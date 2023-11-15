@@ -1,0 +1,32 @@
+{
+  "name": "web",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@tanstack/react-query-devtools": "^5.8.3",
+    "autoprefixer": "^10.4.16",
+    "dotenv": "^16.3.1",
+    "next": "^13.5.6",
+    "postcss": "^8.4.27",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tailwindcss": "^3.3.5",
+    "ui": "^0.2.4",
+    "zod-schema": "^0.0.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/forms": "^0.5.7",
+    "@types/node": "^20.9.0",
+    "@types/react": "^18.2.37",
+    "@types/react-dom": "^18.2.15",
+    "eslint-config-custom": "^0.0.0",
+    "tsconfig": "^0.0.0",
+    "typescript": "^5.2.2"
+  }
+}
