@@ -4,7 +4,6 @@ import { port, origins } from './config'
 import dotenv from 'dotenv'
 import mysql from 'mysql2'
 import routes from './routes'
-import { loadAndSaveData } from './seeds/seed'
 dotenv.config()
 
 const connection = mysql.createConnection(process.env.DATABASE_URL || '')
