@@ -1,4 +1,4 @@
-import Users from './src/models/users'
+import Users from './src/seeds/models/users'
 import { keys } from './src/config/keys'
 import jwt, { Secret } from 'jsonwebtoken'
 import { UNKNOWN_ERROR_OCCURRED } from './src/utils/constants'
