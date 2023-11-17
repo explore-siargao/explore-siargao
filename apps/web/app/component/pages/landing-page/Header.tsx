@@ -1,11 +1,9 @@
 "use client"
-import React, { useState } from "react"
+import React from "react"
 import Image from "next/image"
 import Logo from "../../../public/esLogo.png"
 
-type Props = {}
-
-function Header({}: Props) {
+function Header() {
   return (
     <>
       <header className="absolute inset-x-0 top-0 z-50 bg-slate-500">

@@ -1,9 +1,7 @@
 import React from "react"
 import Header from "./Header"
 
-type Props = {}
-
-function Content({}: Props) {
+function Content() {
   return (
     <>
       <Header />
