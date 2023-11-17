@@ -194,7 +194,7 @@ const Content = () => {
             </div>
             <div className="flex justify-center">
               <div className="text-sm leading-6">
-                Already have an account?
+                <span>Already have an account?</span>
                 <a
                   href="/login"
                   className="font-semibold text-indigo-600 hover:text-indigo-500"
