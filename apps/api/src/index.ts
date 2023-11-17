@@ -3,7 +3,6 @@ import cors from 'cors'
 import { port, origins } from './config'
 import dotenv from 'dotenv'
 import mysql from 'mysql2'
-
 dotenv.config()
 
 const connection = mysql.createConnection(process.env.DATABASE_URL || '')
@@ -15,7 +14,6 @@ app.use(
     credentials: true,
   })
 )
-
 
 connection.connect((err: any) => console.log('PlannetScale Connected'))
 
