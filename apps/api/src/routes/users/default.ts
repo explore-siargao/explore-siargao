@@ -1,4 +1,4 @@
-import express, { Response, Request } from 'express'
+import { Response, Request } from 'express'
 import { PrismaClient } from '@prisma/client'
 import { keys } from '../../config/keys'
 import CryptoJS from 'crypto-js'
