@@ -6,7 +6,7 @@ import { Request, Response, NextFunction } from 'express'
 import { PrismaClient } from '@prisma/client'
 
 export const loginAuth = async (req: Request, res: Response, next: NextFunction) => {
-
+    const randomNumber = Math.floor(100000 + Math.random() * 900000)
     const { email, password } = req.body
     const prisma = new PrismaClient()
     if (email && password) {
@@ -17,7 +17,7 @@ export const loginAuth = async (req: Request, res: Response, next: NextFunction)
             }
         })
 
-        if (!user || (user && user.deletedAt)) {
+        if (!user || user.deletedAt) {
           throw new Error('Account does not exist in our system')
         }
        
@@ -29,12 +29,11 @@ export const loginAuth = async (req: Request, res: Response, next: NextFunction)
         if (originalPassword !== password) {
           throw new Error('Email or password is invalid')
         } else {
-          const otp = Math.floor(100000 + Math.random() * 900000)
           const token = jwt.sign(
             {
               email: user.email,
               role: user.role,
-              otp:otp
+              otp:randomNumber
             },
             keys.signKey as string
           )
