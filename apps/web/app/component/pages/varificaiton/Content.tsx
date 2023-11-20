@@ -55,20 +55,23 @@ const Content: FC<Props> = (props): JSX.Element => {
               id="verification-field"
               className="flex justify-center items-center space-x-2"
             >
-              {otp.map((_, index: number) => {
+              {otp.map((_: string, num: number = 0) => {
                 return (
-                  <React.Fragment key={index}>
+                  <React.Fragment key={num}>
                     <input
-                      ref={index === activeOTPIndex ? inputRef : null}
+                      ref={num === activeOTPIndex ? inputRef : null}
                       type="number"
                       className="w-12 h-16 text-xl font-bold text-center text-gray-600 rounded-lg bg-slate-100 focus:bg-white border-0 focus:ring-black"
                       onChange={handleOnChange}
-                      value={otp[index]}
+                      value={otp[num]}
                       //@ts-ignore
-                      onKeyDown={(e) => handleOnKeyDown(e, index)}
+                      onKeyDown={(e) => handleOnKeyDown(e, num)}
                     />
                   </React.Fragment>
                 )
+                {
+                  num++
+                }
               })}
             </div>
             <div>
