@@ -23,12 +23,18 @@ function Header() {
           </a>
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end space-x-3">
-          <button className="text-sm font-semibold leading-6 text-white">
+          <a
+            href="/login"
+            className="text-sm font-semibold leading-6 text-white focus:underline focus:text-blue-300"
+          >
             Log in
-          </button>
-          <button className="text-sm font-semibold leading-6 text-white">
+          </a>
+          <a
+            href="/signup"
+            className="text-sm font-semibold leading-6 text-white focus:underline focus:text-blue-300"
+          >
             Sign up
-          </button>
+          </a>
         </div>
       </nav>
     </header>
