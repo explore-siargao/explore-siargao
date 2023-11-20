@@ -55,7 +55,7 @@ const Content: FC<Props> = (props): JSX.Element => {
               id="verification-field"
               className="flex justify-center items-center space-x-2"
             >
-              {otp.map((_, index) => {
+              {otp.map((_, index: number) => {
                 return (
                   <React.Fragment key={index}>
                     <input
