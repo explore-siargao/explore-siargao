@@ -1,9 +1,9 @@
 import express, { Response, Request } from 'express'
+import { addUser, getAllUsers } from './default'
 const router = express.Router()
 
 //default
-router.get('/', (req: Request, res: Response) => {
-  return res.json({ data: 'hello World' })
-})
+router.get('/', getAllUsers)
+router.post('/', addUser)
 
 export default router
