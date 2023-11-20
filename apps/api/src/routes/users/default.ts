@@ -42,14 +42,15 @@ export const getAllUsers = async (req:Request, res:Response) => {
     const newUser = await prisma.user.create({
       data:{
         email: req.body.email,
-        password:String(encryptPassword),
         firstName: req.body.firstName,
         middleName:req.body.middleName,  
+        registrationType: req.body.registrationType,
         lastName:req.body.lastName,
         address:req.body.address,
         birthDate:req.body.birthDate,
         contactNumber: req.body.contactNumber,
-        role:"User"      
+        role:"User",   
+        password: req.body.password ? String(encryptPassword): null
       }
     })
     res.json({
