@@ -69,9 +69,6 @@ const Content: FC<Props> = (props): JSX.Element => {
                     />
                   </React.Fragment>
                 )
-                {
-                  num++
-                }
               })}
             </div>
             <div>
