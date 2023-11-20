@@ -39,7 +39,7 @@ const Content = () => {
               </a>
               <a
                 href="#"
-                className="flex w-full items-center justify-center gap-3 rounded-md bg-[#5862ba] px-3 py-1.5 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#24292F]"
+                className="flex w-full items-center justify-center gap-3 rounded-md bg-[#3b5998] px-3 py-1.5 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#24292F]"
               >
                 <Image
                   className="h-5 w-auto"
