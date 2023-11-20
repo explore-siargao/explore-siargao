@@ -2,10 +2,9 @@ import express from 'express'
 import cors from 'cors'
 import { port } from './config'
 import dotenv from 'dotenv'
-import mysql from 'mysql2'
+import routes from './routes'
 dotenv.config()
 
-const connection = mysql.createConnection(process.env.DATABASE_URL || '')
 const es = express()
 es.disable("x-powered-by");
 es.use(express.json())
@@ -15,9 +14,7 @@ es.use(
     credentials: true,
   })
 )
-
-connection.connect((err: any) => console.log('PlannetScale Connected'))
-
+routes(es)
 es.listen(port, () => {
   console.log(`🚀 SERVER is running at http://localhost:${port}`)
 })
