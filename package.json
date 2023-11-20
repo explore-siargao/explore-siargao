@@ -8,6 +8,9 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "prepare": "husky install"
   },
+  "prisma":{
+    "schema": "apps/api/src/prisma/schema.prisma"
+  },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.7",
     "@turbo/gen": "^1.10.16",
