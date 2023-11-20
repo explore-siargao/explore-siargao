@@ -18,12 +18,12 @@ export const loginAuth = async (req: Request, res: Response, next: NextFunction)
             }
         })
 
-        if (!user || user.deletedAt) {
+        if (user?.deletedAt) {
           throw new Error('Account does not exist in our system')
         }
        
         const encryptPassword = CryptoJS.AES.decrypt(
-          user.password as string,
+          user?.password as string,
           keys.encryptKey as string
         )
         const originalPassword = encryptPassword.toString(CryptoJS.enc.Utf8)
@@ -32,8 +32,8 @@ export const loginAuth = async (req: Request, res: Response, next: NextFunction)
         } else {
           const token = jwt.sign(
             {
-              email: user.email,
-              role: user.role,
+              email: user?.email,
+              role: user?.role,
               otp:randomNumber
             },
             keys.signKey as string
@@ -49,7 +49,7 @@ export const loginAuth = async (req: Request, res: Response, next: NextFunction)
             },
             itemCount: 1,
             message: null,
-            userType: user.role,
+            userType: user?.role,
           })
         }
       } catch (err: any) {
