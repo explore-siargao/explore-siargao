@@ -4,13 +4,15 @@ import CryptoJS from 'crypto-js'
 import jwt from 'jsonwebtoken'
 import { Request, Response, NextFunction } from 'express'
 import { PrismaClient } from '@prisma/client'
+import { randomInt } from 'crypto'
 
-const randomNumber = Math.floor(100000 + Math.random() * 900000)
+
 
 export const loginAuth = async (req: Request, res: Response, next: NextFunction) => {
     const { email, password } = req.body
     const prisma = new PrismaClient()
     if (email && password) {
+     const randomNumber = randomInt(100000,999999)
       try {
         const user = await prisma.user.findUnique({
             where:{
