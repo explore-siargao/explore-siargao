@@ -1,9 +1,44 @@
+"use client"
 import React from "react"
 import logo from "../../../public/esLogo.png"
 import Image from "next/image"
 import fb from "../../../public/facebook-logo.png"
 import google from "../../../public/google-logo.png"
-const Content = () => {
+import { I_User, T_BACKEND_RESPONSE } from "../../../../types/global"
+import useRegister from "../../../../hooks/users/useRegister"
+import { useQueryClient } from "@tanstack/react-query"
+import { useForm } from "react-hook-form"
+import toast from "react-hot-toast"
+
+interface AddStudentModalProps {
+  userId: string
+}
+
+const Content = ({ userId }: AddStudentModalProps) => {
+  const { mutate: addUser, isPending: adUserIsPending } = useRegister()
+  const queryClient = useQueryClient()
+  const { register, handleSubmit, reset } = useForm<I_User>()
+  const onSubmit = (data: I_User) => {
+    const callBackReq = {
+      onSuccess: (data: T_BACKEND_RESPONSE) => {
+        if (!data.error) {
+          if (data.item && !adUserIsPending) {
+            queryClient.invalidateQueries({
+              queryKey: ["users"],
+            })
+            toast.success("User Successfully added")
+            reset()
+          }
+        } else {
+          toast.error(String(data.message))
+        }
+      },
+      onError: (err: any) => {
+        toast.error(String(err))
+      },
+    }
+    addUser({ ...data }, callBackReq)
+  }
   return (
     <div className="flex min-h-screen flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8 bg-slate-200">
       <div className="sm:mx-auto sm:w-full sm:max-w-[480px]">
@@ -67,7 +102,7 @@ const Content = () => {
               </div>
             </div>
           </div>
-          <form className="space-y-3" action="#" method="POST">
+          <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
             <div>
               <label
                 htmlFor="name"
@@ -81,18 +116,21 @@ const Content = () => {
                   type="text"
                   placeholder="First Name"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  {...register("firstName")}
                 />
                 <input
                   id="middleName"
                   type="text"
                   placeholder="Middle Name"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  {...register("middleName")}
                 />
                 <input
                   id="lastName"
                   type="text"
                   placeholder="Last Name"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  {...register("lastName")}
                 />
               </div>
             </div>
@@ -110,6 +148,7 @@ const Content = () => {
                   autoComplete="email"
                   required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  {...register("email")}
                 />
               </div>
             </div>
@@ -125,6 +164,7 @@ const Content = () => {
                   id="email"
                   type="text"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  {...register("address")}
                 />
               </div>
             </div>
@@ -141,6 +181,7 @@ const Content = () => {
                     id="contactnum"
                     type="number"
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    {...register("contactNumber")}
                   />
                 </div>
               </div>
@@ -156,6 +197,7 @@ const Content = () => {
                     id="contactnum"
                     type="date"
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    {...register("birthdate")}
                   />
                 </div>
               </div>
@@ -174,12 +216,13 @@ const Content = () => {
                   placeholder="New Password"
                   required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  {...register("password")}
                 />
                 <input
                   id="passwordConfirmation"
                   type="password"
                   placeholder="Password Confirmation"
-                  required
+                  // required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -189,7 +232,16 @@ const Content = () => {
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-green-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
               >
-                Sign up
+                {adUserIsPending ? (
+                  <div
+                    className="animate-spin inline-block w-4 h-4 border-[2px] border-current border-t-transparent text-white rounded-full mx-2"
+                    aria-label="loading"
+                  >
+                    <span className="sr-only">Loading...</span>
+                  </div>
+                ) : (
+                  "Sign up"
+                )}
               </button>
             </div>
             <div className="flex justify-center">

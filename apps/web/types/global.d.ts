@@ -1,70 +1,41 @@
 import z from "zod"
-import {
-  LoginZodSchema,
-  UserBasicForEdit,
-  ZBackendResponse,
-} from "contract"
+import { LoginZodSchema, UserBasicForEdit, ZBackendResponse } from "contract"
 
 export interface I_User {
   id?: number
-  firstName?: string
-  lastName?: string
-  role?: string
-  location?: string
+  firstName: string
+  middleName?: string
+  lastName: string
+  role?: UserRole
+  registrationType?: RegistrationType
   email: string
+  address: string
   password: string
-  profile: object
+  contactNumber: number
+  birthdate: string
   createdAt?: string
   deletedAt?: string
   updatedAt?: string
 }
 
-export interface I_UserUpdate {
-  id?: string
-  firstName?: string
-  lastName?: string
-  email?: string
-  password?: string
-  createdAt?: string
-  deletedAt?: string
-  updatedAt?: string
-}
-
-export interface I_Part {
-  name: string
-  factoryId: string
-  machineClassId: string
-  pounds: number
-  time: number
-  finishGoodWeight: number
-  cageWeightActual: number
-  cageWeightScrap: number
-  locationId: string
-}
-
-export interface I_PartUpdate {
-  id?: string
-  name?: string
-  factoryId?: string
-  machineClassId?: string
-  pounds?: number
-  time?: number
-  finishGoodWeight?: number
-  cageWeightActual?: number
-  cageWeightScrap?: number
-  locationId?: string
-}
-
-export interface I_FACTORY {
-  _id: string
-  name: string
-}
 //stores
 type Email = {
   email: string
 }
 type Action = {
   updateEmail: (email: Email["email"]) => void
+}
+
+enum UserRole {
+  Admin,
+  Host,
+  User,
+}
+
+enum RegistrationType {
+  Manual,
+  Facebook,
+  Google,
 }
 
 export type T_LOGIN = z.input<typeof LoginZodSchema>
