@@ -3,136 +3,104 @@ import logo from "../../../public/esLogo.png"
 import Image from "next/image"
 import fb from "../../../public/facebook-logo.png"
 import google from "../../../public/google-logo.png"
+import { XMarkIcon } from "@heroicons/react/20/solid"
 const Content = () => {
   return (
     <div className="flex min-h-screen flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8 bg-slate-200">
-      <div className="sm:mx-auto sm:w-full sm:max-w-[480px]">
-        <div className="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
-          <div className="sm:mx-auto sm:w-full sm:max-w-md">
-            <Image
-              className="mx-auto h-20 w-auto"
-              src={logo}
-              width={500}
-              height={500}
-              alt="ES-Logo"
-            />
-            <h2 className="my-4 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-              Sign in to your account
-            </h2>
+      <div className="sm:mx-auto sm:w-full sm:max-w-[560px]">
+        <div className="bg-white shadow sm:rounded-2xl p-6">
+          <div className="flex border-b-gray-400/50 border-b pb-4">
+            <XMarkIcon className="h-6 w-6  rounded-full hover:bg-gray-300/30" />
+            <h1 className="w-full text-center place-self-center font-semibold">
+              Log in or sign up
+            </h1>
           </div>
-          <form className="space-y-6" action="#" method="POST">
-            <div>
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                Email address
-              </label>
-              <div className="mt-2">
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  required
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
-            </div>
-            <div>
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                Password
-              </label>
-              <div className="mt-2">
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  autoComplete="current-password"
-                  required
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
-            </div>
-            <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <input
-                  id="remember-me"
-                  name="remember-me"
-                  type="checkbox"
-                  className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                />
+          <div className="p-1">
+            <h1 className="font-semibold text-xl py-6">
+              Welcome to Explore Siargao
+            </h1>
+            <div className="isolate -space-y-px rounded-xl shadow-sm">
+              <div className="relative rounded-md rounded-b-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-gray-600">
                 <label
-                  htmlFor="remember-me"
-                  className="ml-3 block text-sm leading-6 text-gray-900"
+                  htmlFor="name"
+                  className="block text-xs font-medium text-gray-900"
                 >
-                  Remember me
+                  Email
                 </label>
+                <input
+                  type="email"
+                  id="email"
+                  className="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                  placeholder="you@example.com"
+                />
               </div>
-              <div className="text-sm leading-6">
-                <a
-                  href="/forgot-password"
-                  className="font-semibold text-indigo-600 hover:text-indigo-500"
+              <div className="relative rounded-md rounded-t-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-gray-600">
+                <label
+                  htmlFor="job-title"
+                  className="block text-xs font-medium text-gray-900"
                 >
-                  Forgot password?
+                  Password
+                </label>
+                <input
+                  type="password"
+                  id="password"
+                  className="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+            <p className="text-[11px] mt-1">
+              We’ll email you to verify your email address. Standard message and
+              data rates apply.{" "}
+              <a href="#" className="font-bold underline">
+                Privacy Policy
+              </a>
+            </p>
+            <button
+              type="button"
+              className="rounded-md w-full my-5 bg-gradient-to-r from-rose-600 from-10% via-rose-700/90 via-40% to-rose-600 to-80% px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-rose-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600 transition ease-in-out active:scale-95 duration-20"
+            >
+              Continue
+            </button>
+          </div>
+          <div className="flex">
+            <span className="border-b-2 h-0 w-full my-auto"></span>
+            <p className="text-xs mx-5">or</p>
+            <span className="border-b-2 shadow-md h-0 w-full my-auto"></span>
+          </div>
+          <div>
+            <div>
+              <div className="mt-6 grid gap-4">
+                <a
+                  href="#"
+                  className="flex w-full items-center gap-3 rounded-md border-black border px-3 py-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#24292F] hover:bg-slate-200/30 transition ease-in-out active:-translate-y-1 active:scale-95 duration-50"
+                >
+                  <Image
+                    className="h-5 w-auto"
+                    src={fb}
+                    width={500}
+                    height={500}
+                    alt="fb-Logo"
+                  />
+                  <span className="text-sm leading-6 font-medium text-center w-full">
+                    Continue with Facebook
+                  </span>
+                </a>
+                <a
+                  href="#"
+                  className="flex w-full items-center gap-3 rounded-md border-black border px-3 py-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#24292F] hover:bg-slate-200/30 transition ease-in-out active:-translate-y-1 active:scale-95 duration-50"
+                >
+                  <Image
+                    className="h-5 w-auto"
+                    src={google}
+                    width={500}
+                    height={500}
+                    alt="fb-Logo"
+                  />
+                  <span className="text-sm font-medium leading-6 text-center w-full">
+                    Continue with Google
+                  </span>
                 </a>
               </div>
-            </div>
-            <div>
-              <button
-                type="submit"
-                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
-                Sign in
-              </button>
-            </div>
-          </form>
-          <div>
-            <div className="relative mt-10">
-              <div
-                className="absolute inset-0 flex items-center"
-                aria-hidden="true"
-              >
-                <div className="w-full border-t border-gray-200" />
-              </div>
-              <div className="relative flex justify-center text-sm font-medium leading-6">
-                <span className="bg-white px-6 text-gray-900">
-                  Or continue with
-                </span>
-              </div>
-            </div>
-            <div className="mt-6 grid grid-cols-2 gap-4">
-              <a
-                href="#"
-                className="flex w-full items-center justify-center gap-3 rounded-md bg-[#3b5998] px-3 py-1.5 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#24292F]"
-              >
-                <Image
-                  className="h-5 w-auto"
-                  src={fb}
-                  width={500}
-                  height={500}
-                  alt="fb-Logo"
-                />
-                <span className="text-sm font-semibold leading-6">
-                  Facebook
-                </span>
-              </a>
-              <a
-                href="#"
-                className="flex w-full items-center justify-center gap-3 rounded-md bg-[#24292F] px-3 py-1.5 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#24292F]"
-              >
-                <Image
-                  className="h-5 w-auto"
-                  src={google}
-                  width={500}
-                  height={500}
-                  alt="fb-Logo"
-                />
-                <span className="text-sm font-semibold leading-6">Google</span>
-              </a>
             </div>
           </div>
         </div>
