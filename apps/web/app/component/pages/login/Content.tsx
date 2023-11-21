@@ -1,10 +1,40 @@
+"use client"
 import React from "react"
-import logo from "../../../public/esLogo.png"
+import Cookies from "js-cookie"
 import Image from "next/image"
 import fb from "../../../public/facebook-logo.png"
 import google from "../../../public/google-logo.png"
 import { XMarkIcon } from "@heroicons/react/20/solid"
+import toast from "react-hot-toast"
+import { I_User, T_BACKEND_RESPONSE } from "../../../../types/global"
+import useLogin from "../../../../hooks/users/useLogin"
+import { useForm } from "react-hook-form"
+import { useRouter } from "next/navigation"
 const Content = () => {
+  const router = useRouter()
+  const { mutate: loginUser, isPending: loginIsPending } = useLogin()
+  const { register, handleSubmit, reset } = useForm<I_User>()
+  const onSubmit = (data: I_User) => {
+    const callBackReq = {
+      onSuccess: (data: T_BACKEND_RESPONSE) => {
+        if (!data.error) {
+          if (data.item && !loginIsPending) {
+            Cookies.set("tfl", data.item.token)
+            if(data.userType==="User"){
+              reset()
+              router.push("/home")
+            }
+          }
+        } else {
+          toast.error(String(data.message))
+        }
+      },
+      onError: (err: any) => {
+        toast.error(String(err))
+      },
+    }
+    loginUser({ ...data }, callBackReq)
+  }
   return (
     <div className="flex min-h-screen flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8 bg-slate-200">
       <div className="sm:mx-auto sm:w-full sm:max-w-[560px]">
@@ -15,10 +45,12 @@ const Content = () => {
               Log in or sign up
             </h1>
           </div>
+          <form onSubmit={handleSubmit(onSubmit)}>
           <div className="p-1">
             <h1 className="font-semibold text-xl py-6">
               Welcome to Explore Siargao
             </h1>
+          
             <div className="isolate -space-y-px rounded-xl shadow-sm">
               <div className="relative rounded-md rounded-b-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-gray-600">
                 <label
@@ -30,6 +62,7 @@ const Content = () => {
                 <input
                   type="email"
                   id="email"
+                  {...register("email")}
                   className="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                   placeholder="you@example.com"
                 />
@@ -44,6 +77,7 @@ const Content = () => {
                 <input
                   type="password"
                   id="password"
+                  {...register("password")}
                   className="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -56,12 +90,22 @@ const Content = () => {
               </a>
             </p>
             <button
-              type="button"
+              type="submit"
               className="rounded-md w-full my-5 bg-gradient-to-r from-rose-600 from-10% via-rose-700/90 via-40% to-rose-600 to-80% px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-rose-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600 transition ease-in-out active:scale-95 duration-20"
             >
-              Continue
+              {loginIsPending ? (
+                  <div
+                    className="animate-spin inline-block w-4 h-4 border-[2px] border-current border-t-transparent text-white rounded-full mx-2"
+                    aria-label="loading"
+                  >
+                    <span className="sr-only">Loading...</span>
+                  </div>
+                ) : (
+                  "Continue"
+                )}
             </button>
           </div>
+          </form>
           <div className="flex">
             <span className="border-b-2 h-0 w-full my-auto"></span>
             <p className="text-xs mx-5">or</p>
