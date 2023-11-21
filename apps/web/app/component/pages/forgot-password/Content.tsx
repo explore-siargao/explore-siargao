@@ -1,7 +1,4 @@
 import React from "react"
-import logo from "../../../public/esLogo.png"
-import Image from "next/image"
-import { EnvelopeIcon } from "@heroicons/react/20/solid"
 
 const Content = () => {
   return (
