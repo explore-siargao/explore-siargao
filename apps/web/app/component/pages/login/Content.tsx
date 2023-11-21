@@ -15,7 +15,6 @@ import { useRouter } from "next/navigation"
 const Content = () => {
   const router = useRouter()
   const { mutate: loginUser, isPending: loginIsPending } = useLogin()
-  const queryClient = useQueryClient()
   const { register, handleSubmit, reset } = useForm<I_User>()
   const onSubmit = (data: I_User) => {
     const callBackReq = {
@@ -24,6 +23,7 @@ const Content = () => {
           if (data.item && !loginIsPending) {
             Cookies.set("tfl", data.item.token)
             if(data.userType==="User"){
+              reset()
               router.push("/home")
             }
           }
