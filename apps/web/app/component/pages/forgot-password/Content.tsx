@@ -1,69 +1,41 @@
 import React from "react"
-import logo from "../../../public/esLogo.png"
-import Image from "next/image"
-import { EnvelopeIcon } from "@heroicons/react/20/solid"
 
 const Content = () => {
   return (
     <div className="flex min-h-screen flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8 bg-slate-200">
       <div className="sm:mx-auto sm:w-full sm:max-w-[480px]">
-        <div className="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
-          <div className="sm:mx-auto sm:w-full sm:max-w-md my-4">
-            <Image
-              className="mx-auto h-20 w-auto"
-              src={logo}
-              width={500}
-              height={500}
-              alt="ES-Logo"
-            />
-
-            <h2 className=" text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-              Forgot your password?
-            </h2>
-            <p className="text-sm text-gray-500 text-center mx-5">
-              Enter your email address we'll send you a link to reset your
-              password
-            </p>
-          </div>
-          <form className="space-y-6" action="#" method="POST">
-            <div>
+        <div className="bg-white shadow sm:rounded-2xl p-6">
+          <div className="p-1">
+            <div className="py-6">
+              <h1 className="font-semibold text-xl">Reset Your Password</h1>
+              <p className="text-sm leading-tight text-gray-500">
+                Enter your email address we'll send you a link to reset your
+                password. go to{" "}
+                <a href="/login" className="font-bold underline">
+                  Login?
+                </a>
+              </p>
+            </div>
+            <div className="relative rounded-md rounded-t-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-gray-600">
               <label
                 htmlFor="email"
-                className="block text-sm font-medium leading-6 text-gray-900"
+                className="block text-xs font-medium text-gray-900"
               >
-                Email address
+                Email
               </label>
-              <div className="relative mt-2 rounded-md shadow-sm">
-                <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                  <EnvelopeIcon
-                    className="h-5 w-5 text-gray-400"
-                    aria-hidden="true"
-                  />
-                </div>
-                <input
-                  type="email"
-                  name="email"
-                  id="email"
-                  className="block w-full rounded-md border-0 py-1.5 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  placeholder="you@example.com"
-                />
-              </div>
+              <input
+                type="email"
+                id="email"
+                className="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+              />
             </div>
-            <div>
-              <button
-                type="submit"
-                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
-                Submit
-              </button>
-            </div>
-            <div className="text-sm text-center text-gray-500">
-              <span>Not a member?</span>&nbsp;
-              <a href="/signup" className="font-bold ">
-                Sign up
-              </a>
-            </div>
-          </form>
+            <button
+              type="button"
+              className="rounded-md w-full my-5 bg-gradient-to-r from-rose-600 from-10% via-rose-700/90 via-40% to-rose-600 to-80% px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-rose-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600 transition ease-in-out active:scale-95 duration-20"
+            >
+              Submit
+            </button>
+          </div>
         </div>
       </div>
     </div>
