@@ -235,7 +235,6 @@ const Content = ({ userId }: AddStudentModalProps) => {
                 {adUserIsPending ? (
                   <div
                     className="animate-spin inline-block w-4 h-4 border-[2px] border-current border-t-transparent text-white rounded-full mx-2"
-                    role="output"
                     aria-label="loading"
                   >
                     <span className="sr-only">Loading...</span>
