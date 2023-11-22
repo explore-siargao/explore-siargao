@@ -6,7 +6,7 @@ require("dotenv").config({
 
 module.exports = {
   reactStrictMode: true,
-  transpilePackages: ["ui"],
+  transpilePackages: ["@repo/ui"],
   images: {
     remotePatterns: [
       {

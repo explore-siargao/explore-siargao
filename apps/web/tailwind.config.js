@@ -2,10 +2,8 @@
 module.exports = {
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./common/components/**/**/*.{js,ts,jsx,tsx,mdx}",
-    "./common/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./module/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./module/**/**/*.{js,ts,jsx,tsx,mdx}",
+    "./common/**/*.{js,ts,jsx,tsx,mdx}",
+    "./module/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
@@ -20,5 +18,8 @@ module.exports = {
       },
     },
   },
-  plugins: [require("@tailwindcss/forms")],
+  plugins: [
+    require("@tailwindcss/forms"),
+    require("@tailwindcss/typography")
+  ],
 }

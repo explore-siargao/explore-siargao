@@ -1,5 +1,5 @@
 import { API_URL_USERS } from "constants/"
-import { I_User } from "../../../types/global"
+import { I_User } from "../../../common/types/global"
 import { useMutation } from "@tanstack/react-query"
 
 export async function registerUser({

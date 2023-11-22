@@ -14,7 +14,7 @@ import {
   I_User,
   RegistrationType,
   T_BACKEND_RESPONSE,
-} from "../../../types/global"
+} from "../../types/global"
 import useLogin from "../../../module/Login/hooks/useLogin"
 import { useForm } from "react-hook-form"
 import { useRouter } from "next/navigation"

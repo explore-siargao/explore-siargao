@@ -1,7 +1,8 @@
 import React from "react"
-import Content from "../../module/LandingPage/components/landing-page/Content"
+import LandingPage from "@/module/LandingPage"
+
 const page = () => {
-  return <Content />
+  return <LandingPage />
 }
 
 export default page

@@ -1,7 +1,7 @@
 import React from "react"
-import Header from "./Header"
+import Header from "./components/Header"
 
-function Content() {
+function LandingPage() {
   return (
     <>
       <Header />
@@ -10,4 +10,4 @@ function Content() {
   )
 }
 
-export default Content
+export default LandingPage
