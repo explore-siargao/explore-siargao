@@ -12,7 +12,7 @@ export const sendResetPassword = async (req: Request, res: Response) => {
         where:{email:email}
       })
       //   @ts-ignore
-      if (getUser?.item !== null) {
+      if (getUser !== null) {
         const transporter = nodeMailer.createTransport({
           port: 465, // true for 465, false for other ports
           host: 'smtp.gmail.com',
@@ -206,18 +206,6 @@ export const sendResetPassword = async (req: Request, res: Response) => {
       </html>
       `,
         }
-        if (getUser === null) {
-          res.json({
-            error: true,
-            item: getUser,
-            itemCount: 1,
-            message: 'Email not found',
-          })
-        } else {
-          transporter.sendMail(mailData, function (err: any, info: any) {
-            if (err) console.log(err)
-            else console.log(info)
-          })
           res.json({
             error: false,
             item: getUser,
@@ -225,10 +213,10 @@ export const sendResetPassword = async (req: Request, res: Response) => {
             message: 'Email Sucessfully Sent',
           })
         }
-      } else {
+       else {
         res.json({
           error: false,
-          item: 'No data found',
+          item: 'Email not found',
           itemCount: 1,
           message: null,
         })
