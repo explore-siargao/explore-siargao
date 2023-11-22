@@ -1,5 +1,5 @@
 import React from "react"
-import Content from "../../component/pages/forgot-password/Content"
+import Content from "../../../module/Login/components/forgot-password/Content"
 
 const page = () => {
   return <Content />

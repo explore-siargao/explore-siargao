@@ -1,5 +1,5 @@
 import React from "react"
-import Content from "../../component/pages/login/Content"
+import Content from "../../../common/components/login/Content"
 
 const page = () => {
   return <Content />

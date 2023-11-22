@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "../globals.css"
-import QueryWrapper from "../component/QueryClientWrapper"
+import QueryWrapper from "../../common/components/QueryClientWrapper"
 import { Toaster } from "react-hot-toast"
 
 const inter = Inter({ subsets: ["latin"] })
