@@ -321,7 +321,6 @@ const Content = () => {
                 <a href="#" className="text-indigo-500 font-bold underline">
                   Privacy Policy
                 </a>
-                .
               </p>
             </div>
             <button
