@@ -9,9 +9,9 @@ export interface I_User {
   role?: UserRole
   registrationType?: RegistrationType
   email: string
-  address: string
+  address?: string
   password: string
-  contactNumber: number
+  contactNumber?: number
   birthdate: string
   createdAt?: string
   deletedAt?: string
@@ -32,10 +32,10 @@ enum UserRole {
   User,
 }
 
-enum RegistrationType {
-  Manual,
-  Facebook,
-  Google,
+export enum RegistrationType {
+  "Manual",
+  "Facebook",
+  "Google",
 }
 
 export type T_LOGIN = z.input<typeof LoginZodSchema>
