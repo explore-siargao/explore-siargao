@@ -1,5 +1,5 @@
-import React from "react"
-import Header from "./components/Header"
+import React from "react";
+import Header from "./components/Header";
 
 function LandingPage() {
   return (
@@ -7,7 +7,7 @@ function LandingPage() {
       <Header />
       <div>Content</div>
     </>
-  )
+  );
 }
 
-export default LandingPage
+export default LandingPage;

@@ -1,7 +1,7 @@
-"use client"
-import React from "react"
-import Image from "next/image"
-import Logo from "@/common/assets/esLogo.png"
+"use client";
+import React from "react";
+import Image from "next/image";
+import Logo from "@/common/assets/esLogo.png";
 
 function Header() {
   return (
@@ -38,7 +38,7 @@ function Header() {
         </div>
       </nav>
     </header>
-  )
+  );
 }
 
-export default Header
+export default Header;
