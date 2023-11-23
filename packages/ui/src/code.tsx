@@ -3,7 +3,7 @@ export function Code({
   className,
 }: {
   children: React.ReactNode;
-  className?: string;
+  readonly className?: string;
 }): JSX.Element {
   return <code className={className}>{children}</code>;
 }

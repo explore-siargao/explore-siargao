@@ -4,10 +4,10 @@ export function Card({
   children,
   href,
 }: {
-  className?: string;
-  title: string;
+  readonly className?: string;
+   readonly title: string;
   children: React.ReactNode;
-  href: string;
+  readonly href: string;
 }): JSX.Element {
   return (
     <a
