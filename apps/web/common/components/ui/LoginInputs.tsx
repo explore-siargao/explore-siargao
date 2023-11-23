@@ -12,8 +12,10 @@ import { useForm } from "react-hook-form";
 import useLogin from "@/module/Authentication/hooks/useLogin";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
-
-const LoginInputs = () => {
+type Props = {
+    modalState: number
+  };
+const LoginInputs = ({modalState}:Props) => {
   const router = useRouter()
   const { mutate: loginUser, isPending: loginIsPending } = useLogin()
   const { register, handleSubmit, reset } = useForm<I_User>()
@@ -137,6 +139,8 @@ const LoginInputs = () => {
                     </span>
                   </a>
                   <button
+                  type="button"
+                  onClick={()=>modalState+1}
                     className="flex w-full items-center gap-3 rounded-md border-black border px-3 py-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#24292F] hover:bg-slate-200/30 transition ease-in-out active:-translate-y-1 active:scale-95 duration-50"
                   >
                     <EnvelopeIcon className="h-5 w-auto" />
