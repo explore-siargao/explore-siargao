@@ -1,8 +1,9 @@
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "../globals.css"
-import QueryWrapper from "../component/QueryClientWrapper"
+import QueryClientWrapper from "@/common/components/QueryClientWrapper"
 import { Toaster } from "react-hot-toast"
+import React from "react"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -20,7 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Toaster />
-        <QueryWrapper>{children}</QueryWrapper>
+        <QueryClientWrapper>{children}</QueryClientWrapper>
       </body>
     </html>
   )

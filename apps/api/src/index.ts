@@ -16,5 +16,5 @@ es.use(
 )
 routes(es)
 es.listen(port, () => {
-  console.log(`🚀 SERVER is running at http://localhost:${port}`)
+  console.log(`Server is running at http://localhost:${port}`)
 })

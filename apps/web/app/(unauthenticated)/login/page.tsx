@@ -1,8 +1,8 @@
+import Login from "@/module/Authentication/Login"
 import React from "react"
-import Content from "../../component/pages/login/Content"
 
 const page = () => {
-  return <Content />
+  return <Login />
 }
 
 export default page
