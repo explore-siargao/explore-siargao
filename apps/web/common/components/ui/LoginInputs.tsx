@@ -11,9 +11,12 @@ import useLogin from "@/module/Authentication/hooks/useLogin";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import { Button } from "./Button";
+import useAuthModalStore from "@/common/store/useAuthModalStore";
 
 const LoginInputs = () => {
   const router = useRouter();
+  const setLogin = useAuthModalStore((state:any)=>state.setIsLogin)
+  const setClosable = useAuthModalStore((state:any)=>state.setClosable)
   const { mutate: loginUser, isPending: loginIsPending } = useLogin();
   const { register, handleSubmit, reset } = useForm<I_User>();
   const onSubmit = (data: I_User) => {
@@ -141,11 +144,15 @@ const LoginInputs = () => {
                   variant={"outline"}
                   type="button"
                   size={"md"}
+                  onClick={()=>{
+                    setLogin()
+                    setClosable(true)
+                  }}
                   className="flex w-full items-center gap-3 rounded-md border-black border px-3 py-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#24292F] hover:bg-slate-200/30 transition ease-in-out active:-translate-y-1 active:scale-95 duration-50"
                 >
                   <EnvelopeIcon className="h-5 w-auto" />
                   <span className="text-sm font-medium leading-6 text-center w-full">
-                    Continue with Facebook
+                    Continue with Email
                   </span>
                 </Button>
               </div>
