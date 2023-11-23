@@ -49,11 +49,9 @@ const Login = () => {
   }
   const renderLoginSignup = () => {
     return (
-      <>
       <LoginContainer title="Login or sign up">
         <LoginInputs modalState={modalState}/>
         </LoginContainer>
-        </>
     )
   }
   const renderContinueWithEmail = () => {
