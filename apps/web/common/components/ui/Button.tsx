@@ -13,7 +13,7 @@ const buttonVariants = cva(
         destructive:
           "bg-red-500 text-white hover:bg-red-600 dark:hover:bg-red-600",
         outline:
-          "gap-3 border-black border focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#24292F] hover:bg-slate-200/30",
+          "gap-3 border-black border focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#24292F] hover:bg-slate-200/30 text-black",
         subtle:
           "bg-slate-100 text-slate-900 hover:bg-slate-200 dark:bg-slate-700 dark:text-slate-100",
         ghost:
@@ -22,8 +22,9 @@ const buttonVariants = cva(
       },
       size: {
         default: "w-full my-5 px-3.5 py-2.5 text-sm",
-        sm: "my-4 px-3 py-2 text-sm",
-        lg: "my-6 px-4 py-4 text-sm",
+        sm: "px-3 py-2 text-sm",
+        md: "px-3 py-4 text-sm",
+        lg: "px-4 py-4 text-sm",
       },
     },
     defaultVariants: {
@@ -57,7 +58,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         {...props}
       >
-        {children}
+      {children}
       </button>
     );
   }
