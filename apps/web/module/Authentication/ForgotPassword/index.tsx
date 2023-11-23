@@ -2,7 +2,7 @@ import Image from "next/image"
 import React from "react"
 import confuse from "../../../../assets/confusion.png"
 
-const Content = () => {
+const ForgotPassword = () => {
   return (
     <div className="flex min-h-screen flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8 bg-slate-200">
       <div className="sm:mx-auto sm:w-full sm:max-w-[480px]">
@@ -52,4 +52,4 @@ const Content = () => {
   )
 }
 
-export default Content
+export default ForgotPassword

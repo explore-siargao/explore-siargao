@@ -4,7 +4,7 @@ import React, { FC, useEffect, useRef, useState } from "react"
 interface Props {}
 
 let currentOTPIndex: number = 0
-const Content: FC<Props> = (props): JSX.Element => {
+const Verification: FC<Props> = (props): JSX.Element => {
   const [otp, setOtp] = useState<string[]>(new Array(6).fill(""))
   const [activeOTPIndex, setActiveOTPIndex] = useState<number>(0)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -80,4 +80,4 @@ const Content: FC<Props> = (props): JSX.Element => {
     </div>
   )
 }
-export default Content
+export default Verification

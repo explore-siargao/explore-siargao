@@ -14,13 +14,13 @@ import {
   I_User,
   RegistrationType,
   T_BACKEND_RESPONSE,
-} from "../../types/global"
+} from "../../../common/types/global"
 import useLogin from "../../../module/Login/hooks/useLogin"
 import { useForm } from "react-hook-form"
 import { useRouter } from "next/navigation"
 import useRegister from "../../../module/Login/hooks/useRegister"
 
-const Content = () => {
+const Login = () => {
   const [modalState, setModalState] = useState(0)
   const router = useRouter()
   const { mutate: loginUser, isPending: loginIsPending } = useLogin()
@@ -381,4 +381,4 @@ const Content = () => {
   )
 }
 
-export default Content
+export default Login
