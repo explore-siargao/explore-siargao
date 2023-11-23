@@ -1,6 +1,6 @@
 import Image from "next/image"
 import React from "react"
-import confuse from "../../../../assets/confusion.png"
+import confuse from "@/common/assets/confusion.png"
 
 const ForgotPassword = () => {
   return (

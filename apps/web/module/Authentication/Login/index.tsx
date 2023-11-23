@@ -2,8 +2,8 @@
 import React, { useState } from "react"
 import Cookies from "js-cookie"
 import Image from "next/image"
-import fb from "../../../assets/facebook-logo.png"
-import google from "../../../assets/google-logo.png"
+import fb from "@/common/assets/facebook-logo.png"
+import google from "@/common/assets/google-logo.png"
 import {
   ChevronLeftIcon,
   EnvelopeIcon,
@@ -15,10 +15,10 @@ import {
   RegistrationType,
   T_BACKEND_RESPONSE,
 } from "../../../common/types/global"
-import useLogin from "../../../module/Login/hooks/useLogin"
 import { useForm } from "react-hook-form"
 import { useRouter } from "next/navigation"
-import useRegister from "../../../module/Login/hooks/useRegister"
+import useLogin from "../hooks/useLogin"
+import useRegister from "../hooks/useRegister"
 
 const Login = () => {
   const [modalState, setModalState] = useState(0)

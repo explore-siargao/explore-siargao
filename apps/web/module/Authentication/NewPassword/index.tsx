@@ -1,5 +1,5 @@
 import React from "react"
-import lock from "../../../../assets/padlock.png"
+import lock from "@/common/assets/padlock.png"
 import Image from "next/image"
 
 const NewPassword = () => {

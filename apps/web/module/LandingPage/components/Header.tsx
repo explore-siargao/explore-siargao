@@ -1,7 +1,7 @@
 "use client"
 import React from "react"
 import Image from "next/image"
-import Logo from "../../../../assets/esLogo.png"
+import Logo from "@/common/assets/esLogo.png"
 
 function Header() {
   return (

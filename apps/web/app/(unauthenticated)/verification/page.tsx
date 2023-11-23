@@ -1,8 +1,8 @@
+import Verification from "@/module/Authentication/Verification"
 import React from "react"
-import Content from "../../../common/components/verificaiton/Content"
 
 const page = () => {
-  return <Content />
+  return <Verification />
 }
 
 export default page
