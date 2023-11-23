@@ -17,8 +17,9 @@ import {
 } from "../../../common/types/global"
 import { useForm } from "react-hook-form"
 import useRegister from "../hooks/useRegister"
-import LoginContainer from "@/common/components/ui/LoginContainer"
+import LoginContainer from "@/common/components/ui/AuthWrapper"
 import LoginInputs from "@/common/components/ui/LoginInputs"
+import AuthWrapper from "@/common/components/ui/AuthWrapper"
 
 const Login = () => {
   const [modalState, setModalState] = useState(0)
@@ -49,9 +50,9 @@ const Login = () => {
   }
   const renderLoginSignup = () => {
     return (
-      <LoginContainer title="Login or sign up">
+      <AuthWrapper title="Login or sign up" closable={false}>
         <LoginInputs modalState={modalState}/>
-        </LoginContainer>
+        </AuthWrapper>
     )
   }
   const renderContinueWithEmail = () => {
