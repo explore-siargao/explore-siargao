@@ -3,6 +3,7 @@ import React from "react";
 import Image from "next/image";
 import Logo from "@/common/assets/esLogo.png";
 import { Button } from "@/common/components/ui/Button";
+import LandingPageMenu from "@/common/components/ui/LandingPageMenu";
 
 function Header() {
   return (
@@ -13,7 +14,7 @@ function Header() {
         </p>
       </div>
       <nav
-        className="flex items-center justify-between p-6 lg:px-8"
+        className="flex items-center justify-between p-5 mx-10 lg:px-8"
         aria-label="Global"
       >
         <a href="#" className="-m-1.5 gap-2 flex lg:flex-1 items-center">
@@ -30,6 +31,7 @@ function Header() {
           <Button variant={"rounded"} size={"sm"} className="text-black">
             Be a host
           </Button>
+          <LandingPageMenu />
         </div>
       </nav>
     </header>
