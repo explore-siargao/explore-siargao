@@ -1,13 +1,7 @@
 "use client"
 import React, { useState } from "react"
-import Cookies from "js-cookie"
-import Image from "next/image"
-import fb from "@/common/assets/facebook-logo.png"
-import google from "@/common/assets/google-logo.png"
 import {
   ChevronLeftIcon,
-  EnvelopeIcon,
-  XMarkIcon,
 } from "@heroicons/react/20/solid"
 import toast from "react-hot-toast"
 import {
@@ -17,7 +11,6 @@ import {
 } from "../../../common/types/global"
 import { useForm } from "react-hook-form"
 import useRegister from "../hooks/useRegister"
-import LoginContainer from "@/common/components/ui/AuthWrapper"
 import LoginInputs from "@/common/components/ui/LoginInputs"
 import AuthWrapper from "@/common/components/ui/AuthWrapper"
 

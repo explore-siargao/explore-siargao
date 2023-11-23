@@ -2,7 +2,6 @@ import * as React from "react";
 import Link from "next/link";
 import { VariantProps, cva } from "class-variance-authority";
 import { cn } from "@/utils/utils";
-import { ImageProps } from "next/image";
 
 const buttonVariants = cva(
   "rounded-md font-semibold text-white shadow-sm transition ease-in-out active:scale-95 duration-20",
