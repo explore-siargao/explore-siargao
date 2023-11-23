@@ -9,11 +9,11 @@ type Props = {
   children: React.ReactNode
 }
 
-const QueryWrapper = ({ children }: Props) => (
+const QueryClientWrapper = ({ children }: Props) => (
   <QueryClientProvider client={queryClient}>
     {children}
     <ReactQueryDevtools initialIsOpen={false} />
   </QueryClientProvider>
 )
 
-export default QueryWrapper
+export default QueryClientWrapper

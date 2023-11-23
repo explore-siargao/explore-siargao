@@ -1,8 +1,8 @@
+import ForgotPassword from "@/module/Authentication/ForgotPassword"
 import React from "react"
-import Content from "../../../module/Login/components/forgot-password/Content"
 
 const page = () => {
-  return <Content />
+  return <ForgotPassword />
 }
 
 export default page
