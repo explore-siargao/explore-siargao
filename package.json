@@ -22,8 +22,10 @@
     "packages/*"
   ],
   "dependencies": {
+    "@headlessui/react": "^1.7.17",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
+    "headlessui": "^0.0.0",
     "tailwind-merge": "^2.0.0",
     "zustand": "^4.4.6"
   }
