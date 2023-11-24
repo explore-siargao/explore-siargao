@@ -9,6 +9,7 @@ import useRegister from "@/module/Authentication/hooks/useRegister";
 import React from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { Button } from "./ui/Button";
 
 interface SignUpInputProps{
   isInModal:boolean
@@ -47,7 +48,7 @@ const SignupInputs = ({isInModal}:SignUpInputProps) => {
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit2)}>
-        <div className="pt-5 px-6 h-[520px] space-y-4 overflow-y-auto">
+        <div className="space-y-4 overflow-y-auto">
           <div>
             <div className="isolate -space-y-px rounded-xl shadow-sm">
               <div className="relative rounded-md rounded-b-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-gray-600">
@@ -151,22 +152,22 @@ const SignupInputs = ({isInModal}:SignUpInputProps) => {
               By selecting{" "}
               <span className="font-bold"> Agree and continue,</span> I agree to
               Explore Siargao's{" "}
-              <a href="#" className="text-indigo-500 font-bold underline">
+              <a href="#" className="text-info-500 font-bold underline">
                 Terms of Service, Payments Terms of Service,
               </a>{" "}
               and{" "}
-              <a href="#" className="text-indigo-500 font-bold underline">
+              <a href="#" className="text-info-500 font-bold underline">
                 Nondiscrimination Policy
               </a>{" "}
               and acknowledge the{" "}
-              <a href="#" className="text-indigo-500 font-bold underline">
+              <a href="#" className="text-info-500 font-bold underline">
                 Privacy Policy
               </a>
             </p>
           </div>
-          <button
+          <Button
             type="submit"
-            className="rounded-md w-full my-5 bg-gradient-to-r from-rose-600 from-10% via-rose-700/90 via-40% to-rose-600 to-80% px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-rose-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600 transition ease-in-out active:scale-95 duration-20"
+            className="w-full my-4"
           >
             {addUserIsPending ? (
               <div
@@ -178,7 +179,7 @@ const SignupInputs = ({isInModal}:SignUpInputProps) => {
             ) : (
               "Agree and continue"
             )}
-          </button>
+          </Button>
           <div className="w-full border-b-2 mt-2" />
           <div className="text-xs font-medium mt-1 text-gray-500 tracking-tighter">
             <p>
@@ -195,7 +196,7 @@ const SignupInputs = ({isInModal}:SignUpInputProps) => {
                   aria-describedby="comments-description"
                   name="comments"
                   type="checkbox"
-                  className="h-6 w-6 rounded border-gray-400 text-indigo-600 focus:ring-transparent"
+                  className="h-6 w-6 rounded border-gray-400 text-secondary-600 focus:ring-transparent"
                 />
               </div>
               <div className="ml-3 text-xs leading-6">

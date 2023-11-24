@@ -9,15 +9,15 @@ const solutions = [
   },
   {
     name: "Sign up",
-    href: "#",
+    href: "/create-account",
   },
 ];
 const LandingPageMenu = () => {
   return (
     <Popover className="relative ">
-      <Popover.Button className="flex gap-1 rounded-full border-gray-400/50 border items-center focus:ring-red-300 focus:border-red-300 focus:shadow-xl px-2 py-1">
-        <Bars3Icon className="h-5" />
-        <UserCircleIcon className="h-10" />
+      <Popover.Button className="flex gap-1 rounded-full border-text-50 border items-center focus:ring-gray-400 focus:border-gray-400 px-2 py-1">
+        <Bars3Icon className="h-5 text-text-200" />
+        <UserCircleIcon className="h-10 text-gray-400" />
       </Popover.Button>
 
       <Transition
@@ -29,14 +29,14 @@ const LandingPageMenu = () => {
         leaveFrom="opacity-100 translate-y-0"
         leaveTo="opacity-0 translate-y-1"
       >
-        <Popover.Panel className="absolute -right-4 top-10 z-10 mt-5 flex w-screen max-w-max px-4 ">
-          <div className="w-screen max-w-[250px] flex-auto rounded-xl bg-white text-sm leading-6 border border-gray-400/50 shadow-lg ring-transparent">
+        <Popover.Panel className="absolute right-0 top-9 z-10 mt-5 flex w-screen max-w-max">
+          <div className="w-screen max-w-[200px] flex-auto bg-white text-sm leading-6 border border-gray-200 shadow-sm ring-transparent rounded-md">
             {solutions.map((item) => (
               <div
                 key={item.name}
-                className="relative rounded-lg p-2 hover:bg-gray-50"
+                className="relative rounded hover:bg-gray-50 px-5 py-2"
               >
-                <a href={item.href} className="font-semibold text-gray-800 p-4">
+                <a href={item.href} className="font-semibold text-gray-800">
                   {item.name}
                   <span className="absolute inset-0" />
                 </a>
