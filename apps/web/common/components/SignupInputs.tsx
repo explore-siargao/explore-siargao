@@ -1,5 +1,4 @@
 "use client";
-import useAuthModalStore from "@/common/store/useAuthModalStore";
 import {
   I_User,
   RegistrationType,
@@ -10,33 +9,25 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Button } from "./ui/Button";
+import { ADD_USER_SUCCESS } from "../constants/texts";
+import Link from "next/link";
 
-interface SignUpInputProps{
-  isInModal:boolean
-}
-
-const SignupInputs = ({isInModal}:SignUpInputProps) => {
+const SignupInputs = () => {
   const { mutate: addUser, isPending: addUserIsPending } = useRegister();
   const { register, handleSubmit, reset } = useForm<I_User>();
-  const setLogin = useAuthModalStore((state:any)=>state.setIsLogin)
-  const setClosable = useAuthModalStore((state:any)=>state.setClosable)
   const onSubmit2 = (data: I_User) => {
     const callBackReq2 = {
       onSuccess: (data: T_BACKEND_RESPONSE) => {
         if (!data.error) {
           if (data.item && !addUserIsPending) {
-            toast.success("User Successfully added");
+            toast.success(ADD_USER_SUCCESS);
             reset();
-            if(!isInModal){
-              setLogin()
-              setClosable(false)
-            }
           }
         } else {
           toast.error(String(data.message));
         }
       },
-      onError: (err: any) => {
+      onError: (err: Error) => {
         toast.error(String(err));
       },
     };
@@ -152,23 +143,20 @@ const SignupInputs = ({isInModal}:SignUpInputProps) => {
               By selecting{" "}
               <span className="font-bold"> Agree and continue,</span> I agree to
               Explore Siargao's{" "}
-              <a href="#" className="text-info-500 font-bold underline">
+              <Link href="#" className="text-info-500 font-bold underline">
                 Terms of Service, Payments Terms of Service,
-              </a>{" "}
+              </Link>{" "}
               and{" "}
-              <a href="#" className="text-info-500 font-bold underline">
+              <Link href="#" className="text-info-500 font-bold underline">
                 Nondiscrimination Policy
-              </a>{" "}
+              </Link>{" "}
               and acknowledge the{" "}
-              <a href="#" className="text-info-500 font-bold underline">
+              <Link href="#" className="text-info-500 font-bold underline">
                 Privacy Policy
-              </a>
+              </Link>
             </p>
           </div>
-          <Button
-            type="submit"
-            className="w-full my-4"
-          >
+          <Button type="submit" className="w-full my-4">
             {addUserIsPending ? (
               <div
                 className="animate-spin inline-block w-4 h-4 border-[2px] border-current border-t-transparent text-white rounded-full mx-2"

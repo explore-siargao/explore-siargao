@@ -1,33 +1,35 @@
-"use client"
-import React, { FC, useEffect, useRef, useState } from "react"
+"use client";
+import { Button } from "@/common/components/ui/Button";
+import Link from "next/link";
+import React, { FC, useEffect, useRef, useState } from "react";
 
 interface Props {}
 
-let currentOTPIndex: number = 0
+let currentOTPIndex: number = 0;
 const Verification: FC<Props> = (props): JSX.Element => {
-  const [otp, setOtp] = useState<string[]>(new Array(6).fill(""))
-  const [activeOTPIndex, setActiveOTPIndex] = useState<number>(0)
-  const inputRef = useRef<HTMLInputElement>(null)
+  const [otp, setOtp] = useState<string[]>(new Array(6).fill(""));
+  const [activeOTPIndex, setActiveOTPIndex] = useState<number>(0);
+  const inputRef = useRef<HTMLInputElement>(null);
   const handleOnChange = ({
     target,
   }: React.ChangeEvent<HTMLInputElement>): void => {
-    const { value } = target
-    const newOTP: string[] = [...otp]
-    newOTP[currentOTPIndex] = value.substring(value.length - 1)
-    if (!value) setActiveOTPIndex(currentOTPIndex - 1)
-    else setActiveOTPIndex(currentOTPIndex + 1)
-    setOtp(newOTP)
-  }
+    const { value } = target;
+    const newOTP: string[] = [...otp];
+    newOTP[currentOTPIndex] = value.substring(value.length - 1);
+    if (!value) setActiveOTPIndex(currentOTPIndex - 1);
+    else setActiveOTPIndex(currentOTPIndex + 1);
+    setOtp(newOTP);
+  };
   const handleOnKeyDown = (
     { key }: React.KeyboardEvent<HTMLImageElement>,
     index: number
   ) => {
-    currentOTPIndex = index
-    if (key === "Backspace") setActiveOTPIndex(currentOTPIndex - 1)
-  }
+    currentOTPIndex = index;
+    if (key === "Backspace") setActiveOTPIndex(currentOTPIndex - 1);
+  };
   useEffect(() => {
-    inputRef.current?.focus()
-  }, [activeOTPIndex])
+    inputRef.current?.focus();
+  }, [activeOTPIndex]);
   return (
     <div className="flex min-h-screen flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8 bg-slate-200">
       <div className="sm:mx-auto sm:w-full sm:max-w-[480px]">
@@ -39,7 +41,7 @@ const Verification: FC<Props> = (props): JSX.Element => {
               confirm your identity.
             </p>
           </div>
-          <form className="space-y-6" action="#" method="POST">
+          <form className="space-y-6" method="POST">
             <div
               id="verification-field"
               className="flex justify-center items-center space-x-2"
@@ -57,27 +59,22 @@ const Verification: FC<Props> = (props): JSX.Element => {
                       onKeyDown={(e) => handleOnKeyDown(e, num)}
                     />
                   </React.Fragment>
-                )
+                );
               })}
             </div>
             <div>
-              <button
-                type="submit"
-                className="rounded-md w-full my-5 bg-gradient-to-r from-rose-600 from-10% via-rose-700/90 via-40% to-rose-600 to-80% px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-rose-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600 transition ease-in-out active:scale-95 duration-20"
-              >
-                Submit
-              </button>
+              <Button type="button" className="w-full  my-5 ">Submit</Button>
               <div className="text-sm text-center text-gray-500">
                 <span>Did not receive the code?</span>&nbsp;
-                <a href="#" className="font-bold uppercase underline">
+                <Link href="#" className="font-bold uppercase underline">
                   Resend
-                </a>
+                </Link>
               </div>
             </div>
           </form>
         </div>
       </div>
     </div>
-  )
-}
-export default Verification
+  );
+};
+export default Verification;

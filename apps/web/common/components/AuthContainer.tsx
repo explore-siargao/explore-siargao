@@ -14,22 +14,34 @@ const AuthContainer = ({ children, title, onClose, onBack }: Props) => {
         <div className="bg-white shadow sm:rounded-2xl">
           <div className="flex border-b-gray-200 border-b p-4">
             <div>
-              {onClose ? <XMarkIcon className="h-6 w-6 cursor-pointer rounded-full hover:bg-gray-300/30" onClick={() => onClose()} /> : null}
-              {onBack ? <ArrowLeftIcon className="h-6 w-6 cursor-pointer rounded-full hover:bg-gray-300/30" onClick={() => onBack()} /> : null}
+              {onClose ? (
+                <XMarkIcon
+                  className="h-6 w-6 cursor-pointer rounded-full hover:bg-gray-300/30"
+                  onClick={() => onClose()}
+                />
+              ) : null}
+              {onBack ? (
+                <ArrowLeftIcon
+                  className="h-6 w-6 cursor-pointer rounded-full hover:bg-gray-300/30"
+                  onClick={() => onBack()}
+                />
+              ) : null}
             </div>
             <div className="flex-1">
-              <h1 className={`w-full text-center place-self-center font-semibold`}>
-                <span className={`${onClose || onBack ? "-ml-4" : ""}`}>{title}</span>
+              <h1
+                className={`w-full text-center place-self-center font-semibold`}
+              >
+                <span className={`${onClose || onBack ? "-ml-4" : ""}`}>
+                  {title}
+                </span>
               </h1>
             </div>
           </div>
-          <div className="p-4">
-            {children}
-          </div>
+          <div className="p-4">{children}</div>
         </div>
       </div>
     </div>
-  )
+  );
 };
 
 export default AuthContainer;

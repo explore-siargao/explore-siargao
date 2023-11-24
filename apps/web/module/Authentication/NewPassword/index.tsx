@@ -1,6 +1,9 @@
-import React from "react"
-import lock from "@/common/assets/padlock.png"
-import Image from "next/image"
+import React from "react";
+import lock from "@/common/assets/padlock.png";
+import Image from "next/image";
+import { LOGIN } from "@/common/constants/links";
+import Link from "next/link";
+import { Button } from "@/common/components/ui/Button";
 
 const NewPassword = () => {
   return (
@@ -21,9 +24,9 @@ const NewPassword = () => {
             <p className="text-sm leading-tight text-gray-500 mx-1">
               Enter your email address we'll send you a link to reset your
               password. go to{" "}
-              <a href="/login" className="font-bold underline">
+              <Link href={LOGIN} className="font-bold underline">
                 Login?
-              </a>
+              </Link>
             </p>
           </div>
           <div className="isolate -space-y-px rounded-xl shadow-sm">
@@ -54,16 +57,12 @@ const NewPassword = () => {
               />
             </div>
           </div>
-          <button
-            type="button"
-            className="rounded-md w-full my-5 bg-gradient-to-r from-rose-600 from-10% via-rose-700/90 via-40% to-rose-600 to-80% px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-rose-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600 transition ease-in-out active:scale-95 duration-20"
-          >
-            Submit
-          </button>
+
+          <Button className="w-full  my-5 ">Submit</Button>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default NewPassword
+export default NewPassword;
