@@ -9,7 +9,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        "light-cyan-blue": "#F5F7FA",
+        "light-cyan-blue": "red",
         "dark-cyan-blue": "#2E3C4F",
         "alice-blue": "#EDF0F2",
         "pale-aqua": "#CCD7EC",

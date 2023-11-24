@@ -10,8 +10,8 @@ import { useForm } from "react-hook-form";
 import useLogin from "@/module/Authentication/hooks/useLogin";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
-import { Button } from "./Button";
 import useAuthModalStore from "@/common/store/useAuthModalStore";
+import { Button } from "@/common/components/ui/Button";
 
 const LoginInputs = () => {
   const router = useRouter();
@@ -43,11 +43,11 @@ const LoginInputs = () => {
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="px-6">
-          <h1 className="font-semibold text-xl py-6">
+        <div>
+          <h1 className="font-semibold text-xl">
             Welcome to Explore Siargao
           </h1>
-          <div className="isolate -space-y-px rounded-xl shadow-sm">
+          <div className="isolate -space-y-px rounded-xl shadow-sm mt-2">
             <div className="relative rounded-md rounded-b-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-gray-600">
               <label
                 htmlFor="name"
@@ -85,9 +85,10 @@ const LoginInputs = () => {
               Privacy Policy
             </a>
           </p>
-          <button
+          <Button
             type="submit"
-            className="rounded-md w-full my-5 bg-gradient-to-r from-rose-600 from-10% via-rose-700/90 via-40% to-rose-600 to-80% px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-rose-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600 transition ease-in-out active:scale-95 duration-20"
+            variant="default"
+            className="w-full my-4"
           >
             {loginIsPending ? (
               <div
@@ -99,7 +100,7 @@ const LoginInputs = () => {
             ) : (
               "Continue"
             )}
-          </button>
+          </Button>
           <div className="flex">
             <span className="border-b-2 h-0 w-full my-auto"></span>
             <p className="text-xs mx-5">or</p>
@@ -110,7 +111,6 @@ const LoginInputs = () => {
               <div className="mt-6 grid gap-4">
                 <Button
                   variant={"outline"}
-                  size={"md"}
                   className="flex w-full items-center gap-3 rounded-md border-black border px-3 py-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#24292F] hover:bg-slate-200/30 transition ease-in-out active:-translate-y-1 active:scale-95 duration-50"
                 >
                   <Image
@@ -126,7 +126,6 @@ const LoginInputs = () => {
                 </Button>
                 <Button
                   variant={"outline"}
-                  size={"md"}
                   className="flex w-full items-center gap-3 rounded-md border-black border px-3 py-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#24292F] hover:bg-slate-200/30 transition ease-in-out active:-translate-y-1 active:scale-95 duration-50"
                 >
                   <Image
@@ -143,10 +142,8 @@ const LoginInputs = () => {
                 <Button
                   variant={"outline"}
                   type="button"
-                  size={"md"}
                   onClick={()=>{
-                    setLogin()
-                    setClosable(true)
+                    router.push("/create-account")
                   }}
                   className="flex w-full items-center gap-3 rounded-md border-black border px-3 py-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#24292F] hover:bg-slate-200/30 transition ease-in-out active:-translate-y-1 active:scale-95 duration-50"
                 >

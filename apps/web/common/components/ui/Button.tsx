@@ -1,71 +1,55 @@
-import * as React from "react";
-import Link from "next/link";
-import { VariantProps, cva } from "class-variance-authority";
-import { cn } from "@/utils/utils";
+import * as React from "react"
+import { Slot } from "@radix-ui/react-slot"
+import { cva, type VariantProps } from "class-variance-authority"
+import { cn } from "@/common/helpers/cn"
 
-const buttonVariants = cva("rounded-md font-semibold text-white shadow-sm", {
-  variants: {
-    variant: {
-      default:
-        "bg-gradient-to-r from-rose-600 from-10% via-rose-700/90 via-40% to-rose-600 to-80% hover:bg-rose-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600",
-      destructive:
-        "bg-red-500 text-white hover:bg-red-600 dark:hover:bg-red-600",
-      outline:
-        "gap-3 border-black border focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#24292F] hover:bg-slate-200/30 text-black",
-      subtle:
-        "bg-slate-100 text-slate-900 hover:bg-slate-200 dark:bg-slate-700 dark:text-slate-100",
-      ghost:
-        "bg-transparent dark:bg-transparent hover:bg-slate-100 dark:hover:bg-slate-800 dark:text-slate-100 dark:hover:text-slate-100 data-[state=open]:bg-transparent dark:data-[state=open]:bg-transparent",
-      link: "bg-transparent dark:bg-transparent underline-offset-4 hover:underline text-slate-900 dark:text-slate-300 hover:bg-transparent dark:hover:bg-transparent",
-      rounded: "hover:bg-gray-200/30 rounded-full",
+const buttonVariants = cva(
+  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-900 disabled:pointer-events-none disabled:opacity-50",
+  {
+    variants: {
+      variant: {
+        default: "bg-primary-500 text-white hover:bg-primary-600 focus:ring-2 focus:ring-offset-2 focus:ring-primary-300",
+        destructive:
+          "bg-amaranth text-white hover:bg-amaranth-500 focus:ring-2 focus:ring-offset-2 focus:ring-amaranth-300",
+        outline:
+          "border border-primary bg-transparent hover:bg-primary hover:text-white",
+        secondary:
+          "bg-accent text-white hover:bg-accent/80 focus:ring-2 focus:ring-offset-2 focus:ring-accent/60",
+        ghost: "hover:bg-accent/80 hover:text-black",
+        link: "text-primary underline-offset-4 hover:underline",
+      },
+      size: {
+        default: "h-10 px-4 py-2",
+        sm: "h-9 rounded-md px-3",
+        lg: "h-11 rounded-md px-8",
+        icon: "h-10 w-10",
+      },
     },
-    animation: {
-      default: "",
-      easeInOut: "transition ease-in-out active:scale-95 duration-20",
+    defaultVariants: {
+      variant: "default",
+      size: "default",
     },
-    size: {
-      default: "w-full px-3.5 py-2.5 text-sm",
-      sm: "px-3 py-2 text-sm",
-      md: "px-3 py-4 text-sm",
-      lg: "px-4 py-4 text-sm",
-    },
-  },
-  defaultVariants: {
-    variant: "default",
-    size: "default",
-    animation: "default",
-  },
-});
+  }
+)
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
-  href?: string;
+  asChild?: boolean
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, children, href, variant, size, ...props }, ref) => {
-    if (href) {
-      return (
-        <Link
-          href={href}
-          className={cn(buttonVariants({ variant, size, className }))}
-        >
-          {children}
-        </Link>
-      );
-    }
+  ({ className, variant, size, asChild = false, ...props }, ref) => {
+    const Comp = asChild ? Slot : "button"
     return (
-      <button
+      <Comp
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
         {...props}
-      >
-        {children}
-      </button>
-    );
+      />
+    )
   }
-);
-Button.displayName = "Button";
+)
+Button.displayName = "Button"
 
-export { Button, buttonVariants };
+export { Button, buttonVariants }

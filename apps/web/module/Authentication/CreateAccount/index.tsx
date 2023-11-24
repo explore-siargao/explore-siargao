@@ -1,19 +1,19 @@
 "use client";
 import React from "react";
-import LoginInputs from "@/common/components/LoginInputs";
 import AuthContainer from "@/common/components/AuthContainer";
+import SignupInputs from "@/common/components/SignupInputs";
 import { useRouter } from "next/navigation";
 
-const Login = () => {
+const CreateAccount = () => {
   const router = useRouter()
   return (
     <AuthContainer
-      title="Login or sign up"
+      title="Create account using you email"
       onBack={() => router.push("/")}
     >
-      <LoginInputs />
+      <SignupInputs />
     </AuthContainer>
   );
 };
 
-export default Login;
+export default CreateAccount;
