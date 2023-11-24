@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "../globals.css"
 import QueryClientWrapper from "@/common/components/QueryClientWrapper"
+import AuthModalWrapper from "@/common/components/AuthModalWrapper"
 import { Toaster } from "react-hot-toast"
 import React from "react"
 
@@ -22,7 +23,11 @@ export default function RootLayout({
       <link rel="icon" type="image/x-icon" href={`/logo-single.png`} />
       <body className={inter.className}>
         <Toaster />
-        <QueryClientWrapper>{children}</QueryClientWrapper>
+        <QueryClientWrapper>
+          <AuthModalWrapper>
+            {children}
+          </AuthModalWrapper>
+        </QueryClientWrapper>
       </body>
     </html>
   )

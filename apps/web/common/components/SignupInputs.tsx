@@ -1,4 +1,5 @@
 "use client";
+import useAuthModalStore from "@/common/store/useAuthModalStore";
 import {
   I_User,
   RegistrationType,
@@ -10,10 +11,15 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Button } from "./ui/Button";
 
-const SignupInputs = () => {
+interface SignUpInputProps{
+  isInModal:boolean
+}
+
+const SignupInputs = ({isInModal}:SignUpInputProps) => {
   const { mutate: addUser, isPending: addUserIsPending } = useRegister();
   const { register, handleSubmit, reset } = useForm<I_User>();
-
+  const setLogin = useAuthModalStore((state:any)=>state.setIsLogin)
+  const setClosable = useAuthModalStore((state:any)=>state.setClosable)
   const onSubmit2 = (data: I_User) => {
     const callBackReq2 = {
       onSuccess: (data: T_BACKEND_RESPONSE) => {
@@ -21,6 +27,10 @@ const SignupInputs = () => {
           if (data.item && !addUserIsPending) {
             toast.success("User Successfully added");
             reset();
+            if(!isInModal){
+              setLogin()
+              setClosable(false)
+            }
           }
         } else {
           toast.error(String(data.message));
