@@ -5,7 +5,16 @@
     "build": {
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**"],
-      "env": ["API_URL"]
+      "env": [
+        "COGNITO_CLIENT_ID",
+        "COGNITO_POOL_ID",
+        "COGNITO_REGION",
+        "API_URL",
+        "API_PORT",
+        "API_ENCRYPT_KEY",
+        "API_SIGN_KEY",
+        "API_ORIGINS"
+      ]
     },
     "lint": {
       "dependsOn": ["^lint"]

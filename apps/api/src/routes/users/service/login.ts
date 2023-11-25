@@ -1,14 +1,12 @@
-import { UNKNOWN_ERROR_OCCURRED } from 'constants/'
-import { keys } from '../../config/keys'
 import CryptoJS from 'crypto-js'
 import jwt from 'jsonwebtoken'
-import { Request, Response, NextFunction } from 'express'
+import { Request, Response } from 'express'
 import { PrismaClient } from '@prisma/client'
 import { randomInt } from 'crypto'
+import { encryptKey, signKey } from '@/common/config'
+import { UNKNOWN_ERROR_OCCURRED } from '@/common/constants'
 
-
-
-export const loginAuth = async (req: Request, res: Response, next: NextFunction) => {
+export const loginAuth = async (req: Request, res: Response) => {
     const { email, password } = req.body
     const prisma = new PrismaClient()
      const randomNumber = randomInt(100000,999999)
@@ -25,7 +23,7 @@ export const loginAuth = async (req: Request, res: Response, next: NextFunction)
        
         const encryptPassword = CryptoJS.AES.decrypt(
           user?.password as string,
-          keys.encryptKey as string
+          encryptKey
         )
         const originalPassword = encryptPassword.toString(CryptoJS.enc.Utf8)
         if (originalPassword !== password) {
@@ -37,7 +35,7 @@ export const loginAuth = async (req: Request, res: Response, next: NextFunction)
               role: user?.role,
               otp:randomNumber
             },
-            keys.signKey as string
+            signKey
           )
           if (res.locals.user) {
             delete res.locals.user

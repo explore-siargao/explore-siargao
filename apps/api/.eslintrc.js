@@ -1,25 +1,9 @@
+/** @type {import("eslint").Linter.Config} */
 module.exports = {
-  parser: '@typescript-eslint/parser',
+  root: true,
+  extends: ["@repo/eslint-config/library.js"],
+  parser: "@typescript-eslint/parser",
   parserOptions: {
-    ecmaVersion: 2020,
-    sourceType: 'module',
+    project: ['./tsconfig.json'],
   },
-  settings: {},
-  extends: [
-    'plugin:@typescript-eslint/recommended',
-    'plugin:import/errors',
-    'plugin:import/warnings',
-    'plugin:import/typescript',
-    'prettier',
-    'plugin:prettier/recommended',
-  ],
-  rules: {
-    'no-unused-vars': 'off',
-    'react/display-name': 'off',
-    'import/no-unresolved': 'off',
-    '@typescript-eslint/no-unused-vars': ['error'],
-    '@typescript-eslint/no-var-requires': 'off',
-    'react/prop-types': 'off',
-    '@typescript-eslint/explicit-module-boundary-types': 'off',
-  },
-}
+};
