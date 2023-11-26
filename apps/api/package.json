@@ -3,14 +3,19 @@
   "version": "1.0.0",
   "main": "src/index.ts",
   "license": "MIT",
+  "prisma": {
+    "schema": "src/prisma/schema.prisma"
+  },
   "scripts": {
     "build": "npx tsc && tsc-alias -p tsconfig.json",
     "start": "node build/index.js",
-    "dev": "concurrently \"npx tsc --watch\" \"tsc-alias -p tsconfig.json --watch\" \"nodemon build/index.js\""
+    "dev": "concurrently \"npx tsc --watch\" \"tsc-alias -p tsconfig.json --watch\" \"nodemon build/index.js\"",
+    "postinstall": "npx prisma generate"
   },
   "dependencies": {
     "@aws-sdk/client-cognito-identity-provider": "^3.454.0",
     "@prisma/client": "^5.6.0",
+    "@repo/constants": "*",
     "amazon-cognito-identity-js": "^6.3.7",
     "aws-sdk": "^2.1500.0",
     "cors": "^2.8.5",
@@ -20,10 +25,8 @@
     "jsonwebtoken": "^9.0.2",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
-    "pm2": "^5.3.0",
     "release-please": "^16.2.0",
-    "zod": "^3.22.4",
-    "@repo/constants": "*"
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@repo/typescript-config": "*",
