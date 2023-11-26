@@ -1,0 +1,13 @@
+{
+  "name": "@repo/constants",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts"
+  },
+  "dependencies": {
+    "tsup": "^8.0.1",
+    "typescript": "^5.2.2"
+  }
+}
