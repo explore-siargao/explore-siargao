@@ -7,7 +7,8 @@ import { useRouter } from "next/navigation"
 const Login = () => {
   const router = useRouter()
   return (
-    <AuthContainer title="Login or sign up" onBack={() => router.push("/")}>
+    <AuthContainer 
+        title="Login or sign up"  onBack={() => router.push("/")}>
       <LoginInputs />
     </AuthContainer>
   )
