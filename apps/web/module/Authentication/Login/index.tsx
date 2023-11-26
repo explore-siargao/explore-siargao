@@ -8,7 +8,7 @@ const Login = () => {
   const router = useRouter()
   return (
     <AuthContainer
-      title="Login or sign up"
+        title="Login or sign up"
       onBack={() => router.push("/")}
     >
       <LoginInputs />
