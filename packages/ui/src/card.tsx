@@ -17,7 +17,7 @@ export function Card({
       target="_blank"
     >
       <h2>
-        {title} <span>-&gt;</span>
+        {title} <span>-mekusmekus</span>
       </h2>
       <p>{children}</p>
     </a>
