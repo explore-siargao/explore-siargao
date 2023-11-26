@@ -1,5 +1,4 @@
 "use client"
-import useAuthModalStore from "@/common/store/useAuthModalStore"
 import {
   I_User,
   RegistrationType,

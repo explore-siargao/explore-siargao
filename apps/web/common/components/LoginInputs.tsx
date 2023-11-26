@@ -10,13 +10,10 @@ import { useForm } from "react-hook-form"
 import useLogin from "@/module/Authentication/hooks/useLogin"
 import { useRouter } from "next/navigation"
 import Cookies from "js-cookie"
-import useAuthModalStore from "@/common/store/useAuthModalStore"
 import { Button } from "@/common/components/ui/Button"
 
 const LoginInputs = () => {
   const router = useRouter()
-  const setLogin = useAuthModalStore((state: any) => state.setIsLogin)
-  const setClosable = useAuthModalStore((state: any) => state.setClosable)
   const { mutate: loginUser, isPending: loginIsPending } = useLogin()
   const { register, handleSubmit, reset } = useForm<I_User>()
   const onSubmit = (data: I_User) => {
