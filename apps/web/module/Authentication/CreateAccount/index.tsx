@@ -11,7 +11,7 @@ const CreateAccount = () => {
       title="Create account using you email"
           onBack={() => router.push("/")}
     >
-          <SignupInputs />
+        <SignupInputs />
     </AuthContainer>
   );
 };
