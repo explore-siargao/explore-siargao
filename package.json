@@ -2,6 +2,7 @@
   "name": "explore-siargao",
   "private": true,
   "scripts": {
+    "install:dev": "npm install && npm run build",
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",

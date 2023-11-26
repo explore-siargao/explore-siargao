@@ -10,7 +10,7 @@
     "build": "npx tsc && tsc-alias -p tsconfig.json",
     "start": "node build/index.js",
     "dev": "concurrently \"npx tsc --watch\" \"tsc-alias -p tsconfig.json --watch\" \"nodemon build/index.js\"",
-    "postinstall": "npx prisma generate && npm run build"
+    "postinstall": "npx prisma generate"
   },
   "dependencies": {
     "@aws-sdk/client-cognito-identity-provider": "^3.454.0",
