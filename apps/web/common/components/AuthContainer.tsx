@@ -19,7 +19,7 @@ const AuthContainer = ({ children, title, onClose, onBack }: Props) => {
             </div>
             <div className="flex-1">
               <h1 className={`w-full text-center place-self-center font-semibold`}>
-                <span className={`${onClose || onBack ? "-ml-4" : ""}`}>{title}</span>
+                <span className={`${onClose || onBack ? "-ml-4" : ""}`}>{title} test pre commit</span>
               </h1>
             </div>
           </div>
