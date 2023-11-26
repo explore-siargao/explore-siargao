@@ -1,6 +1,6 @@
 import { Bars3Icon, UserCircleIcon } from "@heroicons/react/20/solid";
 import React, { Fragment } from "react";
-const { Popover, Transition } = require("@headlessui/react");
+import { Popover, Transition } from '@headlessui/react'
 
 const solutions = [
   {

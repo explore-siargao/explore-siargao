@@ -2,7 +2,7 @@
 import React, { Fragment } from "react";
 import { ChevronLeftIcon, XMarkIcon } from "@heroicons/react/20/solid";
 import useAuthModalStore from "@/common/store/useAuthModalStore";
-const { Dialog, Transition } = require("@headlessui/react");
+import { Dialog, Transition } from '@headlessui/react'
 
 type Props = {
   children: React.ReactNode;
