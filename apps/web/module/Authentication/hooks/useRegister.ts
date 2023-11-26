@@ -1,4 +1,4 @@
-import { API_URL_USERS } from "constants/"
+import { API_URL_USERS } from "@repo/constants"
 import { I_User } from "../../../common/types/global"
 import { useMutation } from "@tanstack/react-query"
 
@@ -12,7 +12,7 @@ export async function registerUser({
   registrationType,
   address,
   birthdate,
-  contactNumber
+  contactNumber,
 }: I_User) {
   const res = await fetch(`${API_URL_USERS}`, {
     method: "POST",
@@ -26,7 +26,7 @@ export async function registerUser({
       registrationType,
       address,
       birthdate,
-      contactNumber
+      contactNumber,
     }),
     headers: {
       "content-type": "application/json",

@@ -1,50 +1,39 @@
-"use client";
-import useAuthModalStore from "@/common/store/useAuthModalStore";
+"use client"
 import {
   I_User,
   RegistrationType,
   T_BACKEND_RESPONSE,
-} from "@/common/types/global";
-import useRegister from "@/module/Authentication/hooks/useRegister";
-import React from "react";
-import { useForm } from "react-hook-form";
-import toast from "react-hot-toast";
-import { Button } from "./ui/Button";
+} from "@/common/types/global"
+import useRegister from "@/module/Authentication/hooks/useRegister"
+import React from "react"
+import { useForm } from "react-hook-form"
+import toast from "react-hot-toast"
+import { Button } from "./ui/Button"
 
-interface SignUpInputProps{
-  isInModal:boolean
-}
-
-const SignupInputs = ({isInModal}:SignUpInputProps) => {
-  const { mutate: addUser, isPending: addUserIsPending } = useRegister();
-  const { register, handleSubmit, reset } = useForm<I_User>();
-  const setLogin = useAuthModalStore((state:any)=>state.setIsLogin)
-  const setClosable = useAuthModalStore((state:any)=>state.setClosable)
+const SignupInputs = () => {
+  const { mutate: addUser, isPending: addUserIsPending } = useRegister()
+  const { register, handleSubmit, reset } = useForm<I_User>()
   const onSubmit2 = (data: I_User) => {
     const callBackReq2 = {
       onSuccess: (data: T_BACKEND_RESPONSE) => {
         if (!data.error) {
           if (data.item && !addUserIsPending) {
-            toast.success("User Successfully added");
-            reset();
-            if(!isInModal){
-              setLogin()
-              setClosable(false)
-            }
+            toast.success("User Successfully added")
+            reset()
           }
         } else {
-          toast.error(String(data.message));
+          toast.error(String(data.message))
         }
       },
       onError: (err: any) => {
-        toast.error(String(err));
+        toast.error(String(err))
       },
-    };
+    }
     addUser(
       { ...data, registrationType: "Manual" as unknown as RegistrationType },
       callBackReq2
-    );
-  };
+    )
+  }
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit2)}>
@@ -165,10 +154,7 @@ const SignupInputs = ({isInModal}:SignUpInputProps) => {
               </a>
             </p>
           </div>
-          <Button
-            type="submit"
-            className="w-full my-4"
-          >
+          <Button type="submit" className="w-full my-4">
             {addUserIsPending ? (
               <div
                 className="animate-spin inline-block w-4 h-4 border-[2px] border-current border-t-transparent text-white rounded-full mx-2"
@@ -210,7 +196,7 @@ const SignupInputs = ({isInModal}:SignUpInputProps) => {
         </div>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default SignupInputs;
+export default SignupInputs

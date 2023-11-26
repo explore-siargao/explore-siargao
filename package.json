@@ -7,26 +7,21 @@
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
-  "prisma": {
-    "schema": "apps/api/src/prisma/schema.prisma"
-  },
   "devDependencies": {
     "@repo/eslint-config": "*",
     "@repo/typescript-config": "*",
+    "husky": "^8.0.3",
     "prettier": "^3.1.0",
     "turbo": "latest"
   },
-  "packageManager": "npm@10.1.0",
+  "packageManager": "^npm@10.2.3",
   "workspaces": [
     "apps/*",
     "packages/*"
   ],
-  "dependencies": {
-    "@headlessui/react": "^1.7.17",
-    "class-variance-authority": "^0.7.0",
-    "clsx": "^2.0.0",
-    "headlessui": "^0.0.0",
-    "tailwind-merge": "^2.0.0",
-    "zustand": "^4.4.6"
-  }
+  "engines": {
+    "node": ">=20.10.0",
+    "npm": ">=10.2.3"
+  },
+  "engineStrict": true
 }

@@ -1,16 +1,16 @@
-"use client";
-import React, { Fragment } from "react";
-import { ChevronLeftIcon, XMarkIcon } from "@heroicons/react/20/solid";
-import useAuthModalStore from "@/common/store/useAuthModalStore";
-const { Dialog, Transition } = require("@headlessui/react");
+"use client"
+import React, { Fragment } from "react"
+import { ChevronLeftIcon, XMarkIcon } from "@heroicons/react/20/solid"
+import useAuthModalStore from "@/common/store/useAuthModalStore"
+import { Dialog, Transition } from "@headlessui/react"
 
 type Props = {
-  children: React.ReactNode;
-  title: string;
-  isLoggedIn: boolean;
-  isOpen: boolean;
-  onClose: () => void;
-};
+  children: React.ReactNode
+  title: string
+  isLoggedIn: boolean
+  isOpen: boolean
+  onClose: () => void
+}
 
 const AuthWrapperModal = ({
   children,
@@ -19,8 +19,8 @@ const AuthWrapperModal = ({
   isOpen,
   onClose,
 }: Props) => {
-  const setLogin = useAuthModalStore((state: any) => state.setIsLogin);
-  const setClosable = useAuthModalStore((state: any) => state.setClosable);
+  const setLogin = useAuthModalStore((state: any) => state.setIsLogin)
+  const setClosable = useAuthModalStore((state: any) => state.setClosable)
 
   const closableAndIsLogin = () => {
     if (isLoggedIn) {
@@ -29,19 +29,19 @@ const AuthWrapperModal = ({
           className="h-6 w-6  rounded-full hover:bg-gray-300/30"
           onClick={onClose}
         />
-      );
+      )
     } else {
       return (
         <ChevronLeftIcon
           onClick={() => {
-            setLogin();
-            setClosable(false);
+            setLogin()
+            setClosable(false)
           }}
           className="h-6 w-6  rounded-full hover:bg-gray-300/30"
         />
-      );
+      )
     }
-  };
+  }
   return (
     <Transition.Root show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-50" onClose={onClose}>
@@ -88,7 +88,7 @@ const AuthWrapperModal = ({
         </div>
       </Dialog>
     </Transition.Root>
-  );
-};
+  )
+}
 
-export default AuthWrapperModal;
+export default AuthWrapperModal

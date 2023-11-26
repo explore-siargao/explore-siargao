@@ -1,9 +1,9 @@
-"use client";
-import React from "react";
-import Image from "next/image";
-import Logo from "@/common/assets/logo.png";
-import { Button } from "@/common/components/ui/Button";
-import LandingPageMenu from "@/common/components/ui/LandingPageMenu";
+"use client"
+import React from "react"
+import Image from "next/image"
+import Logo from "@/common/assets/logo.png"
+import { Button } from "@/common/components/ui/Button"
+import LandingPageMenu from "@/common/components/ui/LandingPageMenu"
 
 function Header() {
   return (
@@ -36,7 +36,7 @@ function Header() {
         </div>
       </nav>
     </header>
-  );
+  )
 }
 
-export default Header;
+export default Header

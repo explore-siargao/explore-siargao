@@ -24,9 +24,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <Toaster />
         <QueryClientWrapper>
-          <AuthModalWrapper>
-            {children}
-          </AuthModalWrapper>
+          <AuthModalWrapper>{children}</AuthModalWrapper>
         </QueryClientWrapper>
       </body>
     </html>

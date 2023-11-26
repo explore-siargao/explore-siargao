@@ -1,6 +1,6 @@
-import { Bars3Icon, UserCircleIcon } from "@heroicons/react/20/solid";
-import React, { Fragment } from "react";
-const { Popover, Transition } = require("@headlessui/react");
+import { Bars3Icon, UserCircleIcon } from "@heroicons/react/20/solid"
+import React, { Fragment } from "react"
+import { Popover, Transition } from "@headlessui/react"
 
 const solutions = [
   {
@@ -11,7 +11,7 @@ const solutions = [
     name: "Sign up",
     href: "/create-account",
   },
-];
+]
 const LandingPageMenu = () => {
   return (
     <Popover className="relative ">
@@ -46,7 +46,7 @@ const LandingPageMenu = () => {
         </Popover.Panel>
       </Transition>
     </Popover>
-  );
-};
+  )
+}
 
-export default LandingPageMenu;
+export default LandingPageMenu
