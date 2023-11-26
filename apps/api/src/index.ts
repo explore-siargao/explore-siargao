@@ -4,7 +4,7 @@ import { port, origins } from '@/common/config'
 import routes from '@/routes'
 
 const es = express()
-es.disable("x-powered-by");
+es.disable('x-powered-by')
 es.use(express.json())
 es.use(
   cors({

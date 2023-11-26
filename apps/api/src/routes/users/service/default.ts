@@ -34,10 +34,7 @@ export const getAllUsers = async (req: Request, res: Response) => {
 export const addUser = async (req: Request, res: Response) => {
   try {
     const prisma = new PrismaClient()
-    const encryptPassword = CryptoJS.AES.encrypt(
-      req.body.password,
-      encryptKey
-    )
+    const encryptPassword = CryptoJS.AES.encrypt(req.body.password, encryptKey)
     const newUser = await prisma.user.create({
       data: {
         email: req.body.email,

@@ -11,10 +11,12 @@ const useAuthModalStore = create<Props>((set) => ({
   isSignUpModalOpen: false,
   isLogin: true,
   closable: false,
-  triggerLoginModal: () => set((state) => ({ isLoginModalOpen: !state.isLoginModalOpen })),
-  triggerSignUpModal: () => set((state) => ({ isSignUpModalOpen: !state.isSignUpModalOpen })),
+  triggerLoginModal: () =>
+    set((state) => ({ isLoginModalOpen: !state.isLoginModalOpen })),
+  triggerSignUpModal: () =>
+    set((state) => ({ isSignUpModalOpen: !state.isSignUpModalOpen })),
   setIsLogin: () => set((state) => ({ isLogin: !state.isLogin })),
-  setClosable: (val: boolean) => set(() => ({ closable: val }))
+  setClosable: (val: boolean) => set(() => ({ closable: val })),
 }))
 
 export default useAuthModalStore
