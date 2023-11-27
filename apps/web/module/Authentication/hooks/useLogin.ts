@@ -1,4 +1,4 @@
-import { API_URL_USERS } from "@repo/constants"
+import { API_URL_USERS } from "../../../../api/src/common/constants/index"
 import { I_User } from "../../../common/types/global"
 import { useMutation } from "@tanstack/react-query"
 
@@ -15,7 +15,6 @@ export async function loginUser({ email, password }: I_User) {
   })
   return res.json()
 }
-
 function useLogin() {
   const query = useMutation({
     mutationFn: (props: I_User) => loginUser(props),

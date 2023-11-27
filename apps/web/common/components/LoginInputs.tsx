@@ -3,7 +3,7 @@ import React from "react"
 import Image from "next/image"
 import fb from "@/common/assets/facebook-logo.png"
 import google from "@/common/assets/google-logo.png"
-import { EnvelopeIcon } from "@heroicons/react/20/solid"
+import { EnvelopeIcon, XMarkIcon } from "@heroicons/react/20/solid"
 import toast from "react-hot-toast"
 import { I_User, T_BACKEND_RESPONSE } from "@/common/types/global"
 import { useForm } from "react-hook-form"
@@ -80,7 +80,7 @@ const LoginInputs = () => {
               Privacy Policy
             </a>
           </p>
-          <Button type="submit" variant="default" className="w-full my-4">
+          <Button type="submit" variant={"default"} className="w-full my-4">
             {loginIsPending ? (
               <div
                 className="animate-spin inline-block w-4 h-4 border-[2px] border-current border-t-transparent text-white rounded-full mx-2"
@@ -99,11 +99,8 @@ const LoginInputs = () => {
           </div>
           <div>
             <div>
-              <div className="mt-6 grid gap-4">
-                <Button
-                  variant={"outline"}
-                  className="flex w-full items-center gap-3 rounded-md border-black border px-3 py-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#24292F] hover:bg-slate-200/30 transition ease-in-out active:-translate-y-1 active:scale-95 duration-50"
-                >
+              {/* <div className="mt-6 grid gap-4">
+                <Button variant={"outline"}>
                   <Image
                     className="h-5 w-auto"
                     src={fb}
@@ -115,10 +112,7 @@ const LoginInputs = () => {
                     Continue with Facebook
                   </span>
                 </Button>
-                <Button
-                  variant={"outline"}
-                  className="flex w-full items-center gap-3 rounded-md border-black border px-3 py-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#24292F] hover:bg-slate-200/30 transition ease-in-out active:-translate-y-1 active:scale-95 duration-50"
-                >
+                <Button variant={"outline"}>
                   <Image
                     className="h-5 w-auto"
                     src={google}
@@ -136,14 +130,23 @@ const LoginInputs = () => {
                   onClick={() => {
                     router.push("/create-account")
                   }}
-                  className="flex w-full items-center gap-3 rounded-md border-black border px-3 py-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#24292F] hover:bg-slate-200/30 transition ease-in-out active:-translate-y-1 active:scale-95 duration-50"
                 >
                   <EnvelopeIcon className="h-5 w-auto" />
                   <span className="text-sm font-medium leading-6 text-center w-full">
                     Continue with Email
                   </span>
                 </Button>
-              </div>
+              </div> */}
+              <Button variant={"outline"} onEnd="asd" icon={fb}>
+                <span className="text-sm font-medium leading-6 text-center w-full">
+                  Continue with Facebook
+                </span>
+              </Button>
+              <Button variant={"outline"} onStart="asd" icon={fb}>
+                <span className="text-sm font-medium leading-6 text-center w-full">
+                  Continue with Facebook
+                </span>
+              </Button>
             </div>
           </div>
         </div>
