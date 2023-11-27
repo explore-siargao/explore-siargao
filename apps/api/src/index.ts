@@ -1,20 +1,18 @@
 import express from 'express'
 import cors from 'cors'
-import { port } from './config'
-import dotenv from 'dotenv'
-import routes from './routes'
-dotenv.config()
+import { port, origins } from '@/common/config'
+import routes from '@/routes'
 
 const es = express()
-es.disable("x-powered-by");
+es.disable('x-powered-by')
 es.use(express.json())
 es.use(
   cors({
-    origin: process.env.ORIGINS,
+    origin: origins,
     credentials: true,
   })
 )
 routes(es)
 es.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}`)
+  console.log(`API server is running at http://localhost:${port}`)
 })

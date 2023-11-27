@@ -1,16 +1,13 @@
-import { API_URL_USERS } from "constants/"
+import { API_URL_USERS } from "@repo/constants"
 import { I_User } from "../../../common/types/global"
 import { useMutation } from "@tanstack/react-query"
 
-export async function loginUser({
-  email,
-  password,
-}: I_User) {
+export async function loginUser({ email, password }: I_User) {
   const res = await fetch(`${API_URL_USERS}/login`, {
     method: "POST",
     body: JSON.stringify({
       email,
-      password
+      password,
     }),
     headers: {
       "content-type": "application/json",

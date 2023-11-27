@@ -1,12 +1,12 @@
-"use client";
-import React from "react";
-import { ArrowLeftIcon, XMarkIcon } from "@heroicons/react/20/solid";
+"use client"
+import React from "react"
+import { ArrowLeftIcon, XMarkIcon } from "@heroicons/react/20/solid"
 type Props = {
-  children: React.ReactNode;
-  title: string;
-  onClose?: () => void;
-  onBack?: () => void;
-};
+  children: React.ReactNode
+  title: string
+  onClose?: () => void
+  onBack?: () => void
+}
 const AuthContainer = ({ children, title, onClose, onBack }: Props) => {
   return (
     <div className="flex min-h-screen flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8 bg-primary-100">
@@ -32,7 +32,7 @@ const AuthContainer = ({ children, title, onClose, onBack }: Props) => {
                 className={`w-full text-center place-self-center font-semibold`}
               >
                 <span className={`${onClose || onBack ? "-ml-4" : ""}`}>
-                  {title}
+                  {title} test image
                 </span>
               </h1>
             </div>
@@ -41,7 +41,7 @@ const AuthContainer = ({ children, title, onClose, onBack }: Props) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default AuthContainer;
+export default AuthContainer

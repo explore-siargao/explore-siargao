@@ -1,44 +1,43 @@
-"use client";
-import React from "react";
-import Image from "next/image";
-import fb from "@/common/assets/facebook-logo.png";
-import google from "@/common/assets/google-logo.png";
-import { EnvelopeIcon } from "@heroicons/react/20/solid";
-import toast from "react-hot-toast";
-import { I_User, T_BACKEND_RESPONSE } from "@/common/types/global";
-import { useForm } from "react-hook-form";
-import useLogin from "@/module/Authentication/hooks/useLogin";
-import { useRouter } from "next/navigation";
-import Cookies from "js-cookie";
-import { Button } from "@/common/components/ui/Button";
-import { CREATE_ACCOUNT, HOME } from "../constants/links";
-import Link from "next/link";
+"use client"
+import React from "react"
+import Image from "next/image"
+import fb from "@/common/assets/facebook-logo.png"
+import google from "@/common/assets/google-logo.png"
+import { EnvelopeIcon } from "@heroicons/react/20/solid"
+import toast from "react-hot-toast"
+import { I_User, T_BACKEND_RESPONSE } from "@/common/types/global"
+import { useForm } from "react-hook-form"
+import useLogin from "@/module/Authentication/hooks/useLogin"
+import { useRouter } from "next/navigation"
+import Cookies from "js-cookie"
+import { Button } from "@/common/components/ui/Button"
+import Link from "next/link"
 
 const LoginInputs = () => {
-  const router = useRouter();
-  const { mutate: loginUser, isPending: loginIsPending } = useLogin();
-  const { register, handleSubmit, reset } = useForm<I_User>();
+  const router = useRouter()
+  const { mutate: loginUser, isPending: loginIsPending } = useLogin()
+  const { register, handleSubmit, reset } = useForm<I_User>()
   const onSubmit = (data: I_User) => {
     const callBackReq = {
       onSuccess: (data: T_BACKEND_RESPONSE) => {
         if (!data.error) {
           if (data.item && !loginIsPending) {
-            Cookies.set("tfl", data.item.token);
+            Cookies.set("tfl", data.item.token)
             if (data.userType === "User") {
-              reset();
-              router.push(HOME);
+              reset()
+              router.push("/home")
             }
           }
         } else {
-          toast.error(String(data.message));
+          toast.error(String(data.message))
         }
       },
-      onError: (err: Error) => {
-        toast.error(String(err));
+      onError: (err: any) => {
+        toast.error(String(err))
       },
-    };
-    loginUser({ ...data }, callBackReq);
-  };
+    }
+    loginUser({ ...data }, callBackReq)
+  }
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -136,7 +135,7 @@ const LoginInputs = () => {
                   variant={"outline"}
                   type="button"
                   onClick={() => {
-                    router.push(CREATE_ACCOUNT);
+                    router.push("/create-account")
                   }}
                   className="flex w-full items-center gap-3 rounded-md border-black border px-3 py-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#24292F] hover:bg-slate-200/30 transition ease-in-out active:-translate-y-1 active:scale-95 duration-50"
                 >
@@ -151,7 +150,7 @@ const LoginInputs = () => {
         </div>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default LoginInputs;
+export default LoginInputs

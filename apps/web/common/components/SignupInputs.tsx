@@ -1,41 +1,40 @@
-"use client";
+"use client"
 import {
   I_User,
   RegistrationType,
   T_BACKEND_RESPONSE,
-} from "@/common/types/global";
-import useRegister from "@/module/Authentication/hooks/useRegister";
-import React from "react";
-import { useForm } from "react-hook-form";
-import toast from "react-hot-toast";
-import { Button } from "./ui/Button";
-import { ADD_USER_SUCCESS } from "../constants/texts";
-import Link from "next/link";
+} from "@/common/types/global"
+import useRegister from "@/module/Authentication/hooks/useRegister"
+import React from "react"
+import { useForm } from "react-hook-form"
+import toast from "react-hot-toast"
+import { Button } from "./ui/Button"
+import Link from "next/link"
 
 const SignupInputs = () => {
-  const { mutate: addUser, isPending: addUserIsPending } = useRegister();
-  const { register, handleSubmit, reset } = useForm<I_User>();
+  const { mutate: addUser, isPending: addUserIsPending } = useRegister()
+  const { register, handleSubmit, reset } = useForm<I_User>()
   const onSubmit2 = (data: I_User) => {
     const callBackReq2 = {
       onSuccess: (data: T_BACKEND_RESPONSE) => {
         if (!data.error) {
           if (data.item && !addUserIsPending) {
-            toast.success(ADD_USER_SUCCESS);
-            reset();
+            toast.success("User Successfully added")
+            reset()
           }
         } else {
-          toast.error(String(data.message));
+          toast.error(String(data.message))
         }
       },
-      onError: (err: Error) => {
-        toast.error(String(err));
+      onError: (err: any) => {
+        toast.error(String(err))
       },
-    };
+    }
     addUser(
       { ...data, registrationType: "Manual" as unknown as RegistrationType },
       callBackReq2
-    );
-  };
+    )
+  }
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit2)}>
@@ -198,7 +197,7 @@ const SignupInputs = () => {
         </div>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default SignupInputs;
+export default SignupInputs

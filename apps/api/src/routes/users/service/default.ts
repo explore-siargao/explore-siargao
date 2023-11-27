@@ -1,7 +1,7 @@
 import { Response, Request } from 'express'
 import { PrismaClient } from '@prisma/client'
-import { keys } from '../../config/keys'
 import CryptoJS from 'crypto-js'
+import { encryptKey } from '@/common/config'
 export const getAllUsers = async (req: Request, res: Response) => {
   try {
     const prisma = new PrismaClient()
@@ -34,10 +34,7 @@ export const getAllUsers = async (req: Request, res: Response) => {
 export const addUser = async (req: Request, res: Response) => {
   try {
     const prisma = new PrismaClient()
-    const encryptPassword = CryptoJS.AES.encrypt(
-      req.body.password,
-      keys.encryptKey as string
-    )
+    const encryptPassword = CryptoJS.AES.encrypt(req.body.password, encryptKey)
     const newUser = await prisma.user.create({
       data: {
         email: req.body.email,

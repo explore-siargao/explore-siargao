@@ -1,8 +1,8 @@
-"use client";
-import React from "react";
-import AuthContainer from "@/common/components/AuthContainer";
-import SignupInputs from "@/common/components/SignupInputs";
-import { useRouter } from "next/navigation";
+"use client"
+import React from "react"
+import AuthContainer from "@/common/components/AuthContainer"
+import SignupInputs from "@/common/components/SignupInputs"
+import { useRouter } from "next/navigation"
 
 const CreateAccount = () => {
   const router = useRouter()
@@ -13,7 +13,7 @@ const CreateAccount = () => {
     >
       <SignupInputs />
     </AuthContainer>
-  );
-};
+  )
+}
 
-export default CreateAccount;
+export default CreateAccount
