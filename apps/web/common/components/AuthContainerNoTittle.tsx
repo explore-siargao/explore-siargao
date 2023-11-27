@@ -1,0 +1,18 @@
+"use client"
+import React from "react"
+type Props = {
+  children: React.ReactNode
+}
+const AuthContainerNoTittle = ({ children }: Props) => {
+  return (
+    <div className="flex min-h-screen flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8 bg-slate-200">
+      <div className="sm:mx-auto sm:w-full sm:max-w-[480px]">
+        <div className="bg-white shadow sm:rounded-2xl">
+          <div className="p-4">{children}</div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default AuthContainerNoTittle

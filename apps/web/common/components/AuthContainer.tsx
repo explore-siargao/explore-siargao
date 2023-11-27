@@ -32,12 +32,12 @@ const AuthContainer = ({ children, title, onClose, onBack }: Props) => {
                 className={`w-full text-center place-self-center font-semibold`}
               >
                 <span className={`${onClose || onBack ? "-ml-4" : ""}`}>
-                  {title} test image
+                  {title}
                 </span>
               </h1>
             </div>
           </div>
-          <div className="p-4">{children}</div>
+          <div className="pb-8 pt-4 px-8">{children}</div>
         </div>
       </div>
     </div>

@@ -1,5 +1,4 @@
-export const CREATE_ACCOUNT = "/create-account";
-export const HOME = "/home";
-export const LOGIN = "/login";
-export const SIGNUP = "/signup";
-export const LOGO_SINGLE = "/logo-single.png";
+export const LINK_CREATE_ACCOUNT = "/create-account";
+export const LINK_HOME = "/home";
+export const LINK_LOGIN = "/login";
+export const LINK_SIGNUP = "/signup";
