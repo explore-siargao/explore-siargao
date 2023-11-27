@@ -37,7 +37,7 @@ const AuthContainer = ({ children, title, onClose, onBack }: Props) => {
               </h1>
             </div>
           </div>
-          <div className="pb-8 pt-4 px-8">{children}</div>
+          <div>{children}</div>
         </div>
       </div>
     </div>

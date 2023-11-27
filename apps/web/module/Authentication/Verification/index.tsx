@@ -1,5 +1,5 @@
 "use client"
-import AuthContainerNoTittle from "@/common/components/AuthContainerNoTittle"
+import Container from "@/common/components/Container"
 import { Button } from "@/common/components/ui/Button"
 import {
   RESEND_BUTTON_TEXT,
@@ -38,10 +38,10 @@ const Verification: FC<Props> = (props): JSX.Element => {
     inputRef.current?.focus()
   }, [activeOTPIndex])
   return (
-    <AuthContainerNoTittle>
-      <div className="m-2">
-        <div className="pb-6 pt-4 space-y-4 text-center">
-          <h1 className="font-semibold text-3xl ">
+    <Container>
+      <div className="p-6">
+        <div className="pb-6 space-y-4 text-center">
+          <h1 className="font-semibold text-3xl pt-2">
             {VERIFICATION_CODE_TITTLE}
           </h1>
           <p className="text-sm leading-tight text-gray-500 mx-1">
@@ -82,7 +82,7 @@ const Verification: FC<Props> = (props): JSX.Element => {
           </div>
         </form>
       </div>
-    </AuthContainerNoTittle>
+    </Container>
   )
 }
 export default Verification

@@ -5,8 +5,8 @@ import AuthContainer from "@/common/components/AuthContainer"
 
 const NewPassword = () => {
   return (
-    <AuthContainer title="Reset Your Password">
-      <div className="mt-3 space-y-4">
+    <AuthContainer title="Reset Password">
+      <div className="p-6 space-y-4">
         <div className="isolate -space-y-px rounded-xl shadow-sm">
           <div className="relative rounded-md rounded-b-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-gray-600">
             <label

@@ -6,7 +6,7 @@ import AuthContainer from "@/common/components/AuthContainer"
 const ForgotPassword = () => {
   return (
     <AuthContainer title="Forgot Password">
-      <div className="mt-3 space-y-4">
+      <div className="p-6 space-y-4">
         <div className="relative rounded-md rounded-t-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-gray-600">
           <label
             htmlFor="email"
