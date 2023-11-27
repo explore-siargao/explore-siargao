@@ -1,9 +1,9 @@
-import React from "react";
-import lock from "@/common/assets/padlock.png";
-import Image from "next/image";
-import { LOGIN } from "@/common/constants/links";
-import Link from "next/link";
-import { Button } from "@/common/components/ui/Button";
+import React from "react"
+import lock from "@/common/assets/padlock.png"
+import Image from "next/image"
+import { LOGIN } from "@/common/constants/links"
+import Link from "next/link"
+import { Button } from "@/common/components/ui/Button"
 
 const NewPassword = () => {
   return (
@@ -62,7 +62,7 @@ const NewPassword = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default NewPassword;
+export default NewPassword

@@ -1,1 +1,1 @@
-export const ADD_USER_SUCCESS = "User Successfully added";
+export const ADD_USER_SUCCESS = "User Successfully added"

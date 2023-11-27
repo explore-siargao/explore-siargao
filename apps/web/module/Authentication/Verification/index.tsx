@@ -1,35 +1,35 @@
-"use client";
-import { Button } from "@/common/components/ui/Button";
-import Link from "next/link";
-import React, { FC, useEffect, useRef, useState } from "react";
+"use client"
+import { Button } from "@/common/components/ui/Button"
+import Link from "next/link"
+import React, { FC, useEffect, useRef, useState } from "react"
 
 interface Props {}
 
-let currentOTPIndex: number = 0;
+let currentOTPIndex: number = 0
 const Verification: FC<Props> = (props): JSX.Element => {
-  const [otp, setOtp] = useState<string[]>(new Array(6).fill(""));
-  const [activeOTPIndex, setActiveOTPIndex] = useState<number>(0);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const [otp, setOtp] = useState<string[]>(new Array(6).fill(""))
+  const [activeOTPIndex, setActiveOTPIndex] = useState<number>(0)
+  const inputRef = useRef<HTMLInputElement>(null)
   const handleOnChange = ({
     target,
   }: React.ChangeEvent<HTMLInputElement>): void => {
-    const { value } = target;
-    const newOTP: string[] = [...otp];
-    newOTP[currentOTPIndex] = value.substring(value.length - 1);
-    if (!value) setActiveOTPIndex(currentOTPIndex - 1);
-    else setActiveOTPIndex(currentOTPIndex + 1);
-    setOtp(newOTP);
-  };
+    const { value } = target
+    const newOTP: string[] = [...otp]
+    newOTP[currentOTPIndex] = value.substring(value.length - 1)
+    if (!value) setActiveOTPIndex(currentOTPIndex - 1)
+    else setActiveOTPIndex(currentOTPIndex + 1)
+    setOtp(newOTP)
+  }
   const handleOnKeyDown = (
     { key }: React.KeyboardEvent<HTMLImageElement>,
     index: number
   ) => {
-    currentOTPIndex = index;
-    if (key === "Backspace") setActiveOTPIndex(currentOTPIndex - 1);
-  };
+    currentOTPIndex = index
+    if (key === "Backspace") setActiveOTPIndex(currentOTPIndex - 1)
+  }
   useEffect(() => {
-    inputRef.current?.focus();
-  }, [activeOTPIndex]);
+    inputRef.current?.focus()
+  }, [activeOTPIndex])
   return (
     <div className="flex min-h-screen flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8 bg-slate-200">
       <div className="sm:mx-auto sm:w-full sm:max-w-[480px]">
@@ -59,11 +59,13 @@ const Verification: FC<Props> = (props): JSX.Element => {
                       onKeyDown={(e) => handleOnKeyDown(e, num)}
                     />
                   </React.Fragment>
-                );
+                )
               })}
             </div>
             <div>
-              <Button type="button" className="w-full  my-5 ">Submit</Button>
+              <Button type="button" className="w-full  my-5 ">
+                Submit
+              </Button>
               <div className="text-sm text-center text-gray-500">
                 <span>Did not receive the code?</span>&nbsp;
                 <Link href="#" className="font-bold uppercase underline">
@@ -75,6 +77,6 @@ const Verification: FC<Props> = (props): JSX.Element => {
         </div>
       </div>
     </div>
-  );
-};
-export default Verification;
+  )
+}
+export default Verification

@@ -1,9 +1,9 @@
-import Image from "next/image";
-import React from "react";
-import confuse from "@/common/assets/confusion.png";
-import { Button } from "@/common/components/ui/Button";
-import Link from "next/link";
-import { LOGIN } from "@/common/constants/links";
+import Image from "next/image"
+import React from "react"
+import confuse from "@/common/assets/confusion.png"
+import { Button } from "@/common/components/ui/Button"
+import Link from "next/link"
+import { LOGIN } from "@/common/constants/links"
 
 const ForgotPassword = () => {
   return (
@@ -47,7 +47,7 @@ const ForgotPassword = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ForgotPassword;
+export default ForgotPassword
