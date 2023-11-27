@@ -1,8 +1,4 @@
 import React from "react"
-import lock from "@/common/assets/padlock.png"
-import Image from "next/image"
-import { LINK_LOGIN } from "@/common/constants/links"
-import Link from "next/link"
 import { Button } from "@/common/components/ui/Button"
 import { SUBMIT_BUTTON_TEXT } from "@/common/constants"
 import AuthContainer from "@/common/components/AuthContainer"
