@@ -1,11 +1,11 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "../globals.css";
-import QueryClientWrapper from "@/common/components/QueryClientWrapper";
-import AuthModalWrapper from "@/common/components/AuthModalWrapper";
-import { Toaster } from "react-hot-toast";
-import React from "react";
-import { LOGO_SINGLE_IMAGE } from "@/common/constants/index";
+import type { Metadata } from "next"
+import { Inter } from "next/font/google"
+import "../globals.css"
+import QueryClientWrapper from "@/common/components/QueryClientWrapper"
+import AuthModalWrapper from "@/common/components/AuthModalWrapper"
+import { Toaster } from "react-hot-toast"
+import React from "react"
+import { LOGO_SINGLE_IMAGE } from "@/common/constants/index"
 
 const inter = Inter({ subsets: ["latin"] })
 
