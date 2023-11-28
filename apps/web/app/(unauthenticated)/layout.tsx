@@ -5,6 +5,7 @@ import QueryClientWrapper from "@/common/components/QueryClientWrapper"
 import AuthModalWrapper from "@/common/components/AuthModalWrapper"
 import { Toaster } from "react-hot-toast"
 import React from "react"
+import { LOGO_SINGLE_IMAGE } from "@/common/constants/index"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -20,7 +21,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <link rel="icon" type="image/x-icon" href={`/logo-single.png`} />
+      <link rel="icon" type="image/x-icon" href={LOGO_SINGLE_IMAGE} />
       <body className={inter.className}>
         <Toaster />
         <QueryClientWrapper>
