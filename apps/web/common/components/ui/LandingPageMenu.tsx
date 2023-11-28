@@ -1,15 +1,17 @@
+import { LINK_LOGIN, LINK_SIGNUP } from "@/common/constants/links"
 import { Bars3Icon, UserCircleIcon } from "@heroicons/react/20/solid"
 import React, { Fragment } from "react"
 import { Popover, Transition } from "@headlessui/react"
+import Link from "next/link"
 
 const solutions = [
   {
     name: "Log in",
-    href: "/login",
+    href: LINK_LOGIN,
   },
   {
     name: "Sign up",
-    href: "/create-account",
+    href: LINK_SIGNUP,
   },
 ]
 const LandingPageMenu = () => {
@@ -36,10 +38,10 @@ const LandingPageMenu = () => {
                 key={item.name}
                 className="relative rounded hover:bg-gray-50 px-5 py-2"
               >
-                <a href={item.href} className="font-semibold text-gray-800">
+                <Link href={item.href} className="font-semibold text-gray-800">
                   {item.name}
                   <span className="absolute inset-0" />
-                </a>
+                </Link>
               </div>
             ))}
           </div>

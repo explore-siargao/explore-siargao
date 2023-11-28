@@ -9,6 +9,11 @@ import React from "react"
 import { useForm } from "react-hook-form"
 import toast from "react-hot-toast"
 import { Button } from "./ui/Button"
+import Link from "next/link"
+import {
+  ADD_USER_SUCCESS_MESSAGE,
+  AGREE_CONTINUE_BUTTON_TEXT,
+} from "../constants/index"
 
 const SignupInputs = () => {
   const { mutate: addUser, isPending: addUserIsPending } = useRegister()
@@ -18,7 +23,7 @@ const SignupInputs = () => {
       onSuccess: (data: T_BACKEND_RESPONSE) => {
         if (!data.error) {
           if (data.item && !addUserIsPending) {
-            toast.success("User Successfully added")
+            toast.success(ADD_USER_SUCCESS_MESSAGE)
             reset()
           }
         } else {
@@ -35,7 +40,7 @@ const SignupInputs = () => {
     )
   }
   return (
-    <div>
+    <div className="p-6">
       <form onSubmit={handleSubmit(onSubmit2)}>
         <div className="space-y-4 overflow-y-auto">
           <div>
@@ -141,17 +146,17 @@ const SignupInputs = () => {
               By selecting{" "}
               <span className="font-bold"> Agree and continue,</span> I agree to
               Explore Siargao's{" "}
-              <a href="#" className="text-info-500 font-bold underline">
+              <Link href="#" className="text-info-500 font-bold underline">
                 Terms of Service, Payments Terms of Service,
-              </a>{" "}
+              </Link>{" "}
               and{" "}
-              <a href="#" className="text-info-500 font-bold underline">
+              <Link href="#" className="text-info-500 font-bold underline">
                 Nondiscrimination Policy
-              </a>{" "}
+              </Link>{" "}
               and acknowledge the{" "}
-              <a href="#" className="text-info-500 font-bold underline">
+              <Link href="#" className="text-info-500 font-bold underline">
                 Privacy Policy
-              </a>
+              </Link>
             </p>
           </div>
           <Button type="submit" className="w-full my-4">
@@ -163,7 +168,7 @@ const SignupInputs = () => {
                 <span className="sr-only">Loading...</span>
               </div>
             ) : (
-              "Agree and continue"
+              AGREE_CONTINUE_BUTTON_TEXT
             )}
           </Button>
           <div className="w-full border-b-2 mt-2" />
@@ -174,7 +179,6 @@ const SignupInputs = () => {
               receiving these at any time in your account settings or directly
               from the marketing notification.
             </p>
-
             <div className="relative flex items-start mt-4">
               <div className="flex h-6 items-center">
                 <input
