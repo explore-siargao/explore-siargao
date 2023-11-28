@@ -18,6 +18,7 @@ import {
   LOGIN_CONTENT_TITTLE_TEXT,
 } from "../constants"
 import Image from "next/image"
+import { Input } from "./ui/Input"
 
 const LoginInputs = () => {
   const router = useRouter()
@@ -47,6 +48,11 @@ const LoginInputs = () => {
   enum Position {
     "end",
     "start",
+  }
+  enum InputVariants {
+    "danger",
+    "warning",
+    "success",
   }
 
   return (
@@ -159,6 +165,22 @@ const LoginInputs = () => {
                   Continue with Email
                 </span>
               </Button>
+
+              <div className="relative rounded-md rounded-b-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-gray-600">
+                <label
+                  htmlFor="name"
+                  className="block text-xs font-medium text-gray-900"
+                >
+                  Email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  className="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                  placeholder="you@example.com"
+                />
+              </div>
+              <Input variants={InputVariants.success} />
             </div>
           </div>
         </div>
