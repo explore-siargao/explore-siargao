@@ -4,6 +4,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/common/helpers/cn"
 import { EnvelopeIcon } from "@heroicons/react/20/solid"
 import Image from "next/image"
+import { StaticImport } from "next/dist/shared/lib/get-img-props"
 
 const buttonVariants = cva(
   "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-900 disabled:pointer-events-none disabled:opacity-50",
@@ -43,8 +44,7 @@ export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean
-  onStart?: string
-  onEnd?: string
+  imgPosition?: string
   icon?: any
 }
 
@@ -57,8 +57,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       asChild = false,
       children,
       icon,
-      onStart,
-      onEnd,
+      imgPosition,
       ...props
     },
     ref
@@ -66,7 +65,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const Comp = asChild ? Slot : "button"
     return (
       <>
-        {onStart ? (
+        {imgPosition === "onStart" ? (
           <Comp
             className={cn(buttonVariants({ variant, size, className }))}
             ref={ref}
@@ -81,31 +80,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             />
             {children}
           </Comp>
-        ) : onEnd ? (
-          <Comp
-            className={cn(buttonVariants({ variant, size, className }))}
-            ref={ref}
-            {...props}
-          >
-            <Image
-              className="h-5 w-auto"
-              src={icon}
-              width={500}
-              height={500}
-              alt={""}
-            />
-            {children}
-          </Comp>
-        ) : (
-          <Comp
-            className={cn(buttonVariants({ variant, size, className }))}
-            ref={ref}
-            {...props}
-          >
-            {children}
-          </Comp>
-        )}
-        {/* {onStart ? (
+        ) : imgPosition === "onEnd" ? (
           <Comp
             className={cn(buttonVariants({ variant, size, className }))}
             ref={ref}
@@ -129,30 +104,6 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             {children}
           </Comp>
         )}
-        {onEnd ? (
-          <Comp
-            className={cn(buttonVariants({ variant, size, className }))}
-            ref={ref}
-            {...props}
-          >
-            <Image
-              className="h-5 w-auto"
-              src={icon}
-              width={500}
-              height={500}
-              alt={""}
-            />
-            {children}
-          </Comp>
-        ) : (
-          <Comp
-            className={cn(buttonVariants({ variant, size, className }))}
-            ref={ref}
-            {...props}
-          >
-            {children}
-          </Comp>
-        )} */}
       </>
     )
   }

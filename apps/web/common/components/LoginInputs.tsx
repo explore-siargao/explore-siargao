@@ -99,7 +99,7 @@ const LoginInputs = () => {
           </div>
           <div>
             <div>
-              {/* <div className="mt-6 grid gap-4">
+              <div className="mt-6 grid gap-4">
                 <Button variant={"outline"}>
                   <Image
                     className="h-5 w-auto"
@@ -136,17 +136,7 @@ const LoginInputs = () => {
                     Continue with Email
                   </span>
                 </Button>
-              </div> */}
-              <Button variant={"outline"} onEnd="asd" icon={fb}>
-                <span className="text-sm font-medium leading-6 text-center w-full">
-                  Continue with Facebook
-                </span>
-              </Button>
-              <Button variant={"outline"} onStart="asd" icon={fb}>
-                <span className="text-sm font-medium leading-6 text-center w-full">
-                  Continue with Facebook
-                </span>
-              </Button>
+              </div>
             </div>
           </div>
         </div>
