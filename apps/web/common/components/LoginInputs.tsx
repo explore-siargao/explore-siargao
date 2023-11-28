@@ -1,6 +1,5 @@
 "use client"
 import React from "react"
-import Image from "next/image"
 import fb from "@/common/assets/facebook-logo.png"
 import google from "@/common/assets/google-logo.png"
 import { EnvelopeIcon } from "@heroicons/react/20/solid"
@@ -18,6 +17,7 @@ import {
   LOGIN_CONTENT_SUB_TEXT,
   LOGIN_CONTENT_TITTLE_TEXT,
 } from "../constants"
+import Image from "next/image"
 
 const LoginInputs = () => {
   const router = useRouter()
@@ -44,6 +44,11 @@ const LoginInputs = () => {
     }
     loginUser({ ...data }, callBackReq)
   }
+  enum Position {
+    "end",
+    "start",
+  }
+
   return (
     <div className="p-6">
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -109,30 +114,34 @@ const LoginInputs = () => {
             <div className="mt-6 grid gap-4">
               <Button
                 variant={"outline"}
-                className="flex w-full items-center gap-3 rounded-md border-black border px-3 py-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#24292F] hover:bg-slate-200/30 transition ease-in-out active:-translate-y-1 active:scale-95 duration-50"
+                imagePosition={Position.start}
+                icon={
+                  <Image
+                    className="h-5 w-auto"
+                    src={fb}
+                    width={500}
+                    height={500}
+                    alt=""
+                  />
+                }
               >
-                <Image
-                  className="h-5 w-auto"
-                  src={fb}
-                  width={500}
-                  height={500}
-                  alt="f-logo"
-                />
                 <span className="text-sm font-medium leading-6 text-center w-full">
                   Continue with Facebook
                 </span>
               </Button>
               <Button
                 variant={"outline"}
-                className="flex w-full items-center gap-3 rounded-md border-black border px-3 py-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#24292F] hover:bg-slate-200/30 transition ease-in-out active:-translate-y-1 active:scale-95 duration-50"
+                imagePosition={Position.start}
+                icon={
+                  <Image
+                    className="h-5 w-auto"
+                    src={google}
+                    width={500}
+                    height={500}
+                    alt=""
+                  />
+                }
               >
-                <Image
-                  className="h-5 w-auto"
-                  src={google}
-                  width={500}
-                  height={500}
-                  alt="google-logo"
-                />
                 <span className="text-sm font-medium leading-6 text-center w-full">
                   Continue with Google
                 </span>
@@ -143,9 +152,9 @@ const LoginInputs = () => {
                 onClick={() => {
                   router.push(LINK_CREATE_ACCOUNT)
                 }}
-                className="flex w-full items-center gap-3 rounded-md border-black border px-3 py-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#24292F] hover:bg-slate-200/30 transition ease-in-out active:-translate-y-1 active:scale-95 duration-50"
+                imagePosition={Position.start}
+                icon={<EnvelopeIcon className="h-5 w-auto" />}
               >
-                <EnvelopeIcon className="h-5 w-auto" />
                 <span className="text-sm font-medium leading-6 text-center w-full">
                   Continue with Email
                 </span>
