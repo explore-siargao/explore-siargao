@@ -62,7 +62,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ) => {
     const Comp = asChild ? Slot : "button"
     const renderButton = () => {
-      if (imgPosition === "onStart") {
+      if (imgPosition === "Start") {
         return (
           <Comp
             className={cn(buttonVariants({ variant, size, className }))}
@@ -80,13 +80,14 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           </Comp>
         )
       }
-      if (imgPosition === "onEnd") {
+      if (imgPosition === "End") {
         return (
           <Comp
             className={cn(buttonVariants({ variant, size, className }))}
             ref={ref}
             {...props}
           >
+            {children}
             <Image
               className="h-5 w-auto"
               src={icon}
@@ -94,7 +95,6 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
               height={500}
               alt={""}
             />
-            {children}
           </Comp>
         )
       } else {

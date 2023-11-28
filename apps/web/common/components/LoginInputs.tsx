@@ -106,12 +106,12 @@ const LoginInputs = () => {
         <div>
           <div>
             <div className="mt-6 grid gap-4">
-              <Button variant={"outline"} imgPosition="onStart" icon={fb}>
+              <Button variant={"outline"} imgPosition="Start" icon={fb}>
                 <span className="text-sm font-medium leading-6 text-center w-full">
                   Continue with Facebook
                 </span>
               </Button>
-              <Button variant={"outline"} imgPosition="onStart" icon={google}>
+              <Button variant={"outline"} imgPosition="Start" icon={google}>
                 <span className="text-sm font-medium leading-6 text-center w-full">
                   Continue with Google
                 </span>
