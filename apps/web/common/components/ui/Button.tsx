@@ -2,9 +2,7 @@ import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/common/helpers/cn"
-import { EnvelopeIcon } from "@heroicons/react/20/solid"
 import Image from "next/image"
-import { StaticImport } from "next/dist/shared/lib/get-img-props"
 
 const buttonVariants = cva(
   "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-900 disabled:pointer-events-none disabled:opacity-50",
@@ -63,9 +61,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     ref
   ) => {
     const Comp = asChild ? Slot : "button"
-    return (
-      <>
-        {imgPosition === "onStart" ? (
+    const renderButton = () => {
+      if (imgPosition === "onStart") {
+        return (
           <Comp
             className={cn(buttonVariants({ variant, size, className }))}
             ref={ref}
@@ -80,7 +78,10 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             />
             {children}
           </Comp>
-        ) : imgPosition === "onEnd" ? (
+        )
+      }
+      if (imgPosition === "onEnd") {
+        return (
           <Comp
             className={cn(buttonVariants({ variant, size, className }))}
             ref={ref}
@@ -95,7 +96,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             />
             {children}
           </Comp>
-        ) : (
+        )
+      } else {
+        return (
           <Comp
             className={cn(buttonVariants({ variant, size, className }))}
             ref={ref}
@@ -103,9 +106,10 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           >
             {children}
           </Comp>
-        )}
-      </>
-    )
+        )
+      }
+    }
+    return <>{renderButton()}</>
   }
 )
 Button.displayName = "Button"
