@@ -27,27 +27,12 @@ model User {
   updatedAt        DateTime          @updatedAt
   deletedAt        DateTime?
   role             UserRole          @default(User)
-  notification    Notification[]
 }
 
 enum UserRole {
   Admin
   Host
   User
-}
-
-model Notification {
-  id        Int       @id @default(autoincrement())
-  userId    Int
-  user      User      @relation(fields: [userId], references: [id])
-  type      String
-  messgae   String
-  link      String
-  isViewed  Boolean
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  deletedAt DateTime?
-  @@index([userId])
 }
 
 enum RegistrationType {
