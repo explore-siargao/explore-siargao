@@ -2,7 +2,6 @@ import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/common/helpers/cn"
-import Image from "next/image"
 
 const buttonVariants = cva(
   "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-900 disabled:pointer-events-none disabled:opacity-50",
@@ -42,10 +41,13 @@ export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean
-  imgPosition?: string
-  icon?: any
+  imagePosition?: Position
+  icon?: React.ReactNode
 }
-
+enum Position {
+  "end",
+  "start",
+}
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
@@ -55,61 +57,25 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       asChild = false,
       children,
       icon,
-      imgPosition,
+      imagePosition,
       ...props
     },
     ref
   ) => {
     const Comp = asChild ? Slot : "button"
-    const renderButton = () => {
-      if (imgPosition === "Start") {
-        return (
-          <Comp
-            className={cn(buttonVariants({ variant, size, className }))}
-            ref={ref}
-            {...props}
-          >
-            <Image
-              className="h-5 w-auto"
-              src={icon}
-              width={500}
-              height={500}
-              alt={""}
-            />
-            {children}
-          </Comp>
-        )
-      }
-      if (imgPosition === "End") {
-        return (
-          <Comp
-            className={cn(buttonVariants({ variant, size, className }))}
-            ref={ref}
-            {...props}
-          >
-            {children}
-            <Image
-              className="h-5 w-auto"
-              src={icon}
-              width={500}
-              height={500}
-              alt={""}
-            />
-          </Comp>
-        )
-      } else {
-        return (
-          <Comp
-            className={cn(buttonVariants({ variant, size, className }))}
-            ref={ref}
-            {...props}
-          >
-            {children}
-          </Comp>
-        )
-      }
-    }
-    return <>{renderButton()}</>
+    return (
+      <>
+        <Comp
+          className={cn(buttonVariants({ variant, size, className }))}
+          ref={ref}
+          {...props}
+        >
+          {imagePosition === Position.start ? icon : null}
+          {children}
+          {imagePosition === Position.end ? icon : null}
+        </Comp>
+      </>
+    )
   }
 )
 Button.displayName = "Button"

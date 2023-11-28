@@ -17,6 +17,7 @@ import {
   LOGIN_CONTENT_SUB_TEXT,
   LOGIN_CONTENT_TITTLE_TEXT,
 } from "../constants"
+import Image from "next/image"
 
 const LoginInputs = () => {
   const router = useRouter()
@@ -43,6 +44,11 @@ const LoginInputs = () => {
     }
     loginUser({ ...data }, callBackReq)
   }
+  enum Position {
+    "end",
+    "start",
+  }
+
   return (
     <div className="p-6">
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -106,12 +112,36 @@ const LoginInputs = () => {
         <div>
           <div>
             <div className="mt-6 grid gap-4">
-              <Button variant={"outline"} imgPosition="Start" icon={fb}>
+              <Button
+                variant={"outline"}
+                imagePosition={Position.start}
+                icon={
+                  <Image
+                    className="h-5 w-auto"
+                    src={fb}
+                    width={500}
+                    height={500}
+                    alt=""
+                  />
+                }
+              >
                 <span className="text-sm font-medium leading-6 text-center w-full">
                   Continue with Facebook
                 </span>
               </Button>
-              <Button variant={"outline"} imgPosition="Start" icon={google}>
+              <Button
+                variant={"outline"}
+                imagePosition={Position.start}
+                icon={
+                  <Image
+                    className="h-5 w-auto"
+                    src={google}
+                    width={500}
+                    height={500}
+                    alt=""
+                  />
+                }
+              >
                 <span className="text-sm font-medium leading-6 text-center w-full">
                   Continue with Google
                 </span>
@@ -122,8 +152,9 @@ const LoginInputs = () => {
                 onClick={() => {
                   router.push(LINK_CREATE_ACCOUNT)
                 }}
+                imagePosition={Position.start}
+                icon={<EnvelopeIcon className="h-5 w-auto" />}
               >
-                <EnvelopeIcon className="h-5 w-auto" />
                 <span className="text-sm font-medium leading-6 text-center w-full">
                   Continue with Email
                 </span>
