@@ -11,6 +11,7 @@ import useLogin from "@/module/Authentication/hooks/useLogin"
 import { useRouter } from "next/navigation"
 import Cookies from "js-cookie"
 import { Button } from "@/common/components/ui/Button"
+import { signIn, signOut } from "next-auth/react"
 
 const LoginInputs = () => {
   const router = useRouter()
@@ -102,6 +103,8 @@ const LoginInputs = () => {
               <div className="mt-6 grid gap-4">
                 <Button
                   variant={"outline"}
+                  type="button"
+                  onClick={() => router.push("/create-account")}
                   className="flex w-full items-center gap-3 rounded-md border-black border px-3 py-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#24292F] hover:bg-slate-200/30 transition ease-in-out active:-translate-y-1 active:scale-95 duration-50"
                 >
                   <Image
@@ -117,6 +120,11 @@ const LoginInputs = () => {
                 </Button>
                 <Button
                   variant={"outline"}
+                  type="button"
+                  onClick={() => signIn("google")}
+                  // onClick={() => signIn("facebook")}
+                  // onClick={() => signIn("credentials", { username: "jsmith", password: "1234" })}
+                  // onClick={() => signOut()}
                   className="flex w-full items-center gap-3 rounded-md border-black border px-3 py-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#24292F] hover:bg-slate-200/30 transition ease-in-out active:-translate-y-1 active:scale-95 duration-50"
                 >
                   <Image
