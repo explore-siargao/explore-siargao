@@ -13,12 +13,13 @@ export class ApiService {
     hasAuthentication = true,
     source: "main" | "auth" | "mock" = "main"
   ) {
-    this.BASE_URL =
-      source == "main"
-        ? process.env.API_URL
-        : source == "auth"
-          ? process.env.API_AUTH_URL
-          : process.env.API_MOCK_URL
+    if (source === "main") {
+      this.BASE_URL = process.env.API_URL
+    } else if (source === "auth") {
+      this.BASE_URL = process.env.API_AUTH_URL
+    } else {
+      this.BASE_URL = process.env.API_MOCK_URL
+    }
     this.isAuthRequired = hasAuthentication
   }
 
