@@ -8,5 +8,6 @@ export function SessionProvider({
   readonly children: React.ReactNode
   readonly session: any
 }) {
+  console.log("para sakin", session)
   return <Provider session={session}>{children}</Provider>
 }
