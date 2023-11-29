@@ -8,6 +8,7 @@ import React from "react"
 import { getServerSession } from "next-auth/next"
 import { SessionProvider } from "@/common/components/SessionProvider"
 import { authOptions } from "@/app/api/auth/[...nextauth]/route"
+import { LOGO_SINGLE_IMAGE } from "@/common/constants/index"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -24,7 +25,7 @@ export default async function RootLayout({
   const session = await getServerSession(authOptions)
   return (
     <html lang="en">
-      <link rel="icon" type="image/x-icon" href={`/logo-single.png`} />
+      <link rel="icon" type="image/x-icon" href={LOGO_SINGLE_IMAGE} />
       <body className={inter.className}>
         <Toaster />
         <SessionProvider session={session}>

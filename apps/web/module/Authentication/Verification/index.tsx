@@ -1,4 +1,13 @@
 "use client"
+import Container from "@/common/components/Container"
+import { Button } from "@/common/components/ui/Button"
+import {
+  RESEND_BUTTON_TEXT,
+  SUBMIT_BUTTON_TEXT,
+  VERIFICATION_CODE_CONTENT,
+  VERIFICATION_CODE_TITTLE,
+} from "@/common/constants"
+import Link from "next/link"
 import React, { FC, useEffect, useRef, useState } from "react"
 
 interface Props {}
@@ -29,55 +38,51 @@ const Verification: FC<Props> = (props): JSX.Element => {
     inputRef.current?.focus()
   }, [activeOTPIndex])
   return (
-    <div className="flex min-h-screen flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8 bg-slate-200">
-      <div className="sm:mx-auto sm:w-full sm:max-w-[480px]">
-        <div className="bg-white shadow sm:rounded-2xl p-6">
-          <div className="pb-6 pt-4 space-y-4 text-center">
-            <h1 className="font-semibold text-3xl "> Verification Code</h1>
-            <p className="text-sm leading-tight text-gray-500 mx-1">
-              Please enter 6 digits verificaiton code sent to your email to
-              confirm your identity.
-            </p>
-          </div>
-          <form className="space-y-6" action="#" method="POST">
-            <div
-              id="verification-field"
-              className="flex justify-center items-center space-x-2"
-            >
-              {otp.map((_: string, num: number = 0) => {
-                return (
-                  <React.Fragment key={num}>
-                    <input
-                      ref={num === activeOTPIndex ? inputRef : null}
-                      type="number"
-                      className="w-12 h-16 text-xl font-bold text-center text-gray-600 rounded-lg bg-rose-100 focus:bg-white border-0 focus:ring-rose-700"
-                      onChange={handleOnChange}
-                      value={otp[num]}
-                      //@ts-ignore
-                      onKeyDown={(e) => handleOnKeyDown(e, num)}
-                    />
-                  </React.Fragment>
-                )
-              })}
-            </div>
-            <div>
-              <button
-                type="submit"
-                className="rounded-md w-full my-5 bg-gradient-to-r from-rose-600 from-10% via-rose-700/90 via-40% to-rose-600 to-80% px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-rose-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600 transition ease-in-out active:scale-95 duration-20"
-              >
-                Submit
-              </button>
-              <div className="text-sm text-center text-gray-500">
-                <span>Did not receive the code?</span>&nbsp;
-                <a href="#" className="font-bold uppercase underline">
-                  Resend
-                </a>
-              </div>
-            </div>
-          </form>
+    <Container>
+      <div className="p-6">
+        <div className="pb-6 space-y-4 text-center">
+          <h1 className="font-semibold text-3xl pt-2">
+            {VERIFICATION_CODE_TITTLE}
+          </h1>
+          <p className="text-sm leading-tight text-gray-500 mx-1">
+            {VERIFICATION_CODE_CONTENT}
+          </p>
         </div>
+        <form className="space-y-6" method="POST">
+          <div
+            id="verification-field"
+            className="flex justify-center items-center space-x-2"
+          >
+            {otp.map((_: string, num: number = 0) => {
+              return (
+                <React.Fragment key={num}>
+                  <input
+                    ref={num === activeOTPIndex ? inputRef : null}
+                    type="number"
+                    className="w-12 h-16 text-xl font-bold text-center text-text-400 rounded-lg bg-primary-200/40 focus:bg-white border-0 focus:ring-primary-700"
+                    onChange={handleOnChange}
+                    value={otp[num]}
+                    //@ts-ignore
+                    onKeyDown={(e) => handleOnKeyDown(e, num)}
+                  />
+                </React.Fragment>
+              )
+            })}
+          </div>
+          <div>
+            <Button type="button" className="w-full  my-5 ">
+              {SUBMIT_BUTTON_TEXT}
+            </Button>
+            <div className="text-sm text-center text-gray-500">
+              <span>Did not receive the code?</span>&nbsp;
+              <Link href="#" className="font-bold underline">
+                {RESEND_BUTTON_TEXT}
+              </Link>
+            </div>
+          </div>
+        </form>
       </div>
-    </div>
+    </Container>
   )
 }
 export default Verification

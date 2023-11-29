@@ -9,6 +9,12 @@ import React from "react"
 import { useForm } from "react-hook-form"
 import toast from "react-hot-toast"
 import { Button } from "./ui/Button"
+import Link from "next/link"
+import {
+  ADD_USER_SUCCESS_MESSAGE,
+  AGREE_CONTINUE_BUTTON_TEXT,
+} from "../constants/index"
+import { Input } from "./ui/Input"
 
 const SignupInputs = () => {
   const { mutate: addUser, isPending: addUserIsPending } = useRegister()
@@ -18,7 +24,7 @@ const SignupInputs = () => {
       onSuccess: (data: T_BACKEND_RESPONSE) => {
         if (!data.error) {
           if (data.item && !addUserIsPending) {
-            toast.success("User Successfully added")
+            toast.success(ADD_USER_SUCCESS_MESSAGE)
             reset()
           }
         } else {
@@ -35,41 +41,23 @@ const SignupInputs = () => {
     )
   }
   return (
-    <div>
+    <div className="p-6">
       <form onSubmit={handleSubmit(onSubmit2)}>
         <div className="space-y-4 overflow-y-auto">
           <div>
             <div className="isolate -space-y-px rounded-xl shadow-sm">
-              <div className="relative rounded-md rounded-b-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-gray-600">
-                <label
-                  htmlFor="firstName"
-                  className="block text-xs font-medium text-gray-900 "
-                >
-                  First name
-                </label>
-                <input
-                  type="text"
-                  id="firstName"
-                  {...register("firstName")}
-                  className="block w-full border-0 p-0 text-gray-900 placeholder-shown:border-black placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                  placeholder="First name"
-                />
-              </div>
-              <div className="relative rounded-md rounded-t-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-gray-600">
-                <label
-                  htmlFor="lastName"
-                  className="block text-xs font-medium text-gray-900"
-                >
-                  Last name
-                </label>
-                <input
-                  type="text"
-                  id="lastName"
-                  placeholder="Last name"
-                  {...register("lastName")}
-                  className="block w-full border-0 p-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                />
-              </div>
+              <Input
+                Label="First Name"
+                inputId="firstName"
+                type="text"
+                {...register("firstName")}
+              />
+              <Input
+                Label="Last name"
+                inputId="lastName"
+                type="text"
+                {...register("lastName")}
+              />
             </div>
             <p className="text-xs mt-1 text-gray-500">
               Make sure it matches the name on your government ID.
@@ -77,21 +65,12 @@ const SignupInputs = () => {
           </div>
           <div>
             <div className="isolate -space-y-px rounded-xl shadow-sm">
-              <div className="relative rounded-md rounded-b-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-gray-600">
-                <label
-                  htmlFor="birthdate"
-                  className="block text-xs font-medium text-gray-900 "
-                >
-                  Birthdate
-                </label>
-                <input
-                  type="date"
-                  id="birthdate"
-                  {...register("birthdate")}
-                  className="block w-full border-0 p-0 text-gray-900 placeholder-shown:border-black placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                  placeholder="First name"
-                />
-              </div>
+              <Input
+                Label="Birthdate"
+                inputId="birthdate"
+                type="date"
+                {...register("birthdate")}
+              />
             </div>
             <p className="text-xs mt-1 text-gray-500">
               To sign up, you need to be at least 18. Your birthday won’t be
@@ -100,21 +79,13 @@ const SignupInputs = () => {
           </div>
           <div>
             <div className="isolate -space-y-px rounded-xl shadow-sm">
-              <div className="relative rounded-md rounded-b-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-gray-600">
-                <label
-                  htmlFor="email"
-                  className="block text-xs font-medium text-gray-900 "
-                >
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  {...register("email")}
-                  className="block w-full border-0 p-0 text-gray-900 placeholder-shown:border-black placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                  placeholder="you@example.com"
-                />
-              </div>
+              <Input
+                Label="Email"
+                inputId="email"
+                type="email"
+                {...register("email")}
+                placeholder="you@example.com"
+              />
             </div>
             <p className="text-xs mt-1 text-gray-500">
               We'll email you trip confirmations and receipts.
@@ -122,36 +93,28 @@ const SignupInputs = () => {
           </div>
           <div>
             <div className="isolate -space-y-px rounded-xl shadow-sm">
-              <div className="relative rounded-md rounded-b-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-gray-600">
-                <label
-                  htmlFor="password"
-                  className="block text-xs font-medium text-gray-900 "
-                >
-                  Password
-                </label>
-                <input
-                  type="password"
-                  id="password"
-                  {...register("password")}
-                  className="block w-full border-0 p-0 text-gray-900 placeholder-shown:border-black placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                />
-              </div>
+              <Input
+                Label="Password"
+                inputId="password"
+                type="password"
+                {...register("password")}
+              />
             </div>
             <p className="text-xs mt-1 text-gray-500 tracking-tighter">
               By selecting{" "}
               <span className="font-bold"> Agree and continue,</span> I agree to
               Explore Siargao's{" "}
-              <a href="#" className="text-info-500 font-bold underline">
+              <Link href="#" className="text-info-500 font-bold underline">
                 Terms of Service, Payments Terms of Service,
-              </a>{" "}
+              </Link>{" "}
               and{" "}
-              <a href="#" className="text-info-500 font-bold underline">
+              <Link href="#" className="text-info-500 font-bold underline">
                 Nondiscrimination Policy
-              </a>{" "}
+              </Link>{" "}
               and acknowledge the{" "}
-              <a href="#" className="text-info-500 font-bold underline">
+              <Link href="#" className="text-info-500 font-bold underline">
                 Privacy Policy
-              </a>
+              </Link>
             </p>
           </div>
           <Button type="submit" className="w-full my-4">
@@ -163,7 +126,7 @@ const SignupInputs = () => {
                 <span className="sr-only">Loading...</span>
               </div>
             ) : (
-              "Agree and continue"
+              AGREE_CONTINUE_BUTTON_TEXT
             )}
           </Button>
           <div className="w-full border-b-2 mt-2" />
@@ -174,7 +137,6 @@ const SignupInputs = () => {
               receiving these at any time in your account settings or directly
               from the marketing notification.
             </p>
-
             <div className="relative flex items-start mt-4">
               <div className="flex h-6 items-center">
                 <input
