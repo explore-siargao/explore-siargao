@@ -1,6 +1,6 @@
 "use client"
 import React from "react"
-import LoginInputs from "@/common/components/LoginInputs"
+import LoginForm from "@/module/Authentication/components/LoginForm"
 import AuthContainer from "@/common/components/AuthContainer"
 import { useRouter } from "next/navigation"
 import { useSession } from "next-auth/react";
@@ -11,7 +11,7 @@ const Login = () => {
   console.log('dsds', session)
   return (
     <AuthContainer title="Login or sign up" onBack={() => router.push("/")}>
-      <LoginInputs />
+      <LoginForm />
     </AuthContainer>
   )
 }

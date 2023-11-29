@@ -8,15 +8,15 @@ import useRegister from "@/module/Authentication/hooks/useRegister"
 import React from "react"
 import { useForm } from "react-hook-form"
 import toast from "react-hot-toast"
-import { Button } from "./ui/Button"
+import { Button } from "../../../common/components/ui/Button"
 import Link from "next/link"
 import {
   ADD_USER_SUCCESS_MESSAGE,
   AGREE_CONTINUE_BUTTON_TEXT,
-} from "../constants/index"
-import { Input } from "./ui/Input"
+} from "../../../common/constants/index"
+import { Input } from "../../../common/components/ui/Input"
 
-const SignupInputs = () => {
+const SignupForm = () => {
   const { mutate: addUser, isPending: addUserIsPending } = useRegister()
   const { register, handleSubmit, reset } = useForm<I_User>()
   const onSubmit2 = (data: I_User) => {
@@ -45,17 +45,18 @@ const SignupInputs = () => {
       <form onSubmit={handleSubmit(onSubmit2)}>
         <div className="space-y-4 overflow-y-auto">
           <div>
-            <div className="isolate -space-y-px rounded-xl shadow-sm">
+            <div>
               <Input
-                Label="First Name"
+                inputLabel="First Name"
                 inputId="firstName"
                 type="text"
                 {...register("firstName")}
               />
               <Input
-                Label="Last name"
+                inputLabel="Last name"
                 inputId="lastName"
                 type="text"
+                className="mt-2"
                 {...register("lastName")}
               />
             </div>
@@ -66,7 +67,7 @@ const SignupInputs = () => {
           <div>
             <div className="isolate -space-y-px rounded-xl shadow-sm">
               <Input
-                Label="Birthdate"
+                inputLabel="Birthdate"
                 inputId="birthdate"
                 type="date"
                 {...register("birthdate")}
@@ -80,7 +81,7 @@ const SignupInputs = () => {
           <div>
             <div className="isolate -space-y-px rounded-xl shadow-sm">
               <Input
-                Label="Email"
+                inputLabel="Email"
                 inputId="email"
                 type="email"
                 {...register("email")}
@@ -94,13 +95,13 @@ const SignupInputs = () => {
           <div>
             <div className="isolate -space-y-px rounded-xl shadow-sm">
               <Input
-                Label="Password"
+                inputLabel="Password"
                 inputId="password"
                 type="password"
                 {...register("password")}
               />
             </div>
-            <p className="text-xs mt-1 text-gray-500 tracking-tighter">
+            <p className="text-xs mt-4 text-gray-500 tracking-tighter">
               By selecting{" "}
               <span className="font-bold"> Agree and continue,</span> I agree to
               Explore Siargao's{" "}
@@ -161,4 +162,4 @@ const SignupInputs = () => {
   )
 }
 
-export default SignupInputs
+export default SignupForm

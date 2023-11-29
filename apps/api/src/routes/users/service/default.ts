@@ -1,5 +1,5 @@
 import { Response, Request } from 'express'
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient, User } from '@prisma/client'
 import CryptoJS from 'crypto-js'
 import { encryptKey } from '@/common/config'
 

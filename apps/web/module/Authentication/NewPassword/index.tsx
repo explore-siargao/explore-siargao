@@ -10,12 +10,12 @@ const NewPassword = () => {
       <div className="p-6 space-y-4">
         <div className="isolate -space-y-px rounded-xl shadow-sm">
           <Input
-            Label="Enter New Password"
+            inputLabel="Enter New Password"
             inputId="newPassword"
             type="password"
           />
           <Input
-            Label="Confirm password"
+            inputLabel="Confirm password"
             inputId="confirmPassword"
             type="password"
           />

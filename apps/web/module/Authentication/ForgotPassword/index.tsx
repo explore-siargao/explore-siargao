@@ -9,7 +9,7 @@ const ForgotPassword = () => {
     <AuthContainer title="Forgot Password">
       <div className="p-6 space-y-4">
         <Input
-          Label="Email"
+          inputLabel="Email"
           inputId="email"
           type="email"
           placeholder="you@example.com"

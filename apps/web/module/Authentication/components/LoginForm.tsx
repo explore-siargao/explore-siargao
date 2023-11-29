@@ -12,16 +12,16 @@ import Cookies from "js-cookie"
 import { Button } from "@/common/components/ui/Button"
 import { signIn, signOut } from "next-auth/react"
 import Link from "next/link"
-import { LINK_CREATE_ACCOUNT, LINK_HOME } from "../constants/links"
+import { LINK_CREATE_ACCOUNT, LINK_HOME } from "../../../common/constants/links"
 import {
   CONTINUE_BUTTON_TEXT,
   LOGIN_CONTENT_SUB_TEXT,
   LOGIN_CONTENT_TITTLE_TEXT,
-} from "../constants"
+} from "../../../common/constants"
 import Image from "next/image"
-import { Input } from "./ui/Input"
+import { Input } from "../../../common/components/ui/Input"
 
-const LoginInputs = () => {
+const LoginForm = () => {
   const router = useRouter()
   const { mutate: loginUser, isPending: loginIsPending } = useLogin()
   const { register, handleSubmit, reset } = useForm<I_User>()
@@ -62,17 +62,18 @@ const LoginInputs = () => {
         <h1 className="font-semibold text-xl mt-1 mb-4">
           {LOGIN_CONTENT_TITTLE_TEXT}
         </h1>
-        <div className="isolate -space-y-px rounded-xl shadow-sm mt-2">
+        <div>
           <Input
-            Label="Email"
+            inputLabel="Email"
             inputId="email"
             type="email"
             {...register("email")}
           />
           <Input
-            Label="Password"
+            inputLabel="Password"
             inputId="password"
             type="password"
+            className="mt-2"
             {...register("password")}
           />
         </div>
@@ -114,6 +115,7 @@ const LoginInputs = () => {
                     alt=""
                   />
                 }
+                onClick={() => signIn("facebook")}
               >
                 <span className="text-sm font-medium leading-6 text-center w-full">
                   Continue with Facebook
@@ -131,6 +133,7 @@ const LoginInputs = () => {
                     alt=""
                   />
                 }
+                onClick={() => signIn("google")}
               >
                 <span className="text-sm font-medium leading-6 text-center w-full">
                   Continue with Google
@@ -146,7 +149,7 @@ const LoginInputs = () => {
                 icon={<EnvelopeIcon className="h-5 w-auto" />}
               >
                 <span className="text-sm font-medium leading-6 text-center w-full">
-                  Continue with Email
+                  Register using email
                 </span>
               </Button>
             </div>
@@ -157,4 +160,4 @@ const LoginInputs = () => {
   )
 }
 
-export default LoginInputs
+export default LoginForm
