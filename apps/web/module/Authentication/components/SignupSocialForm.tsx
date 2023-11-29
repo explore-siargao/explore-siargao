@@ -16,7 +16,7 @@ import {
 } from "../../../common/constants/index"
 import { Input } from "../../../common/components/ui/Input"
 
-const SignupForm = () => {
+const SignupSocialForm = () => {
   const { mutate: addUser, isPending: addUserIsPending } = useRegister()
   const { register, handleSubmit, reset } = useForm<I_User>()
   const onSubmit2 = (data: I_User) => {
@@ -36,30 +36,31 @@ const SignupForm = () => {
       },
     }
     addUser(
-      { ...data, registrationType: "Manual" as unknown as RegistrationType },
+      { ...data, registrationType: "Google" as unknown as RegistrationType },
       callBackReq2
     )
   }
   return (
-    <div className="p-6">
+    <div className="px-6 pb-6 ">
       <form onSubmit={handleSubmit(onSubmit2)}>
         <div className="space-y-4 overflow-y-auto">
           <div>
-            <div>
-              <Input
-                inputLabel="First Name"
-                inputId="firstName"
-                type="text"
-                {...register("firstName")}
-              />
-              <Input
-                inputLabel="Last name"
-                inputId="lastName"
-                type="text"
-                className="mt-2"
-                {...register("lastName")}
-              />
-            </div>
+            <p className="text-xs my-2 text-text-500 text-center">
+              This information is from google
+            </p>
+            <Input
+              inputLabel="First Name"
+              inputId="firstName"
+              type="text"
+              {...register("firstName")}
+            />
+            <Input
+              inputLabel="Last name"
+              inputId="lastName"
+              type="text"
+              className="mt-2"
+              {...register("lastName")}
+            />
             <p className="text-xs mt-1 text-text-500">
               Make sure it matches the name on your government ID.
             </p>
@@ -93,14 +94,6 @@ const SignupForm = () => {
             </p>
           </div>
           <div>
-            <div className="isolate -space-y-px rounded-xl shadow-sm">
-              <Input
-                inputLabel="Password"
-                inputId="password"
-                type="password"
-                {...register("password")}
-              />
-            </div>
             <p className="text-xs mt-4 text-text-500 tracking-tighter">
               By selecting{" "}
               <span className="font-bold"> Agree and continue,</span> I agree to
@@ -162,4 +155,4 @@ const SignupForm = () => {
   )
 }
 
-export default SignupForm
+export default SignupSocialForm
