@@ -1,4 +1,4 @@
-import { LINK_LOGIN, LINK_SIGNUP } from "@/common/constants/links"
+import { LINK_CREATE_ACCOUNT, LINK_LOGIN } from "@/common/constants/links"
 import { Bars3Icon, UserCircleIcon } from "@heroicons/react/20/solid"
 import React, { Fragment } from "react"
 import { Popover, Transition } from "@headlessui/react"
@@ -11,7 +11,7 @@ const solutions = [
   },
   {
     name: "Sign up",
-    href: LINK_SIGNUP,
+    href: LINK_CREATE_ACCOUNT,
   },
 ]
 const LandingPageMenu = () => {
