@@ -10,7 +10,6 @@ import useLogin from "@/module/Authentication/hooks/useLogin"
 import { useRouter } from "next/navigation"
 import Cookies from "js-cookie"
 import { Button } from "@/common/components/ui/Button"
-import { signIn, signOut } from "next-auth/react"
 import Link from "next/link"
 import { LINK_CREATE_ACCOUNT, LINK_HOME } from "../../../common/constants/links"
 import {
@@ -49,11 +48,6 @@ const LoginForm = () => {
   enum Position {
     "end",
     "start",
-  }
-  enum InputVariants {
-    "danger",
-    "warning",
-    "success",
   }
 
   return (

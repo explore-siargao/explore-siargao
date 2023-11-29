@@ -15,9 +15,13 @@ import {
   AGREE_CONTINUE_BUTTON_TEXT,
 } from "../../../common/constants/index"
 import { Input } from "../../../common/components/ui/Input"
-
+import { useParams } from "next/navigation"
+import { capitalizeFirstLetter } from "@/common/helpers/capitalizeFirstLetter"
 const SignupSocialForm = () => {
   const { mutate: addUser, isPending: addUserIsPending } = useRegister()
+  const params = useParams()
+  const capitalizedText = capitalizeFirstLetter(params.social as string)
+
   const { register, handleSubmit, reset } = useForm<I_User>()
   const onSubmit2 = (data: I_User) => {
     const callBackReq2 = {
@@ -46,7 +50,7 @@ const SignupSocialForm = () => {
         <div className="space-y-4 overflow-y-auto">
           <div>
             <p className="text-xs my-2 text-text-500 text-center">
-              This information is from google
+              This information is from {capitalizedText}
             </p>
             <Input
               inputLabel="First Name"
