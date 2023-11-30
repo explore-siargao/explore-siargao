@@ -4,36 +4,38 @@ import fb from "@/common/assets/facebook-logo.png"
 import google from "@/common/assets/google-logo.png"
 import { EnvelopeIcon } from "@heroicons/react/20/solid"
 import toast from "react-hot-toast"
-import { I_User, T_BACKEND_RESPONSE } from "@/common/types/global"
+import { I_User } from "@/common/types/global"
 import { useForm } from "react-hook-form"
 import useLogin from "@/module/Authentication/hooks/useLogin"
 import { useRouter } from "next/navigation"
 import Cookies from "js-cookie"
 import { Button } from "@/common/components/ui/Button"
 import Link from "next/link"
-import { LINK_CREATE_ACCOUNT, LINK_HOME } from "../../../common/constants/links"
+import { LINK_CREATE_ACCOUNT, LINK_HOME } from "@/common/constants/links"
 import {
   CONTINUE_BUTTON_TEXT,
   LOGIN_CONTENT_SUB_TEXT,
   LOGIN_CONTENT_TITTLE_TEXT,
-} from "../../../common/constants"
+} from "@/common/constants"
 import Image from "next/image"
-import { Input } from "../../../common/components/ui/Input"
+import { Input } from "@/common/components/ui/Input"
+import { signIn, signOut } from "next-auth/react"
 
 const LoginForm = () => {
   const router = useRouter()
-  const { mutate: loginUser, isPending: loginIsPending } = useLogin()
-  const { register, handleSubmit, reset } = useForm<I_User>()
-  const onSubmit = (data: I_User) => {
+  const { mutate: loginUser, isPending: isLoginPending } = useLogin()
+  const { register, handleSubmit } = useForm<I_User>()
+  const onSubmit = (formData: I_User) => {
     const callBackReq = {
-      onSuccess: (data: T_BACKEND_RESPONSE) => {
+      onSuccess: (data: any) => {
         if (!data.error) {
-          if (data.item && !loginIsPending) {
-            Cookies.set("tfl", data.item.token)
-            if (data.userType === "User") {
-              reset()
-              router.push(LINK_HOME)
-            }
+          if (data.item && !isLoginPending) {
+            Cookies.set("accessToken", data.item.accessToken)
+            signIn("credentials", {
+              callbackUrl: "/",
+              username: formData.email,
+              password: formData.password,
+            })
           }
         } else {
           toast.error(String(data.message))
@@ -43,7 +45,7 @@ const LoginForm = () => {
         toast.error(String(err))
       },
     }
-    loginUser({ ...data }, callBackReq)
+    loginUser({ ...formData }, callBackReq)
   }
   enum Position {
     "end",
@@ -61,14 +63,16 @@ const LoginForm = () => {
             inputLabel="Email"
             inputId="email"
             type="email"
-            {...register("email")}
+            {...register("email", { required: true })}
+            disabled={isLoginPending}
           />
           <Input
             inputLabel="Password"
             inputId="password"
             type="password"
             className="mt-2"
-            {...register("password")}
+            {...register("password", { required: true })}
+            disabled={isLoginPending}
           />
         </div>
         <p className="text-[11px] mt-1">
@@ -81,15 +85,9 @@ const LoginForm = () => {
           type="submit"
           variant="default"
           className="w-full my-4"
-          onClick={() =>
-            signIn("credentials", {
-              callbackUrl: "/session/manual",
-              username: "jsmith",
-              password: "1234",
-            })
-          }
+          disabled={isLoginPending}
         >
-          {loginIsPending ? (
+          {isLoginPending ? (
             <div
               className="animate-spin inline-block w-4 h-4 border-[2px] border-current border-t-transparent text-white rounded-full mx-2"
               aria-label="loading"
@@ -112,6 +110,7 @@ const LoginForm = () => {
                 type="button"
                 variant={"outline"}
                 imagePosition={Position.start}
+                disabled={isLoginPending}
                 icon={
                   <Image
                     className="h-5 w-auto"
@@ -133,6 +132,7 @@ const LoginForm = () => {
                 type="button"
                 variant={"outline"}
                 imagePosition={Position.start}
+                disabled={isLoginPending}
                 icon={
                   <Image
                     className="h-5 w-auto"
@@ -142,8 +142,7 @@ const LoginForm = () => {
                     alt=""
                   />
                 }
-                // onClick={() => signIn("google", { callbackUrl: "/session/google" })}
-                onClick={() => signOut()}
+                onClick={() => signIn("google", { callbackUrl: "/session/google" })}
               >
                 <span className="text-sm font-medium leading-6 text-center w-full">
                   Continue with Google
@@ -157,6 +156,7 @@ const LoginForm = () => {
                 }}
                 imagePosition={Position.start}
                 icon={<EnvelopeIcon className="h-5 w-auto" />}
+                
               >
                 <span className="text-sm font-medium leading-6 text-center w-full">
                   Register using email

@@ -1,24 +1,15 @@
 "use client"
-import React from "react"
-import { useSession } from "next-auth/react"
-import useVerifySession from "@/common/hooks/useVerifySession"
-import { useRouter, useParams } from "next/navigation"
+import React, { useEffect } from "react"
 import Cookies from "js-cookie"
+import { signOut } from "next-auth/react"
 
-const SessionVerifier = () => {
-  const router = useRouter()
-  const params = useParams()
-  const { data: session } = useSession()
-  const { data } = useVerifySession()
-  if (!session) {
-    router.push("/")
-    Cookies.remove("accessToken")
-  } else if (session && data && !data.item) {
-    router.push(`/create-account/${params.type}`)
-  } else if (session && data && data.item.accessToken) {
-    Cookies.set("accessToken", data.item.accessToken)
-    router.push(`/`)
-  }
+const Logout = () => {
+  useEffect(() => {
+    setTimeout(function() {
+      Cookies.remove("accessToken")
+      signOut({ callbackUrl: "/" })
+    }, 1500);
+  }, [])
   return (
     <div className="flex min-h-screen flex-1 flex-col justify-center items-center py-12 sm:px-6 lg:px-8 bg-primary-100">
       <div role="status">
@@ -44,4 +35,4 @@ const SessionVerifier = () => {
   )
 }
 
-export default SessionVerifier
+export default Logout

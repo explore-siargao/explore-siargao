@@ -1,10 +1,8 @@
 "use client"
 import {
-  I_User,
   RegistrationType,
-  T_BACKEND_RESPONSE,
 } from "@/common/types/global"
-import useRegister from "@/module/Authentication/hooks/useRegister"
+import useRegister, { T_Register } from "@/module/Authentication/hooks/useRegister"
 import React from "react"
 import { useForm } from "react-hook-form"
 import toast from "react-hot-toast"
@@ -17,24 +15,37 @@ import {
 import { Input } from "@/common/components/ui/Input"
 import { capitalizeFirstLetter } from "@/common/helpers/capitalizeFirstLetter"
 import { useParams } from "next/navigation"
+import { signIn, useSession } from "next-auth/react"
+import Cookies from "js-cookie"
+import { useRouter } from "next/navigation"
 
 type Props = {
-  isSocial: boolean
+  isSocial?: boolean
 }
 
-const SignupForm = ({ isSocial = false }: Props) => {
+const SignUpForm = ({ isSocial = false }: Props) => {
+  const router = useRouter()
+  const { data: session } = useSession()
   const { mutate: addUser, isPending: addUserIsPending } = useRegister()
-  const { register, handleSubmit, reset } = useForm<I_User>()
+  const { register, handleSubmit } = useForm<T_Register>({ values: { email: session?.user?.email as string, firstName: "", lastName: "", birthDate: "", password: "", registrationType: RegistrationType.Manual } })
   const params = useParams()
-  const capitalizedText = capitalizeFirstLetter(params.social as string)
+  const signUpType = params.type === "facebook" || params.type === "google" ? capitalizeFirstLetter(params.type as string) : "Manual";
 
-  const onSubmit = (data: I_User) => {
+  const onSubmit = (formData: T_Register) => {
     const callBackReq = {
-      onSuccess: (data: T_BACKEND_RESPONSE) => {
+      onSuccess: (data: any) => {
         if (!data.error) {
           if (data.item && !addUserIsPending) {
-            toast.success(ADD_USER_SUCCESS_MESSAGE)
-            reset()
+            Cookies.set("accessToken", data.item.accessToken)
+            if(signUpType === "Manual") {
+              signIn("credentials", {
+                callbackUrl: "/",
+                username: formData.email,
+                password: formData.password,
+              })
+            } else {
+              router.push("/")
+            }
           }
         } else {
           toast.error(String(data.message))
@@ -45,7 +56,7 @@ const SignupForm = ({ isSocial = false }: Props) => {
       },
     }
     addUser(
-      { ...data, registrationType: "Manual" as unknown as RegistrationType },
+      { ...formData, registrationType: signUpType as unknown as RegistrationType },
       callBackReq
     )
   }
@@ -55,17 +66,12 @@ const SignupForm = ({ isSocial = false }: Props) => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="space-y-4 overflow-y-auto">
           <div>
-            {isSocial && (
-              <p className="text-xs mb-4 text-text-500 text-center">
-                This information is from {capitalizedText}
-              </p>
-            )}
             <div>
               <Input
                 inputLabel="First Name"
                 inputId="firstName"
                 type="text"
-                {...register("firstName")}
+                {...register("firstName", { required: true })}
                 disabled={addUserIsPending}
               />
               <Input
@@ -73,7 +79,7 @@ const SignupForm = ({ isSocial = false }: Props) => {
                 inputId="lastName"
                 type="text"
                 className="mt-2"
-                {...register("lastName")}
+                {...register("lastName", { required: true })}
                 disabled={addUserIsPending}
               />
             </div>
@@ -87,7 +93,7 @@ const SignupForm = ({ isSocial = false }: Props) => {
                 inputLabel="Birthdate"
                 inputId="birthdate"
                 type="date"
-                {...register("birthDate")}
+                {...register("birthDate", { required: true })}
                 disabled={addUserIsPending}
               />
             </div>
@@ -102,9 +108,9 @@ const SignupForm = ({ isSocial = false }: Props) => {
                 inputLabel="Email"
                 inputId="email"
                 type="email"
-                {...register("email")}
+                {...register("email", { required: true })}
                 placeholder="you@example.com"
-                disabled={addUserIsPending}
+                disabled={addUserIsPending || isSocial}
               />
             </div>
             <p className="text-xs mt-1 text-text-500">
@@ -117,7 +123,7 @@ const SignupForm = ({ isSocial = false }: Props) => {
                 inputLabel="Password"
                 inputId="password"
                 type="password"
-                {...register("password")}
+                {...register("password", { required: true })}
                 disabled={addUserIsPending}
               />
             )}
@@ -183,4 +189,4 @@ const SignupForm = ({ isSocial = false }: Props) => {
   )
 }
 
-export default SignupForm
+export default SignUpForm

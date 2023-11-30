@@ -30,6 +30,7 @@ export const verifySession = async (req: Request, res: Response) => {
             firstName: user.firstName,
             lastName: user.lastName,
             email: user.email,
+            role: user.role
           },
           signKey as string
         )
@@ -60,9 +61,9 @@ export const verifySession = async (req: Request, res: Response) => {
   }
 }
 
-export const manual = async (req: Request, res: Response) => {
-  const { email, password, firstName, lastName, birthDate } = req.body
-  if (password && email && firstName && lastName && birthDate) {
+export const register = async (req: Request, res: Response) => {
+  const { email, password, firstName, lastName, birthDate, registrationType } = req.body
+  if (email && firstName && lastName && birthDate && registrationType) {
     try {
       const user = await prisma.user.findFirst({
         where: {
@@ -79,7 +80,7 @@ export const manual = async (req: Request, res: Response) => {
             email: email,
             firstName: firstName,
             middleName: '',
-            registrationType: 'Manual',
+            registrationType: registrationType,
             lastName: lastName,
             address: '',
             birthDate: dayjs(birthDate).format(),
@@ -88,10 +89,22 @@ export const manual = async (req: Request, res: Response) => {
             password: password ? String(encryptPassword) : null,
           },
         })
+        const token = jwt.sign(
+          {
+            firstName: newUser.firstName,
+            lastName: newUser.lastName,
+            email: newUser.email,
+            role: newUser.role
+          },
+          signKey as string
+        )
         res.json({
           error: false,
-          item: newUser,
-          message: 'User Successfully Created',
+          item: {
+            accessToken: token,
+            user: newUser
+          },
+          message: 'Successfully registered',
         })
       } else {
         res.json({
@@ -115,60 +128,94 @@ export const manual = async (req: Request, res: Response) => {
   }
 }
 
-export const facebook = async (req: Request, res: Response) => {
-  try {
-    const prisma = new PrismaClient()
-    const users = await prisma.user.findMany({})
-    if (users.length > 0) {
-      res.json({
-        error: false,
-        items: users,
-        itemCount: users.length,
-        message: '',
+export const manual = async (req: Request, res: Response) => {
+  const { email, password } = req.body
+  if (email && password) {
+    try {
+      const user = await prisma.user.findFirst({
+        where: {
+          email: email,
+          registrationType: RegistrationType.Manual
+        }
       })
-    } else {
+      if (!user) {
+        throw new Error("Email or password is invalid")
+      }
+      const decryptedPassword = CryptoJS.AES.decrypt(
+        user?.password as string,
+        encryptKey as string
+      )
+      const originalPassword = decryptedPassword.toString(CryptoJS.enc.Utf8)
+      if (user && originalPassword === password) {
+        const token = jwt.sign(
+          {
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+            role: user.role
+          },
+          signKey as string
+        )
+        res.json({
+          error: false,
+          item: {
+            accessToken: token,
+          },
+        })
+      } else {
+        res.json({
+          error: true,
+          message: 'Email or password is invalid',
+        })
+      }
+    } catch (err: any) {
       res.json({
-        error: false,
-        items: null,
-        itemCount: 0,
-        message: 'No data found',
+        error: true,
+        message: err.message,
       })
     }
-  } catch (err: any) {
+  } else {
     res.json({
       error: true,
-      items: null,
-      itemCount: 0,
-      message: err.message,
+      message: REQUIRED_VALUE_EMPTY,
     })
   }
 }
 
-export const google = async (req: Request, res: Response) => {
-  try {
-    const prisma = new PrismaClient()
-    const users = await prisma.user.findMany({})
-    if (users.length > 0) {
-      res.json({
-        error: false,
-        items: users,
-        itemCount: users.length,
-        message: '',
+export const info = async (req: Request, res: Response) => {
+  const { email } = req.body
+  if (email) {
+    try {
+      const user = await prisma.user.findFirst({
+        where: {
+          email: email
+        }
       })
-    } else {
+      if (user) {
+        res.json({
+          error: false,
+          item: {
+            name: `${user.firstName} ${user.lastName}`,
+            email: user.email
+          },
+        })
+      } else {
+        res.json({
+          error: true,
+          message: 'No data found',
+        })
+      }
+    } catch (err: any) {
       res.json({
-        error: false,
-        items: null,
-        itemCount: 0,
-        message: 'No data found',
+        error: true,
+        message: err.message,
       })
     }
-  } catch (err: any) {
+  } else {
     res.json({
       error: true,
-      items: null,
-      itemCount: 0,
-      message: err.message,
+      message: REQUIRED_VALUE_EMPTY,
     })
   }
 }
+
