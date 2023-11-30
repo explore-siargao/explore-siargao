@@ -4,36 +4,38 @@ import fb from "@/common/assets/facebook-logo.png"
 import google from "@/common/assets/google-logo.png"
 import { EnvelopeIcon } from "@heroicons/react/20/solid"
 import toast from "react-hot-toast"
-import { I_User, T_BACKEND_RESPONSE } from "@/common/types/global"
+import { I_User } from "@/common/types/global"
 import { useForm } from "react-hook-form"
 import useLogin from "@/module/Authentication/hooks/useLogin"
 import { useRouter } from "next/navigation"
 import Cookies from "js-cookie"
 import { Button } from "@/common/components/ui/Button"
 import Link from "next/link"
-import { LINK_CREATE_ACCOUNT, LINK_HOME } from "../constants/links"
+import { LINK_CREATE_ACCOUNT } from "@/common/constants/links"
 import {
   CONTINUE_BUTTON_TEXT,
   LOGIN_CONTENT_SUB_TEXT,
   LOGIN_CONTENT_TITTLE_TEXT,
-} from "../constants"
+} from "@/common/constants"
 import Image from "next/image"
-import { Input } from "./ui/Input"
+import { Input } from "@/common/components/ui/Input"
+import { signIn } from "next-auth/react"
 
-const LoginInputs = () => {
+const LoginForm = () => {
   const router = useRouter()
-  const { mutate: loginUser, isPending: loginIsPending } = useLogin()
-  const { register, handleSubmit, reset } = useForm<I_User>()
-  const onSubmit = (data: I_User) => {
+  const { mutate: loginUser, isPending: isLoginPending } = useLogin()
+  const { register, handleSubmit } = useForm<I_User>()
+  const onSubmit = (formData: I_User) => {
     const callBackReq = {
-      onSuccess: (data: T_BACKEND_RESPONSE) => {
+      onSuccess: (data: any) => {
         if (!data.error) {
-          if (data.item && !loginIsPending) {
-            Cookies.set("tfl", data.item.token)
-            if (data.userType === "User") {
-              reset()
-              router.push(LINK_HOME)
-            }
+          if (data.item && !isLoginPending) {
+            Cookies.set("accessToken", data.item.accessToken)
+            signIn("credentials", {
+              callbackUrl: "/",
+              username: formData.email,
+              password: formData.password,
+            })
           }
         } else {
           toast.error(String(data.message))
@@ -43,16 +45,11 @@ const LoginInputs = () => {
         toast.error(String(err))
       },
     }
-    loginUser({ ...data }, callBackReq)
+    loginUser({ ...formData }, callBackReq)
   }
   enum Position {
     "end",
     "start",
-  }
-  enum InputVariants {
-    "danger",
-    "warning",
-    "success",
   }
 
   return (
@@ -61,18 +58,21 @@ const LoginInputs = () => {
         <h1 className="font-semibold text-xl mt-1 mb-4">
           {LOGIN_CONTENT_TITTLE_TEXT}
         </h1>
-        <div className="isolate -space-y-px rounded-xl shadow-sm mt-2">
+        <div>
           <Input
-            Label="Email"
+            inputLabel="Email"
             inputId="email"
             type="email"
-            {...register("email")}
+            {...register("email", { required: true })}
+            disabled={isLoginPending}
           />
           <Input
-            Label="Password"
+            inputLabel="Password"
             inputId="password"
             type="password"
-            {...register("password")}
+            className="mt-2"
+            {...register("password", { required: true })}
+            disabled={isLoginPending}
           />
         </div>
         <p className="text-[11px] mt-1">
@@ -81,8 +81,13 @@ const LoginInputs = () => {
             Privacy Policy
           </Link>
         </p>
-        <Button type="submit" variant="default" className="w-full my-4">
-          {loginIsPending ? (
+        <Button
+          type="submit"
+          variant="default"
+          className="w-full my-4"
+          disabled={isLoginPending}
+        >
+          {isLoginPending ? (
             <div
               className="animate-spin inline-block w-4 h-4 border-[2px] border-current border-t-transparent text-white rounded-full mx-2"
               aria-label="loading"
@@ -102,8 +107,10 @@ const LoginInputs = () => {
           <div>
             <div className="mt-6 grid gap-4">
               <Button
+                type="button"
                 variant={"outline"}
                 imagePosition={Position.start}
+                disabled={isLoginPending}
                 icon={
                   <Image
                     className="h-5 w-auto"
@@ -113,14 +120,19 @@ const LoginInputs = () => {
                     alt=""
                   />
                 }
+                onClick={() =>
+                  signIn("facebook", { callbackUrl: "/session/facebook" })
+                }
               >
                 <span className="text-sm font-medium leading-6 text-center w-full">
                   Continue with Facebook
                 </span>
               </Button>
               <Button
+                type="button"
                 variant={"outline"}
                 imagePosition={Position.start}
+                disabled={isLoginPending}
                 icon={
                   <Image
                     className="h-5 w-auto"
@@ -129,6 +141,9 @@ const LoginInputs = () => {
                     height={500}
                     alt=""
                   />
+                }
+                onClick={() =>
+                  signIn("google", { callbackUrl: "/session/google" })
                 }
               >
                 <span className="text-sm font-medium leading-6 text-center w-full">
@@ -145,7 +160,7 @@ const LoginInputs = () => {
                 icon={<EnvelopeIcon className="h-5 w-auto" />}
               >
                 <span className="text-sm font-medium leading-6 text-center w-full">
-                  Continue with Email
+                  Register using email
                 </span>
               </Button>
             </div>
@@ -156,4 +171,4 @@ const LoginInputs = () => {
   )
 }
 
-export default LoginInputs
+export default LoginForm

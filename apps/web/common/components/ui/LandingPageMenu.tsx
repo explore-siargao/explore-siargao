@@ -1,10 +1,16 @@
-import { LINK_CREATE_ACCOUNT, LINK_LOGIN } from "@/common/constants/links"
+"use client"
+import {
+  LINK_CREATE_ACCOUNT,
+  LINK_LOGIN,
+  LINK_LOGOUT,
+} from "@/common/constants/links"
 import { Bars3Icon, UserCircleIcon } from "@heroicons/react/20/solid"
 import React, { Fragment } from "react"
 import { Popover, Transition } from "@headlessui/react"
 import Link from "next/link"
+import { useSession } from "next-auth/react"
 
-const solutions = [
+const unAuthMenus = [
   {
     name: "Log in",
     href: LINK_LOGIN,
@@ -14,7 +20,16 @@ const solutions = [
     href: LINK_CREATE_ACCOUNT,
   },
 ]
+
+const authMenus = [
+  {
+    name: "Log out",
+    href: LINK_LOGOUT,
+  },
+]
+
 const LandingPageMenu = () => {
+  const { data: session } = useSession()
   return (
     <Popover className="relative ">
       <Popover.Button className="flex gap-1 rounded-full border-text-50 border items-center focus:ring-gray-400 focus:border-gray-400 px-2 py-1">
@@ -33,7 +48,7 @@ const LandingPageMenu = () => {
       >
         <Popover.Panel className="absolute right-0 top-9 z-10 mt-5 flex w-screen max-w-max">
           <div className="w-screen max-w-[200px] flex-auto bg-white text-sm leading-6 border border-gray-200 shadow-sm ring-transparent rounded-md">
-            {solutions.map((item) => (
+            {[...(session ? authMenus : unAuthMenus)].map((item) => (
               <div
                 key={item.name}
                 className="relative rounded hover:bg-gray-50 px-5 py-2"

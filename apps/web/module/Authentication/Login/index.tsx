@@ -1,6 +1,6 @@
 "use client"
 import React from "react"
-import LoginInputs from "@/common/components/LoginInputs"
+import LoginForm from "@/module/Authentication/components/LoginForm"
 import AuthContainer from "@/common/components/AuthContainer"
 import { useRouter } from "next/navigation"
 
@@ -8,7 +8,7 @@ const Login = () => {
   const router = useRouter()
   return (
     <AuthContainer title="Login or sign up" onBack={() => router.push("/")}>
-      <LoginInputs />
+      <LoginForm />
     </AuthContainer>
   )
 }

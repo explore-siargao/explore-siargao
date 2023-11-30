@@ -1,15 +1,17 @@
 import express from 'express'
 import { addUser, getAllUsers } from './service/default'
-import { loginAuth } from './service/login'
+import { verifySession, register, manual, info } from './service/auth'
 
 const router = express.Router()
-//default
+
+// DEFAULT
 router.get('/', getAllUsers)
 router.post('/', addUser)
 
-//auth
-router.post('/login', loginAuth)
-// router.get('/signup', authController.SignUp);
-// router.get('/signin', authController.SignIn);
-// router.get('/verify', authController.Verify);
+// AUTH
+router.get('/auth/verify-session', verifySession)
+router.post('/auth/info', info)
+router.post('/auth/register', register)
+router.post('/auth/manual', manual)
+
 export default router

@@ -1,7 +1,7 @@
 "use client"
 import React from "react"
 import AuthContainer from "@/common/components/AuthContainer"
-import SignupInputs from "@/common/components/SignupInputs"
+import SignUpForm from "@/module/Authentication/components/SignUpForm"
 import { useRouter } from "next/navigation"
 
 const CreateAccount = () => {
@@ -9,9 +9,9 @@ const CreateAccount = () => {
   return (
     <AuthContainer
       title="Create account using you email"
-      onBack={() => router.push("/")}
+      onBack={() => router.push("/login")}
     >
-      <SignupInputs />
+      <SignUpForm />
     </AuthContainer>
   )
 }

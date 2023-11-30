@@ -1,43 +1,25 @@
 import { API_URL_USERS } from "@repo/constants"
-import { I_User } from "../../../common/types/global"
 import { useMutation } from "@tanstack/react-query"
+import { ApiService } from "@/common/service/api"
+import { RegistrationType } from "@/common/types/global"
 
-export async function registerUser({
-  email,
-  password,
-  firstName,
-  lastName,
-  middleName,
-  role,
-  registrationType,
-  address,
-  birthdate,
-  contactNumber,
-}: I_User) {
-  const res = await fetch(`${API_URL_USERS}`, {
-    method: "POST",
-    body: JSON.stringify({
-      email,
-      password,
-      firstName,
-      lastName,
-      middleName,
-      role,
-      registrationType,
-      address,
-      birthdate,
-      contactNumber,
-    }),
-    headers: {
-      "content-type": "application/json",
-    },
-  })
-  return res.json()
+export type T_Register = {
+  email: string
+  firstName: string
+  lastName: string
+  birthDate: string
+  registrationType: RegistrationType
+  password?: string
+}
+
+export async function registerUser(props: T_Register) {
+  const apiService = new ApiService()
+  return await apiService.post(`${API_URL_USERS}/auth/register`, props)
 }
 
 function useRegister() {
   const query = useMutation({
-    mutationFn: (props: I_User) => registerUser(props),
+    mutationFn: (props: T_Register) => registerUser(props),
   })
   return query
 }

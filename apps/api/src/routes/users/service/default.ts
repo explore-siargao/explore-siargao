@@ -2,6 +2,7 @@ import { Response, Request } from 'express'
 import { PrismaClient } from '@prisma/client'
 import CryptoJS from 'crypto-js'
 import { encryptKey } from '@/common/config'
+
 export const getAllUsers = async (req: Request, res: Response) => {
   try {
     const prisma = new PrismaClient()
