@@ -51,17 +51,15 @@ const SignupForm = ({ isSocial = false }: Props) => {
   }
 
   return (
-    <div className={`${isSocial ? "px-6 pb-6" : "p-6"}`}>
+    <div className="p-6">
       <form onSubmit={handleSubmit(onSubmit2)}>
         <div className="space-y-4 overflow-y-auto">
           <div>
-            <p
-              className={`${
-                isSocial ? "text-xs my-2 text-text-500 text-center" : "hidden"
-              }`}
-            >
-              This information is from {capitalizedText}
-            </p>
+            {isSocial && (
+              <p className="text-xs mb-4 text-text-500 text-center">
+                This information is from {capitalizedText}
+              </p>
+            )}
             <div>
               <Input
                 inputLabel="First Name"
@@ -110,13 +108,14 @@ const SignupForm = ({ isSocial = false }: Props) => {
             </p>
           </div>
           <div>
-            <Input
-              inputLabel="Password"
-              inputId="password"
-              type="password"
-              {...register("password")}
-              className={`${isSocial ? "hidden" : ""}`}
-            />
+            {!isSocial && (
+              <Input
+                inputLabel="Password"
+                inputId="password"
+                type="password"
+                {...register("password")}
+              />
+            )}
             <p className="text-xs mt-4 text-text-500 tracking-tighter">
               By selecting{" "}
               <span className="font-bold"> Agree and continue,</span> I agree to
