@@ -8,6 +8,5 @@ export function SessionProvider({
   children: React.ReactNode
   session: any
 }) {
-  console.log('para sakin', session)
   return <Provider session={session}>{children}</Provider>;
 }

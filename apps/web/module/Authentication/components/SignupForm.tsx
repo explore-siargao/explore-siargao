@@ -8,22 +8,22 @@ import useRegister from "@/module/Authentication/hooks/useRegister"
 import React from "react"
 import { useForm } from "react-hook-form"
 import toast from "react-hot-toast"
-import { Button } from "../../../common/components/ui/Button"
+import { Button } from "@/common/components/ui/Button"
 import Link from "next/link"
 import {
   ADD_USER_SUCCESS_MESSAGE,
   AGREE_CONTINUE_BUTTON_TEXT,
-} from "../../../common/constants/index"
-import { Input } from "../../../common/components/ui/Input"
+} from "@/common/constants/index"
+import { Input } from "@/common/components/ui/Input"
 
 const SignupForm = () => {
-  const { mutate: addUser, isPending: addUserIsPending } = useRegister()
+  const { mutate: addUser, isPending: isAddUserPending } = useRegister()
   const { register, handleSubmit, reset } = useForm<I_User>()
-  const onSubmit2 = (data: I_User) => {
-    const callBackReq2 = {
+  const onSubmit = (data: I_User) => {
+    const callBackReq = {
       onSuccess: (data: T_BACKEND_RESPONSE) => {
         if (!data.error) {
-          if (data.item && !addUserIsPending) {
+          if (data.item && !isAddUserPending) {
             toast.success(ADD_USER_SUCCESS_MESSAGE)
             reset()
           }
@@ -37,12 +37,12 @@ const SignupForm = () => {
     }
     addUser(
       { ...data, registrationType: "Manual" as unknown as RegistrationType },
-      callBackReq2
+      callBackReq
     )
   }
   return (
     <div className="p-6">
-      <form onSubmit={handleSubmit(onSubmit2)}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="space-y-4 overflow-y-auto">
           <div>
             <div>
@@ -51,6 +51,7 @@ const SignupForm = () => {
                 inputId="firstName"
                 type="text"
                 {...register("firstName")}
+                disabled={isAddUserPending}
               />
               <Input
                 inputLabel="Last name"
@@ -58,6 +59,7 @@ const SignupForm = () => {
                 type="text"
                 className="mt-2"
                 {...register("lastName")}
+                disabled={isAddUserPending}
               />
             </div>
             <p className="text-xs mt-1 text-gray-500">
@@ -70,7 +72,8 @@ const SignupForm = () => {
                 inputLabel="Birthdate"
                 inputId="birthdate"
                 type="date"
-                {...register("birthdate")}
+                {...register("birthDate")}
+                disabled={isAddUserPending}
               />
             </div>
             <p className="text-xs mt-1 text-gray-500">
@@ -86,6 +89,7 @@ const SignupForm = () => {
                 type="email"
                 {...register("email")}
                 placeholder="you@example.com"
+                disabled={isAddUserPending}
               />
             </div>
             <p className="text-xs mt-1 text-gray-500">
@@ -99,6 +103,7 @@ const SignupForm = () => {
                 inputId="password"
                 type="password"
                 {...register("password")}
+                disabled={isAddUserPending}
               />
             </div>
             <p className="text-xs mt-4 text-gray-500 tracking-tighter">
@@ -119,7 +124,7 @@ const SignupForm = () => {
             </p>
           </div>
           <Button type="submit" className="w-full my-4">
-            {addUserIsPending ? (
+            {isAddUserPending ? (
               <div
                 className="animate-spin inline-block w-4 h-4 border-[2px] border-current border-t-transparent text-white rounded-full mx-2"
                 aria-label="loading"
@@ -145,6 +150,7 @@ const SignupForm = () => {
                   aria-describedby="comments-description"
                   name="comments"
                   type="checkbox"
+                  disabled={isAddUserPending}
                   className="h-6 w-6 rounded border-gray-400 text-secondary-600 focus:ring-transparent"
                 />
               </div>

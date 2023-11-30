@@ -12,7 +12,7 @@ export interface I_User {
   address?: string
   password: string
   contactNumber?: number
-  birthdate: string
+  birthDate: string
   createdAt?: string
   deletedAt?: string
   updatedAt?: string
