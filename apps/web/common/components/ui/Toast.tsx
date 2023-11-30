@@ -55,28 +55,28 @@ const Toast = React.forwardRef<HTMLDivElement, ToastProps>(
     },
     ref
   ) => {
-    const myTimeout = setTimeout(onClose, 3000)
+    let iconComponent
+
+    if (variant === "success") {
+      iconComponent = <CheckCircleIcon className="h-6 w-6" aria-hidden="true" />
+    } else if (variant === "warning") {
+      iconComponent = (
+        <ExclamationTriangleIcon className="h-6 w-6" aria-hidden="true" />
+      )
+    } else if (variant === "danger") {
+      iconComponent = (
+        <ExclamationCircleIcon className="h-6 w-6" aria-hidden="true" />
+      )
+    } else {
+      iconComponent = (
+        <QuestionMarkCircleIcon className="h-6 w-6" aria-hidden="true" />
+      )
+    }
     return (
       <div className={cn(toastVariants({ variant, className }))}>
         <div className="p-4">
           <div className="flex items-start">
-            <div className="flex-shrink-0">
-              {variant === "success" ? (
-                <CheckCircleIcon className="h-6 w-6" aria-hidden="true" />
-              ) : variant === "warning" ? (
-                <ExclamationTriangleIcon
-                  className="h-6 w-6"
-                  aria-hidden="true"
-                />
-              ) : variant === "danger" ? (
-                <ExclamationCircleIcon className="h-6 w-6" aria-hidden="true" />
-              ) : (
-                <QuestionMarkCircleIcon
-                  className="h-6 w-6"
-                  aria-hidden="true"
-                />
-              )}
-            </div>
+            <div className="flex-shrink-0">{iconComponent}</div>
             <div className="ml-3 w-0 flex-1 pt-0.5">
               <p className="text-sm font-medium ">{tittle}</p>
               <p className="mt-1 text-sm ">{text}</p>
