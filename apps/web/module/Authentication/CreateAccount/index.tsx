@@ -13,7 +13,10 @@ const CreateAccount = () => {
       onBack={() => router.push("/")}
     >
       <SignupInputs />
-      <Checkbox checkboxId="IDKOTO" text="I don’t want to receive marketing messages from Explore Siargao" />
+      <Checkbox
+        checkboxId="IDKOTO"
+        text="I don’t want to receive marketing messages from Explore Siargao"
+      />
     </AuthContainer>
   )
 }
