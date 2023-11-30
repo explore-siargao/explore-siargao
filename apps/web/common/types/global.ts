@@ -1,4 +1,3 @@
-
 export interface I_User {
   id?: number
   firstName: string

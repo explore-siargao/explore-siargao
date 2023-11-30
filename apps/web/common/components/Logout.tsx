@@ -5,10 +5,10 @@ import { signOut } from "next-auth/react"
 
 const Logout = () => {
   useEffect(() => {
-    setTimeout(function() {
+    setTimeout(function () {
       Cookies.remove("accessToken")
       signOut({ callbackUrl: "/" })
-    }, 1500);
+    }, 1500)
   }, [])
   return (
     <div className="flex min-h-screen flex-1 flex-col justify-center items-center py-12 sm:px-6 lg:px-8 bg-primary-100">

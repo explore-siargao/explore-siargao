@@ -39,4 +39,4 @@ const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET as string,
 }
 
-export default authOptions;
+export default authOptions

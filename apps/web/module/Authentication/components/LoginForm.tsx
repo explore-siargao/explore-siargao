@@ -142,7 +142,9 @@ const LoginForm = () => {
                     alt=""
                   />
                 }
-                onClick={() => signIn("google", { callbackUrl: "/session/google" })}
+                onClick={() =>
+                  signIn("google", { callbackUrl: "/session/google" })
+                }
               >
                 <span className="text-sm font-medium leading-6 text-center w-full">
                   Continue with Google
@@ -156,7 +158,6 @@ const LoginForm = () => {
                 }}
                 imagePosition={Position.start}
                 icon={<EnvelopeIcon className="h-5 w-auto" />}
-                
               >
                 <span className="text-sm font-medium leading-6 text-center w-full">
                   Register using email
