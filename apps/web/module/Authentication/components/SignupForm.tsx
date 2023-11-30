@@ -15,15 +15,24 @@ import {
   AGREE_CONTINUE_BUTTON_TEXT,
 } from "@/common/constants/index"
 import { Input } from "@/common/components/ui/Input"
+import { capitalizeFirstLetter } from "@/common/helpers/capitalizeFirstLetter"
+import { useParams } from "next/navigation"
 
-const SignupForm = () => {
-  const { mutate: addUser, isPending: isAddUserPending } = useRegister()
+type Props = {
+  isSocial: boolean
+}
+
+const SignupForm = ({ isSocial = false }: Props) => {
+  const { mutate: addUser, isPending: addUserIsPending } = useRegister()
   const { register, handleSubmit, reset } = useForm<I_User>()
+  const params = useParams()
+  const capitalizedText = capitalizeFirstLetter(params.social as string)
+
   const onSubmit = (data: I_User) => {
     const callBackReq = {
       onSuccess: (data: T_BACKEND_RESPONSE) => {
         if (!data.error) {
-          if (data.item && !isAddUserPending) {
+          if (data.item && !addUserIsPending) {
             toast.success(ADD_USER_SUCCESS_MESSAGE)
             reset()
           }
@@ -40,18 +49,24 @@ const SignupForm = () => {
       callBackReq
     )
   }
+
   return (
     <div className="p-6">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="space-y-4 overflow-y-auto">
           <div>
+            {isSocial && (
+              <p className="text-xs mb-4 text-text-500 text-center">
+                This information is from {capitalizedText}
+              </p>
+            )}
             <div>
               <Input
                 inputLabel="First Name"
                 inputId="firstName"
                 type="text"
                 {...register("firstName")}
-                disabled={isAddUserPending}
+                disabled={addUserIsPending}
               />
               <Input
                 inputLabel="Last name"
@@ -59,10 +74,10 @@ const SignupForm = () => {
                 type="text"
                 className="mt-2"
                 {...register("lastName")}
-                disabled={isAddUserPending}
+                disabled={addUserIsPending}
               />
             </div>
-            <p className="text-xs mt-1 text-gray-500">
+            <p className="text-xs mt-1 text-text-500">
               Make sure it matches the name on your government ID.
             </p>
           </div>
@@ -73,10 +88,10 @@ const SignupForm = () => {
                 inputId="birthdate"
                 type="date"
                 {...register("birthDate")}
-                disabled={isAddUserPending}
+                disabled={addUserIsPending}
               />
             </div>
-            <p className="text-xs mt-1 text-gray-500">
+            <p className="text-xs mt-1 text-text-500">
               To sign up, you need to be at least 18. Your birthday won’t be
               shared with other people who use Explore Siargao.
             </p>
@@ -89,24 +104,24 @@ const SignupForm = () => {
                 type="email"
                 {...register("email")}
                 placeholder="you@example.com"
-                disabled={isAddUserPending}
+                disabled={addUserIsPending}
               />
             </div>
-            <p className="text-xs mt-1 text-gray-500">
+            <p className="text-xs mt-1 text-text-500">
               We'll email you trip confirmations and receipts.
             </p>
           </div>
           <div>
-            <div className="isolate -space-y-px rounded-xl shadow-sm">
+            {!isSocial && (
               <Input
                 inputLabel="Password"
                 inputId="password"
                 type="password"
                 {...register("password")}
-                disabled={isAddUserPending}
+                disabled={addUserIsPending}
               />
-            </div>
-            <p className="text-xs mt-4 text-gray-500 tracking-tighter">
+            )}
+            <p className="text-xs mt-4 text-text-500 tracking-tighter">
               By selecting{" "}
               <span className="font-bold"> Agree and continue,</span> I agree to
               Explore Siargao's{" "}
@@ -124,7 +139,7 @@ const SignupForm = () => {
             </p>
           </div>
           <Button type="submit" className="w-full my-4">
-            {isAddUserPending ? (
+            {addUserIsPending ? (
               <div
                 className="animate-spin inline-block w-4 h-4 border-[2px] border-current border-t-transparent text-white rounded-full mx-2"
                 aria-label="loading"
@@ -136,7 +151,7 @@ const SignupForm = () => {
             )}
           </Button>
           <div className="w-full border-b-2 mt-2" />
-          <div className="text-xs font-medium mt-1 text-gray-500 tracking-tighter">
+          <div className="text-xs font-medium mt-1 text-text-500 tracking-tighter">
             <p>
               Explore Siargao will send you members-only deals, inspiration,
               marketing emails, and push notifications. You can opt out of
@@ -147,18 +162,18 @@ const SignupForm = () => {
               <div className="flex h-6 items-center">
                 <input
                   id="comments"
-                  aria-describedby="comments-description"
                   name="comments"
                   type="checkbox"
-                  disabled={isAddUserPending}
+                  disabled={addUserIsPending}
                   className="h-6 w-6 rounded border-gray-400 text-secondary-600 focus:ring-transparent"
                 />
-              </div>
-              <div className="ml-3 text-xs leading-6">
-                <span id="comments-description" className="text-gray-500">
+                <label
+                  htmlFor="comments"
+                  className="text-text-500 ml-3 text-xs leading-6"
+                >
                   I don’t want to receive marketing messages from Explore
                   Siargao
-                </span>
+                </label>
               </div>
             </div>
           </div>

@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react"
 
 const SessionVerifier = () => {
-  return (
-    <div>SessionVerifier</div>
-  )
+  return <div>SessionVerifier</div>
 }
 
 export default SessionVerifier

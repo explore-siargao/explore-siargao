@@ -1,4 +1,4 @@
-import Cookies from "js-cookie";
+import Cookies from "js-cookie"
 
 enum EContentType {
   JSON = "application/json",
@@ -6,22 +6,25 @@ enum EContentType {
 }
 
 export class ApiService {
-  private BASE_URL: string | undefined;
-  private isAuthRequired: boolean = false;
+  private BASE_URL: string | undefined
+  private isAuthRequired: boolean = false
 
   constructor(
     hasAuthentication = true,
     source: "main" | "auth" | "mock" = "main"
   ) {
-    this.BASE_URL =
-      source == "main"
-        ? process.env.API_URL
-        : source == "auth" ? process.env.API_AUTH_URL : process.env.API_MOCK_URL;
-    this.isAuthRequired = hasAuthentication;
+    if (source === "main") {
+      this.BASE_URL = process.env.API_URL
+    } else if (source === "auth") {
+      this.BASE_URL = process.env.API_AUTH_URL
+    } else {
+      this.BASE_URL = process.env.API_MOCK_URL
+    }
+    this.isAuthRequired = hasAuthentication
   }
 
   private constructHeader(isFormData = false, removeContentType = false) {
-    const accessToken = Cookies.get("accessToken");
+    const accessToken = Cookies.get("accessToken")
 
     const res = {
       ...(!removeContentType && {
@@ -30,9 +33,9 @@ export class ApiService {
       ...(accessToken && this.isAuthRequired
         ? { Authorization: `Bearer ${accessToken}` }
         : {}),
-    } as Record<string, any>;
+    } as Record<string, any>
 
-    return res;
+    return res
   }
 
   async get<T = any>(
@@ -40,8 +43,8 @@ export class ApiService {
     params?: Record<string, any>,
     signal?: AbortSignal
   ): Promise<T | any> {
-    const reqParams = new URLSearchParams(params).toString();
-    const header = this.constructHeader();
+    const reqParams = new URLSearchParams(params).toString()
+    const header = this.constructHeader()
 
     const res = fetch(
       `${this.BASE_URL}${endpoint}${params ? `?${reqParams}` : ""}`,
@@ -49,39 +52,39 @@ export class ApiService {
         headers: header,
         ...(signal ? { signal } : {}),
       }
-    );
+    )
 
-    return (await res).json();
+    return (await res).json()
   }
 
   async post<T = any>(endpoint: string, body: any): Promise<T> {
-    const header = this.constructHeader();
+    const header = this.constructHeader()
     const res = fetch(`${this.BASE_URL}${endpoint}`, {
       method: "POST",
       body: JSON.stringify(body),
       headers: header,
-    });
-    return (await res).json();
+    })
+    return (await res).json()
   }
 
   async patch(endpoint: string, body: any) {
-    const header = this.constructHeader();
+    const header = this.constructHeader()
 
     const res = fetch(`${this.BASE_URL}${endpoint}`, {
       method: "PATCH",
       body: JSON.stringify(body),
       headers: header,
-    });
-    return (await res).json();
+    })
+    return (await res).json()
   }
 
   async delete(endpoint: string, payload: { [key: string]: string }) {
-    const header = this.constructHeader();
+    const header = this.constructHeader()
 
     const res = fetch(`${this.BASE_URL}${endpoint}`, {
       method: "DELETE",
       headers: header,
-    });
-    return (await res).json();
+    })
+    return (await res).json()
   }
 }

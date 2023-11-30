@@ -10,7 +10,6 @@ import useLogin from "@/module/Authentication/hooks/useLogin"
 import { useRouter } from "next/navigation"
 import Cookies from "js-cookie"
 import { Button } from "@/common/components/ui/Button"
-import { signIn, signOut } from "next-auth/react"
 import Link from "next/link"
 import { LINK_CREATE_ACCOUNT, LINK_HOME } from "../../../common/constants/links"
 import {
@@ -50,11 +49,6 @@ const LoginForm = () => {
     "end",
     "start",
   }
-  enum InputVariants {
-    "danger",
-    "warning",
-    "success",
-  }
 
   return (
     <div className="p-6">
@@ -83,7 +77,18 @@ const LoginForm = () => {
             Privacy Policy
           </Link>
         </p>
-        <Button type="submit" variant="default" className="w-full my-4" onClick={() => signIn("credentials", { callbackUrl: "/session/manual", username: "jsmith", password: "1234" })}>
+        <Button
+          type="submit"
+          variant="default"
+          className="w-full my-4"
+          onClick={() =>
+            signIn("credentials", {
+              callbackUrl: "/session/manual",
+              username: "jsmith",
+              password: "1234",
+            })
+          }
+        >
           {loginIsPending ? (
             <div
               className="animate-spin inline-block w-4 h-4 border-[2px] border-current border-t-transparent text-white rounded-full mx-2"
@@ -116,7 +121,9 @@ const LoginForm = () => {
                     alt=""
                   />
                 }
-                onClick={() => signIn("facebook", { callbackUrl: "/session/facebook" })}
+                onClick={() =>
+                  signIn("facebook", { callbackUrl: "/session/facebook" })
+                }
               >
                 <span className="text-sm font-medium leading-6 text-center w-full">
                   Continue with Facebook

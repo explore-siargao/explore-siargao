@@ -18,9 +18,7 @@ export default async function RootLayout({
     <html lang="en">
       <body>
         <SessionProvider session={session}>
-          <QueryClientWrapper>
-            {children}
-          </QueryClientWrapper>
+          <QueryClientWrapper>{children}</QueryClientWrapper>
         </SessionProvider>
       </body>
     </html>
