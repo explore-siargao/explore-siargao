@@ -9,15 +9,13 @@ import toast from "react-hot-toast"
 import { Button } from "@/common/components/ui/Button"
 import Link from "next/link"
 import {
-  ADD_USER_SUCCESS_MESSAGE,
   AGREE_CONTINUE_BUTTON_TEXT,
 } from "@/common/constants/index"
 import { Input } from "@/common/components/ui/Input"
 import { capitalizeFirstLetter } from "@/common/helpers/capitalizeFirstLetter"
-import { useParams } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 import { signIn, useSession } from "next-auth/react"
 import Cookies from "js-cookie"
-import { useRouter } from "next/navigation"
 
 type Props = {
   isSocial?: boolean

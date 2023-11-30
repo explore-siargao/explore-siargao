@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation"
 import Cookies from "js-cookie"
 import { Button } from "@/common/components/ui/Button"
 import Link from "next/link"
-import { LINK_CREATE_ACCOUNT, LINK_HOME } from "@/common/constants/links"
+import { LINK_CREATE_ACCOUNT } from "@/common/constants/links"
 import {
   CONTINUE_BUTTON_TEXT,
   LOGIN_CONTENT_SUB_TEXT,
@@ -19,7 +19,7 @@ import {
 } from "@/common/constants"
 import Image from "next/image"
 import { Input } from "@/common/components/ui/Input"
-import { signIn, signOut } from "next-auth/react"
+import { signIn } from "next-auth/react"
 
 const LoginForm = () => {
   const router = useRouter()

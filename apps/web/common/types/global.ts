@@ -1,5 +1,5 @@
 
-export interface I_User {
+export interface IUser {
   id?: number
   firstName: string
   middleName?: string

@@ -12,7 +12,7 @@ const Logout = () => {
   }, [])
   return (
     <div className="flex min-h-screen flex-1 flex-col justify-center items-center py-12 sm:px-6 lg:px-8 bg-primary-100">
-      <div role="status">
+      <div>
         <svg
           aria-hidden="true"
           className="w-12 h-12 text-primary-400 animate-spin fill-primary-700"
