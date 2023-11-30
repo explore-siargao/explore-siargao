@@ -61,16 +61,13 @@ const Toast = React.forwardRef<HTMLDivElement, ToastProps>(
           <div className="flex items-start">
             <div className="flex-shrink-0">
               {variant === "success" ? (
-                <CheckCircleIcon className="h-6 w-6" aria-hidden="true" />
+                <CheckCircleIcon className="h-6 w-6" />
               ) : variant === "warning" ? (
-                <ExclamationTriangleIcon
-                  className="h-6 w-6"
-                  aria-hidden="true"
-                />
+                <ExclamationTriangleIcon className="h-6 w-6" />
               ) : variant === "danger" ? (
-                <ExclamationCircleIcon className="h-6 w-6" aria-hidden="true" />
+                <ExclamationCircleIcon className="h-6 w-6" />
               ) : (
-                <ExclamationCircleIcon className="h-6 w-6" aria-hidden="true" />
+                <ExclamationCircleIcon className="h-6 w-6" />
               )}
             </div>
             <div className="ml-3 w-0 flex-1 pt-0.5">
