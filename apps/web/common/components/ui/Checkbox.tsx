@@ -12,15 +12,14 @@ const checkboxVariants = cva(
         lg: "h-10 w-10",
       },
       textSize: {
-        xs: "text-xs",
-        sm: "text-sm",
-        md: "text-md",
+        sm: "text-xs",
+        md: "text-base",
         lg: "text-lg",
       },
     },
     defaultVariants: {
       size: "sm",
-      textSize: "xs",
+      textSize: "sm",
     },
   }
 )

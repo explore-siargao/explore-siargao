@@ -155,22 +155,6 @@ const SignupInputs = () => {
                 </span>
               </div>
             </div>
-            <Checkbox
-              checkboxId="IDKOaTO"
-              text="this is small"
-            />
-            <Checkbox
-              size={"md"}
-              textSize={"md"}
-              checkboxId="IDKO2TO"
-              text="this is medium"
-            />
-            <Checkbox
-              size={"lg"}
-              textSize={"lg"}
-              checkboxId="IDKOTO"
-              text="this is large"
-            />
           </div>
         </div>
       </form>
