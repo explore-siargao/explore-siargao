@@ -1,26 +1,28 @@
 import { Response, Request } from 'express'
 import { PrismaClient, RegistrationType } from '@prisma/client'
-import { REQUIRED_VALUE_EMPTY } from '@repo/constants';
-import jwt from "jsonwebtoken"
-import { encryptKey, signKey } from '@/common/config';
+import { REQUIRED_VALUE_EMPTY } from '@repo/constants'
+import jwt from 'jsonwebtoken'
+import { encryptKey, signKey } from '@/common/config'
 import CryptoJS from 'crypto-js'
-import dayjs from 'dayjs';
+import dayjs from 'dayjs'
 
 const prisma = new PrismaClient()
 
 function capitalizeFirstLetter(value: string) {
-  return value.charAt(0).toUpperCase() + value.slice(1);
+  return value.charAt(0).toUpperCase() + value.slice(1)
 }
 
 export const verifySession = async (req: Request, res: Response) => {
-  const { type, email } = req.query;
+  const { type, email } = req.query
   if (type && email) {
     try {
       const user = await prisma.user.findFirst({
         where: {
           email: email as string,
-          registrationType: capitalizeFirstLetter(type as string) as RegistrationType
-        }
+          registrationType: capitalizeFirstLetter(
+            type as string
+          ) as RegistrationType,
+        },
       })
       if (user) {
         const token = jwt.sign(
@@ -34,7 +36,7 @@ export const verifySession = async (req: Request, res: Response) => {
         res.json({
           error: false,
           item: {
-            accessToken: token
+            accessToken: token,
           },
         })
       } else {
@@ -59,16 +61,19 @@ export const verifySession = async (req: Request, res: Response) => {
 }
 
 export const manual = async (req: Request, res: Response) => {
-  const { email, password, firstName, lastName, birthDate } = req.body;
+  const { email, password, firstName, lastName, birthDate } = req.body
   if (password && email && firstName && lastName && birthDate) {
     try {
       const user = await prisma.user.findFirst({
         where: {
           email: email as string,
-        }
+        },
       })
       if (!user) {
-        const encryptPassword = CryptoJS.AES.encrypt(req.body.password, encryptKey)
+        const encryptPassword = CryptoJS.AES.encrypt(
+          req.body.password,
+          encryptKey
+        )
         const newUser = await prisma.user.create({
           data: {
             email: email,

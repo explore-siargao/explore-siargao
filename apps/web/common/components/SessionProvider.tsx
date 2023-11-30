@@ -8,5 +8,5 @@ export function SessionProvider({
   readonly children: React.ReactNode
   readonly session: any
 }) {
-  return <Provider session={session}>{children}</Provider>;
+  return <Provider session={session}>{children}</Provider>
 }
