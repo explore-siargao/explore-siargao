@@ -30,7 +30,7 @@ export const verifySession = async (req: Request, res: Response) => {
             firstName: user.firstName,
             lastName: user.lastName,
             email: user.email,
-            role: user.role
+            role: user.role,
           },
           signKey as string
         )
@@ -62,7 +62,8 @@ export const verifySession = async (req: Request, res: Response) => {
 }
 
 export const register = async (req: Request, res: Response) => {
-  const { email, password, firstName, lastName, birthDate, registrationType } = req.body
+  const { email, password, firstName, lastName, birthDate, registrationType } =
+    req.body
   if (email && firstName && lastName && birthDate && registrationType) {
     try {
       const user = await prisma.user.findFirst({
@@ -94,7 +95,7 @@ export const register = async (req: Request, res: Response) => {
             firstName: newUser.firstName,
             lastName: newUser.lastName,
             email: newUser.email,
-            role: newUser.role
+            role: newUser.role,
           },
           signKey as string
         )
@@ -102,7 +103,7 @@ export const register = async (req: Request, res: Response) => {
           error: false,
           item: {
             accessToken: token,
-            user: newUser
+            user: newUser,
           },
           message: 'Successfully registered',
         })
@@ -135,11 +136,11 @@ export const manual = async (req: Request, res: Response) => {
       const user = await prisma.user.findFirst({
         where: {
           email: email,
-          registrationType: RegistrationType.Manual
-        }
+          registrationType: RegistrationType.Manual,
+        },
       })
       if (!user) {
-        throw new Error("Email or password is invalid")
+        throw new Error('Email or password is invalid')
       }
       const decryptedPassword = CryptoJS.AES.decrypt(
         user?.password as string,
@@ -152,7 +153,7 @@ export const manual = async (req: Request, res: Response) => {
             firstName: user.firstName,
             lastName: user.lastName,
             email: user.email,
-            role: user.role
+            role: user.role,
           },
           signKey as string
         )
@@ -188,15 +189,15 @@ export const info = async (req: Request, res: Response) => {
     try {
       const user = await prisma.user.findFirst({
         where: {
-          email: email
-        }
+          email: email,
+        },
       })
       if (user) {
         res.json({
           error: false,
           item: {
             name: `${user.firstName} ${user.lastName}`,
-            email: user.email
+            email: user.email,
           },
         })
       } else {
@@ -218,4 +219,3 @@ export const info = async (req: Request, res: Response) => {
     })
   }
 }
-

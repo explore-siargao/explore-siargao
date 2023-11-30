@@ -1,8 +1,8 @@
 "use client"
-import {
-  RegistrationType,
-} from "@/common/types/global"
-import useRegister, { T_Register } from "@/module/Authentication/hooks/useRegister"
+import { RegistrationType } from "@/common/types/global"
+import useRegister, {
+  T_Register,
+} from "@/module/Authentication/hooks/useRegister"
 import React from "react"
 import { useForm } from "react-hook-form"
 import toast from "react-hot-toast"
@@ -25,9 +25,21 @@ const SignUpForm = ({ isSocial = false }: Props) => {
   const router = useRouter()
   const { data: session } = useSession()
   const { mutate: addUser, isPending: addUserIsPending } = useRegister()
-  const { register, handleSubmit } = useForm<T_Register>({ values: { email: session?.user?.email as string, firstName: "", lastName: "", birthDate: "", password: "", registrationType: RegistrationType.Manual } })
+  const { register, handleSubmit } = useForm<T_Register>({
+    values: {
+      email: session?.user?.email as string,
+      firstName: "",
+      lastName: "",
+      birthDate: "",
+      password: "",
+      registrationType: RegistrationType.Manual,
+    },
+  })
   const params = useParams()
-  const signUpType = params.type === "facebook" || params.type === "google" ? capitalizeFirstLetter(params.type as string) : "Manual";
+  const signUpType =
+    params.type === "facebook" || params.type === "google"
+      ? capitalizeFirstLetter(params.type as string)
+      : "Manual"
 
   const onSubmit = (formData: T_Register) => {
     const callBackReq = {
@@ -35,7 +47,7 @@ const SignUpForm = ({ isSocial = false }: Props) => {
         if (!data.error) {
           if (data.item && !addUserIsPending) {
             Cookies.set("accessToken", data.item.accessToken)
-            if(signUpType === "Manual") {
+            if (signUpType === "Manual") {
               signIn("credentials", {
                 callbackUrl: "/",
                 username: formData.email,
@@ -54,7 +66,10 @@ const SignUpForm = ({ isSocial = false }: Props) => {
       },
     }
     addUser(
-      { ...formData, registrationType: signUpType as unknown as RegistrationType },
+      {
+        ...formData,
+        registrationType: signUpType as unknown as RegistrationType,
+      },
       callBackReq
     )
   }

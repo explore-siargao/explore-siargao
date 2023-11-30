@@ -1,5 +1,9 @@
 "use client"
-import { LINK_CREATE_ACCOUNT, LINK_LOGIN, LINK_LOGOUT } from "@/common/constants/links"
+import {
+  LINK_CREATE_ACCOUNT,
+  LINK_LOGIN,
+  LINK_LOGOUT,
+} from "@/common/constants/links"
 import { Bars3Icon, UserCircleIcon } from "@heroicons/react/20/solid"
 import React, { Fragment } from "react"
 import { Popover, Transition } from "@headlessui/react"

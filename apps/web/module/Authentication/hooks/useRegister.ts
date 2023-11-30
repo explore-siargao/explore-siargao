@@ -4,12 +4,12 @@ import { ApiService } from "@/common/service/api"
 import { RegistrationType } from "@/common/types/global"
 
 export type T_Register = {
-  email: string,
-  firstName: string,
-  lastName: string,
-  birthDate: string,
+  email: string
+  firstName: string
+  lastName: string
+  birthDate: string
   registrationType: RegistrationType
-  password?: string,
+  password?: string
 }
 
 export async function registerUser(props: T_Register) {
