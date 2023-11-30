@@ -3,8 +3,8 @@ import React from "react"
 import AuthContainer from "@/common/components/AuthContainer"
 import { useParams, useRouter } from "next/navigation"
 import { LINK_LOGIN } from "@/common/constants/links"
-import SignupSocialForm from "../components/SignupSocialForm"
 import { capitalizeFirstLetter } from "@/common/helpers/capitalizeFirstLetter"
+import SignupForm from "@/module/Authentication/components/SignupForm"
 
 const CreateAccountSocial = () => {
   const params = useParams()
@@ -16,7 +16,7 @@ const CreateAccountSocial = () => {
       title={`Create account using your ${capitalizedText}`}
       onBack={() => router.push(LINK_LOGIN)}
     >
-      <SignupSocialForm />
+      <SignupForm isSocial={true} />
     </AuthContainer>
   )
 }

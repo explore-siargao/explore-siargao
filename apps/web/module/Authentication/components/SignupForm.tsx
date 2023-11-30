@@ -8,17 +8,26 @@ import useRegister from "@/module/Authentication/hooks/useRegister"
 import React from "react"
 import { useForm } from "react-hook-form"
 import toast from "react-hot-toast"
-import { Button } from "../../../common/components/ui/Button"
+import { Button } from "@/common/components/ui/Button"
 import Link from "next/link"
 import {
   ADD_USER_SUCCESS_MESSAGE,
   AGREE_CONTINUE_BUTTON_TEXT,
-} from "../../../common/constants/index"
-import { Input } from "../../../common/components/ui/Input"
+} from "@/common/constants/index"
+import { Input } from "@/common/components/ui/Input"
+import { capitalizeFirstLetter } from "@/common/helpers/capitalizeFirstLetter"
+import { useParams } from "next/navigation"
 
-const SignupForm = () => {
+type Props = {
+  isSocial: boolean
+}
+
+const SignupForm = ({ isSocial = false }: Props) => {
   const { mutate: addUser, isPending: addUserIsPending } = useRegister()
   const { register, handleSubmit, reset } = useForm<I_User>()
+  const params = useParams()
+  const capitalizedText = capitalizeFirstLetter(params.social as string)
+
   const onSubmit2 = (data: I_User) => {
     const callBackReq2 = {
       onSuccess: (data: T_BACKEND_RESPONSE) => {
@@ -40,11 +49,19 @@ const SignupForm = () => {
       callBackReq2
     )
   }
+
   return (
-    <div className="p-6">
+    <div className={`${isSocial ? "px-6 pb-6" : "p-6"}`}>
       <form onSubmit={handleSubmit(onSubmit2)}>
         <div className="space-y-4 overflow-y-auto">
           <div>
+            <p
+              className={`${
+                isSocial ? "text-xs my-2 text-text-500 text-center" : "hidden"
+              }`}
+            >
+              This information is from {capitalizedText}
+            </p>
             <div>
               <Input
                 inputLabel="First Name"
@@ -93,14 +110,13 @@ const SignupForm = () => {
             </p>
           </div>
           <div>
-            <div className="isolate -space-y-px rounded-xl shadow-sm">
-              <Input
-                inputLabel="Password"
-                inputId="password"
-                type="password"
-                {...register("password")}
-              />
-            </div>
+            <Input
+              inputLabel="Password"
+              inputId="password"
+              type="password"
+              {...register("password")}
+              className={`${isSocial ? "hidden" : ""}`}
+            />
             <p className="text-xs mt-4 text-text-500 tracking-tighter">
               By selecting{" "}
               <span className="font-bold"> Agree and continue,</span> I agree to
