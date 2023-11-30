@@ -41,7 +41,4 @@ export const authOptions: NextAuthOptions = {
 
 const handler = NextAuth(authOptions)
 
-export { handler as GET, handler as POST }
-
-// ADD BROWSER COOKIES ACCESS TOKEN CHECKER IF EXIST,
-// IF AUTHENTICATED WITH NEXT AUTH AND IF COOKIE TOKEN NOT EXIST IN THE BROWSER, GENERATE FROM THE BACKEND USING NEXT AUTH SESSION AND STORE IT TO COOKIES
+export { handler as GET, handler as POST };

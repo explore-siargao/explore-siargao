@@ -28,8 +28,8 @@ const SignupForm = ({ isSocial = false }: Props) => {
   const params = useParams()
   const capitalizedText = capitalizeFirstLetter(params.social as string)
 
-  const onSubmit2 = (data: I_User) => {
-    const callBackReq2 = {
+  const onSubmit = (data: I_User) => {
+    const callBackReq = {
       onSuccess: (data: T_BACKEND_RESPONSE) => {
         if (!data.error) {
           if (data.item && !addUserIsPending) {
@@ -46,13 +46,13 @@ const SignupForm = ({ isSocial = false }: Props) => {
     }
     addUser(
       { ...data, registrationType: "Manual" as unknown as RegistrationType },
-      callBackReq2
+      callBackReq
     )
   }
 
   return (
     <div className="p-6">
-      <form onSubmit={handleSubmit(onSubmit2)}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="space-y-4 overflow-y-auto">
           <div>
             {isSocial && (
@@ -66,6 +66,7 @@ const SignupForm = ({ isSocial = false }: Props) => {
                 inputId="firstName"
                 type="text"
                 {...register("firstName")}
+                disabled={addUserIsPending}
               />
               <Input
                 inputLabel="Last name"
@@ -73,6 +74,7 @@ const SignupForm = ({ isSocial = false }: Props) => {
                 type="text"
                 className="mt-2"
                 {...register("lastName")}
+                disabled={addUserIsPending}
               />
             </div>
             <p className="text-xs mt-1 text-text-500">
@@ -85,7 +87,8 @@ const SignupForm = ({ isSocial = false }: Props) => {
                 inputLabel="Birthdate"
                 inputId="birthdate"
                 type="date"
-                {...register("birthdate")}
+                {...register("birthDate")}
+                disabled={addUserIsPending}
               />
             </div>
             <p className="text-xs mt-1 text-text-500">
@@ -101,6 +104,7 @@ const SignupForm = ({ isSocial = false }: Props) => {
                 type="email"
                 {...register("email")}
                 placeholder="you@example.com"
+                disabled={addUserIsPending}
               />
             </div>
             <p className="text-xs mt-1 text-text-500">
@@ -114,6 +118,7 @@ const SignupForm = ({ isSocial = false }: Props) => {
                 inputId="password"
                 type="password"
                 {...register("password")}
+                disabled={addUserIsPending}
               />
             )}
             <p className="text-xs mt-4 text-text-500 tracking-tighter">
@@ -159,7 +164,8 @@ const SignupForm = ({ isSocial = false }: Props) => {
                   id="comments"
                   name="comments"
                   type="checkbox"
-                  className="h-6 w-6 rounded border-text-400 text-secondary-600 focus:ring-transparent"
+                  disabled={addUserIsPending}
+                  className="h-6 w-6 rounded border-gray-400 text-secondary-600 focus:ring-transparent"
                 />
                 <label
                   htmlFor="comments"

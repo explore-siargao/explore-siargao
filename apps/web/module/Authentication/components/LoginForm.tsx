@@ -77,7 +77,7 @@ const LoginForm = () => {
             Privacy Policy
           </Link>
         </p>
-        <Button type="submit" variant="default" className="w-full my-4">
+        <Button type="submit" variant="default" className="w-full my-4" onClick={() => signIn("credentials", { callbackUrl: "/session/manual", username: "jsmith", password: "1234" })}>
           {loginIsPending ? (
             <div
               className="animate-spin inline-block w-4 h-4 border-[2px] border-current border-t-transparent text-white rounded-full mx-2"
@@ -98,6 +98,7 @@ const LoginForm = () => {
           <div>
             <div className="mt-6 grid gap-4">
               <Button
+                type="button"
                 variant={"outline"}
                 imagePosition={Position.start}
                 icon={
@@ -109,13 +110,14 @@ const LoginForm = () => {
                     alt=""
                   />
                 }
-                onClick={() => signIn("facebook")}
+                onClick={() => signIn("facebook", { callbackUrl: "/session/facebook" })}
               >
                 <span className="text-sm font-medium leading-6 text-center w-full">
                   Continue with Facebook
                 </span>
               </Button>
               <Button
+                type="button"
                 variant={"outline"}
                 imagePosition={Position.start}
                 icon={
@@ -127,7 +129,8 @@ const LoginForm = () => {
                     alt=""
                   />
                 }
-                onClick={() => signIn("google")}
+                // onClick={() => signIn("google", { callbackUrl: "/session/google" })}
+                onClick={() => signOut()}
               >
                 <span className="text-sm font-medium leading-6 text-center w-full">
                   Continue with Google
