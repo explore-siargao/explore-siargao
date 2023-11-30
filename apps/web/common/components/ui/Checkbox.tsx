@@ -14,7 +14,7 @@ const checkboxVariants = cva(
       textSize: {
         xs: "text-xs",
         sm: "text-sm",
-        md: "text-sm",
+        md: "text-md",
         lg: "text-lg",
       },
     },
@@ -33,7 +33,10 @@ export interface ToastProps
 }
 
 const Checkbox = React.forwardRef<HTMLInputElement, ToastProps>(
-  ({ className, size, children, checkboxId, text, ...props }, ref) => {
+  (
+    { className, size, children, checkboxId, textSize, text, ...props },
+    ref
+  ) => {
     return (
       <div className="relative flex items-start mt-4">
         <div className="flex h-6 items-center">
@@ -46,7 +49,7 @@ const Checkbox = React.forwardRef<HTMLInputElement, ToastProps>(
         <div className="ml-3 leading-6">
           <label
             htmlFor={checkboxId}
-            className={cn(checkboxVariants({ size }), "text-gray-500")}
+            className={cn(checkboxVariants({ textSize }), "text-gray-500")}
           >
             {text}
           </label>

@@ -15,6 +15,7 @@ import {
   AGREE_CONTINUE_BUTTON_TEXT,
 } from "../constants/index"
 import { Input } from "./ui/Input"
+import { Checkbox } from "./ui/Checkbox"
 
 const SignupInputs = () => {
   const { mutate: addUser, isPending: addUserIsPending } = useRegister()
@@ -154,6 +155,22 @@ const SignupInputs = () => {
                 </span>
               </div>
             </div>
+            <Checkbox
+              checkboxId="IDKOaTO"
+              text="this is small"
+            />
+            <Checkbox
+              size={"md"}
+              textSize={"md"}
+              checkboxId="IDKO2TO"
+              text="this is medium"
+            />
+            <Checkbox
+              size={"lg"}
+              textSize={"lg"}
+              checkboxId="IDKOTO"
+              text="this is large"
+            />
           </div>
         </div>
       </form>
