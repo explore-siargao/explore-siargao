@@ -23,7 +23,8 @@ const NewPassword = () => {
   const code = params.get("code")
   const email = params.get("email")
   const router = useRouter()
-  const { mutate: forgotPassword, isPending: isPendingNewPassword } = useForgotPassword()
+  const { mutate: forgotPassword, isPending: isPendingNewPassword } =
+    useForgotPassword()
   const { register, handleSubmit, getValues } = useForm<ForgotPassword>()
   const onSubmit = (data: ForgotPassword) => {
     const callBackReq = {
@@ -85,17 +86,16 @@ const NewPassword = () => {
             </div>
             <Button className="w-full my-5" type="submit">
               {isPendingNewPassword ? (
-                  <div
-                    className="animate-spin inline-block w-[20px] h-[20px] border-[2px] border-current border-t-transparent text-white rounded-full"
-                    role="status"
-                    aria-label="loading"
-                  >
-                    <span className="sr-only">Loading...</span>
-                  </div>
-                ) : (
-                  SUBMIT_BUTTON_TEXT
-                )
-                }
+                <div
+                  className="animate-spin inline-block w-[20px] h-[20px] border-[2px] border-current border-t-transparent text-white rounded-full"
+                  role="status"
+                  aria-label="loading"
+                >
+                  <span className="sr-only">Loading...</span>
+                </div>
+              ) : (
+                SUBMIT_BUTTON_TEXT
+              )}
             </Button>
           </div>
         </form>
