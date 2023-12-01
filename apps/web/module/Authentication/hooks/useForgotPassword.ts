@@ -1,6 +1,5 @@
 import { API_AUTH_FORGOT_PASSWORD_VERIFY } from "@/common/constants/api-routes"
 import { useMutation } from "@tanstack/react-query"
-import Cookies from "js-cookie"
 type ForgotPasswordVerify = {
   email: string
   code: number
