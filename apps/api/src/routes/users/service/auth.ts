@@ -4,7 +4,7 @@ import { REQUIRED_VALUE_EMPTY } from '@repo/constants'
 import jwt from 'jsonwebtoken'
 import { encryptKey, signKey } from '@/common/config'
 import CryptoJS from 'crypto-js'
-import dayjs, { Dayjs } from 'dayjs'
+import dayjs from 'dayjs'
 
 const prisma = new PrismaClient()
 
