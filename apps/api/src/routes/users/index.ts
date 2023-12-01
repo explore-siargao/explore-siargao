@@ -1,6 +1,13 @@
 import express from 'express'
 import { addUser, getAllUsers } from './service/default'
-import { verifySession, register, manual, info, forgot, forgotVerify } from './service/auth'
+import {
+  verifySession,
+  register,
+  manual,
+  info,
+  forgot,
+  forgotVerify,
+} from './service/auth'
 
 const router = express.Router()
 

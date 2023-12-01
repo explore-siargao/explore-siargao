@@ -232,8 +232,10 @@ export const forgot = async (req: Request, res: Response) => {
       if (!user) {
         throw new Error('This email does not exist in our records')
       }
-      if (user && user.registrationType !== "Manual") {
-        throw new Error(`Account registration type is invalid, please login using your ${user.registrationType} account.`)
+      if (user && user.registrationType !== 'Manual') {
+        throw new Error(
+          `Account registration type is invalid, please login using your ${user.registrationType} account.`
+        )
       }
       const forgotPassword = await prisma.forgotPassword.findFirst({
         where: {
@@ -244,27 +246,27 @@ export const forgot = async (req: Request, res: Response) => {
           },
         },
       })
-      const code = Math.floor(100000 + Math.random() * 900000);
-      const successMessage = `Email was sent to ${email}, pleas check before it expires.`;
+      const code = Math.floor(100000 + Math.random() * 900000)
+      const successMessage = `Email was sent to ${email}, pleas check before it expires.`
       // const webVerifyUrl = `${WEB_URL}/new-password?email=${email}&code=${code}`
-      if(!forgotPassword) {
+      if (!forgotPassword) {
         await prisma.forgotPassword.create({
           data: {
             email: email,
             code: String(code),
-            expiredAt: dayjs().add(1, 'minutes').format()
+            expiredAt: dayjs().add(1, 'minutes').format(),
           },
         })
         // ADD EMAIL SEND HERE FOR NEW
         res.json({
           error: false,
-          message: successMessage
+          message: successMessage,
         })
       } else {
         // ADD EMAIL SEND HERE FOR EXISTING
         res.json({
           error: false,
-          message: successMessage
+          message: successMessage,
         })
       }
     } catch (err: any) {
@@ -309,19 +311,16 @@ export const forgotVerify = async (req: Request, res: Response) => {
             id: forgotPassword.id,
           },
           data: {
-            used: true
+            used: true,
           },
         })
-        const encryptPassword = CryptoJS.AES.encrypt(
-          newPassword,
-          encryptKey
-        )
+        const encryptPassword = CryptoJS.AES.encrypt(newPassword, encryptKey)
         const user = await prisma.user.update({
           where: {
             email: email,
           },
           data: {
-            password: String(encryptPassword)
+            password: String(encryptPassword),
           },
         })
         const token = jwt.sign(
@@ -336,14 +335,15 @@ export const forgotVerify = async (req: Request, res: Response) => {
         res.json({
           error: false,
           item: {
-            accessToken: token
+            accessToken: token,
           },
           message: 'Password successfully updated',
         })
       } else {
         res.json({
           error: true,
-          message: 'Some values are invalid or forgot password token is expired',
+          message:
+            'Some values are invalid or forgot password token is expired',
         })
       }
     } catch (err: any) {
@@ -359,4 +359,3 @@ export const forgotVerify = async (req: Request, res: Response) => {
     })
   }
 }
-
