@@ -4,7 +4,7 @@ import fb from "@/common/assets/facebook-logo.png"
 import google from "@/common/assets/google-logo.png"
 import { EnvelopeIcon } from "@heroicons/react/20/solid"
 import toast from "react-hot-toast"
-import { I_User } from "@/common/types/global"
+import { IUser } from "@/common/types/global"
 import { useForm } from "react-hook-form"
 import useLogin from "@/module/Authentication/hooks/useLogin"
 import { useRouter } from "next/navigation"
@@ -24,8 +24,8 @@ import { signIn } from "next-auth/react"
 const LoginForm = () => {
   const router = useRouter()
   const { mutate: loginUser, isPending: isLoginPending } = useLogin()
-  const { register, handleSubmit } = useForm<I_User>()
-  const onSubmit = (formData: I_User) => {
+  const { register, handleSubmit } = useForm<IUser>()
+  const onSubmit = (formData: IUser) => {
     const callBackReq = {
       onSuccess: (data: any) => {
         if (!data.error) {
