@@ -1,6 +1,9 @@
 {
   "name": "explore-siargao",
   "private": true,
+  "prisma": {
+    "schema": "apps/api/src/prisma/schema.prisma"
+  },
   "scripts": {
     "install:dev": "npm install && npm run build",
     "build": "turbo build",
