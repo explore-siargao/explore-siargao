@@ -23,7 +23,8 @@ const NewPassword = () => {
   const code = params.get("code")
   const email = params.get("email")
   const router = useRouter()
-  const { mutate: forgotPassword, isPending: isPendingNewPassword } = useForgotPassword()
+  const { mutate: forgotPassword, isPending: isPendingNewPassword } =
+    useForgotPassword()
   const { register, handleSubmit, getValues } = useForm<ForgotPassword>()
   const onSubmit = (data: ForgotPassword) => {
     const callBackReq = {
