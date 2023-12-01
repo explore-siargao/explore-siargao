@@ -29,6 +29,16 @@ model User {
   role             UserRole          @default(User)
 }
 
+model ForgotPassword {
+  id               Int               @id @default(autoincrement())
+  email            String            @db.VarChar(255)
+  code             String            @db.VarChar(255)
+  used             Boolean           @default(false)
+  expiredAt        DateTime          
+  createdAt        DateTime          @default(now())
+  deletedAt        DateTime?
+}
+
 enum UserRole {
   Admin
   Host
