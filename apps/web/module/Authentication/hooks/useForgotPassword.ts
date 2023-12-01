@@ -8,7 +8,6 @@ type ForgotPasswordVerify = {
   confirmPassword: string
 }
 export async function updatePassword(props: ForgotPasswordVerify) {
-  const token = Cookies.get("tfl")
   const res = await fetch(`${API_AUTH_FORGOT_PASSWORD_VERIFY}`, {
     method: "POST",
     body: JSON.stringify({

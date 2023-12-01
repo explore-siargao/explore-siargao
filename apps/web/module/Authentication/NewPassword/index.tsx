@@ -23,13 +23,13 @@ const NewPassword = () => {
   const code = params.get("code")
   const email = params.get("email")
   const router = useRouter()
-  const { mutate: forgotPassword, isPending: isPending } = useForgotPassword()
+  const { mutate: forgotPassword, isPending: isPendingNewPassword } = useForgotPassword()
   const { register, handleSubmit, getValues } = useForm<ForgotPassword>()
   const onSubmit = (data: ForgotPassword) => {
     const callBackReq = {
       onSuccess: (data: any) => {
         if (!data.error) {
-          if (data.item && !isPending) {
+          if (data.item && !isPendingNewPassword) {
             Cookies.set("accessToken", data.item.accessToken)
             signIn("credentials", {
               callbackUrl: "/",
@@ -72,6 +72,7 @@ const NewPassword = () => {
                 inputId="newPassword"
                 type="password"
                 {...register("newPassword")}
+                disabled={isPendingNewPassword}
               />
               <Input
                 inputLabel="Confirm password"
@@ -79,10 +80,22 @@ const NewPassword = () => {
                 type="password"
                 className="mt-2"
                 {...register("confirmPassword")}
+                disabled={isPendingNewPassword}
               />
             </div>
             <Button className="w-full my-5" type="submit">
-              {SUBMIT_BUTTON_TEXT}
+              {isPendingNewPassword ? (
+                  <div
+                    className="animate-spin inline-block w-[20px] h-[20px] border-[2px] border-current border-t-transparent text-white rounded-full"
+                    role="status"
+                    aria-label="loading"
+                  >
+                    <span className="sr-only">Loading...</span>
+                  </div>
+                ) : (
+                  SUBMIT_BUTTON_TEXT
+                )
+                }
             </Button>
           </div>
         </form>
