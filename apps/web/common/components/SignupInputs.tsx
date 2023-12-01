@@ -15,7 +15,7 @@ import {
   AGREE_CONTINUE_BUTTON_TEXT,
 } from "../constants/index"
 import { Input } from "./ui/Input"
-import { Checkbox } from "./ui/Checkbox"
+
 const SignupInputs = () => {
   const { mutate: addUser, isPending: addUserIsPending } = useRegister()
   const { register, handleSubmit, reset } = useForm<I_User>()
