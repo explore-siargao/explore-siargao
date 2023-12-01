@@ -8,7 +8,7 @@ const NewPassword = () => {
   return (
     <AuthContainer title="Reset Password">
       <div className="p-6 space-y-4">
-        <div className="isolate -space-y-px rounded-xl shadow-sm">
+        <div className="space-y-2">
           <Input
             Label="Enter New Password"
             inputId="newPassword"
@@ -20,7 +20,7 @@ const NewPassword = () => {
             type="password"
           />
         </div>
-        <Button className="w-full  my-5 ">{SUBMIT_BUTTON_TEXT}</Button>
+        <Button className="w-full my-5 ">{SUBMIT_BUTTON_TEXT}</Button>
       </div>
     </AuthContainer>
   )
