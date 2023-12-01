@@ -97,6 +97,7 @@ const NewPassword = () => {
                   SUBMIT_BUTTON_TEXT
                 )
                 }
+
             </Button>
           </div>
         </form>
