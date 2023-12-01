@@ -89,7 +89,6 @@ const NewPassword = () => {
                 <div
                   className="animate-spin inline-block w-[20px] h-[20px] border-[2px] border-current border-t-transparent text-white rounded-full"
                   role="button"
-                  aria-label="loading"
                 >
                   <span className="sr-only">Loading...</span>
                 </div>
