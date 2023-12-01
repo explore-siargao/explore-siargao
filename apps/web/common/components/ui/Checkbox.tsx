@@ -3,13 +3,13 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/common/helpers/cn"
 
 const checkboxVariants = cva(
-  "rounded border-gray-400 text-secondary-600 focus:ring-transparent  tracking-tight",
+  "rounded border-gray-400 text-secondary-600 focus:ring-transparent",
   {
     variants: {
       size: {
-        sm: "h-6 w-6 ",
-        md: "h-7 w-7",
-        lg: "h-10 w-10",
+        sm: "h-5 w-5",
+        md: "h-6 w-6",
+        lg: "h-7 w-7",
       },
       textSize: {
         sm: "text-xs",
@@ -18,8 +18,8 @@ const checkboxVariants = cva(
       },
     },
     defaultVariants: {
-      size: "sm",
-      textSize: "sm",
+      size: "md",
+      textSize: "md",
     },
   }
 )
@@ -48,7 +48,10 @@ const Checkbox = React.forwardRef<HTMLInputElement, ToastProps>(
         <div className="ml-3 leading-6">
           <label
             htmlFor={checkboxId}
-            className={cn(checkboxVariants({ textSize }), "text-gray-500")}
+            className={cn(
+              checkboxVariants({ textSize }),
+              "text-gray-500 select-none"
+            )}
           >
             {text}
           </label>
