@@ -89,7 +89,7 @@ const NewPassword = () => {
                 <div className="content px-4 md:px-7 lg:px-16 2xl:px-80 mt-28">
                   <div
                     className="m-4 animate-spin inline-block w-6 h-6 border-[3px] border-current border-t-transparent text-blue-600 rounded-full"
-                    role="status"
+                    role="output"
                     aria-label="loading"
                   >
                     <span className="sr-only">Loading...</span>
