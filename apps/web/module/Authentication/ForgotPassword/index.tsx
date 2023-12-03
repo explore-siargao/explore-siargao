@@ -13,13 +13,13 @@ const ForgotPassword = () => {
     useForgotPassword()
   const { register, handleSubmit, reset } = useForm<TForgotPassword>()
   const onSubmit = (data: TForgotPassword) => {
-    const { email  } = data;
+    const { email } = data
     const callBackReq = {
       onSuccess: (data: any) => {
         if (!data.error) {
           if (data.message && !isForgotPasswordPending) {
-            toast.success(String(data.message), { duration: 5000 });
-            reset();
+            toast.success(String(data.message), { duration: 5000 })
+            reset()
           }
         } else {
           toast.error(String(data.message))
@@ -51,7 +51,11 @@ const ForgotPassword = () => {
               disabled={isForgotPasswordPending}
             />
           </div>
-          <Button className="w-full my-5" type="submit" disabled={isForgotPasswordPending}>
+          <Button
+            className="w-full my-5"
+            type="submit"
+            disabled={isForgotPasswordPending}
+          >
             {isForgotPasswordPending ? (
               <div className="animate-spin w-4 h-4 border-2 border-current border-t-transparent text-primary-200 rounded-full">
                 <span className="sr-only">Loading...</span>

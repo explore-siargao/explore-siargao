@@ -6,12 +6,14 @@ import AuthContainer from "@/common/components/AuthContainer"
 import { Input } from "@/common/components/ui/Input"
 import { useRouter, useSearchParams } from "next/navigation"
 import { useForm } from "react-hook-form"
-import useVerifyForgotPassword, { TVerifyForgotPassword } from "../hooks/useVerifyForgotPassword"
+import useVerifyForgotPassword, {
+  TVerifyForgotPassword,
+} from "../hooks/useVerifyForgotPassword"
 import Cookies from "js-cookie"
 import { signIn } from "next-auth/react"
 import toast from "react-hot-toast"
 
-type TForm = TVerifyForgotPassword & { confirmPassword: string };
+type TForm = TVerifyForgotPassword & { confirmPassword: string }
 
 const NewPassword = () => {
   const params = useSearchParams()
@@ -22,7 +24,7 @@ const NewPassword = () => {
     useVerifyForgotPassword()
   const { register, handleSubmit } = useForm<TForm>()
   const onSubmit = (data: TForm) => {
-    const { newPassword, confirmPassword  } = data;
+    const { newPassword, confirmPassword } = data
     const callBackReq = {
       onSuccess: (data: any) => {
         if (!data.error) {
@@ -56,7 +58,7 @@ const NewPassword = () => {
     }
   }
 
-  if(!email || !code) {
+  if (!email || !code) {
     router.push("/")
   }
 
@@ -81,7 +83,11 @@ const NewPassword = () => {
               disabled={isPendingNewPassword}
             />
           </div>
-          <Button className="w-full my-5" type="submit" disabled={isPendingNewPassword}>
+          <Button
+            className="w-full my-5"
+            type="submit"
+            disabled={isPendingNewPassword}
+          >
             {isPendingNewPassword ? (
               <div className="animate-spin w-4 h-4 border-2 border-current border-t-transparent text-primary-200 rounded-full">
                 <span className="sr-only">Loading...</span>

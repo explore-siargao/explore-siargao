@@ -25,7 +25,7 @@ import { LINK_FORGOT_PASSWORD } from "../constants/links"
 
 const dmSerifDisplay = DM_Serif_Display({
   subsets: ["latin"],
-  weight: "400"
+  weight: "400",
 })
 
 const LoginForm = () => {
@@ -83,7 +83,10 @@ const LoginForm = () => {
           />
         </div>
         <div className="flex justify-end mt-1">
-          <Link href={LINK_FORGOT_PASSWORD} className="font-bold underline text-xs text-text-300 hover:text-text-600">
+          <Link
+            href={LINK_FORGOT_PASSWORD}
+            className="font-bold underline text-xs text-text-300 hover:text-text-600"
+          >
             Forgot Password?
           </Link>
         </div>
