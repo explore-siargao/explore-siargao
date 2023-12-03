@@ -3,28 +3,28 @@ import {
   SESClientConfig,
   SendEmailCommand,
   SendEmailCommandInput,
-} from '@aws-sdk/client-ses';
+} from '@aws-sdk/client-ses'
 
 export type TSendEmailParams = {
-  to: string[];
-  template: string;
-  subject: string;
-  sender?: string;
+  to: string[]
+  template: string
+  subject: string
+  sender?: string
 }
 
 export class EmailService {
-  private sesProviderClient: SESClient;
-  private config: SESClientConfig;
-  private AWS_REGION: string;
-  private AWS_ACCESS_KEY: string;
-  private AWS_SECRET_ACCESS_KEY: string;
-  private DEFAULT_SENDER: string;
+  private sesProviderClient: SESClient
+  private config: SESClientConfig
+  private AWS_REGION: string
+  private AWS_ACCESS_KEY: string
+  private AWS_SECRET_ACCESS_KEY: string
+  private DEFAULT_SENDER: string
 
   constructor() {
-    this.AWS_REGION = process.env.AWS_REGION || '';
-    this.AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY || '';
-    this.AWS_SECRET_ACCESS_KEY = process.env.AWS_SECRET_ACCESS_KEY || '';
-    this.DEFAULT_SENDER = '"ExploreSiargao" <no-reply@exploresiargao.com>';
+    this.AWS_REGION = process.env.AWS_REGION || ''
+    this.AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY || ''
+    this.AWS_SECRET_ACCESS_KEY = process.env.AWS_SECRET_ACCESS_KEY || ''
+    this.DEFAULT_SENDER = '"ExploreSiargao" <no-reply@exploresiargao.com>'
 
     this.config = {
       region: this.AWS_REGION,
@@ -32,13 +32,13 @@ export class EmailService {
         accessKeyId: this.AWS_ACCESS_KEY,
         secretAccessKey: this.AWS_SECRET_ACCESS_KEY,
       },
-    };
+    }
 
-    this.sesProviderClient = new SESClient(this.config);
+    this.sesProviderClient = new SESClient(this.config)
   }
 
   async sendEmail(sendEmailParams: TSendEmailParams) {
-    const { to, template, subject, sender } = sendEmailParams;
+    const { to, template, subject, sender } = sendEmailParams
     const params: SendEmailCommandInput = {
       Destination: {
         ToAddresses: to,
@@ -56,9 +56,9 @@ export class EmailService {
         },
       },
       Source: sender ?? this.DEFAULT_SENDER,
-    };
+    }
 
-    const command = new SendEmailCommand(params);
-    return await this.sesProviderClient.send(command);
+    const command = new SendEmailCommand(params)
+    return await this.sesProviderClient.send(command)
   }
 }

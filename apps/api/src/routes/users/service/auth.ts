@@ -250,8 +250,8 @@ export const forgot = async (req: Request, res: Response) => {
       const code = Math.floor(100000 + Math.random() * 900000)
       const successMessage = `Email was sent to ${email}, pleas check before it expires.`
       const webVerifyUrl = `${webUrl}/new-password?email=${email}&code=${code}`
-      const sendEmailParams = { to: email, magicLink: webVerifyUrl };
-      const authEmail = new AuthEmail();
+      const sendEmailParams = { to: email, magicLink: webVerifyUrl }
+      const authEmail = new AuthEmail()
       if (!forgotPassword) {
         authEmail.sendForgotPasswordEmail(sendEmailParams)
         await prisma.forgotPassword.create({

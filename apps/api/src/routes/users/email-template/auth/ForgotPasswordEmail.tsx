@@ -11,12 +11,12 @@ import {
   Preview,
   Section,
   Text,
-} from '@react-email/components';
-import { APP_NAME } from '@repo/constants';
-import * as React from 'react';
+} from '@react-email/components'
+import { APP_NAME } from '@repo/constants'
+import * as React from 'react'
 
 interface ForgotPasswordEmailProps {
-  magicLink: string;
+  magicLink: string
 }
 
 export const ForgotPasswordEmail = ({
@@ -34,7 +34,9 @@ export const ForgotPasswordEmail = ({
           alt={APP_NAME}
           style={logo}
         />
-        <Heading style={heading}>Your forgot password link for {APP_NAME}</Heading>
+        <Heading style={heading}>
+          Your forgot password link for {APP_NAME}
+        </Heading>
         <Section style={buttonContainer}>
           <Button style={button} href={magicLink}>
             Change Password
@@ -50,27 +52,27 @@ export const ForgotPasswordEmail = ({
       </Container>
     </Body>
   </Html>
-);
+)
 
-export default ForgotPasswordEmail;
+export default ForgotPasswordEmail
 
 const logo = {
   borderRadius: 21,
   width: 42,
   height: 42,
-};
+}
 
 const main = {
   backgroundColor: '#ffffff',
   fontFamily:
     '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif',
-};
+}
 
 const container = {
   margin: '0 auto',
   padding: '20px 0 48px',
   width: '560px',
-};
+}
 
 const heading = {
   fontSize: '24px',
@@ -79,18 +81,18 @@ const heading = {
   fontWeight: '400',
   color: '#484848',
   padding: '17px 0 0',
-};
+}
 
 const paragraph = {
   margin: '0 0 15px',
   fontSize: '15px',
   lineHeight: '1.4',
   color: '#3c4149',
-};
+}
 
 const buttonContainer = {
   padding: '27px 0 27px',
-};
+}
 
 const button = {
   backgroundColor: '#8dbfc0',
@@ -104,15 +106,15 @@ const button = {
   paddingTop: 11,
   paddingBottom: 11,
   paddingRight: 23,
-  paddingLeft: 23
-};
+  paddingLeft: 23,
+}
 
 const reportLink = {
   fontSize: '14px',
   color: '#b4becc',
-};
+}
 
 const hr = {
   borderColor: '#dfe1e4',
   margin: '42px 0 26px',
-};
+}
