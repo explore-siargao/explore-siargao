@@ -2,9 +2,10 @@ import { Response, Request } from 'express'
 import { PrismaClient, RegistrationType } from '@prisma/client'
 import { REQUIRED_VALUE_EMPTY } from '@repo/constants'
 import jwt from 'jsonwebtoken'
-import { encryptKey, signKey } from '@/common/config'
+import { encryptKey, signKey, webUrl } from '@/common/config'
 import CryptoJS from 'crypto-js'
 import dayjs from 'dayjs'
+import { AuthEmail } from './authEmail'
 
 const prisma = new PrismaClient()
 
@@ -248,22 +249,24 @@ export const forgot = async (req: Request, res: Response) => {
       })
       const code = Math.floor(100000 + Math.random() * 900000)
       const successMessage = `Email was sent to ${email}, pleas check before it expires.`
-      // const webVerifyUrl = `${WEB_URL}/new-password?email=${email}&code=${code}`
+      const webVerifyUrl = `${webUrl}/new-password?email=${email}&code=${code}`
+      const sendEmailParams = { to: email, magicLink: webVerifyUrl }
+      const authEmail = new AuthEmail()
       if (!forgotPassword) {
+        authEmail.sendForgotPasswordEmail(sendEmailParams)
         await prisma.forgotPassword.create({
           data: {
             email: email,
             code: String(code),
-            expiredAt: dayjs().add(1, 'minutes').format(),
+            expiredAt: dayjs().add(30, 'minutes').format(),
           },
         })
-        // ADD EMAIL SEND HERE FOR NEW
         res.json({
           error: false,
           message: successMessage,
         })
       } else {
-        // ADD EMAIL SEND HERE FOR EXISTING
+        authEmail.sendForgotPasswordEmail(sendEmailParams)
         res.json({
           error: false,
           message: successMessage,
