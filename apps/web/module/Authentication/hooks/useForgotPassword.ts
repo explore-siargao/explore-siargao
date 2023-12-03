@@ -1,27 +1,19 @@
-import { API_AUTH_FORGOT_PASSWORD_VERIFY } from "@/common/constants/api-routes"
+import { ApiService } from "@/common/service/api"
 import { useMutation } from "@tanstack/react-query"
-type ForgotPasswordVerify = {
+import { API_AUTH_FORGOT_PASSWORD } from "../constants/api-routes"
+
+export type TForgotPassword = {
   email: string
-  code: number
-  newPassword: string
-  confirmPassword: string
 }
-export async function updatePassword(props: ForgotPasswordVerify) {
-  const res = await fetch(`${API_AUTH_FORGOT_PASSWORD_VERIFY}`, {
-    method: "POST",
-    body: JSON.stringify({
-      props,
-    }),
-    headers: {
-      "content-type": "application/json",
-    },
-  })
-  return await res.json()
+
+export async function forgotPassword(props: TForgotPassword) {
+  const apiService = new ApiService()
+  return await apiService.post(API_AUTH_FORGOT_PASSWORD, props)
 }
 
 function useForgotPassword() {
   const query = useMutation({
-    mutationFn: (props: ForgotPasswordVerify) => updatePassword(props),
+    mutationFn: (props: TForgotPassword) => forgotPassword(props),
   })
   return query
 }

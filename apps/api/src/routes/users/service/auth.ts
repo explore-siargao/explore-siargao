@@ -301,7 +301,7 @@ export const forgotVerify = async (req: Request, res: Response) => {
       const forgotPassword = await prisma.forgotPassword.findFirst({
         where: {
           email: email,
-          code,
+          code: String(code),
           used: false,
           expiredAt: {
             gte: new Date(),

@@ -14,6 +14,7 @@ import { capitalizeFirstLetter } from "@/common/helpers/capitalizeFirstLetter"
 import { useParams, useRouter } from "next/navigation"
 import { signIn, useSession } from "next-auth/react"
 import Cookies from "js-cookie"
+import { APP_NAME } from "@repo/constants"
 
 type Props = {
   isSocial?: boolean
@@ -110,7 +111,7 @@ const SignUpForm = ({ isSocial = false }: Props) => {
             </div>
             <p className="text-xs mt-1 text-text-500">
               To sign up, you need to be at least 18. Your birthday won’t be
-              shared with other people who use Explore Siargao.
+              shared with other people who use {APP_NAME}.
             </p>
           </div>
           <div>
@@ -141,7 +142,7 @@ const SignUpForm = ({ isSocial = false }: Props) => {
             <p className="text-xs mt-4 text-text-500 tracking-tighter">
               By selecting{" "}
               <span className="font-bold"> Agree and continue,</span> I agree to
-              Explore Siargao's{" "}
+              {APP_NAME}'s{" "}
               <Link href="#" className="text-info-500 font-bold underline">
                 Terms of Service, Payments Terms of Service,
               </Link>{" "}
@@ -157,11 +158,8 @@ const SignUpForm = ({ isSocial = false }: Props) => {
           </div>
           <Button type="submit" className="w-full my-4">
             {addUserIsPending ? (
-              <div
-                className="animate-spin inline-block w-4 h-4 border-[2px] border-current border-t-transparent text-white rounded-full mx-2"
-                aria-label="loading"
-              >
-                <span className="sr-only">Loading...</span>
+              <div className="animate-spin w-4 h-4 border-2 border-current border-t-transparent text-primary-200 rounded-full">
+              <span className="sr-only">Loading...</span>
               </div>
             ) : (
               AGREE_CONTINUE_BUTTON_TEXT
@@ -170,7 +168,7 @@ const SignUpForm = ({ isSocial = false }: Props) => {
           <div className="w-full border-b-2 mt-2" />
           <div className="text-xs font-medium mt-1 text-text-500 tracking-tighter">
             <p>
-              Explore Siargao will send you members-only deals, inspiration,
+              {APP_NAME} will send you members-only deals, inspiration,
               marketing emails, and push notifications. You can opt out of
               receiving these at any time in your account settings or directly
               from the marketing notification.

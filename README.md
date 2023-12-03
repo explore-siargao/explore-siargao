@@ -1,4 +1,4 @@
-# Explore Siargao
+# ExploreSiargao
 
 First, run the project dependencies installation:
 
