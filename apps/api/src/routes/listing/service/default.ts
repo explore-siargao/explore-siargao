@@ -4,9 +4,9 @@ export const getAllListing = async (req: Request, res: Response) => {
   try {
     const prisma = new PrismaClient()
     const listings = await prisma.listing.findMany({
-        where:{deletedAt: null}
+      where: { deletedAt: null },
     })
-    if (listings.length >0) {
+    if (listings.length > 0) {
       res.json({
         error: false,
         items: listings,
@@ -31,42 +31,40 @@ export const getAllListing = async (req: Request, res: Response) => {
   }
 }
 
-
-
 export const getListing = async (req: Request, res: Response) => {
-    try {
-      const prisma = new PrismaClient()
-      const listing = await prisma.listing.findFirst({
-        where:{id: Number(req.params.id)},
-        include:{
-            price:true,
-            highLights:true,
-            hostedBy:true,
-            placeOffers:true,
-            thingsToKnow:true
-        }
-      })
-      if (listing!==null) {
-        res.json({
-          error: false,
-          items: listing,
-          itemCount: 1,
-          message: '',
-        })
-      } else {
-        res.json({
-          error: false,
-          items: null,
-          itemCount: 0,
-          message: 'No data found',
-        })
-      }
-    } catch (err: any) {
+  try {
+    const prisma = new PrismaClient()
+    const listing = await prisma.listing.findFirst({
+      where: { id: Number(req.params.id) },
+      include: {
+        price: true,
+        highLights: true,
+        hostedBy: true,
+        placeOffers: true,
+        thingsToKnow: true,
+      },
+    })
+    if (listing !== null) {
       res.json({
-        error: true,
+        error: false,
+        items: listing,
+        itemCount: 1,
+        message: '',
+      })
+    } else {
+      res.json({
+        error: false,
         items: null,
         itemCount: 0,
-        message: err.message,
+        message: 'No data found',
       })
     }
+  } catch (err: any) {
+    res.json({
+      error: true,
+      items: null,
+      itemCount: 0,
+      message: err.message,
+    })
   }
+}

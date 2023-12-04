@@ -7,9 +7,9 @@ export const getAllUsers = async (req: Request, res: Response) => {
   try {
     const prisma = new PrismaClient()
     const users = await prisma.user.findMany({
-      include:{
-        personalInfo:true
-      }
+      include: {
+        personalInfo: true,
+      },
     })
     if (users.length > 0) {
       res.json({
@@ -49,23 +49,20 @@ export const addUser = async (req: Request, res: Response) => {
       },
     })
     const newPersonalInfo = await prisma.personalInfo.create({
-      data:{
+      data: {
         firstName: req.body.firstName,
         middleName: '',
         lastName: req.body.lastName,
         birthDate: req.body.birthDate,
         phoneNumber: '',
         governMentId: '',
-        userId: newUser.id
-      }
+        userId: newUser.id,
+      },
     })
 
-    const [
-      createUser,
-      createpersonalInfo
-    ] = await Promise.all([
+    const [createUser, createpersonalInfo] = await Promise.all([
       newUser,
-      newPersonalInfo
+      newPersonalInfo,
     ])
     res.json({
       error: false,

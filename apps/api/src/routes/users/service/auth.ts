@@ -24,9 +24,9 @@ export const verifySession = async (req: Request, res: Response) => {
             type as string
           ) as RegistrationType,
         },
-        include:{
-          personalInfo:true
-        }
+        include: {
+          personalInfo: true,
+        },
       })
       if (user) {
         const token = jwt.sign(
@@ -74,16 +74,16 @@ export const register = async (req: Request, res: Response) => {
         where: {
           email: email as string,
         },
-        include:{
-          personalInfo:true
-        }
+        include: {
+          personalInfo: true,
+        },
       })
       if (!user) {
         const encryptPassword = CryptoJS.AES.encrypt(
           req.body.password,
           encryptKey
         )
-        
+
         const newUser = await prisma.user.create({
           data: {
             email: email,
@@ -94,14 +94,14 @@ export const register = async (req: Request, res: Response) => {
         })
 
         const newPersonalInfo = await prisma.personalInfo.create({
-          data:{
+          data: {
             userId: newUser.id,
             firstName: firstName,
-            middleName:'',
+            middleName: '',
             lastName: lastName,
             birthDate: dayjs(birthDate).format(),
             phoneNumber: '',
-          }
+          },
         })
 
         const token = jwt.sign(
@@ -152,9 +152,9 @@ export const manual = async (req: Request, res: Response) => {
           email: email,
           registrationType: RegistrationType.Manual,
         },
-        include:{
-          personalInfo:true
-        }
+        include: {
+          personalInfo: true,
+        },
       })
       if (!user) {
         throw new Error('Email or password is invalid')
@@ -208,9 +208,9 @@ export const info = async (req: Request, res: Response) => {
         where: {
           email: email,
         },
-        include:{
-          personalInfo: true
-        }
+        include: {
+          personalInfo: true,
+        },
       })
       if (user) {
         res.json({
@@ -341,8 +341,8 @@ export const forgotVerify = async (req: Request, res: Response) => {
           where: {
             email: email,
           },
-          include:{
-            personalInfo:true
+          include: {
+            personalInfo: true,
           },
           data: {
             password: String(encryptPassword),
