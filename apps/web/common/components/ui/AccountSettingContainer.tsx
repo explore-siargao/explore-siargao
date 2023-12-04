@@ -26,7 +26,7 @@ const AccountSettingContainer = React.forwardRef<HTMLDivElement, ToastProps>(
         onClick={() => {
           handleClick()
         }}
-        role="button"
+        aria-hidden="true"
       >
         {icon}
         <div>
