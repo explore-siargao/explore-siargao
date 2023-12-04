@@ -4,14 +4,14 @@ export const getPersonalInfo = async (req: Request, res: Response) => {
   try {
     const prisma = new PrismaClient()
     const getPersonalInfo = await prisma.personalInfo.findFirst({
-        where:{userId: Number(req?.params?.userId)},
-        include:{
-            user: true,
-            emergrncyContacts:true,
-            address: true
-        }
+      where: { userId: Number(req?.params?.userId) },
+      include: {
+        user: true,
+        emergrncyContacts: true,
+        address: true,
+      },
     })
-    if (getPersonalInfo!==null) {
+    if (getPersonalInfo !== null) {
       res.json({
         error: false,
         items: getPersonalInfo,
@@ -35,5 +35,3 @@ export const getPersonalInfo = async (req: Request, res: Response) => {
     })
   }
 }
-
-
