@@ -11,14 +11,16 @@ export const getAllUsers = async (req: Request, res: Response) => {
         personalInfo: {
           include: {
             emergrncyContacts: true,
+            address:true
           },
         },
       },
     })
+    const addresses = await prisma.addresses.findMany({})
     if (users.length > 0) {
       res.json({
         error: false,
-        items: users,
+        items: [users, addresses],
         itemCount: users.length,
         message: '',
       })
