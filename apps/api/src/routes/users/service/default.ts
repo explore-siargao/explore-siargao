@@ -11,7 +11,7 @@ export const getAllUsers = async (req: Request, res: Response) => {
         personalInfo: {
           include: {
             emergrncyContacts: true,
-            address:true
+            address: true,
           },
         },
       },
