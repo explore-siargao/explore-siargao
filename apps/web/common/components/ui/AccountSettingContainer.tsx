@@ -23,7 +23,9 @@ const AccountSettingContainer = React.forwardRef<HTMLDivElement, ToastProps>(
         id={id}
         ref={ref}
         {...props}
-        onClick={handleClick}
+        onClick={() => {
+          handleClick()
+        }}
       >
         {icon}
         <div>
