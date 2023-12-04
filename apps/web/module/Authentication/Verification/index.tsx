@@ -16,9 +16,11 @@ import { useRouter } from "next/navigation"
 let currentOTPIndex: number = 0
 
 const Verification = () => {
-  const router = useRouter();
-  const { mutate: multiFactor, isPending: isMultiFactorPending } = useMultiFactor();
-  const { mutate: verifyMultiFactor, isPending: isVerifyMultiFactorPending } = useVerifyMultiFactor();
+  const router = useRouter()
+  const { mutate: multiFactor, isPending: isMultiFactorPending } =
+    useMultiFactor()
+  const { mutate: verifyMultiFactor, isPending: isVerifyMultiFactorPending } =
+    useVerifyMultiFactor()
   const [otp, setOtp] = useState<string[]>(new Array(6).fill(""))
   const [activeOTPIndex, setActiveOTPIndex] = useState<number>(0)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -43,8 +45,8 @@ const Verification = () => {
     inputRef.current?.focus()
   }, [activeOTPIndex])
   const submitCode = () => {
-    const code = otp.join('');
-    if(code.length < 6) {
+    const code = otp.join("")
+    if (code.length < 6) {
       toast.error("Please complete the code")
     } else {
       const callBackReq = {
@@ -109,7 +111,9 @@ const Verification = () => {
                     value={otp[num]}
                     //@ts-ignore
                     onKeyDown={(e) => handleOnKeyDown(e, num)}
-                    disabled={isMultiFactorPending || isVerifyMultiFactorPending}
+                    disabled={
+                      isMultiFactorPending || isVerifyMultiFactorPending
+                    }
                   />
                 </React.Fragment>
               )

@@ -14,7 +14,17 @@ import {
 } from '@react-email/components'
 import { APP_NAME } from '@repo/constants'
 import * as React from 'react'
-import { buttonContainer, button, container, heading, hr, logo, main, paragraph, reportLink } from '../styles'
+import {
+  buttonContainer,
+  button,
+  container,
+  heading,
+  hr,
+  logo,
+  main,
+  paragraph,
+  reportLink,
+} from '../styles'
 
 interface ForgotPasswordEmailProps {
   magicLink: string

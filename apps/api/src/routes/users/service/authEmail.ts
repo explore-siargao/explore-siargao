@@ -20,9 +20,7 @@ export class AuthEmail extends EmailService {
     })
     return await sendEmail
   }
-  async sendMFA(
-    sendEmailParams: TSendEmailParams & { code: string }
-  ) {
+  async sendMFA(sendEmailParams: TSendEmailParams & { code: string }) {
     const { to, code } = sendEmailParams
     const emailHtml = render(MultiFactorAuth({ validationCode: code }))
     const sendEmail = super.sendEmail({

@@ -8,7 +8,7 @@ import {
   forgot,
   forgotVerify,
   mfa,
-  mfaVerify
+  mfaVerify,
 } from './service/auth'
 
 const router = express.Router()

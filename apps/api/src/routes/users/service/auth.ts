@@ -378,7 +378,7 @@ export const mfa = async (req: Request, res: Response) => {
       const multiFactor = await prisma.multiFactorAuth.findFirst({
         where: {
           userId: Number(userId),
-          type: "test",
+          type: 'test',
           used: false,
           expiredAt: {
             gte: new Date(),
@@ -395,7 +395,7 @@ export const mfa = async (req: Request, res: Response) => {
           data: {
             userId: Number(userId),
             code: String(code),
-            type: "test",
+            type: 'test',
             expiredAt: dayjs().add(3, 'minutes').format(),
           },
         })
@@ -440,7 +440,7 @@ export const mfaVerify = async (req: Request, res: Response) => {
         where: {
           userId: Number(userId),
           code: String(code),
-          type: "test",
+          type: 'test',
           used: false,
           expiredAt: {
             gte: new Date(),
@@ -464,8 +464,7 @@ export const mfaVerify = async (req: Request, res: Response) => {
       } else {
         res.json({
           error: true,
-          message:
-            'Invalid or expired token',
+          message: 'Invalid or expired token',
         })
       }
     } catch (err: any) {

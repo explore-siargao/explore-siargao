@@ -12,15 +12,22 @@ import {
 } from '@react-email/components'
 import { APP_NAME } from '@repo/constants'
 import * as React from 'react'
-import { code, container, heading, hr, logo, main, paragraph, reportLink } from '../styles'
+import {
+  code,
+  container,
+  heading,
+  hr,
+  logo,
+  main,
+  paragraph,
+  reportLink,
+} from '../styles'
 
 interface MultiFactorAuthProps {
-  validationCode: string,
+  validationCode: string
 }
 
-export const MultiFactorAuth = ({
-  validationCode,
-}: MultiFactorAuthProps) => (
+export const MultiFactorAuth = ({ validationCode }: MultiFactorAuthProps) => (
   <Html>
     <Head />
     <Preview>Your multi-factor authentication code for {APP_NAME}</Preview>

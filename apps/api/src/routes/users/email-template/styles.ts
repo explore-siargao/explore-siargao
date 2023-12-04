@@ -51,7 +51,7 @@ export const code = {
   fontSize: '21px',
   borderRadius: '4px',
   color: '#3c4149',
-};
+}
 
 export const buttonContainer = {
   padding: '27px 0 27px',
