@@ -1,0 +1,67 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider          = "mysql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+  relationMode      = "prisma"
+}
+
+model User {
+  id               Int               @id @default(autoincrement())
+  registrationType RegistrationType?
+  email            String            @unique @db.VarChar(255)
+  password         String?           @db.VarChar(255)
+  firstName        String            @db.VarChar(255)
+  middleName       String?           @db.VarChar(255)
+  lastName         String            @db.VarChar(255)
+  address          String            @db.LongText
+  contactNumber    String            @db.VarChar(20)
+  birthDate        DateTime?
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  deletedAt        DateTime?
+  role             UserRole          @default(User)
+  multiFactorAuth  MultiFactorAuth[]
+}
+
+model ForgotPassword {
+  id               Int               @id @default(autoincrement())
+  email            String            @db.VarChar(255)
+  code             String            @db.VarChar(255)
+  used             Boolean           @default(false)
+  expiredAt        DateTime          
+  createdAt        DateTime          @default(now())
+  deletedAt        DateTime?
+}
+
+model MultiFactorAuth {
+  id               Int               @id @default(autoincrement())
+  userId           Int
+  type             String            @db.VarChar(255)
+  code             String            @db.VarChar(255)
+  used             Boolean           @default(false)
+  expiredAt        DateTime          
+  createdAt        DateTime          @default(now())
+  deletedAt        DateTime?
+  user             User              @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+}
+
+enum UserRole {
+  Admin
+  Host
+  User
+}
+
+enum RegistrationType {
+  Manual
+  Facebook
+  Google
+}

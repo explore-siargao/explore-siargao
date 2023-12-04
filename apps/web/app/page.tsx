@@ -1,9 +1,8 @@
-const Home=()=>{
-    return (
-        <>
-        <h1>Explore-Siargao</h1>
-        </>
-    )
+import React from "react"
+import LandingPage from "@/module/LandingPage"
+
+const page = () => {
+  return <LandingPage />
 }
 
-export default Home;
+export default page
