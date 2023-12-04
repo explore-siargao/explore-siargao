@@ -8,7 +8,11 @@ export const getAllUsers = async (req: Request, res: Response) => {
     const prisma = new PrismaClient()
     const users = await prisma.user.findMany({
       include: {
-        personalInfo: true,
+        personalInfo:{
+          include:{
+            emergrncyContacts:true
+          }
+        }
       },
     })
     if (users.length > 0) {
