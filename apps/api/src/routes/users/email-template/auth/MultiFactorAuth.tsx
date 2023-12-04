@@ -1,6 +1,5 @@
 import {
   Body,
-  Button,
   Container,
   Head,
   Heading,
@@ -9,14 +8,12 @@ import {
   Img,
   Link,
   Preview,
-  Section,
   Text,
 } from '@react-email/components'
 import { APP_NAME } from '@repo/constants'
 import * as React from 'react'
 import {
-  buttonContainer,
-  button,
+  code,
   container,
   heading,
   hr,
@@ -26,16 +23,14 @@ import {
   reportLink,
 } from '../styles'
 
-interface ForgotPasswordEmailProps {
-  magicLink: string
+interface MultiFactorAuthProps {
+  validationCode: string
 }
 
-export const ForgotPasswordEmail = ({
-  magicLink,
-}: ForgotPasswordEmailProps) => (
+export const MultiFactorAuth = ({ validationCode }: MultiFactorAuthProps) => (
   <Html>
     <Head />
-    <Preview>Your forgot password link for {APP_NAME}</Preview>
+    <Preview>Your multi-factor authentication code for {APP_NAME}</Preview>
     <Body style={main}>
       <Container style={container}>
         <Img
@@ -46,16 +41,12 @@ export const ForgotPasswordEmail = ({
           style={logo}
         />
         <Heading style={heading}>
-          Your forgot password link for {APP_NAME}
+          Your multi-factor authentication code for {APP_NAME}
         </Heading>
-        <Section style={buttonContainer}>
-          <Button style={button} href={magicLink}>
-            Change Password
-          </Button>
-        </Section>
         <Text style={paragraph}>
-          This link will only be valid for the next 30 minutes.
+          This code will only be valid for the next 3 minutes.
         </Text>
+        <code style={code}>{validationCode}</code>
         <Hr style={hr} />
         <Link href={process.env.WEB_URL} style={reportLink}>
           {APP_NAME}
@@ -65,4 +56,4 @@ export const ForgotPasswordEmail = ({
   </Html>
 )
 
-export default ForgotPasswordEmail
+export default MultiFactorAuth
