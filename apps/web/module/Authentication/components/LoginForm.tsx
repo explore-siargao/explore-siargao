@@ -4,7 +4,7 @@ import fb from "@/common/assets/facebook-logo.png"
 import google from "@/common/assets/google-logo.png"
 import { EnvelopeIcon } from "@heroicons/react/20/solid"
 import toast from "react-hot-toast"
-import { I_User } from "@/common/types/global"
+import { IUser } from "@/common/types/global"
 import { useForm } from "react-hook-form"
 import useLogin from "@/module/Authentication/hooks/useLogin"
 import { useRouter } from "next/navigation"
@@ -14,18 +14,24 @@ import Link from "next/link"
 import { LINK_CREATE_ACCOUNT } from "@/common/constants/links"
 import {
   CONTINUE_BUTTON_TEXT,
-  LOGIN_CONTENT_SUB_TEXT,
   LOGIN_CONTENT_TITTLE_TEXT,
 } from "@/common/constants"
 import Image from "next/image"
 import { Input } from "@/common/components/ui/Input"
 import { signIn } from "next-auth/react"
+import { DM_Serif_Display } from "next/font/google"
+import { LINK_FORGOT_PASSWORD } from "../constants/links"
+
+const dmSerifDisplay = DM_Serif_Display({
+  subsets: ["latin"],
+  weight: "400",
+})
 
 const LoginForm = () => {
   const router = useRouter()
   const { mutate: loginUser, isPending: isLoginPending } = useLogin()
-  const { register, handleSubmit } = useForm<I_User>()
-  const onSubmit = (formData: I_User) => {
+  const { register, handleSubmit } = useForm<IUser>()
+  const onSubmit = (formData: IUser) => {
     const callBackReq = {
       onSuccess: (data: any) => {
         if (!data.error) {
@@ -75,12 +81,14 @@ const LoginForm = () => {
             disabled={isLoginPending}
           />
         </div>
-        <p className="text-[11px] mt-1">
-          {LOGIN_CONTENT_SUB_TEXT}{" "}
-          <Link href="#" className="font-bold underline">
-            Privacy Policy
+        <div className="flex justify-end mt-1">
+          <Link
+            href={LINK_FORGOT_PASSWORD}
+            className="font-bold underline text-xs text-text-300 hover:text-text-600"
+          >
+            Forgot Password?
           </Link>
-        </p>
+        </div>
         <Button
           type="submit"
           variant="default"
@@ -88,10 +96,7 @@ const LoginForm = () => {
           disabled={isLoginPending}
         >
           {isLoginPending ? (
-            <div
-              className="animate-spin inline-block w-4 h-4 border-[2px] border-current border-t-transparent text-white rounded-full mx-2"
-              aria-label="loading"
-            >
+            <div className="animate-spin w-4 h-4 border-2 border-current border-t-transparent text-primary-200 rounded-full">
               <span className="sr-only">Loading...</span>
             </div>
           ) : (

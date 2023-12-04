@@ -2,9 +2,10 @@ import { Response, Request } from 'express'
 import { PrismaClient, RegistrationType } from '@prisma/client'
 import { REQUIRED_VALUE_EMPTY } from '@repo/constants'
 import jwt from 'jsonwebtoken'
-import { encryptKey, signKey } from '@/common/config'
+import { encryptKey, signKey, webUrl } from '@/common/config'
 import CryptoJS from 'crypto-js'
 import dayjs from 'dayjs'
+import { AuthEmail } from './authEmail'
 
 const prisma = new PrismaClient()
 
@@ -204,6 +205,266 @@ export const info = async (req: Request, res: Response) => {
         res.json({
           error: true,
           message: 'No data found',
+        })
+      }
+    } catch (err: any) {
+      res.json({
+        error: true,
+        message: err.message,
+      })
+    }
+  } else {
+    res.json({
+      error: true,
+      message: REQUIRED_VALUE_EMPTY,
+    })
+  }
+}
+
+export const forgot = async (req: Request, res: Response) => {
+  const { email } = req.body
+  if (email) {
+    try {
+      const user = await prisma.user.findFirst({
+        where: {
+          email: email,
+        },
+      })
+      if (!user) {
+        throw new Error('This email does not exist in our records')
+      }
+      if (user && user.registrationType !== 'Manual') {
+        throw new Error(
+          `Account registration type is invalid, please login using your ${user.registrationType} account.`
+        )
+      }
+      const forgotPassword = await prisma.forgotPassword.findFirst({
+        where: {
+          email: email,
+          used: false,
+          expiredAt: {
+            gte: new Date(),
+          },
+        },
+      })
+      const code = Math.floor(100000 + Math.random() * 900000)
+      const successMessage = `Email was sent to ${email}, please check before it expires.`
+      const webVerifyUrl = `${webUrl}/new-password?email=${email}&code=${code}`
+      const sendEmailParams = { to: email, magicLink: webVerifyUrl }
+      const authEmail = new AuthEmail()
+      if (!forgotPassword) {
+        authEmail.sendForgotPasswordEmail(sendEmailParams)
+        await prisma.forgotPassword.create({
+          data: {
+            email: email,
+            code: String(code),
+            expiredAt: dayjs().add(30, 'minutes').format(),
+          },
+        })
+        res.json({
+          error: false,
+          message: successMessage,
+        })
+      } else {
+        authEmail.sendForgotPasswordEmail(sendEmailParams)
+        res.json({
+          error: false,
+          message: successMessage,
+        })
+      }
+    } catch (err: any) {
+      res.json({
+        error: true,
+        message: err.message,
+      })
+    }
+  } else {
+    res.json({
+      error: true,
+      message: REQUIRED_VALUE_EMPTY,
+    })
+  }
+}
+
+export const forgotVerify = async (req: Request, res: Response) => {
+  const { email, code, newPassword } = req.body
+  if (email && code && newPassword) {
+    try {
+      const user = await prisma.user.findFirst({
+        where: {
+          email: email,
+        },
+      })
+      if (!user) {
+        throw new Error('Some of the values are invalid')
+      }
+      const forgotPassword = await prisma.forgotPassword.findFirst({
+        where: {
+          email: email,
+          code: String(code),
+          used: false,
+          expiredAt: {
+            gte: new Date(),
+          },
+        },
+      })
+      if (forgotPassword) {
+        await prisma.forgotPassword.update({
+          where: {
+            id: forgotPassword.id,
+          },
+          data: {
+            used: true,
+          },
+        })
+        const encryptPassword = CryptoJS.AES.encrypt(newPassword, encryptKey)
+        const user = await prisma.user.update({
+          where: {
+            email: email,
+          },
+          data: {
+            password: String(encryptPassword),
+          },
+        })
+        const token = jwt.sign(
+          {
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+            role: user.role,
+          },
+          signKey as string
+        )
+        res.json({
+          error: false,
+          item: {
+            accessToken: token,
+          },
+          message: 'Password successfully updated',
+        })
+      } else {
+        res.json({
+          error: true,
+          message:
+            'Some values are invalid or forgot password token is expired',
+        })
+      }
+    } catch (err: any) {
+      res.json({
+        error: true,
+        message: err.message,
+      })
+    }
+  } else {
+    res.json({
+      error: true,
+      message: REQUIRED_VALUE_EMPTY,
+    })
+  }
+}
+
+export const mfa = async (req: Request, res: Response) => {
+  const { userId } = req.body
+  if (userId) {
+    try {
+      const user = await prisma.user.findFirst({
+        where: {
+          id: Number(userId),
+        },
+      })
+      if (!user) {
+        throw new Error('Invalid account')
+      }
+      const multiFactor = await prisma.multiFactorAuth.findFirst({
+        where: {
+          userId: Number(userId),
+          type: 'test',
+          used: false,
+          expiredAt: {
+            gte: new Date(),
+          },
+        },
+      })
+      const code = Math.floor(100000 + Math.random() * 900000)
+      const successMessage = `Email was sent to ${user.email}, please check before it expires.`
+      const sendEmailParams = { to: user.email, code: String(code) }
+      const authEmail = new AuthEmail()
+      if (!multiFactor) {
+        authEmail.sendMFA(sendEmailParams)
+        await prisma.multiFactorAuth.create({
+          data: {
+            userId: Number(userId),
+            code: String(code),
+            type: 'test',
+            expiredAt: dayjs().add(3, 'minutes').format(),
+          },
+        })
+        res.json({
+          error: false,
+          message: successMessage,
+        })
+      } else {
+        authEmail.sendMFA(sendEmailParams)
+        res.json({
+          error: false,
+          message: successMessage,
+        })
+      }
+    } catch (err: any) {
+      res.json({
+        error: true,
+        message: err.message,
+      })
+    }
+  } else {
+    res.json({
+      error: true,
+      message: REQUIRED_VALUE_EMPTY,
+    })
+  }
+}
+
+export const mfaVerify = async (req: Request, res: Response) => {
+  const { userId, code } = req.body
+  if (userId && code) {
+    try {
+      const user = await prisma.user.findFirst({
+        where: {
+          id: Number(userId),
+        },
+      })
+      if (!user) {
+        throw new Error('Invalid account')
+      }
+      const multiFactor = await prisma.multiFactorAuth.findFirst({
+        where: {
+          userId: Number(userId),
+          code: String(code),
+          type: 'test',
+          used: false,
+          expiredAt: {
+            gte: new Date(),
+          },
+        },
+      })
+      if (multiFactor) {
+        await prisma.multiFactorAuth.update({
+          where: {
+            id: multiFactor.id,
+          },
+          data: {
+            used: true,
+          },
+        })
+        res.json({
+          error: false,
+          item: {},
+          message: 'User was verified',
+        })
+      } else {
+        res.json({
+          error: true,
+          message: 'Invalid or expired token',
         })
       }
     } catch (err: any) {

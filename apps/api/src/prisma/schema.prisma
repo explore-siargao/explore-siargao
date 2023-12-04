@@ -27,6 +27,31 @@ model User {
   updatedAt        DateTime          @updatedAt
   deletedAt        DateTime?
   role             UserRole          @default(User)
+  multiFactorAuth  MultiFactorAuth[]
+}
+
+model ForgotPassword {
+  id               Int               @id @default(autoincrement())
+  email            String            @db.VarChar(255)
+  code             String            @db.VarChar(255)
+  used             Boolean           @default(false)
+  expiredAt        DateTime          
+  createdAt        DateTime          @default(now())
+  deletedAt        DateTime?
+}
+
+model MultiFactorAuth {
+  id               Int               @id @default(autoincrement())
+  userId           Int
+  type             String            @db.VarChar(255)
+  code             String            @db.VarChar(255)
+  used             Boolean           @default(false)
+  expiredAt        DateTime          
+  createdAt        DateTime          @default(now())
+  deletedAt        DateTime?
+  user             User              @relation(fields: [userId], references: [id])
+
+  @@index([userId])
 }
 
 enum UserRole {

@@ -7,13 +7,20 @@ import {
   VERIFICATION_CODE_CONTENT,
   VERIFICATION_CODE_TITTLE,
 } from "@/common/constants"
-import Link from "next/link"
-import React, { FC, useEffect, useRef, useState } from "react"
-
-interface Props {}
+import React, { useEffect, useRef, useState } from "react"
+import toast from "react-hot-toast"
+import useMultiFactor from "../hooks/useMultiFactor"
+import useVerifyMultiFactor from "../hooks/useVerifyMultiFactor"
+import { useRouter } from "next/navigation"
 
 let currentOTPIndex: number = 0
-const Verification: FC<Props> = (props): JSX.Element => {
+
+const Verification = () => {
+  const router = useRouter()
+  const { mutate: multiFactor, isPending: isMultiFactorPending } =
+    useMultiFactor()
+  const { mutate: verifyMultiFactor, isPending: isVerifyMultiFactorPending } =
+    useVerifyMultiFactor()
   const [otp, setOtp] = useState<string[]>(new Array(6).fill(""))
   const [activeOTPIndex, setActiveOTPIndex] = useState<number>(0)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -37,6 +44,46 @@ const Verification: FC<Props> = (props): JSX.Element => {
   useEffect(() => {
     inputRef.current?.focus()
   }, [activeOTPIndex])
+  const submitCode = () => {
+    const code = otp.join("")
+    if (code.length < 6) {
+      toast.error("Please complete the code")
+    } else {
+      const callBackReq = {
+        onSuccess: (data: any) => {
+          if (!data.error) {
+            if (data.item && !isVerifyMultiFactorPending) {
+              toast.success(data.message)
+              router.push("/")
+            }
+          } else {
+            toast.error(String(data.message))
+          }
+        },
+        onError: (err: any) => {
+          toast.error(String(err))
+        },
+      }
+      verifyMultiFactor({ userId: "3", code }, callBackReq)
+    }
+  }
+  const sendMultiFactorCode = () => {
+    const callBackReq = {
+      onSuccess: (data: any) => {
+        if (!data.error) {
+          if (!isMultiFactorPending) {
+            toast.success(data.message, { duration: 5000 })
+          }
+        } else {
+          toast.error(String(data.message))
+        }
+      },
+      onError: (err: any) => {
+        toast.error(String(err))
+      },
+    }
+    multiFactor({ userId: "3" }, callBackReq)
+  }
   return (
     <Container>
       <div className="p-6">
@@ -59,25 +106,39 @@ const Verification: FC<Props> = (props): JSX.Element => {
                   <input
                     ref={num === activeOTPIndex ? inputRef : null}
                     type="number"
-                    className="w-12 h-16 text-xl font-bold text-center text-text-400 rounded-lg bg-primary-200/40 focus:bg-white border-0 focus:ring-primary-700"
+                    className="w-12 h-16 text-xl font-bold text-center text-text-400 rounded-lg bg-primary-200/40 focus:bg-white border-0 focus:ring-primary-700 disabled:opacity-50"
                     onChange={handleOnChange}
                     value={otp[num]}
                     //@ts-ignore
                     onKeyDown={(e) => handleOnKeyDown(e, num)}
+                    disabled={
+                      isMultiFactorPending || isVerifyMultiFactorPending
+                    }
                   />
                 </React.Fragment>
               )
             })}
           </div>
           <div>
-            <Button type="button" className="w-full  my-5 ">
+            <Button
+              type="button"
+              className="w-full my-5"
+              onClick={() => submitCode()}
+              disabled={isVerifyMultiFactorPending}
+            >
               {SUBMIT_BUTTON_TEXT}
             </Button>
             <div className="text-sm text-center text-gray-500">
               <span>Did not receive the code?</span>&nbsp;
-              <Link href="#" className="font-bold underline">
+              <Button
+                type="button"
+                variant="link"
+                className="font-bold underline px-0"
+                onClick={() => sendMultiFactorCode()}
+                disabled={isMultiFactorPending}
+              >
                 {RESEND_BUTTON_TEXT}
-              </Link>
+              </Button>
             </div>
           </div>
         </form>

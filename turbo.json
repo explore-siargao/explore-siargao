@@ -6,12 +6,9 @@
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**", "dist/**"],
       "env": [
-        "COGNITO_CLIENT_ID",
-        "COGNITO_CLIENT_SECRET",
-        "COGNITO_POOL_ID",
-        "COGNITO_REGION",
         "AWS_ACCESS_KEY",
         "AWS_SECRET_ACCESS_KEY",
+        "AWS_REGION",
         "API_URL",
         "API_PORT",
         "API_ENCRYPT_KEY",
@@ -24,7 +21,8 @@
         "GOOGLE_CLIENT_ID",
         "GOOGLE_SECRET_ID",
         "FACEBOOK_CLIENT_ID",
-        "FACEBOOK_SECRET_ID"
+        "FACEBOOK_SECRET_ID",
+        "WEB_URL"
       ]
     },
     "lint": {
