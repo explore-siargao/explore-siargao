@@ -14,7 +14,6 @@ import Link from "next/link"
 import { LINK_CREATE_ACCOUNT } from "@/common/constants/links"
 import {
   CONTINUE_BUTTON_TEXT,
-  LOGIN_CONTENT_SUB_TEXT,
   LOGIN_CONTENT_TITTLE_TEXT,
 } from "@/common/constants"
 import Image from "next/image"

@@ -4,9 +4,7 @@ import Header from "./components/Header"
 
 function LandingPage() {
   return (
-    <>
-      <Header />
-    </>
+    <Header />
   )
 }
 
