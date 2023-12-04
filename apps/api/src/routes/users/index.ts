@@ -10,6 +10,7 @@ import {
   mfa,
   mfaVerify,
 } from './service/auth'
+import { addEmergencyContact } from './service/personalInfo'
 
 const router = express.Router()
 
@@ -26,5 +27,8 @@ router.post('/auth/forgot-password', forgot)
 router.post('/auth/forgot-password/verify', forgotVerify)
 router.post('/auth/mfa', mfa)
 router.post('/auth/mfa/verify', mfaVerify)
+
+//Personal Info
+router.post('/:personalInfoId/emergencyContact/add/', addEmergencyContact)
 
 export default router
