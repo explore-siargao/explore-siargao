@@ -24,12 +24,15 @@ export const verifySession = async (req: Request, res: Response) => {
             type as string
           ) as RegistrationType,
         },
+        include:{
+          personalInfo:true
+        }
       })
       if (user) {
         const token = jwt.sign(
           {
-            firstName: user.firstName,
-            lastName: user.lastName,
+            firstName: user.personalInfo?.firstName,
+            lastName: user.personalInfo?.lastName,
             email: user.email,
             role: user.role,
           },
@@ -71,30 +74,40 @@ export const register = async (req: Request, res: Response) => {
         where: {
           email: email as string,
         },
+        include:{
+          personalInfo:true
+        }
       })
       if (!user) {
         const encryptPassword = CryptoJS.AES.encrypt(
           req.body.password,
           encryptKey
         )
+        
         const newUser = await prisma.user.create({
           data: {
             email: email,
-            firstName: firstName,
-            middleName: '',
             registrationType: registrationType,
-            lastName: lastName,
-            address: '',
-            birthDate: dayjs(birthDate).format(),
-            contactNumber: '',
             role: 'User',
             password: password ? String(encryptPassword) : null,
           },
         })
+
+        const newPersonalInfo = await prisma.personalInfo.create({
+          data:{
+            userId: newUser.id,
+            firstName: firstName,
+            middleName:'',
+            lastName: lastName,
+            birthDate: dayjs(birthDate).format(),
+            phoneNumber: '',
+          }
+        })
+
         const token = jwt.sign(
           {
-            firstName: newUser.firstName,
-            lastName: newUser.lastName,
+            firstName: newPersonalInfo.firstName,
+            lastName: newPersonalInfo.lastName,
             email: newUser.email,
             role: newUser.role,
           },
@@ -139,6 +152,9 @@ export const manual = async (req: Request, res: Response) => {
           email: email,
           registrationType: RegistrationType.Manual,
         },
+        include:{
+          personalInfo:true
+        }
       })
       if (!user) {
         throw new Error('Email or password is invalid')
@@ -151,8 +167,8 @@ export const manual = async (req: Request, res: Response) => {
       if (user && originalPassword === password) {
         const token = jwt.sign(
           {
-            firstName: user.firstName,
-            lastName: user.lastName,
+            firstName: user.personalInfo?.firstName,
+            lastName: user.personalInfo?.lastName,
             email: user.email,
             role: user.role,
           },
@@ -192,12 +208,15 @@ export const info = async (req: Request, res: Response) => {
         where: {
           email: email,
         },
+        include:{
+          personalInfo: true
+        }
       })
       if (user) {
         res.json({
           error: false,
           item: {
-            name: `${user.firstName} ${user.lastName}`,
+            name: `${user.personalInfo?.firstName} ${user.personalInfo?.lastName}`,
             email: user.email,
           },
         })
@@ -322,14 +341,17 @@ export const forgotVerify = async (req: Request, res: Response) => {
           where: {
             email: email,
           },
+          include:{
+            personalInfo:true
+          },
           data: {
             password: String(encryptPassword),
           },
         })
         const token = jwt.sign(
           {
-            firstName: user.firstName,
-            lastName: user.lastName,
+            firstName: user.personalInfo?.firstName,
+            lastName: user.personalInfo?.lastName,
             email: user.email,
             role: user.role,
           },
