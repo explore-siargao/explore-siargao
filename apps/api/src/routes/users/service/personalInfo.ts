@@ -76,10 +76,64 @@ export const addEmergencyContact = async (req: Request, res: Response) => {
         })
       }
     } else {
-      console.log(email)
       res.json({
         error: true,
-        items: name && relationship,
+        items: null,
+        itemCount: 0,
+        message: REQUIRED_VALUE_EMPTY,
+      })
+    }
+  } catch (err: any) {
+    res.json({
+      error: true,
+      items: null,
+      itemCount: 0,
+      message: err.message,
+    })
+  }
+}
+
+export const addAddress = async (req: Request, res: Response) => {
+  try {
+    const prisma = new PrismaClient()
+    const { streetAddress, city, province, zipCode } = req.body
+    const personalInfoId = Number(req.params.personalInfoId)
+    if (streetAddress && city && province && zipCode) {
+      const getPersonalInfo = await prisma.personalInfo.findFirst({
+        where: {
+          id: personalInfoId,
+          deletedAt: null,
+        },
+      })
+
+      if (getPersonalInfo) {
+        const newAddress = await prisma.addresses.create({
+          data: {
+            peronalInfoId: personalInfoId,
+            streetAddress: streetAddress,
+            city: city,
+            province: province,
+            zipCode: zipCode,
+          },
+        })
+        res.json({
+          error: false,
+          items: newAddress,
+          itemCount: 1,
+          message: 'Address successfully added',
+        })
+      } else {
+        res.json({
+          error: true,
+          items: getPersonalInfo,
+          itemCount: 0,
+          message: 'No personal information data found',
+        })
+      }
+    } else {
+      res.json({
+        error: true,
+        items: null,
         itemCount: 0,
         message: REQUIRED_VALUE_EMPTY,
       })
