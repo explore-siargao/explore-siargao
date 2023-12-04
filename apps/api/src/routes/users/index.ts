@@ -7,6 +7,8 @@ import {
   info,
   forgot,
   forgotVerify,
+  mfa,
+  mfaVerify
 } from './service/auth'
 
 const router = express.Router()
@@ -22,5 +24,7 @@ router.post('/auth/register', register)
 router.post('/auth/manual', manual)
 router.post('/auth/forgot-password', forgot)
 router.post('/auth/forgot-password/verify', forgotVerify)
+router.post('/auth/mfa', mfa)
+router.post('/auth/mfa/verify', mfaVerify)
 
 export default router
