@@ -19,9 +19,9 @@ const AccountSettings = () => {
         <h1 className="text-4xl font-bold mb-3.5">Account</h1>
         <div className="flex space-x-2">
           <p>
-            <span className="font-bold">Albalate Jazer</span>,
-            albalate.jazer147@gmail.com <span>•</span>{" "}
-            <a href="#" className="font-bold underline underline-offset-2">
+            <span className="font-semibold">Full Name</span>, you@sample.com{" "}
+            <span>•</span>{" "}
+            <a href="#" className="font-semibold underline underline-offset-2">
               Go to profile
             </a>
           </p>

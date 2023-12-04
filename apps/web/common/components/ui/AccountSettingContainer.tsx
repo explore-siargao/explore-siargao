@@ -19,7 +19,7 @@ const AccountSettingContainer = React.forwardRef<HTMLDivElement, ToastProps>(
     }
     return (
       <div
-        className="grid p-4 shadow-lg border border-text-100/50 rounded-2xl gap-5 content-between select-none hover:bg-primary-100"
+        className="grid p-4 shadow-xl rounded-2xl gap-5 content-between select-none"
         id={id}
         ref={ref}
         {...props}
@@ -30,7 +30,7 @@ const AccountSettingContainer = React.forwardRef<HTMLDivElement, ToastProps>(
       >
         {icon}
         <div>
-          <h1 className="font-bold">{title}</h1>
+          <h1 className="font-semibold">{title}</h1>
           <span className="text-text-400 text-sm">{content}</span>
         </div>
       </div>
