@@ -16,8 +16,8 @@ const EmailAddress = () => {
       {!contentState.isButtonClicked ? (
         <div className="flex justify-between py-5">
           <div>
-            <h1>Email Address</h1>
-            <p className="text-base font-light">Full name</p>
+            <h1>Email address</h1>
+            <p className="text-base font-light">you@sample.com</p>
           </div>
           <button
             onClick={() =>
@@ -34,7 +34,7 @@ const EmailAddress = () => {
       ) : (
         <div className="grid py-5">
           <div className="flex justify-between">
-            <h1>Legal name</h1>
+            <h1>Email address</h1>
             <button
               className="underline self-start select-none"
               onClick={() =>
@@ -50,13 +50,12 @@ const EmailAddress = () => {
           <p className="text-base font-light">
             Use an address you’ll always have access to.
           </p>
-          <div className="grid grid-cols-2 gap-4 my-4">
-            <Input
-              inputId="email"
-              inputLabel="Email Address"
-              placeholder="you@sample.com"
-            />
-          </div>
+          <Input
+            inputId="email"
+            inputLabel="Email Address"
+            placeholder="you@sample.com"
+            className="my-4"
+          />
           <Button className="w-20" variant={"success"}>
             Save
           </Button>
