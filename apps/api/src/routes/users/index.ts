@@ -17,11 +17,12 @@ import {
   getPersonalInfo,
   updatePersonalInfo,
 } from './service/personalInfo'
+import isUserLoggedIn from '@/common/middleware/isLoggedIn'
 
 const router = express.Router()
 
 // DEFAULT
-router.get('/', getAllUsers)
+router.get('/', isUserLoggedIn, getAllUsers)
 router.post('/', addUser)
 
 // AUTH
