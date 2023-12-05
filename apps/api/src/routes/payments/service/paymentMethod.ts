@@ -60,3 +60,51 @@ export const addpaymentMethod = async (req: Request, res: Response) => {
     })
   }
 }
+
+export const getPaymentMethods = async (req:Request, res:Response)=>{
+    const prisma = new PrismaClient()
+    const userId = Number(req.params.userId)
+    try{
+        const isUserExist =
+      (await prisma.user.findUnique({
+        where: {
+          id: userId,
+          deletedAt: null,
+        },
+      })) !== null 
+      if(isUserExist){
+        const getPaymentsMethod = await prisma.paymentMethod.findMany({
+            where:{
+                userId: userId
+            },
+            include:{
+                user:{
+                    include:{
+                        personalInfo: true
+                    }
+                }
+            }
+        })
+        res.json({
+            error: false,
+            items: getPaymentsMethod,
+            itemCount: getPaymentsMethod.length,
+            message: "",
+        })
+      }else{
+        res.json({
+            error: true,
+            items: null,
+            itemCount: 0,
+            message: "user not exists to our system",
+          })
+      }
+    }catch(err: any){
+        res.json({
+            error: true,
+            items: null,
+            itemCount: 0,
+            message: err.message,
+          })
+    }
+}
