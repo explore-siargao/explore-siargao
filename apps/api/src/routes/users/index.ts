@@ -10,7 +10,12 @@ import {
   mfa,
   mfaVerify,
 } from './service/auth'
-import { addAddress, addEmergencyContact } from './service/personalInfo'
+import {
+  addAddress,
+  addEmergencyContact,
+  getPersonalInfo,
+  updatePersonalInfo,
+} from './service/personalInfo'
 
 const router = express.Router()
 
@@ -29,7 +34,9 @@ router.post('/auth/mfa', mfa)
 router.post('/auth/mfa/verify', mfaVerify)
 
 //Personal Info
+router.get('/personalInfo/:userId', getPersonalInfo)
 router.post('/:personalInfoId/emergencyContact/add/', addEmergencyContact)
 router.post('/:personalInfoId/address/add/', addAddress)
+router.patch('/personalInfo/:userId', updatePersonalInfo)
 
 export default router
