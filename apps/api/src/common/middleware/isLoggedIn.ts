@@ -4,11 +4,37 @@ import { signKey } from '@/common/config/'
 import jwt, { Secret } from 'jsonwebtoken'
 import {PrismaClient } from '@prisma/client'
 
+
 const isUserLoggedIn = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
+
+  const checkErrorMessage = (message:string)=>{
+    if (message === 'jwt malformed') {
+      res.json({
+        error: true,
+        item: null,
+        itemCount: 0,
+        message: 'Invalid authentication credentials',
+      })
+    } else if (message === 'jwt expired') {
+      res.json({
+        error: true,
+        item: null,
+        itemCount: 0,
+        message: 'Authentication is expired, please login again',
+      })
+    } else {
+      res.json({
+        error: true,
+        item: null,
+        itemCount: 0,
+        message: message,
+      })
+    }
+  }
   const bearerHeader = req.headers['authorization']
   if (bearerHeader) {
     const bearer = bearerHeader.split(' ')
@@ -28,28 +54,7 @@ const isUserLoggedIn = async (
       next()
     } catch (err: any) {
       const message = err.message ? err.message : UNKNOWN_ERROR_OCCURRED
-      if (message === 'jwt malformed') {
-        res.json({
-          error: true,
-          item: null,
-          itemCount: 0,
-          message: 'Invalid authentication credentials',
-        })
-      } else if (message === 'jwt expired') {
-        res.json({
-          error: true,
-          item: null,
-          itemCount: 0,
-          message: 'Authentication is expired, please login again',
-        })
-      } else {
-        res.json({
-          error: true,
-          item: null,
-          itemCount: 0,
-          message: message,
-        })
-      }
+      checkErrorMessage(message)
     }
   } else {
     res.json({
