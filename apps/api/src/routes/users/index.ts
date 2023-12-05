@@ -15,6 +15,7 @@ import {
   addAddress,
   addEmergencyContact,
   getPersonalInfo,
+  removeEmergencyContact,
   updatePersonalInfo,
 } from './service/personalInfo'
 import isUserLoggedIn from '@/common/middleware/isLoggedIn'
@@ -37,9 +38,10 @@ router.post('/auth/mfa/verify', mfaVerify)
 router.patch('/auth/:userId', updateUserEmail)
 
 //Personal Info
-router.get('/personalInfo/:userId', getPersonalInfo)
-router.post('/:personalInfoId/emergencyContact/add/', addEmergencyContact)
-router.post('/:personalInfoId/address/add/', addAddress)
-router.patch('/personalInfo/:userId', updatePersonalInfo)
+router.get('/personalInfo/:userId', isUserLoggedIn, getPersonalInfo)
+router.post('/:personalInfoId/emergencyContact/add/', isUserLoggedIn, addEmergencyContact)
+router.post('/:personalInfoId/address/add/', isUserLoggedIn, addAddress)
+router.patch('/personalInfo/:userId', isUserLoggedIn, updatePersonalInfo)
+router.delete('/:userId/emergencyContact/remove/:emergencyContactId',isUserLoggedIn, removeEmergencyContact)
 
 export default router
