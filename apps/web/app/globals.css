@@ -3,6 +3,8 @@
 @tailwind utilities;
 
 #verification-field ::-webkit-inner-spin-button,
-#verification-field ::-webkit-outer-spin-button {
+#verification-field ::-webkit-outer-spin-button,
+#zipCode::-webkit-inner-spin-button,
+#zipCode::-webkit-outer-spin-button {
   display: none;
 }

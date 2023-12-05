@@ -10,13 +10,15 @@ import {
   MegaphoneIcon,
   ShieldExclamationIcon,
 } from "@heroicons/react/24/outline"
+import { LINK_ACCOUNT_PERSONAL_INFO } from "@/common/constants/links"
+import Title from "@/common/components/ui/Title"
 
 const AccountSettings = () => {
   return (
     <>
       <Header />
       <AccountSettingWrapper>
-        <h1 className="text-4xl font-bold mb-3.5">Account</h1>
+        <Title>Account</Title>
         <div className="flex space-x-2">
           <p>
             <span className="font-semibold">Full Name</span>, you@sample.com{" "}
@@ -31,7 +33,7 @@ const AccountSettings = () => {
             icon={<IdentificationIcon className="h-8 w-auto text-text-400" />}
             title="Personal Info"
             content="Labore est amet eiusmod proident."
-            link="/"
+            link={LINK_ACCOUNT_PERSONAL_INFO}
           />
           <AccountSettingContainer
             icon={
