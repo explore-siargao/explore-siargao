@@ -1,11 +1,9 @@
 "use client"
 import AccountSettingWrapper from "@/common/components/AccountSettingWrapper"
-import { AccountSettingContainer } from "@/common/components/ui/AccountSettingContainer"
-import { Input } from "@/common/components/ui/Input"
 import { LINK_ACCOUNT_SETTINGS } from "@/common/constants/links"
 import Header from "@/module/LandingPage/components/Header"
 import { ChevronRightIcon } from "@heroicons/react/20/solid"
-import React, { useState } from "react"
+import React from "react"
 import LegalName from "./components/LegalName"
 import EmailAddress from "./components/EmailAddress"
 import PhoneNumber from "./components/PhoneNumber"
@@ -33,7 +31,6 @@ const PersonalInfo = () => {
             />
             <p className="font-medium">Personal info</p>
           </div>
-          <h1 className="text-4xl font-bold mt-3.5"></h1>
           <Title>Personal info</Title>
         </div>
         <div className="divide-y">

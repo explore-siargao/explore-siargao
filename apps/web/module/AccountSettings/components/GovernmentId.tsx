@@ -1,5 +1,4 @@
 import { Button } from "@/common/components/ui/Button"
-import { Input } from "@/common/components/ui/Input"
 import React, { useState } from "react"
 
 type PersonalInfoProps = {
@@ -52,13 +51,6 @@ const GovernmentId = () => {
             make sure you’re really you.
           </p>
 
-          {/* <input
-            className="h-10 w-full mb-5 text-xs text-text-900 border border-text-300 rounded-lg cursor-pointer bg-text-50 dark:text-text-400 focus:outline-none"
-            id="small_size"
-            type="file"
-            accept="image/png, image/gif, image/jpeg"
-          /> */}
-
           <div className="flex items-center justify-center w-full my-4">
             <label
               htmlFor="dropzone-file"
@@ -74,9 +66,9 @@ const GovernmentId = () => {
                 >
                   <path
                     stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
                   />
                 </svg>

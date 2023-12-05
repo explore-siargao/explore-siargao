@@ -51,8 +51,8 @@ const LegalName = () => {
             or a passport.
           </p>
           <div className="grid grid-cols-2 gap-4 my-4">
-            <Input inputId="email" inputLabel="First name" />
-            <Input inputId="email" inputLabel="First name" />
+            <Input inputId="firstName" inputLabel="First name" />
+            <Input inputId="lastName" inputLabel="Last name" />
           </div>
           <Button className="w-20" variant={"success"}>
             Save
