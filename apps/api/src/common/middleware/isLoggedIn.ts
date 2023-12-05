@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express'
 import { UNKNOWN_ERROR_OCCURRED } from '../constants'
 import { signKey } from '@/common/config/'
 import jwt, { Secret } from 'jsonwebtoken'
-import {PrismaClient } from '@prisma/client'
+import { PrismaClient } from '@prisma/client'
 
 
 const isUserLoggedIn = async (
