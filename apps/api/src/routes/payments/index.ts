@@ -5,5 +5,4 @@ import { addpaymentMethod } from './service/paymentMethod'
 const router = express.Router()
 router.post('/:userId/paymentMethod', isUserLoggedIn, addpaymentMethod)
 
-
 export default router
