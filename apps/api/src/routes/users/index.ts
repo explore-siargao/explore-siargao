@@ -39,9 +39,17 @@ router.patch('/auth/:userId', updateUserEmail)
 
 //Personal Info
 router.get('/personalInfo/:userId', isUserLoggedIn, getPersonalInfo)
-router.post('/:personalInfoId/emergencyContact/add/', isUserLoggedIn, addEmergencyContact)
+router.post(
+  '/:personalInfoId/emergencyContact/add/',
+  isUserLoggedIn,
+  addEmergencyContact
+)
 router.post('/:personalInfoId/address/add/', isUserLoggedIn, addAddress)
 router.patch('/personalInfo/:userId', isUserLoggedIn, updatePersonalInfo)
-router.delete('/:userId/emergencyContact/remove/:emergencyContactId',isUserLoggedIn, removeEmergencyContact)
+router.delete(
+  '/:userId/emergencyContact/remove/:emergencyContactId',
+  isUserLoggedIn,
+  removeEmergencyContact
+)
 
 export default router
