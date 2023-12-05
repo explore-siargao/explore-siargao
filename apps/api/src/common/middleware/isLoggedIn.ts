@@ -4,14 +4,12 @@ import { signKey } from '@/common/config/'
 import jwt, { Secret } from 'jsonwebtoken'
 import { PrismaClient } from '@prisma/client'
 
-
 const isUserLoggedIn = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-
-  const checkErrorMessage = (message:string)=>{
+  const checkErrorMessage = (message: string) => {
     if (message === 'jwt malformed') {
       res.json({
         error: true,
