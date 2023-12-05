@@ -8,7 +8,6 @@ type Props = {
   icon: React.ReactNode
   content: string
   link: string
-  id?: string
   className?: string
 }
 
