@@ -1,7 +1,7 @@
 import React from "react"
 import Header from "../LandingPage/components/Header"
 import AccountSettingWrapper from "@/common/components/AccountSettingWrapper"
-import { AccountSettingContainer } from "@/common/components/ui/AccountSettingContainer"
+import { AccountMenuContainer } from "@/common/components/AccountMenuContainer"
 import {
   CreditCardIcon,
   IdentificationIcon,
@@ -25,25 +25,25 @@ const AccountSettings = () => {
           </p>
         </div>
         <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-4 my-14">
-          <AccountSettingContainer
+          <AccountMenuContainer
             icon={<IdentificationIcon className="h-8 w-auto text-primary-700" />}
             title="Personal Info"
             content="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
             link="/"
           />
-          <AccountSettingContainer
+          <AccountMenuContainer
             icon={<ListBulletIcon className="h-8 w-auto text-primary-700" />}
             title="Bookings"
             content="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
             link="/"
           />
-          <AccountSettingContainer
+          <AccountMenuContainer
             icon={<HeartIcon className="h-8 w-auto text-primary-700" />}
             title="Wishlists"
             content="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
             link="/"
           />
-          <AccountSettingContainer
+          <AccountMenuContainer
             icon={<CreditCardIcon className="h-8 w-auto text-primary-700" />}
             title="Payments & payouts"
             content="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
