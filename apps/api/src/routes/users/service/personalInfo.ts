@@ -188,3 +188,61 @@ export const addAddress = async (req: Request, res: Response) => {
     })
   }
 }
+
+export const removeEmergencyContact = async (req: Request, res: Response) => {
+  const prisma = new PrismaClient()
+  const userId = Number(req.params.userId)
+  const emergencyContactId = Number(req.params.emergencyContactId)
+  try {
+    const personalInfo = await prisma.personalInfo.findFirst({
+      where: {
+        userId: userId,
+      },
+    })
+    if (personalInfo !== null) {
+      const personInfoId = personalInfo.id
+      const emergencyContactExist =
+        (await prisma.emergencyContacts.findFirst({
+          where: {
+            id: emergencyContactId,
+            peronalInfoId: personInfoId,
+          },
+        })) !== null
+      if (emergencyContactExist) {
+        const deleteEmergencyContact = await prisma.emergencyContacts.delete({
+          where: {
+            id: emergencyContactId,
+            peronalInfoId: personInfoId,
+          },
+        })
+        res.json({
+          error: false,
+          items: deleteEmergencyContact,
+          itemCount: 1,
+          message: 'Sucessfully deleted emergency contact',
+        })
+      } else {
+        res.json({
+          error: true,
+          items: null,
+          itemCount: 0,
+          message: 'Emergency contact already deleted',
+        })
+      }
+    } else {
+      res.json({
+        error: true,
+        items: null,
+        itemCount: 0,
+        message: 'User does not exist to our system',
+      })
+    }
+  } catch (err: any) {
+    res.json({
+      error: true,
+      items: null,
+      itemCount: 0,
+      message: err.message,
+    })
+  }
+}
