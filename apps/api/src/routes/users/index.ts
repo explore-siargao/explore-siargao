@@ -10,7 +10,12 @@ import {
   mfa,
   mfaVerify,
 } from './service/auth'
-import { addAddress, addEmergencyContact, getPersonalInfo, updatePersonalInfo } from './service/personalInfo'
+import {
+  addAddress,
+  addEmergencyContact,
+  getPersonalInfo,
+  updatePersonalInfo,
+} from './service/personalInfo'
 
 const router = express.Router()
 

@@ -37,31 +37,38 @@ export const getPersonalInfo = async (req: Request, res: Response) => {
   }
 }
 
-export const updatePersonalInfo = async (req:Request, res:Response) =>{
-  try{
+export const updatePersonalInfo = async (req: Request, res: Response) => {
+  try {
     const prisma = new PrismaClient()
-    const {firstName, lastName, middleName, birthDate, governmentId, phoneNumber} = req.body
+    const {
+      firstName,
+      lastName,
+      middleName,
+      birthDate,
+      governmentId,
+      phoneNumber,
+    } = req.body
     const userId = Number(req.params.userId)
     const editPersonalInfo = await prisma.personalInfo.update({
-      where:{
+      where: {
         userId: userId,
       },
-      data:{
+      data: {
         firstName: firstName,
         lastName: lastName,
         middleName: middleName,
         birthDate: birthDate,
         governMentId: governmentId,
-        phoneNumber:phoneNumber
-      }
+        phoneNumber: phoneNumber,
+      },
     })
     res.json({
       error: false,
       items: editPersonalInfo,
       itemCount: 1,
-      message: "Sucessfully updated",
+      message: 'Sucessfully updated',
     })
-  }catch(err: any){
+  } catch (err: any) {
     res.json({
       error: true,
       items: null,
