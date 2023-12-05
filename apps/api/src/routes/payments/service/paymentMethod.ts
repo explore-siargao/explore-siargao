@@ -108,3 +108,63 @@ export const getPaymentMethods = async (req: Request, res: Response) => {
     })
   }
 }
+
+export const removePaymentmethod = async (req: Request, res: Response) => {
+  const userId = Number(req.params.userId)
+  const paymentMethodId = Number(req.params.paymentMethodId)
+  const prisma = new PrismaClient()
+  try {
+    const isUserExist =
+      (await prisma.user.findFirst({
+        where: {
+          id: userId,
+          deletedAt: null,
+        },
+      })) !== null
+    if (isUserExist) {
+      const isPaymentMethodExist =
+        (await prisma.paymentMethod.findFirst({
+          where: {
+            id: paymentMethodId,
+            userId: userId,
+            deletedAt: null,
+          },
+        })) !== null
+      if (isPaymentMethodExist) {
+        const deletePayementMethod = await prisma.paymentMethod.delete({
+          where: {
+            id: paymentMethodId,
+            userId: userId,
+          },
+        })
+        res.json({
+          error: false,
+          items: deletePayementMethod,
+          itemCount: 0,
+          message: 'Payment method successfully removed',
+        })
+      } else {
+        res.json({
+          error: true,
+          items: null,
+          itemCount: 0,
+          message: 'Payment Method already deleted',
+        })
+      }
+    } else {
+      res.json({
+        error: true,
+        items: null,
+        itemCount: 0,
+        message: 'user not exists to our system',
+      })
+    }
+  } catch (err: any) {
+    res.json({
+      error: true,
+      items: null,
+      itemCount: 0,
+      message: err.message,
+    })
+  }
+}
