@@ -67,7 +67,6 @@ const EmergencyContact = () => {
               <Input inputId="email" inputLabel="Email" />
               <Input inputId="contactNumber" inputLabel="Phone Number" />
             </div>
-            
           </div>
           <Button className="w-20" variant={"success"}>
             Save
