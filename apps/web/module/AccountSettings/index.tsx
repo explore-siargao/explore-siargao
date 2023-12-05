@@ -6,7 +6,7 @@ import {
   CreditCardIcon,
   IdentificationIcon,
   HeartIcon,
-  ListBulletIcon
+  ListBulletIcon,
 } from "@heroicons/react/24/outline"
 
 const AccountSettings = () => {
@@ -17,8 +17,8 @@ const AccountSettings = () => {
         <h1 className="text-3xl font-semibold mb-3 text-text-500">Account</h1>
         <div className="flex space-x-2">
           <p>
-            <span className="font-semibold">John Patrick Madrigal</span>, jepoyyy0225@gmail.com{" "}
-            <span>•</span>{" "}
+            <span className="font-semibold">John Patrick Madrigal</span>,
+            jepoyyy0225@gmail.com <span>•</span>{" "}
             <a href="#" className="font-semibold underline underline-offset-2">
               Go to profile
             </a>
