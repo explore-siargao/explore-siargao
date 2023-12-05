@@ -8,8 +8,8 @@ import { APP_NAME } from "@repo/constants"
 
 function Header() {
   return (
-    <header className="fixed inset-x-0 top-0 z-50 bg-white border-y-text-100 border shadow-sm">
-      <div className="w-full text-center py-2 bg-text-50">
+    <header className="fixed inset-x-0 top-0 z-50 bg-white border-y-text-50 border">
+      <div className="w-full text-center py-2 bg-primary-50">
         <p className="underline">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         </p>

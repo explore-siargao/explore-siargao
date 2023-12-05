@@ -4,11 +4,9 @@ import AccountSettingWrapper from "@/common/components/AccountSettingWrapper"
 import { AccountSettingContainer } from "@/common/components/ui/AccountSettingContainer"
 import {
   CreditCardIcon,
-  DocumentIcon,
-  EyeIcon,
   IdentificationIcon,
-  MegaphoneIcon,
-  ShieldExclamationIcon,
+  HeartIcon,
+  ListBulletIcon
 } from "@heroicons/react/24/outline"
 
 const AccountSettings = () => {
@@ -16,10 +14,10 @@ const AccountSettings = () => {
     <>
       <Header />
       <AccountSettingWrapper>
-        <h1 className="text-4xl font-bold mb-3.5">Account</h1>
+        <h1 className="text-3xl font-semibold mb-3 text-text-500">Account</h1>
         <div className="flex space-x-2">
           <p>
-            <span className="font-semibold">Full Name</span>, you@sample.com{" "}
+            <span className="font-semibold">John Patrick Madrigal</span>, jepoyyy0225@gmail.com{" "}
             <span>•</span>{" "}
             <a href="#" className="font-semibold underline underline-offset-2">
               Go to profile
@@ -28,41 +26,27 @@ const AccountSettings = () => {
         </div>
         <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-4 my-14">
           <AccountSettingContainer
-            icon={<IdentificationIcon className="h-8 w-auto text-text-400" />}
+            icon={<IdentificationIcon className="h-8 w-auto text-primary-700" />}
             title="Personal Info"
-            content="Labore est amet eiusmod proident."
+            content="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
             link="/"
           />
           <AccountSettingContainer
-            icon={
-              <ShieldExclamationIcon className="h-8 w-auto text-text-400" />
-            }
-            title="Login & security"
-            content="nisi non et consectetur Lorem eiusmod consequ"
+            icon={<ListBulletIcon className="h-8 w-auto text-primary-700" />}
+            title="Bookings"
+            content="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
             link="/"
           />
           <AccountSettingContainer
-            icon={<CreditCardIcon className="h-8 w-auto text-text-400" />}
+            icon={<HeartIcon className="h-8 w-auto text-primary-700" />}
+            title="Wishlists"
+            content="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            link="/"
+          />
+          <AccountSettingContainer
+            icon={<CreditCardIcon className="h-8 w-auto text-primary-700" />}
             title="Payments & payouts"
-            content="Please provide personal info"
-            link="/"
-          />
-          <AccountSettingContainer
-            icon={<DocumentIcon className="h-8 w-auto text-text-400" />}
-            title="Taxes"
-            content=" nisi non et  adipisicing quis laborum deserunt veniam do esse sit do veniam."
-            link="/"
-          />
-          <AccountSettingContainer
-            icon={<MegaphoneIcon className="h-8 w-auto text-text-400" />}
-            title="Notifications"
-            content="nisi non et consectetur Lorem eiusmod consequ"
-            link="/"
-          />
-          <AccountSettingContainer
-            icon={<EyeIcon className="h-8 w-auto text-text-400" />}
-            title="Privacy & sharing"
-            content="Please provide personal info"
+            content="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
             link="/"
           />
         </div>
