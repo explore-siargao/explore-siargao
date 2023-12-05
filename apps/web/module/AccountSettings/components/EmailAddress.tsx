@@ -48,8 +48,7 @@ const EmailAddress = () => {
             </button>
           </div>
           <p className="text-base font-light">
-            This is the name on your travel document, which could be a license
-            or a passport.
+            Use an address you’ll always have access to.
           </p>
           <div className="grid grid-cols-2 gap-4 my-4">
             <Input
