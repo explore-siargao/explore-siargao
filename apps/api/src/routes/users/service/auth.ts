@@ -503,60 +503,60 @@ export const mfaVerify = async (req: Request, res: Response) => {
   }
 }
 
-export const updateUserEmail = async(req:Request, res:Response) =>{
-  const {email} = req.body
+export const updateUserEmail = async (req: Request, res: Response) => {
+  const { email } = req.body
   const userId = Number(req.params.userId)
-  try{
+  try {
     const prisma = new PrismaClient()
     const getUser = await prisma.user.findFirst({
-      where:{
+      where: {
         id: userId,
-        deletedAt: null
-      }
+        deletedAt: null,
+      },
     })
-    if(getUser){
-    if(email){
-      if(String(email).indexOf('@') > 1){
-      const updateEmail = await prisma.user.update({
-        where:{
-          id: userId,
-          deletedAt: null
-        },
-        data:{
-          email:email
+    if (getUser) {
+      if (email) {
+        if (String(email).indexOf('@') > 1) {
+          const updateEmail = await prisma.user.update({
+            where: {
+              id: userId,
+              deletedAt: null,
+            },
+            data: {
+              email: email,
+            },
+          })
+          res.json({
+            error: false,
+            items: updateEmail,
+            itemCount: 1,
+            message: 'Sucessfully updated',
+          })
+        } else {
+          res.json({
+            error: true,
+            items: null,
+            itemCount: 0,
+            message: 'Invalid email address',
+          })
         }
-      })
-      res.json({
-        error: false,
-        items: updateEmail,
-        itemCount: 1,
-        message: 'Sucessfully updated',
-      })
-    }else{
-      res.json({
-        error: true,
-        items: null,
-        itemCount: 0,
-        message: "Invalid email address",
-      })
-    }
-    }else{
+      } else {
+        res.json({
+          error: true,
+          items: null,
+          itemCount: 0,
+          message: REQUIRED_VALUE_EMPTY,
+        })
+      }
+    } else {
       res.json({
         error: true,
         items: null,
         itemCount: 0,
-        message: REQUIRED_VALUE_EMPTY,
+        message: 'User not exist to our system',
       })
     }
-  }else{
-    res.json({
-      error: true,
-      items: null,
-      itemCount: 0,
-      message: "User not exist to our system",
-    })
-  }
-  }catch(err: any){
+  } catch (err: any) {
     res.json({
       error: true,
       items: null,
