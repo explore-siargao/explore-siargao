@@ -26,7 +26,9 @@ const AccountSettings = () => {
         </div>
         <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-4 my-14">
           <AccountMenuContainer
-            icon={<IdentificationIcon className="h-8 w-auto text-primary-700" />}
+            icon={
+              <IdentificationIcon className="h-8 w-auto text-primary-700" />
+            }
             title="Personal Info"
             content="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
             link="/"
