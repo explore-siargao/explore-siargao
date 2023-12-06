@@ -1,4 +1,4 @@
-import { create } from 'zustand'
+import { create } from "zustand"
 
 type T_ForgotPasswordEmail = {
   email: string | null
@@ -12,4 +12,4 @@ const useForgotPasswordEmail = create<T_ForgotPasswordEmail>((set) => ({
   remove: () => set({ email: null }),
 }))
 
-export default useForgotPasswordEmail;
+export default useForgotPasswordEmail

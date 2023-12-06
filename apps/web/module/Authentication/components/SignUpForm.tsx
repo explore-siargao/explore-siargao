@@ -15,7 +15,7 @@ import { useParams, useRouter } from "next/navigation"
 import { signIn, useSession } from "next-auth/react"
 import Cookies from "js-cookie"
 import { APP_NAME } from "@repo/constants"
-import dayjs from 'dayjs'
+import dayjs from "dayjs"
 
 type Props = {
   isSocial?: boolean

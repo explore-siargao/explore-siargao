@@ -24,7 +24,7 @@ import useForgotPasswordEmail from "../store/useForgotPasswordEmail"
 
 const LoginForm = () => {
   const router = useRouter()
-  const updateEmail = useForgotPasswordEmail((state) => state.update); 
+  const updateEmail = useForgotPasswordEmail((state) => state.update)
   const { mutate: loginUser, isPending: isLoginPending } = useLogin()
   const { register, handleSubmit, getValues } = useForm<IUser>()
   const onSubmit = (formData: IUser) => {
@@ -82,7 +82,7 @@ const LoginForm = () => {
             href={LINK_FORGOT_PASSWORD}
             className="font-bold underline text-xs text-text-300 hover:text-text-600"
             onClick={() => {
-              const email = getValues("email");
+              const email = getValues("email")
               updateEmail(email)
             }}
           >

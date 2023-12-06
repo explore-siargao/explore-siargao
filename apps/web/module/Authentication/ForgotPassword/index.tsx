@@ -16,7 +16,9 @@ const ForgotPassword = () => {
   const [captcha, setCaptcha] = useState<string | null>("")
   const { mutate: forgotPassword, isPending: isForgotPasswordPending } =
     useForgotPassword()
-  const { register, handleSubmit, reset } = useForm<TForgotPassword>({ values: { email: forgotPassEmail || '', token: '' } })
+  const { register, handleSubmit, reset } = useForm<TForgotPassword>({
+    values: { email: forgotPassEmail || "", token: "" },
+  })
   const onSubmit = (data: TForgotPassword) => {
     const { email } = data
     if (captcha) {
