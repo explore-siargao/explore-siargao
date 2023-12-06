@@ -13,18 +13,21 @@ import Title from "@/common/components/ui/Title"
 const AccountSettings = () => {
   const pages = [
     {
+      id: 1,
       icon: IdentificationIcon,
       title: "Personal Info",
       content: "Labore est amet eiusmod proident.",
       link: LINK_ACCOUNT_PERSONAL_INFO,
     },
     {
+      id: 2,
       icon: HeartIcon,
       title: "Wishlists",
       content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       link: "/",
     },
     {
+      id: 3,
       icon: CreditCardIcon,
       title: "Payments & payouts",
       content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
@@ -48,6 +51,7 @@ const AccountSettings = () => {
         <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-4 my-14">
           {pages.map((page) => (
             <AccountMenuContainer
+              key={page.id}
               icon={<page.icon className="h-8 w-auto text-primary-700" />}
               title="Personal Info"
               content="Labore est amet eiusmod proident."
