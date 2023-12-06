@@ -8,7 +8,7 @@ const CreateAccount = () => {
   const router = useRouter()
   return (
     <AuthContainer
-      title="Create account using you email"
+      title="Create account using your email"
       onBack={() => router.push("/login")}
     >
       <SignUpForm />

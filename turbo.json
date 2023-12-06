@@ -22,7 +22,9 @@
         "GOOGLE_SECRET_ID",
         "FACEBOOK_CLIENT_ID",
         "FACEBOOK_SECRET_ID",
-        "WEB_URL"
+        "WEB_URL",
+        "RECAPTCHA_KEY",
+        "RECAPTCHA_KEY_SECRET"
       ]
     },
     "lint": {

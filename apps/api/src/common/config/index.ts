@@ -8,3 +8,4 @@ export const encryptKey = process.env.API_ENCRYPT_KEY || ''
 export const signKey = process.env.API_SIGN_KEY || ''
 export const origins = process.env.API_ORIGINS?.split(',') as unknown as string
 export const webUrl = process.env.WEB_URL || ''
+export const captchaKeySecret = process.env.RECAPTCHA_KEY_SECRET || ''
