@@ -134,8 +134,6 @@ export const addEmergencyContact = async (req: Request, res: Response) => {
   }
 }
 
-
-
 export const removeEmergencyContact = async (req: Request, res: Response) => {
   const prisma = new PrismaClient()
   const userId = Number(req.params.userId)
@@ -250,49 +248,49 @@ export const addAddress = async (req: Request, res: Response) => {
   }
 }
 
-export const editAddress =async (req:Request, res:Response) => {
+export const editAddress = async (req: Request, res: Response) => {
   const prisma = new PrismaClient()
-  const {streetAddress, city, province, zipCode, country} = req.body
+  const { streetAddress, city, province, zipCode, country } = req.body
   const userId = Number(req.params.userId)
   try {
-    if(streetAddress && city && province && zipCode && country){
+    if (streetAddress && city && province && zipCode && country) {
       const personalInfo = await prisma.personalInfo.findUnique({
-        where:{
-          userId: userId
+        where: {
+          userId: userId,
         },
-        include:{
-          address:true
-        }
+        include: {
+          address: true,
+        },
       })
-      if(personalInfo){
+      if (personalInfo) {
         const updateAddress = await prisma.addresses.update({
-          where:{
-            peronalInfoId : personalInfo.id,
-            id: personalInfo.address?.id
+          where: {
+            peronalInfoId: personalInfo.id,
+            id: personalInfo.address?.id,
           },
-          data:{
-            streetAddress :streetAddress,
-            city:city,
+          data: {
+            streetAddress: streetAddress,
+            city: city,
             province: province,
-            country : country,
-            zipCode: zipCode
-          }
+            country: country,
+            zipCode: zipCode,
+          },
         })
         res.json({
           error: false,
           items: updateAddress,
           itemCount: 1,
-          message: "Address successfully updated",
+          message: 'Address successfully updated',
         })
-      }else{
+      } else {
         res.json({
           error: true,
           items: null,
           itemCount: 0,
-          message: "User does not exist to our system",
+          message: 'User does not exist to our system',
         })
       }
-    }else{
+    } else {
       res.json({
         error: true,
         items: null,
