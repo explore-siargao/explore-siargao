@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from "react"
+import React, { useRef, useState } from "react"
 import { Button } from "@/common/components/ui/Button"
 import { SEND_EMAIL_BUTTON_TEXT } from "@/common/constants"
 import AuthContainer from "@/common/components/AuthContainer"
@@ -10,6 +10,7 @@ import toast from "react-hot-toast"
 import ReCAPTCHA from "react-google-recaptcha"
 
 const ForgotPassword = () => {
+  const recaptchaRef = useRef<ReCAPTCHA>(null)
   const [captcha, setCaptcha] = useState<string | null>("")
   const { mutate: forgotPassword, isPending: isForgotPasswordPending } =
     useForgotPassword()
@@ -27,6 +28,7 @@ const ForgotPassword = () => {
           } else {
             toast.error(String(data.message))
           }
+          recaptchaRef.current?.reset()
         },
         onError: (err: any) => {
           toast.error(String(err))
@@ -63,6 +65,7 @@ const ForgotPassword = () => {
             </p>
           </div>
           <ReCAPTCHA
+            ref={recaptchaRef}
             sitekey={process.env.RECAPTCHA_KEY || ""}
             onChange={setCaptcha}
           />
