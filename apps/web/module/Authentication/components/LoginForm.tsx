@@ -19,18 +19,14 @@ import {
 import Image from "next/image"
 import { Input } from "@/common/components/ui/Input"
 import { signIn } from "next-auth/react"
-import { DM_Serif_Display } from "next/font/google"
 import { LINK_FORGOT_PASSWORD } from "../constants/links"
-
-const dmSerifDisplay = DM_Serif_Display({
-  subsets: ["latin"],
-  weight: "400",
-})
+import useForgotPasswordEmail from "../store/useForgotPasswordEmail"
 
 const LoginForm = () => {
   const router = useRouter()
+  const updateEmail = useForgotPasswordEmail((state) => state.update)
   const { mutate: loginUser, isPending: isLoginPending } = useLogin()
-  const { register, handleSubmit } = useForm<IUser>()
+  const { register, handleSubmit, getValues } = useForm<IUser>()
   const onSubmit = (formData: IUser) => {
     const callBackReq = {
       onSuccess: (data: any) => {
@@ -85,6 +81,10 @@ const LoginForm = () => {
           <Link
             href={LINK_FORGOT_PASSWORD}
             className="font-bold underline text-xs text-text-300 hover:text-text-600"
+            onClick={() => {
+              const email = getValues("email")
+              updateEmail(email)
+            }}
           >
             Forgot Password?
           </Link>
