@@ -4,6 +4,7 @@ import { API_AUTH_FORGOT_PASSWORD } from "../constants/api-routes"
 
 export type TForgotPassword = {
   email: string
+  token: string
 }
 
 export async function forgotPassword(props: TForgotPassword) {

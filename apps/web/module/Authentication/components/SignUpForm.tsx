@@ -40,7 +40,7 @@ const SignUpForm = ({ isSocial = false }: Props) => {
       ? capitalizeFirstLetter(params.type as string)
       : "Manual"
 
-  const onSubmit = (formData: T_Register) => {
+  const onSubmit = async (formData: T_Register) => {
     const callBackReq = {
       onSuccess: (data: any) => {
         if (!data.error) {
@@ -64,6 +64,7 @@ const SignUpForm = ({ isSocial = false }: Props) => {
         toast.error(String(err))
       },
     }
+    // TODO: ADD CSRF TOKEN
     addUser(
       {
         ...formData,
