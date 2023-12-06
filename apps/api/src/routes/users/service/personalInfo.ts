@@ -37,6 +37,47 @@ export const getPersonalInfo = async (req: Request, res: Response) => {
   }
 }
 
+export const updatePersonalInfo = async (req: Request, res: Response) => {
+  try {
+    const prisma = new PrismaClient()
+    const {
+      firstName,
+      lastName,
+      middleName,
+      birthDate,
+      governmentId,
+      phoneNumber,
+    } = req.body
+    const userId = Number(req.params.userId)
+    const editPersonalInfo = await prisma.personalInfo.update({
+      where: {
+        userId: userId,
+      },
+      data: {
+        firstName: firstName,
+        lastName: lastName,
+        middleName: middleName,
+        birthDate: birthDate,
+        governMentId: governmentId,
+        phoneNumber: phoneNumber,
+      },
+    })
+    res.json({
+      error: false,
+      items: editPersonalInfo,
+      itemCount: 1,
+      message: 'Sucessfully updated',
+    })
+  } catch (err: any) {
+    res.json({
+      error: true,
+      items: null,
+      itemCount: 0,
+      message: err.message,
+    })
+  }
+}
+
 export const addEmergencyContact = async (req: Request, res: Response) => {
   try {
     const prisma = new PrismaClient()
@@ -136,6 +177,64 @@ export const addAddress = async (req: Request, res: Response) => {
         items: null,
         itemCount: 0,
         message: REQUIRED_VALUE_EMPTY,
+      })
+    }
+  } catch (err: any) {
+    res.json({
+      error: true,
+      items: null,
+      itemCount: 0,
+      message: err.message,
+    })
+  }
+}
+
+export const removeEmergencyContact = async (req: Request, res: Response) => {
+  const prisma = new PrismaClient()
+  const userId = Number(req.params.userId)
+  const emergencyContactId = Number(req.params.emergencyContactId)
+  try {
+    const personalInfo = await prisma.personalInfo.findFirst({
+      where: {
+        userId: userId,
+      },
+    })
+    if (personalInfo !== null) {
+      const personInfoId = personalInfo.id
+      const emergencyContactExist =
+        (await prisma.emergencyContacts.findFirst({
+          where: {
+            id: emergencyContactId,
+            peronalInfoId: personInfoId,
+          },
+        })) !== null
+      if (emergencyContactExist) {
+        const deleteEmergencyContact = await prisma.emergencyContacts.delete({
+          where: {
+            id: emergencyContactId,
+            peronalInfoId: personInfoId,
+          },
+        })
+        res.json({
+          error: false,
+          items: deleteEmergencyContact,
+          itemCount: 1,
+          message: 'Sucessfully deleted emergency contact',
+        })
+      } else {
+        res.json({
+          error: true,
+          items: null,
+          itemCount: 0,
+          message: 'Emergency contact already deleted',
+        })
+      }
+    } else {
+      res.json({
+        error: true,
+        items: null,
+        itemCount: 0,
+        message: 'User does not exist to our system',
       })
     }
   } catch (err: any) {
