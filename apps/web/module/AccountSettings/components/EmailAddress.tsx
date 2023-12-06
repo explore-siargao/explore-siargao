@@ -7,7 +7,7 @@ type PersonalInfoProps = {
   isButtonClicked: boolean
   contentId: string
 }
-const EmailAddress = ({email}:IUser) => {
+const EmailAddress = ({ email }: IUser) => {
   const [contentState, setContentState] = useState<PersonalInfoProps>({
     isButtonClicked: false,
     contentId: "",

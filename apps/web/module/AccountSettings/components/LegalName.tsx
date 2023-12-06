@@ -8,8 +8,7 @@ type PersonalInfoProps = {
   contentId: string
 }
 
-
-const LegalName = ({firstName, lastName}:IPersonalInfo) => {
+const LegalName = ({ firstName, lastName }: IPersonalInfo) => {
   const [contentState, setContentState] = useState<PersonalInfoProps>({
     isButtonClicked: false,
     contentId: "",
@@ -20,7 +19,7 @@ const LegalName = ({firstName, lastName}:IPersonalInfo) => {
         <div className="flex justify-between py-5">
           <div>
             <h1>Legal name</h1>
-            <p className="font-light">{firstName+" "+lastName}</p>
+            <p className="font-light">{firstName + " " + lastName}</p>
           </div>
           <button
             onClick={() =>
@@ -55,8 +54,16 @@ const LegalName = ({firstName, lastName}:IPersonalInfo) => {
             or a passport.
           </p>
           <div className="grid grid-cols-2 gap-4 my-4">
-            <Input inputId="firstName" inputLabel="First name" defaultValue={firstName} />
-            <Input inputId="lastName" inputLabel="Last name" defaultValue={lastName}/>
+            <Input
+              inputId="firstName"
+              inputLabel="First name"
+              defaultValue={firstName}
+            />
+            <Input
+              inputId="lastName"
+              inputLabel="Last name"
+              defaultValue={lastName}
+            />
           </div>
           <Button className="w-20" size={"sm"}>
             Save

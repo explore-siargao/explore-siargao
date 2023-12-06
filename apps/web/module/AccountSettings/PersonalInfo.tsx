@@ -15,8 +15,8 @@ import useGetPersonalInfo from "./hooks/useGetPersonalInfo"
 import authOptions from "@/common/helpers/authOptions"
 import { getServerSession } from "next-auth"
 import useGetUserDetails from "@/common/hooks/useGetUserdetails"
-const PersonalInfo =  () => {
-  const {data, isPending} = useGetUserDetails()
+const PersonalInfo = () => {
+  const { data, isPending } = useGetUserDetails()
   return (
     <>
       <Header />
@@ -38,35 +38,34 @@ const PersonalInfo =  () => {
           <Title>Personal info</Title>
         </div>
         <div className="divide-y">
-        {isPending ? (
-              <div className="animate-spin w-4 h-4 border-2 border-current border-t-transparent text-primary-200 rounded-full">
-                <span className="sr-only">Loading...</span>
-              </div>
-        ):(
-          <div>
+          {isPending ? (
+            <div className="animate-spin w-4 h-4 border-2 border-current border-t-transparent text-primary-200 rounded-full">
+              <span className="sr-only">Loading...</span>
+            </div>
+          ) : (
+            <div>
               <LegalName
-               firstName={data?.item?.personalInfo?.firstName} 
-               lastName={data?.item?.personalInfo?.lastName}/>
-              <EmailAddress
-                email={data?.item?.email}            
-                 />
-              <PhoneNumber 
-              phoneNumber={data?.item?.personalInfo?.phoneNumber} 
+                firstName={data?.item?.personalInfo?.firstName}
+                lastName={data?.item?.personalInfo?.lastName}
               />
-              <GovernmentId 
-              governmentId={data?.item?.personalInfo?.governmentId}
-               />
-              <Address 
-              country={data?.item?.personalInfo?.address?.country}
-              city={data?.item?.personalInfo?.address?.city}
-              province={data?.item?.personalInfo?.address?.province}
-              streetAddress={data?.item?.personalInfo?.address?.streetAddress}
-              zipCode={data?.item?.personalInfo?.address?.zipCode}
+              <EmailAddress email={data?.item?.email} />
+              <PhoneNumber
+                phoneNumber={data?.item?.personalInfo?.phoneNumber}
               />
-              <EmergencyContact 
-              emergencyContact={data?.item?.personalInfo?.emergencyContact}
+              <GovernmentId
+                governmentId={data?.item?.personalInfo?.governmentId}
               />
-          </div>
+              <Address
+                country={data?.item?.personalInfo?.address?.country}
+                city={data?.item?.personalInfo?.address?.city}
+                province={data?.item?.personalInfo?.address?.province}
+                streetAddress={data?.item?.personalInfo?.address?.streetAddress}
+                zipCode={data?.item?.personalInfo?.address?.zipCode}
+              />
+              <EmergencyContact
+                emergencyContact={data?.item?.personalInfo?.emergencyContact}
+              />
+            </div>
           )}
         </div>
       </AccountSettingWrapper>

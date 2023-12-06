@@ -7,7 +7,7 @@ type PersonalInfoProps = {
   isButtonClicked: boolean
   contentId: string
 }
-const EmergencyContact = ({emergencyContact}:IPersonalInfo) => {
+const EmergencyContact = ({ emergencyContact }: IPersonalInfo) => {
   const [contentState, setContentState] = useState<PersonalInfoProps>({
     isButtonClicked: false,
     contentId: "",
@@ -18,14 +18,11 @@ const EmergencyContact = ({emergencyContact}:IPersonalInfo) => {
         <div className="flex justify-between py-5">
           <div>
             <h1>Emergency Contact</h1>
-            {emergencyContact ?
-            (
-            <p className="font-light">{emergencyContact[0]?.name}</p>
-            ):
-            (
-            <p className="font-light">Not provided</p>
-            )
-            }
+            {emergencyContact ? (
+              <p className="font-light">{emergencyContact[0]?.name}</p>
+            ) : (
+              <p className="font-light">Not provided</p>
+            )}
           </div>
           <button
             onClick={() =>

@@ -7,7 +7,13 @@ type PersonalInfoProps = {
   isButtonClicked: boolean
   contentId: string
 }
-const Address = ({streetAddress,country,city,province,zipCode}:IAddress) => {
+const Address = ({
+  streetAddress,
+  country,
+  city,
+  province,
+  zipCode,
+}: IAddress) => {
   const [contentState, setContentState] = useState<PersonalInfoProps>({
     isButtonClicked: false,
     contentId: "",
@@ -18,7 +24,11 @@ const Address = ({streetAddress,country,city,province,zipCode}:IAddress) => {
         <div className="flex justify-between py-5">
           <div>
             <h1>Address</h1>
-            <p className="font-light">{zipCode ? `${streetAddress} ${city}, ${province}, ${country}`:"Enter an Address"}</p>
+            <p className="font-light">
+              {zipCode
+                ? `${streetAddress} ${city}, ${province}, ${country}`
+                : "Enter an Address"}
+            </p>
           </div>
           <button
             onClick={() =>

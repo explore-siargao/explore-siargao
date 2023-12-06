@@ -6,7 +6,7 @@ type PersonalInfoProps = {
   isButtonClicked: boolean
   contentId: string
 }
-const GovernmentId = ({governmentId}:IPersonalInfo) => {
+const GovernmentId = ({ governmentId }: IPersonalInfo) => {
   const [contentState, setContentState] = useState<PersonalInfoProps>({
     isButtonClicked: false,
     contentId: "",
@@ -17,7 +17,9 @@ const GovernmentId = ({governmentId}:IPersonalInfo) => {
         <div className="flex justify-between py-5">
           <div>
             <h1>Goverment ID</h1>
-            <p className="font-light">{governmentId ? governmentId:"Not Provided"}</p>
+            <p className="font-light">
+              {governmentId ? governmentId : "Not Provided"}
+            </p>
           </div>
           <button
             onClick={() =>
