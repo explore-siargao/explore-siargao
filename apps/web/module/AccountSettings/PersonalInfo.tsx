@@ -10,7 +10,7 @@ import PhoneNumber from "./components/PhoneNumber"
 import GovernmentId from "./components/GovernmentId"
 import Address from "./components/Address"
 import EmergencyContact from "./components/EmergencyContact"
-import Title from "@/common/components/ui/Title"
+import { Title } from "@/common/components/ui/Title"
 
 const PersonalInfo = () => {
   return (
