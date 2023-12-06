@@ -10,7 +10,7 @@ import toast from "react-hot-toast"
 import ReCAPTCHA from "react-google-recaptcha"
 
 const ForgotPassword = () => {
-  const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const recaptchaRef = useRef<ReCAPTCHA>(null)
   const [captcha, setCaptcha] = useState<string | null>("")
   const { mutate: forgotPassword, isPending: isForgotPasswordPending } =
     useForgotPassword()
@@ -28,7 +28,7 @@ const ForgotPassword = () => {
           } else {
             toast.error(String(data.message))
           }
-          recaptchaRef.current?.reset();
+          recaptchaRef.current?.reset()
         },
         onError: (err: any) => {
           toast.error(String(err))
