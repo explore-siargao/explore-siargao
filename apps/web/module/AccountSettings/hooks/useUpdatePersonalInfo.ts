@@ -5,7 +5,6 @@ import { useMutation } from "@tanstack/react-query"
 import Cookies from "js-cookie"
 
 export async function updatePersonalInfo(userId: number | undefined, props: IPersonalInfo) {
-  const token = Cookies.get("accessToken")
   const apiService = new ApiService()
   return await apiService.patch(`${API_URL_USERS}/personal-info/${userId}`, props)
 }
