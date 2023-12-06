@@ -17,43 +17,43 @@ export interface IUser {
 
 export interface IPersonalInfo {
   id?: number
-  userId? : number
-  firstName :string
+  userId?: number
+  firstName: string
   lastName: string
   middleName?: string
   birthDate?: string
   governmentId?: string
-  phoneNumber?:string
-  address? : IAddress
+  phoneNumber?: string
+  address?: IAddress
   emergencyContact?: IEmergencyContact[]
-  createdAt? : string
-updatedAt? : string
-deletedAt? : string 
+  createdAt?: string
+  updatedAt?: string
+  deletedAt?: string
 }
 
 export interface IAddress {
-id?:number
-peronalInfoId? : number
-streetAddress : string
-city : string         
-province : string
-zipCode : number   
-country : string 
-createdAt? : string
-updatedAt? : string
-deletedAt? : string 
+  id?: number
+  peronalInfoId?: number
+  streetAddress: string
+  city: string
+  province: string
+  zipCode: number
+  country: string
+  createdAt?: string
+  updatedAt?: string
+  deletedAt?: string
 }
 
 export interface IEmergencyContact {
   id?: number
-  peronalInfoId? : number
-  name : string   
-  relationship : string 
-  email : string        
-  phoneNumber : string 
-  createdAt?: string    
-  updatedAt? : string 
-  deletedAt? : string
+  peronalInfoId?: number
+  name: string
+  relationship: string
+  email: string
+  phoneNumber: string
+  createdAt?: string
+  updatedAt?: string
+  deletedAt?: string
 }
 
 //stores
