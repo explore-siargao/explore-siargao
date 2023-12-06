@@ -54,7 +54,7 @@ const PhoneNumber = () => {
           <div className="grid grid-cols-2 gap-4 my-4">
             <Input inputId="phoneNumber" inputLabel="Phone number" />
           </div> 
-          <Button className="w-20"  size={"sm"} variant={"success"}>
+          <Button className="w-20"  size={"sm"}>
             Save
           </Button>
         </div>

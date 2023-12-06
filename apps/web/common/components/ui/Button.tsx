@@ -9,9 +9,11 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
+          "bg-text-600 text-white hover:bg-text-700 focus:ring-2 focus:ring-offset-2 focus:ring-text-300",
+        primary:
           "bg-primary-600 text-white hover:bg-primary-700 focus:ring-2 focus:ring-offset-2 focus:ring-primary-300",
         danger:
-          "bg-error-500 text-white hover:bg-error-500 focus:ring-2 focus:ring-offset-2 focus:ring-error-300",
+          "bg-error-500 text-white hover:bg-error-600 focus:ring-2 focus:ring-offset-2 focus:ring-error-300",
         warning:
           "bg-warning-500 text-white hover:bg-warning-600 focus:ring-2 focus:ring-offset-2 focus:ring-warning-300",
         success:
@@ -19,7 +21,7 @@ const buttonVariants = cva(
         outline:
           "border border-primary-600 bg-transparent hover:bg-primary-600 hover:text-white",
         secondary:
-          "bg-accent text-white hover:bg-accent/80 focus:ring-2 focus:ring-offset-2 focus:ring-accent/60",
+          "bg-secondary-500 text-white hover:bg-secondary-600 focus:ring-2 focus:ring-offset-2 focus:ring-secondary-300",
         ghost: "hover:bg-accent/80 hover:text-black",
         link: "text-primary-500 underline-offset-4 hover:underline",
       },

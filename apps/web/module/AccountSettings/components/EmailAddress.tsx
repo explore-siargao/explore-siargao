@@ -56,7 +56,7 @@ const EmailAddress = () => {
             placeholder="you@sample.com"
             className="my-4"
           />
-          <Button className="w-20" size={"sm"} variant={"success"}>
+          <Button className="w-20" size={"sm"}>
             Save
           </Button>
         </div>

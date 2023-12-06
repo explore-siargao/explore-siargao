@@ -156,7 +156,7 @@ const SignUpForm = ({ isSocial = false }: Props) => {
               </Link>
             </p>
           </div>
-          <Button type="submit" className="w-full my-4">
+          <Button type="submit" variant={"primary"} className="w-full my-4">
             {addUserIsPending ? (
               <div className="animate-spin w-4 h-4 border-2 border-current border-t-transparent text-primary-200 rounded-full">
                 <span className="sr-only">Loading...</span>

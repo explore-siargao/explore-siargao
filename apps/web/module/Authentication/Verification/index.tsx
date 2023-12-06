@@ -125,6 +125,7 @@ const Verification = () => {
               className="w-full my-5"
               onClick={() => submitCode()}
               disabled={isVerifyMultiFactorPending}
+              variant={"primary"}
             >
               {SUBMIT_BUTTON_TEXT}
             </Button>

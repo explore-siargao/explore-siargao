@@ -54,7 +54,7 @@ const LegalName = () => {
             <Input inputId="firstName" inputLabel="First name" />
             <Input inputId="lastName" inputLabel="Last name" />
           </div>
-          <Button className="w-20" size={"sm"} variant={"success"}>
+          <Button className="w-20" size={"sm"}>
             Save
           </Button>
         </div>

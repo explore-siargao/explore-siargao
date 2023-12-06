@@ -86,6 +86,7 @@ const NewPassword = () => {
           <Button
             className="w-full my-5"
             type="submit"
+            variant={"primary"}
             disabled={isPendingNewPassword}
           >
             {isPendingNewPassword ? (
