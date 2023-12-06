@@ -10,10 +10,6 @@ import verifyCaptcha from '@/common/helpers/verifyCaptcha'
 
 const prisma = new PrismaClient()
 
-function capitalizeFirstLetter(value: string) {
-  return value.charAt(0).toUpperCase() + value.slice(1)
-}
-
 export const verifySession = async (req: Request, res: Response) => {
   const { type, email } = req.query
   if (type && email) {
@@ -21,9 +17,6 @@ export const verifySession = async (req: Request, res: Response) => {
       const user = await prisma.user.findFirst({
         where: {
           email: email as string,
-          registrationType: capitalizeFirstLetter(
-            type as string
-          ) as RegistrationType,
         },
       })
       if (user) {
@@ -464,7 +457,7 @@ export const mfaVerify = async (req: Request, res: Response) => {
         res.json({
           error: false,
           item: {},
-          message: 'User was verified',
+          message: 'User verified',
         })
       } else {
         res.json({
