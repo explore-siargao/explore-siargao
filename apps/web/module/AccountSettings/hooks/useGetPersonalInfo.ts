@@ -15,13 +15,12 @@ export async function getPersonalInfo(userId: number | undefined) {
 }
 
 function useGetPersonalInfo(userId: number | undefined) {
-
-const query = useQuery({
-    queryKey:["personal-info", userId],
-    queryFn:()=>getPersonalInfo(userId),
+  const query = useQuery({
+    queryKey: ["personal-info", userId],
+    queryFn: () => getPersonalInfo(userId),
     refetchOnWindowFocus: false,
-    enabled: !!userId
-})
+    enabled: !!userId,
+  })
   return query
 }
 export default useGetPersonalInfo
