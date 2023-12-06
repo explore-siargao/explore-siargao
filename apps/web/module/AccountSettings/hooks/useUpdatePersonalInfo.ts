@@ -3,7 +3,10 @@ import { IPersonalInfo } from "@/common/types/global"
 import { API_URL_USERS } from "@repo/constants"
 import { useMutation } from "@tanstack/react-query"
 
-export async function updatePersonalInfo(userId: number | undefined, props: IPersonalInfo) {
+export async function updatePersonalInfo(
+  userId: number | undefined,
+  props: IPersonalInfo
+) {
   const apiService = new ApiService()
   return await apiService.patch(
     `${API_URL_USERS}/personal-info/${userId}`,
