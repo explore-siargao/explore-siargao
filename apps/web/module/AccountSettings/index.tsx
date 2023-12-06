@@ -6,12 +6,34 @@ import {
   CreditCardIcon,
   IdentificationIcon,
   HeartIcon,
-  ListBulletIcon,
 } from "@heroicons/react/24/outline"
 import { LINK_ACCOUNT_PERSONAL_INFO } from "@/common/constants/links"
 import Title from "@/common/components/ui/Title"
 
 const AccountSettings = () => {
+  const pages = [
+    {
+      id: 1,
+      icon: IdentificationIcon,
+      title: "Personal Info",
+      content: "Labore est amet eiusmod proident.",
+      link: LINK_ACCOUNT_PERSONAL_INFO,
+    },
+    {
+      id: 2,
+      icon: HeartIcon,
+      title: "Wishlists",
+      content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      link: "/",
+    },
+    {
+      id: 3,
+      icon: CreditCardIcon,
+      title: "Payments & payouts",
+      content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      link: "/",
+    },
+  ]
   return (
     <>
       <Header />
@@ -27,24 +49,15 @@ const AccountSettings = () => {
           </p>
         </div>
         <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-4 my-14">
-          <AccountMenuContainer
-            icon={<IdentificationIcon className="h-8 w-auto text-text-400" />}
-            title="Personal Info"
-            content="Labore est amet eiusmod proident."
-            link={LINK_ACCOUNT_PERSONAL_INFO}
-          />
-          <AccountMenuContainer
-            icon={<HeartIcon className="h-8 w-auto text-primary-700" />}
-            title="Wishlists"
-            content="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-            link="/"
-          />
-          <AccountMenuContainer
-            icon={<CreditCardIcon className="h-8 w-auto text-primary-700" />}
-            title="Payments & payouts"
-            content="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-            link="/"
-          />
+          {pages.map((page) => (
+            <AccountMenuContainer
+              key={page.id}
+              icon={<page.icon className="h-8 w-auto text-primary-700" />}
+              title="Personal Info"
+              content="Labore est amet eiusmod proident."
+              link={String(page.link)}
+            />
+          ))}
         </div>
       </AccountSettingWrapper>
     </>
