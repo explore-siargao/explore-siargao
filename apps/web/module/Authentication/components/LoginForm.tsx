@@ -91,7 +91,7 @@ const LoginForm = () => {
         </div>
         <Button
           type="submit"
-          variant="default"
+          variant="primary"
           className="w-full my-4"
           disabled={isLoginPending}
         >

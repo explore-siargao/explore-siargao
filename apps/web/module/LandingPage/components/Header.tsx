@@ -29,7 +29,7 @@ function Header() {
         </a>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end space-x-3 items-center">
           <div>
-            <Button variant="default" size="sm">
+            <Button variant="primary" size="sm">
               Be a host
             </Button>
           </div>

@@ -54,6 +54,7 @@ const ForgotPassword = () => {
           <Button
             className="w-full my-5"
             type="submit"
+            variant={"primary"}
             disabled={isForgotPasswordPending}
           >
             {isForgotPasswordPending ? (

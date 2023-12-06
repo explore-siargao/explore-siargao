@@ -8,13 +8,15 @@ import {
   HeartIcon,
   ListBulletIcon,
 } from "@heroicons/react/24/outline"
+import { LINK_ACCOUNT_PERSONAL_INFO } from "@/common/constants/links"
+import Title from "@/common/components/ui/Title"
 
 const AccountSettings = () => {
   return (
     <>
       <Header />
       <AccountSettingWrapper>
-        <h1 className="text-3xl font-semibold mb-3 text-text-500">Account</h1>
+        <Title>Account</Title>
         <div className="flex space-x-2">
           <p>
             <span className="font-semibold">John Patrick Madrigal</span>,
@@ -26,18 +28,10 @@ const AccountSettings = () => {
         </div>
         <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-4 my-14">
           <AccountMenuContainer
-            icon={
-              <IdentificationIcon className="h-8 w-auto text-primary-700" />
-            }
+            icon={<IdentificationIcon className="h-8 w-auto text-text-400" />}
             title="Personal Info"
-            content="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-            link="/"
-          />
-          <AccountMenuContainer
-            icon={<ListBulletIcon className="h-8 w-auto text-primary-700" />}
-            title="Bookings"
-            content="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-            link="/"
+            content="Labore est amet eiusmod proident."
+            link={LINK_ACCOUNT_PERSONAL_INFO}
           />
           <AccountMenuContainer
             icon={<HeartIcon className="h-8 w-auto text-primary-700" />}
