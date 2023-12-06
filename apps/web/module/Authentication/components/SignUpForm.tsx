@@ -15,6 +15,7 @@ import { useParams, useRouter } from "next/navigation"
 import { signIn, useSession } from "next-auth/react"
 import Cookies from "js-cookie"
 import { APP_NAME } from "@repo/constants"
+import dayjs from "dayjs"
 
 type Props = {
   isSocial?: boolean
@@ -106,6 +107,7 @@ const SignUpForm = ({ isSocial = false }: Props) => {
                 inputLabel="Birthdate"
                 inputId="birthdate"
                 type="date"
+                max={dayjs().format("YYYY-MM-DD")}
                 {...register("birthDate", { required: true })}
                 disabled={addUserIsPending}
               />
