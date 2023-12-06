@@ -14,6 +14,7 @@ import {
 import {
   addAddress,
   addEmergencyContact,
+  editAddress,
   getPersonalInfo,
   removeEmergencyContact,
   updatePersonalInfo,
@@ -45,6 +46,7 @@ router.post(
   addEmergencyContact
 )
 router.post('/:personalInfoId/address/add/', isUserLoggedIn, addAddress)
+router.patch('/address/:userId', isUserLoggedIn, editAddress)
 router.patch('/personalInfo/:userId', isUserLoggedIn, updatePersonalInfo)
 router.delete(
   '/:userId/emergencyContact/remove/:emergencyContactId',
