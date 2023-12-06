@@ -10,13 +10,13 @@ import toast from "react-hot-toast"
 import ReCAPTCHA from "react-google-recaptcha"
 
 const ForgotPassword = () => {
-  const [captcha, setCaptcha] = useState<string | null>("");
+  const [captcha, setCaptcha] = useState<string | null>("")
   const { mutate: forgotPassword, isPending: isForgotPasswordPending } =
     useForgotPassword()
   const { register, handleSubmit, reset } = useForm<TForgotPassword>()
   const onSubmit = (data: TForgotPassword) => {
-    const { email } = data;
-      if(captcha) {
+    const { email } = data
+    if (captcha) {
       const callBackReq = {
         onSuccess: (data: any) => {
           if (!data.error) {
@@ -57,10 +57,13 @@ const ForgotPassword = () => {
               {...register("email", { required: true })}
               disabled={isForgotPasswordPending}
             />
-            <p className="text-sm mt-2 text-text-300">Please enter your email in the box above. We will send you link to access further instructions.</p>
+            <p className="text-sm mt-2 text-text-300">
+              Please enter your email in the box above. We will send you link to
+              access further instructions.
+            </p>
           </div>
           <ReCAPTCHA
-            sitekey={process.env.RECAPTCHA_KEY || ''}
+            sitekey={process.env.RECAPTCHA_KEY || ""}
             onChange={setCaptcha}
           />
           <Button

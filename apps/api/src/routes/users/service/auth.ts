@@ -226,7 +226,7 @@ export const forgot = async (req: Request, res: Response) => {
   const { token, email } = req.body
   if (email && token) {
     try {
-      const isCaptchaTokenValid = await verifyCaptcha(token);
+      const isCaptchaTokenValid = await verifyCaptcha(token)
       if (!isCaptchaTokenValid) {
         throw new Error('CAPTCHA is invalid')
       }
