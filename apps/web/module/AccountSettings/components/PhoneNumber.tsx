@@ -53,8 +53,8 @@ const PhoneNumber = () => {
           </p>
           <div className="grid grid-cols-2 gap-4 my-4">
             <Input inputId="phoneNumber" inputLabel="Phone number" />
-          </div> 
-          <Button className="w-20"  size={"sm"} variant={"success"}>
+          </div>
+          <Button className="w-20" size={"sm"} variant={"success"}>
             Save
           </Button>
         </div>

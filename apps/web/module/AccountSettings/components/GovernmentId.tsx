@@ -89,7 +89,7 @@ const GovernmentId = () => {
             </label>
           </div>
 
-          <Button className="w-20"  size={"sm"}  variant={"success"}>
+          <Button className="w-20" size={"sm"} variant={"success"}>
             Save
           </Button>
         </div>
