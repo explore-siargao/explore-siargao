@@ -7,10 +7,10 @@ import {
 } from './service/paymentMethod'
 
 const router = express.Router()
-router.post('/:userId/paymentMethod', isUserLoggedIn, addpaymentMethod)
-router.get('/:userId/paymentMethod', isUserLoggedIn, getPaymentMethods)
+router.post('/:userId/payment-method', isUserLoggedIn, addpaymentMethod)
+router.get('/:userId/payment-method', isUserLoggedIn, getPaymentMethods)
 router.delete(
-  '/:userId/paymentMethod/remove/:paymentMethodId',
+  '/:userId/payment-method/remove/:paymentMethodId',
   isUserLoggedIn,
   removePaymentmethod
 )

@@ -39,17 +39,17 @@ router.post('/auth/mfa/verify', mfaVerify)
 router.patch('/auth/:userId', updateUserEmail)
 
 //Personal Info
-router.get('/personalInfo/:userId', isUserLoggedIn, getPersonalInfo)
+router.get('/personal-info/:userId', isUserLoggedIn, getPersonalInfo)
 router.post(
-  '/:personalInfoId/emergencyContact/add/',
+  '/:personalInfoId/emergency-contact/add/',
   isUserLoggedIn,
   addEmergencyContact
 )
 router.post('/:personalInfoId/address/add/', isUserLoggedIn, addAddress)
 router.patch('/address/:userId', isUserLoggedIn, editAddress)
-router.patch('/personalInfo/:userId', isUserLoggedIn, updatePersonalInfo)
+router.patch('/personal-info/:userId', isUserLoggedIn, updatePersonalInfo)
 router.delete(
-  '/:userId/emergencyContact/remove/:emergencyContactId',
+  '/:userId/emergency-contact/remove/:emergencyContactId',
   isUserLoggedIn,
   removeEmergencyContact
 )
