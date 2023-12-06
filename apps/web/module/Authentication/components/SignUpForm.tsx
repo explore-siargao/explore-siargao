@@ -40,7 +40,7 @@ const SignUpForm = ({ isSocial = false }: Props) => {
       ? capitalizeFirstLetter(params.type as string)
       : "Manual"
 
-  const onSubmit = (formData: T_Register) => {
+  const onSubmit = async (formData: T_Register) => {
     const callBackReq = {
       onSuccess: (data: any) => {
         if (!data.error) {
@@ -64,6 +64,7 @@ const SignUpForm = ({ isSocial = false }: Props) => {
         toast.error(String(err))
       },
     }
+    // TODO: ADD CSRF TOKEN
     addUser(
       {
         ...formData,
@@ -186,8 +187,7 @@ const SignUpForm = ({ isSocial = false }: Props) => {
                   htmlFor="comments"
                   className="text-text-500 ml-3 text-xs leading-6"
                 >
-                  I don’t want to receive marketing messages from Explore
-                  Siargao
+                  I don’t want to receive marketing messages from {APP_NAME}
                 </label>
               </div>
             </div>

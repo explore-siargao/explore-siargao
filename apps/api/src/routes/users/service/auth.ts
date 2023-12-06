@@ -6,6 +6,7 @@ import { encryptKey, signKey, webUrl } from '@/common/config'
 import CryptoJS from 'crypto-js'
 import dayjs from 'dayjs'
 import { AuthEmail } from './authEmail'
+import verifyCaptcha from '@/common/helpers/verifyCaptcha'
 
 const prisma = new PrismaClient()
 
@@ -222,9 +223,13 @@ export const info = async (req: Request, res: Response) => {
 }
 
 export const forgot = async (req: Request, res: Response) => {
-  const { email } = req.body
-  if (email) {
+  const { token, email } = req.body
+  if (email && token) {
     try {
+      const isCaptchaTokenValid = await verifyCaptcha(token)
+      if (!isCaptchaTokenValid) {
+        throw new Error('CAPTCHA is invalid')
+      }
       const user = await prisma.user.findFirst({
         where: {
           email: email,
