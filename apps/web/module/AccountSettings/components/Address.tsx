@@ -12,12 +12,12 @@ const Address = () => {
     contentId: "",
   })
   return (
-    <div>
+    <div className="text-sm">
       {!contentState.isButtonClicked ? (
         <div className="flex justify-between py-5">
           <div>
             <h1>Address</h1>
-            <p className="text-base font-light">Enter an Address</p>
+            <p className="font-light">Enter an Address</p>
           </div>
           <button
             onClick={() =>
@@ -47,7 +47,7 @@ const Address = () => {
               Cancel
             </button>
           </div>
-          <p className="text-base font-light">
+          <p className="font-light">
             Use a permanent address where you can receive mail.
           </p>
           <div className="my-4 space-y-4">
@@ -69,7 +69,7 @@ const Address = () => {
               <Input inputId="zipCode" type="number" inputLabel="zip code" />
             </div>
           </div>
-          <Button className="w-20" variant={"success"}>
+          <Button className="w-20" size={"sm"} variant={"success"}>
             Save
           </Button>
         </div>

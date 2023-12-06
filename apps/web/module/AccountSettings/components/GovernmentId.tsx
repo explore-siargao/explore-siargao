@@ -11,12 +11,12 @@ const GovernmentId = () => {
     contentId: "",
   })
   return (
-    <div>
+    <div className="text-sm">
       {!contentState.isButtonClicked ? (
         <div className="flex justify-between py-5">
           <div>
             <h1>Goverment ID</h1>
-            <p className="text-base font-light">Not Provided</p>
+            <p className="font-light">Not Provided</p>
           </div>
           <button
             onClick={() =>
@@ -46,7 +46,7 @@ const GovernmentId = () => {
               Cancel
             </button>
           </div>
-          <p className="text-base font-light">
+          <p className="font-light">
             We’ll need you to add an official government ID. This step helps
             make sure you’re really you.
           </p>
@@ -72,7 +72,7 @@ const GovernmentId = () => {
                     d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
                   />
                 </svg>
-                <p className="mb-2 text-sm text-text-500 d">
+                <p className="mb-2 text-text-500 d">
                   <span className="font-semibold">Click to upload</span> or drag
                   and drop
                 </p>
@@ -89,7 +89,7 @@ const GovernmentId = () => {
             </label>
           </div>
 
-          <Button className="w-20" variant={"success"}>
+          <Button className="w-20"  size={"sm"}  variant={"success"}>
             Save
           </Button>
         </div>

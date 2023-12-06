@@ -12,12 +12,12 @@ const EmergencyContact = () => {
     contentId: "",
   })
   return (
-    <div>
+    <div className="text-sm">
       {!contentState.isButtonClicked ? (
         <div className="flex justify-between py-5">
           <div>
             <h1>Emergency Contact</h1>
-            <p className="text-base font-light">Not provided</p>
+            <p className="font-light">Not provided</p>
           </div>
           <button
             onClick={() =>
@@ -47,7 +47,7 @@ const EmergencyContact = () => {
               Cancel
             </button>
           </div>
-          <p className="text-base font-light">
+          <p className="font-light">
             A trusted contact we can alert in an urgent situation.
           </p>
           <div className="my-4 space-y-4">
@@ -68,7 +68,7 @@ const EmergencyContact = () => {
               <Input inputId="contactNumber" inputLabel="Phone Number" />
             </div>
           </div>
-          <Button className="w-20" variant={"success"}>
+          <Button className="w-20" size={"sm"} variant={"success"}>
             Save
           </Button>
         </div>

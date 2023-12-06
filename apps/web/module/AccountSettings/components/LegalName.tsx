@@ -11,12 +11,12 @@ const LegalName = () => {
     contentId: "",
   })
   return (
-    <div>
+    <div className="text-sm">
       {!contentState.isButtonClicked ? (
         <div className="flex justify-between py-5">
           <div>
             <h1>Legal name</h1>
-            <p className="text-base font-light">Full name</p>
+            <p className="font-light">Full name</p>
           </div>
           <button
             onClick={() =>
@@ -25,7 +25,7 @@ const LegalName = () => {
                 contentId: "legalName",
               })
             }
-            className="underline self-start select-none"
+            className="underline self-start select-none "
           >
             Edit
           </button>
@@ -35,7 +35,7 @@ const LegalName = () => {
           <div className="flex justify-between">
             <h1>Legal name</h1>
             <button
-              className="underline self-start select-none"
+              className="underline self-start select-none "
               onClick={() =>
                 setContentState({
                   isButtonClicked: !contentState.isButtonClicked,
@@ -46,7 +46,7 @@ const LegalName = () => {
               Cancel
             </button>
           </div>
-          <p className="text-base font-light">
+          <p className="font-light">
             This is the name on your travel document, which could be a license
             or a passport.
           </p>
@@ -54,7 +54,7 @@ const LegalName = () => {
             <Input inputId="firstName" inputLabel="First name" />
             <Input inputId="lastName" inputLabel="Last name" />
           </div>
-          <Button className="w-20" variant={"success"}>
+          <Button className="w-20" size={"sm"} variant={"success"}>
             Save
           </Button>
         </div>

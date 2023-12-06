@@ -27,17 +27,11 @@ const AccountSettings = () => {
           </p>
         </div>
         <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-4 my-14">
-          <AccountSettingContainer
+          <AccountMenuContainer
             icon={<IdentificationIcon className="h-8 w-auto text-text-400" />}
             title="Personal Info"
             content="Labore est amet eiusmod proident."
             link={LINK_ACCOUNT_PERSONAL_INFO}
-          />
-          <AccountMenuContainer
-            icon={<ListBulletIcon className="h-8 w-auto text-primary-700" />}
-            title="Bookings"
-            content="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-            link="/"
           />
           <AccountMenuContainer
             icon={<HeartIcon className="h-8 w-auto text-primary-700" />}

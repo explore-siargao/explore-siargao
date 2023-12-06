@@ -12,12 +12,12 @@ const EmailAddress = () => {
     contentId: "",
   })
   return (
-    <div>
+    <div className="text-sm">
       {!contentState.isButtonClicked ? (
         <div className="flex justify-between py-5">
           <div>
             <h1>Email address</h1>
-            <p className="text-base font-light">you@sample.com</p>
+            <p className="font-light">you@sample.com</p>
           </div>
           <button
             onClick={() =>
@@ -47,7 +47,7 @@ const EmailAddress = () => {
               Cancel
             </button>
           </div>
-          <p className="text-base font-light">
+          <p className="font-light">
             Use an address you’ll always have access to.
           </p>
           <Input
@@ -56,7 +56,7 @@ const EmailAddress = () => {
             placeholder="you@sample.com"
             className="my-4"
           />
-          <Button className="w-20" variant={"success"}>
+          <Button className="w-20" size={"sm"} variant={"success"}>
             Save
           </Button>
         </div>
