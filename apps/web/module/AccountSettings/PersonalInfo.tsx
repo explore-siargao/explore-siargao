@@ -11,8 +11,12 @@ import GovernmentId from "./components/GovernmentId"
 import Address from "./components/Address"
 import EmergencyContact from "./components/EmergencyContact"
 import Title from "@/common/components/ui/Title"
-
-const PersonalInfo = () => {
+import useGetPersonalInfo from "./hooks/useGetPersonalInfo"
+import authOptions from "@/common/helpers/authOptions"
+import { getServerSession } from "next-auth"
+import useGetUserDetails from "@/common/hooks/useGetUserdetails"
+const PersonalInfo =  () => {
+  const {data, isPending} = useGetUserDetails()
   return (
     <>
       <Header />
@@ -34,12 +38,36 @@ const PersonalInfo = () => {
           <Title>Personal info</Title>
         </div>
         <div className="divide-y">
-          <LegalName />
-          <EmailAddress />
-          <PhoneNumber />
-          <GovernmentId />
-          <Address />
-          <EmergencyContact />
+        {isPending ? (
+              <div className="animate-spin w-4 h-4 border-2 border-current border-t-transparent text-primary-200 rounded-full">
+                <span className="sr-only">Loading...</span>
+              </div>
+        ):(
+          <div>
+              <LegalName
+               firstName={data?.item?.personalInfo?.firstName} 
+               lastName={data?.item?.personalInfo?.lastName}/>
+              <EmailAddress
+                email={data?.item?.email}            
+                 />
+              <PhoneNumber 
+              phoneNumber={data?.item?.personalInfo?.phoneNumber} 
+              />
+              <GovernmentId 
+              governmentId={data?.item?.personalInfo?.governmentId}
+               />
+              <Address 
+              country={data?.item?.personalInfo?.address?.country}
+              city={data?.item?.personalInfo?.address?.city}
+              province={data?.item?.personalInfo?.address?.province}
+              streetAddress={data?.item?.personalInfo?.address?.streetAddress}
+              zipCode={data?.item?.personalInfo?.address?.zipCode}
+              />
+              <EmergencyContact 
+              emergencyContact={data?.item?.personalInfo?.emergencyContact}
+              />
+          </div>
+          )}
         </div>
       </AccountSettingWrapper>
     </>

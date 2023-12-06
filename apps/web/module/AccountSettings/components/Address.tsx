@@ -1,12 +1,13 @@
 import { Button } from "@/common/components/ui/Button"
 import { Input } from "@/common/components/ui/Input"
+import { IAddress } from "@/common/types/global"
 import React, { useState } from "react"
 
 type PersonalInfoProps = {
   isButtonClicked: boolean
   contentId: string
 }
-const Address = () => {
+const Address = ({streetAddress,country,city,province,zipCode}:IAddress) => {
   const [contentState, setContentState] = useState<PersonalInfoProps>({
     isButtonClicked: false,
     contentId: "",
@@ -17,7 +18,7 @@ const Address = () => {
         <div className="flex justify-between py-5">
           <div>
             <h1>Address</h1>
-            <p className="font-light">Enter an Address</p>
+            <p className="font-light">{zipCode ? `${streetAddress} ${city}, ${province}, ${country}`:"Enter an Address"}</p>
           </div>
           <button
             onClick={() =>

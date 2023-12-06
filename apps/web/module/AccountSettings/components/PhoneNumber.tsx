@@ -1,12 +1,13 @@
 import { Button } from "@/common/components/ui/Button"
 import { Input } from "@/common/components/ui/Input"
+import { IPersonalInfo } from "@/common/types/global"
 import React, { useState } from "react"
 
 type PersonalInfoProps = {
   isButtonClicked: boolean
   contentId: string
 }
-const PhoneNumber = () => {
+const PhoneNumber = ({phoneNumber}:IPersonalInfo) => {
   const [contentState, setContentState] = useState<PersonalInfoProps>({
     isButtonClicked: false,
     contentId: "",
@@ -17,7 +18,7 @@ const PhoneNumber = () => {
         <div className="flex justify-between py-5">
           <div>
             <h1>Phone number</h1>
-            <p className="font-light">Enter a new phone number</p>
+            <p className="font-light">{phoneNumber!=="" ? phoneNumber : "Enter a new phone number"}</p>
           </div>
           <button
             onClick={() =>
@@ -52,7 +53,7 @@ const PhoneNumber = () => {
             touch. You can add other numbers and choose how they’re used
           </p>
           <div className="grid grid-cols-2 gap-4 my-4">
-            <Input inputId="phoneNumber" inputLabel="Phone number" />
+            <Input inputId="phoneNumber" inputLabel="Phone number" defaultValue={phoneNumber} />
           </div>
           <Button className="w-20" size={"sm"}>
             Save
