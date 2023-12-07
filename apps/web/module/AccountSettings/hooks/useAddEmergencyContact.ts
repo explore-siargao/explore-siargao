@@ -16,7 +16,8 @@ export async function addEmergencyContact(
 
 function useAddEmergencyContact(personId: number) {
   const query = useMutation({
-    mutationFn: (props: IEmergencyContact) => addEmergencyContact(personId, props),
+    mutationFn: (props: IEmergencyContact) =>
+      addEmergencyContact(personId, props),
   })
   return query
 }
