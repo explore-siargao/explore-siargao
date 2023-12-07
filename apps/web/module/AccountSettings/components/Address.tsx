@@ -79,7 +79,6 @@ const Address = ({
             </select>
             <div className="grid grid-cols-2 gap-4">
               <Input inputId="streetAddress" inputLabel="Street address" />
-              <Input inputId="aptSuite" inputLabel="Apt, suite (optional)" />
               <Input inputId="city" inputLabel="city" />
               <Input inputId="stateProvice" inputLabel="State/Province" />
               <Input inputId="zipCode" type="number" inputLabel="zip code" />
