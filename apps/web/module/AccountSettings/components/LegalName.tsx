@@ -1,11 +1,13 @@
 import { Button } from "@/common/components/ui/Button"
 import { Input } from "@/common/components/ui/Input"
+import { IPersonalInfo } from "@/common/types/global"
 import React, { useState } from "react"
 type PersonalInfoProps = {
   isButtonClicked: boolean
   contentId: string
 }
-const LegalName = () => {
+
+const LegalName = ({ firstName, lastName }: IPersonalInfo) => {
   const [contentState, setContentState] = useState<PersonalInfoProps>({
     isButtonClicked: false,
     contentId: "",
@@ -16,7 +18,7 @@ const LegalName = () => {
         <div className="flex justify-between py-5">
           <div>
             <h1>Legal name</h1>
-            <p className="font-light">Full name</p>
+            <p className="font-light">{firstName + " " + lastName}</p>
           </div>
           <button
             onClick={() =>
@@ -51,8 +53,16 @@ const LegalName = () => {
             or a passport.
           </p>
           <div className="grid grid-cols-2 gap-4 my-4">
-            <Input inputId="firstName" inputLabel="First name" />
-            <Input inputId="lastName" inputLabel="Last name" />
+            <Input
+              inputId="firstName"
+              inputLabel="First name"
+              defaultValue={firstName}
+            />
+            <Input
+              inputId="lastName"
+              inputLabel="Last name"
+              defaultValue={lastName}
+            />
           </div>
           <Button className="w-20" size={"sm"}>
             Save

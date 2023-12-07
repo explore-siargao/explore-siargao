@@ -1,12 +1,13 @@
 import { Button } from "@/common/components/ui/Button"
 import { Input } from "@/common/components/ui/Input"
+import { IUser } from "@/common/types/global"
 import React, { useState } from "react"
 
 type PersonalInfoProps = {
   isButtonClicked: boolean
   contentId: string
 }
-const EmailAddress = () => {
+const EmailAddress = ({ email }: IUser) => {
   const [contentState, setContentState] = useState<PersonalInfoProps>({
     isButtonClicked: false,
     contentId: "",
@@ -17,7 +18,7 @@ const EmailAddress = () => {
         <div className="flex justify-between py-5">
           <div>
             <h1>Email address</h1>
-            <p className="font-light">you@sample.com</p>
+            <p className="font-light">{email}</p>
           </div>
           <button
             onClick={() =>
@@ -54,6 +55,7 @@ const EmailAddress = () => {
             inputId="email"
             inputLabel="Email Address"
             placeholder="you@sample.com"
+            defaultValue={email}
             className="my-4"
           />
           <Button className="w-20" size={"sm"}>

@@ -10,6 +10,7 @@ import {
   mfa,
   mfaVerify,
   updateUserEmail,
+  userDetails,
 } from './service/auth'
 import {
   addAddress,
@@ -37,6 +38,7 @@ router.post('/auth/forgot-password/verify', forgotVerify)
 router.post('/auth/mfa', mfa)
 router.post('/auth/mfa/verify', mfaVerify)
 router.patch('/auth/:userId', updateUserEmail)
+router.get('/auth/user-details', isUserLoggedIn, userDetails)
 
 //Personal Info
 router.get('/personal-info/:userId', isUserLoggedIn, getPersonalInfo)
