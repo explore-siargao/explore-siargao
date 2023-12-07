@@ -44,7 +44,6 @@ const EmergencyContact = ({ emergencyContact, id }: IPersonalInfo) => {
     }
     mutate({ ...formData }, callBackReq)
   }
-  console.log(emergencyContact)
   return (
     <div className="text-sm">
       {!contentState.isButtonClicked ? (
