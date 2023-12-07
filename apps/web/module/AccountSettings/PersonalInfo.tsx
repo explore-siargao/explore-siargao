@@ -60,7 +60,8 @@ const PersonalInfo = () => {
                 zipCode={data?.item?.personalInfo?.address?.zipCode}
               />
               <EmergencyContact
-                emergencyContact={data?.item?.personalInfo?.emergencyContact}
+                emergencyContact={data?.item?.personalInfo?.emergrncyContacts}
+                id={data?.item?.personalInfo?.id}
               />
             </div>
           )}
