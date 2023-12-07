@@ -13,7 +13,7 @@ function useGetCountries() {
     queryFn: () => getCounties(),
     refetchOnWindowFocus: false,
   })
-  
+
   return query
 }
 export default useGetCountries

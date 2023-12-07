@@ -15,7 +15,7 @@ const Address = ({
   province,
   zipCode,
 }: IAddress) => {
-  const {data:countries, isPending:countriesIsPending} = useGetCountries()
+  const { data: countries, isPending: countriesIsPending } = useGetCountries()
   const [contentState, setContentState] = useState<PersonalInfoProps>({
     isButtonClicked: false,
     contentId: "",
@@ -71,8 +71,8 @@ const Address = ({
               <option selected>Choose a country</option>
               {countriesIsPending ? (
                 <option>Loading</option>
-              ):(
-                countries.map((country: any)=>(
+              ) : (
+                countries.map((country: any) => (
                   <option key={country.country}>{country.country}</option>
                 ))
               )}
