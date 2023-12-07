@@ -40,10 +40,12 @@ const GuestContribution = () => {
       </div>
       <p className="font-light mt-10">
         100% of all contributions will be deposited into your payout account,
-        unless you have an account balance. Your payout is subject to the
-        <a href="/" className="font-semibold">Payment Terms of Service.</a>
+        unless you have an account balance. Your payout is subject to the{" "}
+        <a href="/" className="font-semibold">
+          Payment Terms of Service.
+        </a>{" "}
         Please note that contributions may not be tax deductible or eligible for
-        tax credits
+        tax credits.
       </p>
     </div>
   )
