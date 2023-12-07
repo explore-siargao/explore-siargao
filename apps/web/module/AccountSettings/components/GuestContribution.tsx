@@ -43,7 +43,7 @@ const GuestContribution = () => {
         unless you have an account balance. Your payout is subject to the
         <a href="/" className="font-semibold">
           Payment Terms of Service.
-        </a>{" "}
+        </a>
         Please note that contributions may not be tax deductible or eligible for
         tax credits
       </p>
