@@ -1,7 +1,6 @@
 import { Button } from "@/common/components/ui/Button"
 import { Input } from "@/common/components/ui/Input"
 import { IPersonalInfo } from "@/common/types/global"
-import { Props } from "next/script"
 import React, { useState } from "react"
 type PersonalInfoProps = {
   isButtonClicked: boolean

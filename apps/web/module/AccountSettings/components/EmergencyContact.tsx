@@ -1,6 +1,6 @@
 import { Button } from "@/common/components/ui/Button"
 import { Input } from "@/common/components/ui/Input"
-import { IEmergencyContact, IPersonalInfo } from "@/common/types/global"
+import { IPersonalInfo } from "@/common/types/global"
 import React, { useState } from "react"
 
 type PersonalInfoProps = {

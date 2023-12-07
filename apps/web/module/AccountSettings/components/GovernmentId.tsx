@@ -18,7 +18,7 @@ const GovernmentId = ({ governmentId }: IPersonalInfo) => {
           <div>
             <h1>Goverment ID</h1>
             <p className="font-light">
-              {governmentId ? governmentId : "Not Provided"}
+              {governmentId ? governmentId.toString() : "Not Provided"}
             </p>
           </div>
           <button

@@ -11,9 +11,6 @@ import GovernmentId from "./components/GovernmentId"
 import Address from "./components/Address"
 import EmergencyContact from "./components/EmergencyContact"
 import Title from "@/common/components/ui/Title"
-import useGetPersonalInfo from "./hooks/useGetPersonalInfo"
-import authOptions from "@/common/helpers/authOptions"
-import { getServerSession } from "next-auth"
 import useGetUserDetails from "@/common/hooks/useGetUserdetails"
 const PersonalInfo = () => {
   const { data, isPending } = useGetUserDetails()
