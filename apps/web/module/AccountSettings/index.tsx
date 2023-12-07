@@ -12,7 +12,6 @@ import {
   LINK_ACCOUNT_PERSONAL_INFO,
 } from "@/common/constants/links"
 import { Title } from "@/common/components/ui/Title"
-import { ChevronRightIcon, HomeIcon } from "@heroicons/react/20/solid"
 
 const pages = [
   {

@@ -9,12 +9,12 @@ import mastercard from "@/common/assets/mastercard.png"
 import visa from "@/common/assets/visa.png"
 import Image from "next/image"
 
-interface addCardDetailModalProps {
+interface CardDetailModal {
   isOpen: boolean
   onClose: () => void
 }
 
-const AddCardDetailModal = ({ isOpen, onClose }: addCardDetailModalProps) => {
+const AddCardDetailModal = ({ isOpen, onClose }: CardDetailModal) => {
   const cancelButtonRef = useRef(null)
   return (
     <Transition.Root show={isOpen} as={Fragment}>

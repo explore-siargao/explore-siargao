@@ -21,7 +21,15 @@ const renderGuestContribution = () => {
 }
 const PaymentPayout = () => {
   const [tableState, setTableState] = useState(0)
+  let content
 
+  if (tableState === 0) {
+    content = renderPayments()
+  } else if (tableState === 1) {
+    content = renderPayouts()
+  } else {
+    content = renderGuestContribution()
+  }
   return (
     <>
       <Header />
@@ -78,11 +86,7 @@ const PaymentPayout = () => {
               Guest contributions
             </button>
           </div>
-          {tableState === 0
-            ? renderPayments()
-            : tableState === 1
-              ? renderPayouts()
-              : renderGuestContribution()}
+          {content}
         </div>
       </AccountSettingWrapper>
     </>

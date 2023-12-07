@@ -10,8 +10,6 @@ type Props = {
 const ModalContainer = ({ children, title, onClose, onBack }: Props) => {
   return (
     <>
-      {/* {children} */}
-      {/* Add all auth modal here */}
       <div className="bg-white shadow rounded-2xl ">
         <div className="flex border-b-gray-200 border-b p-4">
           <div>
