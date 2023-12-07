@@ -1,5 +1,6 @@
 import { Button } from "@/common/components/ui/Button"
 import { Input } from "@/common/components/ui/Input"
+import useGetCountries from "@/common/hooks/useGetCounties"
 import { IAddress } from "@/common/types/global"
 import React, { useState } from "react"
 
@@ -14,6 +15,7 @@ const Address = ({
   province,
   zipCode,
 }: IAddress) => {
+  const { data: countries, isPending: countriesIsPending } = useGetCountries()
   const [contentState, setContentState] = useState<PersonalInfoProps>({
     isButtonClicked: false,
     contentId: "",
@@ -67,10 +69,13 @@ const Address = ({
               className="pr-10 text-text-900 focus-within:z-10 focus-within:ring-2 focus-within:ring-text-600 text-sm rounded-lg block h-14 w-[490px] p-2.5 "
             >
               <option selected>Choose a country</option>
-              <option value="US">United States</option>
-              <option value="CA">Canada</option>
-              <option value="FR">France</option>
-              <option value="DE">Germany</option>
+              {countriesIsPending ? (
+                <option>Loading</option>
+              ) : (
+                countries.map((country: any) => (
+                  <option key={country.country}>{country.country}</option>
+                ))
+              )}
             </select>
             <div className="grid grid-cols-2 gap-4">
               <Input inputId="streetAddress" inputLabel="Street address" />
