@@ -1,11 +1,12 @@
 import { Button } from "@/common/components/ui/Button"
+import { IPersonalInfo } from "@/common/types/global"
 import React, { useState } from "react"
 
 type PersonalInfoProps = {
   isButtonClicked: boolean
   contentId: string
 }
-const GovernmentId = () => {
+const GovernmentId = ({ governmentId }: IPersonalInfo) => {
   const [contentState, setContentState] = useState<PersonalInfoProps>({
     isButtonClicked: false,
     contentId: "",
@@ -16,7 +17,9 @@ const GovernmentId = () => {
         <div className="flex justify-between py-5">
           <div>
             <h1>Goverment ID</h1>
-            <p className="font-light">Not Provided</p>
+            <p className="font-light">
+              {governmentId ? governmentId.toString() : "Not Provided"}
+            </p>
           </div>
           <button
             onClick={() =>

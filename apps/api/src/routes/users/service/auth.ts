@@ -1,7 +1,7 @@
 import { Response, Request } from 'express'
 import { PrismaClient, RegistrationType } from '@prisma/client'
 import { REQUIRED_VALUE_EMPTY } from '@repo/constants'
-import jwt from 'jsonwebtoken'
+import jwt, { Secret } from 'jsonwebtoken'
 import { encryptKey, signKey, webUrl } from '@/common/config'
 import CryptoJS from 'crypto-js'
 import dayjs from 'dayjs'
@@ -562,6 +562,58 @@ export const updateUserEmail = async (req: Request, res: Response) => {
       items: null,
       itemCount: 0,
       message: err.message,
+    })
+  }
+}
+
+export const userDetails = async (req: Request, res: Response) => {
+  const bearerHeader = req.headers['authorization']
+  if (bearerHeader) {
+    const bearer = bearerHeader.split(' ')
+    const bearerToken = String(bearer[1])
+    const prisma = new PrismaClient()
+    try {
+      const { email }: any = jwt.verify(bearerToken, signKey as Secret)
+      const user = await prisma.user.findFirst({
+        where: {
+          email: email,
+          deletedAt: null,
+        },
+        include: {
+          personalInfo: {
+            include: {
+              address: true,
+              emergrncyContacts: true,
+            },
+          },
+        },
+      })
+      res.json({
+        error: false,
+        item: {
+          id: user?.id,
+          email: user?.email,
+          RegistrationType: user?.registrationType,
+          profilePicture: user?.profilePicture,
+          personalInfo: user?.personalInfo,
+        },
+        itemCount: 0,
+        message: '',
+      })
+    } catch (err: any) {
+      res.json({
+        error: true,
+        item: null,
+        itemCount: 0,
+        message: err.message,
+      })
+    }
+  } else {
+    res.json({
+      error: true,
+      item: null,
+      itemCount: 0,
+      message: `You are not authorized to perform this action`,
     })
   }
 }

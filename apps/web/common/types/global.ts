@@ -1,15 +1,12 @@
 export interface IUser {
   id?: number
-  firstName: string
-  middleName?: string
-  lastName: string
   role?: UserRole
   registrationType?: RegistrationType
   email: string
   address?: string
-  password: string
+  password?: string
   contactNumber?: number
-  birthDate: string
+  birthDate?: string
   createdAt?: string
   deletedAt?: string
   updatedAt?: string
@@ -18,8 +15,8 @@ export interface IUser {
 export interface IPersonalInfo {
   id?: number
   userId?: number
-  firstName: string
-  lastName: string
+  firstName?: string
+  lastName?: string
   middleName?: string
   birthDate?: string
   governmentId?: string
