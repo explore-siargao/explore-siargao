@@ -10,12 +10,6 @@ import Payments from "./components/Payments"
 import Payouts from "./components/Payouts"
 import GuestContribution from "./components/GuestContribution"
 
-const tabs = [
-  { name: "My Account", href: "#", current: false },
-  { name: "Company", href: "#", current: false },
-  { name: "Team Members", href: "#", current: true },
-  { name: "Billing", href: "#", current: false },
-]
 const renderPayments = () => {
   return <Payments />
 }
