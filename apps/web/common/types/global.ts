@@ -46,8 +46,8 @@ export interface IEmergencyContact {
   peronalInfoId?: number
   name: string
   relationship: string
-  email: string
-  phoneNumber: string
+  email?: string
+  phoneNumber?: string
   createdAt?: string
   updatedAt?: string
   deletedAt?: string
