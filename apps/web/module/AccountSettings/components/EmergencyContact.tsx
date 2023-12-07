@@ -55,7 +55,9 @@ const EmergencyContact = ({ emergencyContact, id }: IPersonalInfo) => {
               <p className="font-light">Not provided</p>
             ) : (
               emergencyContact?.map((contact: IEmergencyContact) => (
-                <p key={contact.id} className="font-light">{contact.name}</p>
+                <p key={contact.id} className="font-light">
+                  {contact.name}
+                </p>
               ))
             )}
           </div>
