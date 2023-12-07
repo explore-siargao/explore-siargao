@@ -5,11 +5,14 @@ export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   inputId: string
   inputLabel: string
+  errorMessage?: string
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type, inputId, inputLabel, ...props }, ref) => {
+  ({ className, type, inputId, inputLabel, errorMessage, ...props }, ref) => {
     return (
+      <>
+      <div>
       <div
         className={cn(
           "relative rounded-md px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-text-200 focus-within:z-10 focus-within:ring-2 focus-within:ring-text-600",
@@ -29,7 +32,11 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           ref={ref}
           {...props}
         />
+        
       </div>
+      <p className="text-error-600 ml-1">{errorMessage}</p>
+      </div>
+      </>
     )
   }
 )
