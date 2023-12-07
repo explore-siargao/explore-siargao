@@ -11,7 +11,6 @@ export interface InputProps
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, inputId, inputLabel, errorMessage, ...props }, ref) => {
     return (
-      <>
         <div>
           <div
             className={cn(
@@ -35,7 +34,6 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           </div>
           <p className="text-error-600 ml-1">{errorMessage}</p>
         </div>
-      </>
     )
   }
 )
