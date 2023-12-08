@@ -17,7 +17,12 @@ import Cookies from "js-cookie"
 import { APP_NAME } from "@repo/constants"
 import dayjs from "dayjs"
 import { Select } from "@/common/components/ui/Select"
-import { CALENDAR_DAYS, CALENDAR_MONTHS_NUM, CALENDAR_MONTHS_STR, CALENDAR_YEARS } from "../constants"
+import {
+  CALENDAR_DAYS,
+  CALENDAR_MONTHS_NUM,
+  CALENDAR_MONTHS_STR,
+  CALENDAR_YEARS,
+} from "../constants"
 import useGlobalInputEmail from "../store/useGlobalInputEmail"
 
 type Props = {
@@ -29,9 +34,11 @@ const SignUpForm = ({ isSocial = false }: Props) => {
   const { data: session } = useSession()
   const { mutate: addUser, isPending: addUserIsPending } = useRegister()
   const createAccountEmail = useGlobalInputEmail((state) => state.email)
-  const { register, handleSubmit } = useForm<T_Register & { month: string, year: string, day: string }>({
+  const { register, handleSubmit } = useForm<
+    T_Register & { month: string; year: string; day: string }
+  >({
     values: {
-      email: session?.user?.email as string || createAccountEmail || '',
+      email: (session?.user?.email as string) || createAccountEmail || "",
       firstName: "",
       lastName: "",
       birthDate: "",
@@ -48,7 +55,9 @@ const SignUpForm = ({ isSocial = false }: Props) => {
       ? capitalizeFirstLetter(params.type as string)
       : "Manual"
 
-  const onSubmit = async (formData: T_Register & { month: string, year: string, day: string }) => {
+  const onSubmit = async (
+    formData: T_Register & { month: string; year: string; day: string }
+  ) => {
     const callBackReq = {
       onSuccess: (data: any) => {
         if (!data.error) {
@@ -74,7 +83,7 @@ const SignUpForm = ({ isSocial = false }: Props) => {
     }
     // TODO: ADD CSRF TOKEN
     const { email, firstName, lastName, month, day, year, password } = formData
-    const birthDate = dayjs(`${month}-${day}-${year}`, "MM-DD-YYYY");
+    const birthDate = dayjs(`${month}-${day}-${year}`, "MM-DD-YYYY")
     addUser(
       {
         email,
@@ -133,7 +142,9 @@ const SignUpForm = ({ isSocial = false }: Props) => {
                 defaultValue="Day"
                 {...register("day", { required: true })}
               >
-                <option disabled value="">Day</option>
+                <option disabled value="">
+                  Day
+                </option>
                 {CALENDAR_DAYS.map((day) => (
                   <option key={day} value={`${day}`}>
                     {day}
@@ -144,7 +155,9 @@ const SignUpForm = ({ isSocial = false }: Props) => {
                 defaultValue="Year"
                 {...register("year", { required: true })}
               >
-                <option disabled value="">Year</option>
+                <option disabled value="">
+                  Year
+                </option>
                 {CALENDAR_YEARS.map((year) => (
                   <option key={year} value={`${year}`}>
                     {year}
@@ -184,8 +197,8 @@ const SignUpForm = ({ isSocial = false }: Props) => {
             )}
             <p className="text-xs mt-4 text-text-500 tracking-tighter">
               By selecting{" "}
-              <span className="font-bold"> Agree and continue,</span> I agree to
-              {" "}{APP_NAME}'s{" "}
+              <span className="font-bold"> Agree and continue,</span> I agree to{" "}
+              {APP_NAME}'s{" "}
               <Link href="#" className="text-info-500 font-bold underline">
                 Terms of Service, Payments Terms of Service,
               </Link>{" "}

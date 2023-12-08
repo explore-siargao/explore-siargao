@@ -17,7 +17,7 @@ const CreateAccount = () => {
       title="Create account using your email"
       onBack={() => router.push("/login")}
     >
-      {session || createAccountEmail ? <SignUpForm /> : <PreSignUpForm/>}
+      {session || createAccountEmail ? <SignUpForm /> : <PreSignUpForm />}
     </AuthContainer>
   )
 }
