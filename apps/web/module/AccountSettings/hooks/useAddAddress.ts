@@ -16,8 +16,7 @@ export async function addAddress(
 
 function useAddAddress(personId: number) {
   const query = useMutation({
-    mutationFn: (props: IAddress) =>
-      addAddress(personId, props),
+    mutationFn: (props: IAddress) => addAddress(personId, props),
   })
   return query
 }

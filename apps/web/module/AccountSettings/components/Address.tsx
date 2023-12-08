@@ -25,12 +25,7 @@ const Address = ({
     isButtonClicked: false,
     contentId: "",
   })
-  const {
-    register,
-    reset,
-    handleSubmit,
-    getValues,
-  } = useForm<IAddress>()
+  const { register, reset, handleSubmit, getValues } = useForm<IAddress>()
   const { mutate, isPending } = useAddAddress(id as number)
   const queryClient = useQueryClient()
 
@@ -51,7 +46,7 @@ const Address = ({
         toast.error(String(err))
       },
     }
-    mutate({ ...formData, zipCode:Number(getValues("zipCode"))}, callBackReq)
+    mutate({ ...formData, zipCode: Number(getValues("zipCode")) }, callBackReq)
   }
 
   return (
