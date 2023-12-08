@@ -34,13 +34,13 @@ const PersonalInfo = () => {
           </div>
           <Title>Personal info</Title>
         </div>
-        <div className="divide-y">
+        <div>
           {isPending ? (
             <div className="animate-spin w-4 h-4 border-2 border-current border-t-transparent text-primary-200 rounded-full">
               <span className="sr-only">Loading...</span>
             </div>
           ) : (
-            <div>
+            <div className="divide-y">
               <LegalName
                 firstName={data?.item?.personalInfo?.firstName}
                 lastName={data?.item?.personalInfo?.lastName}
