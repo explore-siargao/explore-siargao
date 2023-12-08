@@ -16,6 +16,7 @@ import { signIn, useSession } from "next-auth/react"
 import Cookies from "js-cookie"
 import { APP_NAME } from "@repo/constants"
 import dayjs from "dayjs"
+import { Select } from "@/common/components/ui/Select"
 
 type Props = {
   isSocial?: boolean
@@ -74,7 +75,17 @@ const SignUpForm = ({ isSocial = false }: Props) => {
       callBackReq
     )
   }
+  const dayCount: number[] = []
 
+  for (let index = 1; index <= 31; index++) {
+    dayCount.push(index)
+  }
+  const startYear = 1900
+  const currentYear = new Date().getFullYear()
+  const years: number[] = []
+  for (let year = currentYear; year >= startYear; year--) {
+    years.push(year)
+  }
   return (
     <div className="p-6">
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -102,15 +113,38 @@ const SignUpForm = ({ isSocial = false }: Props) => {
             </p>
           </div>
           <div>
-            <div className="isolate -space-y-px rounded-xl shadow-sm">
-              <Input
-                inputLabel="Birthdate"
-                inputId="birthdate"
-                type="date"
-                max={dayjs().format("YYYY-MM-DD")}
-                {...register("birthDate", { required: true })}
-                disabled={addUserIsPending}
-              />
+            <div className="grid grid-cols-3 gap-4">
+              <Select SelectId="month" SelectValue="Month">
+                <option disabled>Month</option>
+                <option value="January">January</option>
+                <option value="February">February</option>
+                <option value="March">March</option>
+                <option value="April">April</option>
+                <option value="May">May</option>
+                <option value="June">June</option>
+                <option value="July">July</option>
+                <option value="August">August</option>
+                <option value="September">September</option>
+                <option value="October">October</option>
+                <option value="November">November</option>
+                <option value="December">December</option>
+              </Select>
+              <Select SelectId="day" SelectValue="Day">
+                <option disabled>Day</option>
+                {dayCount.map((day) => (
+                  <option key={day} value={`${day}`}>
+                    {day}
+                  </option>
+                ))}
+              </Select>
+              <Select SelectId="year" SelectValue="Year">
+                <option disabled>Year</option>
+                {years.map((year) => (
+                  <option key={year} value={`${year}`}>
+                    {year}
+                  </option>
+                ))}
+              </Select>
             </div>
             <p className="text-xs mt-1 text-text-500">
               To sign up, you need to be at least 18. Your birthday won’t be
