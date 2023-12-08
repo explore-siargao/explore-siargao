@@ -11,7 +11,7 @@ import GovernmentId from "./components/GovernmentId"
 import Address from "./components/Address"
 import EmergencyContact from "./components/EmergencyContact"
 import { Title } from "@/common/components/ui/Title"
-import useGetUserDetails from "@/common/hooks/useGetUserdetails"
+import useGetUserDetails from "@/common/hooks/useGetUserDetails"
 
 const PersonalInfo = () => {
   const { data, isPending } = useGetUserDetails()
@@ -59,6 +59,7 @@ const PersonalInfo = () => {
                 province={data?.item?.personalInfo?.address?.province}
                 streetAddress={data?.item?.personalInfo?.address?.streetAddress}
                 zipCode={data?.item?.personalInfo?.address?.zipCode}
+                id={data?.item?.personalInfo?.id}
               />
               <EmergencyContact
                 emergencyContact={data?.item?.personalInfo?.emergrncyContacts}
