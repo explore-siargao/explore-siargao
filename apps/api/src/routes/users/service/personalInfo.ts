@@ -203,24 +203,46 @@ export const addAddress = async (req: Request, res: Response) => {
           id: personalInfoId,
           deletedAt: null,
         },
+        include: {
+          address: true,
+        },
       })
 
       if (getPersonalInfo) {
-        const newAddress = await prisma.addresses.create({
-          data: {
-            peronalInfoId: personalInfoId,
-            country: country,
-            streetAddress: streetAddress,
-            city: city,
-            province: province,
-            zipCode: zipCode,
-          },
-        })
+        let returnAddress = null
+        if (getPersonalInfo.address === null) {
+          const newAddress = await prisma.addresses.create({
+            data: {
+              peronalInfoId: personalInfoId,
+              country: country,
+              streetAddress: streetAddress,
+              city: city,
+              province: province,
+              zipCode: zipCode,
+            },
+          })
+          returnAddress = newAddress
+        } else {
+          const updateAddress = await prisma.addresses.update({
+            where: {
+              peronalInfoId: getPersonalInfo.id,
+              id: getPersonalInfo.address?.id,
+            },
+            data: {
+              streetAddress: streetAddress,
+              city: city,
+              province: province,
+              country: country,
+              zipCode: zipCode,
+            },
+          })
+          returnAddress = updateAddress
+        }
         res.json({
           error: false,
-          items: newAddress,
+          items: returnAddress,
           itemCount: 1,
-          message: 'Address successfully added',
+          message: 'Address successfully updated',
         })
       } else {
         res.json({
