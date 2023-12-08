@@ -20,11 +20,16 @@ import Image from "next/image"
 import { Input } from "@/common/components/ui/Input"
 import { signIn } from "next-auth/react"
 import { LINK_FORGOT_PASSWORD } from "../constants/links"
-import useForgotPasswordEmail from "../store/useForgotPasswordEmail"
+import useGlobalInputEmail from "../store/useGlobalInputEmail"
+
+enum Position {
+  "end",
+  "start",
+}
 
 const LoginForm = () => {
   const router = useRouter()
-  const updateEmail = useForgotPasswordEmail((state) => state.update)
+  const updateEmail = useGlobalInputEmail((state) => state.update)
   const { mutate: loginUser, isPending: isLoginPending } = useLogin()
   const { register, handleSubmit, getValues } = useForm<IUser>()
   const onSubmit = (formData: IUser) => {
@@ -48,10 +53,6 @@ const LoginForm = () => {
       },
     }
     loginUser({ ...formData }, callBackReq)
-  }
-  enum Position {
-    "end",
-    "start",
   }
 
   return (

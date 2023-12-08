@@ -8,11 +8,11 @@ import { useForm } from "react-hook-form"
 import useForgotPassword, { TForgotPassword } from "../hooks/useForgotPassword"
 import toast from "react-hot-toast"
 import ReCAPTCHA from "react-google-recaptcha"
-import useForgotPasswordEmail from "../store/useForgotPasswordEmail"
+import useGlobalInputEmail from "../store/useGlobalInputEmail"
 
 const ForgotPassword = () => {
   const recaptchaRef = useRef<ReCAPTCHA>(null)
-  const forgotPassEmail = useForgotPasswordEmail((state) => state.email)
+  const forgotPassEmail = useGlobalInputEmail((state) => state.email)
   const [captcha, setCaptcha] = useState<string | null>("")
   const { mutate: forgotPassword, isPending: isForgotPasswordPending } =
     useForgotPassword()

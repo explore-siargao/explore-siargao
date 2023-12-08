@@ -16,6 +16,14 @@ import { signIn, useSession } from "next-auth/react"
 import Cookies from "js-cookie"
 import { APP_NAME } from "@repo/constants"
 import dayjs from "dayjs"
+import { Select } from "@/common/components/ui/Select"
+import {
+  CALENDAR_DAYS,
+  CALENDAR_MONTHS_NUM,
+  CALENDAR_MONTHS_STR,
+  CALENDAR_YEARS,
+} from "../constants"
+import useGlobalInputEmail from "../store/useGlobalInputEmail"
 
 type Props = {
   isSocial?: boolean
@@ -25,13 +33,19 @@ const SignUpForm = ({ isSocial = false }: Props) => {
   const router = useRouter()
   const { data: session } = useSession()
   const { mutate: addUser, isPending: addUserIsPending } = useRegister()
-  const { register, handleSubmit } = useForm<T_Register>({
+  const createAccountEmail = useGlobalInputEmail((state) => state.email)
+  const { register, handleSubmit } = useForm<
+    T_Register & { month: string; year: string; day: string }
+  >({
     values: {
-      email: session?.user?.email as string,
+      email: (session?.user?.email as string) || createAccountEmail || "",
       firstName: "",
       lastName: "",
       birthDate: "",
       password: "",
+      month: "",
+      year: "",
+      day: "",
       registrationType: RegistrationType.Manual,
     },
   })
@@ -41,7 +55,9 @@ const SignUpForm = ({ isSocial = false }: Props) => {
       ? capitalizeFirstLetter(params.type as string)
       : "Manual"
 
-  const onSubmit = async (formData: T_Register) => {
+  const onSubmit = async (
+    formData: T_Register & { month: string; year: string; day: string }
+  ) => {
     const callBackReq = {
       onSuccess: (data: any) => {
         if (!data.error) {
@@ -66,9 +82,15 @@ const SignUpForm = ({ isSocial = false }: Props) => {
       },
     }
     // TODO: ADD CSRF TOKEN
+    const { email, firstName, lastName, month, day, year, password } = formData
+    const birthDate = dayjs(`${month}-${day}-${year}`, "MM-DD-YYYY")
     addUser(
       {
-        ...formData,
+        email,
+        firstName,
+        lastName,
+        birthDate: birthDate.format(),
+        password,
         registrationType: signUpType as unknown as RegistrationType,
       },
       callBackReq
@@ -102,15 +124,46 @@ const SignUpForm = ({ isSocial = false }: Props) => {
             </p>
           </div>
           <div>
-            <div className="isolate -space-y-px rounded-xl shadow-sm">
-              <Input
-                inputLabel="Birthdate"
-                inputId="birthdate"
-                type="date"
-                max={dayjs().format("YYYY-MM-DD")}
-                {...register("birthDate", { required: true })}
-                disabled={addUserIsPending}
-              />
+            <div className="grid grid-cols-3 gap-4">
+              <Select
+                defaultValue="Month"
+                {...register("month", { required: true })}
+              >
+                <option disabled value="">
+                  Month
+                </option>
+                {CALENDAR_MONTHS_STR.map((month, index) => (
+                  <option key={month} value={CALENDAR_MONTHS_NUM[index]}>
+                    {month}
+                  </option>
+                ))}
+              </Select>
+              <Select
+                defaultValue="Day"
+                {...register("day", { required: true })}
+              >
+                <option disabled value="">
+                  Day
+                </option>
+                {CALENDAR_DAYS.map((day) => (
+                  <option key={day} value={`${day}`}>
+                    {day}
+                  </option>
+                ))}
+              </Select>
+              <Select
+                defaultValue="Year"
+                {...register("year", { required: true })}
+              >
+                <option disabled value="">
+                  Year
+                </option>
+                {CALENDAR_YEARS.map((year) => (
+                  <option key={year} value={`${year}`}>
+                    {year}
+                  </option>
+                ))}
+              </Select>
             </div>
             <p className="text-xs mt-1 text-text-500">
               To sign up, you need to be at least 18. Your birthday won’t be
@@ -144,7 +197,7 @@ const SignUpForm = ({ isSocial = false }: Props) => {
             )}
             <p className="text-xs mt-4 text-text-500 tracking-tighter">
               By selecting{" "}
-              <span className="font-bold"> Agree and continue,</span> I agree to
+              <span className="font-bold"> Agree and continue,</span> I agree to{" "}
               {APP_NAME}'s{" "}
               <Link href="#" className="text-info-500 font-bold underline">
                 Terms of Service, Payments Terms of Service,
