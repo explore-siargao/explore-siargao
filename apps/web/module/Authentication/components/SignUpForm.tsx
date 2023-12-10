@@ -100,7 +100,7 @@ const SignUpForm = ({ isSocial = false }: Props) => {
   return (
     <div className="p-6">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="space-y-4 overflow-y-auto">
+        <div className="space-y-4">
           <div>
             <div>
               <Input
@@ -166,8 +166,8 @@ const SignUpForm = ({ isSocial = false }: Props) => {
               </Select>
             </div>
             <p className="text-xs mt-1 text-text-500">
-              To sign up, you need to be at least 18. Your birthday won’t be
-              shared with other people who use {APP_NAME}.
+              To sign up, you need to be at least 18. We will not share your
+              personal information.
             </p>
           </div>
           <div>
@@ -196,20 +196,15 @@ const SignUpForm = ({ isSocial = false }: Props) => {
               />
             )}
             <p className="text-xs mt-4 text-text-500 tracking-tighter">
-              By selecting{" "}
-              <span className="font-bold"> Agree and continue,</span> I agree to{" "}
-              {APP_NAME}'s{" "}
-              <Link href="#" className="text-info-500 font-bold underline">
-                Terms of Service, Payments Terms of Service,
+              By signing in or creating an account, you agree with our{" "}
+              <Link href="#" className="text-info-500 underline">
+                Terms & conditions
               </Link>{" "}
               and{" "}
-              <Link href="#" className="text-info-500 font-bold underline">
-                Nondiscrimination Policy
-              </Link>{" "}
-              and acknowledge the{" "}
-              <Link href="#" className="text-info-500 font-bold underline">
-                Privacy Policy
+              <Link href="#" className="text-info-500 underline">
+                Privacy statement
               </Link>
+              .
             </p>
           </div>
           <Button type="submit" className="w-full my-4">
@@ -223,12 +218,6 @@ const SignUpForm = ({ isSocial = false }: Props) => {
           </Button>
           <div className="w-full border-b-2 mt-2" />
           <div className="text-xs font-medium mt-1 text-text-500 tracking-tighter">
-            <p>
-              {APP_NAME} will send you members-only deals, inspiration,
-              marketing emails, and push notifications. You can opt out of
-              receiving these at any time in your account settings or directly
-              from the marketing notification.
-            </p>
             <div className="relative flex items-start mt-4">
               <div className="flex h-6 items-center">
                 <input
@@ -240,9 +229,10 @@ const SignUpForm = ({ isSocial = false }: Props) => {
                 />
                 <label
                   htmlFor="comments"
-                  className="text-text-500 ml-3 text-xs leading-6"
+                  className="text-text-500 ml-3 text-xs leading-2"
                 >
-                  I don’t want to receive marketing messages from {APP_NAME}
+                  I’d like to receive travel tips, uplifting content, and
+                  exclusive deals from {APP_NAME}. You can opt out at any time.
                 </label>
               </div>
             </div>
