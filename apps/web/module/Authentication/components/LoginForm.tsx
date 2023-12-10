@@ -79,19 +79,19 @@ const LoginForm = () => {
           />
         </div>
         <div className="flex mt-2">
+          <p className="text-xs text-text-500 tracking-tighter">
+            By signing in or creating an account, you agree with our{" "}
+            <Link href="#" className="text-info-500 underline">
+              Terms & conditions
+            </Link>{" "}
+            and{" "}
+            <Link href="#" className="text-info-500 underline">
+              Privacy statement
+            </Link>
+            .
+          </p>
+        </div>
 
-        <p className="text-xs text-text-500 tracking-tighter">
-              By signing in or creating an account, you agree with our{" "}
-              <Link href="#" className="text-info-500 underline">
-                Terms & conditions
-              </Link>{" "}
-              and{" "}
-              <Link href="#" className="text-info-500 underline">
-                Privacy statement
-              </Link>.
-            </p>
-            </div>
-            
         <Button
           type="submit"
           variant="default"
@@ -107,7 +107,7 @@ const LoginForm = () => {
           )}
         </Button>
         <div className="flex justify-end mb-2">
-                    <Link
+          <Link
             href={LINK_FORGOT_PASSWORD}
             className="font-semibold underline text-xs text-text-300 hover:text-text-600"
             onClick={() => {

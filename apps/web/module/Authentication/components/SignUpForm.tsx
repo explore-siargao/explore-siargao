@@ -166,7 +166,8 @@ const SignUpForm = ({ isSocial = false }: Props) => {
               </Select>
             </div>
             <p className="text-xs mt-1 text-text-500">
-              To sign up, you need to be at least 18. We will not share your personal information.
+              To sign up, you need to be at least 18. We will not share your
+              personal information.
             </p>
           </div>
           <div>
@@ -194,7 +195,7 @@ const SignUpForm = ({ isSocial = false }: Props) => {
                 disabled={addUserIsPending}
               />
             )}
-        <p className="text-xs mt-4 text-text-500 tracking-tighter">
+            <p className="text-xs mt-4 text-text-500 tracking-tighter">
               By signing in or creating an account, you agree with our{" "}
               <Link href="#" className="text-info-500 underline">
                 Terms & conditions
@@ -202,7 +203,8 @@ const SignUpForm = ({ isSocial = false }: Props) => {
               and{" "}
               <Link href="#" className="text-info-500 underline">
                 Privacy statement
-              </Link>.
+              </Link>
+              .
             </p>
           </div>
           <Button type="submit" className="w-full my-4">
@@ -229,7 +231,8 @@ const SignUpForm = ({ isSocial = false }: Props) => {
                   htmlFor="comments"
                   className="text-text-500 ml-3 text-xs leading-2"
                 >
-                  I’d like to receive travel tips, uplifting content, and exclusive deals from {APP_NAME}. You can opt out at any time.
+                  I’d like to receive travel tips, uplifting content, and
+                  exclusive deals from {APP_NAME}. You can opt out at any time.
                 </label>
               </div>
             </div>
