@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect } from "react"
+import React from "react"
 import LoginForm from "@/module/Authentication/components/LoginForm"
 import AuthContainer from "@/common/components/AuthContainer"
 import { useRouter } from "next/navigation"

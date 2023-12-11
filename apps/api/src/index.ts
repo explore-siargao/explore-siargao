@@ -1,4 +1,4 @@
-import express, { Request } from 'express'
+import express from 'express'
 import cors from 'cors'
 import cookies from 'cookie-parser'
 import { port, origins } from '@/common/config'

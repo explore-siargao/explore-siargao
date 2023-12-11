@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from 'express'
-import { nodeEnv, webUrl } from '@/common/config'
-import { ENV_PROD } from '@/common/constants';
+import { webUrl } from '@/common/config'
 
 const isOriginValid = async (
   req: Request,
