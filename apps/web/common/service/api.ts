@@ -71,7 +71,7 @@ export class ApiService {
     return (await res).json()
   }
 
-  async delete(endpoint: string, payload: { [key: string]: string }) {
+  async delete(endpoint: string) {
     const otherOptions = this.constructOtherOptions()
 
     const res = fetch(`${this.BASE_URL}${endpoint}`, {

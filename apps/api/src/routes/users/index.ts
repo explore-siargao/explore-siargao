@@ -53,7 +53,7 @@ router.post('/:personalInfoId/address/add/', isUserLoggedIn, addAddress)
 router.patch('/address/:userId', isUserLoggedIn, editAddress)
 router.patch('/personal-info/:userId', isUserLoggedIn, updatePersonalInfo)
 router.delete(
-  '/:userId/emergency-contact/remove/:emergencyContactId',
+  '/:peronalInfoId/emergency-contact/:emergencyContactId',
   isUserLoggedIn,
   removeEmergencyContact
 )

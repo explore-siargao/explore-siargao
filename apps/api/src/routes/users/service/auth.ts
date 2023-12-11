@@ -491,6 +491,9 @@ export const updateUserEmail = async (req: Request, res: Response) => {
         id: userId,
         deletedAt: null,
       },
+      include: {
+        personalInfo: true,
+      },
     })
     if (getUser) {
       if (email) {
@@ -504,9 +507,21 @@ export const updateUserEmail = async (req: Request, res: Response) => {
               email: email,
             },
           })
+          const token = jwt.sign(
+            {
+              firstName: getUser.personalInfo?.firstName,
+              lastName: getUser.personalInfo?.lastName,
+              email: email,
+              role: getUser.role,
+            },
+            signKey as string
+          )
           res.json({
             error: false,
-            items: updateEmail,
+            items: {
+              accessToken: token,
+              user: updateEmail,
+            },
             itemCount: 1,
             message: 'Sucessfully updated',
           })

@@ -44,8 +44,8 @@ export interface IAddress {
 export interface IEmergencyContact {
   id?: number
   peronalInfoId?: number
-  name: string
-  relationship: string
+  name?: string
+  relationship?: string
   email?: string
   phoneNumber?: string
   createdAt?: string
