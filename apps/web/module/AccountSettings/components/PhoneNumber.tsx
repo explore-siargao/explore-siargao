@@ -17,11 +17,11 @@ const PhoneNumber = ({ phoneNumber, userId}: IPersonalInfo) => {
     contentId: "",
   })
 
-  const { register, reset, handleSubmit} = useForm<IPersonalInfo>()
+  const { register:registerPhoneNumber, reset, handleSubmit} = useForm<IPersonalInfo>()
   const {mutate, isPending} = useUpdatePersonalInfo(userId as number)
   const queryClient = useQueryClient()
 
-  const onSubmit = (formData: IPersonalInfo) => {
+  const onSubmitPhoneNumber = (formData: IPersonalInfo) => {
     const callBackReq = {
       onSuccess: (data: any) => {
         if (!data.error) {
@@ -83,13 +83,13 @@ const PhoneNumber = ({ phoneNumber, userId}: IPersonalInfo) => {
             Add a number so confirmed guests and ExploreSiargao can get in
             touch. You can add other numbers and choose how they’re used
           </p>
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={handleSubmit(onSubmitPhoneNumber)}>
           <div className="grid grid-cols-2 gap-4 my-4">
             <Input
               inputId="phoneNumber"
               inputLabel="Phone number"
               defaultValue={phoneNumber}
-              {...register("phoneNumber")}
+              {...registerPhoneNumber("phoneNumber")}
             />
           </div>
           <Button className="w-20" size={"sm"}>

@@ -16,11 +16,11 @@ const LegalName = ({ firstName, lastName, userId}: IPersonalInfo) => {
     isButtonClicked: false,
     contentId: "",
   })
-  const { register, reset, handleSubmit} = useForm<IPersonalInfo>()
+  const { register:registerLegalName, reset, handleSubmit} = useForm<IPersonalInfo>()
   const {mutate, isPending} = useUpdatePersonalInfo(userId as number)
   const queryClient = useQueryClient()
 
-  const onSubmit = (formData: IPersonalInfo) => {
+  const onSubmitLegalName = (formData: IPersonalInfo) => {
     const callBackReq = {
       onSuccess: (data: any) => {
         if (!data.error) {
@@ -80,19 +80,19 @@ const LegalName = ({ firstName, lastName, userId}: IPersonalInfo) => {
             This is the name on your travel document, which could be a license
             or a passport.
           </p>
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={handleSubmit(onSubmitLegalName)}>
           <div className="grid grid-cols-2 gap-4 my-4">
             <Input
               inputId="firstName"
               inputLabel="First name"
               defaultValue={firstName}
-              {...register("firstName")}
+              {...registerLegalName("firstName")}
             />
             <Input
               inputId="lastName"
               inputLabel="Last name"
               defaultValue={lastName}
-              {...register("lastName")}
+              {...registerLegalName("lastName")}
             />
           </div>
           <Button className="w-20" size={"sm"} type="submit">
