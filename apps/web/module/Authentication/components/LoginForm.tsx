@@ -34,15 +34,18 @@ const LoginForm = () => {
   const onSubmit = (formData: IUser) => {
     const callBackReq = {
       onSuccess: (data: any) => {
-        if (!data.error) {
-          if (data.item && !isLoginPending) {
-            Cookies.set("accessToken", data.item.accessToken)
-            signIn("credentials", {
-              callbackUrl: "/",
-              username: formData.email,
-              password: formData.password,
-            })
-          }
+        if (!data.error && !isLoginPending) {
+          signIn("credentials", {
+            username: formData.email,
+            password: formData.password,
+            redirect: false,
+          }).then(response => {
+            if(!response?.ok) {
+              toast.error("Something went wrong while signing in")
+            } else {
+              router.push("/")
+            }
+          })
         } else {
           toast.error(String(data.message))
         }

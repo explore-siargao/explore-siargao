@@ -1,10 +1,8 @@
 import { ApiService } from "@/common/service/api"
 import { API_URL_USERS } from "@repo/constants"
 import { useQuery } from "@tanstack/react-query"
-import Cookies from "js-cookie"
 
 export async function getPersonalInfo(userId: number | undefined) {
-  const token = Cookies.get("accessToken")
   const apiService = new ApiService()
   return await apiService.get(`${API_URL_USERS}/personal-info/${userId}`)
 }
