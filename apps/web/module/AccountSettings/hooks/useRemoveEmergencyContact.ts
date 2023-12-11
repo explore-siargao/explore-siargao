@@ -8,12 +8,15 @@ export async function removeEmergencyContact(
   id: number
 ) {
   const apiService = new ApiService()
-  return await apiService.delete(`${API_URL_USERS}/${personalInfoId}/emergency-contact/${id}`)
+  return await apiService.delete(
+    `${API_URL_USERS}/${personalInfoId}/emergency-contact/${id}`
+  )
 }
 
-function useRemoveEmergencyContact(personalInfoId:number) {
+function useRemoveEmergencyContact(personalInfoId: number) {
   const query = useMutation({
-    mutationFn: (props: IEmergencyContact) => removeEmergencyContact(personalInfoId,props?.id as number),
+    mutationFn: (props: IEmergencyContact) =>
+      removeEmergencyContact(personalInfoId, props?.id as number),
   })
   return query
 }

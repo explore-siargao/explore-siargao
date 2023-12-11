@@ -25,7 +25,10 @@ const EmergencyContact = ({ emergencyContact, id }: IPersonalInfo) => {
     formState: { errors },
   } = useForm<IEmergencyContact>()
   const { mutate, isPending } = useAddEmergencyContact(id as number)
-  const {mutate:removeEmergencyContact, isPending:isPendingRemoveEmergencyContact} = useRemoveEmergencyContact(id as number)
+  const {
+    mutate: removeEmergencyContact,
+    isPending: isPendingRemoveEmergencyContact,
+  } = useRemoveEmergencyContact(id as number)
   const queryClient = useQueryClient()
 
   const onSubmit = (formData: IEmergencyContact) => {
@@ -69,35 +72,35 @@ const EmergencyContact = ({ emergencyContact, id }: IPersonalInfo) => {
     <div className="text-sm">
       {!contentState.isButtonClicked ? (
         <div>
-        <div className="flex justify-between py-5">
-          <div>
-            <h1>Emergency Contact</h1>
-            {emergencyContact?.length === 0 ? (
-              <p className="font-light">Not provided</p>
-            ) : (
-             ""
-            )}
+          <div className="flex justify-between py-5">
+            <div>
+              <h1>Emergency Contact</h1>
+              {emergencyContact?.length === 0 ? (
+                <p className="font-light">Not provided</p>
+              ) : (
+                ""
+              )}
+            </div>
+            <button
+              onClick={() =>
+                setContentState({
+                  isButtonClicked: !contentState.isButtonClicked,
+                  contentId: "EmergencyContact",
+                })
+              }
+              className="underline self-start select-none"
+            >
+              {emergencyContact?.length !== 0 ? "Edit" : "Add"}
+            </button>
           </div>
-          <button
-            onClick={() =>
-              setContentState({
-                isButtonClicked: !contentState.isButtonClicked,
-                contentId: "EmergencyContact",
-              })
-            }
-            className="underline self-start select-none"
-          >
-            {emergencyContact?.length !== 0 ? "Edit" : "Add"}
-          </button>
+          {emergencyContact?.map((contact: IEmergencyContact) => (
+            <div className="flex justify-between py-5">
+              <p key={contact.id} className="text-lg font-semibold">
+                {contact.name}
+              </p>
+            </div>
+          ))}
         </div>
-        {emergencyContact?.map((contact: IEmergencyContact) => (
-           <div className="flex justify-between py-5">
-          <p key={contact.id} className="text-lg font-semibold">
-            {contact.name}
-          </p>
-          </div>
-      ))}
-       </div>
       ) : (
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="grid py-5">
@@ -120,27 +123,27 @@ const EmergencyContact = ({ emergencyContact, id }: IPersonalInfo) => {
               A trusted contact we can alert in an urgent situation.
             </p>
             {emergencyContact?.map((contact: IEmergencyContact) => (
-           <div className="flex justify-between py-5">
-          <p key={contact.id} className="text-lg font-semibold">
-            {contact.name}
-          </p>
-          <button
-                type="button"
-                className="underline self-start select-none text-lg font-semibold"
-                onClick={()=>
-                  removeEmergencyContact({id: contact?.id}, callBackReq2)
-                }
+              <div className="flex justify-between py-5">
+                <p key={contact.id} className="text-lg font-semibold">
+                  {contact.name}
+                </p>
+                <button
+                  type="button"
+                  className="underline self-start select-none text-lg font-semibold"
+                  onClick={() =>
+                    removeEmergencyContact({ id: contact?.id }, callBackReq2)
+                  }
                 >
-                   {isPendingRemoveEmergencyContact ? (
-                <div className="animate-spin w-4 h-4 border-2 border-current border-t-transparent text-primary-200 rounded-full">
-                  <span className="sr-only">Loading...</span>
-                </div>
-              ) : (
-                "Remove"
-              )}
+                  {isPendingRemoveEmergencyContact ? (
+                    <div className="animate-spin w-4 h-4 border-2 border-current border-t-transparent text-primary-200 rounded-full">
+                      <span className="sr-only">Loading...</span>
+                    </div>
+                  ) : (
+                    "Remove"
+                  )}
                 </button>
-          </div>
-      ))}
+              </div>
+            ))}
             <div className="my-4 space-y-4">
               <div>
                 <Input
