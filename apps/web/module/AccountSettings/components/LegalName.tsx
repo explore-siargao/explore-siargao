@@ -11,13 +11,13 @@ type PersonalInfoProps = {
   contentId: string
 }
 
-const LegalName = ({ firstName, lastName, userId}: IPersonalInfo) => {
+const LegalName = ({ firstName, lastName, userId }: IPersonalInfo) => {
   const [contentState, setContentState] = useState<PersonalInfoProps>({
     isButtonClicked: false,
     contentId: "",
   })
-  const { register, reset, handleSubmit} = useForm<IPersonalInfo>()
-  const {mutate, isPending} = useUpdatePersonalInfo(userId as number)
+  const { register, reset, handleSubmit } = useForm<IPersonalInfo>()
+  const { mutate, isPending } = useUpdatePersonalInfo(userId as number)
   const queryClient = useQueryClient()
 
   const onSubmit = (formData: IPersonalInfo) => {
@@ -37,7 +37,7 @@ const LegalName = ({ firstName, lastName, userId}: IPersonalInfo) => {
         toast.error(String(err))
       },
     }
-    mutate({...formData}, callBackReq)
+    mutate({ ...formData }, callBackReq)
   }
 
   return (
@@ -81,29 +81,29 @@ const LegalName = ({ firstName, lastName, userId}: IPersonalInfo) => {
             or a passport.
           </p>
           <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="grid grid-cols-2 gap-4 my-4">
-            <Input
-              inputId="firstName"
-              inputLabel="First name"
-              defaultValue={firstName}
-              {...register("firstName")}
-            />
-            <Input
-              inputId="lastName"
-              inputLabel="Last name"
-              defaultValue={lastName}
-              {...register("lastName")}
-            />
-          </div>
-          <Button className="w-20" size={"sm"} type="submit">
-          {isPending ? (
+            <div className="grid grid-cols-2 gap-4 my-4">
+              <Input
+                inputId="firstName"
+                inputLabel="First name"
+                defaultValue={firstName}
+                {...register("firstName")}
+              />
+              <Input
+                inputId="lastName"
+                inputLabel="Last name"
+                defaultValue={lastName}
+                {...register("lastName")}
+              />
+            </div>
+            <Button className="w-20" size={"sm"} type="submit">
+              {isPending ? (
                 <div className="animate-spin w-4 h-4 border-2 border-current border-t-transparent text-primary-200 rounded-full">
                   <span className="sr-only">Loading...</span>
                 </div>
               ) : (
                 "Save"
               )}
-          </Button>
+            </Button>
           </form>
         </div>
       )}
