@@ -6,9 +6,7 @@ enum EContentType {
 export class ApiService {
   private BASE_URL: string | undefined
 
-  constructor(
-    source: "main" | "auth" | "mock" = "main"
-  ) {
+  constructor(source: "main" | "auth" | "mock" = "main") {
     if (source === "main") {
       this.BASE_URL = process.env.API_URL
     } else if (source === "auth") {
@@ -26,7 +24,7 @@ export class ApiService {
     } as Record<string, any>
     const options = {
       headers,
-      credentials: 'include' as RequestCredentials,
+      credentials: "include" as RequestCredentials,
     }
     return options
   }
@@ -55,7 +53,7 @@ export class ApiService {
     const res = fetch(`${this.BASE_URL}${endpoint}`, {
       method: "POST",
       body: JSON.stringify(body),
-      ...otherOptions
+      ...otherOptions,
     })
     return (await res).json()
   }

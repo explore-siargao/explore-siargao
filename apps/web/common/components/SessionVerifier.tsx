@@ -14,10 +14,16 @@ const SessionVerifier = () => {
     router.push("/")
   } else if (session && data && data.error) {
     // Adding id 1 to prevent duplicate toast
-    toast.error(data.message, { id: "1", duration: 5000 });
-    signOut({ redirect: false });
+    toast.error(data.message, { id: "1", duration: 5000 })
+    signOut({ redirect: false })
     router.push("/login")
-  }  else if (session && data && !data.error && data.action.type === "SOCIAL_REGISTER" && data.action.description === params.type) {
+  } else if (
+    session &&
+    data &&
+    !data.error &&
+    data.action.type === "SOCIAL_REGISTER" &&
+    data.action.description === params.type
+  ) {
     router.push(`/create-account/${params.type}`)
   }
   return (

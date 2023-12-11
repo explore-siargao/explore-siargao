@@ -24,7 +24,10 @@ const authOptions: NextAuthOptions = {
         const res = await fetch(`${process.env.API_URL}/api/users/auth/info`, {
           method: "POST",
           body: JSON.stringify({ email: credentials?.username }),
-          headers: { "Content-Type": "application/json", "X-CSRF-Token": csrfToken as string },
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-Token": csrfToken as string,
+          },
         })
         const user = await res.json()
         if (res.ok && user.item) {

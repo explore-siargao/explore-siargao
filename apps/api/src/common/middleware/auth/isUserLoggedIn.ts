@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express'
 import { UNKNOWN_ERROR_OCCURRED } from '../../constants'
 import { nextAuthSecret } from '@/common/config/'
 import { PrismaClient } from '@prisma/client'
-import { decode } from 'next-auth/jwt';
+import { decode } from 'next-auth/jwt'
 
 const checkErrorMessage = (res: Response, message: string) => {
   if (message === 'jwt malformed') {
@@ -34,11 +34,11 @@ const isUserLoggedIn = async (
   res: Response,
   next: NextFunction
 ) => {
-  const token = req.cookies["next-auth.session-token"]
+  const token = req.cookies['next-auth.session-token']
   const decoded = await decode({
     token: token,
     secret: nextAuthSecret,
-  });
+  })
   if (token && decoded?.email) {
     const prisma = new PrismaClient()
     try {
