@@ -45,10 +45,14 @@ const PersonalInfo = () => {
               <LegalName
                 firstName={data?.item?.personalInfo?.firstName}
                 lastName={data?.item?.personalInfo?.lastName}
+                userId={data?.item?.id}
               />
-              <EmailAddress email={data?.item?.email} />
+              <EmailAddress 
+              email={data?.item?.email} 
+              />
               <PhoneNumber
                 phoneNumber={data?.item?.personalInfo?.phoneNumber}
+                userId={data?.item?.id}
               />
               <GovernmentId
                 governmentId={data?.item?.personalInfo?.governmentId}
