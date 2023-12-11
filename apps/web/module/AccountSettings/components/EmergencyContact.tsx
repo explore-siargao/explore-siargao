@@ -94,7 +94,7 @@ const EmergencyContact = ({ emergencyContact, id }: IPersonalInfo) => {
             </button>
           </div>
           {emergencyContact?.map((contact: IEmergencyContact) => (
-            <div className="flex justify-between py-5">
+            <div key={contact.id} className="flex justify-between py-5">
               <p key={contact.id} className="text-lg font-semibold">
                 {contact.name}
               </p>
@@ -123,8 +123,8 @@ const EmergencyContact = ({ emergencyContact, id }: IPersonalInfo) => {
               A trusted contact we can alert in an urgent situation.
             </p>
             {emergencyContact?.map((contact: IEmergencyContact) => (
-              <div className="flex justify-between py-5">
-                <p key={contact.id} className="text-lg font-semibold">
+              <div key={contact.id} className="flex justify-between py-5">
+                <p  className="text-lg font-semibold">
                   {contact.name}
                 </p>
                 <button
