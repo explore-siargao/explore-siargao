@@ -513,9 +513,9 @@ export const updateUserEmail = async (req: Request, res: Response) => {
         id: userId,
         deletedAt: null,
       },
-      include:{
-        personalInfo:true
-      }
+      include: {
+        personalInfo: true,
+      },
     })
     if (getUser) {
       if (email) {
@@ -533,7 +533,7 @@ export const updateUserEmail = async (req: Request, res: Response) => {
             {
               firstName: getUser.personalInfo?.firstName,
               lastName: getUser.personalInfo?.lastName,
-              email:email,
+              email: email,
               role: getUser.role,
             },
             signKey as string
@@ -542,7 +542,7 @@ export const updateUserEmail = async (req: Request, res: Response) => {
             error: false,
             items: {
               accessToken: token,
-              user: updateEmail
+              user: updateEmail,
             },
             itemCount: 1,
             message: 'Sucessfully updated',

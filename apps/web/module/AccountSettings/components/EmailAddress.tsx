@@ -23,8 +23,9 @@ const EmailAddress = ({ email, id }: IUser) => {
     reset: resetEmail,
     handleSubmit: handleEmailSubmit,
   } = useForm<IUser>()
-  const { mutate: mutateEmail, isPending: isPendingEmail } =
-    useUpdateUserEmail(id as number)
+  const { mutate: mutateEmail, isPending: isPendingEmail } = useUpdateUserEmail(
+    id as number
+  )
   const queryClient = useQueryClient()
 
   const onSubmitEmail = (formData: IUser) => {
@@ -33,7 +34,7 @@ const EmailAddress = ({ email, id }: IUser) => {
         if (!data.error) {
           Cookies.set("accessToken", data?.items?.accessToken)
           signIn("credentials", {
-            username: formData.email
+            username: formData.email,
           })
           toast.success(data.message)
           queryClient.invalidateQueries({
@@ -91,23 +92,23 @@ const EmailAddress = ({ email, id }: IUser) => {
             Use an address you’ll always have access to.
           </p>
           <form onSubmit={handleEmailSubmit(onSubmitEmail)}>
-          <Input
-            inputId="email"
-            inputLabel="Email Address"
-            placeholder="you@sample.com"
-            defaultValue={email}
-            className="my-4"
-            {...registerEmail("email")}
-          />
-          <Button className="w-20" size={"sm"} type="submit">
-          {isPendingEmail ? (
+            <Input
+              inputId="email"
+              inputLabel="Email Address"
+              placeholder="you@sample.com"
+              defaultValue={email}
+              className="my-4"
+              {...registerEmail("email")}
+            />
+            <Button className="w-20" size={"sm"} type="submit">
+              {isPendingEmail ? (
                 <div className="animate-spin w-4 h-4 border-2 border-current border-t-transparent text-primary-200 rounded-full">
                   <span className="sr-only">Loading...</span>
                 </div>
               ) : (
                 "Save"
               )}
-          </Button>
+            </Button>
           </form>
         </div>
       )}

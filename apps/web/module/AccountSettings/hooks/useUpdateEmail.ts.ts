@@ -8,10 +8,7 @@ export async function updateUserEmail(
   props: IUser
 ) {
   const apiService = new ApiService()
-  return await apiService.patch(
-    `${API_URL_USERS}/auth/${userId}`,
-    props
-  )
+  return await apiService.patch(`${API_URL_USERS}/auth/${userId}`, props)
 }
 
 function useUpdateUserEmail(userId: number) {
