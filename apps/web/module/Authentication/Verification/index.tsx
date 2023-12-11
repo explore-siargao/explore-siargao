@@ -12,7 +12,6 @@ import toast from "react-hot-toast"
 import useMultiFactor from "../hooks/useMultiFactor"
 import useVerifyMultiFactor from "../hooks/useVerifyMultiFactor"
 import { useRouter } from "next/navigation"
-import AuthContainer from "@/common/components/AuthContainer"
 
 let currentOTPIndex: number = 0
 
