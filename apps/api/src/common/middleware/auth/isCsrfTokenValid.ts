@@ -6,9 +6,9 @@ const isCsrfTokenValid = async (
   res: Response,
   next: NextFunction
 ) => {
-  const csrfToken = req.cookies["next-auth.csrf-token"]
+  const csrfToken = req.cookies['next-auth.csrf-token']
   if (csrfToken) {
-    const isTokenValid = validateCsrfToken(csrfToken);
+    const isTokenValid = validateCsrfToken(csrfToken)
     if (isTokenValid === 'valid') {
       next()
     } else {

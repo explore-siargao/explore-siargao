@@ -6,7 +6,7 @@ import CryptoJS from 'crypto-js'
 import dayjs from 'dayjs'
 import { AuthEmail } from './authEmail'
 import validateCsrfToken from '@/common/helpers/validateCsrfToken'
-import { decode } from 'next-auth/jwt';
+import { decode } from 'next-auth/jwt'
 
 const prisma = new PrismaClient()
 
@@ -20,13 +20,13 @@ export const verifySession = async (req: Request, res: Response) => {
     try {
       const user = await prisma.user.findFirst({
         where: {
-          email: email as string
+          email: email as string,
         },
         include: {
           personalInfo: true,
         },
       })
-      const capitalizeType = capitalizeFirstLetter(type as string);
+      const capitalizeType = capitalizeFirstLetter(type as string)
       if (user && user.registrationType === capitalizeType) {
         res.json({
           error: false,
@@ -38,12 +38,12 @@ export const verifySession = async (req: Request, res: Response) => {
           item: null,
           message: `Invalid login method, please login using your ${type} account`,
         })
-      } else if (type === "google" || type === "facebook") {
+      } else if (type === 'google' || type === 'facebook') {
         res.json({
           error: false,
           action: {
-            type: "SOCIAL_REGISTER",
-            description: type
+            type: 'SOCIAL_REGISTER',
+            description: type,
           },
           message: 'Email is not registered',
         })
@@ -109,7 +109,7 @@ export const register = async (req: Request, res: Response) => {
         res.json({
           error: false,
           item: {
-            personalInfo: newPersonalInfo
+            personalInfo: newPersonalInfo,
           },
           message: 'Successfully registered',
         })
@@ -182,8 +182,8 @@ export const manual = async (req: Request, res: Response) => {
 }
 
 export const info = async (req: Request, res: Response) => {
-  const csrfToken = req.headers['x-csrf-token'];
-  if(csrfToken && validateCsrfToken(csrfToken as string) === 'valid') {
+  const csrfToken = req.headers['x-csrf-token']
+  if (csrfToken && validateCsrfToken(csrfToken as string) === 'valid') {
     const { email } = req.body
     if (email) {
       try {
@@ -560,11 +560,11 @@ export const updateUserEmail = async (req: Request, res: Response) => {
 }
 
 export const userDetails = async (req: Request, res: Response) => {
-  const sessionToken = req.cookies['next-auth.session-token'];
+  const sessionToken = req.cookies['next-auth.session-token']
   const decoded = await decode({
     token: sessionToken,
     secret: nextAuthSecret,
-  });
+  })
   if (sessionToken && decoded?.email) {
     const prisma = new PrismaClient()
     try {

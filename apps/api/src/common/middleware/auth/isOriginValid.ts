@@ -6,10 +6,10 @@ const isOriginValid = async (
   res: Response,
   next: NextFunction
 ) => {
-  const origin = req.headers['origin'];
+  const origin = req.headers['origin']
   const referer = req.headers['referer']
   if (origin && referer) {
-    const isValid = String(referer).startsWith(webUrl) && origin === webUrl;
+    const isValid = String(referer).startsWith(webUrl) && origin === webUrl
     if (isValid) {
       next()
     } else {

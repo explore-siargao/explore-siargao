@@ -32,11 +32,21 @@ router.post('/', isOriginValid, isCsrfTokenValid, isUserLoggedIn, addUser)
 
 // AUTH
 router.post('/auth/info', info) // Use for Manual log in for Next-Auth
-router.get('/auth/verify-session', isOriginValid, isCsrfTokenValid, verifySession)
+router.get(
+  '/auth/verify-session',
+  isOriginValid,
+  isCsrfTokenValid,
+  verifySession
+)
 router.post('/auth/register', isOriginValid, isCsrfTokenValid, register)
 router.post('/auth/manual', isOriginValid, isCsrfTokenValid, manual)
 router.post('/auth/forgot-password', isOriginValid, isCsrfTokenValid, forgot)
-router.post('/auth/forgot-password/verify', isOriginValid, isCsrfTokenValid, forgotVerify)
+router.post(
+  '/auth/forgot-password/verify',
+  isOriginValid,
+  isCsrfTokenValid,
+  forgotVerify
+)
 router.post('/auth/mfa', isOriginValid, isCsrfTokenValid, mfa)
 router.post('/auth/mfa/verify', isOriginValid, isCsrfTokenValid, mfaVerify)
 router.patch('/auth/:userId', updateUserEmail)
