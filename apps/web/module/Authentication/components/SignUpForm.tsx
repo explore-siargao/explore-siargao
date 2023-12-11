@@ -43,18 +43,15 @@ const SignUpForm = ({ isSocial = false }: Props) => {
   const onSubmit = (formData: T_Register) => {
     const callBackReq = {
       onSuccess: (data: any) => {
-        if (!data.error) {
-          if (data.item && !addUserIsPending) {
-            Cookies.set("accessToken", data.item.accessToken)
-            if (signUpType === "Manual") {
-              signIn("credentials", {
-                callbackUrl: "/",
-                username: formData.email,
-                password: formData.password,
-              })
-            } else {
-              router.push("/")
-            }
+        if (!data.error && !addUserIsPending) {
+          if (signUpType === "Manual") {
+            signIn("credentials", {
+              callbackUrl: "/",
+              username: formData.email,
+              password: formData.password,
+            })
+          } else {
+            router.push("/")
           }
         } else {
           toast.error(String(data.message))

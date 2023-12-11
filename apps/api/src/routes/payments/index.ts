@@ -1,4 +1,4 @@
-import isUserLoggedIn from '@/common/middleware/isLoggedIn'
+import isUserLoggedIn from '@/common/middleware/auth/isUserLoggedIn'
 import express from 'express'
 import {
   addpaymentMethod,

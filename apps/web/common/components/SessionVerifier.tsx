@@ -1,23 +1,30 @@
 "use client"
 import React from "react"
-import { useSession } from "next-auth/react"
+import { signOut, useSession } from "next-auth/react"
 import useVerifySession from "@/common/hooks/useVerifySession"
 import { useRouter, useParams } from "next/navigation"
-import Cookies from "js-cookie"
+import toast from "react-hot-toast"
 
 const SessionVerifier = () => {
   const router = useRouter()
   const params = useParams()
   const { data: session } = useSession()
   const { data } = useVerifySession()
-  if (!session) {
+  if (!session || (session && data && data.item)) {
     router.push("/")
-    Cookies.remove("accessToken")
-  } else if (session && data && !data.item) {
+  } else if (session && data && data.error) {
+    // Adding id 1 to prevent duplicate toast
+    toast.error(data.message, { id: "1", duration: 5000 })
+    signOut({ redirect: false })
+    router.push("/login")
+  } else if (
+    session &&
+    data &&
+    !data.error &&
+    data.action.type === "SOCIAL_REGISTER" &&
+    data.action.description === params.type
+  ) {
     router.push(`/create-account/${params.type}`)
-  } else if (session && data && data.item.accessToken) {
-    Cookies.set("accessToken", data.item.accessToken)
-    router.push(`/`)
   }
   return (
     <div className="flex min-h-screen flex-1 flex-col justify-center items-center py-12 sm:px-6 lg:px-8 bg-primary-100">

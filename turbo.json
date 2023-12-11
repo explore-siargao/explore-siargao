@@ -22,7 +22,8 @@
         "GOOGLE_SECRET_ID",
         "FACEBOOK_CLIENT_ID",
         "FACEBOOK_SECRET_ID",
-        "WEB_URL"
+        "WEB_URL",
+        "NODE_ENV"
       ]
     },
     "lint": {
