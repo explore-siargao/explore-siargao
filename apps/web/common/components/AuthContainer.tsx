@@ -9,9 +9,9 @@ type Props = {
 }
 const AuthContainer = ({ children, title, onClose, onBack }: Props) => {
   return (
-    <div className="flex min-h-screen flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8 bg-primary-100">
-      <div className="sm:mx-auto sm:w-full sm:max-w-[540px]">
-        <div className="bg-white shadow sm:rounded-2xl">
+    <div className="flex min-h-screen flex-1 flex-col justify-center md:px-8 bg-primary-100">
+      <div className="mx-auto w-full max-w-[540px]">
+        <div className="bg-white shadow sm:rounded-2xl h-screen md:h-auto">
           <div className="flex border-b-gray-200 border-b p-4">
             <div>
               {onClose ? (

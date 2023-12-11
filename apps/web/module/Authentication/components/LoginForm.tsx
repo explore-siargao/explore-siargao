@@ -56,7 +56,7 @@ const LoginForm = () => {
   }
 
   return (
-    <div className="p-6">
+    <div className="p-8 md:p-6">
       <form onSubmit={handleSubmit(onSubmit)}>
         <h1 className="font-semibold text-xl mt-1 mb-4">
           {LOGIN_CONTENT_TITTLE_TEXT}
@@ -86,9 +86,8 @@ const LoginForm = () => {
             </Link>{" "}
             and{" "}
             <Link href="#" className="text-info-500 underline">
-              Privacy statement
+              Privacy statement.
             </Link>
-            .
           </p>
         </div>
 
