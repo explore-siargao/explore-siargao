@@ -18,10 +18,10 @@ const LegalName = ({ firstName, lastName, userId }: IPersonalInfo) => {
   })
   const {
     register: registerLegalName,
-    reset,
-    handleSubmit,
+    reset:resetLegalName,
+    handleSubmit:handleLegalNameSubmit,
   } = useForm<IPersonalInfo>()
-  const { mutate, isPending } = useUpdatePersonalInfo(userId as number)
+  const { mutate:mutateLegalName, isPending:isPendingLegalName } = useUpdatePersonalInfo(userId as number)
   const queryClient = useQueryClient()
 
   const onSubmitLegalName = (formData: IPersonalInfo) => {
@@ -32,7 +32,7 @@ const LegalName = ({ firstName, lastName, userId }: IPersonalInfo) => {
             queryKey: ["personal-info"],
           })
           toast.success(data.message)
-          reset()
+          resetLegalName()
         } else {
           toast.error(String(data.message))
         }
@@ -41,7 +41,7 @@ const LegalName = ({ firstName, lastName, userId }: IPersonalInfo) => {
         toast.error(String(err))
       },
     }
-    mutate({ ...formData }, callBackReq)
+    mutateLegalName({ ...formData }, callBackReq)
   }
 
   return (
@@ -84,7 +84,7 @@ const LegalName = ({ firstName, lastName, userId }: IPersonalInfo) => {
             This is the name on your travel document, which could be a license
             or a passport.
           </p>
-          <form onSubmit={handleSubmit(onSubmitLegalName)}>
+          <form onSubmit={handleLegalNameSubmit(onSubmitLegalName)}>
             <div className="grid grid-cols-2 gap-4 my-4">
               <Input
                 inputId="firstName"
@@ -100,7 +100,7 @@ const LegalName = ({ firstName, lastName, userId }: IPersonalInfo) => {
               />
             </div>
             <Button className="w-20" size={"sm"} type="submit">
-              {isPending ? (
+              {isPendingLegalName ? (
                 <div className="animate-spin w-4 h-4 border-2 border-current border-t-transparent text-primary-200 rounded-full">
                   <span className="sr-only">Loading...</span>
                 </div>

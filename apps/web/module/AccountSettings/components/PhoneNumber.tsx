@@ -19,10 +19,10 @@ const PhoneNumber = ({ phoneNumber, userId }: IPersonalInfo) => {
 
   const {
     register: registerPhoneNumber,
-    reset,
-    handleSubmit,
+    reset:resetPhoneNumber,
+    handleSubmit:handlePhoneNumberSubmit,
   } = useForm<IPersonalInfo>()
-  const { mutate, isPending } = useUpdatePersonalInfo(userId as number)
+  const { mutate:mutatePhoneNumber, isPending:isPendingPhoneNumber } = useUpdatePersonalInfo(userId as number)
   const queryClient = useQueryClient()
 
   const onSubmitPhoneNumber = (formData: IPersonalInfo) => {
@@ -33,7 +33,7 @@ const PhoneNumber = ({ phoneNumber, userId }: IPersonalInfo) => {
             queryKey: ["personal-info"],
           })
           toast.success(data.message)
-          reset()
+          resetPhoneNumber()
         } else {
           toast.error(String(data.message))
         }
@@ -42,7 +42,7 @@ const PhoneNumber = ({ phoneNumber, userId }: IPersonalInfo) => {
         toast.error(String(err))
       },
     }
-    mutate({ ...formData }, callBackReq)
+    mutatePhoneNumber({ ...formData }, callBackReq)
   }
 
   return (
@@ -87,7 +87,7 @@ const PhoneNumber = ({ phoneNumber, userId }: IPersonalInfo) => {
             Add a number so confirmed guests and ExploreSiargao can get in
             touch. You can add other numbers and choose how they’re used
           </p>
-          <form onSubmit={handleSubmit(onSubmitPhoneNumber)}>
+          <form onSubmit={handlePhoneNumberSubmit(onSubmitPhoneNumber)}>
             <div className="grid grid-cols-2 gap-4 my-4">
               <Input
                 inputId="phoneNumber"
@@ -97,7 +97,7 @@ const PhoneNumber = ({ phoneNumber, userId }: IPersonalInfo) => {
               />
             </div>
             <Button className="w-20" size={"sm"}>
-              {isPending ? (
+              {isPendingPhoneNumber ? (
                 <div className="animate-spin w-4 h-4 border-2 border-current border-t-transparent text-primary-200 rounded-full">
                   <span className="sr-only">Loading...</span>
                 </div>
