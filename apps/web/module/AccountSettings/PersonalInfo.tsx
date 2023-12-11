@@ -47,7 +47,10 @@ const PersonalInfo = () => {
                 lastName={data?.item?.personalInfo?.lastName}
                 userId={data?.item?.id}
               />
-              <EmailAddress email={data?.item?.email} />
+              <EmailAddress 
+              email={data?.item?.email}
+              id={data?.item?.id}
+              />
               <PhoneNumber
                 phoneNumber={data?.item?.personalInfo?.phoneNumber}
                 userId={data?.item?.id}

@@ -93,7 +93,7 @@ const PhoneNumber = ({ phoneNumber, userId }: IPersonalInfo) => {
               <Input
                 inputId="phoneNumber"
                 inputLabel="Phone number"
-                defaultValue={phoneNumber}
+                defaultValue={phoneNumber !== "" ? phoneNumber : "Enter a new phone number"}
                 {...registerPhoneNumber("phoneNumber")}
               />
             </div>
