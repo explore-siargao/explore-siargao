@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form"
 import useAddEmergencyContact from "../hooks/useAddEmergencyContact"
 import toast from "react-hot-toast"
 import { useQueryClient } from "@tanstack/react-query"
+import useRemoveEmergencyContact from "../hooks/useRemoveEmergencyContact"
 
 type PersonalInfoProps = {
   isButtonClicked: boolean
@@ -16,6 +17,7 @@ const EmergencyContact = ({ emergencyContact, id }: IPersonalInfo) => {
     isButtonClicked: false,
     contentId: "",
   })
+
   const {
     register,
     reset,
@@ -23,6 +25,7 @@ const EmergencyContact = ({ emergencyContact, id }: IPersonalInfo) => {
     formState: { errors },
   } = useForm<IEmergencyContact>()
   const { mutate, isPending } = useAddEmergencyContact(id as number)
+  const {mutate:removeEmergencyContact, isPending:isPendingRemoveEmergencyContact} = useRemoveEmergencyContact(id as number)
   const queryClient = useQueryClient()
 
   const onSubmit = (formData: IEmergencyContact) => {
@@ -44,20 +47,35 @@ const EmergencyContact = ({ emergencyContact, id }: IPersonalInfo) => {
     }
     mutate({ ...formData }, callBackReq)
   }
+
+  const callBackReq2 = {
+    onSuccess: (data: any) => {
+      if (!data.error) {
+        queryClient.invalidateQueries({
+          queryKey: ["personal-info"],
+        })
+        toast.success("Contact Successfully added")
+        reset()
+      } else {
+        toast.error(String(data.message))
+      }
+    },
+    onError: (err: any) => {
+      toast.error(String(err))
+    },
+  }
+
   return (
     <div className="text-sm">
       {!contentState.isButtonClicked ? (
+        <div>
         <div className="flex justify-between py-5">
           <div>
             <h1>Emergency Contact</h1>
             {emergencyContact?.length === 0 ? (
               <p className="font-light">Not provided</p>
             ) : (
-              emergencyContact?.map((contact: IEmergencyContact) => (
-                <p key={contact.id} className="font-light">
-                  {contact.name}
-                </p>
-              ))
+             ""
             )}
           </div>
           <button
@@ -69,9 +87,17 @@ const EmergencyContact = ({ emergencyContact, id }: IPersonalInfo) => {
             }
             className="underline self-start select-none"
           >
-            Add
+            {emergencyContact?.length !== 0 ? "Edit" : "Add"}
           </button>
         </div>
+        {emergencyContact?.map((contact: IEmergencyContact) => (
+           <div className="flex justify-between py-5">
+          <p key={contact.id} className="text-lg font-semibold">
+            {contact.name}
+          </p>
+          </div>
+      ))}
+       </div>
       ) : (
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="grid py-5">
@@ -93,6 +119,28 @@ const EmergencyContact = ({ emergencyContact, id }: IPersonalInfo) => {
             <p className="font-light">
               A trusted contact we can alert in an urgent situation.
             </p>
+            {emergencyContact?.map((contact: IEmergencyContact) => (
+           <div className="flex justify-between py-5">
+          <p key={contact.id} className="text-lg font-semibold">
+            {contact.name}
+          </p>
+          <button
+                type="button"
+                className="underline self-start select-none text-lg font-semibold"
+                onClick={()=>
+                  removeEmergencyContact({id: contact?.id}, callBackReq2)
+                }
+                >
+                   {isPendingRemoveEmergencyContact ? (
+                <div className="animate-spin w-4 h-4 border-2 border-current border-t-transparent text-primary-200 rounded-full">
+                  <span className="sr-only">Loading...</span>
+                </div>
+              ) : (
+                "Remove"
+              )}
+                </button>
+          </div>
+      ))}
             <div className="my-4 space-y-4">
               <div>
                 <Input

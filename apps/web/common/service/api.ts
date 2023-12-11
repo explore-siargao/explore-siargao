@@ -78,7 +78,7 @@ export class ApiService {
     return (await res).json()
   }
 
-  async delete(endpoint: string, payload: { [key: string]: string }) {
+  async delete(endpoint: string) {
     const header = this.constructHeader()
 
     const res = fetch(`${this.BASE_URL}${endpoint}`, {

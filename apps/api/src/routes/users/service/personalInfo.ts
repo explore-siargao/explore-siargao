@@ -136,12 +136,12 @@ export const addEmergencyContact = async (req: Request, res: Response) => {
 
 export const removeEmergencyContact = async (req: Request, res: Response) => {
   const prisma = new PrismaClient()
-  const userId = Number(req.params.userId)
+  const personId = Number(req.params.peronalInfoId)
   const emergencyContactId = Number(req.params.emergencyContactId)
   try {
     const personalInfo = await prisma.personalInfo.findFirst({
       where: {
-        userId: userId,
+        id: personId,
       },
     })
     if (personalInfo !== null) {
