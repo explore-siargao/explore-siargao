@@ -18,10 +18,11 @@ const LegalName = ({ firstName, lastName, userId }: IPersonalInfo) => {
   })
   const {
     register: registerLegalName,
-    reset:resetLegalName,
-    handleSubmit:handleLegalNameSubmit,
+    reset: resetLegalName,
+    handleSubmit: handleLegalNameSubmit,
   } = useForm<IPersonalInfo>()
-  const { mutate:mutateLegalName, isPending:isPendingLegalName } = useUpdatePersonalInfo(userId as number)
+  const { mutate: mutateLegalName, isPending: isPendingLegalName } =
+    useUpdatePersonalInfo(userId as number)
   const queryClient = useQueryClient()
 
   const onSubmitLegalName = (formData: IPersonalInfo) => {

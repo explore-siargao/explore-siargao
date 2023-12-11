@@ -19,10 +19,11 @@ const PhoneNumber = ({ phoneNumber, userId }: IPersonalInfo) => {
 
   const {
     register: registerPhoneNumber,
-    reset:resetPhoneNumber,
-    handleSubmit:handlePhoneNumberSubmit,
+    reset: resetPhoneNumber,
+    handleSubmit: handlePhoneNumberSubmit,
   } = useForm<IPersonalInfo>()
-  const { mutate:mutatePhoneNumber, isPending:isPendingPhoneNumber } = useUpdatePersonalInfo(userId as number)
+  const { mutate: mutatePhoneNumber, isPending: isPendingPhoneNumber } =
+    useUpdatePersonalInfo(userId as number)
   const queryClient = useQueryClient()
 
   const onSubmitPhoneNumber = (formData: IPersonalInfo) => {
