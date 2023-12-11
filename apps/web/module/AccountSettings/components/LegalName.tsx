@@ -11,7 +11,7 @@ type PersonalInfoProps = {
   contentId: string
 }
 
-const LegalName = ({ firstName, lastName, userId}: IPersonalInfo) => {
+const LegalName = ({ firstName, lastName, userId }: IPersonalInfo) => {
   const [contentState, setContentState] = useState<PersonalInfoProps>({
     isButtonClicked: false,
     contentId: "",
@@ -37,7 +37,7 @@ const LegalName = ({ firstName, lastName, userId}: IPersonalInfo) => {
         toast.error(String(err))
       },
     }
-    mutate({...formData}, callBackReq)
+    mutate({ ...formData }, callBackReq)
   }
 
   return (
@@ -103,7 +103,7 @@ const LegalName = ({ firstName, lastName, userId}: IPersonalInfo) => {
               ) : (
                 "Save"
               )}
-          </Button>
+            </Button>
           </form>
         </div>
       )}
