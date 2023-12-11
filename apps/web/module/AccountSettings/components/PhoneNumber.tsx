@@ -17,8 +17,12 @@ const PhoneNumber = ({ phoneNumber, userId }: IPersonalInfo) => {
     contentId: "",
   })
 
-  const { register:registerPhoneNumber, reset, handleSubmit} = useForm<IPersonalInfo>()
-  const {mutate, isPending} = useUpdatePersonalInfo(userId as number)
+  const {
+    register: registerPhoneNumber,
+    reset,
+    handleSubmit,
+  } = useForm<IPersonalInfo>()
+  const { mutate, isPending } = useUpdatePersonalInfo(userId as number)
   const queryClient = useQueryClient()
 
   const onSubmitPhoneNumber = (formData: IPersonalInfo) => {
@@ -84,16 +88,16 @@ const PhoneNumber = ({ phoneNumber, userId }: IPersonalInfo) => {
             touch. You can add other numbers and choose how they’re used
           </p>
           <form onSubmit={handleSubmit(onSubmitPhoneNumber)}>
-          <div className="grid grid-cols-2 gap-4 my-4">
-            <Input
-              inputId="phoneNumber"
-              inputLabel="Phone number"
-              defaultValue={phoneNumber}
-              {...registerPhoneNumber("phoneNumber")}
-            />
-          </div>
-          <Button className="w-20" size={"sm"}>
-          {isPending ? (
+            <div className="grid grid-cols-2 gap-4 my-4">
+              <Input
+                inputId="phoneNumber"
+                inputLabel="Phone number"
+                defaultValue={phoneNumber}
+                {...registerPhoneNumber("phoneNumber")}
+              />
+            </div>
+            <Button className="w-20" size={"sm"}>
+              {isPending ? (
                 <div className="animate-spin w-4 h-4 border-2 border-current border-t-transparent text-primary-200 rounded-full">
                   <span className="sr-only">Loading...</span>
                 </div>

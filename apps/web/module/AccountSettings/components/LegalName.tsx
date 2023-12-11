@@ -16,8 +16,12 @@ const LegalName = ({ firstName, lastName, userId }: IPersonalInfo) => {
     isButtonClicked: false,
     contentId: "",
   })
-  const { register:registerLegalName, reset, handleSubmit} = useForm<IPersonalInfo>()
-  const {mutate, isPending} = useUpdatePersonalInfo(userId as number)
+  const {
+    register: registerLegalName,
+    reset,
+    handleSubmit,
+  } = useForm<IPersonalInfo>()
+  const { mutate, isPending } = useUpdatePersonalInfo(userId as number)
   const queryClient = useQueryClient()
 
   const onSubmitLegalName = (formData: IPersonalInfo) => {
@@ -81,22 +85,22 @@ const LegalName = ({ firstName, lastName, userId }: IPersonalInfo) => {
             or a passport.
           </p>
           <form onSubmit={handleSubmit(onSubmitLegalName)}>
-          <div className="grid grid-cols-2 gap-4 my-4">
-            <Input
-              inputId="firstName"
-              inputLabel="First name"
-              defaultValue={firstName}
-              {...registerLegalName("firstName")}
-            />
-            <Input
-              inputId="lastName"
-              inputLabel="Last name"
-              defaultValue={lastName}
-              {...registerLegalName("lastName")}
-            />
-          </div>
-          <Button className="w-20" size={"sm"} type="submit">
-          {isPending ? (
+            <div className="grid grid-cols-2 gap-4 my-4">
+              <Input
+                inputId="firstName"
+                inputLabel="First name"
+                defaultValue={firstName}
+                {...registerLegalName("firstName")}
+              />
+              <Input
+                inputId="lastName"
+                inputLabel="Last name"
+                defaultValue={lastName}
+                {...registerLegalName("lastName")}
+              />
+            </div>
+            <Button className="w-20" size={"sm"} type="submit">
+              {isPending ? (
                 <div className="animate-spin w-4 h-4 border-2 border-current border-t-transparent text-primary-200 rounded-full">
                   <span className="sr-only">Loading...</span>
                 </div>
