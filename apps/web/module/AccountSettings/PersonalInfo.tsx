@@ -16,7 +16,7 @@ import useGetPaymentmethods from "./hooks/useGetPaymentMethods"
 
 const PersonalInfo = () => {
   const { data, isPending } = useGetUserDetails()
-  const {data:paymentMethod} = useGetPaymentmethods(data?.item?.id) 
+  const { data: paymentMethod } = useGetPaymentmethods(data?.item?.id)
   return (
     <>
       <Header />
