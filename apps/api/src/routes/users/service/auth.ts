@@ -507,19 +507,10 @@ export const updateUserEmail = async (req: Request, res: Response) => {
               email: email,
             },
           })
-          const token = jwt.sign(
-            {
-              firstName: getUser.personalInfo?.firstName,
-              lastName: getUser.personalInfo?.lastName,
-              email: email,
-              role: getUser.role,
-            },
-            signKey as string
-          )
+
           res.json({
             error: false,
             items: {
-              accessToken: token,
               user: updateEmail,
             },
             itemCount: 1,
