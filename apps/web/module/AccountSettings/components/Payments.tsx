@@ -78,7 +78,6 @@ const Payments = () => {
                     </div>
                     <div
                       onClick={() => setRemovePaymentModal(true)}
-                      role="button"
                       className="relative rounded hover:bg-gray-50 px-5 py-2"
                     >
                       Remove
