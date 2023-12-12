@@ -55,9 +55,9 @@ export interface IEmergencyContact {
 
 export interface IPaymentMethod {
   id?: number
-  cardNumber: string,
+  cardNumber: string
   countryRegion: string
-  cvv:number
+  cvv: number
   expirationDate: string
   zipCode: number
   createdAt?: string
