@@ -205,7 +205,6 @@ const EmergencyContact = ({ emergencyContact, id }: IPersonalInfo) => {
                 />
               </div>
             </div>
-
             <Button className="w-20" size={"sm"} type="submit">
               {isPending ? (
                 <div className="animate-spin w-4 h-4 border-2 border-current border-t-transparent text-primary-200 rounded-full">
