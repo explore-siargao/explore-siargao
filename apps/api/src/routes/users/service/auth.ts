@@ -507,7 +507,7 @@ export const updateUserEmail = async (req: Request, res: Response) => {
               email: email,
             },
           })
-         
+
           res.json({
             error: false,
             items: {
