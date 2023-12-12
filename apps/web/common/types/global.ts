@@ -53,6 +53,18 @@ export interface IEmergencyContact {
   deletedAt?: string
 }
 
+export interface IPaymentMethod {
+  id?: number
+  cardNumber: string,
+  countryRegion: string
+  cvv:number
+  expirationDate: string
+  zipCode: number
+  createdAt?: string
+  updatedAt?: string
+  deletedAt?: string
+}
+
 //stores
 type Email = {
   email: string
