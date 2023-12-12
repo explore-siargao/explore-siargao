@@ -110,12 +110,12 @@ const EmergencyContact = ({ emergencyContact, id }: IPersonalInfo) => {
               <button
                 type="button"
                 className="underline self-start select-none"
-                onClick={() =>{
+                onClick={() => {
                   setContentState({
                     isButtonClicked: !contentState.isButtonClicked,
-                    contentId: " "
-                })
-                setEmergencyContactIsVisible(false)
+                    contentId: " ",
+                  })
+                  setEmergencyContactIsVisible(false)
                 }}
               >
                 Cancel
@@ -230,7 +230,7 @@ const EmergencyContact = ({ emergencyContact, id }: IPersonalInfo) => {
                     variant={"outline"}
                     type="button"
                     className="text-lg font-semibold p-6"
-                    onClick={()=>setEmergencyContactIsVisible(true)}
+                    onClick={() => setEmergencyContactIsVisible(true)}
                   >
                     Add new emergency contact
                   </Button>
