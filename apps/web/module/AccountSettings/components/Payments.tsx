@@ -9,6 +9,8 @@ import Image from "next/image"
 import { Input } from "@/common/components/ui/Input"
 import { Popover, Transition } from "@headlessui/react"
 import RemovePaymentModal from "./modals/RemovePaymentModal"
+import useGetUserDetails from "@/common/hooks/useGetUserDetails"
+import useGetPaymentmethods from "../hooks/useGetPaymentMethods"
 
 const Payments = () => {
   const router = useRouter()
@@ -18,9 +20,16 @@ const Payments = () => {
   const toggleVisibility = () => {
     setShowHide(!showHide)
   }
-
+  const {data:userDetails, isPending:isPendingUserDetails} = useGetUserDetails()
+  const {data:paymentMethods, isPending:isPendingPaymentmethods} = useGetPaymentmethods(!isPendingUserDetails && userDetails?.item?.id)
   return (
     <>
+    {(isPendingUserDetails || isPendingPaymentmethods) ? (
+            <div className="animate-spin w-4 h-4 border-2 border-current border-t-transparent text-primary-200 rounded-full">
+              <span className="sr-only">Loading...</span>
+            </div>
+          ) : (
+            
       <div className="space-y-10 my-5">
         <div>
           <Title size={"sub"}>Your payments</Title>
@@ -33,10 +42,11 @@ const Payments = () => {
         </div>
         <div>
           <Title size={"sub"}>Payment methods</Title>
-          <p className="font-light ">
+          <p className="font-light py-3">
             Add a payment method using our secure payment system, then start
             planning your next trip.
           </p>
+        {paymentMethods?.items.length !== 0 ? (
           <div className="flex my-4 py-5 border-y border-y-text-100 justify-between">
             <div className="flex gap-4">
               <Image
@@ -88,6 +98,7 @@ const Payments = () => {
               </Transition>
             </Popover>
           </div>
+          ):(<div className="pt-5 border-t border-t-text-100"></div>)}
           <Button onClick={() => setAddCardModal(true)}>
             Add payment method
           </Button>
@@ -110,9 +121,11 @@ const Payments = () => {
           <Button onClick={toggleVisibility}>Add coupon</Button>
         </div>
       </div>
+          )}
       <AddCardDetailModal
         isOpen={addCardModal}
         onClose={() => setAddCardModal(false)}
+        userId={!isPendingUserDetails ? userDetails?.item?.id as number: 0}
       />
       <RemovePaymentModal
         isOpen={removePaymentModal}
