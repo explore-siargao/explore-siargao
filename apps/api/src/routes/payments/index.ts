@@ -10,7 +10,7 @@ const router = express.Router()
 router.post('/:userId/payment-method', isUserLoggedIn, addpaymentMethod)
 router.get('/:userId/payment-method', isUserLoggedIn, getPaymentMethods)
 router.delete(
-  '/:userId/payment-method/remove/:paymentMethodId',
+  '/:userId/payment-method/:paymentMethodId',
   isUserLoggedIn,
   removePaymentmethod
 )
