@@ -11,11 +11,17 @@ const CreateAccount = () => {
   const router = useRouter()
   const { data: session } = useSession()
   const createAccountEmail = useGlobalInputEmail((state) => state.email)
-
+  const removeAccountEmail = useGlobalInputEmail((state) => state.remove)
   return (
     <AuthContainer
       title="Create account using your email"
-      onBack={() => router.push("/login")}
+      onBack={() => {
+        if (createAccountEmail !== null) {
+          removeAccountEmail()
+        } else {
+          router.push("/login")
+        }
+      }}
     >
       {session || createAccountEmail ? <SignUpForm /> : <PreSignUpForm />}
     </AuthContainer>

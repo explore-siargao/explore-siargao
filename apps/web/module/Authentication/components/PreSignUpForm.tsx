@@ -36,10 +36,18 @@ const PreSignUpForm = () => {
             placeholder="you@example.com"
             {...register("email", { required: true })}
           />
+          <p className="text-xs mt-1 text-text-500">
+            We'll email you trip confirmations and receipts.
+          </p>
         </div>
         <Button className="w-full my-5" type="submit">
-          Proceed
+          Continue
         </Button>
+        <div className="flex">
+          <span className="border-b-2 h-0 w-full my-auto"></span>
+          <p className="text-xs mx-5">or</p>
+          <span className="border-b-2 shadow-md h-0 w-full my-auto"></span>
+        </div>
         <div className="mt-6 grid gap-4">
           <Button
             type="button"
