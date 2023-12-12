@@ -12,9 +12,11 @@ import Address from "./components/Address"
 import EmergencyContact from "./components/EmergencyContact"
 import { Title } from "@/common/components/ui/Title"
 import useGetUserDetails from "@/common/hooks/useGetUserDetails"
+import useGetPaymentmethods from "./hooks/useGetPaymentMethods"
 
 const PersonalInfo = () => {
   const { data, isPending } = useGetUserDetails()
+  const {data:paymentMethod} = useGetPaymentmethods(data?.item?.id) 
   return (
     <>
       <Header />
