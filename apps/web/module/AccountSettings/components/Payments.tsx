@@ -2,15 +2,18 @@ import { Button } from "@/common/components/ui/Button"
 import { Title } from "@/common/components/ui/Title"
 import { LINK_ACCOUNT_YOUR_PAYMENT, LINK_GIFT } from "@/common/constants/links"
 import { useRouter } from "next/navigation"
-import React, { useState } from "react"
+import React, { Fragment, useState } from "react"
 import AddCardDetailModal from "./modals/AddCardDetailModal"
 import mastercard from "@/common/assets/mastercard.png"
 import Image from "next/image"
 import { Input } from "@/common/components/ui/Input"
+import { Popover, Transition } from "@headlessui/react"
+import RemovePaymentModal from "./modals/RemovePaymentModal"
 
 const Payments = () => {
   const router = useRouter()
   const [addCardModal, setAddCardModal] = useState<boolean>(false)
+  const [removePaymentModal, setRemovePaymentModal] = useState<boolean>(false)
   const [showHide, setShowHide] = useState(false)
   const toggleVisibility = () => {
     setShowHide(!showHide)
@@ -47,13 +50,43 @@ const Payments = () => {
                 <p>
                   MasterCard {""}
                   <span className="font-medium">**** 0000 </span>{" "}
+                  <span className="bg-text-50 font-semibold ml-2">DEFAULT</span>
                 </p>
                 <p>
                   Expiration:<span className="font-medium"> 00/2023</span>{" "}
                 </p>
               </div>
             </div>
-            <span className="place-self-center select-none">•••</span>
+            <Popover className="relative">
+              <Popover.Button className="items-center focus:outline-none px-2 py-1">
+                <span className="place-self-center select-none">•••</span>
+              </Popover.Button>
+
+              <Transition
+                as={Fragment}
+                enter="transition ease-out duration-200"
+                enterFrom="opacity-0 translate-y-1"
+                enterTo="opacity-100 translate-y-0"
+                leave="transition ease-in duration-150"
+                leaveFrom="opacity-100 translate-y-0"
+                leaveTo="opacity-0 translate-y-1"
+              >
+                <Popover.Panel className="absolute right-0 top-5 z-10 mt-5 flex w-screen max-w-max shadow-md">
+                  <div className="w-screen max-w-[200px] flex-auto bg-white text-sm leading-6 border border-gray-200 shadow-sm ring-transparent rounded-md cursor-pointer">
+                    <div className="relative rounded hover:bg-gray-50 px-5 py-2">
+                      Use default
+                    </div>
+                    <div
+                      onClick={() => setRemovePaymentModal(true)}
+                      role="button"
+                      className="relative rounded hover:bg-gray-50 px-5 py-2"
+                    >
+                      Remove
+                    </div>
+                  </div>
+                </Popover.Panel>
+              </Transition>
+            </Popover>
           </div>
           <Button onClick={() => setAddCardModal(true)}>
             Add payment method
@@ -80,6 +113,10 @@ const Payments = () => {
       <AddCardDetailModal
         isOpen={addCardModal}
         onClose={() => setAddCardModal(false)}
+      />
+      <RemovePaymentModal
+        isOpen={removePaymentModal}
+        onClose={() => setRemovePaymentModal(false)}
       />
     </>
   )
