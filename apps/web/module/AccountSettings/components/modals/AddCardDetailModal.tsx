@@ -8,14 +8,51 @@ import discover from "@/common/assets/discover-card.png"
 import mastercard from "@/common/assets/mastercard.png"
 import visa from "@/common/assets/visa.png"
 import Image from "next/image"
+import useAddPaymentMethod from "../../hooks/useAddPaymentMethod"
+import { IPaymentMethod } from "@/common/types/global"
+import { useForm } from "react-hook-form"
+import { useQueryClient } from "@tanstack/react-query"
+import toast from "react-hot-toast"
 
 interface CardDetailModal {
   isOpen: boolean
   onClose: () => void
+  userId: number
 }
 
-const AddCardDetailModal = ({ isOpen, onClose }: CardDetailModal) => {
+const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
+  const { mutate, isPending } = useAddPaymentMethod(userId)
+  const { register, reset, handleSubmit, getValues } = useForm<IPaymentMethod>()
   const cancelButtonRef = useRef(null)
+  const queryClient = useQueryClient()
+  const onSubmit = (formData: IPaymentMethod) => {
+    const callBackReq = {
+      onSuccess: (data: any) => {
+        if (!data.error) {
+          queryClient.invalidateQueries({
+            queryKey: ["payment-method"],
+          })
+          toast.success(data.message)
+          reset()
+          onClose()
+        } else {
+          toast.error(String(data.message))
+        }
+      },
+      onError: (err: any) => {
+        toast.error(String(err))
+      },
+    }
+    mutate(
+      {
+        ...formData,
+        cvv: Number(getValues("cvv")),
+        zipCode: Number(getValues("zipCode")),
+        userId: Number(userId),
+      },
+      callBackReq
+    )
+  }
   return (
     <Transition.Root show={isOpen} as={Fragment}>
       <Dialog
@@ -50,80 +87,120 @@ const AddCardDetailModal = ({ isOpen, onClose }: CardDetailModal) => {
               <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:w-full sm:max-w-lg ">
                 <ModalContainer title="Add card details" onClose={onClose}>
                   <div className="p-6 space-y-4">
-                    <div className="flex gap-2">
-                      <Image
-                        src={mastercard}
-                        width={500}
-                        height={500}
-                        className="h-5 w-auto"
-                        alt="mastercard"
-                      />
-                      <Image
-                        src={visa}
-                        width={500}
-                        height={500}
-                        className="h-5 w-auto"
-                        alt="visa"
-                      />
-                      <Image
-                        src={amex}
-                        width={500}
-                        height={500}
-                        className="h-5 w-auto"
-                        alt="amex"
-                      />
-                      <Image
-                        src={discover}
-                        width={500}
-                        height={500}
-                        className="h-5 w-auto"
-                        alt="discover"
-                      />
-                    </div>
-                    <div>
-                      <Input
-                        inputLabel="Card Number"
-                        inputId="cardNumber"
-                        placeholder="0000 0000 0000 0000"
-                        type="number"
-                        className="rounded-b-none"
-                      />
-                      <div className="grid grid-flow-col">
-                        <Input
-                          inputLabel="Expiration date"
-                          inputId="expirationDate"
-                          type="number"
-                          className="rounded-t-none rounded-r-none"
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                      <div className="flex gap-2">
+                        <Image
+                          src={mastercard}
+                          width={500}
+                          height={500}
+                          className="h-5 w-auto"
+                          alt="mastercard"
                         />
-                        <Input
-                          inputLabel="CVV"
-                          inputId="cvv"
-                          type="number"
-                          className="rounded-t-none rounded-l-none"
+                        <Image
+                          src={visa}
+                          width={500}
+                          height={500}
+                          className="h-5 w-auto"
+                          alt="visa"
+                        />
+                        <Image
+                          src={amex}
+                          width={500}
+                          height={500}
+                          className="h-5 w-auto"
+                          alt="amex"
+                        />
+                        <Image
+                          src={discover}
+                          width={500}
+                          height={500}
+                          className="h-5 w-auto"
+                          alt="discover"
                         />
                       </div>
-                    </div>
-                    <Input
-                      inputLabel="Zip code"
-                      inputId="zipCode"
-                      type="number"
-                    />
-                    <select
-                      id="countries"
-                      className=" text-text-900 focus-within:z-10 focus-within:ring-2 focus-within:ring-text-600 text-sm rounded-lg block h-14 w-full"
-                    >
-                      <option selected>Country/Region</option>
-                      <option value="US">United state</option>
-                      <option value="PH">Philippines</option>
-                      <option value="ch">China</option>
-                      <option value="ITALIAN">Italian</option>
-                    </select>
-                    <div className="flex justify-between">
-                      <Button variant={"ghost"} onClick={onClose}>
-                        Cancel
-                      </Button>
-                      <Button>Save</Button>
-                    </div>
+                      <div>
+                        <Input
+                          inputLabel="Card Number"
+                          inputId="cardNumber"
+                          placeholder="0000 0000 0000 0000"
+                          type="text"
+                          className="rounded-b-none"
+                          disabled={isPending}
+                          {...register("cardNumber", {
+                            minLength: 10,
+                            required: "This field is required",
+                          })}
+                        />
+                        <div className="grid grid-flow-col">
+                          <Input
+                            inputLabel="Expiration date"
+                            inputId="expirationDate"
+                            type="string"
+                            className="rounded-t-none rounded-r-none"
+                            disabled={isPending}
+                            {...register("expirationDate", {
+                              minLength: 5,
+                              maxLength: 5,
+                              required: "This field is required",
+                            })}
+                          />
+                          <Input
+                            inputLabel="CVV"
+                            inputId="cvv"
+                            type="number"
+                            className="rounded-t-none rounded-l-none"
+                            disabled={isPending}
+                            {...register("cvv", {
+                              minLength: 3,
+                              maxLength: 3,
+                              required: "This field is required",
+                            })}
+                          />
+                        </div>
+                      </div>
+                      <Input
+                        inputLabel="Zip code"
+                        inputId="zipCode"
+                        type="number"
+                        disabled={isPending}
+                        {...register("zipCode", {
+                          minLength: 4,
+                          required: "This field is required",
+                        })}
+                      />
+                      <select
+                        id="countries"
+                        disabled={isPending}
+                        className=" text-text-900 focus-within:z-10 focus-within:ring-2 focus-within:ring-text-600 text-sm rounded-lg block h-14 w-full"
+                        {...register("countryRegion", {
+                          required: "This field is required",
+                        })}
+                      >
+                        <option value="">Country/Region</option>
+                        <option value="US">United state</option>
+                        <option value="Ph">Philippines</option>
+                        <option value="CH">China</option>
+                        <option value="ITALIAN">Italian</option>
+                      </select>
+                      <div className="flex justify-between">
+                        <Button
+                          variant={"ghost"}
+                          type="button"
+                          onClick={onClose}
+                        >
+                          Cancel
+                        </Button>
+                        <Button type="submit">
+                          {isPending ? (
+                            <div className="animate-spin w-4 h-4 border-2 border-current border-t-transparent text-primary-200 rounded-full">
+                              <span className="sr-only">Loading...</span>
+                            </div>
+                          ) : (
+                            "Save"
+                          )}
+                        </Button>
+                      </div>
+                    </form>
                   </div>
                 </ModalContainer>
               </Dialog.Panel>

@@ -133,7 +133,7 @@ model PaymentMethod {
   id             Int       @id @default(autoincrement())
   userId         Int
   user           User      @relation(fields: [userId], references: [id])
-  cardNumber     Int       @unique
+  cardNumber     String    @unique
   expirationDate String    @db.VarChar(10)
   cvv            Int
   zipCode        Int
