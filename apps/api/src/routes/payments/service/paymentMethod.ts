@@ -168,3 +168,99 @@ export const removePaymentmethod = async (req: Request, res: Response) => {
     })
   }
 }
+
+export const updatePaymentMethod = async (req: Request, res: Response) => {
+  const { cardNumber, countryRegion, cvv, expirationDate, zipCode, isDefault } = req.body
+  const userId = Number(req.params.userId)
+  const paymentMethodId = Number(req.params.paymentMethodId)
+  try {
+    const prisma = new PrismaClient()
+    const getUser = await prisma.user.findFirst({
+      where: {
+        id: userId,
+        deletedAt: null,
+      },
+      include: {
+        paymentMethod: true,
+      },
+    })
+    if (getUser) {
+      const getPaymentMethod = await prisma.paymentMethod.findFirst({
+        where: {
+          id: paymentMethodId,
+          userId:userId
+        },
+        include: {
+          user: true,
+        },
+      })
+      if(getPaymentMethod){
+      if (cardNumber || cvv || expirationDate || countryRegion || zipCode || isDefault || !isDefault) {
+        if(isDefault){
+        const updateCurrentDefault = await prisma.paymentMethod.updateMany({
+          where: {
+            userId:userId,
+            isDefault:true
+          },
+          data:{
+            isDefault:false
+          }
+         })
+        }
+          const updatePaymentMethod = await prisma.paymentMethod.update({
+            where: {
+              id:paymentMethodId,
+              userId:userId
+            },
+            data: {
+              cardNumber: cardNumber,
+              cvv:cvv,
+              expirationDate:expirationDate,
+              countryRegion:countryRegion,
+              zipCode:zipCode,
+              isDefault: isDefault
+            },
+          })
+
+          res.json({
+            error: false,
+            items: {
+              user: updatePaymentMethod,
+            },
+            itemCount: 1,
+            message: 'Sucessfully updated',
+          })
+        
+      } else {
+        res.json({
+          error: true,
+          items: null,
+          itemCount: 0,
+          message: REQUIRED_VALUE_EMPTY,
+        })
+      }
+    }else{
+      res.json({
+        error: true,
+        items: null,
+        itemCount: 0,
+        message: 'Payment method not exist to our system',
+      })
+    }
+    } else {
+      res.json({
+        error: true,
+        items: null,
+        itemCount: 0,
+        message: 'User not exist to our system',
+      })
+    }
+  } catch (err: any) {
+    res.json({
+      error: true,
+      items: null,
+      itemCount: 0,
+      message: err.message,
+    })
+  }
+}
