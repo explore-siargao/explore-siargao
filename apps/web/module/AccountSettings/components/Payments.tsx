@@ -31,7 +31,9 @@ const Payments = () => {
     useGetUserDetails()
   const { data: paymentMethods, isPending: isPendingPaymentmethods } =
     useGetPaymentmethods(!isPendingUserDetails && userDetails?.item?.id)
-  const {mutate,isPending} = useUpdatepaymentMethod(!isPendingUserDetails && userDetails?.item?.id)
+  const { mutate, isPending } = useUpdatepaymentMethod(
+    !isPendingUserDetails && userDetails?.item?.id
+  )
   const callBackReqDefaultPaymentMethod = {
     onSuccess: (data: any) => {
       if (!data.error) {
@@ -107,49 +109,60 @@ const Payments = () => {
                     </div>
                   </div>
                   <Popover className="relative">
-                    <Popover.Button className="items-center focus:outline-none px-2 py-1" onClick={()=>setPopPanelIsVisible(true)}>
-                      {isPending ? ( <div className="animate-spin w-4 h-4 border-2 border-current border-t-transparent text-primary-200 rounded-full">
+                    <Popover.Button
+                      className="items-center focus:outline-none px-2 py-1"
+                      onClick={() => setPopPanelIsVisible(true)}
+                    >
+                      {isPending ? (
+                        <div className="animate-spin w-4 h-4 border-2 border-current border-t-transparent text-primary-200 rounded-full">
                           <span className="sr-only">Loading...</span>
-                        </div>):(
-                      <span className="place-self-center select-none">•••</span>
+                        </div>
+                      ) : (
+                        <span className="place-self-center select-none">
+                          •••
+                        </span>
                       )}
                     </Popover.Button>
                     {popPanelIsVisible && (
-                    <Transition
-                      as={Fragment}
-                      enter="transition ease-out duration-200"
-                      enterFrom="opacity-0 translate-y-1"
-                      enterTo="opacity-100 translate-y-0"
-                      leave="transition ease-in duration-150"
-                      leaveFrom="opacity-100 translate-y-0"
-                      leaveTo="opacity-0 translate-y-1"
-                    >
-                      <Popover.Panel className="absolute right-0 top-5 z-10 mt-5 flex w-screen max-w-max shadow-md">
-                        <div className="w-screen max-w-[200px] flex-auto bg-white text-sm leading-6 border border-gray-200 shadow-sm ring-transparent rounded-md cursor-pointer">
-                          <div className="relative rounded hover:bg-gray-50 px-5 py-2" onClick={()=>{
-                            setPopPanelIsVisible(false)
-                            mutate({id:paymentMethod.id, isDefault:true}, callBackReqDefaultPaymentMethod)
-                          }}>
-                            Set default
+                      <Transition
+                        as={Fragment}
+                        enter="transition ease-out duration-200"
+                        enterFrom="opacity-0 translate-y-1"
+                        enterTo="opacity-100 translate-y-0"
+                        leave="transition ease-in duration-150"
+                        leaveFrom="opacity-100 translate-y-0"
+                        leaveTo="opacity-0 translate-y-1"
+                      >
+                        <Popover.Panel className="absolute right-0 top-5 z-10 mt-5 flex w-screen max-w-max shadow-md">
+                          <div className="w-screen max-w-[200px] flex-auto bg-white text-sm leading-6 border border-gray-200 shadow-sm ring-transparent rounded-md cursor-pointer">
+                            <div
+                              className="relative rounded hover:bg-gray-50 px-5 py-2"
+                              onClick={() => {
+                                setPopPanelIsVisible(false)
+                                mutate(
+                                  { id: paymentMethod.id, isDefault: true },
+                                  callBackReqDefaultPaymentMethod
+                                )
+                              }}
+                            >
+                              Set default
+                            </div>
+                            <div
+                              onClick={() => {
+                                setPaymentMethodId(paymentMethod.id as number)
+                                setRemovePaymentModal(true)
+                              }}
+                              className="relative rounded hover:bg-gray-50 px-5 py-2"
+                              aria-hidden="true"
+                            >
+                              Remove
+                            </div>
                           </div>
-                          <div
-                            onClick={() => {
-                              setPaymentMethodId(paymentMethod.id as number)
-                              setRemovePaymentModal(true)
-                            }}
-                            className="relative rounded hover:bg-gray-50 px-5 py-2"
-                            aria-hidden="true"
-                          >
-                            Remove
-                          </div>
-                        </div>
-                      </Popover.Panel>
-                      
-                    </Transition>
+                        </Popover.Panel>
+                      </Transition>
                     )}
                   </Popover>
                 </div>
-
               ))
             ) : (
               <div className="pt-5 border-t border-t-text-100"></div>
