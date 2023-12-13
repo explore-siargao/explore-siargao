@@ -11,6 +11,7 @@ import { Popover, Transition } from "@headlessui/react"
 import RemovePaymentModal from "./modals/RemovePaymentModal"
 import useGetUserDetails from "@/common/hooks/useGetUserDetails"
 import useGetPaymentmethods from "../hooks/useGetPaymentMethods"
+import { IPaymentMethod } from "@/common/types/global"
 
 const Payments = () => {
   const router = useRouter()
@@ -48,59 +49,73 @@ const Payments = () => {
               planning your next trip.
             </p>
             {paymentMethods?.items?.length !== 0 ? (
-              <div className="flex my-4 py-5 border-y border-y-text-100 justify-between">
-                <div className="flex gap-4">
-                  <Image
-                    src={mastercard}
-                    width={500}
-                    height={500}
-                    className="h-8 w-auto"
-                    alt="mastercard"
-                  />
-                  <div className="text-sm">
-                    <p>
-                      MasterCard {""}
-                      <span className="font-medium">**** 0000 </span>{" "}
-                      <span className="bg-text-50 font-semibold ml-2">
-                        DEFAULT
-                      </span>
-                    </p>
-                    <p>
-                      Expiration:<span className="font-medium"> 00/2023</span>{" "}
-                    </p>
+              paymentMethods?.items?.map((paymentMethod: IPaymentMethod) => (
+                <div
+                  key={paymentMethod.id}
+                  className="flex my-4 py-5 border-y border-y-text-100 justify-between"
+                >
+                  <div className="flex gap-4">
+                    <Image
+                      src={mastercard}
+                      width={500}
+                      height={500}
+                      className="h-8 w-auto"
+                      alt="mastercard"
+                    />
+                    <div className="text-sm">
+                      <p>
+                        MasterCard {""}
+                        <span className="font-medium">
+                          **** {paymentMethod.cardNumber.slice(5)}{" "}
+                        </span>{" "}
+                        {paymentMethod.isDefault ? (
+                          <span className="bg-text-50 font-semibold ml-2">
+                            Default
+                          </span>
+                        ) : (
+                          ""
+                        )}
+                      </p>
+                      <p>
+                        Expiration:
+                        <span className="font-medium">
+                          {paymentMethod.expirationDate}
+                        </span>{" "}
+                      </p>
+                    </div>
                   </div>
-                </div>
-                <Popover className="relative">
-                  <Popover.Button className="items-center focus:outline-none px-2 py-1">
-                    <span className="place-self-center select-none">•••</span>
-                  </Popover.Button>
+                  <Popover className="relative">
+                    <Popover.Button className="items-center focus:outline-none px-2 py-1">
+                      <span className="place-self-center select-none">•••</span>
+                    </Popover.Button>
 
-                  <Transition
-                    as={Fragment}
-                    enter="transition ease-out duration-200"
-                    enterFrom="opacity-0 translate-y-1"
-                    enterTo="opacity-100 translate-y-0"
-                    leave="transition ease-in duration-150"
-                    leaveFrom="opacity-100 translate-y-0"
-                    leaveTo="opacity-0 translate-y-1"
-                  >
-                    <Popover.Panel className="absolute right-0 top-5 z-10 mt-5 flex w-screen max-w-max shadow-md">
-                      <div className="w-screen max-w-[200px] flex-auto bg-white text-sm leading-6 border border-gray-200 shadow-sm ring-transparent rounded-md cursor-pointer">
-                        <div className="relative rounded hover:bg-gray-50 px-5 py-2">
-                          Use default
+                    <Transition
+                      as={Fragment}
+                      enter="transition ease-out duration-200"
+                      enterFrom="opacity-0 translate-y-1"
+                      enterTo="opacity-100 translate-y-0"
+                      leave="transition ease-in duration-150"
+                      leaveFrom="opacity-100 translate-y-0"
+                      leaveTo="opacity-0 translate-y-1"
+                    >
+                      <Popover.Panel className="absolute right-0 top-5 z-10 mt-5 flex w-screen max-w-max shadow-md">
+                        <div className="w-screen max-w-[200px] flex-auto bg-white text-sm leading-6 border border-gray-200 shadow-sm ring-transparent rounded-md cursor-pointer">
+                          <div className="relative rounded hover:bg-gray-50 px-5 py-2">
+                            Set default
+                          </div>
+                          <div
+                            onClick={() => setRemovePaymentModal(true)}
+                            className="relative rounded hover:bg-gray-50 px-5 py-2"
+                            aria-hidden="true"
+                          >
+                            Remove
+                          </div>
                         </div>
-                        <div
-                          onClick={() => setRemovePaymentModal(true)}
-                          className="relative rounded hover:bg-gray-50 px-5 py-2"
-                          aria-hidden="true"
-                        >
-                          Remove
-                        </div>
-                      </div>
-                    </Popover.Panel>
-                  </Transition>
-                </Popover>
-              </div>
+                      </Popover.Panel>
+                    </Transition>
+                  </Popover>
+                </div>
+              ))
             ) : (
               <div className="pt-5 border-t border-t-text-100"></div>
             )}
