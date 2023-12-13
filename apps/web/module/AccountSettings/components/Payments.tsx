@@ -135,8 +135,7 @@ const Payments = () => {
                       >
                         <Popover.Panel className="absolute right-0 top-5 z-10 mt-5 flex w-screen max-w-max shadow-md">
                           <div className="w-screen max-w-[200px] flex-auto bg-white text-sm leading-6 border border-gray-200 shadow-sm ring-transparent rounded-md cursor-pointer">
-                            <div
-                            role="button"
+                            <button
                               className="relative rounded hover:bg-gray-50 px-5 py-2"
                               onClick={() => {
                                 setPopPanelIsVisible(false)
@@ -147,9 +146,8 @@ const Payments = () => {
                               }}
                             >
                               Set default
-                            </div>
-                            <div
-                            role="button"
+                            </button>
+                            <button
                               onClick={() => {
                                 setPaymentMethodId(paymentMethod.id as number)
                                 setRemovePaymentModal(true)
@@ -158,7 +156,7 @@ const Payments = () => {
                               aria-hidden="true"
                             >
                               Remove
-                            </div>
+                            </button>
                           </div>
                         </Popover.Panel>
                       </Transition>
