@@ -17,6 +17,7 @@ const Payments = () => {
   const router = useRouter()
   const [addCardModal, setAddCardModal] = useState<boolean>(false)
   const [removePaymentModal, setRemovePaymentModal] = useState<boolean>(false)
+  const [paymentMethodId, setPaymentMethodId] = useState(0)
   const [showHide, setShowHide] = useState(false)
   const toggleVisibility = () => {
     setShowHide(!showHide)
@@ -66,7 +67,7 @@ const Payments = () => {
                       <p>
                         MasterCard {""}
                         <span className="font-medium">
-                          **** {paymentMethod.cardNumber.slice(5)}{" "}
+                          **** {paymentMethod?.cardNumber?.slice(5)}{" "}
                         </span>{" "}
                         {paymentMethod.isDefault ? (
                           <span className="bg-text-50 font-semibold ml-2">
@@ -104,7 +105,10 @@ const Payments = () => {
                             Set default
                           </div>
                           <div
-                            onClick={() => setRemovePaymentModal(true)}
+                            onClick={() => {
+                              setPaymentMethodId(paymentMethod.id as number)
+                              setRemovePaymentModal(true)
+                            }}
                             className="relative rounded hover:bg-gray-50 px-5 py-2"
                             aria-hidden="true"
                           >
@@ -150,6 +154,8 @@ const Payments = () => {
         userId={!isPendingUserDetails ? (userDetails?.item?.id as number) : 0}
       />
       <RemovePaymentModal
+        id={paymentMethodId}
+        userId={userDetails?.item?.id}
         isOpen={removePaymentModal}
         onClose={() => setRemovePaymentModal(false)}
       />
