@@ -6,37 +6,31 @@ import WishlistBoxContainer from "@/common/components/WishlistBoxContainer"
 const WishlistGroup = [
   {
     id: 1,
-    pic: "http://localhost:3000/logo-single.png",
+    pic: "http://localhost:3000/2.jpg",
     name: "My Wishlist",
     text: "1 saved",
   },
   {
     id: 2,
-    pic: "http://localhost:3000/logo-single.png",
+    pic: "http://localhost:3000/3.jpg",
     name: "Vacation",
     text: "3 saved",
   },
   {
     id: 3,
-    pic: "http://localhost:3000/logo-single.png",
+    pic: "http://localhost:3000/4.jpg",
     name: "Wanted",
     text: "2 saved",
   },
   {
     id: 4,
-    pic: "http://localhost:3000/logo-single.png",
+    pic: "http://localhost:3000/5.jpg",
     name: "Wanted",
     text: "2 saved",
   },
   {
     id: 5,
-    pic: "http://localhost:3000/logo-single.png",
-    name: "Wanted",
-    text: "2 saved",
-  },
-  {
-    id: 6,
-    pic: "http://localhost:3000/logo-single.png",
+    pic: "http://localhost:3000/1.jpg",
     name: "Wanted",
     text: "2 saved",
   },
