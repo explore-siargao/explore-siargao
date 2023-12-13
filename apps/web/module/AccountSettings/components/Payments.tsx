@@ -90,7 +90,7 @@ const Payments = () => {
                       <p>
                         MasterCard {""}
                         <span className="font-medium">
-                          **** {paymentMethod?.cardNumber?.slice(5)}{" "}
+                          **** {paymentMethod?.cardNumber?.slice(-3)}{" "}
                         </span>{" "}
                         {paymentMethod.isDefault ? (
                           <span className="bg-text-50 font-semibold ml-2">
