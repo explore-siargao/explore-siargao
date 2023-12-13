@@ -154,8 +154,8 @@ const Payments = () => {
         userId={!isPendingUserDetails ? (userDetails?.item?.id as number) : 0}
       />
       <RemovePaymentModal
-      id={paymentMethodId}
-      userId={userDetails?.item?.id}
+        id={paymentMethodId}
+        userId={userDetails?.item?.id}
         isOpen={removePaymentModal}
         onClose={() => setRemovePaymentModal(false)}
       />

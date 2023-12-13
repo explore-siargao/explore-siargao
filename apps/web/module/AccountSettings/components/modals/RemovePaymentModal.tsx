@@ -22,7 +22,7 @@ const RemovePaymentModal = ({
 }: PaymentModalProps) => {
   const cancelButtonRef = useRef(null)
   const queryClient = useQueryClient()
-  const {mutate, isPending} = useRemovePaymentmethod(userId,id)
+  const { mutate, isPending } = useRemovePaymentmethod(userId, id)
   const callBackReq = {
     onSuccess: (data: any) => {
       if (!data.error) {
@@ -84,17 +84,19 @@ const RemovePaymentModal = ({
                     <Button variant={"ghost"} onClick={closeModal}>
                       Cancel
                     </Button>
-                    <Button onClick={()=>{
-                      mutate({id:id, userId:userId}, callBackReq)
-                    }}>
-                    {isPending ? (
-                            <div className="animate-spin w-4 h-4 border-2 border-current border-t-transparent text-primary-200 rounded-full">
-                              <span className="sr-only">Loading...</span>
-                            </div>
-                          ) : (
-                            "Remove"
-                          )}
-                      </Button>
+                    <Button
+                      onClick={() => {
+                        mutate({ id: id, userId: userId }, callBackReq)
+                      }}
+                    >
+                      {isPending ? (
+                        <div className="animate-spin w-4 h-4 border-2 border-current border-t-transparent text-primary-200 rounded-full">
+                          <span className="sr-only">Loading...</span>
+                        </div>
+                      ) : (
+                        "Remove"
+                      )}
+                    </Button>
                   </div>
                 </ModalContainer>
               </Dialog.Panel>

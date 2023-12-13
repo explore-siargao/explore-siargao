@@ -13,7 +13,7 @@ export async function removePaymentMethod(
   )
 }
 
-function useRemovePaymentmethod(userId: number, paymentMethodId:number) {
+function useRemovePaymentmethod(userId: number, paymentMethodId: number) {
   const query = useMutation({
     mutationFn: (props: IPaymentMethod) =>
       removePaymentMethod(userId, paymentMethodId as number),
