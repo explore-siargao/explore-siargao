@@ -29,6 +29,7 @@ model User {
   personalInfo     PersonalInfo?
   deactivated      Boolean           @default(false)
   MultiFactorAuth  MultiFactorAuth[]
+  Coupons          Coupon[]
 }
 
 model PersonalInfo {
@@ -73,7 +74,7 @@ model Addresses {
   city          String?      @db.LongText()
   province      String?      @db.LongText()
   zipCode       Int?         @db.Int()
-  country       String?       @db.VarChar(255)
+  country       String?      @db.VarChar(255)
   createdAt     DateTime     @default(now())
   updatedAt     DateTime     @updatedAt
   deletedAt     DateTime?
@@ -144,6 +145,22 @@ model PaymentMethod {
   deletedAt      DateTime?
 
   @@index([userId])
+}
+
+model Coupon {
+  id             Int       @id @default(autoincrement())
+  createdBy      Int
+  usedBy         Int?
+  user           User?     @relation(fields: [usedBy], references: [id])
+  code           String    @unique
+  expirationDate DateTime
+  reward         String
+  isUsed         Boolean
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  deletedAt      DateTime?
+
+  @@index([usedBy])
 }
 
 model ListingPrice {
