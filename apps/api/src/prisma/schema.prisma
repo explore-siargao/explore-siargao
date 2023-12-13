@@ -138,6 +138,7 @@ model PaymentMethod {
   cvv            Int
   zipCode        Int
   countryRegion  String    @db.VarChar(255)
+  isDefault      Boolean   @default(false)
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
   deletedAt      DateTime?
