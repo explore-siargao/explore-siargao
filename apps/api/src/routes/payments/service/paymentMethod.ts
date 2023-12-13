@@ -170,7 +170,8 @@ export const removePaymentmethod = async (req: Request, res: Response) => {
 }
 
 export const updatePaymentMethod = async (req: Request, res: Response) => {
-  const { cardNumber, countryRegion, cvv, expirationDate, zipCode, isDefault } = req.body
+  const { cardNumber, countryRegion, cvv, expirationDate, zipCode, isDefault } =
+    req.body
   const userId = Number(req.params.userId)
   const paymentMethodId = Number(req.params.paymentMethodId)
   try {
@@ -188,37 +189,45 @@ export const updatePaymentMethod = async (req: Request, res: Response) => {
       const getPaymentMethod = await prisma.paymentMethod.findFirst({
         where: {
           id: paymentMethodId,
-          userId:userId
+          userId: userId,
         },
         include: {
           user: true,
         },
       })
-      if(getPaymentMethod){
-      if (cardNumber || cvv || expirationDate || countryRegion || zipCode || isDefault || !isDefault) {
-        if(isDefault){
-        const updateCurrentDefault = await prisma.paymentMethod.updateMany({
-          where: {
-            userId:userId,
-            isDefault:true
-          },
-          data:{
-            isDefault:false
+      if (getPaymentMethod) {
+        if (
+          cardNumber ||
+          cvv ||
+          expirationDate ||
+          countryRegion ||
+          zipCode ||
+          isDefault ||
+          !isDefault
+        ) {
+          if (isDefault) {
+            const updateCurrentDefault = await prisma.paymentMethod.updateMany({
+              where: {
+                userId: userId,
+                isDefault: true,
+              },
+              data: {
+                isDefault: false,
+              },
+            })
           }
-         })
-        }
           const updatePaymentMethod = await prisma.paymentMethod.update({
             where: {
-              id:paymentMethodId,
-              userId:userId
+              id: paymentMethodId,
+              userId: userId,
             },
             data: {
               cardNumber: cardNumber,
-              cvv:cvv,
-              expirationDate:expirationDate,
-              countryRegion:countryRegion,
-              zipCode:zipCode,
-              isDefault: isDefault
+              cvv: cvv,
+              expirationDate: expirationDate,
+              countryRegion: countryRegion,
+              zipCode: zipCode,
+              isDefault: isDefault,
             },
           })
 
@@ -230,23 +239,22 @@ export const updatePaymentMethod = async (req: Request, res: Response) => {
             itemCount: 1,
             message: 'Sucessfully updated',
           })
-        
+        } else {
+          res.json({
+            error: true,
+            items: null,
+            itemCount: 0,
+            message: REQUIRED_VALUE_EMPTY,
+          })
+        }
       } else {
         res.json({
           error: true,
           items: null,
           itemCount: 0,
-          message: REQUIRED_VALUE_EMPTY,
+          message: 'Payment method not exist to our system',
         })
       }
-    }else{
-      res.json({
-        error: true,
-        items: null,
-        itemCount: 0,
-        message: 'Payment method not exist to our system',
-      })
-    }
     } else {
       res.json({
         error: true,
