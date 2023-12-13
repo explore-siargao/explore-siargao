@@ -12,13 +12,18 @@ import RemovePaymentModal from "./modals/RemovePaymentModal"
 import useGetUserDetails from "@/common/hooks/useGetUserDetails"
 import useGetPaymentmethods from "../hooks/useGetPaymentMethods"
 import { IPaymentMethod } from "@/common/types/global"
+import useUpdatepaymentMethod from "../hooks/useUpdatePaymentMethod"
+import toast from "react-hot-toast"
+import { useQueryClient } from "@tanstack/react-query"
 
 const Payments = () => {
   const router = useRouter()
+  const queryClient = useQueryClient()
   const [addCardModal, setAddCardModal] = useState<boolean>(false)
   const [removePaymentModal, setRemovePaymentModal] = useState<boolean>(false)
   const [paymentMethodId, setPaymentMethodId] = useState(0)
   const [showHide, setShowHide] = useState(false)
+  const [popPanelIsVisible, setPopPanelIsVisible] = useState(false)
   const toggleVisibility = () => {
     setShowHide(!showHide)
   }
@@ -26,6 +31,22 @@ const Payments = () => {
     useGetUserDetails()
   const { data: paymentMethods, isPending: isPendingPaymentmethods } =
     useGetPaymentmethods(!isPendingUserDetails && userDetails?.item?.id)
+  const {mutate,isPending} = useUpdatepaymentMethod(!isPendingUserDetails && userDetails?.item?.id)
+  const callBackReqDefaultPaymentMethod = {
+    onSuccess: (data: any) => {
+      if (!data.error) {
+        queryClient.invalidateQueries({
+          queryKey: ["payment-method"],
+        })
+        toast.success(data.message)
+      } else {
+        toast.error(String(data.message))
+      }
+    },
+    onError: (err: any) => {
+      toast.error(String(err))
+    },
+  }
   return (
     <>
       {isPendingUserDetails || isPendingPaymentmethods ? (
@@ -86,10 +107,14 @@ const Payments = () => {
                     </div>
                   </div>
                   <Popover className="relative">
-                    <Popover.Button className="items-center focus:outline-none px-2 py-1">
+                    <Popover.Button className="items-center focus:outline-none px-2 py-1" onClick={()=>setPopPanelIsVisible(true)}>
+                      {isPending ? ( <div className="animate-spin w-4 h-4 border-2 border-current border-t-transparent text-primary-200 rounded-full">
+                          <span className="sr-only">Loading...</span>
+                        </div>):(
                       <span className="place-self-center select-none">•••</span>
+                      )}
                     </Popover.Button>
-
+                    {popPanelIsVisible && (
                     <Transition
                       as={Fragment}
                       enter="transition ease-out duration-200"
@@ -101,7 +126,10 @@ const Payments = () => {
                     >
                       <Popover.Panel className="absolute right-0 top-5 z-10 mt-5 flex w-screen max-w-max shadow-md">
                         <div className="w-screen max-w-[200px] flex-auto bg-white text-sm leading-6 border border-gray-200 shadow-sm ring-transparent rounded-md cursor-pointer">
-                          <div className="relative rounded hover:bg-gray-50 px-5 py-2">
+                          <div className="relative rounded hover:bg-gray-50 px-5 py-2" onClick={()=>{
+                            setPopPanelIsVisible(false)
+                            mutate({id:paymentMethod.id, isDefault:true}, callBackReqDefaultPaymentMethod)
+                          }}>
                             Set default
                           </div>
                           <div
@@ -116,9 +144,12 @@ const Payments = () => {
                           </div>
                         </div>
                       </Popover.Panel>
+                      
                     </Transition>
+                    )}
                   </Popover>
                 </div>
+
               ))
             ) : (
               <div className="pt-5 border-t border-t-text-100"></div>
