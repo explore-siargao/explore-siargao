@@ -135,7 +135,7 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
                           <Input
                             inputLabel="Expiration date"
                             inputId="expirationDate"
-                            type="string"
+                            type="text"
                             className="rounded-t-none rounded-r-none"
                             disabled={isPending}
                             {...register("expirationDate", {
