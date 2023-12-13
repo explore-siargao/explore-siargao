@@ -6,6 +6,7 @@ const titleVariants = cva("font-bold", {
     size: {
       default: "text-4xl my-3.5",
       sub: "text-xl",
+      ContentTitle: "text-lg",
     },
   },
   defaultVariants: {
