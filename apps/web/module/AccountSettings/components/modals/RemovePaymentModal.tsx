@@ -5,7 +5,6 @@ import { useQueryClient } from "@tanstack/react-query"
 import React, { Fragment, useRef } from "react"
 import toast from "react-hot-toast"
 import useRemovePaymentmethod from "../../hooks/useRemovePaymentMethod"
-import { IPaymentMethod } from "@/common/types/global"
 
 interface PaymentModalProps {
   id: number
