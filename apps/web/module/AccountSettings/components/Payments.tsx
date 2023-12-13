@@ -46,7 +46,7 @@ const Payments = () => {
             Add a payment method using our secure payment system, then start
             planning your next trip.
           </p>
-        {paymentMethods?.items.length !== 0 ? (
+        {paymentMethods?.items?.length !== 0 ? (
           <div className="flex my-4 py-5 border-y border-y-text-100 justify-between">
             <div className="flex gap-4">
               <Image

@@ -34,7 +34,7 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
           })
           toast.success(data.message)
           reset()
-          onClose
+          onClose()
         } else {
           toast.error(String(data.message))
         }
@@ -46,9 +46,9 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
     mutate(
       {
         ...formData,
-        cardNumber: Number(getValues("cardNumber")),
         cvv: Number(getValues("cvv")),
-        zipCode: Number(getValues("zipCode"))
+        zipCode: Number(getValues("zipCode")),
+        userId:Number(userId)
       },
       callBackReq
     )
@@ -123,7 +123,7 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
                           inputLabel="Card Number"
                           inputId="cardNumber"
                           placeholder="0000 0000 0000 0000"
-                          type="number"
+                          type="text"
                           className="rounded-b-none"
                           disabled={isPending}
                           {...register("cardNumber", {
@@ -178,8 +178,8 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
                       >
                         <option value="">Country/Region</option>
                         <option value="US">United state</option>
-                        <option value="PH">Philippines</option>
-                        <option value="ch">China</option>
+                        <option value="Ph">Philippines</option>
+                        <option value="CH">China</option>
                         <option value="ITALIAN">Italian</option>
                       </select>
                       <div className="flex justify-between">
