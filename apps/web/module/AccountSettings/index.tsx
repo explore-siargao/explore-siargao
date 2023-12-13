@@ -10,6 +10,7 @@ import {
 import {
   LINK_ACCOUNT_PAYMENT_PAYOUT,
   LINK_ACCOUNT_PERSONAL_INFO,
+  LINK_ACCOUNT_WISHLIST,
 } from "@/common/constants/links"
 import { Title } from "@/common/components/ui/Title"
 
@@ -26,7 +27,7 @@ const pages = [
     icon: HeartIcon,
     title: "Wishlists",
     content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    link: "/",
+    link: LINK_ACCOUNT_WISHLIST,
   },
   {
     id: 3,
