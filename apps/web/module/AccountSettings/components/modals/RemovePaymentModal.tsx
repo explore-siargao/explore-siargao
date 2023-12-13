@@ -1,18 +1,44 @@
 import ModalContainer from "@/common/components/ModalContainer"
 import { Button } from "@/common/components/ui/Button"
 import { Dialog, Transition } from "@headlessui/react"
+import { useQueryClient } from "@tanstack/react-query"
 import React, { Fragment, useRef } from "react"
+import toast from "react-hot-toast"
+import useRemovePaymentmethod from "../../hooks/useRemovePaymentMethod"
+import { IPaymentMethod } from "@/common/types/global"
 
 interface PaymentModalProps {
+  id: number
+  userId: number
   isOpen: boolean
   onClose: () => void
 }
 
 const RemovePaymentModal = ({
+  id,
+  userId,
   isOpen: openModal,
   onClose: closeModal,
 }: PaymentModalProps) => {
   const cancelButtonRef = useRef(null)
+  const queryClient = useQueryClient()
+  const {mutate, isPending} = useRemovePaymentmethod(userId,id)
+  const callBackReq = {
+    onSuccess: (data: any) => {
+      if (!data.error) {
+        queryClient.invalidateQueries({
+          queryKey: ["payment-method"],
+        })
+        toast.success(data.message)
+        closeModal()
+      } else {
+        toast.error(String(data.message))
+      }
+    },
+    onError: (err: any) => {
+      toast.error(String(err))
+    },
+  }
   return (
     <Transition.Root show={openModal} as={Fragment}>
       <Dialog
@@ -58,7 +84,17 @@ const RemovePaymentModal = ({
                     <Button variant={"ghost"} onClick={closeModal}>
                       Cancel
                     </Button>
-                    <Button>Remove</Button>
+                    <Button onClick={()=>{
+                      mutate({id:id, userId:userId}, callBackReq)
+                    }}>
+                    {isPending ? (
+                            <div className="animate-spin w-4 h-4 border-2 border-current border-t-transparent text-primary-200 rounded-full">
+                              <span className="sr-only">Loading...</span>
+                            </div>
+                          ) : (
+                            "Remove"
+                          )}
+                      </Button>
                   </div>
                 </ModalContainer>
               </Dialog.Panel>

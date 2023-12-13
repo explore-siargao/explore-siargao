@@ -55,12 +55,12 @@ export interface IEmergencyContact {
 
 export interface IPaymentMethod {
   id?: number
-  userId: number
-  cardNumber: string
-  countryRegion: string
-  cvv: number
-  expirationDate: string
-  zipCode: number
+  userId?: number
+  cardNumber?: string
+  countryRegion?: string
+  cvv?: number
+  expirationDate?: string
+  zipCode?: number
   isDefault?: boolean
   createdAt?: string
   updatedAt?: string
