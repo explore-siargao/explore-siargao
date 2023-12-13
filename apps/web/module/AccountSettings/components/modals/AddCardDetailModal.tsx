@@ -2,7 +2,7 @@ import ModalContainer from "@/common/components/ModalContainer"
 import { Button } from "@/common/components/ui/Button"
 import { Input } from "@/common/components/ui/Input"
 import { Dialog, Transition } from "@headlessui/react"
-import React, { Fragment, useRef } from "react"
+import React, { Fragment, useRef, useState } from "react"
 import amex from "@/common/assets/amex.png"
 import discover from "@/common/assets/discover-card.png"
 import mastercard from "@/common/assets/mastercard.png"
@@ -22,7 +22,8 @@ interface CardDetailModal {
 
 const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
   const { mutate, isPending } = useAddPaymentMethod(userId)
-  const { register, reset, handleSubmit, getValues } = useForm<IPaymentMethod>()
+  const { register, reset, handleSubmit, getValues, setValue } =
+    useForm<IPaymentMethod>()
   const cancelButtonRef = useRef(null)
   const queryClient = useQueryClient()
   const onSubmit = (formData: IPaymentMethod) => {
@@ -46,6 +47,7 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
     mutate(
       {
         ...formData,
+        cardNumber: String(getValues("cardNumber")).replace(/\s/g, ""),
         cvv: Number(getValues("cvv")),
         zipCode: Number(getValues("zipCode")),
         userId: Number(userId),
@@ -53,6 +55,7 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
       callBackReq
     )
   }
+
   return (
     <Transition.Root show={isOpen} as={Fragment}>
       <Dialog
@@ -129,6 +132,15 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
                           {...register("cardNumber", {
                             minLength: 10,
                             required: "This field is required",
+                            onChange: (e) => {
+                              const value = e.target.value
+                              const trimmedValue = value.replace(/\s/g, "")
+                              const spacedValue = trimmedValue.replace(
+                                /(.{4})/g,
+                                "$1 "
+                              )
+                              setValue("cardNumber", String(spacedValue).trim())
+                            },
                           })}
                         />
                         <div className="grid grid-flow-col">
@@ -142,6 +154,26 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
                               minLength: 5,
                               maxLength: 5,
                               required: "This field is required",
+                              onChange: (e) => {
+                                let value = e.target.value
+                                if (e.nativeEvent.inputType === 'deleteContentBackward') {
+                                  value = value.slice(0, -2);
+                                  setValue("expirationDate", value)
+                                }else{
+                                value = value.replace(/\//g, '');
+                                const slashValue = value.replace(
+                                  /(.{2})/g,
+                                  "$1/"
+                                )
+                                  const newValue = String(slashValue).trim()
+                                  if(newValue.length>5){
+                                    setValue("expirationDate", newValue.slice(0, -1))
+                                  }else{
+                                    setValue("expirationDate", newValue.trim())
+                                  }
+                                
+                                }
+                              },
                             })}
                           />
                           <Input
