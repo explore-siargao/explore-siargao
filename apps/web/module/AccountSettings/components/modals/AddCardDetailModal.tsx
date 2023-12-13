@@ -48,7 +48,7 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
         ...formData,
         cvv: Number(getValues("cvv")),
         zipCode: Number(getValues("zipCode")),
-        userId:Number(userId)
+        userId: Number(userId),
       },
       callBackReq
     )
