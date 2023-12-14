@@ -8,8 +8,8 @@
   },
   "scripts": {
     "build": "npx tsc && tsc-alias -p tsconfig.json",
-    "start": "node build/index.js",
-    "dev": "concurrently \"npx tsc --watch\" \"tsc-alias -p tsconfig.json --watch\" \"nodemon build/index.js\"",
+    "start": "cross-env NODE_ENV=production node build/index.js",
+    "dev": "cross-env NODE_ENV=development concurrently \"npx tsc --watch\" \"tsc-alias -p tsconfig.json --watch\" \"nodemon build/index.js\"",
     "postinstall": "npx prisma generate"
   },
   "dependencies": {
@@ -18,7 +18,9 @@
     "@react-email/components": "^0.0.12",
     "@react-email/render": "^0.0.10",
     "@repo/constants": "*",
+    "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
     "crypto-js": "^4.2.0",
     "dayjs": "^1.11.10",
     "dotenv": "^16.3.1",
@@ -31,6 +33,7 @@
   },
   "devDependencies": {
     "@repo/typescript-config": "*",
+    "@types/cookie-parser": "^1.4.6",
     "@types/cookie-session": "^2.0.47",
     "@types/cors": "^2.8.16",
     "@types/crypto-js": "^4.2.1",

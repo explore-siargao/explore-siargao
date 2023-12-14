@@ -60,18 +60,15 @@ const SignUpForm = ({ isSocial = false }: Props) => {
   ) => {
     const callBackReq = {
       onSuccess: (data: any) => {
-        if (!data.error) {
-          if (data.item && !addUserIsPending) {
-            Cookies.set("accessToken", data.item.accessToken)
-            if (signUpType === "Manual") {
-              signIn("credentials", {
-                callbackUrl: "/",
-                username: formData.email,
-                password: formData.password,
-              })
-            } else {
-              router.push("/")
-            }
+        if (!data.error && !addUserIsPending) {
+          if (signUpType === "Manual") {
+            signIn("credentials", {
+              callbackUrl: "/",
+              username: formData.email,
+              password: formData.password,
+            })
+          } else {
+            router.push("/")
           }
         } else {
           toast.error(String(data.message))
@@ -207,7 +204,7 @@ const SignUpForm = ({ isSocial = false }: Props) => {
               .
             </p>
           </div>
-          <Button type="submit" className="w-full my-4">
+          <Button type="submit" variant={"primary"} className="w-full my-4">
             {addUserIsPending ? (
               <div className="animate-spin w-4 h-4 border-2 border-current border-t-transparent text-primary-200 rounded-full">
                 <span className="sr-only">Loading...</span>

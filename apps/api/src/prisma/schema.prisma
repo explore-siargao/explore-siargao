@@ -17,39 +17,283 @@ model User {
   registrationType RegistrationType?
   email            String            @unique @db.VarChar(255)
   password         String?           @db.VarChar(255)
-  firstName        String            @db.VarChar(255)
-  middleName       String?           @db.VarChar(255)
-  lastName         String            @db.VarChar(255)
-  address          String            @db.LongText
-  contactNumber    String            @db.VarChar(20)
-  birthDate        DateTime?
+  profilePicture   String?           @db.LongText()
   createdAt        DateTime          @default(now())
   updatedAt        DateTime          @updatedAt
   deletedAt        DateTime?
   role             UserRole          @default(User)
-  multiFactorAuth  MultiFactorAuth[]
+  listing          Listing[]
+  paymentMethod    PaymentMethod[]
+  wishList         WishGroup[]
+  review           Review[]
+  personalInfo     PersonalInfo?
+  deactivated      Boolean           @default(false)
+  MultiFactorAuth  MultiFactorAuth[]
+  Coupons          Coupon[]
+}
+
+model PersonalInfo {
+  id                Int                 @id @default(autoincrement())
+  userId            Int                 @unique
+  user              User                @relation(fields: [userId], references: [id])
+  firstName         String              @db.VarChar(255)
+  middleName        String?             @db.VarChar(255)
+  lastName          String              @db.VarChar(255)
+  birthDate         DateTime?
+  governMentId      String?             @db.VarChar(255)
+  address           Addresses?
+  emergrncyContacts EmergencyContacts[]
+  phoneNumber       String              @db.VarChar(20)
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+  deletedAt         DateTime?
+
+  @@index([userId])
+}
+
+model EmergencyContacts {
+  id            Int          @id @default(autoincrement())
+  peronalInfoId Int
+  personalInfo  PersonalInfo @relation(fields: [peronalInfoId], references: [id])
+  name          String       @db.LongText()
+  relationship  String       @db.VarChar(100)
+  email         String?      @db.VarChar(50)
+  phoneNumber   String?      @db.VarChar(20)
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  deletedAt     DateTime?
+
+  @@index([peronalInfoId])
+}
+
+model Addresses {
+  id            Int          @id @default(autoincrement())
+  peronalInfoId Int          @unique
+  personalInfo  PersonalInfo @relation(fields: [peronalInfoId], references: [id])
+  streetAddress String?      @db.LongText()
+  city          String?      @db.LongText()
+  province      String?      @db.LongText()
+  zipCode       Int?         @db.Int()
+  country       String?      @db.VarChar(255)
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  deletedAt     DateTime?
+
+  @@index([peronalInfoId])
 }
 
 model ForgotPassword {
-  id               Int               @id @default(autoincrement())
-  email            String            @db.VarChar(255)
-  code             String            @db.VarChar(255)
-  used             Boolean           @default(false)
-  expiredAt        DateTime          
-  createdAt        DateTime          @default(now())
-  deletedAt        DateTime?
+  id        Int       @id @default(autoincrement())
+  email     String    @db.VarChar(255)
+  code      String    @db.VarChar(255)
+  used      Boolean   @default(false)
+  expiredAt DateTime
+  createdAt DateTime  @default(now())
+  deletedAt DateTime?
 }
 
 model MultiFactorAuth {
-  id               Int               @id @default(autoincrement())
-  userId           Int
-  type             String            @db.VarChar(255)
-  code             String            @db.VarChar(255)
-  used             Boolean           @default(false)
-  expiredAt        DateTime          
-  createdAt        DateTime          @default(now())
-  deletedAt        DateTime?
-  user             User              @relation(fields: [userId], references: [id])
+  id        Int       @id @default(autoincrement())
+  userId    Int
+  type      String    @db.VarChar(255)
+  code      String    @db.VarChar(255)
+  used      Boolean   @default(false)
+  expiredAt DateTime
+  createdAt DateTime  @default(now())
+  deletedAt DateTime?
+  user      User      @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+}
+
+model Listing {
+  id             Int             @id @default(autoincrement())
+  hostedById     Int
+  hostedBy       User            @relation(fields: [hostedById], references: [id])
+  imageUrls      String          @db.VarChar(255)
+  title          String          @db.VarChar(100)
+  description    String          @db.LongText()
+  address        String          @db.LongText()
+  listingPriceId Int             @unique
+  price          ListingPrice    @relation(fields: [listingPriceId], references: [id])
+  highLights     HighLights[]
+  placeOffers    PlaceOffers[]
+  thingsToKnow   ThingsToKnow[]
+  category       ListingCategory
+  favoriteBy     String
+  wishList       WishGroup[]
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  deletedAt      DateTime?
+
+  @@index([listingPriceId])
+  @@index([hostedById])
+}
+
+model PaymentMethod {
+  id             Int       @id @default(autoincrement())
+  userId         Int
+  user           User      @relation(fields: [userId], references: [id])
+  cardNumber     String    @unique
+  expirationDate String    @db.VarChar(10)
+  cvv            Int
+  zipCode        Int
+  countryRegion  String    @db.VarChar(255)
+  isDefault      Boolean   @default(false)
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  deletedAt      DateTime?
+
+  @@index([userId])
+}
+
+model Coupon {
+  id             Int       @id @default(autoincrement())
+  createdBy      Int?
+  usedBy         Int?
+  user           User?     @relation(fields: [usedBy], references: [id])
+  code           String    @unique
+  expirationDate DateTime
+  reward         String
+  isUsed         Boolean
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  deletedAt      DateTime?
+
+  @@index([usedBy])
+}
+
+model ListingPrice {
+  id          Int       @id @unique @default(autoincrement())
+  listing     Listing?
+  fee         Int
+  cleaningfee Int
+  serviceFee  Int
+  isNight     Boolean?  @default(false)
+  checkIn     DateTime
+  checkOut    DateTime
+  countGuest  Int
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  deletedAt   DateTime?
+}
+
+model HighLights {
+  id        Int       @id @default(autoincrement())
+  title     String
+  details   String
+  icon      String
+  listingId Int
+  listing   Listing   @relation(fields: [listingId], references: [id])
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  @@index([listingId])
+}
+
+model PlaceOffers {
+  id        Int       @id @default(autoincrement())
+  listingId Int
+  listing   Listing   @relation(fields: [listingId], references: [id])
+  icon      String
+  title     String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  @@index([listingId])
+}
+
+model ThingsToKnow {
+  id             Int                 @id @default(autoincrement())
+  listingId      Int
+  listing        Listing             @relation(fields: [listingId], references: [id])
+  houseRule      HouseRules[]
+  safetyProperty SafetyAndProperty[]
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime            @updatedAt
+  deletedAt      DateTime?
+
+  @@index([listingId])
+}
+
+model HouseRules {
+  id             Int          @id @default(autoincrement())
+  thingsToKnowid Int
+  thingsToKnow   ThingsToKnow @relation(fields: [thingsToKnowid], references: [id])
+  title          String
+  rules          Rule[]
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  deletedAt      DateTime?
+
+  @@index([thingsToKnowid])
+}
+
+model SafetyAndProperty {
+  id             Int          @id @default(autoincrement())
+  title          String
+  thingsToKnowid Int
+  thingsToKnow   ThingsToKnow @relation(fields: [thingsToKnowid], references: [id])
+  rules          Rule[]
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  deletedAt      DateTime?
+
+  @@index([thingsToKnowid])
+}
+
+model CancellationPolicy {
+  id                 Int       @id @default(autoincrement())
+  title              String
+  description        String
+  cancelationDueDate DateTime
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+  deletedAt          DateTime?
+}
+
+model Rule {
+  id                Int               @id @default(autoincrement())
+  icon              String
+  rule              String
+  houseRuleid       Int
+  houseRule         HouseRules        @relation(fields: [houseRuleid], references: [id])
+  safetyPropertyId  Int
+  safetyAndProperty SafetyAndProperty @relation(fields: [safetyPropertyId], references: [id])
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+  deletedAt         DateTime?
+
+  @@index([safetyPropertyId])
+  @@index([houseRuleid])
+}
+
+model WishGroup {
+  id        Int       @id @default(autoincrement())
+  userId    Int
+  user      User      @relation(fields: [userId], references: [id])
+  title     String    @db.VarChar(100)
+  listingId Int
+  listing   Listing   @relation(fields: [listingId], references: [id])
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  @@index([userId])
+  @@index([listingId])
+}
+
+model Review {
+  id        Int       @id @default(autoincrement())
+  userId    Int
+  user      User      @relation(fields: [userId], references: [id])
+  rates     Float
+  comment   String    @db.LongText()
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
 
   @@index([userId])
 }
@@ -64,4 +308,10 @@ enum RegistrationType {
   Manual
   Facebook
   Google
+}
+
+enum ListingCategory {
+  Accomodation
+  Rentals
+  Activity
 }

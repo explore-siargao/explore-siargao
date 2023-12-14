@@ -1,12 +1,10 @@
 "use client"
 import React, { useEffect } from "react"
-import Cookies from "js-cookie"
 import { signOut } from "next-auth/react"
 
 const Logout = () => {
   useEffect(() => {
     setTimeout(function () {
-      Cookies.remove("accessToken")
       signOut({ callbackUrl: "/" })
     }, 1500)
   }, [])

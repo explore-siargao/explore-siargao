@@ -1,12 +1,14 @@
 import { Response, Request } from 'express'
 import { PrismaClient, RegistrationType } from '@prisma/client'
 import { REQUIRED_VALUE_EMPTY } from '@repo/constants'
-import jwt from 'jsonwebtoken'
-import { encryptKey, signKey, webUrl } from '@/common/config'
+import { encryptKey, nextAuthSecret, webUrl } from '@/common/config'
 import CryptoJS from 'crypto-js'
 import dayjs from 'dayjs'
 import { AuthEmail } from './authEmail'
 import verifyCaptcha from '@/common/helpers/verifyCaptcha'
+import validateCsrfToken from '@/common/helpers/validateCsrfToken'
+import { decode } from 'next-auth/jwt'
+import { capitalize } from 'lodash'
 
 const prisma = new PrismaClient()
 
@@ -18,28 +20,36 @@ export const verifySession = async (req: Request, res: Response) => {
         where: {
           email: email as string,
         },
+        include: {
+          personalInfo: true,
+        },
       })
-      if (user) {
-        const token = jwt.sign(
-          {
-            firstName: user.firstName,
-            lastName: user.lastName,
-            email: user.email,
-            role: user.role,
-          },
-          signKey as string
-        )
+      const capitalizeType = capitalize(type as string)
+      if (user && user.registrationType === capitalizeType) {
         res.json({
           error: false,
-          item: {
-            accessToken: token,
+          item: { email },
+        })
+      } else if (user && user.registrationType !== capitalizeType) {
+        res.json({
+          error: true,
+          item: null,
+          message: `Invalid login method, please login using your ${type} account`,
+        })
+      } else if (type === 'google' || type === 'facebook') {
+        res.json({
+          error: false,
+          action: {
+            type: 'SOCIAL_REGISTER',
+            description: type,
           },
+          message: 'Email is not registered',
         })
       } else {
         res.json({
           error: false,
           item: null,
-          message: 'No data found',
+          message: 'Email is not registered',
         })
       }
     } catch (err: any) {
@@ -65,40 +75,39 @@ export const register = async (req: Request, res: Response) => {
         where: {
           email: email as string,
         },
+        include: {
+          personalInfo: true,
+        },
       })
       if (!user) {
         const encryptPassword = CryptoJS.AES.encrypt(
           req.body.password,
           encryptKey
         )
+
         const newUser = await prisma.user.create({
           data: {
             email: email,
-            firstName: firstName,
-            middleName: '',
             registrationType: registrationType,
-            lastName: lastName,
-            address: '',
-            birthDate: dayjs(birthDate).format(),
-            contactNumber: '',
             role: 'User',
             password: password ? String(encryptPassword) : null,
           },
         })
-        const token = jwt.sign(
-          {
-            firstName: newUser.firstName,
-            lastName: newUser.lastName,
-            email: newUser.email,
-            role: newUser.role,
+
+        const newPersonalInfo = await prisma.personalInfo.create({
+          data: {
+            userId: newUser.id,
+            firstName: firstName,
+            middleName: '',
+            lastName: lastName,
+            birthDate: dayjs(birthDate).format(),
+            phoneNumber: '',
           },
-          signKey as string
-        )
+        })
         res.json({
           error: false,
           item: {
-            accessToken: token,
-            user: newUser,
+            personalInfo: newPersonalInfo,
           },
           message: 'Successfully registered',
         })
@@ -133,6 +142,9 @@ export const manual = async (req: Request, res: Response) => {
           email: email,
           registrationType: RegistrationType.Manual,
         },
+        include: {
+          personalInfo: true,
+        },
       })
       if (!user) {
         throw new Error('Email or password is invalid')
@@ -143,20 +155,9 @@ export const manual = async (req: Request, res: Response) => {
       )
       const originalPassword = decryptedPassword.toString(CryptoJS.enc.Utf8)
       if (user && originalPassword === password) {
-        const token = jwt.sign(
-          {
-            firstName: user.firstName,
-            lastName: user.lastName,
-            email: user.email,
-            role: user.role,
-          },
-          signKey as string
-        )
         res.json({
           error: false,
-          item: {
-            accessToken: token,
-          },
+          item: null,
         })
       } else {
         res.json({
@@ -179,38 +180,49 @@ export const manual = async (req: Request, res: Response) => {
 }
 
 export const info = async (req: Request, res: Response) => {
-  const { email } = req.body
-  if (email) {
-    try {
-      const user = await prisma.user.findFirst({
-        where: {
-          email: email,
-        },
-      })
-      if (user) {
-        res.json({
-          error: false,
-          item: {
-            name: `${user.firstName} ${user.lastName}`,
-            email: user.email,
+  const csrfToken = req.headers['x-csrf-token']
+  if (csrfToken && validateCsrfToken(csrfToken as string) === 'valid') {
+    const { email } = req.body
+    if (email) {
+      try {
+        const user = await prisma.user.findFirst({
+          where: {
+            email: email,
+          },
+          include: {
+            personalInfo: true,
           },
         })
-      } else {
+        if (user) {
+          res.json({
+            error: false,
+            item: {
+              name: `${user.personalInfo?.firstName} ${user.personalInfo?.lastName}`,
+              email: user.email,
+            },
+          })
+        } else {
+          res.json({
+            error: true,
+            message: 'No data found',
+          })
+        }
+      } catch (err: any) {
         res.json({
           error: true,
-          message: 'No data found',
+          message: err.message,
         })
       }
-    } catch (err: any) {
+    } else {
       res.json({
         error: true,
-        message: err.message,
+        message: REQUIRED_VALUE_EMPTY,
       })
     }
   } else {
     res.json({
       error: true,
-      message: REQUIRED_VALUE_EMPTY,
+      message: 'You are not authorized to perform this action',
     })
   }
 }
@@ -316,28 +328,20 @@ export const forgotVerify = async (req: Request, res: Response) => {
           },
         })
         const encryptPassword = CryptoJS.AES.encrypt(newPassword, encryptKey)
-        const user = await prisma.user.update({
+        await prisma.user.update({
           where: {
             email: email,
+          },
+          include: {
+            personalInfo: true,
           },
           data: {
             password: String(encryptPassword),
           },
         })
-        const token = jwt.sign(
-          {
-            firstName: user.firstName,
-            lastName: user.lastName,
-            email: user.email,
-            role: user.role,
-          },
-          signKey as string
-        )
         res.json({
           error: false,
-          item: {
-            accessToken: token,
-          },
+          item: null,
           message: 'Password successfully updated',
         })
       } else {
@@ -475,6 +479,128 @@ export const mfaVerify = async (req: Request, res: Response) => {
     res.json({
       error: true,
       message: REQUIRED_VALUE_EMPTY,
+    })
+  }
+}
+
+export const updateUserEmail = async (req: Request, res: Response) => {
+  const { email } = req.body
+  const userId = Number(req.params.userId)
+  try {
+    const prisma = new PrismaClient()
+    const getUser = await prisma.user.findFirst({
+      where: {
+        id: userId,
+        deletedAt: null,
+      },
+      include: {
+        personalInfo: true,
+      },
+    })
+    if (getUser) {
+      if (email) {
+        if (String(email).indexOf('@') > 1) {
+          const updateEmail = await prisma.user.update({
+            where: {
+              id: userId,
+              deletedAt: null,
+            },
+            data: {
+              email: email,
+            },
+          })
+
+          res.json({
+            error: false,
+            items: {
+              user: updateEmail,
+            },
+            itemCount: 1,
+            message: 'Sucessfully updated',
+          })
+        } else {
+          res.json({
+            error: true,
+            items: null,
+            itemCount: 0,
+            message: 'Invalid email address',
+          })
+        }
+      } else {
+        res.json({
+          error: true,
+          items: null,
+          itemCount: 0,
+          message: REQUIRED_VALUE_EMPTY,
+        })
+      }
+    } else {
+      res.json({
+        error: true,
+        items: null,
+        itemCount: 0,
+        message: 'User not exist to our system',
+      })
+    }
+  } catch (err: any) {
+    res.json({
+      error: true,
+      items: null,
+      itemCount: 0,
+      message: err.message,
+    })
+  }
+}
+
+export const userDetails = async (req: Request, res: Response) => {
+  const sessionToken = req.cookies['next-auth.session-token']
+  const decoded = await decode({
+    token: sessionToken,
+    secret: nextAuthSecret,
+  })
+  if (sessionToken && decoded?.email) {
+    const prisma = new PrismaClient()
+    try {
+      const user = await prisma.user.findFirst({
+        where: {
+          email: decoded?.email,
+          deletedAt: null,
+        },
+        include: {
+          personalInfo: {
+            include: {
+              address: true,
+              emergrncyContacts: true,
+            },
+          },
+        },
+      })
+      res.json({
+        error: false,
+        item: {
+          id: user?.id,
+          email: user?.email,
+          RegistrationType: user?.registrationType,
+          profilePicture: user?.profilePicture,
+          personalInfo: user?.personalInfo,
+        },
+        itemCount: 0,
+        message: '',
+      })
+    } catch (err: any) {
+      res.json({
+        error: true,
+        item: null,
+        itemCount: 0,
+        message: err.message,
+      })
+    }
+  } else {
+    res.json({
+      error: true,
+      item: null,
+      itemCount: 0,
+      message: `You are not authorized to perform this action`,
     })
   }
 }
