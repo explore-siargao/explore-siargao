@@ -1,5 +1,5 @@
 import { ApiService } from "@/common/service/api"
-import { ICoupon} from "@/common/types/global"
+import { ICoupon } from "@/common/types/global"
 import { API_URL_PAYMENTS } from "@repo/constants"
 import { useMutation } from "@tanstack/react-query"
 
