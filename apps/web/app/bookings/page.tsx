@@ -1,8 +1,8 @@
-import Trips from "@/module/Trips"
+import Bookings from "@/module/Bookings"
 import React from "react"
 
 const page = () => {
-  return <Trips />
+  return <Bookings />
 }
 
 export default page

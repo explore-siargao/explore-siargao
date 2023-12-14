@@ -2,7 +2,7 @@ import React from "react"
 import Header from "../LandingPage/components/Header"
 import HomeWrapper from "@/common/components/HomeWrapper"
 import { Title } from "@/common/components/ui/Title"
-import TripBoxContainer from "@/common/components/TripBoxContainer"
+import BookingBoxContainer from "@/common/components/BookingBoxContainer"
 
 const tripGroup = [
   {
@@ -51,15 +51,15 @@ const tripGroup = [
     dayTime: "night",
   },
 ]
-const Trips = () => {
+const Bookings = () => {
   return (
     <>
       <Header />
       <HomeWrapper>
-        <Title>Trips</Title>
+        <Title>Bookings</Title>
         <div className="grid grid-cols-1 md:grid-cols-4 grid-flow-row place-items-center pt-4 gap-4">
           {tripGroup.map((item) => (
-            <TripBoxContainer
+            <BookingBoxContainer
               key={item.id}
               location={item.location}
               date={item.date}
@@ -75,4 +75,4 @@ const Trips = () => {
   )
 }
 
-export default Trips
+export default Bookings

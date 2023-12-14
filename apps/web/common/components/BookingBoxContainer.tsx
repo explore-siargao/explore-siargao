@@ -4,7 +4,7 @@ import React, { useState } from "react"
 import { Title } from "./ui/Title"
 import { HeartIcon } from "@heroicons/react/24/outline"
 
-type TripProps = {
+type BookingProps = {
   photo: string
   distance: string
   location: string
@@ -13,24 +13,24 @@ type TripProps = {
   dayTime: string
 }
 
-const TripBoxContainer = ({
+const BookingBoxContainer = ({
   date,
   distance,
   location,
   price,
   photo,
   dayTime,
-}: TripProps) => {
+}: BookingProps) => {
   const [isClicked, setIsClicked] = useState(false)
   const handleClick = () => {
     setIsClicked((setIsClicked) => !setIsClicked)
   }
   return (
     <div>
-      <div className="relative h-[320px] w-[320px] rounded-2xl border border-text-100 shadow-md select-none">
+      <div className="relative h-[320px] w-[320px] rounded-2xl border border-text-100 select-none">
         <HeartIcon
           className={`absolute top-3 right-3 h-7 w-7 text-text-50 transition durataion-100 active:scale-90 ${
-            isClicked ? "fill-error-500 scale-110" : "fill-text-200"
+            isClicked ? "fill-error-500 before:scale-110" : "fill-text-200"
           }`}
           onClick={handleClick}
         />
@@ -58,4 +58,4 @@ const TripBoxContainer = ({
   )
 }
 
-export default TripBoxContainer
+export default BookingBoxContainer
