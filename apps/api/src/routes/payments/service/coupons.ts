@@ -175,12 +175,12 @@ export const updateCoupon = async (req: Request, res: Response) => {
         message: 'User is not exist from our system',
       })
     }
-  } catch (err: any) {
+  } catch (e: any) {
     res.json({
       error: true,
       items: null,
       itemCount: 0,
-      message: err.message,
+      message: e.message,
     })
   }
 }
