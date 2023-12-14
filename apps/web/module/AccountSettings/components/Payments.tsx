@@ -17,6 +17,7 @@ import { useQueryClient } from "@tanstack/react-query"
 import useGetUserDetails from "@/common/hooks/useGetUserDetails"
 import { useForm } from "react-hook-form"
 import useUpdateCoupon from "../hooks/useUpdateCoupon"
+import { error } from "console"
 
 const Payments = () => {
   const router = useRouter()
@@ -210,14 +211,30 @@ const Payments = () => {
               <Button onClick={toggleVisibility}>Add coupon</Button>
             ) : (
               <>
-                <Input inputId="couponCode" inputLabel="Enter coupon code" {...register("code",{required:"This field is required"})} />
+          
+                <Input inputId="couponCode" inputLabel="Enter coupon code" {...register("code",{required:true})} disabled={isPendingRedeemCoupon}/>
                 <div className="flex gap-4">
                   <Button type="button"
-                  onClick={()=>redeemCoupon({code:getValues("code"), isUsed:true,usedBy:!isPendingUserDetails && userDetails?.item?.id},CallBackCheckCoupon)}
+                  onClick={()=>{
+                    console.log(getValues("code")?.length)
+                    if(getValues("code")?.length!==0){
+                    redeemCoupon({code:getValues("code"), isUsed:true,usedBy:!isPendingUserDetails && userDetails?.item?.id},CallBackCheckCoupon)
+                    }else{
+                      toast.error("Please enter a coupon code")
+                    }
+                  }}
                   >
-                    Redeem coupon
+                    <div>
+                    {isPendingRedeemCoupon ? (
+                            <div className="animate-spin w-4 h-4 border-2 border-current border-t-transparent text-primary-200 rounded-full">
+                              <span className="sr-only">Loading...</span>
+                            </div>
+                          ) : (
+                            "Redeem coupon"
+                          )}
+                          </div>
                   </Button>
-                  <Button onClick={toggleVisibility} variant={"outline"}>
+                  <Button onClick={toggleVisibility} variant={"outline"} type="button">
                     Cancel
                   </Button>
                 </div>
