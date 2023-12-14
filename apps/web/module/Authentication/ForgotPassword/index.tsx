@@ -1,5 +1,5 @@
 "use client"
-import React from "react"
+import React, { useRef, useState } from "react"
 import { Button } from "@/common/components/ui/Button"
 import { SEND_EMAIL_BUTTON_TEXT } from "@/common/constants"
 import AuthContainer from "@/common/components/AuthContainer"
@@ -7,34 +7,47 @@ import { Input } from "@/common/components/ui/Input"
 import { useForm } from "react-hook-form"
 import useForgotPassword, { TForgotPassword } from "../hooks/useForgotPassword"
 import toast from "react-hot-toast"
+import ReCAPTCHA from "react-google-recaptcha"
+import useGlobalInputEmail from "../store/useGlobalInputEmail"
 
 const ForgotPassword = () => {
+  const recaptchaRef = useRef<ReCAPTCHA>(null)
+  const forgotPassEmail = useGlobalInputEmail((state) => state.email)
+  const [captcha, setCaptcha] = useState<string | null>("")
   const { mutate: forgotPassword, isPending: isForgotPasswordPending } =
     useForgotPassword()
-  const { register, handleSubmit, reset } = useForm<TForgotPassword>()
+  const { register, handleSubmit, reset } = useForm<TForgotPassword>({
+    values: { email: forgotPassEmail || "", token: "" },
+  })
   const onSubmit = (data: TForgotPassword) => {
     const { email } = data
-    const callBackReq = {
-      onSuccess: (data: any) => {
-        if (!data.error) {
-          if (data.message && !isForgotPasswordPending) {
-            toast.success(String(data.message), { duration: 5000 })
-            reset()
+    if (captcha) {
+      const callBackReq = {
+        onSuccess: (data: any) => {
+          if (!data.error) {
+            if (data.message && !isForgotPasswordPending) {
+              toast.success(String(data.message), { duration: 5000 })
+              reset()
+            }
+          } else {
+            toast.error(String(data.message))
           }
-        } else {
-          toast.error(String(data.message))
-        }
-      },
-      onError: (err: any) => {
-        toast.error(String(err))
-      },
+          recaptchaRef.current?.reset()
+        },
+        onError: (err: any) => {
+          toast.error(String(err))
+        },
+      }
+      forgotPassword(
+        {
+          token: captcha,
+          email,
+        },
+        callBackReq
+      )
+    } else {
+      toast.error("Please complete the reCAPTCHA before proceeding")
     }
-    forgotPassword(
-      {
-        email,
-      },
-      callBackReq
-    )
   }
 
   return (
@@ -47,10 +60,19 @@ const ForgotPassword = () => {
               inputId="email"
               type="email"
               placeholder="you@example.com"
-              {...register("email")}
+              {...register("email", { required: true })}
               disabled={isForgotPasswordPending}
             />
+            <p className="text-sm mt-2 text-text-300">
+              Please enter your email in the box above. We will send you link to
+              access further instructions.
+            </p>
           </div>
+          <ReCAPTCHA
+            ref={recaptchaRef}
+            sitekey={process.env.RECAPTCHA_KEY || ""}
+            onChange={setCaptcha}
+          />
           <Button
             className="w-full my-5"
             type="submit"

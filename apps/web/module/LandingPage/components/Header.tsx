@@ -13,14 +13,14 @@ function Header() {
   const { data: session } = useSession()
   const router = useRouter()
   return (
-    <header className="fixed inset-x-0 top-0 z-50 bg-white border-y-text-50 border">
-      <div className="w-full text-center py-2 bg-primary-50">
+    <header className="absolute inset-x-0 top-0 z-50 bg-white border-y-gray-200/50 border">
+      <div className="w-full text-center py-2 bg-gray-50 sr-only md:not-sr-only">
         <p className="underline">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         </p>
       </div>
       <nav
-        className="flex items-center justify-between py-2 mx-10 md:px-8"
+        className="flex items-center justify-between p-2 mx-2 my-2 md:mx-10 lg:px-8"
         aria-label="Global"
       >
         <a href="#" className="-m-1.5 gap-2 flex lg:flex-1 items-center">

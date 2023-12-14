@@ -13,7 +13,6 @@ type BookingProps = {
   price: string
   dayTime: string
   ratings: string
-  key: number
 }
 
 const BookingBoxContainer = ({
@@ -24,14 +23,13 @@ const BookingBoxContainer = ({
   photo,
   dayTime,
   ratings,
-  key,
 }: BookingProps) => {
   const [isClicked, setIsClicked] = useState(false)
   const handleClick = () => {
     setIsClicked((setIsClicked) => !setIsClicked)
   }
   return (
-    <li key={key} className="flex">
+    <li className="flex">
       <div className="flex flex-col w-full items-center justify-between space-y-2">
         <div className="relative select-none">
           <HeartIcon

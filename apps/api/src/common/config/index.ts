@@ -10,5 +10,6 @@ export const origins = process.env.API_ORIGINS?.split(
   ','
 ) as unknown as string[]
 export const webUrl = process.env.WEB_URL || ''
+export const captchaKeySecret = process.env.RECAPTCHA_KEY_SECRET || ''
 export const nodeEnv = process.env.NODE_ENV || ''
 export const nextAuthSecret = process.env.NEXTAUTH_SECRET || ''

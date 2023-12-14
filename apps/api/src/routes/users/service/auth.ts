@@ -5,14 +5,12 @@ import { encryptKey, nextAuthSecret, webUrl } from '@/common/config'
 import CryptoJS from 'crypto-js'
 import dayjs from 'dayjs'
 import { AuthEmail } from './authEmail'
+import verifyCaptcha from '@/common/helpers/verifyCaptcha'
 import validateCsrfToken from '@/common/helpers/validateCsrfToken'
 import { decode } from 'next-auth/jwt'
+import { capitalize } from 'lodash'
 
 const prisma = new PrismaClient()
-
-function capitalizeFirstLetter(value: string) {
-  return value.charAt(0).toUpperCase() + value.slice(1)
-}
 
 export const verifySession = async (req: Request, res: Response) => {
   const { type, email } = req.query
@@ -26,7 +24,7 @@ export const verifySession = async (req: Request, res: Response) => {
           personalInfo: true,
         },
       })
-      const capitalizeType = capitalizeFirstLetter(type as string)
+      const capitalizeType = capitalize(type as string)
       if (user && user.registrationType === capitalizeType) {
         res.json({
           error: false,
@@ -230,9 +228,13 @@ export const info = async (req: Request, res: Response) => {
 }
 
 export const forgot = async (req: Request, res: Response) => {
-  const { email } = req.body
-  if (email) {
+  const { token, email } = req.body
+  if (email && token) {
     try {
+      const isCaptchaTokenValid = await verifyCaptcha(token)
+      if (!isCaptchaTokenValid) {
+        throw new Error('CAPTCHA is invalid')
+      }
       const user = await prisma.user.findFirst({
         where: {
           email: email,
@@ -459,7 +461,7 @@ export const mfaVerify = async (req: Request, res: Response) => {
         res.json({
           error: false,
           item: {},
-          message: 'User was verified',
+          message: 'User verified',
         })
       } else {
         res.json({
