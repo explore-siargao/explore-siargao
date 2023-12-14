@@ -149,7 +149,7 @@ export const updateCoupon = async (req: Request, res: Response) => {
             error: false,
             items: updateCoupon,
             itemCount: 1,
-            message: 'New coupon successfully created',
+            message: 'Coupon successfully updated',
           })
         } else {
           res.json({
