@@ -4,7 +4,13 @@ export const getAllListing = async (req: Request, res: Response) => {
   try {
     const prisma = new PrismaClient()
     const listings = await prisma.listing.findMany({
-      where: { deletedAt: null },
+      include: {
+        price: true,
+        highLights: true,
+        hostedBy: true,
+        placeOffers: true,
+        thingsToKnow: true,
+      },
     })
     if (listings.length > 0) {
       res.json({

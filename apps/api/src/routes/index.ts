@@ -7,7 +7,7 @@ import { API_ROOT } from '@repo/constants'
 
 export default function (app: Application) {
   app.use(`${API_ROOT}/users`, UsersRoute)
-  app.use(`${API_ROOT}/listing`, ListingRoute)
+  app.use(`${API_ROOT}/bookings`, ListingRoute)
   app.use(`${API_ROOT}/payments`, PaymentRoute)
   app.use(`${API_ROOT}/countries`, CountriesRoute)
 }
