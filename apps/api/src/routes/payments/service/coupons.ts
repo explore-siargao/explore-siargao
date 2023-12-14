@@ -122,13 +122,12 @@ export const updateCoupon = async (req: Request, res: Response) => {
       })) !== null
     if (isUserExist) {
       if (code || reward || expirationDate || usedBy || isUsed) {
-        const getCoupon =
-          (await prisma.coupon.findFirst({
-            where: {
-              code: req.body.code
-            },
-          }))
-        if (getCoupon!==null) {
+        const getCoupon = await prisma.coupon.findFirst({
+          where: {
+            code: req.body.code,
+          },
+        })
+        if (getCoupon !== null) {
           const updateCoupon = await prisma.coupon.update({
             where: {
               id: getCoupon.id,

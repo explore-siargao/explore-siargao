@@ -68,16 +68,16 @@ export interface IPaymentMethod {
 }
 
 export interface ICoupon {
-  id?:number
-  createdBy?:number
-  usedBy?:number
-  code?:string
-  expirationDate?:string
-  reward?:string
-  isUsed:boolean
-  createdAt?:string
-  updatedAt?:string
-  deletedAt?:string
+  id?: number
+  createdBy?: number
+  usedBy?: number
+  code?: string
+  expirationDate?: string
+  reward?: string
+  isUsed: boolean
+  createdAt?: string
+  updatedAt?: string
+  deletedAt?: string
 }
 
 //stores
