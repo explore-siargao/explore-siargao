@@ -10,11 +10,13 @@ import { Input } from "@/common/components/ui/Input"
 import { Popover, Transition } from "@headlessui/react"
 import RemovePaymentModal from "./modals/RemovePaymentModal"
 import useGetPaymentmethods from "../hooks/useGetPaymentMethods"
-import { IPaymentMethod } from "@/common/types/global"
+import { ICoupon, IPaymentMethod } from "@/common/types/global"
 import useUpdatepaymentMethod from "../hooks/useUpdatePaymentMethod"
 import toast from "react-hot-toast"
 import { useQueryClient } from "@tanstack/react-query"
-import useGetUserDetails from "@/common/hooks/useGetUserdetails"
+import useGetUserDetails from "@/common/hooks/useGetUserDetails"
+import { useForm } from "react-hook-form"
+import useUpdateCoupon from "../hooks/useUpdateCoupon"
 
 const Payments = () => {
   const router = useRouter()
@@ -24,6 +26,7 @@ const Payments = () => {
   const [paymentMethodId, setPaymentMethodId] = useState(0)
   const [showHide, setShowHide] = useState(false)
   const [popPanelIsVisible, setPopPanelIsVisible] = useState(false)
+  const {register, reset, getValues} = useForm<ICoupon>()
   const toggleVisibility = () => {
     setShowHide(!showHide)
   }
@@ -34,6 +37,10 @@ const Payments = () => {
   const { mutate, isPending } = useUpdatepaymentMethod(
     !isPendingUserDetails && userDetails?.item?.id
   )
+  const {mutate:redeemCoupon,isPending:isPendingRedeemCoupon} = useUpdateCoupon(
+    !isPendingUserDetails && userDetails?.item?.id
+  )
+
   const callBackReqDefaultPaymentMethod = {
     onSuccess: (data: any) => {
       if (!data.error) {
@@ -49,6 +56,21 @@ const Payments = () => {
       toast.error(String(err))
     },
   }
+
+  const CallBackCheckCoupon = {
+    onSuccess: (data: any) => {
+      if (!data.error) {
+        toast.success("Code Successfully redeemed")
+      } else {
+        toast.error(String(data.message))
+      }
+      reset()
+    },
+    onError: (err: any) => {
+      toast.error(String(err))
+    },
+  }
+
   return (
     <>
       {isPendingUserDetails || isPendingPaymentmethods ? (
@@ -188,9 +210,13 @@ const Payments = () => {
               <Button onClick={toggleVisibility}>Add coupon</Button>
             ) : (
               <>
-                <Input inputId="couponCode" inputLabel="Enter coupon code" />
+                <Input inputId="couponCode" inputLabel="Enter coupon code" {...register("code",{required:"This field is required"})} />
                 <div className="flex gap-4">
-                  <Button>Redeem coupon</Button>
+                  <Button type="button"
+                  onClick={()=>redeemCoupon({code:getValues("code"), isUsed:true,usedBy:!isPendingUserDetails && userDetails?.item?.id},CallBackCheckCoupon)}
+                  >
+                    Redeem coupon
+                  </Button>
                   <Button onClick={toggleVisibility} variant={"outline"}>
                     Cancel
                   </Button>

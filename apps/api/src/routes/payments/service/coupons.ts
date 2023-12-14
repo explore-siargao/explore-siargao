@@ -125,12 +125,13 @@ export const updateCoupon = async (req: Request, res: Response) => {
         const getCoupon = await prisma.coupon.findFirst({
           where: {
             code: req.body.code,
+            isUsed: false
           },
         })
         if (getCoupon !== null) {
           const updateCoupon = await prisma.coupon.update({
             where: {
-              id: getCoupon.id,
+              id: getCoupon.id
             },
             data: {
               code: code,
@@ -154,7 +155,7 @@ export const updateCoupon = async (req: Request, res: Response) => {
             error: true,
             items: null,
             itemCount: 0,
-            message: 'Coupon not exist check your code',
+            message: 'Invalid code or code already in used',
           })
         }
       } else {
