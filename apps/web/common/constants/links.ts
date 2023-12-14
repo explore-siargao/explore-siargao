@@ -12,3 +12,4 @@ export const LINK_ACCOUNT_YOUR_PAYMENT =
   "/account-settings/payment-payout/your-payments"
 
 export const LINK_ACCOUNT_WISHLIST = "/account-settings/wishlist"
+export const LINK_ACCOUNT_BOOKINGS = "/account-settings/bookings"
