@@ -108,3 +108,79 @@ export const addCoupon = async (req: Request, res: Response) => {
     })
   }
 }
+
+export const updateCoupon = async (req: Request, res: Response) => {
+  const prisma = new PrismaClient()
+  const userId = Number(req.params.userId)
+  const couponId = Number(req.params.couponId)
+  const { code, reward, expirationDate, usedBy, isUsed } = req.body
+  try {
+    const isUserExist =
+      (await prisma.user.findUnique({
+        where: {
+          id: userId,
+        },
+      })) !== null
+    if (isUserExist) {
+      if (code || reward || expirationDate || usedBy || isUsed) {
+        const isCouponExist =
+          (await prisma.coupon.findUnique({
+            where: {
+              id: couponId,
+            },
+          })) !== null
+        if (isCouponExist) {
+          const updateCoupon = await prisma.coupon.update({
+            where: {
+              id: couponId,
+            },
+            data: {
+              code: code,
+              reward: reward,
+              expirationDate: expirationDate,
+              usedBy: usedBy,
+              isUsed: isUsed,
+            },
+            include: {
+              user: true,
+            },
+          })
+          res.json({
+            error: false,
+            items: updateCoupon,
+            itemCount: 1,
+            message: 'Coupon successfully updated',
+          })
+        } else {
+          res.json({
+            error: true,
+            items: null,
+            itemCount: 0,
+            message: 'Coupon not exist check your code',
+          })
+        }
+      } else {
+        res.json({
+          error: true,
+          items: null,
+          itemCount: 0,
+          message: REQUIRED_VALUE_EMPTY,
+        })
+      }
+    } else {
+      res.json({
+        error: true,
+        items: null,
+        itemCount: 0,
+        message: 'User is not exist from our system',
+      })
+    }
+  } catch (e: any) {
+    res.json({
+      error: true,
+      items: null,
+      itemCount: 0,
+      message: e.message,
+    })
+  }
+}

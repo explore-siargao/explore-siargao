@@ -149,7 +149,7 @@ model PaymentMethod {
 
 model Coupon {
   id             Int       @id @default(autoincrement())
-  createdBy      Int
+  createdBy      Int?
   usedBy         Int?
   user           User?     @relation(fields: [usedBy], references: [id])
   code           String    @unique
