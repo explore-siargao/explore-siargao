@@ -22,7 +22,7 @@ const BookingBoxContainer = ({
   price,
   photo,
   dayTime,
-  ratings
+  ratings,
 }: BookingProps) => {
   const [isClicked, setIsClicked] = useState(false)
   const handleClick = () => {
