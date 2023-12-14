@@ -17,7 +17,6 @@ import { useQueryClient } from "@tanstack/react-query"
 import useGetUserDetails from "@/common/hooks/useGetUserDetails"
 import { useForm } from "react-hook-form"
 import useUpdateCoupon from "../hooks/useUpdateCoupon"
-import { error } from "console"
 
 const Payments = () => {
   const router = useRouter()
