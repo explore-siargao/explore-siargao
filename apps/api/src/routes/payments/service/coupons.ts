@@ -52,28 +52,26 @@ export const getUsedCoupons = async (req: Request, res: Response) => {
 
 export const addCoupon = async (req: Request, res: Response) => {
   const prisma = new PrismaClient()
-  const { code, expirationDate, reward} = req.body
+  const { code, expirationDate, reward } = req.body
   const userId = Number(req.params.userId)
   try {
     const isUserExist =
       (await prisma.user.findUnique({
         where: {
           id: userId,
-          OR:[
-            {role:"Admin"},{role:"Host"}
-          ],
+          OR: [{ role: 'Admin' }, { role: 'Host' }],
         },
       })) !== null
     if (isUserExist) {
       if (code && reward && expirationDate) {
         const newPaymentMethod = await prisma.coupon.create({
           data: {
-            code:code,
-            reward:reward,
-            expirationDate:expirationDate,
-            createdBy:userId,
-            usedBy:null,
-            isUsed:false,
+            code: code,
+            reward: reward,
+            expirationDate: expirationDate,
+            createdBy: userId,
+            usedBy: null,
+            isUsed: false,
           },
           include: {
             user: true,
