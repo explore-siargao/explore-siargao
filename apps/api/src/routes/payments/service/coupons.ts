@@ -109,11 +109,11 @@ export const addCoupon = async (req: Request, res: Response) => {
   }
 }
 
-export const updateCoupon =async (req:Request, res:Response) => {
-  const prisma = new PrismaClient();
+export const updateCoupon = async (req: Request, res: Response) => {
+  const prisma = new PrismaClient()
   const userId = Number(req.params.userId)
   const couponId = Number(req.params.couponId)
-  const {code, reward, expirationDate, usedBy, isUsed} = req.body
+  const { code, reward, expirationDate, usedBy, isUsed } = req.body
   try {
     const isUserExist =
       (await prisma.user.findUnique({
@@ -121,17 +121,18 @@ export const updateCoupon =async (req:Request, res:Response) => {
           id: userId,
         },
       })) !== null
-      if (isUserExist) {
-        if (code || reward || expirationDate || usedBy || isUsed) {
-          const isCouponExist = await prisma.coupon.findUnique({
-            where:{
-              id:couponId
-            }
-          })!==null
-          if(isCouponExist){
+    if (isUserExist) {
+      if (code || reward || expirationDate || usedBy || isUsed) {
+        const isCouponExist =
+          (await prisma.coupon.findUnique({
+            where: {
+              id: couponId,
+            },
+          })) !== null
+        if (isCouponExist) {
           const updateCoupon = await prisma.coupon.update({
-            where:{
-              id:couponId
+            where: {
+              id: couponId,
             },
             data: {
               code: code,
@@ -150,20 +151,12 @@ export const updateCoupon =async (req:Request, res:Response) => {
             itemCount: 1,
             message: 'New coupon successfully created',
           })
-        }else{
-          res.json({
-            error: true,
-            items: null,
-            itemCount: 0,
-            message: "Coupon not exist check your code",
-          })
-        }
         } else {
           res.json({
             error: true,
             items: null,
             itemCount: 0,
-            message: REQUIRED_VALUE_EMPTY,
+            message: 'Coupon not exist check your code',
           })
         }
       } else {
@@ -171,10 +164,18 @@ export const updateCoupon =async (req:Request, res:Response) => {
           error: true,
           items: null,
           itemCount: 0,
-          message: 'User is not exist from our system',
+          message: REQUIRED_VALUE_EMPTY,
         })
       }
-  } catch (err:any) {
+    } else {
+      res.json({
+        error: true,
+        items: null,
+        itemCount: 0,
+        message: 'User is not exist from our system',
+      })
+    }
+  } catch (err: any) {
     res.json({
       error: true,
       items: null,
