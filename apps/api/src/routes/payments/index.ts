@@ -6,7 +6,7 @@ import {
   removePaymentmethod,
   updatePaymentMethod,
 } from './service/paymentMethod'
-import { addCoupon, getUsedCoupons } from './service/coupons'
+import { addCoupon, getUsedCoupons, updateCoupon } from './service/coupons'
 
 const router = express.Router()
 //payment method
@@ -26,5 +26,6 @@ router.delete(
 //coupons
 router.get('/:userId/coupon', getUsedCoupons)
 router.post('/:userId/coupon', addCoupon)
+router.patch('/:userId/coupon/:couponId', updateCoupon)
 
 export default router
