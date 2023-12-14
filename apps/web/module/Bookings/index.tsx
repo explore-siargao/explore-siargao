@@ -3,7 +3,6 @@ import Header from "../LandingPage/components/Header"
 import HomeWrapper from "@/common/components/HomeWrapper"
 import { Title } from "@/common/components/ui/Title"
 import BookingBoxContainer from "@/common/components/BookingBoxContainer"
-import { EnvelopeIcon, PhoneIcon } from "@heroicons/react/20/solid"
 
 const tripGroup = [
   {
@@ -73,10 +72,7 @@ const Bookings = () => {
       <Header />
       <HomeWrapper>
         <Title>Bookings</Title>
-        <ul
-          role="list"
-          className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6"
-        >
+        <ul className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6">
           {tripGroup.map((item) => (
             <BookingBoxContainer
               key={item.id}
