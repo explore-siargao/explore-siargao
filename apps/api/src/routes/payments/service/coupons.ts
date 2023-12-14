@@ -125,13 +125,13 @@ export const updateCoupon = async (req: Request, res: Response) => {
         const getCoupon = await prisma.coupon.findFirst({
           where: {
             code: req.body.code,
-            isUsed: false
+            isUsed: false,
           },
         })
         if (getCoupon !== null) {
           const updateCoupon = await prisma.coupon.update({
             where: {
-              id: getCoupon.id
+              id: getCoupon.id,
             },
             data: {
               code: code,

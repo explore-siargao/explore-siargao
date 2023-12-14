@@ -27,7 +27,7 @@ const Payments = () => {
   const [paymentMethodId, setPaymentMethodId] = useState(0)
   const [showHide, setShowHide] = useState(false)
   const [popPanelIsVisible, setPopPanelIsVisible] = useState(false)
-  const {register, reset, getValues} = useForm<ICoupon>()
+  const { register, reset, getValues } = useForm<ICoupon>()
   const toggleVisibility = () => {
     setShowHide(!showHide)
   }
@@ -38,9 +38,8 @@ const Payments = () => {
   const { mutate, isPending } = useUpdatepaymentMethod(
     !isPendingUserDetails && userDetails?.item?.id
   )
-  const {mutate:redeemCoupon,isPending:isPendingRedeemCoupon} = useUpdateCoupon(
-    !isPendingUserDetails && userDetails?.item?.id
-  )
+  const { mutate: redeemCoupon, isPending: isPendingRedeemCoupon } =
+    useUpdateCoupon(!isPendingUserDetails && userDetails?.item?.id)
 
   const callBackReqDefaultPaymentMethod = {
     onSuccess: (data: any) => {
@@ -211,30 +210,47 @@ const Payments = () => {
               <Button onClick={toggleVisibility}>Add coupon</Button>
             ) : (
               <>
-          
-                <Input inputId="couponCode" inputLabel="Enter coupon code" {...register("code",{required:true})} disabled={isPendingRedeemCoupon}/>
+                <Input
+                  inputId="couponCode"
+                  inputLabel="Enter coupon code"
+                  {...register("code", { required: true })}
+                  disabled={isPendingRedeemCoupon}
+                />
                 <div className="flex gap-4">
-                  <Button type="button"
-                  onClick={()=>{
-                    console.log(getValues("code")?.length)
-                    if(getValues("code")?.length!==0){
-                    redeemCoupon({code:getValues("code"), isUsed:true,usedBy:!isPendingUserDetails && userDetails?.item?.id},CallBackCheckCoupon)
-                    }else{
-                      toast.error("Please enter a coupon code")
-                    }
-                  }}
+                  <Button
+                    type="button"
+                    onClick={() => {
+                      console.log(getValues("code")?.length)
+                      if (getValues("code")?.length !== 0) {
+                        redeemCoupon(
+                          {
+                            code: getValues("code"),
+                            isUsed: true,
+                            usedBy:
+                              !isPendingUserDetails && userDetails?.item?.id,
+                          },
+                          CallBackCheckCoupon
+                        )
+                      } else {
+                        toast.error("Please enter a coupon code")
+                      }
+                    }}
                   >
                     <div>
-                    {isPendingRedeemCoupon ? (
-                            <div className="animate-spin w-4 h-4 border-2 border-current border-t-transparent text-primary-200 rounded-full">
-                              <span className="sr-only">Loading...</span>
-                            </div>
-                          ) : (
-                            "Redeem coupon"
-                          )}
-                          </div>
+                      {isPendingRedeemCoupon ? (
+                        <div className="animate-spin w-4 h-4 border-2 border-current border-t-transparent text-primary-200 rounded-full">
+                          <span className="sr-only">Loading...</span>
+                        </div>
+                      ) : (
+                        "Redeem coupon"
+                      )}
+                    </div>
                   </Button>
-                  <Button onClick={toggleVisibility} variant={"outline"} type="button">
+                  <Button
+                    onClick={toggleVisibility}
+                    variant={"outline"}
+                    type="button"
+                  >
                     Cancel
                   </Button>
                 </div>
