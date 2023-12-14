@@ -185,9 +185,7 @@ const Payments = () => {
               <p>0</p>
             </div>
             {showHide === false ? (
-              <>
-                <Button onClick={toggleVisibility}>Add coupon</Button>
-              </>
+              <Button onClick={toggleVisibility}>Add coupon</Button>
             ) : (
               <>
                 <Input inputId="couponCode" inputLabel="Enter coupon code" />
