@@ -184,10 +184,25 @@ const Payments = () => {
               <p className="font-light">Your coupons</p>
               <p>0</p>
             </div>
-            {showHide && (
+            {/* {showHide && (
               <Input inputId="couponCode" inputLabel="Enter coupon code" />
             )}
-            <Button onClick={toggleVisibility}>Add coupon</Button>
+            <Button onClick={toggleVisibility}>Add coupon</Button> */}
+            {showHide === false ? (
+              <>
+                <Button onClick={toggleVisibility}>Add coupon</Button>
+              </>
+            ) : (
+              <>
+                <Input inputId="couponCode" inputLabel="Enter coupon code" />
+                <div className="flex gap-4">
+                  <Button>Redeem coupon</Button>
+                  <Button onClick={toggleVisibility} variant={"outline"}>
+                    Cancel
+                  </Button>
+                </div>
+              </>
+            )}
           </div>
         </div>
       )}
