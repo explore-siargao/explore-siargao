@@ -67,6 +67,19 @@ export interface IPaymentMethod {
   deletedAt?: string
 }
 
+export interface ICoupon {
+  id?:number
+  createdBy?:number
+  usedBy?:number
+  code?:string
+  expirationDate?:string
+  reward?:string
+  isUsed:boolean
+  createdAt?:string
+  updatedAt?:string
+  deletedAt?:string
+}
+
 //stores
 type Email = {
   email: string

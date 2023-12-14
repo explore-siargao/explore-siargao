@@ -112,7 +112,6 @@ export const addCoupon = async (req: Request, res: Response) => {
 export const updateCoupon = async (req: Request, res: Response) => {
   const prisma = new PrismaClient()
   const userId = Number(req.params.userId)
-  const couponId = Number(req.params.couponId)
   const { code, reward, expirationDate, usedBy, isUsed } = req.body
   try {
     const isUserExist =
@@ -123,16 +122,16 @@ export const updateCoupon = async (req: Request, res: Response) => {
       })) !== null
     if (isUserExist) {
       if (code || reward || expirationDate || usedBy || isUsed) {
-        const isCouponExist =
-          (await prisma.coupon.findUnique({
+        const getCoupon =
+          (await prisma.coupon.findFirst({
             where: {
-              id: couponId,
+              code: req.body.code
             },
-          })) !== null
-        if (isCouponExist) {
+          }))
+        if (getCoupon!==null) {
           const updateCoupon = await prisma.coupon.update({
             where: {
-              id: couponId,
+              id: getCoupon.id,
             },
             data: {
               code: code,
