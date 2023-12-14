@@ -5,7 +5,7 @@ import { useMutation } from "@tanstack/react-query"
 
 export async function updatePaymentMethod(
   userId: number | undefined,
-  props: IPersonalInfo
+  props: IPaymentMethod
 ) {
   const apiService = new ApiService()
   return await apiService.patch(

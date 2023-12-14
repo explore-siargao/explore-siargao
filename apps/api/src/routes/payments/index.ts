@@ -26,6 +26,6 @@ router.delete(
 //coupons
 router.get('/:userId/coupon', getUsedCoupons)
 router.post('/:userId/coupon', addCoupon)
-router.patch('/:userId/coupon/:couponId', updateCoupon)
+router.patch('/:userId/coupon', updateCoupon)
 
 export default router
