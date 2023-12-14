@@ -1,5 +1,4 @@
 import { PrismaClient } from '@prisma/client'
-import { REQUIRED_VALUE_EMPTY } from '@repo/constants'
 import { Request, Response } from 'express'
 
 export const getUsedCoupons = async (req: Request, res: Response) => {
