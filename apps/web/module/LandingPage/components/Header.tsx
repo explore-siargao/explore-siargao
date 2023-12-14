@@ -15,7 +15,7 @@ function Header() {
         </p>
       </div>
       <nav
-        className="flex items-center justify-between p-2 mx-10 lg:px-8"
+        className="flex items-center justify-between py-2 mx-10 md:px-8"
         aria-label="Global"
       >
         <a href="#" className="-m-1.5 gap-2 flex lg:flex-1 items-center">

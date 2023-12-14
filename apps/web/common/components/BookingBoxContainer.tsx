@@ -42,8 +42,8 @@ const BookingBoxContainer = ({
           />
           <Image
             src={photo}
-            width={300}
-            height={300}
+            width={500}
+            height={500}
             alt={photo}
             className="flex-shrink-0 h-80 w-80 rounded-xl"
           />
