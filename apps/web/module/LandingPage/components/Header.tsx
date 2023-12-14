@@ -33,33 +33,30 @@ function Header() {
           />
         </a>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end space-x-3 items-center">
-       
-            {!session  &&(
+          {!session && (
             <div>
-               <Button 
-               variant="link" 
-               size="sm"
-               onClick={()=>router.push(LINK_LOGIN)}
-               >
-              Login
-            </Button>
-            <Button 
-            variant="link" 
-            size="sm"
-            onClick={()=>router.push(LINK_CREATE_ACCOUNT)}
-            >
-              Sign up
-            </Button>
+              <Button
+                variant="link"
+                size="sm"
+                onClick={() => router.push(LINK_LOGIN)}
+              >
+                Login
+              </Button>
+              <Button
+                variant="link"
+                size="sm"
+                onClick={() => router.push(LINK_CREATE_ACCOUNT)}
+              >
+                Sign up
+              </Button>
             </div>
-            )}
-            <div>
+          )}
+          <div>
             <Button variant="primary" size="sm">
               Be a host
             </Button>
           </div>
-          {session &&(
-          <LandingPageMenu />
-          )}
+          {session && <LandingPageMenu />}
         </div>
       </nav>
     </header>
