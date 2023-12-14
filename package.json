@@ -26,5 +26,6 @@
     "node": ">=20.10.0",
     "npm": ">=10.2.3"
   },
-  "engineStrict": true
+  "engineStrict": true,
+  "version": "1.0.0"
 }
