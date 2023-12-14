@@ -64,7 +64,7 @@ export const addCoupon = async (req: Request, res: Response) => {
       })) !== null
     if (isUserExist) {
       if (code && reward && expirationDate) {
-        const newPaymentMethod = await prisma.coupon.create({
+        const newCoupon = await prisma.coupon.create({
           data: {
             code: code,
             reward: reward,
@@ -79,7 +79,7 @@ export const addCoupon = async (req: Request, res: Response) => {
         })
         res.json({
           error: false,
-          items: newPaymentMethod,
+          items: newCoupon,
           itemCount: 1,
           message: 'New coupon successfully created',
         })
