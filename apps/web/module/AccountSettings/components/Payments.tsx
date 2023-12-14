@@ -9,12 +9,12 @@ import Image from "next/image"
 import { Input } from "@/common/components/ui/Input"
 import { Popover, Transition } from "@headlessui/react"
 import RemovePaymentModal from "./modals/RemovePaymentModal"
-import useGetUserDetails from "@/common/hooks/useGetUserDetails"
 import useGetPaymentmethods from "../hooks/useGetPaymentMethods"
 import { IPaymentMethod } from "@/common/types/global"
 import useUpdatepaymentMethod from "../hooks/useUpdatePaymentMethod"
 import toast from "react-hot-toast"
 import { useQueryClient } from "@tanstack/react-query"
+import useGetUserDetails from "@/common/hooks/useGetUserdetails"
 
 const Payments = () => {
   const router = useRouter()
@@ -184,10 +184,6 @@ const Payments = () => {
               <p className="font-light">Your coupons</p>
               <p>0</p>
             </div>
-            {/* {showHide && (
-              <Input inputId="couponCode" inputLabel="Enter coupon code" />
-            )}
-            <Button onClick={toggleVisibility}>Add coupon</Button> */}
             {showHide === false ? (
               <>
                 <Button onClick={toggleVisibility}>Add coupon</Button>
