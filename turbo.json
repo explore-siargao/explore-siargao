@@ -4,9 +4,32 @@
   "pipeline": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": [".next/**", "!.next/cache/**"]
+      "outputs": [".next/**", "!.next/cache/**", "dist/**"],
+      "env": [
+        "AWS_ACCESS_KEY",
+        "AWS_SECRET_ACCESS_KEY",
+        "AWS_REGION",
+        "API_URL",
+        "API_PORT",
+        "API_ENCRYPT_KEY",
+        "API_SIGN_KEY",
+        "API_ORIGINS",
+        "API_AUTH_URL",
+        "API_MOCK_URL",
+        "NEXTAUTH_URL",
+        "NEXTAUTH_SECRET",
+        "GOOGLE_CLIENT_ID",
+        "GOOGLE_SECRET_ID",
+        "FACEBOOK_CLIENT_ID",
+        "FACEBOOK_SECRET_ID",
+        "WEB_URL",
+        "RECAPTCHA_KEY",
+        "RECAPTCHA_KEY_SECRET"
+      ]
     },
-    "lint": {},
+    "lint": {
+      "dependsOn": ["^lint"]
+    },
     "dev": {
       "cache": false,
       "persistent": true
