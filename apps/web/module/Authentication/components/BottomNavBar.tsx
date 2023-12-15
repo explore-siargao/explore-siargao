@@ -1,5 +1,9 @@
 "use client"
-import { LINK_LOGIN } from "@/common/constants/links"
+import {
+  LINK_ACCOUNT_BOOKINGS,
+  LINK_ACCOUNT_WISHLIST,
+  LINK_LOGIN,
+} from "@/common/constants/links"
 import {
   ChatBubbleBottomCenterIcon,
   ClipboardDocumentListIcon,
@@ -10,6 +14,34 @@ import {
 import React, { useEffect, useState } from "react"
 import Cookies from "js-cookie"
 
+const authenticatedNavBar = [
+  { id: 1, link: "/", icon: MagnifyingGlassIcon, name: "Explore" },
+  { id: 2, link: LINK_ACCOUNT_WISHLIST, icon: HeartIcon, name: "Wishlists" },
+  { id: 3, link: LINK_LOGIN, icon: UserCircleIcon, name: "Log in" },
+]
+
+const unauthenticatedNavBar = [
+  { id: 1, link: "/", icon: MagnifyingGlassIcon, name: "Explore" },
+  { id: 2, link: LINK_ACCOUNT_WISHLIST, icon: HeartIcon, name: "Wishlists" },
+  {
+    id: 3,
+    link: LINK_ACCOUNT_BOOKINGS,
+    icon: ClipboardDocumentListIcon,
+    name: "Bookings",
+  },
+  {
+    id: 4,
+    link: "/",
+    icon: ChatBubbleBottomCenterIcon,
+    name: "Inbox",
+  },
+  {
+    id: 5,
+    link: LINK_ACCOUNT_BOOKINGS,
+    icon: UserCircleIcon,
+    name: "Profile",
+  },
+]
 const BottomNavBar = () => {
   const [isBottomNavVisible, setIsBottomNavVisible] = useState(true)
 
@@ -40,73 +72,30 @@ const BottomNavBar = () => {
     >
       {Cookies.get("accessToken") === undefined ? (
         <nav className="flex justify-center space-x-7 p-2" aria-label="Global">
-          <a
-            href="/"
-            type="button"
-            className="grid justify-items-center -m-1.5 text-text-400 text-xs focus:text-primary-700"
-          >
-            <MagnifyingGlassIcon className="h-7 w-auto" />
-            <p> Explore</p>
-          </a>
-          <a
-            href="#"
-            type="button"
-            className="grid justify-items-center -m-1.5  text-text-400 text-xs focus:text-primary-700"
-          >
-            <HeartIcon className="h-7 w-auto" />
-            <p> Wishlists</p>
-          </a>
-          <a
-            href={LINK_LOGIN}
-            type="button"
-            className="grid justify-items-center -m-1.5  text-text-400 text-xs focus:text-primary-700"
-          >
-            <UserCircleIcon className="h-7 w-auto" />
-            <p> Log in</p>
-          </a>
+          {authenticatedNavBar.map((item) => (
+            <a
+              key={item.id}
+              href={item.link}
+              type="button"
+              className="grid justify-items-center -m-1.5 text-text-400 text-xs focus:text-primary-700"
+            >
+              <item.icon className="h-7 w-auto" />
+              <p> {item.name}</p>
+            </a>
+          ))}
         </nav>
       ) : (
         <nav className="flex justify-center space-x-7 p-2" aria-label="Global">
-          <a
-            href="/"
-            type="button"
-            className="grid justify-items-center -m-1.5 text-text-400 text-xs focus:text-primary-700"
-          >
-            <MagnifyingGlassIcon className="h-7 w-auto" />
-            <p> Explore</p>
-          </a>
-          <a
-            href="#"
-            type="button"
-            className="grid justify-items-center -m-1.5  text-text-400 text-xs focus:text-primary-700"
-          >
-            <HeartIcon className="h-7 w-auto" />
-            <p> Wishlists</p>
-          </a>
-          <a
-            href="#"
-            type="button"
-            className="grid justify-items-center -m-1.5  text-text-400 text-xs focus:text-primary-700"
-          >
-            <ClipboardDocumentListIcon className="h-7 w-auto" />
-            <p> Bookings</p>
-          </a>
-          <a
-            href="#"
-            type="button"
-            className="grid justify-items-center -m-1.5  text-text-400 text-xs focus:text-primary-700"
-          >
-            <ChatBubbleBottomCenterIcon className="h-7 w-auto" />
-            <p> Inbox</p>
-          </a>
-          <a
-            href={LINK_LOGIN}
-            type="button"
-            className="grid justify-items-center -m-1.5  text-text-400 text-xs focus:text-primary-700"
-          >
-            <UserCircleIcon className="h-7 w-auto" />
-            <p> Log in</p>
-          </a>
+          {unauthenticatedNavBar.map((item) => (
+            <a
+              href={item.link}
+              type="button"
+              className="grid justify-items-center -m-1.5 text-text-400 text-xs focus:text-primary-700"
+            >
+              <item.icon className="h-7 w-auto" />
+              <p> {item.name}</p>
+            </a>
+          ))}
         </nav>
       )}
     </footer>

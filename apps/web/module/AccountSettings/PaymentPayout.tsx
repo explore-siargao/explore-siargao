@@ -1,6 +1,5 @@
 "use client"
 import React, { useState } from "react"
-import Header from "../LandingPage/components/Header"
 import AccountSettingWrapper from "@/common/components/AccountSettingWrapper"
 import { Title } from "@/common/components/ui/Title"
 import { ChevronRightIcon } from "@heroicons/react/20/solid"
@@ -32,7 +31,6 @@ const PaymentPayout = () => {
   }
   return (
     <>
-      <Header />
       <AccountSettingWrapper>
         <div className="mb-10">
           <div className="flex items-center text-text-400">

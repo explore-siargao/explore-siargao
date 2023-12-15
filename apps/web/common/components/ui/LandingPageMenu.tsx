@@ -36,10 +36,10 @@ const authMenus = [
 const LandingPageMenu = () => {
   const { data: session } = useSession()
   return (
-    <Popover className="relative ">
+    <Popover className="relative">
       <Popover.Button className="flex gap-1 rounded-full border-text-50 border items-center focus:ring-gray-400 focus:border-gray-400 px-2 py-1">
         <Bars3Icon className="h-5 text-text-200" />
-        <UserCircleIcon className="h-10 text-gray-400" />
+        <UserCircleIcon className="h-8 text-gray-400" />
       </Popover.Button>
 
       <Transition

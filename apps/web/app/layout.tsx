@@ -11,6 +11,7 @@ import { LOGO_SINGLE_IMAGE } from "@/common/constants/index"
 import authOptions from "@/common/helpers/authOptions"
 import { APP_NAME } from "@repo/constants"
 import BottomNavBar from "@/module/Authentication/components/BottomNavBar"
+import Header from "@/module/LandingPage/components/Header"
 
 const nunito = Nunito({ subsets: ["latin"] })
 
@@ -33,6 +34,7 @@ export default async function RootLayout({
         <SessionProvider session={session}>
           <QueryClientWrapper>
             <AuthModalWrapper>
+              <Header />
               {children}
               <BottomNavBar />
             </AuthModalWrapper>

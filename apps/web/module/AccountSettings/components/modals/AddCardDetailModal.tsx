@@ -1,5 +1,4 @@
 import ModalContainer from "@/common/components/ModalContainer"
-import { Button } from "@/common/components/ui/Button"
 import { Input } from "@/common/components/ui/Input"
 import { Dialog, Transition } from "@headlessui/react"
 import React, { Fragment, useRef } from "react"
@@ -88,9 +87,17 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
               <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:w-full sm:max-w-lg ">
-                <ModalContainer title="Add card details" onClose={onClose}>
-                  <div className="p-6 space-y-4">
-                    <form onSubmit={handleSubmit(onSubmit)}>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                  <ModalContainer
+                    title="Add card details"
+                    onClose={onClose}
+                    positive="Save"
+                    negative="Cancel"
+                    isPending={isPending}
+                    isSubmit={true}
+                    onClick={() => null}
+                  >
+                    <div className="p-6 space-y-2">
                       <div className="flex gap-2">
                         <Image
                           src={mastercard}
@@ -219,7 +226,7 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
                         <option value="CH">China</option>
                         <option value="ITALIAN">Italian</option>
                       </select>
-                      <div className="flex justify-between">
+                      {/* <div className="flex justify-between">
                         <Button
                           variant={"ghost"}
                           type="button"
@@ -236,10 +243,10 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
                             "Save"
                           )}
                         </Button>
-                      </div>
-                    </form>
-                  </div>
-                </ModalContainer>
+                      </div> */}
+                    </div>
+                  </ModalContainer>
+                </form>
               </Dialog.Panel>
             </Transition.Child>
           </div>
