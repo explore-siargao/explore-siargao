@@ -53,7 +53,7 @@ function Header() {
           )}
           <div>
             <Button variant="primary" size="sm">
-              Be a host
+              Apply to Host
             </Button>
           </div>
           {session && <LandingPageMenu />}
