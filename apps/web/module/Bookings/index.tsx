@@ -1,5 +1,4 @@
 import React from "react"
-import Header from "../LandingPage/components/Header"
 import HomeWrapper from "@/common/components/HomeWrapper"
 import { Title } from "@/common/components/ui/Title"
 import BookingBoxContainer from "@/common/components/BookingBoxContainer"
@@ -65,29 +64,66 @@ const tripGroup = [
     dayTime: "night",
     ratings: "5.0",
   },
+  {
+    id: 7,
+    location: "Cavinti, Laguna",
+    distance: "100 kilometers away",
+    date: "Dec 13 - 15",
+    price: "₱3,419",
+    photo: "http://localhost:3000/5.jpg",
+    dayTime: "night",
+    ratings: "5.0",
+  },
+  {
+    id: 8,
+    location: "Cavinti, Laguna",
+    distance: "100 kilometers away",
+    date: "Dec 13 - 15",
+    price: "₱3,419",
+    photo: "http://localhost:3000/5.jpg",
+    dayTime: "night",
+    ratings: "5.0",
+  },
+  {
+    id: 9,
+    location: "Cavinti, Laguna",
+    distance: "100 kilometers away",
+    date: "Dec 13 - 15",
+    price: "₱3,419",
+    photo: "http://localhost:3000/5.jpg",
+    dayTime: "night",
+    ratings: "5.0",
+  },
+  {
+    id: 10,
+    location: "Cavinti, Laguna",
+    distance: "100 kilometers away",
+    date: "Dec 13 - 15",
+    price: "₱3,419",
+    photo: "http://localhost:3000/5.jpg",
+    dayTime: "night",
+    ratings: "5.0",
+  },
 ]
 const Bookings = () => {
   return (
-    <>
-      <Header />
-      <HomeWrapper>
-        <Title>Bookings</Title>
-        <ul className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6">
-          {tripGroup.map((item) => (
-            <BookingBoxContainer
-              key={item.id}
-              location={item.location}
-              date={item.date}
-              distance={item.distance}
-              price={item.price}
-              photo={item.photo}
-              dayTime={item.dayTime}
-              ratings={item.ratings}
-            />
-          ))}
-        </ul>
-      </HomeWrapper>
-    </>
+    <HomeWrapper>
+      <Title>Bookings</Title>
+      <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 mx-auto w-full max-w-[2520px] justify-center">
+        {tripGroup.map((item) => (
+          <BookingBoxContainer
+            key={item.id}
+            location={item.location}
+            date={item.date}
+            distance={item.distance}
+            price={item.price}
+            photo={item.photo}
+            dayTime={item.dayTime}
+            ratings={item.ratings}
+          />
+        ))}
+      </ul>
+    </HomeWrapper>
   )
 }
 

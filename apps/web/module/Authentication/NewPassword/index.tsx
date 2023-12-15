@@ -9,7 +9,6 @@ import { useForm } from "react-hook-form"
 import useVerifyForgotPassword, {
   TVerifyForgotPassword,
 } from "../hooks/useVerifyForgotPassword"
-import Cookies from "js-cookie"
 import { signIn } from "next-auth/react"
 import toast from "react-hot-toast"
 

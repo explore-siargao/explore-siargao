@@ -1,7 +1,6 @@
 "use client"
 import AccountSettingWrapper from "@/common/components/AccountSettingWrapper"
 import { LINK_ACCOUNT_SETTINGS } from "@/common/constants/links"
-import Header from "@/module/LandingPage/components/Header"
 import { ChevronRightIcon } from "@heroicons/react/20/solid"
 import React from "react"
 import LegalName from "./components/LegalName"
@@ -11,13 +10,12 @@ import GovernmentId from "./components/GovernmentId"
 import Address from "./components/Address"
 import EmergencyContact from "./components/EmergencyContact"
 import { Title } from "@/common/components/ui/Title"
-import useGetUserDetails from "@/common/hooks/useGetUserDetails"
+import useGetUserDetails from "@/common/hooks/useGetUserdetails"
 
 const PersonalInfo = () => {
   const { data, isPending } = useGetUserDetails()
   return (
     <>
-      <Header />
       <AccountSettingWrapper>
         <div className="mb-10">
           <div className="flex items-center text-text-400">

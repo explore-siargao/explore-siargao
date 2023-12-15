@@ -1,5 +1,4 @@
 import React from "react"
-import Header from "../LandingPage/components/Header"
 import AccountSettingWrapper from "@/common/components/AccountSettingWrapper"
 import { AccountMenuContainer } from "@/common/components/AccountMenuContainer"
 import {
@@ -40,7 +39,6 @@ const pages = [
 const AccountSettings = () => {
   return (
     <>
-      <Header />
       <AccountSettingWrapper>
         <Title>Account</Title>
         <div className="flex space-x-2">

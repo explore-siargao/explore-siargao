@@ -1,12 +1,10 @@
 import AccountSettingWrapper from "@/common/components/AccountSettingWrapper"
 import { Title } from "@/common/components/ui/Title"
-import Header from "@/module/LandingPage/components/Header"
 import React from "react"
 
 const YourPayments = () => {
   return (
     <>
-      <Header />
       <AccountSettingWrapper>
         <Title>Your payments</Title>
         <p className="text-text-400">

@@ -1,5 +1,4 @@
 import ModalContainer from "@/common/components/ModalContainer"
-import { Button } from "@/common/components/ui/Button"
 import { Dialog, Transition } from "@headlessui/react"
 import { useQueryClient } from "@tanstack/react-query"
 import React, { Fragment, useRef } from "react"
@@ -73,29 +72,18 @@ const RemovePaymentModal = ({
                 <ModalContainer
                   title="Remove payment method"
                   onClose={closeModal}
+                  isPending={isPending}
+                  isSubmit={false}
+                  negative="Cancel"
+                  positive="Remove"
+                  onClick={() =>
+                    mutate({ id: id, userId: userId }, callBackReq)
+                  }
                 >
                   <div className="p-6">
                     <p className="text-text-400 font-light">
                       Are you sure you want to remove this payment method?
                     </p>
-                  </div>
-                  <div className="flex justify-between px-4 py-2 border-t-gray-200 border-t">
-                    <Button variant={"ghost"} onClick={closeModal}>
-                      Cancel
-                    </Button>
-                    <Button
-                      onClick={() => {
-                        mutate({ id: id, userId: userId }, callBackReq)
-                      }}
-                    >
-                      {isPending ? (
-                        <div className="animate-spin w-4 h-4 border-2 border-current border-t-transparent text-primary-200 rounded-full">
-                          <span className="sr-only">Loading...</span>
-                        </div>
-                      ) : (
-                        "Remove"
-                      )}
-                    </Button>
                   </div>
                 </ModalContainer>
               </Dialog.Panel>

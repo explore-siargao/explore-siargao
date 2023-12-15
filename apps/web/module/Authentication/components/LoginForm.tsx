@@ -8,7 +8,6 @@ import { IUser } from "@/common/types/global"
 import { useForm } from "react-hook-form"
 import useLogin from "@/module/Authentication/hooks/useLogin"
 import { useRouter } from "next/navigation"
-import Cookies from "js-cookie"
 import { Button } from "@/common/components/ui/Button"
 import Link from "next/link"
 import { LINK_CREATE_ACCOUNT } from "@/common/constants/links"
@@ -59,7 +58,7 @@ const LoginForm = () => {
   }
 
   return (
-    <div className="p-8 md:p-6">
+    <div className="p-8 md:p-6 ">
       <form onSubmit={handleSubmit(onSubmit)}>
         <h1 className="font-semibold text-xl mt-1 mb-4">
           {LOGIN_CONTENT_TITTLE_TEXT}
@@ -96,7 +95,7 @@ const LoginForm = () => {
 
         <Button
           type="submit"
-          variant="default"
+          variant="primary"
           className="w-full mt-4 mb-2"
           disabled={isLoginPending}
         >
