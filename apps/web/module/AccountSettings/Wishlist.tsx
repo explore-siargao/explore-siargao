@@ -37,19 +37,19 @@ const WishlistGroup = [
 
 const Wishlist = () => {
   return (
-      <HomeWrapper>
-        <Title className="">Wishlist</Title>
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6">
-          {WishlistGroup.map((item) => (
-            <WishlistBoxContainer
-              key={item.id}
-              photo={item.pic}
-              title={item.name}
-              text={item.text}
-            />
-          ))}
-        </div>
-      </HomeWrapper>
+    <HomeWrapper>
+      <Title className="">Wishlist</Title>
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6">
+        {WishlistGroup.map((item) => (
+          <WishlistBoxContainer
+            key={item.id}
+            photo={item.pic}
+            title={item.name}
+            text={item.text}
+          />
+        ))}
+      </div>
+    </HomeWrapper>
   )
 }
 
