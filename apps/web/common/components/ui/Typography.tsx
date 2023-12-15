@@ -12,28 +12,30 @@ const typographyVariants = cva("font-bold", {
       h5: "text-sm font-bold",
       h6: "text-xs font-bold",
     },
-    fontWeight:{
-        normal:"font-normal",
-        bold:"font-bold",
-        thin:"font-thin",
-        semiBold:"font-semibold",
-    }
+    fontWeight: {
+      normal: "font-normal",
+      bold: "font-bold",
+      thin: "font-thin",
+      semiBold: "font-semibold",
+    },
   },
   defaultVariants: {
     variant: "p",
-    fontWeight:"normal"
+    fontWeight: "normal",
   },
 })
 export interface TypographyProps
   extends React.DetailsHTMLAttributes<HTMLDivElement>,
     VariantProps<typeof typographyVariants> {
-        children: string
-    }
+  children: string
+}
 
 const Typography = React.forwardRef<HTMLDivElement, TypographyProps>(
   ({ variant, fontWeight, className, children }) => {
     return (
-      <p className={cn(typographyVariants({ variant, fontWeight, className}))}>{children}</p>
+      <p className={cn(typographyVariants({ variant, fontWeight, className }))}>
+        {children}
+      </p>
     )
   }
 )
