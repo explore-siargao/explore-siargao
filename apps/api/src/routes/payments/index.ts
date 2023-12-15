@@ -12,8 +12,20 @@ import isOriginValid from '@/common/middleware/auth/isOriginValid'
 
 const router = express.Router()
 //payment method
-router.post('/:userId/payment-method', isCsrfTokenValid, isOriginValid, isUserLoggedIn, addpaymentMethod)
-router.get('/:userId/payment-method', isCsrfTokenValid, isOriginValid, isUserLoggedIn, getPaymentMethods)
+router.post(
+  '/:userId/payment-method',
+  isCsrfTokenValid,
+  isOriginValid,
+  isUserLoggedIn,
+  addpaymentMethod
+)
+router.get(
+  '/:userId/payment-method',
+  isCsrfTokenValid,
+  isOriginValid,
+  isUserLoggedIn,
+  getPaymentMethods
+)
 router.patch(
   '/:userId/payment-method/:paymentMethodId',
   isCsrfTokenValid,
@@ -30,8 +42,26 @@ router.delete(
 )
 
 //coupons
-router.get('/:userId/coupon', isCsrfTokenValid, isOriginValid,isUserLoggedIn, getUsedCoupons)
-router.post('/:userId/coupon', isCsrfTokenValid, isOriginValid, isUserLoggedIn, addCoupon)
-router.patch('/:userId/coupon', isCsrfTokenValid, isOriginValid, isUserLoggedIn, updateCoupon)
+router.get(
+  '/:userId/coupon',
+  isCsrfTokenValid,
+  isOriginValid,
+  isUserLoggedIn,
+  getUsedCoupons
+)
+router.post(
+  '/:userId/coupon',
+  isCsrfTokenValid,
+  isOriginValid,
+  isUserLoggedIn,
+  addCoupon
+)
+router.patch(
+  '/:userId/coupon',
+  isCsrfTokenValid,
+  isOriginValid,
+  isUserLoggedIn,
+  updateCoupon
+)
 
 export default router

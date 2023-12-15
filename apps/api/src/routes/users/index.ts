@@ -50,10 +50,22 @@ router.post(
 router.post('/auth/mfa', isOriginValid, isCsrfTokenValid, mfa)
 router.post('/auth/mfa/verify', isOriginValid, isCsrfTokenValid, mfaVerify)
 router.patch('/auth/:userId', isCsrfTokenValid, isOriginValid, updateUserEmail)
-router.get('/auth/user-details', isCsrfTokenValid, isOriginValid, isUserLoggedIn, userDetails)
+router.get(
+  '/auth/user-details',
+  isCsrfTokenValid,
+  isOriginValid,
+  isUserLoggedIn,
+  userDetails
+)
 
 // PERSONAL INFO
-router.get('/personal-info/:userId', isCsrfTokenValid, isOriginValid, isUserLoggedIn, getPersonalInfo)
+router.get(
+  '/personal-info/:userId',
+  isCsrfTokenValid,
+  isOriginValid,
+  isUserLoggedIn,
+  getPersonalInfo
+)
 router.post(
   '/:personalInfoId/emergency-contact/add/',
   isCsrfTokenValid,
@@ -61,9 +73,27 @@ router.post(
   isUserLoggedIn,
   addEmergencyContact
 )
-router.post('/:personalInfoId/address/add/', isCsrfTokenValid, isOriginValid, isUserLoggedIn, addAddress)
-router.patch('/address/:userId', isUserLoggedIn, isCsrfTokenValid, isOriginValid, editAddress)
-router.patch('/personal-info/:userId', isCsrfTokenValid, isOriginValid, isUserLoggedIn, updatePersonalInfo)
+router.post(
+  '/:personalInfoId/address/add/',
+  isCsrfTokenValid,
+  isOriginValid,
+  isUserLoggedIn,
+  addAddress
+)
+router.patch(
+  '/address/:userId',
+  isUserLoggedIn,
+  isCsrfTokenValid,
+  isOriginValid,
+  editAddress
+)
+router.patch(
+  '/personal-info/:userId',
+  isCsrfTokenValid,
+  isOriginValid,
+  isUserLoggedIn,
+  updatePersonalInfo
+)
 router.delete(
   '/:peronalInfoId/emergency-contact/:emergencyContactId',
   isCsrfTokenValid,

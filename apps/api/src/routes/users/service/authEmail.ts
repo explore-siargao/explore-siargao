@@ -1,5 +1,5 @@
 import { render } from '@react-email/render'
-import { EmailService } from  '@/common/service/email'
+import { EmailService } from '@/common/service/email'
 import ForgotPasswordEmail from '@/routes/users/email-template/auth/ForgotPasswordEmail'
 import MultiFactorAuth from '@/routes/users/email-template/auth/MultiFactorAuth'
 
