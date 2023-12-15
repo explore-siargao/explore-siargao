@@ -10,5 +10,11 @@ const router = express.Router()
 // DEFAULT
 router.get('/', isCsrfTokenValid, isOriginValid, getAllListing)
 router.get('/:id', isCsrfTokenValid, isOriginValid, getListing)
-router.get('/:userId/wish-group', isOriginValid, isCsrfTokenValid, isUserLoggedIn, getWishGroupsByUser)
+router.get(
+  '/:userId/wish-group',
+  isOriginValid,
+  isCsrfTokenValid,
+  isUserLoggedIn,
+  getWishGroupsByUser
+)
 export default router
