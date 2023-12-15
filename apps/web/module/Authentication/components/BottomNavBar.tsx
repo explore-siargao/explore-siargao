@@ -89,6 +89,7 @@ const BottomNavBar = () => {
           {unauthenticatedNavBar.map((item) => (
             <a
               href={item.link}
+              key={item.id}
               type="button"
               className="grid justify-items-center -m-1.5 text-text-400 text-xs focus:text-primary-700"
             >

@@ -107,25 +107,23 @@ const tripGroup = [
 ]
 const Bookings = () => {
   return (
-    <>
-      <HomeWrapper>
-        <Title>Bookings</Title>
-        <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 mx-auto w-full max-w-[2520px] justify-center">
-          {tripGroup.map((item) => (
-            <BookingBoxContainer
-              key={item.id}
-              location={item.location}
-              date={item.date}
-              distance={item.distance}
-              price={item.price}
-              photo={item.photo}
-              dayTime={item.dayTime}
-              ratings={item.ratings}
-            />
-          ))}
-        </ul>
-      </HomeWrapper>
-    </>
+    <HomeWrapper>
+      <Title>Bookings</Title>
+      <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 mx-auto w-full max-w-[2520px] justify-center">
+        {tripGroup.map((item) => (
+          <BookingBoxContainer
+            key={item.id}
+            location={item.location}
+            date={item.date}
+            distance={item.distance}
+            price={item.price}
+            photo={item.photo}
+            dayTime={item.dayTime}
+            ratings={item.ratings}
+          />
+        ))}
+      </ul>
+    </HomeWrapper>
   )
 }
 
