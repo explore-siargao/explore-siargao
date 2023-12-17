@@ -10,10 +10,10 @@ import GovernmentId from "./components/GovernmentId"
 import Address from "./components/Address"
 import EmergencyContact from "./components/EmergencyContact"
 import { Title } from "@/common/components/ui/Title"
-import useGetUserDetails from "@/common/hooks/useGetUserDetails"
+import useGetPersonalInfo from "@/common/hooks/useGetPersonalInfo"
 
 const PersonalInfo = () => {
-  const { data, isPending } = useGetUserDetails()
+  const { data, isPending } = useGetPersonalInfo()
   return (
     <>
       <AccountSettingWrapper>

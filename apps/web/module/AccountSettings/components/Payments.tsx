@@ -14,7 +14,7 @@ import { ICoupon, IPaymentMethod } from "@/common/types/global"
 import useUpdatepaymentMethod from "../hooks/useUpdatePaymentMethod"
 import toast from "react-hot-toast"
 import { useQueryClient } from "@tanstack/react-query"
-import useGetUserDetails from "@/common/hooks/useGetUserDetails"
+import useGetPersonalInfo from "@/common/hooks/useGetPersonalInfo"
 import { useForm } from "react-hook-form"
 import useUpdateCoupon from "../hooks/useUpdateCoupon"
 
@@ -31,7 +31,7 @@ const Payments = () => {
     setShowHide(!showHide)
   }
   const { data: userDetails, isPending: isPendingUserDetails } =
-    useGetUserDetails()
+    useGetPersonalInfo()
   const { data: paymentMethods, isPending: isPendingPaymentmethods } =
     useGetPaymentmethods(!isPendingUserDetails && userDetails?.item?.id)
   const { mutate, isPending } = useUpdatepaymentMethod(

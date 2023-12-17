@@ -7,7 +7,7 @@ export async function getUserDetails() {
   return await apiService.get(`${API_URL_USERS}/auth/user-details`)
 }
 
-function useGetUserDetails() {
+function useGetPersonalInfo() {
   const query = useQuery({
     queryKey: ["personal-info"],
     queryFn: () => getUserDetails(),
@@ -15,4 +15,4 @@ function useGetUserDetails() {
   })
   return query
 }
-export default useGetUserDetails
+export default useGetPersonalInfo
