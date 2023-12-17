@@ -1,0 +1,33 @@
+name: dev-api
+
+on: workflow_dispatch
+  # push:
+    # branches: ["dev"]
+    # paths:
+      # - apps/api/**
+
+jobs:
+  deployment:
+    runs-on: dev-api
+    environment: development
+    env:
+      API_ENCRYPT_KEY: ${{secrets.API_ENCRYPT_KEY}}
+      API_SIGN_KEY: ${{secrets.API_SIGN_KEY}}
+      API_ORIGINS: ${{secrets.API_ORIGINS}}
+      WEB_URL: ${{secrets.WEB_URL}}
+      RECAPTCHA_KEY_SECRET: ${{secrets.RECAPTCHA_KEY_SECRET}}
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install API dependencies
+        working-directory: ./apps/api
+        run: npm install
+      - name: Install Constants dependencies
+        working-directory: ./packages/constants
+        run: npm install
+      - run: npm run build:api
+      - run: pm2 delete api
+        continue-on-error: true
+      - run: pm2 start npm --name api -- run start:api
+      - run: pm2 describe api
+      - run: pm2 logs --nostream

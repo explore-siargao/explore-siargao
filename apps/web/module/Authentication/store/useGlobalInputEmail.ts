@@ -1,15 +1,15 @@
 import { create } from "zustand"
 
-type T_ForgotPasswordEmail = {
+type T_GlobalInputEmail = {
   email: string | null
   update: (email: string) => void
   remove: () => void
 }
 
-const useForgotPasswordEmail = create<T_ForgotPasswordEmail>((set) => ({
+const useGlobalInputEmail = create<T_GlobalInputEmail>((set) => ({
   email: null,
   update: (email: string) => set(() => ({ email })),
   remove: () => set({ email: null }),
 }))
 
-export default useForgotPasswordEmail
+export default useGlobalInputEmail

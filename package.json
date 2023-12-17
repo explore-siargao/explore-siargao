@@ -5,9 +5,12 @@
     "schema": "apps/api/src/prisma/schema.prisma"
   },
   "scripts": {
-    "install:dev": "npm install && npm run build",
+    "setup": "npm install && npm run build",
     "build": "turbo build",
+    "build:api": "turbo build --filter=api --filter=@repo/constants",
     "dev": "turbo dev",
+    "start": "turbo start",
+    "start:api": "turbo start --filter=api",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },

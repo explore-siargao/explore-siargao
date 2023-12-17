@@ -20,11 +20,16 @@ import Image from "next/image"
 import { Input } from "@/common/components/ui/Input"
 import { signIn } from "next-auth/react"
 import { LINK_FORGOT_PASSWORD } from "../constants/links"
-import useForgotPasswordEmail from "../store/useForgotPasswordEmail"
+import useGlobalInputEmail from "../store/useGlobalInputEmail"
+
+enum Position {
+  "end",
+  "start",
+}
 
 const LoginForm = () => {
   const router = useRouter()
-  const updateEmail = useForgotPasswordEmail((state) => state.update)
+  const updateEmail = useGlobalInputEmail((state) => state.update)
   const { mutate: loginUser, isPending: isLoginPending } = useLogin()
   const { register, handleSubmit, getValues } = useForm<IUser>()
   const onSubmit = (formData: IUser) => {
@@ -49,13 +54,9 @@ const LoginForm = () => {
     }
     loginUser({ ...formData }, callBackReq)
   }
-  enum Position {
-    "end",
-    "start",
-  }
 
   return (
-    <div className="p-6">
+    <div className="p-8 md:p-6">
       <form onSubmit={handleSubmit(onSubmit)}>
         <h1 className="font-semibold text-xl mt-1 mb-4">
           {LOGIN_CONTENT_TITTLE_TEXT}
@@ -77,22 +78,23 @@ const LoginForm = () => {
             disabled={isLoginPending}
           />
         </div>
-        <div className="flex justify-end mt-1">
-          <Link
-            href={LINK_FORGOT_PASSWORD}
-            className="font-bold underline text-xs text-text-300 hover:text-text-600"
-            onClick={() => {
-              const email = getValues("email")
-              updateEmail(email)
-            }}
-          >
-            Forgot Password?
-          </Link>
+        <div className="flex mt-2">
+          <p className="text-xs text-text-500 tracking-tighter">
+            By signing in or creating an account, you agree with our{" "}
+            <Link href="#" className="text-info-500 underline">
+              Terms & conditions
+            </Link>{" "}
+            and{" "}
+            <Link href="#" className="text-info-500 underline">
+              Privacy statement.
+            </Link>
+          </p>
         </div>
+
         <Button
           type="submit"
           variant="default"
-          className="w-full my-4"
+          className="w-full mt-4 mb-2"
           disabled={isLoginPending}
         >
           {isLoginPending ? (
@@ -103,6 +105,18 @@ const LoginForm = () => {
             CONTINUE_BUTTON_TEXT
           )}
         </Button>
+        <div className="flex justify-end mb-2">
+          <Link
+            href={LINK_FORGOT_PASSWORD}
+            className="font-semibold underline text-xs text-text-300 hover:text-text-600"
+            onClick={() => {
+              const email = getValues("email")
+              updateEmail(email)
+            }}
+          >
+            Forgot password?
+          </Link>
+        </div>
         <div className="flex">
           <span className="border-b-2 h-0 w-full my-auto"></span>
           <p className="text-xs mx-5">or</p>
