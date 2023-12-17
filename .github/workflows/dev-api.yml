@@ -17,7 +17,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - run: npm install
+      - run: npm install --filter=api --filter=@repo/constants
       - run: npm run build:api
       - run: pm2 delete api
         continue-on-error: true
