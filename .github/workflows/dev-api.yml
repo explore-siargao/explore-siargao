@@ -1,0 +1,26 @@
+name: dev-deploy
+
+on:
+  push:
+    branches: ["dev"]
+
+jobs:
+  deployment:
+    runs-on: dev-api
+    environment: development
+    env:
+      API_ENCRYPT_KEY: ${{secrets.API_ENCRYPT_KEY}}
+      API_SIGN_KEY: ${{secrets.API_SIGN_KEY}}
+      API_ORIGINS: ${{secrets.API_ORIGINS}}
+      WEB_URL: ${{secrets.WEB_URL}}
+      RECAPTCHA_KEY_SECRET: ${{secrets.RECAPTCHA_KEY_SECRET}}
+
+    steps:
+      - uses: actions/checkout@v3
+      - run: npm install --filter=api --filter=@repo/constants
+      - run: npm run build:api
+      - run: pm2 delete api
+        continue-on-error: true
+      - run: pm2 start npm --name api -- run start:api
+      - run: pm2 describe api
+      - run: pm2 logs --nostream
