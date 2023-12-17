@@ -1,8 +1,10 @@
-name: dev-deploy
+name: dev-api
 
-on:
-  push:
-    branches: ["dev"]
+on: workflow_dispatch
+  # push:
+    # branches: ["dev"]
+    # paths:
+      # - apps/api/**
 
 jobs:
   deployment:
