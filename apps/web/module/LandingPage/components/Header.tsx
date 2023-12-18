@@ -6,13 +6,20 @@ import { Button } from "@/common/components/ui/Button"
 import LandingPageMenu from "@/common/components/ui/LandingPageMenu"
 import { APP_NAME } from "@repo/constants"
 import { useSession } from "next-auth/react"
-import { useRouter } from "next/navigation"
+import {usePathname, useRouter } from "next/navigation"
 import { LINK_CREATE_ACCOUNT, LINK_LOGIN } from "@/common/constants/links"
 
 function Header() {
   const { data: session } = useSession()
+  const path = usePathname()
   const router = useRouter()
-  return (
+  let withoutHeader = ["login","create-account","forgot-password","verification","logout","new-password"]
+  const urls = path.split("/")
+  const url = urls[urls.length -1]
+  const renderHeader = ()=>{
+    if(!withoutHeader.includes(url as string))
+    {
+   return (
     <header className="absolute inset-x-0 top-0 z-50 bg-white border-y-gray-200/50 border flex flex-col items-center">
       <div className="w-full text-center py-2 bg-gray-50 sr-only md:not-sr-only">
         <p className="underline">
@@ -59,8 +66,15 @@ function Header() {
           {session && <LandingPageMenu />}
         </div>
       </nav>
-    </header>
-  )
+    </header>   
+   )
+          }
+    }
+    return (
+      <>
+      {renderHeader()}
+      </>
+    )
 }
 
 export default Header
