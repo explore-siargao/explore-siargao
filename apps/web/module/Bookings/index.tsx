@@ -1,7 +1,7 @@
 import React from "react"
-import HomeWrapper from "@/common/components/HomeWrapper"
 import { Title } from "@/common/components/ui/Title"
 import BookingBoxContainer from "@/common/components/BookingBoxContainer"
+import { WidthWrapper } from "@/common/components/WidthWrapper"
 
 const tripGroup = [
   {
@@ -107,7 +107,7 @@ const tripGroup = [
 ]
 const Bookings = () => {
   return (
-    <HomeWrapper>
+    <WidthWrapper className="my-24 lg:my-32">
       <Title>Bookings</Title>
       <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 mx-auto w-full max-w-[2520px] justify-center">
         {tripGroup.map((item) => (
@@ -123,7 +123,7 @@ const Bookings = () => {
           />
         ))}
       </ul>
-    </HomeWrapper>
+    </WidthWrapper>
   )
 }
 

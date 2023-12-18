@@ -1,7 +1,7 @@
 import React from "react"
-import HomeWrapper from "@/common/components/HomeWrapper"
 import { Title } from "@/common/components/ui/Title"
 import WishlistBoxContainer from "@/common/components/WishlistBoxContainer"
+import { WidthWrapper } from "@/common/components/WidthWrapper"
 const WishlistGroup = [
   {
     id: 1,
@@ -37,7 +37,7 @@ const WishlistGroup = [
 
 const Wishlist = () => {
   return (
-    <HomeWrapper>
+    <WidthWrapper className="my-24 lg:my-32">
       <Title>Wishlists</Title>
       <div className="grid gap-4 grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 mx-auto w-full max-w-[2520px] ">
         {WishlistGroup.map((item) => (
@@ -49,7 +49,7 @@ const Wishlist = () => {
           />
         ))}
       </div>
-    </HomeWrapper>
+    </WidthWrapper>
   )
 }
 

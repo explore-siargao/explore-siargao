@@ -1,7 +1,7 @@
 import * as React from "react"
 import { cn } from "@/common/helpers/cn"
 import { VariantProps, cva } from "class-variance-authority"
-const titleVariants = cva("font-bold", {
+const titleVariants = cva("font-semibold", {
   variants: {
     size: {
       default: "text-4xl my-3.5",
