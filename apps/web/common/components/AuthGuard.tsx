@@ -15,7 +15,7 @@ const AuthGuard = ({ children }: { children: React.ReactNode }) => {
   if (data && !data.error && data.item && data.item.email && !isLoading) {
     updateSession(data.item)
   } else if (data?.error && !isLoading) {
-    const redirect = pathname !== "/" ? `?redirect_to=${pathname}` : ``;
+    const redirect = pathname !== "/" ? `?redirect_to=${pathname}` : ``
     removeSession()
     router.push(`/login${redirect}`)
   }
