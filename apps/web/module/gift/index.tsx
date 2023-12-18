@@ -9,31 +9,6 @@ import { Input } from "@/common/components/ui/Input"
 const Gift = () => {
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-50 my-5">
-        <nav
-          className="flex items-center justify-between p-2 mx-10 lg:px-8"
-          aria-label="Global"
-        >
-          <a href="#" className="-m-1.5 gap-2 flex lg:flex-1 items-center">
-            <Image
-              className="h-12 w-auto"
-              src={Logo}
-              width={500}
-              height={700}
-              alt={APP_NAME}
-            />
-          </a>
-          <div className="hidden lg:flex lg:flex-1 lg:justify-end space-x-3 items-center">
-            <div>
-              <Button variant="primary" size="sm">
-                Be a host
-              </Button>
-            </div>
-            <LandingPageMenu />
-          </div>
-        </nav>
-      </header>
-
       <div className="grid grid-cols-2 ">
         <div className="grid bg-primary-50 h-screen py-40 justify-items-center">
           <div className="flex h-[300px] w-[500px] rounded-xl shadow-2xl bg-primary-700 self-center justify-center align-middle">
