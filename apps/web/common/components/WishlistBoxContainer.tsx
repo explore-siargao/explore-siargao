@@ -16,20 +16,20 @@ const WishlistBoxContainer = ({ title, text, photo }: Props) => {
 
   return (
     <>
-      <div className="flex flex-col">
+      <div className="flex flex-col select-none">
         <div
-          className="h-[150px] w-[150px] md:h-72 md:w-auto 2xl:h-72 2xl:w-auto rounded-3xl relative select-none border border-text-100"
+          className="h-[150px] w-[150px] md:h-72 md:w-auto 2xl:h-72 2xl:w-auto rounded-3xl relative  border border-text-100"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
-          role="button"
+          aria-hidden="true"
         >
           {isHovered && (
-            <div onClick={() => setRemoveModal(true)}>
-              <XMarkIcon
-                role="button"
-                className="absolute top-4 left-4 h-8 w-8 text-text-400 bg-primary-100 rounded-full p-1 hover:bg-white hover:shadow-lg transition hover:scale-105"
-              />
-            </div>
+            <XMarkIcon
+              role="button"
+              className="absolute top-4 left-4 h-8 w-8 text-text-400 bg-primary-100 rounded-full p-1 hover:bg-white hover:shadow-lg transition hover:scale-105"
+              onClick={() => setRemoveModal(true)}
+              aria-hidden="true"
+            />
           )}
           <Image
             src={photo}
