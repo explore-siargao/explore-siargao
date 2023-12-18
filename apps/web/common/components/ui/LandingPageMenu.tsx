@@ -34,13 +34,13 @@ const authMenus = [
 ]
 
 const LandingPageMenu = () => {
-  const [menuIsVisible, setMunuIsVisible] = useState<Boolean>(false)
+  const [menuIsVisible, setMenuIsVisible] = useState<boolean>(false)
 
   const { data: session } = useSession()
   return (
     <Popover className="relative">
       <Popover.Button
-        onClick={() => setTimeout(() => setMunuIsVisible(true), 500)}
+        onClick={() => setTimeout(() => setMenuIsVisible(true), 500)}
         className="flex gap-1 rounded-full border-text-50 border items-center focus:ring-gray-400 focus:border-gray-400 px-2 py-1"
       >
         <Bars3Icon className="h-5 text-text-200" />
@@ -68,8 +68,8 @@ const LandingPageMenu = () => {
                     className="font-semibold text-gray-800"
                     onClick={() =>
                       menuIsVisible
-                        ? setMunuIsVisible(false)
-                        : setMunuIsVisible(true)
+                        ? setMenuIsVisible(false)
+                        : setMenuIsVisible(true)
                     }
                   >
                     {item.name}
