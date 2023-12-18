@@ -29,7 +29,7 @@ const typographyVariants = cva("font-bold", {
 export interface TypographyProps
   extends React.DetailsHTMLAttributes<HTMLDivElement>,
     VariantProps<typeof typographyVariants> {
-  children: string
+  children: React.ReactNode
 }
 
 const Typography = React.forwardRef<HTMLDivElement, TypographyProps>(

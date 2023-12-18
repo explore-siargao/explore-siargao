@@ -33,7 +33,7 @@ const DeleteWIshlistsModal = ({
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+          <div className="fixed inset-0 bg-primary-100 bg-opacity-50 backdrop-blur-sm transition-opacity" />
         </Transition.Child>
 
         <div className="fixed inset-0 z-10 overflow-y-auto">
@@ -61,7 +61,7 @@ const DeleteWIshlistsModal = ({
                       Delete this wishlist?
                     </Typography>
                     <Typography className="text-text-400 font-light w-60 text-center">
-                      "{title as Array}" will be permanently deleted.
+                      "{title}" will be permanently deleted.
                     </Typography>
                   </div>
                 </ModalContainer>
