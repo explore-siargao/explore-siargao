@@ -24,12 +24,13 @@ const WishlistBoxContainer = ({ title, text, photo }: Props) => {
           aria-hidden="true"
         >
           {isHovered && (
-            <XMarkIcon
-              role="button"
-              className="absolute top-4 left-4 h-8 w-8 text-text-400 bg-primary-100 rounded-full p-1 hover:bg-white hover:shadow-lg transition hover:scale-105"
-              onClick={() => setRemoveModal(true)}
-              aria-hidden="true"
-            />
+            <input role="button" onClick={() => setRemoveModal(true)}>
+              <XMarkIcon
+                role="button"
+                className="absolute top-4 left-4 h-8 w-8 text-text-400 bg-primary-100 rounded-full p-1 hover:bg-white hover:shadow-lg transition hover:scale-105"
+                aria-hidden="true"
+              />
+            </input>
           )}
           <Image
             src={photo}
