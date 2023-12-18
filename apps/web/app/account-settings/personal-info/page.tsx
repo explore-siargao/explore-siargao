@@ -1,8 +1,13 @@
+import AuthGuard from "@/common/components/AuthGuard"
 import PersonalInfo from "@/module/AccountSettings/PersonalInfo"
 import React from "react"
 
 const page = () => {
-  return <PersonalInfo />
+  return (
+    <AuthGuard>
+      <PersonalInfo />
+    </AuthGuard>
+  )
 }
 
 export default page
