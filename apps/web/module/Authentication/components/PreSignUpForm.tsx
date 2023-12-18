@@ -40,7 +40,7 @@ const PreSignUpForm = () => {
             We'll email you trip confirmations and receipts.
           </p>
         </div>
-        <Button className="w-full my-5" type="submit">
+        <Button className="w-full my-5" variant={"primary"} type="submit">
           Continue
         </Button>
         <div className="flex">

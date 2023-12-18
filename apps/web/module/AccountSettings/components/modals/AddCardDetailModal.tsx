@@ -226,24 +226,6 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
                         <option value="CH">China</option>
                         <option value="ITALIAN">Italian</option>
                       </select>
-                      {/* <div className="flex justify-between">
-                        <Button
-                          variant={"ghost"}
-                          type="button"
-                          onClick={onClose}
-                        >
-                          Cancel
-                        </Button>
-                        <Button type="submit">
-                          {isPending ? (
-                            <div className="animate-spin w-4 h-4 border-2 border-current border-t-transparent text-primary-200 rounded-full">
-                              <span className="sr-only">Loading...</span>
-                            </div>
-                          ) : (
-                            "Save"
-                          )}
-                        </Button>
-                      </div> */}
                     </div>
                   </ModalContainer>
                 </form>
