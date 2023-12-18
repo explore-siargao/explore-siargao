@@ -8,35 +8,37 @@ import { APP_NAME } from "@repo/constants"
 import { useSession } from "next-auth/react"
 import { usePathname, useRouter } from "next/navigation"
 import { LINK_CREATE_ACCOUNT, LINK_LOGIN } from "@/common/constants/links"
+import { Typography } from "@/common/components/ui/Typography"
+import Link from "next/link"
 
 function Header() {
   const { data: session } = useSession()
   const path = usePathname()
   const router = useRouter()
   let withoutHeader = [
-    "login",
-    "create-account",
-    "forgot-password",
-    "verification",
-    "logout",
-    "new-password",
+    "/login",
+    "/create-account",
+    "/create-account/google",
+    "/create-account/facebook",
+    "/forgot-password",
+    "/verification",
+    "/logout",
+    "/new-password",
   ]
-  const urls = path.split("/")
-  const url = urls[urls.length - 1]
   const renderHeader = () => {
-    if (!withoutHeader.includes(url as string)) {
+    if (!withoutHeader.includes(path as string)) {
       return (
-        <header className="absolute inset-x-0 top-0 z-50 bg-white border-y-gray-200/50 border flex flex-col items-center">
-          <div className="w-full text-center py-2 bg-gray-50 sr-only md:not-sr-only">
-            <p className="underline">
+        <header className="fixed w-full inset-x-0 top-0 z-50 bg-white border-y-gray-200/50 border flex flex-col items-center">
+          <div className="min-w-full py-2 text-center bg-primary-100 sr-only md:not-sr-only">
+            <Typography fontWeight={"light"}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            </p>
+            </Typography>
           </div>
           <nav
             className="flex items-center justify-between p-2 m-2 px-4 lg:px-16 mx-auto w-full max-w-[2520px]"
             aria-label="Global"
           >
-            <a href="/" className="-m-1.5 gap-2 flex lg:flex-1 items-center">
+            <Link href="/" className="-m-1.5 gap-2 flex lg:flex-1 items-center">
               <Image
                 className="h-12 w-auto"
                 src={Logo}
@@ -44,7 +46,7 @@ function Header() {
                 height={700}
                 alt={APP_NAME}
               />
-            </a>
+            </Link>
             <div className="hidden lg:flex lg:flex-1 lg:justify-end space-x-3 items-center relative">
               {!session && (
                 <div className="flex gap-1 rounded-full items-center px-2 py-1">
