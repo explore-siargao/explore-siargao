@@ -18,19 +18,21 @@ const WishlistBoxContainer = ({ title, text, photo }: Props) => {
     <>
       <div className="flex flex-col select-none">
         <div
-          className="h-[150px] w-[150px] md:h-72 md:w-auto 2xl:h-72 2xl:w-auto rounded-3xl relative  border border-text-100"
+          className="h-[150px] w-[150px] md:h-72 md:w-auto 2xl:h-72 2xl:w-auto rounded-3xl relative border border-text-100"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
           aria-hidden="true"
         >
           {isHovered && (
-            <input role="button" onClick={() => setRemoveModal(true)}>
+            <button
+              onClick={() => setRemoveModal(true)}
+              className="absolute top-4 left-4 p-1 bg-primary-100 rounded-full hover:bg-white hover:shadow-lg transition hover:scale-105"
+            >
               <XMarkIcon
-                role="button"
-                className="absolute top-4 left-4 h-8 w-8 text-text-400 bg-primary-100 rounded-full p-1 hover:bg-white hover:shadow-lg transition hover:scale-105"
+                className=" h-7 w-7 text-text-400 "
                 aria-hidden="true"
               />
-            </input>
+            </button>
           )}
           <Image
             src={photo}
