@@ -10,7 +10,7 @@ const SessionVerifier = () => {
   const router = useRouter()
   const params = useParams()
   const searchParams = useSearchParams()
-  const redirectTo = searchParams.get('redirect_to')
+  const redirectTo = searchParams.get("redirect_to")
   const { data: session } = useSession()
   const { data } = useVerifySignIn()
   if (!session || (session && data && data.item)) {
@@ -29,9 +29,7 @@ const SessionVerifier = () => {
   ) {
     router.push(`/create-account/${params.type}`)
   }
-  return (
-    <WholePageLoading />
-  )
+  return <WholePageLoading />
 }
 
 export default SessionVerifier

@@ -1,9 +1,18 @@
-import React from 'react'
-import { cn } from '../helpers/cn'
+import React from "react"
+import { cn } from "../helpers/cn"
 
-const WholePageLoading = ({ variant = 'default' }: { variant?: 'default' | 'primary' }) => {
+const WholePageLoading = ({
+  variant = "default",
+}: {
+  variant?: "default" | "primary"
+}) => {
   return (
-    <div className={cn("flex min-h-screen flex-1 flex-col justify-center items-center py-12 sm:px-6 lg:px-8", variant === 'primary' && "bg-primary-100")}>
+    <div
+      className={cn(
+        "flex min-h-screen flex-1 flex-col justify-center items-center py-12 sm:px-6 lg:px-8",
+        variant === "primary" && "bg-primary-100"
+      )}
+    >
       <div>
         <svg
           aria-hidden="true"

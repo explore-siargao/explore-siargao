@@ -11,26 +11,20 @@ const AuthGuard = ({ children }: { children: React.ReactNode }) => {
   const { data, isLoading } = useVerifySession()
   const updateSession = useSessionStore((state) => state.update)
   const removeSession = useSessionStore((state) => state.remove)
-  
+
   if (data && !data.error && data.item && data.item.email && !isLoading) {
     updateSession(data.item)
   } else if (data?.error && !isLoading) {
     const redirect = pathname !== "/" ? `?redirect_to=${pathname}` : ``;
     removeSession()
     router.push(`/login${redirect}`)
-  } 
-
-  if (isLoading) {
-    return (
-      <WholePageLoading/>
-    );
   }
 
-  return (
-    <>
-      {children}
-    </>
-  )
+  if (isLoading) {
+    return <WholePageLoading />
+  }
+
+  return <>{children}</>
 }
 
 export default AuthGuard

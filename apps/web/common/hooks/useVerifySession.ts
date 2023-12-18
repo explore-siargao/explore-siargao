@@ -11,8 +11,7 @@ export async function verifySession() {
 function useVerifySession() {
   const query = useQuery({
     queryKey: ["session"],
-    queryFn: () =>
-      verifySession(),
+    queryFn: () => verifySession(),
     gcTime: FIFTEEN_MINUTES,
     staleTime: TWELVE_MINUTES,
   })
