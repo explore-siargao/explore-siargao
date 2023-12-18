@@ -25,25 +25,40 @@ export const verifySignIn = async (req: Request, res: Response) => {
         },
       })
       const capitalizeType = capitalize(type as string)
-      const isSocial = capitalizeType === RegistrationType.Facebook || capitalizeType === RegistrationType.Google
-      if ((user && user.registrationType !== RegistrationType.Manual && isSocial) || (user && user.registrationType === RegistrationType.Manual && !isSocial)) {
+      const isSocial =
+        capitalizeType === RegistrationType.Facebook ||
+        capitalizeType === RegistrationType.Google
+      if (
+        (user &&
+          user.registrationType !== RegistrationType.Manual &&
+          isSocial) ||
+        (user && user.registrationType === RegistrationType.Manual && !isSocial)
+      ) {
         res.json({
           error: false,
           item: { email },
         })
-      } else if (user && user.registrationType !== RegistrationType.Manual && !isSocial) {
+      } else if (
+        user &&
+        user.registrationType !== RegistrationType.Manual &&
+        !isSocial
+      ) {
         res.json({
           error: true,
           item: null,
           message: `Invalid login method, please login using your ${type} account`,
         })
-      }  else if (user && user.registrationType === RegistrationType.Manual && isSocial) {
+      } else if (
+        user &&
+        user.registrationType === RegistrationType.Manual &&
+        isSocial
+      ) {
         res.json({
           error: true,
           item: null,
           message: `Invalid login method, please login using your password`,
         })
-      } else if (!user && type === 'google' || type === 'facebook') {
+      } else if ((!user && type === 'google') || type === 'facebook') {
         res.json({
           error: false,
           action: {

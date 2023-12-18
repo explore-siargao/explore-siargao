@@ -27,9 +27,9 @@ enum Position {
 }
 
 const LoginForm = () => {
-  const router = useRouter();
+  const router = useRouter()
   const searchParams = useSearchParams()
-  const redirectTo = searchParams.get('redirect_to')
+  const redirectTo = searchParams.get("redirect_to")
   const updateEmail = useGlobalInputEmail((state) => state.update)
   const { mutate: loginUser, isPending: isLoginPending } = useLogin()
   const { register, handleSubmit, getValues } = useForm<IUser>()
@@ -144,7 +144,11 @@ const LoginForm = () => {
                   />
                 }
                 onClick={() =>
-                  signIn("facebook", { callbackUrl: `/session/facebook${redirectTo ? `?redirect_to=${redirectTo}` : "" }` })
+                  signIn("facebook", {
+                    callbackUrl: `/session/facebook${
+                      redirectTo ? `?redirect_to=${redirectTo}` : ""
+                    }`,
+                  })
                 }
               >
                 <span className="text-sm font-medium leading-6 text-center w-full">
@@ -166,7 +170,11 @@ const LoginForm = () => {
                   />
                 }
                 onClick={() =>
-                  signIn("google", { callbackUrl: `/session/google${redirectTo ? `?redirect_to=${redirectTo}` : "" }` })
+                  signIn("google", {
+                    callbackUrl: `/session/google${
+                      redirectTo ? `?redirect_to=${redirectTo}` : ""
+                    }`,
+                  })
                 }
               >
                 <span className="text-sm font-medium leading-6 text-center w-full">
