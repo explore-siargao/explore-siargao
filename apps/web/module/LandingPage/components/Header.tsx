@@ -8,6 +8,7 @@ import { APP_NAME } from "@repo/constants"
 import { useSession } from "next-auth/react"
 import { usePathname, useRouter } from "next/navigation"
 import { LINK_CREATE_ACCOUNT, LINK_LOGIN } from "@/common/constants/links"
+import Link from "next/link"
 
 function Header() {
   const { data: session } = useSession()
@@ -36,7 +37,7 @@ function Header() {
             className="flex items-center justify-between p-2 m-2 px-4 lg:px-16 mx-auto w-full max-w-[2520px]"
             aria-label="Global"
           >
-            <a href="/" className="-m-1.5 gap-2 flex lg:flex-1 items-center">
+            <Link href="/" className="-m-1.5 gap-2 flex lg:flex-1 items-center">
               <Image
                 className="h-12 w-auto"
                 src={Logo}
@@ -44,7 +45,7 @@ function Header() {
                 height={700}
                 alt={APP_NAME}
               />
-            </a>
+            </Link>
             <div className="hidden lg:flex lg:flex-1 lg:justify-end space-x-3 items-center relative">
               {!session && (
                 <div className="flex gap-1 rounded-full items-center px-2 py-1">

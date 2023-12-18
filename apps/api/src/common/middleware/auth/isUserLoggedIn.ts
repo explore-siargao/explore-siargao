@@ -9,21 +9,18 @@ const checkErrorMessage = (res: Response, message: string) => {
     res.json({
       error: true,
       item: null,
-      itemCount: 0,
       message: 'Invalid authentication credentials',
     })
   } else if (message === 'jwt expired') {
     res.json({
       error: true,
       item: null,
-      itemCount: 0,
       message: 'Authentication is expired, please login again',
     })
   } else {
     res.json({
       error: true,
       item: null,
-      itemCount: 0,
       message: message,
     })
   }
@@ -50,7 +47,15 @@ const isUserLoggedIn = async (
       if (user && (user.deletedAt || user.deactivated)) {
         throw new Error('We cannot find your account in our system')
       }
-      res.locals.user = user
+      const authUser = {
+        id: user?.id,
+        registrationType: user?.registrationType,
+        email: user?.email,
+        profilePicture: user?.profilePicture,
+        role: user?.role,
+        deactivated: user?.deactivated
+      }
+      res.locals.user = authUser
       next()
     } catch (err: any) {
       const message = err.message ? err.message : UNKNOWN_ERROR_OCCURRED
@@ -60,7 +65,6 @@ const isUserLoggedIn = async (
     res.json({
       error: true,
       item: null,
-      itemCount: 0,
       message: `You are not authorized to perform this action`,
     })
   }

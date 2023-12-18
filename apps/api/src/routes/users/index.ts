@@ -1,6 +1,7 @@
 import express from 'express'
 import { addUser, getAllUsers } from './service/default'
 import {
+  verifySignIn,
   verifySession,
   register,
   manual,
@@ -36,7 +37,14 @@ router.get(
   '/auth/verify-session',
   isOriginValid,
   isCsrfTokenValid,
+  isUserLoggedIn,
   verifySession
+)
+router.get(
+  '/auth/verify-sign-in',
+  isOriginValid,
+  isCsrfTokenValid,
+  verifySignIn
 )
 router.post('/auth/register', isOriginValid, isCsrfTokenValid, register)
 router.post('/auth/manual', isOriginValid, isCsrfTokenValid, manual)

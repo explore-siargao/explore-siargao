@@ -8,6 +8,7 @@ import combineClasses from "@/common/helpers/combineClasses"
 import Payments from "./components/Payments"
 import Payouts from "./components/Payouts"
 import GuestContribution from "./components/GuestContribution"
+import Link from "next/link"
 
 const renderPayments = () => {
   return <Payments />
@@ -34,12 +35,12 @@ const PaymentPayout = () => {
       <AccountSettingWrapper>
         <div className="mb-10">
           <div className="flex items-center text-text-400">
-            <a
+            <Link
               href={LINK_ACCOUNT_SETTINGS}
               className="font-semibold hover:underline"
             >
               Account
-            </a>
+            </Link>
             <ChevronRightIcon
               className="h-5 w-5 flex-shrink-0 mx-3"
               aria-hidden="true"

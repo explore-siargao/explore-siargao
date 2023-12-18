@@ -1,33 +1,9 @@
-"use client"
-import React from "react"
-import { signOut, useSession } from "next-auth/react"
-import useVerifySession from "@/common/hooks/useVerifySession"
-import { useRouter, useParams } from "next/navigation"
-import toast from "react-hot-toast"
+import React from 'react'
+import { cn } from '../helpers/cn'
 
-const SessionVerifier = () => {
-  const router = useRouter()
-  const params = useParams()
-  const { data: session } = useSession()
-  const { data } = useVerifySession()
-  if (!session || (session && data && data.item)) {
-    router.push("/")
-  } else if (session && data && data.error) {
-    // Adding id 1 to prevent duplicate toast
-    toast.error(data.message, { id: "1", duration: 5000 })
-    signOut({ redirect: false })
-    router.push("/login")
-  } else if (
-    session &&
-    data &&
-    !data.error &&
-    data.action.type === "SOCIAL_REGISTER" &&
-    data.action.description === params.type
-  ) {
-    router.push(`/create-account/${params.type}`)
-  }
+const WholePageLoading = ({ variant = 'default' }: { variant?: 'default' | 'primary' }) => {
   return (
-    <div className="flex min-h-screen flex-1 flex-col justify-center items-center py-12 sm:px-6 lg:px-8 bg-primary-100">
+    <div className={cn("flex min-h-screen flex-1 flex-col justify-center items-center py-12 sm:px-6 lg:px-8", variant === 'primary' && "bg-primary-100")}>
       <div>
         <svg
           aria-hidden="true"
@@ -51,4 +27,4 @@ const SessionVerifier = () => {
   )
 }
 
-export default SessionVerifier
+export default WholePageLoading

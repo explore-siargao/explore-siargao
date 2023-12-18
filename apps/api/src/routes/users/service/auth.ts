@@ -12,7 +12,7 @@ import { capitalize } from 'lodash'
 
 const prisma = new PrismaClient()
 
-export const verifySession = async (req: Request, res: Response) => {
+export const verifySignIn = async (req: Request, res: Response) => {
   const { type, email } = req.query
   if (type && email) {
     try {
@@ -25,18 +25,25 @@ export const verifySession = async (req: Request, res: Response) => {
         },
       })
       const capitalizeType = capitalize(type as string)
-      if (user && user.registrationType === capitalizeType) {
+      const isSocial = capitalizeType === RegistrationType.Facebook || capitalizeType === RegistrationType.Google
+      if ((user && user.registrationType !== RegistrationType.Manual && isSocial) || (user && user.registrationType === RegistrationType.Manual && !isSocial)) {
         res.json({
           error: false,
           item: { email },
         })
-      } else if (user && user.registrationType !== capitalizeType) {
+      } else if (user && user.registrationType !== RegistrationType.Manual && !isSocial) {
         res.json({
           error: true,
           item: null,
           message: `Invalid login method, please login using your ${type} account`,
         })
-      } else if (type === 'google' || type === 'facebook') {
+      }  else if (user && user.registrationType === RegistrationType.Manual && isSocial) {
+        res.json({
+          error: true,
+          item: null,
+          message: `Invalid login method, please login using your password`,
+        })
+      } else if (!user && type === 'google' || type === 'facebook') {
         res.json({
           error: false,
           action: {
@@ -64,6 +71,13 @@ export const verifySession = async (req: Request, res: Response) => {
       message: REQUIRED_VALUE_EMPTY,
     })
   }
+}
+
+export const verifySession = async (req: Request, res: Response) => {
+  res.json({
+    error: false,
+    item: res.locals.user,
+  })
 }
 
 export const register = async (req: Request, res: Response) => {

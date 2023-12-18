@@ -1,4 +1,4 @@
-import SessionVerifier from "@/common/components/SessionVerifier"
+import SessionVerifier from "@/module/Authentication/components/SessionVerifier"
 import React from "react"
 
 const page = () => {

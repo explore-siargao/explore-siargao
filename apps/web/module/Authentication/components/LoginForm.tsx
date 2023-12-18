@@ -7,7 +7,7 @@ import toast from "react-hot-toast"
 import { IUser } from "@/common/types/global"
 import { useForm } from "react-hook-form"
 import useLogin from "@/module/Authentication/hooks/useLogin"
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import { Button } from "@/common/components/ui/Button"
 import Link from "next/link"
 import { LINK_CREATE_ACCOUNT } from "@/common/constants/links"
@@ -27,7 +27,9 @@ enum Position {
 }
 
 const LoginForm = () => {
-  const router = useRouter()
+  const router = useRouter();
+  const searchParams = useSearchParams()
+  const redirectTo = searchParams.get('redirect_to')
   const updateEmail = useGlobalInputEmail((state) => state.update)
   const { mutate: loginUser, isPending: isLoginPending } = useLogin()
   const { register, handleSubmit, getValues } = useForm<IUser>()
@@ -142,7 +144,7 @@ const LoginForm = () => {
                   />
                 }
                 onClick={() =>
-                  signIn("facebook", { callbackUrl: "/session/facebook" })
+                  signIn("facebook", { callbackUrl: `/session/facebook${redirectTo ? `?redirect_to=${redirectTo}` : "" }` })
                 }
               >
                 <span className="text-sm font-medium leading-6 text-center w-full">
@@ -164,7 +166,7 @@ const LoginForm = () => {
                   />
                 }
                 onClick={() =>
-                  signIn("google", { callbackUrl: "/session/google" })
+                  signIn("google", { callbackUrl: `/session/google${redirectTo ? `?redirect_to=${redirectTo}` : "" }` })
                 }
               >
                 <span className="text-sm font-medium leading-6 text-center w-full">
