@@ -38,8 +38,8 @@ const WishlistGroup = [
 const Wishlist = () => {
   return (
     <HomeWrapper>
-      <Title className="">Wishlist</Title>
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6">
+      <Title>Wishlists</Title>
+      <div className="grid gap-4 grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 mx-auto w-full max-w-[2520px] ">
         {WishlistGroup.map((item) => (
           <WishlistBoxContainer
             key={item.id}
