@@ -26,10 +26,10 @@ export interface SpinnerProps
   extends React.DetailsHTMLAttributes<HTMLDivElement>,
     VariantProps<typeof spinnerVariants> {}
 const Spinner = React.forwardRef<HTMLDivElement, SpinnerProps>(
-  ({ variant, className, size },ref) => {
+  ({ variant, className, size }, ref) => {
     return (
       <div
-      ref={ref}
+        ref={ref}
         className={`animate-spin border-2 border-current border-t-transparent rounded-full ${cn(
           spinnerVariants({ variant, size, className })
         )}`}
