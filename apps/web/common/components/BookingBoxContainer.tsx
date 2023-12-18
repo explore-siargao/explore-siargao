@@ -32,7 +32,7 @@ const BookingBoxContainer = ({
     <li>
       <div className="h-80 w-auto 2xl:h-72 2xl:w-auto rounded-2xl relative select-none">
         <HeartIcon
-          className={`absolute top-3 right-3 z-50 h-7 w-7 text-text-50 active:scale-90 ${
+          className={`absolute top-3 right-3 h-7 w-7 text-text-50 active:scale-90 ${
             isClicked ? "fill-error-500" : "fill-text-500/50 "
           }`}
           onClick={handleClick}

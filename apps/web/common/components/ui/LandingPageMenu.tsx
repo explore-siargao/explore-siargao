@@ -6,7 +6,7 @@ import {
   LINK_LOGOUT,
 } from "@/common/constants/links"
 import { Bars3Icon, UserCircleIcon } from "@heroicons/react/20/solid"
-import React, { Fragment } from "react"
+import React, { Fragment, useState } from "react"
 import { Popover, Transition } from "@headlessui/react"
 import Link from "next/link"
 import { useSession } from "next-auth/react"
@@ -34,14 +34,17 @@ const authMenus = [
 ]
 
 const LandingPageMenu = () => {
+  const [menuIsVisible, setMunuIsVisible] = useState(false)
   const { data: session } = useSession()
   return (
     <Popover className="relative">
-      <Popover.Button className="flex gap-1 rounded-full border-text-50 border items-center focus:ring-gray-400 focus:border-gray-400 px-2 py-1">
+      <Popover.Button
+      onClick={()=>setTimeout(()=>setMunuIsVisible(true),500)}
+       className="flex gap-1 rounded-full border-text-50 border items-center focus:ring-gray-400 focus:border-gray-400 px-2 py-1">
         <Bars3Icon className="h-5 text-text-200" />
         <UserCircleIcon className="h-8 text-gray-400" />
       </Popover.Button>
-
+    {menuIsVisible &&(
       <Transition
         as={Fragment}
         enter="transition ease-out duration-200"
@@ -58,7 +61,9 @@ const LandingPageMenu = () => {
                 key={item.name}
                 className="relative rounded hover:bg-gray-50 px-5 py-2"
               >
-                <Link href={item.href} className="font-semibold text-gray-800">
+                <Link href={item.href} className="font-semibold text-gray-800" 
+                onClick={()=>menuIsVisible ? setMunuIsVisible(false) : setMunuIsVisible(true)}
+                >
                   {item.name}
                   <span className="absolute inset-0" />
                 </Link>
@@ -67,6 +72,7 @@ const LandingPageMenu = () => {
           </div>
         </Popover.Panel>
       </Transition>
+    )}
     </Popover>
   )
 }
