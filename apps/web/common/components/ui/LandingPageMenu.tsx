@@ -34,7 +34,8 @@ const authMenus = [
 ]
 
 const LandingPageMenu = () => {
-  const [menuIsVisible, setMunuIsVisible] = useState(false)
+  const [menuIsVisible, setMunuIsVisible] = useState<Boolean>(false)
+
   const { data: session } = useSession()
   return (
     <Popover className="relative">

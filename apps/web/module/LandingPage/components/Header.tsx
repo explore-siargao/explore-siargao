@@ -9,6 +9,7 @@ import { useSession } from "next-auth/react"
 import { usePathname, useRouter } from "next/navigation"
 import { LINK_CREATE_ACCOUNT, LINK_LOGIN } from "@/common/constants/links"
 import { Typography } from "@/common/components/ui/Typography"
+import Link from "next/link"
 
 function Header() {
   const { data: session } = useSession()
@@ -29,7 +30,7 @@ function Header() {
       return (
         <header className="fixed w-full inset-x-0 top-0 z-50 bg-white border-y-gray-200/50 border flex flex-col items-center">
           <div className="min-w-full py-2 text-center bg-primary-100 sr-only md:not-sr-only">
-            <Typography fontWeight={"light"} variant={"p"}>
+            <Typography fontWeight={"light"}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             </Typography>
           </div>
@@ -37,7 +38,7 @@ function Header() {
             className="flex items-center justify-between p-2 m-2 px-4 lg:px-16 mx-auto w-full max-w-[2520px]"
             aria-label="Global"
           >
-            <a href="/" className="-m-1.5 gap-2 flex lg:flex-1 items-center">
+            <Link href="/" className="-m-1.5 gap-2 flex lg:flex-1 items-center">
               <Image
                 className="h-12 w-auto"
                 src={Logo}
@@ -45,7 +46,7 @@ function Header() {
                 height={700}
                 alt={APP_NAME}
               />
-            </a>
+            </Link>
             <div className="hidden lg:flex lg:flex-1 lg:justify-end space-x-3 items-center relative">
               {!session && (
                 <div className="flex gap-1 rounded-full items-center px-2 py-1">
