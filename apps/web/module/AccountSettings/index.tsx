@@ -42,7 +42,6 @@ const pages = [
 const AccountSettings = () => {
   const { data, isPending } = useGetPersonalInfo()
   return (
-    <>
       <AccountSettingWrapper>
         <Title>Account</Title>
         {isPending ? (
@@ -80,7 +79,6 @@ const AccountSettings = () => {
           </div>
         )}
       </AccountSettingWrapper>
-    </>
   )
 }
 
