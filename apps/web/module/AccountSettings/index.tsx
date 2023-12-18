@@ -40,38 +40,45 @@ const pages = [
   },
 ]
 const AccountSettings = () => {
-  const {data, isPending} = useGetPersonalInfo()
+  const { data, isPending } = useGetPersonalInfo()
   return (
     <>
       <AccountSettingWrapper>
         <Title>Account</Title>
-        {isPending ?(
+        {isPending ? (
           <Spinner />
-        ):(
-        <div>
-        <div className="flex space-x-2">
-          <p>
-            <span className="font-semibold">{data?.item?.personalInfo?.firstName+" "+data?.item?.personalInfo?.lastName}</span>,
-            {" "+data?.item?.email+" "}<span>•</span>{" "}
-            <a href="#" className="font-semibold underline underline-offset-2">
-              Go to profile
-            </a>
-          </p>
-        </div>
-        <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-4 my-14">
-          {pages.map((page) => (
-            <AccountMenuContainer
-              key={page.id}
-              icon={<page.icon className="h-8 w-auto text-primary-700" />}
-              title={page.title}
-              content={page.content}
-              link={String(page.link)}
-            />
-          ))}
-        </div>
-        </div>
+        ) : (
+          <div>
+            <div className="flex space-x-2">
+              <p>
+                <span className="font-semibold">
+                  {data?.item?.personalInfo?.firstName +
+                    " " +
+                    data?.item?.personalInfo?.lastName}
+                </span>
+                ,{" " + data?.item?.email + " "}
+                <span>•</span>{" "}
+                <a
+                  href="#"
+                  className="font-semibold underline underline-offset-2"
+                >
+                  Go to profile
+                </a>
+              </p>
+            </div>
+            <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-4 my-14">
+              {pages.map((page) => (
+                <AccountMenuContainer
+                  key={page.id}
+                  icon={<page.icon className="h-8 w-auto text-primary-700" />}
+                  title={page.title}
+                  content={page.content}
+                  link={String(page.link)}
+                />
+              ))}
+            </div>
+          </div>
         )}
-    
       </AccountSettingWrapper>
     </>
   )
