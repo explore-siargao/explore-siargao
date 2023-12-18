@@ -1,3 +1,4 @@
+"use client"
 import React from "react"
 import AccountSettingWrapper from "@/common/components/AccountSettingWrapper"
 import { AccountMenuContainer } from "@/common/components/AccountMenuContainer"
@@ -12,6 +13,8 @@ import {
   LINK_ACCOUNT_WISHLIST,
 } from "@/common/constants/links"
 import { Title } from "@/common/components/ui/Title"
+import useGetPersonalInfo from "@/common/hooks/useGetPersonalInfo"
+import { Spinner } from "@/common/components/ui/Spinner"
 
 const pages = [
   {
@@ -37,32 +40,45 @@ const pages = [
   },
 ]
 const AccountSettings = () => {
+  const { data, isPending } = useGetPersonalInfo()
   return (
-    <>
-      <AccountSettingWrapper>
-        <Title>Account</Title>
-        <div className="flex space-x-2">
-          <p>
-            <span className="font-semibold">John Patrick Madrigal</span>,
-            jepoyyy0225@gmail.com <span>•</span>{" "}
-            <a href="#" className="font-semibold underline underline-offset-2">
-              Go to profile
-            </a>
-          </p>
+    <AccountSettingWrapper>
+      <Title>Account</Title>
+      {isPending ? (
+        <Spinner />
+      ) : (
+        <div>
+          <div className="flex space-x-2">
+            <p>
+              <span className="font-semibold">
+                {data?.item?.personalInfo?.firstName +
+                  " " +
+                  data?.item?.personalInfo?.lastName}
+              </span>
+              ,{" " + data?.item?.email + " "}
+              <span>•</span>{" "}
+              <a
+                href="#"
+                className="font-semibold underline underline-offset-2"
+              >
+                Go to profile
+              </a>
+            </p>
+          </div>
+          <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-4 my-14">
+            {pages.map((page) => (
+              <AccountMenuContainer
+                key={page.id}
+                icon={<page.icon className="h-8 w-auto text-primary-700" />}
+                title={page.title}
+                content={page.content}
+                link={String(page.link)}
+              />
+            ))}
+          </div>
         </div>
-        <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-4 my-14">
-          {pages.map((page) => (
-            <AccountMenuContainer
-              key={page.id}
-              icon={<page.icon className="h-8 w-auto text-primary-700" />}
-              title={page.title}
-              content={page.content}
-              link={String(page.link)}
-            />
-          ))}
-        </div>
-      </AccountSettingWrapper>
-    </>
+      )}
+    </AccountSettingWrapper>
   )
 }
 
