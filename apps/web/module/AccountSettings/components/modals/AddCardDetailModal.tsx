@@ -15,7 +15,6 @@ import toast from "react-hot-toast"
 import valid from "card-validator"
 import { ErrorMessage } from "@hookform/error-message"
 import { Typography } from "@/common/components/ui/Typography"
-import { error } from "console"
 
 interface CardDetailModal {
   isOpen: boolean
