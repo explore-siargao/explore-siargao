@@ -134,7 +134,7 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
                           inputId="cardNumber"
                           placeholder="0000 0000 0000 0000"
                           type="text"
-                          className="rounded-b-none"
+                         className="mb-2"
                           disabled={isPending}
                           {...register("cardNumber", {
                             minLength: 10,
@@ -150,12 +150,11 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
                             },
                           })}
                         />
-                        <div className="grid grid-flow-col">
+                        <div className="grid grid-flow-col space-x-2">
                           <Input
                             inputLabel="Expiration date"
                             inputId="expirationDate"
                             type="text"
-                            className="rounded-t-none rounded-r-none"
                             disabled={isPending}
                             {...register("expirationDate", {
                               minLength: 5,
@@ -192,7 +191,6 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
                             inputLabel="CVV"
                             inputId="cvv"
                             type="number"
-                            className="rounded-t-none rounded-l-none"
                             disabled={isPending}
                             {...register("cvv", {
                               minLength: 3,
@@ -215,7 +213,7 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
                       <select
                         id="countries"
                         disabled={isPending}
-                        className=" text-text-900 focus-within:z-10 focus-within:ring-2 focus-within:ring-text-600 text-sm rounded-lg block h-14 w-full"
+                        className=" text-text-900 focus:ring-gray-900  focus:ring-2  focus:border-transparent text-sm rounded-lg block h-14 w-full"
                         {...register("countryRegion", {
                           required: "This field is required",
                         })}
