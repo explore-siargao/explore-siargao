@@ -171,13 +171,3 @@ export const addListing = async (req: Request, res: Response) => {
     })
   }
 }
-
-export const deleteListing =async (req:Request, res:Response) => {
-  const prisma = new PrismaClient()
-  const deleteAllListing = await prisma.listing.deleteMany({
-    where:{
-      deletedAt:null
-    }
-  })
-  res.json({message:"Deleted"})
-}
