@@ -219,7 +219,6 @@ const Payments = () => {
                   <Button
                     type="button"
                     onClick={() => {
-                      console.log(getValues("code")?.length)
                       if (getValues("code")?.length !== 0) {
                         redeemCoupon(
                           {
