@@ -1,14 +1,15 @@
 "use client"
 import React from "react"
+import { WidthWrapper } from "./WidthWrapper"
 
 type Props = {
   children: React.ReactNode
 }
 const AccountSettingWrapper = ({ children }: Props) => {
   return (
-    <div className="my-40 justify-center sm:mx-auto sm:w-full sm:max-w-[1000px]">
+    <WidthWrapper width={"secondary"} className="my-16 md:my-32">
       {children}
-    </div>
+    </WidthWrapper>
   )
 }
 

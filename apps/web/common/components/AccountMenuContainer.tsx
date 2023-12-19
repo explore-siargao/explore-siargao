@@ -2,6 +2,7 @@
 import Link from "next/link"
 import { cn } from "@/common/helpers/cn"
 import * as React from "react"
+import { ChevronRightIcon } from "@heroicons/react/24/outline"
 
 type Props = {
   title: string
@@ -21,15 +22,19 @@ const AccountMenuContainer = ({
   return (
     <Link
       className={cn(
-        `grid p-4 rounded-2xl gap-5 content-between select-none drop-shadow-xl border hover:shadow-lg transition`,
+        `flex md:grid p-4 rounded-2xl gap-5 content-between select-none drop-shadow-xl border hover:shadow-lg transition`,
         className
       )}
       href={link}
     >
       {icon}
-      <div>
+      <div className="hidden md:block">
         <h1 className="font-semibold">{title}</h1>
         <span className="text-text-300 text-sm">{content}</span>
+      </div>
+      <div className="flex md:hidden self-center justify-between w-full">
+        {title}
+        <ChevronRightIcon className="h-5 w-auto" />
       </div>
     </Link>
   )

@@ -1,7 +1,7 @@
 import React from "react"
-import HomeWrapper from "@/common/components/HomeWrapper"
 import { Title } from "@/common/components/ui/Title"
 import BookingBoxContainer from "@/common/components/BookingBoxContainer"
+import { WidthWrapper } from "@/common/components/WidthWrapper"
 import useGetAllBookings from "../LandingPage/hooks/useGetAllBookings"
 import { Spinner } from "@/common/components/ui/Spinner"
 
@@ -110,7 +110,7 @@ const tripGroup = [
 const Bookings = () => {
   const { data, isPending } = useGetAllBookings()
   return (
-    <HomeWrapper>
+    <WidthWrapper className="my-24 lg:my-32">
       {isPending ? (
         <Spinner className="mt-4" />
       ) : (
@@ -137,7 +137,7 @@ const Bookings = () => {
           </ul>
         </>
       )}
-    </HomeWrapper>
+    </WidthWrapper>
   )
 }
 
