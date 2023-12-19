@@ -1,6 +1,7 @@
 "use client"
 import React from "react"
 import { ArrowLeftIcon, XMarkIcon } from "@heroicons/react/20/solid"
+import { Typography } from "./ui/Typography"
 type Props = {
   children: React.ReactNode
   title: string
@@ -28,13 +29,14 @@ const AuthContainer = ({ children, title, onClose, onBack }: Props) => {
               ) : null}
             </div>
             <div className="flex-1">
-              <h1
-                className={`w-full text-center place-self-center font-semibold`}
+              <Typography
+                variant={"p"}
+                className={`w-full text-center place-self-center `}
               >
                 <span className={`${onClose || onBack ? "-ml-4" : ""}`}>
                   {title}
                 </span>
-              </h1>
+              </Typography>
             </div>
           </div>
           <div>{children}</div>

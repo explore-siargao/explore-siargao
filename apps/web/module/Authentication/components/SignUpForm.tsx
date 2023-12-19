@@ -23,6 +23,7 @@ import {
   CALENDAR_YEARS,
 } from "../constants"
 import useGlobalInputEmail from "../store/useGlobalInputEmail"
+import { Typography } from "@/common/components/ui/Typography"
 
 type Props = {
   isSocial?: boolean
@@ -115,9 +116,9 @@ const SignUpForm = ({ isSocial = false }: Props) => {
                 disabled={addUserIsPending}
               />
             </div>
-            <p className="text-xs mt-1 text-text-500">
+            <Typography variant={"p"} className="text-xs mt-1 text-text-500">
               Make sure it matches the name on your government ID.
-            </p>
+            </Typography>
           </div>
           <div>
             <div className="grid grid-cols-3 gap-4">
@@ -161,10 +162,10 @@ const SignUpForm = ({ isSocial = false }: Props) => {
                 ))}
               </Select>
             </div>
-            <p className="text-xs mt-1 text-text-500">
+            <Typography variant={"p"} className="text-xs mt-1 text-text-500">
               To sign up, you need to be at least 18. We will not share your
               personal information.
-            </p>
+            </Typography>
           </div>
           <div>
             <div className="isolate -space-y-px rounded-xl shadow-sm">
@@ -177,9 +178,9 @@ const SignUpForm = ({ isSocial = false }: Props) => {
                 disabled={addUserIsPending || isSocial}
               />
             </div>
-            <p className="text-xs mt-1 text-text-500">
+            <Typography variant={"p"} className="text-xs mt-1 text-text-500">
               We'll email you trip confirmations and receipts.
-            </p>
+            </Typography>
           </div>
           <div>
             {!isSocial && (
@@ -191,7 +192,10 @@ const SignUpForm = ({ isSocial = false }: Props) => {
                 disabled={addUserIsPending}
               />
             )}
-            <p className="text-xs mt-4 text-text-500 tracking-tighter">
+            <Typography
+              variant={"p"}
+              className="text-xs mt-4 text-text-500 tracking-tighter"
+            >
               By signing in or creating an account, you agree with our{" "}
               <Link href="#" className="text-info-500 underline">
                 Terms & conditions
@@ -201,7 +205,7 @@ const SignUpForm = ({ isSocial = false }: Props) => {
                 Privacy statement
               </Link>
               .
-            </p>
+            </Typography>
           </div>
           <Button type="submit" variant={"primary"} className="w-full my-4">
             {addUserIsPending ? (

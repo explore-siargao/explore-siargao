@@ -6,6 +6,7 @@ import useUpdatePersonalInfo from "../hooks/useUpdatePersonalInfo"
 import { useQueryClient } from "@tanstack/react-query"
 import toast from "react-hot-toast"
 import { useForm } from "react-hook-form"
+import { Typography } from "@/common/components/ui/Typography"
 
 type PersonalInfoProps = {
   isButtonClicked: boolean
@@ -51,10 +52,10 @@ const PhoneNumber = ({ phoneNumber, userId }: IPersonalInfo) => {
       {!contentState.isButtonClicked ? (
         <div className="flex justify-between py-5">
           <div>
-            <h1>Phone number</h1>
-            <p className="font-light">
+            <Typography variant={"p"}>Phone number</Typography>
+            <Typography variant={"p"} fontWeight={"light"}>
               {phoneNumber !== "" ? phoneNumber : "Enter a new phone number"}
-            </p>
+            </Typography>
           </div>
           <button
             onClick={() =>
@@ -71,7 +72,7 @@ const PhoneNumber = ({ phoneNumber, userId }: IPersonalInfo) => {
       ) : (
         <div className="grid py-5">
           <div className="flex justify-between">
-            <h1>Phone number</h1>
+            <Typography variant={"p"}>Phone number</Typography>
             <button
               className="underline self-start select-none"
               onClick={() =>
@@ -84,10 +85,10 @@ const PhoneNumber = ({ phoneNumber, userId }: IPersonalInfo) => {
               Cancel
             </button>
           </div>
-          <p className="font-light">
+          <Typography variant={"p"} fontWeight={"light"}>
             Add a number so confirmed guests and ExploreSiargao can get in
             touch. You can add other numbers and choose how they’re used
-          </p>
+          </Typography>
           <form onSubmit={handlePhoneNumberSubmit(onSubmitPhoneNumber)}>
             <div className="grid grid-cols-2 gap-4 my-4">
               <Input

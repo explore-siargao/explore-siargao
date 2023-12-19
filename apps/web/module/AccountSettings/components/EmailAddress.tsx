@@ -8,6 +8,7 @@ import { useQueryClient } from "@tanstack/react-query"
 import toast from "react-hot-toast"
 import { signIn } from "next-auth/react"
 import Cookies from "js-cookie"
+import { Typography } from "@/common/components/ui/Typography"
 
 type PersonalInfoProps = {
   isButtonClicked: boolean
@@ -57,8 +58,8 @@ const EmailAddress = ({ email, id }: IUser) => {
       {!contentState.isButtonClicked ? (
         <div className="flex justify-between py-5">
           <div>
-            <h1>Email address</h1>
-            <p className="font-light">{email}</p>
+            <Typography variant={"p"}>Email address</Typography>
+            <Typography fontWeight={"light"}>{email}</Typography>
           </div>
           <button
             onClick={() =>
@@ -75,7 +76,7 @@ const EmailAddress = ({ email, id }: IUser) => {
       ) : (
         <div className="grid py-5">
           <div className="flex justify-between">
-            <h1>Email address</h1>
+            <Typography variant={"p"}>Email address</Typography>
             <button
               className="underline self-start select-none"
               onClick={() =>
@@ -88,9 +89,9 @@ const EmailAddress = ({ email, id }: IUser) => {
               Cancel
             </button>
           </div>
-          <p className="font-light">
+          <Typography fontWeight={"light"}>
             Use an address you’ll always have access to.
-          </p>
+          </Typography>
           <form onSubmit={handleEmailSubmit(onSubmitEmail)}>
             <Input
               inputId="email"

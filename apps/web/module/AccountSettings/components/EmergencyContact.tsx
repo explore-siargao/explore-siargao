@@ -76,7 +76,7 @@ const EmergencyContact = ({ emergencyContact, id }: IPersonalInfo) => {
         <div>
           <div className="flex justify-between py-5">
             <div>
-              <h1>Emergency Contact</h1>
+              <Typography variant={"p"}>Emergency Contact</Typography>
               {emergencyContact?.length === 0 ? (
                 <p className="font-light">Not provided</p>
               ) : (
@@ -105,7 +105,7 @@ const EmergencyContact = ({ emergencyContact, id }: IPersonalInfo) => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="grid py-5">
             <div className="flex justify-between">
-              <h1>Emergency Contact</h1>
+              <Typography variant={"p"}>Emergency Contact</Typography>
               <button
                 type="button"
                 className="underline self-start select-none"
@@ -120,9 +120,9 @@ const EmergencyContact = ({ emergencyContact, id }: IPersonalInfo) => {
                 Cancel
               </button>
             </div>
-            <p className="font-light">
+            <Typography fontWeight={"light"}>
               A trusted contact we can alert in an urgent situation.
-            </p>
+            </Typography>
             {emergencyContact?.map((contact: IEmergencyContact) => (
               <div key={contact.id} className="flex justify-between py-5">
                 <Typography key={contact.id}>{contact.name}</Typography>
@@ -201,7 +201,6 @@ const EmergencyContact = ({ emergencyContact, id }: IPersonalInfo) => {
                           : ""
                       }
                     />
-
                     <Input
                       inputId="contactNumber"
                       inputLabel="Phone Number"
