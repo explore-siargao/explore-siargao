@@ -24,8 +24,16 @@ interface CardDetailModal {
 
 const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
   const { mutate, isPending } = useAddPaymentMethod(userId)
-  const { register, reset, handleSubmit, getValues, setValue, setError, clearErrors, formState:{errors}} =
-    useForm<IPaymentMethod>()
+  const {
+    register,
+    reset,
+    handleSubmit,
+    getValues,
+    setValue,
+    setError,
+    clearErrors,
+    formState: { errors },
+  } = useForm<IPaymentMethod>()
   const cancelButtonRef = useRef(null)
   const queryClient = useQueryClient()
   const onSubmit = (formData: IPaymentMethod) => {
@@ -58,46 +66,48 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
     )
   }
 
-  const validateCard = ()=>{
+  const validateCard = () => {
     const validateNumber = valid.number(getValues("cardNumber"))
-    if(validateNumber.card){
+    if (validateNumber.card) {
       clearErrors("cardNumber")
-      if(validateNumber.isValid){
+      if (validateNumber.isValid) {
         clearErrors("cardNumber")
         console.log(validateNumber.isValid)
-         }else{
-           setError("cardNumber",{
-             type:"manual",
-             message:"Invalid card number"
-            })
-         }
-    }else{
-      setError("cardNumber",{
-        type:"manual",
-        message:"Invalid Card"
+      } else {
+        setError("cardNumber", {
+          type: "manual",
+          message: "Invalid card number",
+        })
+      }
+    } else {
+      setError("cardNumber", {
+        type: "manual",
+        message: "Invalid Card",
       })
     }
   }
 
-  const validateCvv = ()=>{
+  const validateCvv = () => {
     const checkCvv = valid.cvv(getValues("cvv"))
-    if(checkCvv.isValid){
+    if (checkCvv.isValid) {
       clearErrors("cvv")
-    }else{
-      setError("cvv",{
-        type:"manual",
-        message:"Invalid cvv number"
+    } else {
+      setError("cvv", {
+        type: "manual",
+        message: "Invalid cvv number",
       })
     }
   }
-  const validateExpirationDate =()=>{
-    const checkExpirationDate = valid.expirationDate(getValues("expirationDate"))
-    if(checkExpirationDate.isValid){
+  const validateExpirationDate = () => {
+    const checkExpirationDate = valid.expirationDate(
+      getValues("expirationDate")
+    )
+    if (checkExpirationDate.isValid) {
       clearErrors("expirationDate")
-    }else{
-      setError("expirationDate",{
-        type:"manual",
-        message:"Invalid expiration date"
+    } else {
+      setError("expirationDate", {
+        type: "manual",
+        message: "Invalid expiration date",
       })
     }
   }
@@ -175,17 +185,32 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
                         />
                       </div>
                       <div>
-                      <ErrorMessage 
-                        errors={errors} name="cardNumber" 
-                        render={()=><Typography className="text-red-500">{errors.cardNumber?.message}</Typography>}
+                        <ErrorMessage
+                          errors={errors}
+                          name="cardNumber"
+                          render={() => (
+                            <Typography className="text-red-500">
+                              {errors.cardNumber?.message}
+                            </Typography>
+                          )}
                         />
-                          <ErrorMessage 
-                        errors={errors} name="cvv" 
-                        render={()=><Typography className="text-red-500">{errors.cvv?.message}</Typography>}
+                        <ErrorMessage
+                          errors={errors}
+                          name="cvv"
+                          render={() => (
+                            <Typography className="text-red-500">
+                              {errors.cvv?.message}
+                            </Typography>
+                          )}
                         />
-                           <ErrorMessage 
-                        errors={errors} name="expirationDate" 
-                        render={()=><Typography className="text-red-500">{errors.expirationDate?.message}</Typography>}
+                        <ErrorMessage
+                          errors={errors}
+                          name="expirationDate"
+                          render={() => (
+                            <Typography className="text-red-500">
+                              {errors.expirationDate?.message}
+                            </Typography>
+                          )}
                         />
                         <Input
                           inputLabel="Card Number"
@@ -196,7 +221,7 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
                           disabled={isPending}
                           {...register("cardNumber", {
                             minLength: 10,
-                            maxLength:20,
+                            maxLength: 20,
                             required: "This field is required",
                             onChange: (e) => {
                               const value = e.target.value
@@ -210,7 +235,7 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
                             },
                           })}
                         />
-                       
+
                         <div className="grid grid-flow-col space-x-2">
                           <Input
                             inputLabel="Expiration date"
@@ -259,7 +284,7 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
                               minLength: 3,
                               maxLength: 3,
                               required: "This field is required",
-                              onChange:()=>validateCvv()
+                              onChange: () => validateCvv(),
                             })}
                           />
                         </div>
