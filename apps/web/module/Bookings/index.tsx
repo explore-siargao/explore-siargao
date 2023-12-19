@@ -108,29 +108,34 @@ const tripGroup = [
   },
 ]
 const Bookings = () => {
-  const {data, isPending} = useGetAllBookings()
+  const { data, isPending } = useGetAllBookings()
   return (
     <HomeWrapper>
       {isPending ? (
-      <Spinner className="mt-4" />
-      ):(
+        <Spinner className="mt-4" />
+      ) : (
         <>
-      <Title>Bookings</Title>
-      <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 mx-auto w-full max-w-[2520px] justify-center">
-        {data?.items?.map((item:any) => (
-          <BookingBoxContainer
-            key={item.id}
-            location={item.address}
-            date={item.description}
-            distance={"100 kilometers away"}
-            price={"₱"+(item?.price?.fee+item.price.cleaningFee+item.price.serviceFee)}
-            photo={JSON.parse(item.imageUrls)[0].url as string}
-            dayTime={item.price.isNight ? "Night" : ""}
-            ratings={item.review.length!== 0 ? item.review.rate : "0.0"}
-          />
-        ))}
-      </ul>
-      </>
+          <Title>Bookings</Title>
+          <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 mx-auto w-full max-w-[2520px] justify-center">
+            {data?.items?.map((item: any) => (
+              <BookingBoxContainer
+                key={item.id}
+                location={item.address}
+                date={item.description}
+                distance={"100 kilometers away"}
+                price={
+                  "₱" +
+                  (item?.price?.fee +
+                    item.price.cleaningFee +
+                    item.price.serviceFee)
+                }
+                photo={JSON.parse(item.imageUrls)[0].url as string}
+                dayTime={item.price.isNight ? "Night" : ""}
+                ratings={item.review.length !== 0 ? item.review.rate : "0.0"}
+              />
+            ))}
+          </ul>
+        </>
       )}
     </HomeWrapper>
   )

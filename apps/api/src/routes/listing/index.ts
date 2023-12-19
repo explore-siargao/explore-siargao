@@ -1,5 +1,10 @@
 import express from 'express'
-import { addListing, deleteListing, getAllListing, getListing } from './service/listing'
+import {
+  addListing,
+  deleteListing,
+  getAllListing,
+  getListing,
+} from './service/listing'
 import isCsrfTokenValid from '@/common/middleware/auth/isCsrfTokenValid'
 import isOriginValid from '@/common/middleware/auth/isOriginValid'
 import { getWishGroupsByUser } from './service/wishGroup'
@@ -10,7 +15,7 @@ const router = express.Router()
 // DEFAULT
 router.get('/', getAllListing)
 router.get('/:id', isCsrfTokenValid, isOriginValid, getListing)
-router.delete('/',deleteListing)
+router.delete('/', deleteListing)
 router.post(
   '/:hostId',
   // isOriginValid,

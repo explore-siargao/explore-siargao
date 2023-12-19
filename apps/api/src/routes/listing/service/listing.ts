@@ -125,7 +125,7 @@ export const addListing = async (req: Request, res: Response) => {
             checkIn: checkIn,
             checkOut: checkOut,
             countGuest: countGuest,
-            isNight: isNight
+            isNight: isNight,
           },
         })
         const newListing = await prisma.listing.create({
@@ -172,12 +172,12 @@ export const addListing = async (req: Request, res: Response) => {
   }
 }
 
-export const deleteListing =async (req:Request, res:Response) => {
+export const deleteListing = async (req: Request, res: Response) => {
   const prisma = new PrismaClient()
   const deleteAllListing = await prisma.listing.deleteMany({
-    where:{
-      deletedAt:null
-    }
+    where: {
+      deletedAt: null,
+    },
   })
-  res.json({message:"Deleted"})
+  res.json({ message: 'Deleted' })
 }
