@@ -141,7 +141,7 @@ const Payments = () => {
                       ) : (
                         <span className="place-self-center select-none text-xs">
                           •••
-                        </span> 
+                        </span>
                       )}
                     </Popover.Button>
                     {popPanelIsVisible && (

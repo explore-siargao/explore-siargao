@@ -134,7 +134,7 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
                           inputId="cardNumber"
                           placeholder="0000 0000 0000 0000"
                           type="text"
-                         className="mb-2"
+                          className="mb-2"
                           disabled={isPending}
                           {...register("cardNumber", {
                             minLength: 10,
