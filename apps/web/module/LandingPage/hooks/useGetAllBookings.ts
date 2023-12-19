@@ -13,8 +13,8 @@ function useGetAllBookings() {
     queryKey: ["bookings"],
     queryFn: () => getAllBookings(),
     refetchOnWindowFocus: false,
-    gcTime:FIFTEEN_MINUTES,
-    staleTime:TWELVE_MINUTES
+    gcTime: FIFTEEN_MINUTES,
+    staleTime: TWELVE_MINUTES,
   })
   return query
 }
