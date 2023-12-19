@@ -125,7 +125,7 @@ export const addListing = async (req: Request, res: Response) => {
             checkIn: checkIn,
             checkOut: checkOut,
             countGuest: countGuest,
-            isNight: isNight
+            isNight: isNight,
           },
         })
         const newListing = await prisma.listing.create({
