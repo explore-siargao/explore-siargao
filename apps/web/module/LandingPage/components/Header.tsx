@@ -37,7 +37,7 @@ function Header() {
           </div>
           <WidthWrapper>
             <nav
-              className="flex items-center justify-between p-2 m-2 w-full"
+              className="flex items-center justify-between py-2 my-2 w-full"
               aria-label="Global"
             >
               <Link
