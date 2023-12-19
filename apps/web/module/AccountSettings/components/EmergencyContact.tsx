@@ -97,9 +97,7 @@ const EmergencyContact = ({ emergencyContact, id }: IPersonalInfo) => {
           </div>
           {emergencyContact?.map((contact: IEmergencyContact) => (
             <div key={contact.id} className="flex justify-between py-1">
-              <Typography key={contact.id} >
-                {contact.name}
-                </Typography> 
+              <Typography key={contact.id}>{contact.name}</Typography>
             </div>
           ))}
         </div>
@@ -127,9 +125,7 @@ const EmergencyContact = ({ emergencyContact, id }: IPersonalInfo) => {
             </p>
             {emergencyContact?.map((contact: IEmergencyContact) => (
               <div key={contact.id} className="flex justify-between py-5">
-                <Typography key={contact.id} >
-                {contact.name}
-                </Typography>
+                <Typography key={contact.id}>{contact.name}</Typography>
                 <button
                   type="button"
                   className="underline self-start select-none text-sm font-semibold"
