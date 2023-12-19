@@ -114,7 +114,7 @@ const Payments = () => {
                           **** {paymentMethod?.cardNumber?.slice(-3)}{" "}
                         </span>{" "}
                         {paymentMethod.isDefault ? (
-                          <span className="bg-text-50 font-semibold ml-2">
+                          <span className="bg-text-50 font-semibold ml-2 px-2 py-1">
                             Default
                           </span>
                         ) : (
@@ -139,7 +139,7 @@ const Payments = () => {
                           <span className="sr-only">Loading...</span>
                         </div>
                       ) : (
-                        <span className="place-self-center select-none">
+                        <span className="place-self-center select-none text-xs">
                           •••
                         </span>
                       )}
