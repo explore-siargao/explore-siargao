@@ -110,7 +110,7 @@ model Listing {
   id             Int             @id @default(autoincrement())
   hostedById     Int
   hostedBy       User            @relation(fields: [hostedById], references: [id])
-  imageUrls      String          @db.VarChar(255)
+  imageUrls      String          @db.LongText()
   title          String          @db.VarChar(100)
   description    String          @db.LongText()
   address        String          @db.LongText()
@@ -120,7 +120,8 @@ model Listing {
   placeOffers    PlaceOffers[]
   thingsToKnow   ThingsToKnow[]
   category       ListingCategory
-  favoriteBy     String
+  review          Review[]
+  favoriteBy     String?
   wishList       WishGroup[]
   createdAt      DateTime        @default(now())
   updatedAt      DateTime        @updatedAt
@@ -167,7 +168,7 @@ model ListingPrice {
   id          Int       @id @unique @default(autoincrement())
   listing     Listing?
   fee         Int
-  cleaningfee Int
+  cleaningFee Int
   serviceFee  Int
   isNight     Boolean?  @default(false)
   checkIn     DateTime
@@ -289,12 +290,14 @@ model Review {
   id        Int       @id @default(autoincrement())
   userId    Int
   user      User      @relation(fields: [userId], references: [id])
+  listingId Int
+  listing Listing     @relation(fields: [listingId], references: [id])
   rates     Float
   comment   String    @db.LongText()
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   deletedAt DateTime?
-
+@@index([listingId])
   @@index([userId])
 }
 
