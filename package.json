@@ -26,5 +26,9 @@
     "node": ">=20.10.0",
     "npm": ">=10.2.3"
   },
-  "engineStrict": true
+  "engineStrict": true,
+  "dependencies": {
+    "@hookform/error-message": "^2.0.1",
+    "card-validator": "^9.0.0"
+  }
 }
