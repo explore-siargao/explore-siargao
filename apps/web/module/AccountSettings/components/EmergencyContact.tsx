@@ -7,6 +7,7 @@ import useAddEmergencyContact from "../hooks/useAddEmergencyContact"
 import toast from "react-hot-toast"
 import { useQueryClient } from "@tanstack/react-query"
 import useRemoveEmergencyContact from "../hooks/useRemoveEmergencyContact"
+import { Typography } from "@/common/components/ui/Typography"
 
 type PersonalInfoProps = {
   isButtonClicked: boolean
@@ -95,10 +96,10 @@ const EmergencyContact = ({ emergencyContact, id }: IPersonalInfo) => {
             </button>
           </div>
           {emergencyContact?.map((contact: IEmergencyContact) => (
-            <div key={contact.id} className="flex justify-between py-5">
-              <p key={contact.id} className="text-lg font-semibold">
+            <div key={contact.id} className="flex justify-between py-1">
+              <Typography key={contact.id} >
                 {contact.name}
-              </p>
+                </Typography> 
             </div>
           ))}
         </div>
@@ -126,10 +127,12 @@ const EmergencyContact = ({ emergencyContact, id }: IPersonalInfo) => {
             </p>
             {emergencyContact?.map((contact: IEmergencyContact) => (
               <div key={contact.id} className="flex justify-between py-5">
-                <p className="text-lg font-semibold">{contact.name}</p>
+                <Typography key={contact.id} >
+                {contact.name}
+                </Typography>
                 <button
                   type="button"
-                  className="underline self-start select-none text-lg font-semibold"
+                  className="underline self-start select-none text-sm font-semibold"
                   onClick={() =>
                     removeEmergencyContact({ id: contact?.id }, callBackReq2)
                   }
@@ -227,7 +230,7 @@ const EmergencyContact = ({ emergencyContact, id }: IPersonalInfo) => {
               <div>
                 {!emergencyContactFormIsVisible && (
                   <Button
-                    variant={"outline"}
+                    variant={"secondary"}
                     type="button"
                     className="text-lg font-semibold p-6"
                     onClick={() => setEmergencyContactIsVisible(true)}
