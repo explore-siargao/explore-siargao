@@ -12,8 +12,8 @@ router.get('/', isCsrfTokenValid, isOriginValid, getAllListing)
 router.get('/:id', isCsrfTokenValid, isOriginValid, getListing)
 router.post(
   '/:hostId',
-  isCsrfTokenValid,
   isOriginValid,
+  isCsrfTokenValid,
   isUserLoggedIn,
   addListing
 )

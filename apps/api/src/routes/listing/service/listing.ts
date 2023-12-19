@@ -93,6 +93,7 @@ export const addListing = async (req: Request, res: Response) => {
     checkIn,
     checkOut,
     countGuest,
+    isNight,
   } = req.body
   try {
     const getHost = await prisma.user.findFirst({
@@ -124,6 +125,7 @@ export const addListing = async (req: Request, res: Response) => {
             checkIn: checkIn,
             checkOut: checkOut,
             countGuest: countGuest,
+            isNight: isNight,
           },
         })
         const newListing = await prisma.listing.create({
