@@ -59,7 +59,7 @@ const BookingBoxContainer = ({
           <p>{distance}</p>
           <p>{date}</p>
         </div>
-        <p className="text-text-700 font-semibold">
+        <p className="text-text-700 font-semibold underline">
           {price} <span className="font-normal">{dayTime}</span>
         </p>
       </div>
