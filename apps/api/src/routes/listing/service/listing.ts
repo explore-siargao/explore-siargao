@@ -11,7 +11,7 @@ export const getAllListing = async (req: Request, res: Response) => {
         hostedBy: true,
         placeOffers: true,
         thingsToKnow: true,
-        review:true
+        review: true,
       },
     })
     if (listings.length > 0) {
@@ -50,7 +50,7 @@ export const getListing = async (req: Request, res: Response) => {
         hostedBy: true,
         placeOffers: true,
         thingsToKnow: true,
-        review: true
+        review: true,
       },
     })
     if (listing !== null) {
@@ -78,65 +78,89 @@ export const getListing = async (req: Request, res: Response) => {
   }
 }
 
-export const addListing = async (req:Request, res:Response) => {
+export const addListing = async (req: Request, res: Response) => {
   const prisma = new PrismaClient()
   const hostId = Number(req.params.hostId)
-  const {imageUrls,title, category,description,address,fee, cleaningFee, serviceFee, checkIn, checkOut,countGuest} = req.body
+  const {
+    imageUrls,
+    title,
+    category,
+    description,
+    address,
+    fee,
+    cleaningFee,
+    serviceFee,
+    checkIn,
+    checkOut,
+    countGuest,
+  } = req.body
   try {
     const getHost = await prisma.user.findFirst({
-    where:{
-      id:hostId,
-      // role:"Host"
-    }
+      where: {
+        id: hostId,
+        // role:"Host"
+      },
     })
 
-    if(getHost!==null){
-      if(imageUrls && title && category && description && address && fee && cleaningFee && serviceFee && checkIn && checkOut && countGuest){
-      const newPrice = await prisma.listingPrice.create({
-        data:{
-          fee:fee,
-          cleaningFee:cleaningFee,
-          serviceFee:serviceFee,
-          checkIn:checkIn,
-          checkOut:checkOut,
-          countGuest:countGuest
-        }
-      })
-      const newListing = await prisma.listing.create({
-        data:{
-          imageUrls:JSON.stringify(imageUrls),
-          title: title,
-          category:category,
-          description:description,
-          address: address,
-          hostedById:hostId,
-          listingPriceId: newPrice.id
-        }
-      })
-  
-      res.json({
-        error: false,
-        item: newListing,
-        itemCount: 1,
-        message:"Listing successfully added"
-      })
-    }else{
+    if (getHost !== null) {
+      if (
+        imageUrls &&
+        title &&
+        category &&
+        description &&
+        address &&
+        fee &&
+        cleaningFee &&
+        serviceFee &&
+        checkIn &&
+        checkOut &&
+        countGuest
+      ) {
+        const newPrice = await prisma.listingPrice.create({
+          data: {
+            fee: fee,
+            cleaningFee: cleaningFee,
+            serviceFee: serviceFee,
+            checkIn: checkIn,
+            checkOut: checkOut,
+            countGuest: countGuest,
+          },
+        })
+        const newListing = await prisma.listing.create({
+          data: {
+            imageUrls: JSON.stringify(imageUrls),
+            title: title,
+            category: category,
+            description: description,
+            address: address,
+            hostedById: hostId,
+            listingPriceId: newPrice.id,
+          },
+        })
+
+        res.json({
+          error: false,
+          item: newListing,
+          itemCount: 1,
+          message: 'Listing successfully added',
+        })
+      } else {
+        res.json({
+          error: true,
+          items: null,
+          itemCount: 0,
+          message: REQUIRED_VALUE_EMPTY,
+        })
+      }
+    } else {
       res.json({
         error: true,
         items: null,
         itemCount: 0,
-        message: REQUIRED_VALUE_EMPTY
+        message: 'This host not exist to our system',
       })
     }
-    }else{
-      res.json({
-        error: true,
-        items: null,
-        itemCount: 0,
-        message: "This host not exist to our system"
-      })
-    }
-  } catch (e:any) {
+  } catch (e: any) {
     res.json({
       error: true,
       items: null,

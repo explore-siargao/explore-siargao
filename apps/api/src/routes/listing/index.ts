@@ -8,9 +8,15 @@ import isUserLoggedIn from '@/common/middleware/auth/isUserLoggedIn'
 const router = express.Router()
 
 // DEFAULT
-router.get('/',isCsrfTokenValid, isOriginValid, getAllListing)
+router.get('/', isCsrfTokenValid, isOriginValid, getAllListing)
 router.get('/:id', isCsrfTokenValid, isOriginValid, getListing)
-router.post('/:hostId',isCsrfTokenValid, isOriginValid, isUserLoggedIn, addListing)
+router.post(
+  '/:hostId',
+  isCsrfTokenValid,
+  isOriginValid,
+  isUserLoggedIn,
+  addListing
+)
 router.get(
   '/:userId/wish-group',
   isOriginValid,
