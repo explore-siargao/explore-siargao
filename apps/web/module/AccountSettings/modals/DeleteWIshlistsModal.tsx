@@ -1,4 +1,5 @@
 import ModalContainer from "@/common/components/ModalContainer"
+import ModalContainerFooter from "@/common/components/ModalContainer/ModalContainerFooter"
 import { Typography } from "@/common/components/ui/Typography"
 import { Dialog, Transition } from "@headlessui/react"
 import React, { Fragment, useRef } from "react"
@@ -48,14 +49,7 @@ const DeleteWIshlistsModal = ({
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
               <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:w-full sm:max-w-lg ">
-                <ModalContainer
-                  onClose={onClose}
-                  positive="Delete"
-                  negative="Cancel"
-                  isSubmit={true}
-                  isPending={false}
-                  onClick={() => null}
-                >
+                <ModalContainer onClose={onClose}>
                   <div className="p-6 flex flex-col items-center">
                     <Typography variant={"h3"}>
                       Delete this wishlist?
@@ -64,6 +58,12 @@ const DeleteWIshlistsModal = ({
                       "{title}" will be permanently deleted.
                     </Typography>
                   </div>
+                  <ModalContainerFooter
+                    positive="Delete"
+                    negative="Cancel"
+                    isSubmit={true}
+                    isPending={true}
+                  />
                 </ModalContainer>
               </Dialog.Panel>
             </Transition.Child>

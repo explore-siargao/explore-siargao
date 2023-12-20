@@ -1,6 +1,6 @@
 import React from "react"
 
-const AuthModalWrapper = ({ children }: { children: React.ReactNode }) => {
+const GlobalModalWrapper = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       {children}
@@ -9,4 +9,4 @@ const AuthModalWrapper = ({ children }: { children: React.ReactNode }) => {
   )
 }
 
-export default AuthModalWrapper
+export default GlobalModalWrapper

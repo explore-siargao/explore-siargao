@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { Nunito } from "next/font/google"
 import "./globals.css"
 import QueryClientWrapper from "@/common/components/QueryClientWrapper"
-import AuthModalWrapper from "@/common/components/AuthModalWrapper"
+import GlobalModalWrapper from "@/common/components/GlobalModalWrapper"
 import { Toaster } from "react-hot-toast"
 import React from "react"
 import { getServerSession } from "next-auth/next"
@@ -33,11 +33,11 @@ export default async function RootLayout({
         <Toaster />
         <SessionProvider session={session}>
           <QueryClientWrapper>
-            <AuthModalWrapper>
+            <GlobalModalWrapper>
               <Header />
               {children}
               <BottomNavBar />
-            </AuthModalWrapper>
+            </GlobalModalWrapper>
           </QueryClientWrapper>
         </SessionProvider>
       </body>
