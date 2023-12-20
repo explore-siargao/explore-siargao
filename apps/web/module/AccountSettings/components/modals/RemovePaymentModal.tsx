@@ -4,6 +4,7 @@ import { useQueryClient } from "@tanstack/react-query"
 import React, { Fragment, useRef } from "react"
 import toast from "react-hot-toast"
 import useRemovePaymentmethod from "../../hooks/useRemovePaymentMethod"
+import ModalContainerFooter from "@/common/components/ModalContainer/ModalContainerFooter"
 
 interface PaymentModalProps {
   id: number
@@ -72,19 +73,23 @@ const RemovePaymentModal = ({
                 <ModalContainer
                   title="Remove payment method"
                   onClose={closeModal}
-                  isPending={isPending}
-                  isSubmit={false}
-                  negative="Cancel"
-                  positive="Remove"
-                  onClick={() =>
-                    mutate({ id: id, userId: userId }, callBackReq)
-                  }
                 >
                   <div className="p-6">
                     <p className="text-text-400 font-light">
                       Are you sure you want to remove this payment method?
                     </p>
                   </div>
+                  <ModalContainerFooter 
+                    positive="Remove"
+                    negative="Cancel"
+                    isPending={isPending}
+                    isSubmit={false}
+                    onClose={closeModal}
+                     buttonFn={()=>{
+                    mutate({ id: id, userId: userId }, callBackReq)
+                     }
+                  }
+                  />
                 </ModalContainer>
               </Dialog.Panel>
             </Transition.Child>

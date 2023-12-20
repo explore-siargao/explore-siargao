@@ -1,3 +1,5 @@
+"use client"
+import OptMessageModal from "@/module/Authentication/modal/OptMessageModal"
 import React from "react"
 
 const GlobalModalWrapper = ({ children }: { children: React.ReactNode }) => {
@@ -5,6 +7,7 @@ const GlobalModalWrapper = ({ children }: { children: React.ReactNode }) => {
     <>
       {children}
       {/* Add all auth modal here */}
+      <OptMessageModal />
     </>
   )
 }

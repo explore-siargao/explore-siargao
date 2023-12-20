@@ -5,6 +5,8 @@ import useVerifySignIn from "@/common/hooks/useVerifySignIn"
 import { useRouter, useParams, useSearchParams } from "next/navigation"
 import toast from "react-hot-toast"
 import WholePageLoading from "@/common/components/WholePageLoading"
+import useOptMessageStore from "@/common/store/useOptMessageStore"
+import { stat } from "fs"
 
 const SessionVerifier = () => {
   const router = useRouter()
@@ -13,8 +15,12 @@ const SessionVerifier = () => {
   const redirectTo = searchParams.get("redirect_to")
   const { data: session } = useSession()
   const { data } = useVerifySignIn()
+  const setIsOpen = useOptMessageStore((state)=>state.setIsOpen)
+  const isOpen = useOptMessageStore((state)=>state.isOpen)
+  console.log(isOpen)
   if (!session || (session && data && data.item)) {
     router.push(redirectTo ? redirectTo : "/")
+    setIsOpen()
   } else if (session && data?.error) {
     // Adding id 1 to prevent duplicate toast
     toast.error(data.message, { id: "1", duration: 5000 })

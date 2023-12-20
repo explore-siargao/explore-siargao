@@ -1,113 +1,13 @@
-import React from "react"
+import React, { useState } from "react"
 import { Title } from "@/common/components/ui/Title"
 import BookingBoxContainer from "@/common/components/BookingBoxContainer"
 import { WidthWrapper } from "@/common/components/WidthWrapper"
 import useGetAllBookings from "../LandingPage/hooks/useGetAllBookings"
 import { Spinner } from "@/common/components/ui/Spinner"
+import OptMessageModal from "../Authentication/modal/OptMessageModal"
 
-const tripGroup = [
-  {
-    id: 1,
-    location: "Cavinti, Laguna",
-    distance: "100 kilometers away",
-    date: "Dec 13 - 15",
-    price: "₱3,419",
-    photo: "http://localhost:3000/1.jpg",
-    dayTime: "night",
-    ratings: "5.0",
-  },
-  {
-    id: 2,
-    location: "Cavinti, Laguna",
-    distance: "100 kilometers away",
-    date: "Dec 13 - 15",
-    price: "₱3,419",
-    photo: "http://localhost:3000/2.jpg",
-    dayTime: "night",
-    ratings: "5.0",
-  },
-  {
-    id: 3,
-    location: "Cavinti, Laguna",
-    distance: "100 kilometers away",
-    date: "Dec 13 - 15",
-    price: "₱3,419",
-    photo: "http://localhost:3000/3.jpg",
-    dayTime: "night",
-    ratings: "5.0",
-  },
-  {
-    id: 4,
-    location: "Cavinti, Laguna",
-    distance: "100 kilometers away",
-    date: "Dec 13 - 15",
-    price: "₱3,419",
-    photo: "http://localhost:3000/4.jpg",
-    dayTime: "night",
-    ratings: "5.0",
-  },
-  {
-    id: 5,
-    location: "Cavinti, Laguna",
-    distance: "100 kilometers away",
-    date: "Dec 13 - 15",
-    price: "₱3,419",
-    photo: "http://localhost:3000/5.jpg",
-    dayTime: "night",
-    ratings: "5.0",
-  },
-  {
-    id: 6,
-    location: "Cavinti, Laguna",
-    distance: "100 kilometers away",
-    date: "Dec 13 - 15",
-    price: "₱3,419",
-    photo: "http://localhost:3000/5.jpg",
-    dayTime: "night",
-    ratings: "5.0",
-  },
-  {
-    id: 7,
-    location: "Cavinti, Laguna",
-    distance: "100 kilometers away",
-    date: "Dec 13 - 15",
-    price: "₱3,419",
-    photo: "http://localhost:3000/5.jpg",
-    dayTime: "night",
-    ratings: "5.0",
-  },
-  {
-    id: 8,
-    location: "Cavinti, Laguna",
-    distance: "100 kilometers away",
-    date: "Dec 13 - 15",
-    price: "₱3,419",
-    photo: "http://localhost:3000/5.jpg",
-    dayTime: "night",
-    ratings: "5.0",
-  },
-  {
-    id: 9,
-    location: "Cavinti, Laguna",
-    distance: "100 kilometers away",
-    date: "Dec 13 - 15",
-    price: "₱3,419",
-    photo: "http://localhost:3000/5.jpg",
-    dayTime: "night",
-    ratings: "5.0",
-  },
-  {
-    id: 10,
-    location: "Cavinti, Laguna",
-    distance: "100 kilometers away",
-    date: "Dec 13 - 15",
-    price: "₱3,419",
-    photo: "http://localhost:3000/5.jpg",
-    dayTime: "night",
-    ratings: "5.0",
-  },
-]
 const Bookings = () => {
+  const [optMessage,setOptMessage] = useState<boolean>(false)
   const { data, isPending } = useGetAllBookings()
   return (
     <WidthWrapper className="my-24 lg:my-32">
