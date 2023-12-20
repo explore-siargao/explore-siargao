@@ -1,5 +1,6 @@
 import * as React from "react"
 import { cn } from "@/common/helpers/cn"
+import { Typography } from "./Typography"
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -32,7 +33,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             {...props}
           />
         </div>
-        <p className="text-error-600 ml-1">{errorMessage}</p>
+        <Typography className="text-error-600 ml-1">{errorMessage}</Typography>
       </div>
     )
   }

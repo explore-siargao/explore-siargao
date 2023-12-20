@@ -4,6 +4,7 @@ import { Title } from "./ui/Title"
 import Image from "next/image"
 import { XMarkIcon } from "@heroicons/react/24/outline"
 import DeleteWIshlistsModal from "@/module/AccountSettings/modals/DeleteWIshlistsModal"
+import { Typography } from "./ui/Typography"
 
 type Props = {
   photo: string
@@ -46,7 +47,7 @@ const WishlistBoxContainer = ({ title, text, photo }: Props) => {
           <Title size={"ContentTitle"} className="text-text-500">
             {title}
           </Title>
-          <p className="text-text-300">{text}</p>
+          <Typography className="text-text-300">{text}</Typography>
         </div>
       </div>
       <DeleteWIshlistsModal

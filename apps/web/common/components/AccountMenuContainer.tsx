@@ -3,6 +3,7 @@ import Link from "next/link"
 import { cn } from "@/common/helpers/cn"
 import * as React from "react"
 import { ChevronRightIcon } from "@heroicons/react/24/outline"
+import { Typography } from "./ui/Typography"
 
 type Props = {
   title: string
@@ -29,7 +30,9 @@ const AccountMenuContainer = ({
     >
       {icon}
       <div className="hidden md:block">
-        <h1 className="font-semibold">{title}</h1>
+        <Typography variant={"p"} className="font-semibold">
+          {title}
+        </Typography>
         <span className="text-text-300 text-sm">{content}</span>
       </div>
       <div className="flex md:hidden self-center justify-between w-full">

@@ -6,6 +6,7 @@ import useUpdatePersonalInfo from "../hooks/useUpdatePersonalInfo"
 import { useQueryClient } from "@tanstack/react-query"
 import toast from "react-hot-toast"
 import { useForm } from "react-hook-form"
+import { Typography } from "@/common/components/ui/Typography"
 type PersonalInfoProps = {
   isButtonClicked: boolean
   contentId: string
@@ -50,8 +51,10 @@ const LegalName = ({ firstName, lastName, userId }: IPersonalInfo) => {
       {!contentState.isButtonClicked ? (
         <div className="flex justify-between py-5">
           <div>
-            <h1>Legal name</h1>
-            <p className="font-light">{firstName + " " + lastName}</p>
+            <Typography variant={"p"}>Legal name</Typography>
+            <Typography fontWeight={"light"}>
+              {firstName + " " + lastName}
+            </Typography>
           </div>
           <button
             onClick={() =>
@@ -68,7 +71,7 @@ const LegalName = ({ firstName, lastName, userId }: IPersonalInfo) => {
       ) : (
         <div className="grid py-5">
           <div className="flex justify-between">
-            <h1>Legal name</h1>
+            <Typography variant={"p"}>Legal name</Typography>
             <button
               className="underline self-start select-none "
               onClick={() =>
@@ -81,10 +84,10 @@ const LegalName = ({ firstName, lastName, userId }: IPersonalInfo) => {
               Cancel
             </button>
           </div>
-          <p className="font-light">
+          <Typography fontWeight={"light"}>
             This is the name on your travel document, which could be a license
             or a passport.
-          </p>
+          </Typography>
           <form onSubmit={handleLegalNameSubmit(onSubmitLegalName)}>
             <div className="grid grid-cols-2 gap-4 my-4">
               <Input

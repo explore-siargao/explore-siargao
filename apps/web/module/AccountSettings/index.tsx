@@ -68,12 +68,12 @@ const AccountSettings = () => {
               </span>
               ,{" " + data?.item?.email + " "}
               <span>•</span>{" "}
-              <a
+              <Link
                 href="#"
                 className="font-semibold underline underline-offset-2"
               >
                 Go to profile
-              </a>
+              </Link>
             </div>
             <Link
               href={"#"}
