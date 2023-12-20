@@ -13,8 +13,8 @@ import { useForm } from "react-hook-form"
 import { useQueryClient } from "@tanstack/react-query"
 import toast from "react-hot-toast"
 import valid from "card-validator"
-import { ErrorMessage } from "@hookform/error-message"
 import { Typography } from "@/common/components/ui/Typography"
+import ErrorMessage from "../ui/ErrorMessage"
 
 interface CardDetailModal {
   isOpen: boolean
@@ -185,7 +185,7 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
                         />
                       </div>
                       <div>
-                        <ErrorMessage
+                        {/* <ErrorMessage
                           errors={errors}
                           name="cardNumber"
                           render={() => (
@@ -211,7 +211,13 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
                               {errors.expirationDate?.message}
                             </Typography>
                           )}
-                        />
+                        /> */}
+
+                        <ErrorMessage title="Please check the following errors" errors={[
+                          ...errors.cardNumber===undefined ? []:[errors.cardNumber.message as string],
+                          ...errors.cvv===undefined ? []:[errors.cvv.message as string],
+                          ...errors.expirationDate===undefined ? []:[errors.expirationDate.message as string],
+                        ]} />
                         <Input
                           inputLabel="Card Number"
                           inputId="cardNumber"
