@@ -1,16 +1,16 @@
-import { Typography } from '@/common/components/ui/Typography';
-import React from 'react';
+import { Typography } from "@/common/components/ui/Typography"
+import React from "react"
 import { InformationCircleIcon } from "@heroicons/react/20/solid"
 interface ErrorMessageProps {
-    title:string
-    errors:string[]
+  title: string
+  errors: string[]
 }
-const ErrorMessage = ({ title, errors }:ErrorMessageProps) => {
+const ErrorMessage = ({ title, errors }: ErrorMessageProps) => {
   if (!errors || errors.length === 0) {
-    return null; // Don't render anything if there are no errors
+    return null // Don't render anything if there are no errors
   }
- 
-console.log(errors)
+
+  console.log(errors)
   return (
     <div className='bg-error-100 py-2 px-3 my-3 rounded-md'>
         <div className="flex items-center space-x-2 w-full">
@@ -24,7 +24,7 @@ console.log(errors)
         ))}
       </ul>
     </div>
-  );
-};
+  )
+}
 
-export default ErrorMessage;
+export default ErrorMessage

@@ -185,11 +185,20 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
                       </div>
                       <div>
 
-                        <ErrorMessage title="Please check the following errors" errors={[
-                          ...errors.cardNumber===undefined ? []:[errors.cardNumber.message as string],
-                          ...errors.cvv===undefined ? []:[errors.cvv.message as string],
-                          ...errors.expirationDate===undefined ? []:[errors.expirationDate.message as string],
-                        ]} />
+                        <ErrorMessage
+                          title="Please check the following errors"
+                          errors={[
+                            ...(errors.cardNumber === undefined
+                              ? []
+                              : [errors.cardNumber.message as string]),
+                            ...(errors.cvv === undefined
+                              ? []
+                              : [errors.cvv.message as string]),
+                            ...(errors.expirationDate === undefined
+                              ? []
+                              : [errors.expirationDate.message as string]),
+                          ]}
+                        />
                         <Input
                           inputLabel="Card Number"
                           inputId="cardNumber"
