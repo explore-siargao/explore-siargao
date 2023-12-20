@@ -12,6 +12,8 @@ import { IPaymentMethod } from "@/common/types/global"
 import { useForm } from "react-hook-form"
 import { useQueryClient } from "@tanstack/react-query"
 import toast from "react-hot-toast"
+import valid from "card-validator"
+import ErrorMessage from "../ui/ErrorMessage"
 
 interface CardDetailModal {
   isOpen: boolean
@@ -21,8 +23,16 @@ interface CardDetailModal {
 
 const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
   const { mutate, isPending } = useAddPaymentMethod(userId)
-  const { register, reset, handleSubmit, getValues, setValue } =
-    useForm<IPaymentMethod>()
+  const {
+    register,
+    reset,
+    handleSubmit,
+    getValues,
+    setValue,
+    setError,
+    clearErrors,
+    formState: { errors },
+  } = useForm<IPaymentMethod>()
   const cancelButtonRef = useRef(null)
   const queryClient = useQueryClient()
   const onSubmit = (formData: IPaymentMethod) => {
@@ -55,6 +65,51 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
     )
   }
 
+  const validateCard = () => {
+    const validateNumber = valid.number(getValues("cardNumber"))
+    if (validateNumber.card) {
+      clearErrors("cardNumber")
+      if (validateNumber.isValid) {
+        clearErrors("cardNumber")
+        console.log(validateNumber.isValid)
+      } else {
+        setError("cardNumber", {
+          type: "manual",
+          message: "Invalid card number",
+        })
+      }
+    } else {
+      setError("cardNumber", {
+        type: "manual",
+        message: "Invalid Card",
+      })
+    }
+  }
+
+  const validateCvv = () => {
+    const checkCvv = valid.cvv(getValues("cvv"))
+    if (checkCvv.isValid) {
+      clearErrors("cvv")
+    } else {
+      setError("cvv", {
+        type: "manual",
+        message: "Invalid cvv number",
+      })
+    }
+  }
+  const validateExpirationDate = () => {
+    const checkExpirationDate = valid.expirationDate(
+      getValues("expirationDate")
+    )
+    if (checkExpirationDate.isValid) {
+      clearErrors("expirationDate")
+    } else {
+      setError("expirationDate", {
+        type: "manual",
+        message: "Invalid expiration date",
+      })
+    }
+  }
   return (
     <Transition.Root show={isOpen} as={Fragment}>
       <Dialog
@@ -129,6 +184,21 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
                         />
                       </div>
                       <div>
+
+                        <ErrorMessage
+                          title="Please check the following errors"
+                          errors={[
+                            ...(errors.cardNumber === undefined
+                              ? []
+                              : [errors.cardNumber.message as string]),
+                            ...(errors.cvv === undefined
+                              ? []
+                              : [errors.cvv.message as string]),
+                            ...(errors.expirationDate === undefined
+                              ? []
+                              : [errors.expirationDate.message as string]),
+                          ]}
+                        />
                         <Input
                           inputLabel="Card Number"
                           inputId="cardNumber"
@@ -138,6 +208,7 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
                           disabled={isPending}
                           {...register("cardNumber", {
                             minLength: 10,
+                            maxLength: 20,
                             required: "This field is required",
                             onChange: (e) => {
                               const value = e.target.value
@@ -147,9 +218,11 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
                                 "$1 "
                               )
                               setValue("cardNumber", String(spacedValue).trim())
+                              validateCard()
                             },
                           })}
                         />
+
                         <div className="grid grid-flow-col space-x-2">
                           <Input
                             inputLabel="Expiration date"
@@ -180,8 +253,10 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
                                       "expirationDate",
                                       newValue.slice(0, -1)
                                     )
+                                    validateExpirationDate()
                                   } else {
                                     setValue("expirationDate", newValue.trim())
+                                    validateExpirationDate()
                                   }
                                 }
                               },
@@ -196,6 +271,7 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
                               minLength: 3,
                               maxLength: 3,
                               required: "This field is required",
+                              onChange: () => validateCvv(),
                             })}
                           />
                         </div>
