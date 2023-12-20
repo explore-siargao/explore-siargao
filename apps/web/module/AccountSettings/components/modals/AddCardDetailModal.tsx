@@ -13,7 +13,6 @@ import { useForm } from "react-hook-form"
 import { useQueryClient } from "@tanstack/react-query"
 import toast from "react-hot-toast"
 import valid from "card-validator"
-import { Typography } from "@/common/components/ui/Typography"
 import ErrorMessage from "../ui/ErrorMessage"
 
 interface CardDetailModal {
@@ -185,33 +184,6 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
                         />
                       </div>
                       <div>
-                        {/* <ErrorMessage
-                          errors={errors}
-                          name="cardNumber"
-                          render={() => (
-                            <Typography className="text-red-500">
-                              {errors.cardNumber?.message}
-                            </Typography>
-                          )}
-                        />
-                        <ErrorMessage
-                          errors={errors}
-                          name="cvv"
-                          render={() => (
-                            <Typography className="text-red-500">
-                              {errors.cvv?.message}
-                            </Typography>
-                          )}
-                        />
-                        <ErrorMessage
-                          errors={errors}
-                          name="expirationDate"
-                          render={() => (
-                            <Typography className="text-red-500">
-                              {errors.expirationDate?.message}
-                            </Typography>
-                          )}
-                        /> */}
 
                         <ErrorMessage title="Please check the following errors" errors={[
                           ...errors.cardNumber===undefined ? []:[errors.cardNumber.message as string],

@@ -19,8 +19,8 @@ console.log(errors)
         </div>
      
       <ul className='list-disc list-inside'>
-        {errors.map((error, index) => (
-            <li key={index} className='text-error-500 pl-6 text-sm'>{error}</li>
+        {errors.map((error) => (
+            <li key={error} className='text-error-500 pl-6 text-sm'>{error}</li>
         ))}
       </ul>
     </div>
