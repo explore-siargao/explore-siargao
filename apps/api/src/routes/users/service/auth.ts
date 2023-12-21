@@ -609,7 +609,7 @@ export const userDetails = async (req: Request, res: Response) => {
         item: {
           id: user?.id,
           email: user?.email,
-          canreceivedEmail:user?.canReceiveEmail,
+          canreceivedEmail: user?.canReceiveEmail,
           RegistrationType: user?.registrationType,
           profilePicture: user?.profilePicture,
           personalInfo: user?.personalInfo,

@@ -13,13 +13,13 @@ import Email from "next-auth/providers/email"
 import { isPagesAPIRouteMatch } from "next/dist/server/future/route-matches/pages-api-route-match"
 import { Spinner } from "@/common/components/ui/Spinner"
 interface OptChecked {
-  isChecked:boolean
+  isChecked: boolean
 }
 const OptMessageModal = () => {
   const isOpen = useOptMessageStore((state) => state.isOpen)
   const closeModal = useOptMessageStore((state) => state.setIsClose)
   const cancelButtonRef = useRef(null)
-  const {data, isPending} = useGetPersonalInfo()
+  const { data, isPending } = useGetPersonalInfo()
   const callBackReq = {
     onSuccess: (data: any) => {
       if (!data.error) {
@@ -33,13 +33,17 @@ const OptMessageModal = () => {
       toast.error(String(err))
     },
   }
-  const {mutate:setCanReceivedEmail, isPending:IsPendingCetCanReceivedEmail} =
-  useSetReceivedEmail(isPending ? 0 : data?.item?.id, {onSuccess:callBackReq.onSuccess,onError:callBackReq.onError})
-  const {register, getValues} = useForm<OptChecked>()
-  return (
-    isPending ?
-    (""):
-   (
+  const {
+    mutate: setCanReceivedEmail,
+    isPending: IsPendingCetCanReceivedEmail,
+  } = useSetReceivedEmail(isPending ? 0 : data?.item?.id, {
+    onSuccess: callBackReq.onSuccess,
+    onError: callBackReq.onError,
+  })
+  const { register, getValues } = useForm<OptChecked>()
+  return isPending ? (
+    ""
+  ) : (
     <Transition.Root show={isOpen} as={Fragment}>
       <Dialog
         as="div"
@@ -81,18 +85,20 @@ const OptMessageModal = () => {
                     <Button
                       variant={"secondary"}
                       className="w-full mt-4"
-                      onClick={() =>{
-                        if(getValues("isChecked")){
-                         setCanReceivedEmail()
-                        }else{
+                      onClick={() => {
+                        if (getValues("isChecked")) {
+                          setCanReceivedEmail()
+                        } else {
                           closeModal()
                         }
                       }}
                       disabled={IsPendingCetCanReceivedEmail}
                     >
-                    {IsPendingCetCanReceivedEmail ? (
-                      <Spinner>Loading...</Spinner>
-                    ):("OK")}
+                      {IsPendingCetCanReceivedEmail ? (
+                        <Spinner>Loading...</Spinner>
+                      ) : (
+                        "OK"
+                      )}
                     </Button>
                     <div className="flex  mt-6">
                       <input
@@ -118,7 +124,6 @@ const OptMessageModal = () => {
         </div>
       </Dialog>
     </Transition.Root>
-  )
   )
 }
 
