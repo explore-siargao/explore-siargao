@@ -63,7 +63,7 @@ const DeleteWIshlistsModal = ({
                     negative="Cancel"
                     isSubmit={true}
                     isPending={true}
-                    buttonFn={()=>null}
+                    buttonFn={() => null}
                   />
                 </ModalContainer>
               </Dialog.Panel>

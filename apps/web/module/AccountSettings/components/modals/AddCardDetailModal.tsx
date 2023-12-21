@@ -143,10 +143,7 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
             >
               <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:w-full sm:max-w-lg ">
                 <form onSubmit={handleSubmit(onSubmit)}>
-                  <ModalContainer
-                    title="Add card details"
-                    onClose={onClose}
-                  >
+                  <ModalContainer title="Add card details" onClose={onClose}>
                     <div className="p-6 space-y-2">
                       <div className="flex gap-2">
                         <Image
@@ -179,7 +176,6 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
                         />
                       </div>
                       <div>
-
                         <ErrorMessage
                           title="Please check the following errors"
                           errors={[
@@ -296,13 +292,13 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
                         <option value="ITALIAN">Italian</option>
                       </select>
                     </div>
-                    <ModalContainerFooter 
-                    isPending={isPending}
-                    isSubmit={true}
-                    positive="Save"
-                    negative="Cancel"
-                    onClose={onClose}
-                    buttonFn={()=>null}
+                    <ModalContainerFooter
+                      isPending={isPending}
+                      isSubmit={true}
+                      positive="Save"
+                      negative="Cancel"
+                      onClose={onClose}
+                      buttonFn={() => null}
                     />
                   </ModalContainer>
                 </form>

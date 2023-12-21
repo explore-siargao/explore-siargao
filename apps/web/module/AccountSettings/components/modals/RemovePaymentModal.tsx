@@ -79,16 +79,15 @@ const RemovePaymentModal = ({
                       Are you sure you want to remove this payment method?
                     </p>
                   </div>
-                  <ModalContainerFooter 
+                  <ModalContainerFooter
                     positive="Remove"
                     negative="Cancel"
                     isPending={isPending}
                     isSubmit={false}
                     onClose={closeModal}
-                     buttonFn={()=>{
-                    mutate({ id: id, userId: userId }, callBackReq)
-                     }
-                  }
+                    buttonFn={() => {
+                      mutate({ id: id, userId: userId }, callBackReq)
+                    }}
                   />
                 </ModalContainer>
               </Dialog.Panel>

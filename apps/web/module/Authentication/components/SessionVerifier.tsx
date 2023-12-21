@@ -16,7 +16,6 @@ const SessionVerifier = () => {
   const { data } = useVerifySignIn()
   if (!session || (session && data && data.item)) {
     router.push(redirectTo ? redirectTo : "/")
-
   } else if (session && data?.error) {
     // Adding id 1 to prevent duplicate toast
     toast.error(data.message, { id: "1", duration: 5000 })

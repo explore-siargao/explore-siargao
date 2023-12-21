@@ -67,9 +67,9 @@ const SignUpForm = ({ isSocial = false }: Props) => {
               callbackUrl: "/",
               username: formData.email,
               password: formData.password,
-              redirect:false
+              redirect: false,
             })
-          } 
+          }
           setIsOpen()
           router.push("/")
         } else {
@@ -95,7 +95,7 @@ const SignUpForm = ({ isSocial = false }: Props) => {
       callBackReq
     )
   }
-  const setIsOpen = useOptMessageStore((state)=>state.setIsOpen)
+  const setIsOpen = useOptMessageStore((state) => state.setIsOpen)
 
   return (
     <div className="p-6">

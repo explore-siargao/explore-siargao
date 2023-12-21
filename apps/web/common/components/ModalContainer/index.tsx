@@ -9,12 +9,7 @@ type Props = {
   onBack?: () => void
 }
 
-const ModalContainer = ({
-  children,
-  title,
-  onClose,
-  onBack,
-}: Props) => {
+const ModalContainer = ({ children, title, onClose, onBack }: Props) => {
   return (
     <div className="bg-white shadow rounded-2xl ">
       <div className="flex border-b-gray-200 border-b p-4">

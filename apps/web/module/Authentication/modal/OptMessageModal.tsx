@@ -57,17 +57,20 @@ const OptMessageModal = () => {
                       OK
                     </Button>
                     <div className="flex  mt-6">
-                    <input
-                      id="recieved"
-                      name="recieved"
-                      type="checkbox"
-                      className="h-6 w-6 rounded border-gray-400 text-secondary-600 focus:ring-transparent"
-                    />
-                    <label htmlFor="recieved" className="text-sm select-none text-left ml-2">
-                      I’d like to receive travel tips, uplifting content, and
-                      exclusive deals from ExploreSiargao. You can opt out at
-                      any time.
-                    </label>
+                      <input
+                        id="recieved"
+                        name="recieved"
+                        type="checkbox"
+                        className="h-6 w-6 rounded border-gray-400 text-secondary-600 focus:ring-transparent"
+                      />
+                      <label
+                        htmlFor="recieved"
+                        className="text-sm select-none text-left ml-2"
+                      >
+                        I’d like to receive travel tips, uplifting content, and
+                        exclusive deals from ExploreSiargao. You can opt out at
+                        any time.
+                      </label>
                     </div>
                   </div>
                 </ModalContainer>

@@ -12,15 +12,19 @@ const ErrorMessage = ({ title, errors }: ErrorMessageProps) => {
 
   console.log(errors)
   return (
-    <div className='bg-error-100 py-2 px-3 my-3 rounded-md'>
-        <div className="flex items-center space-x-2 w-full">
-       <InformationCircleIcon className='w-4 h-4 text-error-500'/>
-      <Typography fontWeight={'bold'} className='text-error-500 text-sm'>{title}</Typography>
-        </div>
-     
-      <ul className='list-disc list-inside'>
+    <div className="bg-error-100 py-2 px-3 my-3 rounded-md">
+      <div className="flex items-center space-x-2 w-full">
+        <InformationCircleIcon className="w-4 h-4 text-error-500" />
+        <Typography fontWeight={"bold"} className="text-error-500 text-sm">
+          {title}
+        </Typography>
+      </div>
+
+      <ul className="list-disc list-inside">
         {errors.map((error) => (
-            <li key={error} className='text-error-500 pl-6 text-sm'>{error}</li>
+          <li key={error} className="text-error-500 pl-6 text-sm">
+            {error}
+          </li>
         ))}
       </ul>
     </div>

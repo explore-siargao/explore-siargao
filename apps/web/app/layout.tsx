@@ -36,8 +36,8 @@ export default async function RootLayout({
             <GlobalModalWrapper>
               <Header />
               {children}
-              </GlobalModalWrapper>
-              <BottomNavBar />
+            </GlobalModalWrapper>
+            <BottomNavBar />
           </QueryClientWrapper>
         </SessionProvider>
       </body>
