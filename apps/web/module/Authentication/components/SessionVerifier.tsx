@@ -5,7 +5,6 @@ import useVerifySignIn from "@/common/hooks/useVerifySignIn"
 import { useRouter, useParams, useSearchParams } from "next/navigation"
 import toast from "react-hot-toast"
 import WholePageLoading from "@/common/components/WholePageLoading"
-import useOptMessageStore from "@/common/store/useOptMessageStore"
 
 const SessionVerifier = () => {
   const router = useRouter()
