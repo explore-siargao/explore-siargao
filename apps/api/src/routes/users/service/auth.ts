@@ -633,3 +633,46 @@ export const userDetails = async (req: Request, res: Response) => {
     })
   }
 }
+
+export const setCanReceivedEmail = async (req: Request, res: Response) => {
+  const prisma = new PrismaClient()
+  const userId = Number(req.params.userId)
+  try {
+    const user = await prisma.user.findFirst({
+      where: {
+        id: userId,
+      },
+    })
+    if (user !== null) {
+      const setCanRecievedEmail = await prisma.user.update({
+        where: {
+          canReceiveEmail: false,
+          id: userId,
+        },
+        data: {
+          canReceiveEmail: true,
+        },
+      })
+      res.json({
+        error: false,
+        item: setCanRecievedEmail,
+        itemCount: 1,
+        message: 'You will now received an email from exploreSiargao',
+      })
+    } else {
+      res.json({
+        error: true,
+        item: null,
+        itemCount: 0,
+        message: `You are not authorized to perform this action`,
+      })
+    }
+  } catch (err: any) {
+    res.json({
+      error: true,
+      item: null,
+      itemCount: 0,
+      message: err.message,
+    })
+  }
+}
