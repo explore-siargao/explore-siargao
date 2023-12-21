@@ -29,7 +29,7 @@
   },
   "engineStrict": true,
   "dependencies": {
-    "@googlemaps/js-api-loader": "^1.16.2",
-    "google-maps": "^4.3.3"
+    "@hookform/error-message": "^2.0.1",
+    "card-validator": "^9.0.0"
   }
 }

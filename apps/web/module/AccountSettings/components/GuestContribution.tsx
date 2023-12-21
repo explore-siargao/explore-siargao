@@ -1,7 +1,9 @@
 "use client"
 import { Title } from "@/common/components/ui/Title"
+import { Typography } from "@/common/components/ui/Typography"
 import combineClasses from "@/common/helpers/combineClasses"
 import { Switch } from "@headlessui/react"
+import Link from "next/link"
 import React, { useState } from "react"
 
 const GuestContribution = () => {
@@ -9,12 +11,12 @@ const GuestContribution = () => {
   return (
     <div className="my-5">
       <Title size={"sub"}>Guest contributions</Title>
-      <p className="font-light pb-4">
+      <Typography fontWeight={"light"} className="pb-4">
         To show their appreciation for great hospitality, guests can send an
         optional financial contribution to a host after completing a stay or an
         ExploreSiargao Experience. You can choose to automatically allow or
         decline future contributions from guests.
-      </p>
+      </Typography>
       <div className="flex justify-between border-b border-b-text-100 py-5">
         <label htmlFor="switchToggle" className="w-full">
           Allow contribution
@@ -38,15 +40,15 @@ const GuestContribution = () => {
           />
         </Switch>
       </div>
-      <p className="font-light mt-10">
+      <Typography fontWeight={"light"} className="mt-10">
         100% of all contributions will be deposited into your payout account,
         unless you have an account balance. Your payout is subject to the{" "}
-        <a href="/" className="font-semibold">
+        <Link href="/" className="font-semibold">
           Payment Terms of Service.
-        </a>{" "}
+        </Link>{" "}
         Please note that contributions may not be tax deductible or eligible for
         tax credits.
-      </p>
+      </Typography>
     </div>
   )
 }

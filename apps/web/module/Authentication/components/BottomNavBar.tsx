@@ -13,6 +13,8 @@ import {
 } from "@heroicons/react/24/outline"
 import React, { useEffect, useState } from "react"
 import Cookies from "js-cookie"
+import Link from "next/link"
+import { Typography } from "@/common/components/ui/Typography"
 
 const authenticatedNavBar = [
   { id: 1, link: "/", icon: MagnifyingGlassIcon, name: "Explore" },
@@ -73,29 +75,29 @@ const BottomNavBar = () => {
       {Cookies.get("accessToken") === undefined ? (
         <nav className="flex justify-center space-x-7 p-2" aria-label="Global">
           {authenticatedNavBar.map((item) => (
-            <a
+            <Link
               key={item.id}
               href={item.link}
               type="button"
               className="grid justify-items-center -m-1.5 text-text-400 text-xs focus:text-primary-700"
             >
               <item.icon className="h-7 w-auto" />
-              <p> {item.name}</p>
-            </a>
+              <Typography variant={"p"}> {item.name}</Typography>
+            </Link>
           ))}
         </nav>
       ) : (
         <nav className="flex justify-center space-x-7 p-2" aria-label="Global">
           {unauthenticatedNavBar.map((item) => (
-            <a
+            <Link
               href={item.link}
               key={item.id}
               type="button"
               className="grid justify-items-center -m-1.5 text-text-400 text-xs focus:text-primary-700"
             >
               <item.icon className="h-7 w-auto" />
-              <p> {item.name}</p>
-            </a>
+              <Typography variant={"p"}> {item.name}</Typography>
+            </Link>
           ))}
         </nav>
       )}

@@ -20,6 +20,7 @@ import { Input } from "@/common/components/ui/Input"
 import { signIn } from "next-auth/react"
 import { LINK_FORGOT_PASSWORD } from "../constants/links"
 import useGlobalInputEmail from "../store/useGlobalInputEmail"
+import { Typography } from "@/common/components/ui/Typography"
 
 enum Position {
   "end",
@@ -83,7 +84,10 @@ const LoginForm = () => {
           />
         </div>
         <div className="flex mt-2">
-          <p className="text-xs text-text-500 tracking-tighter">
+          <Typography
+            variant={"p"}
+            className="text-xs text-text-500 tracking-tighter"
+          >
             By signing in or creating an account, you agree with our{" "}
             <Link href="#" className="text-info-500 underline">
               Terms & conditions
@@ -92,7 +96,7 @@ const LoginForm = () => {
             <Link href="#" className="text-info-500 underline">
               Privacy statement.
             </Link>
-          </p>
+          </Typography>
         </div>
 
         <Button
@@ -123,7 +127,9 @@ const LoginForm = () => {
         </div>
         <div className="flex">
           <span className="border-b-2 h-0 w-full my-auto"></span>
-          <p className="text-xs mx-5">or</p>
+          <Typography variant={"p"} className="text-xs mx-5">
+            or
+          </Typography>
           <span className="border-b-2 shadow-md h-0 w-full my-auto"></span>
         </div>
         <div>

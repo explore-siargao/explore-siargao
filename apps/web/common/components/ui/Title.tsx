@@ -1,6 +1,7 @@
 import * as React from "react"
 import { cn } from "@/common/helpers/cn"
 import { VariantProps, cva } from "class-variance-authority"
+import { Typography } from "./Typography"
 const titleVariants = cva("font-semibold", {
   variants: {
     size: {
@@ -20,7 +21,11 @@ export interface TitleProps
 }
 const Title = React.forwardRef<HTMLDivElement, TitleProps>(
   ({ className, size, children }, ref) => {
-    return <p className={cn(titleVariants({ size, className }))}>{children}</p>
+    return (
+      <Typography className={cn(titleVariants({ size, className }))}>
+        {children}
+      </Typography>
+    )
   }
 )
 Title.displayName = "Title"

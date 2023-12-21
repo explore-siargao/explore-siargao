@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form"
 import useAddAddress from "../hooks/useAddAddress"
 import { useQueryClient } from "@tanstack/react-query"
 import toast from "react-hot-toast"
+import { Typography } from "@/common/components/ui/Typography"
 
 type PersonalInfoProps = {
   isButtonClicked: boolean
@@ -54,12 +55,12 @@ const Address = ({
       {!contentState.isButtonClicked ? (
         <div className="flex justify-between py-5">
           <div>
-            <h1>Address</h1>
-            <p className="font-light">
+            <Typography variant={"p"}>Address</Typography>
+            <Typography className="font-light">
               {zipCode
                 ? `${streetAddress} ${city}, ${province}, ${country}`
                 : "Enter an Address"}
-            </p>
+            </Typography>
           </div>
           <button
             onClick={() =>
@@ -76,7 +77,7 @@ const Address = ({
       ) : (
         <div className="grid py-5">
           <div className="flex justify-between">
-            <h1>Address</h1>
+            <Typography variant={"p"}>Address</Typography>
             <button
               className="underline self-start select-none"
               onClick={() =>
@@ -89,9 +90,9 @@ const Address = ({
               Cancel
             </button>
           </div>
-          <p className="font-light">
+          <Typography className="font-light">
             Use a permanent address where you can receive mail.
-          </p>
+          </Typography>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="my-4 space-y-4">
               <select
