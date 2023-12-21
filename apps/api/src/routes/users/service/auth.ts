@@ -609,6 +609,7 @@ export const userDetails = async (req: Request, res: Response) => {
         item: {
           id: user?.id,
           email: user?.email,
+          canreceivedEmail:user?.canReceiveEmail,
           RegistrationType: user?.registrationType,
           profilePicture: user?.profilePicture,
           personalInfo: user?.personalInfo,
@@ -638,7 +639,7 @@ export const setCanReceivedEmail = async (req: Request, res: Response) => {
   const prisma = new PrismaClient()
   const userId = Number(req.params.userId)
   try {
-    const user = await prisma.user.findFirst({
+    const user = await prisma.user.findUnique({
       where: {
         id: userId,
       },
@@ -646,7 +647,6 @@ export const setCanReceivedEmail = async (req: Request, res: Response) => {
     if (user !== null) {
       const setCanRecievedEmail = await prisma.user.update({
         where: {
-          canReceiveEmail: false,
           id: userId,
         },
         data: {
