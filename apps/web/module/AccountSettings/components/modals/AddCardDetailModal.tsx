@@ -14,6 +14,7 @@ import { useQueryClient } from "@tanstack/react-query"
 import toast from "react-hot-toast"
 import valid from "card-validator"
 import ErrorMessage from "../ui/ErrorMessage"
+import ModalContainerFooter from "@/common/components/ModalContainer/ModalContainerFooter"
 
 interface CardDetailModal {
   isOpen: boolean
@@ -71,7 +72,6 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
       clearErrors("cardNumber")
       if (validateNumber.isValid) {
         clearErrors("cardNumber")
-        console.log(validateNumber.isValid)
       } else {
         setError("cardNumber", {
           type: "manual",
@@ -143,15 +143,7 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
             >
               <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:w-full sm:max-w-lg ">
                 <form onSubmit={handleSubmit(onSubmit)}>
-                  <ModalContainer
-                    title="Add card details"
-                    onClose={onClose}
-                    positive="Save"
-                    negative="Cancel"
-                    isPending={isPending}
-                    isSubmit={true}
-                    onClick={() => null}
-                  >
+                  <ModalContainer title="Add card details" onClose={onClose}>
                     <div className="p-6 space-y-2">
                       <div className="flex gap-2">
                         <Image
@@ -184,7 +176,6 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
                         />
                       </div>
                       <div>
-
                         <ErrorMessage
                           title="Please check the following errors"
                           errors={[
@@ -301,6 +292,14 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
                         <option value="ITALIAN">Italian</option>
                       </select>
                     </div>
+                    <ModalContainerFooter
+                      isPending={isPending}
+                      isSubmit={true}
+                      positive="Save"
+                      negative="Cancel"
+                      onClose={onClose}
+                      buttonFn={() => null}
+                    />
                   </ModalContainer>
                 </form>
               </Dialog.Panel>
