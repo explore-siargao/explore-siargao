@@ -1,28 +1,38 @@
-import React, { useEffect } from "react"
-import { Loader, LoaderOptions } from "@googlemaps/js-api-loader"
+import React, { useState, useEffect } from "react"
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet"
 
 const Map = () => {
+  const [center, setCenter] = useState({ lat: 13.084622, lng: 80.248357 })
+  const [mapLoaded, setMapLoaded] = useState(false)
+  const ZOOM_LEVEL = 9
+
   useEffect(() => {
-    const loaderOptions: LoaderOptions = {
-      apiKey: "my-api-key", // Replace with your actual API key
-      version: "weekly", // Replace with the desired Google Maps API version
+    const fetchData = async () => {
+      await new Promise((resolve) => setTimeout(resolve, 1000))
+      setCenter({ lat: 13.084622, lng: 80.248357 })
+      setMapLoaded(true)
     }
 
-    const loader = new Loader(loaderOptions)
-
-    loader.load().then((google) => {
-      const mapElement = document.getElementById("map")
-
-      if (mapElement) {
-        const map = new google.maps.Map(mapElement, {
-          center: { lat: -34.397, lng: 150.644 },
-          zoom: 8,
-        })
-      }
-    })
+    fetchData()
   }, [])
 
-  return <div id="map" style={{ height: "400px" }}></div>
+  return (
+    <>
+      {mapLoaded && (
+        <MapContainer center={center} zoom={13} scrollWheelZoom={false}>
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          <Marker position={center}>
+            <Popup>
+              A pretty CSS3 popup. <br /> Easily customizable.
+            </Popup>
+          </Marker>
+        </MapContainer>
+      )}
+    </>
+  )
 }
 
 export default Map

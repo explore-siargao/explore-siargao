@@ -9,6 +9,7 @@ import {
   StarIcon,
 } from "@heroicons/react/20/solid"
 import { Typography } from "./ui/Typography"
+import AddNoteModal from "@/module/AccountSettings/components/modals/AddNoteModal"
 type ItemData = {
   id: number
   photo: string
@@ -37,6 +38,7 @@ const WishlistsItemContainer = ({
   const handleClick = () => {
     setIsClicked((setIsClicked) => !setIsClicked)
   }
+  const [addNote, setAddNote] = useState(false)
   const [contentState, setContentState] = useState({
     isButtonClicked: false,
     buttonId: "",
@@ -67,11 +69,19 @@ const WishlistsItemContainer = ({
         <Title className="w-full text-left place-self-center font-semibold ml-4">
           asd
         </Title>
+        <div className="flex">
+          <div className="border-2 border-text-100 rounded-full hover:border-text-300 p-2">
+            Add dates
+          </div>
+          <div className="border-2 border-text-100 rounded-full hover:border-text-300 p-2">
+            1 guest
+          </div>
+        </div>
       </div>
       <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 mx-auto w-full max-w-[2520px] justify-center">
         {datas.map((item) => (
           <li>
-            <div className="h-80 w-auto 2xl:h-72 2xl:w-auto rounded-2xl relative select-none">
+            <div className="h-72 2xl:w-auto rounded-2xl relative select-none">
               <HeartIcon
                 className={`absolute top-3 right-3 h-7 w-7 text-text-50 active:scale-90 ${
                   isClicked ? "fill-error-500" : "fill-text-500/50 "
@@ -135,17 +145,19 @@ const WishlistsItemContainer = ({
                   //     isButtonClicked: true,
                   //   })
                   // }
+                  onClick={() => setAddNote(true)}
                   className="text-text-300 underline hover:text-text-700 select-none "
                 >
                   Add a note
                 </button>
               ) : (
-                "asd"
+                "Notes"
               )}
             </div>
           </li>
         ))}
       </ul>
+      <AddNoteModal isOpen={addNote} onClose={() => setAddNote(false)} />
     </>
   )
 }

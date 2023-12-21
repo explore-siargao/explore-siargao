@@ -1,4 +1,4 @@
-import "./globals.css"
+import "@/app/globals.css"
 import React from "react"
 import BottomNavBar from "@/module/Authentication/components/BottomNavBar"
 import Header from "@/module/LandingPage/components/Header"

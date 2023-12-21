@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import { Nunito } from "next/font/google"
-import "./globals.css"
+import "@/app/globals.css"
 import QueryClientWrapper from "@/common/components/QueryClientWrapper"
 import GlobalModalWrapper from "@/common/components/GlobalModalWrapper"
 import { Toaster } from "react-hot-toast"
