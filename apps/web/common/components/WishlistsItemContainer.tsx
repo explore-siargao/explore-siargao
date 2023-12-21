@@ -2,8 +2,12 @@
 import Image from "next/image"
 import React, { useState } from "react"
 import { Title } from "./ui/Title"
-import { ArrowLeftIcon, HeartIcon } from "@heroicons/react/24/outline"
-import { StarIcon } from "@heroicons/react/20/solid"
+import { HeartIcon, ShareIcon } from "@heroicons/react/24/outline"
+import {
+  ArrowLeftIcon,
+  ArrowUpTrayIcon,
+  StarIcon,
+} from "@heroicons/react/20/solid"
 import { Typography } from "./ui/Typography"
 type ItemData = {
   id: number
@@ -15,6 +19,7 @@ type ItemData = {
   dayTime: string
   ratings: string
   reviews: number
+  wishlistName: string
 }
 
 type WishlistsItemCProps = {
@@ -34,23 +39,34 @@ const WishlistsItemContainer = ({
   }
   const [contentState, setContentState] = useState({
     isButtonClicked: false,
-    contentId: "",
+    buttonId: "",
   })
   return (
     <>
-      <div className="flex border-b-gray-200 border-b p-4">
+      <div className="fixed w-[920px] 2xl:w-[1000px] top-24 bg-white z-50 flex border-b-gray-200 border-b py-4 items-center">
         <ArrowLeftIcon
-          className="h-6 w-6 cursor-pointer rounded-full hover:bg-gray-300/30"
+          className="h-10 w-10 cursor-pointer rounded-full hover:bg-gray-50 p-2 -ml-3"
           //   onClick={() => router.push(LINK_ACCOUNT_WISHLIST)}
         />
         <div className="flex-1">
           <Typography
             variant={"h4"}
-            className={`w-full text-left place-self-center font-semibold`}
+            className="w-full text-left place-self-center font-semibold ml-4"
           >
-            <span className="ml-4"></span>
+            asd{" "}
           </Typography>
         </div>
+        <div className="flex gap-3">
+          <ArrowUpTrayIcon className="h-10 w-10 cursor-pointer rounded-full hover:bg-gray-50 p-2" />
+          <button className="h-10 w-10 cursor-pointer rounded-full hover:bg-gray-50 p-2 text-xs">
+            •••
+          </button>
+        </div>
+      </div>
+      <div>
+        <Title className="w-full text-left place-self-center font-semibold ml-4">
+          asd
+        </Title>
       </div>
       <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 mx-auto w-full max-w-[2520px] justify-center">
         {datas.map((item) => (
@@ -93,7 +109,7 @@ const WishlistsItemContainer = ({
               </Typography>
             </div>
             <div>
-              {!contentState.isButtonClicked ? (
+              {/* {!contentState.isButtonClicked ? (
                 <div className="flex justify-between py-5">
                   <button
                     onClick={() =>
@@ -111,6 +127,20 @@ const WishlistsItemContainer = ({
                 <div className="grid py-5">
                   <Typography>Typography</Typography>
                 </div>
+              )} */}
+              {isButtonClicked === false ? (
+                <button
+                  // onClick={() =>
+                  //   setContentState({
+                  //     isButtonClicked: true,
+                  //   })
+                  // }
+                  className="text-text-300 underline hover:text-text-700 select-none "
+                >
+                  Add a note
+                </button>
+              ) : (
+                "asd"
               )}
             </div>
           </li>

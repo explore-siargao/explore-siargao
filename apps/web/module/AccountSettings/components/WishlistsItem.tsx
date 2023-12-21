@@ -21,6 +21,7 @@ const tripGroup = [
     dayTime: "night",
     ratings: "5.0",
     reviews: "200",
+    wishlistName: "Siargao",
   },
   {
     id: 2,
@@ -32,6 +33,7 @@ const tripGroup = [
     dayTime: "night",
     ratings: "5.0",
     reviews: "200",
+    wishlistName: "Siargao",
   },
   {
     id: 3,
@@ -43,6 +45,7 @@ const tripGroup = [
     dayTime: "night",
     ratings: "5.0",
     reviews: "200",
+    wishlistName: "Siargao",
   },
   {
     id: 4,
@@ -54,6 +57,7 @@ const tripGroup = [
     dayTime: "night",
     ratings: "5.0",
     reviews: "200",
+    wishlistName: "Siargao",
   },
   {
     id: 5,
@@ -65,6 +69,7 @@ const tripGroup = [
     dayTime: "night",
     ratings: "5.0",
     reviews: "200",
+    wishlistName: "Siargao",
   },
   {
     id: 6,
@@ -76,6 +81,7 @@ const tripGroup = [
     dayTime: "night",
     ratings: "5.0",
     reviews: "200",
+    wishlistName: "Siargao",
   },
   {
     id: 7,
@@ -87,6 +93,7 @@ const tripGroup = [
     dayTime: "night",
     ratings: "5.0",
     reviews: "200",
+    wishlistName: "Siargao",
   },
   {
     id: 8,
@@ -98,6 +105,7 @@ const tripGroup = [
     dayTime: "night",
     ratings: "5.0",
     reviews: "200",
+    wishlistName: "Siargao",
   },
   {
     id: 9,
@@ -109,6 +117,7 @@ const tripGroup = [
     dayTime: "night",
     ratings: "5.0",
     reviews: "200",
+    wishlistName: "Siargao",
   },
   {
     id: 10,
@@ -120,14 +129,16 @@ const tripGroup = [
     dayTime: "night",
     ratings: "5.0",
     reviews: "200",
+    wishlistName: "Siargao",
   },
 ]
 const WishlistsItem = () => {
   const router = useRouter()
   return (
-    <WidthWrapper width={"full"} className="mt-24 lg:mt-32 h-screen">
-      <div className="flex bg-slate-100 h-full">
-        <div className="bg-red-100 w-[920px] 2xl:w-[1000px]">
+    <WidthWrapper width={"full"} className="pt-24 lg:pt-44">
+      <div className="flex h-full">
+        <div className="w-[920px] 2xl:w-[1000px]">
+          {/* @ts-ignore */}
           <WishlistsItemContainer datas={tripGroup} />
         </div>
         <div className="h-full">
