@@ -9,8 +9,6 @@ import useGetPersonalInfo from "@/common/hooks/useGetPersonalInfo"
 import useSetReceivedEmail from "../hooks/useSetReceivedEmail"
 import toast from "react-hot-toast"
 import { useForm } from "react-hook-form"
-import Email from "next-auth/providers/email"
-import { isPagesAPIRouteMatch } from "next/dist/server/future/route-matches/pages-api-route-match"
 import { Spinner } from "@/common/components/ui/Spinner"
 interface OptChecked {
   isChecked: boolean

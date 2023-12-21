@@ -1,7 +1,6 @@
 import { API_URL_USERS } from "@repo/constants"
 import { useMutation } from "@tanstack/react-query"
 import { ApiService } from "@/common/service/api"
-import { IUser } from "@/common/types/global"
 
 export async function setReceivedEmail(userId: number | undefined) {
   const apiService = new ApiService()
