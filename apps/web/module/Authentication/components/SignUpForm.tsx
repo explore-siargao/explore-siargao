@@ -24,6 +24,7 @@ import {
 } from "../constants"
 import useGlobalInputEmail from "../store/useGlobalInputEmail"
 import { Typography } from "@/common/components/ui/Typography"
+import useOptMessageStore from "@/common/store/useOptMessageStore"
 
 type Props = {
   isSocial?: boolean
@@ -66,10 +67,11 @@ const SignUpForm = ({ isSocial = false }: Props) => {
               callbackUrl: "/",
               username: formData.email,
               password: formData.password,
+              redirect:false
             })
-          } else {
-            router.push("/")
-          }
+          } 
+          setIsOpen()
+          router.push("/")
         } else {
           toast.error(String(data.message))
         }
@@ -93,6 +95,7 @@ const SignUpForm = ({ isSocial = false }: Props) => {
       callBackReq
     )
   }
+  const setIsOpen = useOptMessageStore((state)=>state.setIsOpen)
 
   return (
     <div className="p-6">

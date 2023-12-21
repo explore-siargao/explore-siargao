@@ -18,6 +18,7 @@ model User {
   email            String            @unique @db.VarChar(255)
   password         String?           @db.VarChar(255)
   profilePicture   String?           @db.LongText()
+  canReceiveEmail  Boolean           @default(false)
   createdAt        DateTime          @default(now())
   updatedAt        DateTime          @updatedAt
   deletedAt        DateTime?

@@ -4,10 +4,8 @@ import BookingBoxContainer from "@/common/components/BookingBoxContainer"
 import { WidthWrapper } from "@/common/components/WidthWrapper"
 import useGetAllBookings from "../LandingPage/hooks/useGetAllBookings"
 import { Spinner } from "@/common/components/ui/Spinner"
-import OptMessageModal from "../Authentication/modal/OptMessageModal"
 
 const Bookings = () => {
-  const [optMessage,setOptMessage] = useState<boolean>(false)
   const { data, isPending } = useGetAllBookings()
   return (
     <WidthWrapper className="my-24 lg:my-32">
