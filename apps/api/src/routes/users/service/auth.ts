@@ -11,11 +11,12 @@ import { decode } from 'next-auth/jwt'
 import { capitalize } from 'lodash'
 
 const prisma = new PrismaClient()
-const cryptoRandom =()=> {
-  const randomBytes = CryptoJS.lib.WordArray.random(8); // Use 8 bytes for a double-precision float
-  const randomHash = CryptoJS.SHA256(randomBytes.toString(CryptoJS.enc.Hex));
-  const normalizedFloat = parseInt(randomHash.toString(CryptoJS.enc.Hex), 16) / Math.pow(2, 256);
-  return normalizedFloat;
+const cryptoRandom = () => {
+  const randomBytes = CryptoJS.lib.WordArray.random(8) // Use 8 bytes for a double-precision float
+  const randomHash = CryptoJS.SHA256(randomBytes.toString(CryptoJS.enc.Hex))
+  const normalizedFloat =
+    parseInt(randomHash.toString(CryptoJS.enc.Hex), 16) / Math.pow(2, 256)
+  return normalizedFloat
 }
 export const verifySignIn = async (req: Request, res: Response) => {
   const { type, email } = req.query
@@ -291,7 +292,7 @@ export const forgot = async (req: Request, res: Response) => {
           },
         },
       })
-   
+
       const code = Math.floor(100000 + cryptoRandom() * 900000)
       const successMessage = `Email was sent to ${email}, please check before it expires.`
       const webVerifyUrl = `${webUrl}/new-password?email=${email}&code=${code}`
