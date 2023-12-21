@@ -13,6 +13,9 @@ const authOptions: NextAuthOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_SECRET_ID as string,
+      authorization: {
+        params: { prompt: 'select_account' },
+      },
     }),
     Credentials({
       credentials: {
