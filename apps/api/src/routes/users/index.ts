@@ -56,7 +56,7 @@ router.post(
   isCsrfTokenValid,
   forgotVerify
 )
-router.post('/auth/mfa', isOriginValid, isCsrfTokenValid, mfa)
+router.post('/auth/mfa', mfa)
 router.post('/auth/mfa/verify', isOriginValid, isCsrfTokenValid, mfaVerify)
 router.patch('/auth/:userId', isCsrfTokenValid, isOriginValid, updateUserEmail)
 router.get(
