@@ -5,11 +5,43 @@ import { Typography } from "@/common/components/ui/Typography"
 import useOptMessageStore from "@/common/store/useOptMessageStore"
 import { CheckCircleIcon } from "@heroicons/react/24/outline"
 import { Button } from "@/common/components/ui/Button"
+import useGetPersonalInfo from "@/common/hooks/useGetPersonalInfo"
+import useSetReceivedEmail from "../hooks/useSetReceivedEmail"
+import toast from "react-hot-toast"
+import { useForm } from "react-hook-form"
+import { Spinner } from "@/common/components/ui/Spinner"
+interface OptChecked {
+  isChecked: boolean
+}
 const OptMessageModal = () => {
   const isOpen = useOptMessageStore((state) => state.isOpen)
   const closeModal = useOptMessageStore((state) => state.setIsClose)
   const cancelButtonRef = useRef(null)
-  return (
+  const { data, isPending } = useGetPersonalInfo()
+  const callBackReq = {
+    onSuccess: (data: any) => {
+      if (!data.error) {
+        toast.success(data.message)
+        closeModal()
+      } else {
+        toast.error(String(data.message))
+      }
+    },
+    onError: (err: any) => {
+      toast.error(String(err))
+    },
+  }
+  const {
+    mutate: setCanReceivedEmail,
+    isPending: IsPendingCetCanReceivedEmail,
+  } = useSetReceivedEmail(isPending ? 0 : data?.item?.id, {
+    onSuccess: callBackReq.onSuccess,
+    onError: callBackReq.onError,
+  })
+  const { register, getValues } = useForm<OptChecked>()
+  return isPending ? (
+    ""
+  ) : (
     <Transition.Root show={isOpen} as={Fragment}>
       <Dialog
         as="div"
@@ -51,14 +83,25 @@ const OptMessageModal = () => {
                     <Button
                       variant={"secondary"}
                       className="w-full mt-4"
-                      onClick={() => closeModal()}
+                      onClick={() => {
+                        if (getValues("isChecked")) {
+                          setCanReceivedEmail()
+                        } else {
+                          closeModal()
+                        }
+                      }}
+                      disabled={IsPendingCetCanReceivedEmail}
                     >
-                      OK
+                      {IsPendingCetCanReceivedEmail ? (
+                        <Spinner>Loading...</Spinner>
+                      ) : (
+                        "OK"
+                      )}
                     </Button>
                     <div className="flex  mt-6">
                       <input
                         id="recieved"
-                        name="recieved"
+                        {...register("isChecked")}
                         type="checkbox"
                         className="h-6 w-6 rounded border-gray-400 text-secondary-600 focus:ring-transparent"
                       />
