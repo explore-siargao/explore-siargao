@@ -7,6 +7,7 @@ import {
   addToExistingWishGroup,
   addWishGroup,
   getWishGroupsByUser,
+  wishGroupByUserAndTitle,
 } from './service/wishGroup'
 import isUserLoggedIn from '@/common/middleware/auth/isUserLoggedIn'
 
@@ -19,7 +20,6 @@ router.post(
   '/:hostId',
   isOriginValid,
   isCsrfTokenValid,
-  isUserLoggedIn,
   addListing
 )
 router.get(
@@ -29,11 +29,35 @@ router.get(
   isUserLoggedIn,
   getWishGroupsByUser
 )
+router.get(
+  '/:userId/wishes',
+isOriginValid,
+isCsrfTokenValid,
+isUserLoggedIn,
+wishGroupByUserAndTitle
+)
 
-router.post('/:userId/wish/:listingId', addWishGroup)
-router.post('/:userId/wish', addNewWishGroup)
+router.post(
+'/:userId/wish/:listingId',
+isOriginValid,
+isCsrfTokenValid,
+isUserLoggedIn,
+addWishGroup
+)
+
+router.post(
+'/:userId/wish',
+isOriginValid,
+isCsrfTokenValid,
+isUserLoggedIn,
+addNewWishGroup
+)
+
 router.post(
   '/:userId/:wishGroupId/add-existing-group/:listingId',
+  isOriginValid,
+  isCsrfTokenValid,
+  isUserLoggedIn,
   addToExistingWishGroup
 )
 

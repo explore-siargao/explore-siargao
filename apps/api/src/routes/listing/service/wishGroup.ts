@@ -54,6 +54,46 @@ export const getWishGroupsByUser = async (req: Request, res: Response) => {
   }
 }
 
+export const wishGroupByUserAndTitle = async(req:Request, res:Response)=>{
+const userId = Number(req.params.userId)
+const title = req.body.title
+try {
+  const getUser =  await prisma.user.findUnique({
+    where:{
+      id:userId,
+    }
+  })
+  if(getUser!==null){
+    const getWishGroupByuserAndTitle = await prisma.wishGroup.findMany({
+      where:{
+        title:title,
+        userId:userId
+      }
+    })
+    res.json({
+      error:false,
+      items:getWishGroupByuserAndTitle,
+      itemCount:getWishGroupByuserAndTitle.length,
+      message:""
+    })
+  }else{
+    res.json({
+      error: true,
+      items: null,
+      itemCount: 0,
+      message:"User not found in our system"
+    })
+  }
+} catch (err:any) {
+  res.json({
+    error: true,
+    items: null,
+    itemCount: 0,
+    message: err.message,
+  })
+}
+}
+
 export const addWishGroup = async (req: Request, res: Response) => {
   const userId = Number(req.params.userId)
   const listingId = Number(req.params.listingId)
