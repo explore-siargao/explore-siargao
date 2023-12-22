@@ -2,13 +2,11 @@
 import React, { useState } from "react"
 import AccountSettingWrapper from "@/common/components/AccountSettingWrapper"
 import { Title } from "@/common/components/ui/Title"
-import { ChevronRightIcon } from "@heroicons/react/20/solid"
 import { LINK_ACCOUNT_SETTINGS } from "@/common/constants/links"
 import combineClasses from "@/common/helpers/combineClasses"
 import Payments from "./components/Payments"
 import Payouts from "./components/Payouts"
 import GuestContribution from "./components/GuestContribution"
-import Link from "next/link"
 import { Breadcrumb } from "@/common/components/ui/Breadcrumb"
 
 const renderPayments = () => {
@@ -33,7 +31,7 @@ const PaymentPayout = () => {
   }
   return (
     <AccountSettingWrapper>
-      <div className="mb-10">
+      <div>
         <Breadcrumb
           home="Account"
           page="Payments & payouts"

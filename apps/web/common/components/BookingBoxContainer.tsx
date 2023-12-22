@@ -4,6 +4,7 @@ import React, { useState } from "react"
 import { Title } from "./ui/Title"
 import { HeartIcon } from "@heroicons/react/24/outline"
 import { StarIcon } from "@heroicons/react/20/solid"
+import { Typography } from "./ui/Typography"
 
 type BookingProps = {
   photo: string
@@ -56,12 +57,15 @@ const BookingBoxContainer = ({
           </div>
         </div>
         <div className="text-text-300 text-sm">
-          <p>{distance}</p>
-          <p>{date}</p>
+          <Typography variant={"p"}>{distance}</Typography>
+          <Typography variant={"p"}>{date}</Typography>
         </div>
-        <p className="text-text-700 font-semibold underline">
+        <Typography
+          variant={"p"}
+          className="text-text-700 font-semibold underline"
+        >
           {price} <span className="font-normal">{dayTime}</span>
-        </p>
+        </Typography>
       </div>
     </li>
   )

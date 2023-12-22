@@ -11,7 +11,13 @@ import { decode } from 'next-auth/jwt'
 import { capitalize } from 'lodash'
 
 const prisma = new PrismaClient()
-
+const cryptoRandom = () => {
+  const randomBytes = CryptoJS.lib.WordArray.random(8) // Use 8 bytes for a double-precision float
+  const randomHash = CryptoJS.SHA256(randomBytes.toString(CryptoJS.enc.Hex))
+  const normalizedFloat =
+    parseInt(randomHash.toString(CryptoJS.enc.Hex), 16) / Math.pow(2, 256)
+  return normalizedFloat
+}
 export const verifySignIn = async (req: Request, res: Response) => {
   const { type, email } = req.query
   if (type && email) {
@@ -286,7 +292,8 @@ export const forgot = async (req: Request, res: Response) => {
           },
         },
       })
-      const code = Math.floor(100000 + Math.random() * 900000)
+
+      const code = Math.floor(100000 + cryptoRandom() * 900000)
       const successMessage = `Email was sent to ${email}, please check before it expires.`
       const webVerifyUrl = `${webUrl}/new-password?email=${email}&code=${code}`
       const sendEmailParams = { to: email, magicLink: webVerifyUrl }
@@ -416,7 +423,8 @@ export const mfa = async (req: Request, res: Response) => {
           },
         },
       })
-      const code = Math.floor(100000 + Math.random() * 900000)
+
+      const code = Math.floor(100000 + cryptoRandom() * 900000)
       const successMessage = `Email was sent to ${user.email}, please check before it expires.`
       const sendEmailParams = { to: user.email, code: String(code) }
       const authEmail = new AuthEmail()
@@ -609,6 +617,7 @@ export const userDetails = async (req: Request, res: Response) => {
         item: {
           id: user?.id,
           email: user?.email,
+          canreceivedEmail: user?.canReceiveEmail,
           RegistrationType: user?.registrationType,
           profilePicture: user?.profilePicture,
           personalInfo: user?.personalInfo,
@@ -630,6 +639,48 @@ export const userDetails = async (req: Request, res: Response) => {
       item: null,
       itemCount: 0,
       message: `You are not authorized to perform this action`,
+    })
+  }
+}
+
+export const setCanReceivedEmail = async (req: Request, res: Response) => {
+  const prisma = new PrismaClient()
+  const userId = Number(req.params.userId)
+  try {
+    const user = await prisma.user.findUnique({
+      where: {
+        id: userId,
+      },
+    })
+    if (user !== null) {
+      const setCanRecievedEmail = await prisma.user.update({
+        where: {
+          id: userId,
+        },
+        data: {
+          canReceiveEmail: true,
+        },
+      })
+      res.json({
+        error: false,
+        item: setCanRecievedEmail,
+        itemCount: 1,
+        message: 'You will now received an email from exploreSiargao',
+      })
+    } else {
+      res.json({
+        error: true,
+        item: null,
+        itemCount: 0,
+        message: `You are not authorized to perform this action`,
+      })
+    }
+  } catch (err: any) {
+    res.json({
+      error: true,
+      item: null,
+      itemCount: 0,
+      message: err.message,
     })
   }
 }

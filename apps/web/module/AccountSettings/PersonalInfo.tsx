@@ -1,7 +1,6 @@
 "use client"
 import AccountSettingWrapper from "@/common/components/AccountSettingWrapper"
 import { LINK_ACCOUNT_SETTINGS } from "@/common/constants/links"
-import { ChevronRightIcon } from "@heroicons/react/20/solid"
 import React from "react"
 import LegalName from "./components/LegalName"
 import EmailAddress from "./components/EmailAddress"
@@ -11,14 +10,13 @@ import Address from "./components/Address"
 import EmergencyContact from "./components/EmergencyContact"
 import { Title } from "@/common/components/ui/Title"
 import useGetPersonalInfo from "@/common/hooks/useGetPersonalInfo"
-import Link from "next/link"
 import { Breadcrumb } from "@/common/components/ui/Breadcrumb"
 
 const PersonalInfo = () => {
   const { data, isPending } = useGetPersonalInfo()
   return (
     <AccountSettingWrapper>
-      <div className="mb-10">
+      <div>
         <Breadcrumb
           home="Account"
           page="Personal info"

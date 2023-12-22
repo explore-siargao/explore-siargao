@@ -58,7 +58,7 @@ export class ApiService {
     return (await res).json()
   }
 
-  async patch(endpoint: string, body: any) {
+  async patch(endpoint: string, body?: any) {
     const otherOptions = this.constructOtherOptions()
 
     const res = fetch(`${this.BASE_URL}${endpoint}`, {

@@ -17,6 +17,7 @@ import { useQueryClient } from "@tanstack/react-query"
 import useGetPersonalInfo from "@/common/hooks/useGetPersonalInfo"
 import { useForm } from "react-hook-form"
 import useUpdateCoupon from "../hooks/useUpdateCoupon"
+import { Typography } from "@/common/components/ui/Typography"
 
 const Payments = () => {
   const router = useRouter()
@@ -80,19 +81,19 @@ const Payments = () => {
         <div className="space-y-10 my-5">
           <div>
             <Title size={"sub"}>Your payments</Title>
-            <p className="font-light pb-4">
+            <Typography fontWeight={"light"} className="pb-4">
               Keep track of all your payments and refunds.
-            </p>
+            </Typography>
             <Button onClick={() => router.push(LINK_ACCOUNT_YOUR_PAYMENT)}>
               Manage payments
             </Button>
           </div>
           <div>
             <Title size={"sub"}>Payment methods</Title>
-            <p className="font-light py-3">
+            <Typography fontWeight={"light"} className="py-3">
               Add a payment method using our secure payment system, then start
               planning your next trip.
-            </p>
+            </Typography>
             {paymentMethods?.items?.length !== 0 ? (
               paymentMethods?.items?.map((paymentMethod: IPaymentMethod) => (
                 <div
@@ -108,7 +109,7 @@ const Payments = () => {
                       alt="mastercard"
                     />
                     <div className="text-sm">
-                      <p>
+                      <Typography>
                         MasterCard {""}
                         <span className="font-medium">
                           **** {paymentMethod?.cardNumber?.slice(-3)}{" "}
@@ -120,13 +121,13 @@ const Payments = () => {
                         ) : (
                           ""
                         )}
-                      </p>
-                      <p>
+                      </Typography>
+                      <Typography>
                         Expiration:
                         <span className="font-medium">
                           {paymentMethod.expirationDate}
                         </span>{" "}
-                      </p>
+                      </Typography>
                     </div>
                   </div>
                   <Popover className="relative">
@@ -202,8 +203,8 @@ const Payments = () => {
           <div className="space-y-4">
             <Title size={"sub"}>Coupons</Title>
             <div className="flex justify-between border-y border-y-text-100  py-4">
-              <p className="font-light">Your coupons</p>
-              <p>0</p>
+              <Typography fontWeight={"light"}>Your coupons</Typography>
+              <Typography>0</Typography>
             </div>
             {showHide === false ? (
               <Button onClick={toggleVisibility}>Add coupon</Button>
