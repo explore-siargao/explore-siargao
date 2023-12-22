@@ -40,7 +40,12 @@ const LandingPageMenu = () => {
   return (
     <Popover className="relative">
       <Popover.Button
-        onClick={() => setTimeout(() => setMenuIsVisible(true), 500)}
+        onClick={(e) =>{
+          e.preventDefault()
+          !menuIsVisible ?
+          setMenuIsVisible(true) :
+          setMenuIsVisible(false)
+        }}
         className="flex gap-1 rounded-full border-text-50 border items-center focus:ring-gray-400 focus:border-gray-400 px-2 py-1"
       >
         <Bars3Icon className="h-5 text-text-200" />
@@ -66,11 +71,10 @@ const LandingPageMenu = () => {
                   <Link
                     href={item.href}
                     className="font-semibold text-gray-800"
-                    onClick={() =>
-                      menuIsVisible
-                        ? setMenuIsVisible(false)
-                        : setMenuIsVisible(true)
-                    }
+                    onClick={(e) =>{
+                      e.preventDefault();
+                      setMenuIsVisible(false)
+                    }}
                   >
                     {item.name}
                     <span className="absolute inset-0" />
