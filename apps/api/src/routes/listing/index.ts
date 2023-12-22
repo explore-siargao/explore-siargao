@@ -16,12 +16,7 @@ const router = express.Router()
 // DEFAULT
 router.get('/', getAllListing)
 router.get('/:id', isCsrfTokenValid, isOriginValid, getListing)
-router.post(
-  '/:hostId',
-  isOriginValid,
-  isCsrfTokenValid,
-  addListing
-)
+router.post('/:hostId', isOriginValid, isCsrfTokenValid, addListing)
 router.get(
   '/:userId/wish-group',
   isOriginValid,
@@ -31,26 +26,26 @@ router.get(
 )
 router.get(
   '/:userId/wishes',
-isOriginValid,
-isCsrfTokenValid,
-isUserLoggedIn,
-wishGroupByUserAndTitle
+  isOriginValid,
+  isCsrfTokenValid,
+  isUserLoggedIn,
+  wishGroupByUserAndTitle
 )
 
 router.post(
-'/:userId/wish/:listingId',
-isOriginValid,
-isCsrfTokenValid,
-isUserLoggedIn,
-addWishGroup
+  '/:userId/wish/:listingId',
+  isOriginValid,
+  isCsrfTokenValid,
+  isUserLoggedIn,
+  addWishGroup
 )
 
 router.post(
-'/:userId/wish',
-isOriginValid,
-isCsrfTokenValid,
-isUserLoggedIn,
-addNewWishGroup
+  '/:userId/wish',
+  isOriginValid,
+  isCsrfTokenValid,
+  isUserLoggedIn,
+  addNewWishGroup
 )
 
 router.post(
