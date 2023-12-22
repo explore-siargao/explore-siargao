@@ -1,6 +1,5 @@
 import type { Metadata } from "next"
 import { Nunito } from "next/font/google"
-import "@/app/globals.css"
 import QueryClientWrapper from "@/common/components/QueryClientWrapper"
 import { Toaster } from "react-hot-toast"
 import React from "react"
@@ -10,6 +9,7 @@ import { LOGO_SINGLE_IMAGE } from "@/common/constants/index"
 import authOptions from "@/common/helpers/authOptions"
 import { APP_NAME } from "@repo/constants"
 import GlobalModalWrapper from "@/common/components/GlobalModalWrapper"
+import "@/app/globals.css"
 
 const nunito = Nunito({ subsets: ["latin"] })
 

@@ -2,14 +2,20 @@
 import Image from "next/image"
 import React, { useState } from "react"
 import { Title } from "./ui/Title"
-import { HeartIcon, ShareIcon } from "@heroicons/react/24/outline"
+import {
+  DocumentDuplicateIcon,
+  HeartIcon,
+  ShareIcon,
+} from "@heroicons/react/24/outline"
 import {
   ArrowLeftIcon,
   ArrowUpTrayIcon,
+  CheckCircleIcon,
   StarIcon,
 } from "@heroicons/react/20/solid"
 import { Typography } from "./ui/Typography"
 import AddNoteModal from "@/module/AccountSettings/components/modals/AddNoteModal"
+import toast from "react-hot-toast"
 type ItemData = {
   id: number
   photo: string
@@ -44,43 +50,55 @@ const WishlistsItemContainer = ({
     buttonId: "",
   })
   return (
-    <>
-      <div className="fixed w-[920px] 2xl:w-[1000px] top-24 bg-white z-50 flex border-b-gray-200 border-b py-4 items-center">
+    <div className="flex flex-col w-full xl:w-[920px]">
+      <div className="sticky w-full 2xl:w-[920px] top-16 md:top-28 bg-white z-50 flex border-b-gray-200 border-b py-4 items-center">
         <ArrowLeftIcon
           className="h-10 w-10 cursor-pointer rounded-full hover:bg-gray-50 p-2 -ml-3"
           //   onClick={() => router.push(LINK_ACCOUNT_WISHLIST)}
         />
-        <div className="flex-1">
-          <Typography
-            variant={"h4"}
-            className="w-full text-left place-self-center font-semibold ml-4"
-          >
-            asd{" "}
-          </Typography>
-        </div>
+
+        <Typography
+          variant={"h4"}
+          className="w-full text-left place-self-center font-semibold ml-4"
+        >
+          asd{" "}
+        </Typography>
         <div className="flex gap-3">
-          <ArrowUpTrayIcon className="h-10 w-10 cursor-pointer rounded-full hover:bg-gray-50 p-2" />
+          <DocumentDuplicateIcon
+            onClick={() =>
+              toast("Link copied!", {
+                icon: <CheckCircleIcon className="h-5 w-5 text-success-500" />,
+              })
+            }
+            className="h-10 w-10 cursor-pointer rounded-full hover:bg-gray-50 p-2"
+          />
           <button className="h-10 w-10 cursor-pointer rounded-full hover:bg-gray-50 p-2 text-xs">
             •••
           </button>
         </div>
       </div>
       <div>
-        <Title className="w-full text-left place-self-center font-semibold ml-4">
-          asd
+        <Title className="w-full text-left place-self-center font-semibold">
+          Wishlist title
         </Title>
         <div className="flex">
-          <div className="border-2 border-text-100 rounded-full hover:border-text-300 p-2">
+          <Typography
+            variant={"h5"}
+            className="border-2 border-text-100 rounded-full hover:border-text-300 p-2"
+          >
             Add dates
-          </div>
-          <div className="border-2 border-text-100 rounded-full hover:border-text-300 p-2">
+          </Typography>
+          <Typography
+            variant={"h5"}
+            className="border-2 border-text-100 rounded-full hover:border-text-300 p-2"
+          >
             1 guest
-          </div>
+          </Typography>
         </div>
       </div>
       <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 mx-auto w-full max-w-[2520px] justify-center">
         {datas.map((item) => (
-          <li>
+          <li key={item.id}>
             <div className="h-72 2xl:w-auto rounded-2xl relative select-none">
               <HeartIcon
                 className={`absolute top-3 right-3 h-7 w-7 text-text-50 active:scale-90 ${
@@ -107,7 +125,7 @@ const WishlistsItemContainer = ({
                 </div>
               </div>
               <div className="text-text-300 text-sm">
-                <p>{item.distance}</p>
+                <Typography>{item.distance}</Typography>
                 <p>{item.date}</p>
               </div>
               <Typography
@@ -158,7 +176,7 @@ const WishlistsItemContainer = ({
         ))}
       </ul>
       <AddNoteModal isOpen={addNote} onClose={() => setAddNote(false)} />
-    </>
+    </div>
   )
 }
 

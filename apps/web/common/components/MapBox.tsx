@@ -1,23 +1,33 @@
+import { MapPinIcon } from "@heroicons/react/20/solid"
 import React, { useState } from "react"
-import ReactMapGL from "react-map-gl"
+import Map, { Marker } from "react-map-gl"
 
-const MapboxMap = () => {
-  const [viewport, setViewport] = useState({
-    width: "100%",
-    height: "500px",
-    latitude: 37.7577,
-    longitude: -122.4376,
-    zoom: 8,
-  })
+const TOKEN =
+  process.env.TOKEN_MAP ||
+  "pk.eyJ1IjoibWFkcmlnYWwxMTA3IiwiYSI6ImNsZ3ZwcTg1MTA1Z3gzbG4xamFoeWs2YncifQ.5kR7PSzA69TAFiR-JmtiOA"
 
+const MapBox: React.FC = () => {
   return (
-    <ReactMapGL
-      {...viewport}
-      // mapboxApiAccessToken={process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN} // replace with your Mapbox access token
-      // onViewportChange={(newViewport) => setViewport(newViewport)}
-      mapStyle="mapbox://styles/mapbox/streets-v11"
-    />
+    <div className="fixed w-full">
+      <Map
+        mapboxAccessToken={TOKEN}
+        initialViewState={{
+          longitude: 133,
+          latitude: 10,
+          zoom: 5,
+        }}
+        style={{
+          width: "100%",
+          height: "100vh",
+        }}
+        mapStyle="mapbox://styles/mapbox/streets-v9"
+      >
+        <Marker longitude={133} latitude={10} anchor="center" draggable>
+          <MapPinIcon className="h-20 w-auto " />
+        </Marker>
+      </Map>
+    </div>
   )
 }
 
-export default MapboxMap
+export default MapBox

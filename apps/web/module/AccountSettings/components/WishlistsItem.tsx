@@ -1,6 +1,7 @@
 "use client"
 import BookingBoxContainer from "@/common/components/BookingBoxContainer"
 import Map from "@/common/components/Map"
+import MapBox from "@/common/components/MapBox"
 import { WidthWrapper } from "@/common/components/WidthWrapper"
 import WishlistBoxContainer from "@/common/components/WishlistBoxContainer"
 import WishlistsItemContainer from "@/common/components/WishlistsItemContainer"
@@ -135,14 +136,14 @@ const tripGroup = [
 const WishlistsItem = () => {
   const router = useRouter()
   return (
-    <WidthWrapper width={"full"} className="pt-24 lg:pt-44">
-      <div className="flex h-full">
-        <div className="w-[920px] 2xl:w-[1000px]">
+    <WidthWrapper width={"full"} className="py-24 lg:py-28 ">
+      <div className="flex gap-2">
+        <div className="relative">
           {/* @ts-ignore */}
           <WishlistsItemContainer datas={tripGroup} />
         </div>
-        <div className="h-full">
-          <Map />
+        <div className="h-screen w-full bg-red-200 hidden lg:block">
+          <MapBox />
         </div>
       </div>
     </WidthWrapper>

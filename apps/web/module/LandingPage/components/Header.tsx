@@ -12,7 +12,11 @@ import { Typography } from "@/common/components/ui/Typography"
 import Link from "next/link"
 import { WidthWrapper } from "@/common/components/WidthWrapper"
 
-function Header() {
+function Header({
+  contentWidth = "primary",
+}: {
+  contentWidth?: "primary" | "secondary" | "full"
+}) {
   const { data: session } = useSession()
   const path = usePathname()
   const router = useRouter()
@@ -35,7 +39,7 @@ function Header() {
               Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             </Typography>
           </div>
-          <WidthWrapper>
+          <WidthWrapper width={contentWidth}>
             <nav
               className="flex items-center justify-between py-2 my-2 w-full"
               aria-label="Global"
