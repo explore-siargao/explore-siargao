@@ -5,6 +5,7 @@ import Image from "next/image"
 import { XMarkIcon } from "@heroicons/react/24/outline"
 import DeleteWIshlistsModal from "@/module/AccountSettings/modals/DeleteWIshlistsModal"
 import { Typography } from "./ui/Typography"
+import Link from "next/link"
 
 type Props = {
   photo: string
@@ -17,7 +18,10 @@ const WishlistBoxContainer = ({ title, text, photo }: Props) => {
 
   return (
     <>
-      <div className="flex flex-col select-none">
+      <Link
+        href={"/account-settings/wishlist/1"}
+        className="flex flex-col select-none"
+      >
         <div
           className="h-[150px] w-[150px] md:h-72 md:w-auto 2xl:h-72 2xl:w-auto rounded-3xl relative border border-text-100"
           onMouseEnter={() => setIsHovered(true)}
@@ -49,7 +53,7 @@ const WishlistBoxContainer = ({ title, text, photo }: Props) => {
           </Title>
           <Typography className="text-text-300">{text}</Typography>
         </div>
-      </div>
+      </Link>
       <DeleteWIshlistsModal
         isOpen={removeModal}
         onClose={() => setRemoveModal(false)}
