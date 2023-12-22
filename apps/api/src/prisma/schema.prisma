@@ -25,7 +25,7 @@ model User {
   role             UserRole          @default(User)
   listing          Listing[]
   paymentMethod    PaymentMethod[]
-  wishList         WishGroup[]
+  wishes         WishGroup[]
   review           Review[]
   personalInfo     PersonalInfo?
   deactivated      Boolean           @default(false)
@@ -123,7 +123,7 @@ model Listing {
   category       ListingCategory
   review          Review[]
   favoriteBy     String?
-  wishList       WishGroup[]
+  wishes       WishGroup[]
   createdAt      DateTime        @default(now())
   updatedAt      DateTime        @updatedAt
   deletedAt      DateTime?
@@ -278,11 +278,10 @@ model WishGroup {
   user      User      @relation(fields: [userId], references: [id])
   title     String    @db.VarChar(100)
   listingId Int
-  listing   Listing   @relation(fields: [listingId], references: [id])
+  listing  Listing    @relation(fields: [listingId], references: [id])   
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   deletedAt DateTime?
-
   @@index([userId])
   @@index([listingId])
 }
