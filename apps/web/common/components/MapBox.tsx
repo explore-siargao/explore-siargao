@@ -13,8 +13,8 @@ const MapboxMap = () => {
   return (
     <ReactMapGL
       {...viewport}
-      mapboxApiAccessToken={process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN} // replace with your Mapbox access token
-      onViewportChange={(newViewport) => setViewport(newViewport)}
+      // mapboxApiAccessToken={process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN} // replace with your Mapbox access token
+      // onViewportChange={(newViewport) => setViewport(newViewport)}
       mapStyle="mapbox://styles/mapbox/streets-v11"
     />
   )

@@ -142,7 +142,7 @@ const WishlistsItem = () => {
           <WishlistsItemContainer datas={tripGroup} />
         </div>
         <div className="h-full">
-          <Map clas/>
+          <Map />
         </div>
       </div>
     </WidthWrapper>
