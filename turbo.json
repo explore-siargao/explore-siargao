@@ -4,7 +4,7 @@
   "pipeline": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": [".next/**", "!.next/cache/**", "dist/**"],
+      "outputs": [".next/**", "!.next/cache/**", "build/**", "dist/**"],
       "env": [
         "AWS_ACCESS_KEY",
         "AWS_SECRET_ACCESS_KEY",
