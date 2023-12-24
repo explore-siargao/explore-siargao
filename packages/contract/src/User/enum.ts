@@ -7,5 +7,5 @@ export enum E_UserRole {
 export enum E_RegistrationType {
   Manual = "Manual",
   Facebook = "Facebook",
-  Google = "Google"
+  Google = "Google",
 }

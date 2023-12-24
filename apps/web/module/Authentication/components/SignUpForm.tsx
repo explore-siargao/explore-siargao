@@ -22,7 +22,11 @@ import {
 import useGlobalInputEmail from "../store/useGlobalInputEmail"
 import { Typography } from "@/common/components/ui/Typography"
 import useOptMessageStore from "@/common/store/useOptMessageStore"
-import { E_RegistrationType, T_BackendResponse, T_UserRegister } from "@repo/contract"
+import {
+  E_RegistrationType,
+  T_BackendResponse,
+  T_UserRegister,
+} from "@repo/contract"
 
 type Props = {
   isSocial?: boolean

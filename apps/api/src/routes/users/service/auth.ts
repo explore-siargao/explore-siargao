@@ -105,8 +105,14 @@ export const verifySession = async (req: Request, res: Response) => {
 export const register = async (req: Request, res: Response) => {
   const isInputValid = Z_UserRegister.safeParse(req.body)
   if (isInputValid.success) {
-    const { email, password, firstName, lastName, birthDate, registrationType } =
-    req.body;
+    const {
+      email,
+      password,
+      firstName,
+      lastName,
+      birthDate,
+      registrationType,
+    } = req.body
     try {
       const user = await prisma.user.findFirst({
         where: {
