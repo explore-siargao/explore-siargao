@@ -1,8 +1,5 @@
 "use client"
-import { RegistrationType } from "@/common/types/global"
-import useRegister, {
-  T_Register,
-} from "@/module/Authentication/hooks/useRegister"
+import useRegister from "@/module/Authentication/hooks/useRegister"
 import React from "react"
 import { useForm } from "react-hook-form"
 import toast from "react-hot-toast"
@@ -25,6 +22,11 @@ import {
 import useGlobalInputEmail from "../store/useGlobalInputEmail"
 import { Typography } from "@/common/components/ui/Typography"
 import useOptMessageStore from "@/common/store/useOptMessageStore"
+import {
+  E_RegistrationType,
+  T_BackendResponse,
+  T_UserRegister,
+} from "@repo/contract"
 
 type Props = {
   isSocial?: boolean
@@ -36,7 +38,7 @@ const SignUpForm = ({ isSocial = false }: Props) => {
   const { mutate: addUser, isPending: addUserIsPending } = useRegister()
   const createAccountEmail = useGlobalInputEmail((state) => state.email)
   const { register, handleSubmit } = useForm<
-    T_Register & { month: string; year: string; day: string }
+    T_UserRegister & { month: string; year: string; day: string }
   >({
     values: {
       email: (session?.user?.email as string) || createAccountEmail || "",
@@ -47,7 +49,7 @@ const SignUpForm = ({ isSocial = false }: Props) => {
       month: "",
       year: "",
       day: "",
-      registrationType: RegistrationType.Manual,
+      registrationType: E_RegistrationType.Manual,
     },
   })
   const params = useParams()
@@ -57,10 +59,10 @@ const SignUpForm = ({ isSocial = false }: Props) => {
       : "Manual"
 
   const onSubmit = async (
-    formData: T_Register & { month: string; year: string; day: string }
+    formData: T_UserRegister & { month: string; year: string; day: string }
   ) => {
     const callBackReq = {
-      onSuccess: (data: any) => {
+      onSuccess: (data: T_BackendResponse) => {
         if (!data.error && !addUserIsPending) {
           if (signUpType === "Manual") {
             signIn("credentials", {
@@ -80,7 +82,6 @@ const SignUpForm = ({ isSocial = false }: Props) => {
         toast.error(String(err))
       },
     }
-    // TODO: ADD CSRF TOKEN
     const { email, firstName, lastName, month, day, year, password } = formData
     const birthDate = dayjs(`${month}-${day}-${year}`, "MM-DD-YYYY")
     addUser(
@@ -90,7 +91,7 @@ const SignUpForm = ({ isSocial = false }: Props) => {
         lastName,
         birthDate: birthDate.format(),
         password,
-        registrationType: signUpType as unknown as RegistrationType,
+        registrationType: signUpType as E_RegistrationType,
       },
       callBackReq
     )

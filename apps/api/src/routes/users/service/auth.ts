@@ -9,6 +9,7 @@ import verifyCaptcha from '@/common/helpers/verifyCaptcha'
 import validateCsrfToken from '@/common/helpers/validateCsrfToken'
 import { decode } from 'next-auth/jwt'
 import { capitalize } from 'lodash'
+import { Z_UserRegister } from '@repo/contract'
 
 const prisma = new PrismaClient()
 const cryptoRandom = () => {
@@ -102,9 +103,16 @@ export const verifySession = async (req: Request, res: Response) => {
 }
 
 export const register = async (req: Request, res: Response) => {
-  const { email, password, firstName, lastName, birthDate, registrationType } =
-    req.body
-  if (email && firstName && lastName && birthDate && registrationType) {
+  const isInputValid = Z_UserRegister.safeParse(req.body)
+  if (isInputValid.success) {
+    const {
+      email,
+      password,
+      firstName,
+      lastName,
+      birthDate,
+      registrationType,
+    } = req.body
     try {
       const user = await prisma.user.findFirst({
         where: {
