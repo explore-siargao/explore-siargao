@@ -9,15 +9,15 @@ import Image from "next/image"
 import { Input } from "@/common/components/ui/Input"
 import { Popover, Transition } from "@headlessui/react"
 import RemovePaymentModal from "./modals/RemovePaymentModal"
-import useGetPaymentmethods from "../hooks/useGetPaymentMethods"
+import useGetPaymentMethods from "../hooks/useGetPaymentMethods"
 import { ICoupon, IPaymentMethod } from "@/common/types/global"
-import useUpdatepaymentMethod from "../hooks/useUpdatePaymentMethod"
+import useUpdatePaymentMethod from "../hooks/useUpdatePaymentMethod"
 import toast from "react-hot-toast"
 import { useQueryClient } from "@tanstack/react-query"
-import useGetPersonalInfo from "@/common/hooks/useGetPersonalInfo"
 import { useForm } from "react-hook-form"
 import useUpdateCoupon from "../hooks/useUpdateCoupon"
 import { Typography } from "@/common/components/ui/Typography"
+import useSessionStore from "@/common/store/useSessionStore"
 
 const Payments = () => {
   const router = useRouter()
@@ -31,15 +31,14 @@ const Payments = () => {
   const toggleVisibility = () => {
     setShowHide(!showHide)
   }
-  const { data: userDetails, isPending: isPendingUserDetails } =
-    useGetPersonalInfo()
+  const session = useSessionStore((state) => state);
   const { data: paymentMethods, isPending: isPendingPaymentmethods } =
-    useGetPaymentmethods(!isPendingUserDetails && userDetails?.item?.id)
-  const { mutate, isPending } = useUpdatepaymentMethod(
-    !isPendingUserDetails && userDetails?.item?.id
+    useGetPaymentMethods(session.id)
+  const { mutate, isPending } = useUpdatePaymentMethod(
+    session.id
   )
   const { mutate: redeemCoupon, isPending: isPendingRedeemCoupon } =
-    useUpdateCoupon(!isPendingUserDetails && userDetails?.item?.id)
+    useUpdateCoupon(session.id)
 
   const callBackReqDefaultPaymentMethod = {
     onSuccess: (data: any) => {
@@ -73,7 +72,7 @@ const Payments = () => {
 
   return (
     <>
-      {isPendingUserDetails || isPendingPaymentmethods ? (
+      {isPendingPaymentmethods ? (
         <div className="animate-spin w-4 h-4 border-2 border-current border-t-transparent text-primary-200 rounded-full">
           <span className="sr-only">Loading...</span>
         </div>
@@ -225,8 +224,7 @@ const Payments = () => {
                           {
                             code: getValues("code"),
                             isUsed: true,
-                            usedBy:
-                              !isPendingUserDetails && userDetails?.item?.id,
+                            usedBy: session.id,
                           },
                           CallBackCheckCoupon
                         )
@@ -261,11 +259,11 @@ const Payments = () => {
       <AddCardDetailModal
         isOpen={addCardModal}
         onClose={() => setAddCardModal(false)}
-        userId={!isPendingUserDetails ? (userDetails?.item?.id as number) : 0}
+        userId={session.id as number}
       />
       <RemovePaymentModal
         id={paymentMethodId}
-        userId={userDetails?.item?.id}
+        userId={session.id as number}
         isOpen={removePaymentModal}
         onClose={() => setRemovePaymentModal(false)}
       />

@@ -10,7 +10,12 @@ export const getCountries = async (req: Request, res: Response) => {
 
     const data = await response.json()
     const newData = Object.values(data.data)
-    res.json(newData)
+    res.json({
+      error: false,
+      items: newData,
+      itemCount: newData.length,
+      message: '',
+    })
   } catch (error) {
     console.error('Error fetching data from the API:', error)
   }

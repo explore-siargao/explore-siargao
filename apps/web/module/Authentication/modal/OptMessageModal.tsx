@@ -5,19 +5,20 @@ import { Typography } from "@/common/components/ui/Typography"
 import useOptMessageStore from "@/common/store/useOptMessageStore"
 import { CheckCircleIcon } from "@heroicons/react/24/outline"
 import { Button } from "@/common/components/ui/Button"
-import useGetPersonalInfo from "@/common/hooks/useGetPersonalInfo"
 import useSetReceivedEmail from "../hooks/useSetReceivedEmail"
 import toast from "react-hot-toast"
 import { useForm } from "react-hook-form"
 import { Spinner } from "@/common/components/ui/Spinner"
+import useSessionStore from "@/common/store/useSessionStore"
 interface OptChecked {
   isChecked: boolean
 }
 const OptMessageModal = () => {
+  const { register, getValues } = useForm<OptChecked>()
   const isOpen = useOptMessageStore((state) => state.isOpen)
   const closeModal = useOptMessageStore((state) => state.setIsClose)
   const cancelButtonRef = useRef(null)
-  const { data, isPending } = useGetPersonalInfo()
+  const session = useSessionStore((state) => state);
   const callBackReq = {
     onSuccess: (data: any) => {
       if (!data.error) {
@@ -34,14 +35,11 @@ const OptMessageModal = () => {
   const {
     mutate: setCanReceivedEmail,
     isPending: IsPendingCetCanReceivedEmail,
-  } = useSetReceivedEmail(isPending ? 0 : data?.item?.id, {
+  } = useSetReceivedEmail(session.id as number, {
     onSuccess: callBackReq.onSuccess,
     onError: callBackReq.onError,
   })
-  const { register, getValues } = useForm<OptChecked>()
-  return isPending ? (
-    ""
-  ) : (
+  return (
     <Transition.Root show={isOpen} as={Fragment}>
       <Dialog
         as="div"

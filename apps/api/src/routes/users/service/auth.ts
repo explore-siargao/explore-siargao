@@ -625,8 +625,8 @@ export const userDetails = async (req: Request, res: Response) => {
         item: {
           id: user?.id,
           email: user?.email,
-          canreceivedEmail: user?.canReceiveEmail,
-          RegistrationType: user?.registrationType,
+          canReceivedEmail: user?.canReceiveEmail,
+          registrationType: user?.registrationType,
           profilePicture: user?.profilePicture,
           personalInfo: user?.personalInfo,
         },

@@ -39,7 +39,7 @@ const EmailAddress = ({ email, id }: IUser) => {
           })
           toast.success(data.message)
           queryClient.invalidateQueries({
-            queryKey: ["personal-info"],
+            queryKey: ["session"],
           })
           resetEmail()
         } else {

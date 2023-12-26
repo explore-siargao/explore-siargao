@@ -13,12 +13,11 @@ import {
   LINK_ACCOUNT_WISHLIST,
 } from "@/common/constants/links"
 import { Title } from "@/common/components/ui/Title"
-import useGetPersonalInfo from "@/common/hooks/useGetPersonalInfo"
-import { Spinner } from "@/common/components/ui/Spinner"
 import { Typography } from "@/common/components/ui/Typography"
 import { capitalizeFirstLetter } from "@/common/helpers/capitalizeFirstLetter"
 import { ChevronRightIcon } from "@heroicons/react/20/solid"
 import Link from "next/link"
+import useSessionStore from "@/common/store/useSessionStore"
 
 const pages = [
   {
@@ -43,30 +42,31 @@ const pages = [
     link: LINK_ACCOUNT_PAYMENT_PAYOUT,
   },
 ]
+
 const AccountSettings = () => {
-  const { data, isPending } = useGetPersonalInfo()
-  const firstName = data?.item?.personalInfo?.firstName
+  const session = useSessionStore((state) => state);
+  const firstName = session?.personalInfo?.firstName;
+  const lastName = session?.personalInfo?.lastName;
+  const email = session?.email;
 
   const firstCharOnly =
     typeof firstName === "string" && firstName.length > 0
       ? String(firstName.charAt(0)).toUpperCase()
       : ""
-  const uppercaseFirstChar = capitalizeFirstLetter(firstName)
+  const uppercaseFirstChar = capitalizeFirstLetter(firstName as string)
   return (
     <AccountSettingWrapper>
       <Title className="pb-5 md:pb-0">Account</Title>
-      {isPending ? (
-        <Spinner />
-      ) : (
+
         <div className="space-y-5">
-          <Typography variant={"p"} className="pb-5 border-b md:border-none">
+          <div className="pb-5 border-b md:border-none">
             <div className="hidden md:block">
               <span className="font-semibold">
-                {data?.item?.personalInfo?.firstName +
+                {firstName +
                   " " +
-                  data?.item?.personalInfo?.lastName}
+                  lastName}
               </span>
-              ,{" " + data?.item?.email + " "}
+              ,{" " + email + " "}
               <span>•</span>{" "}
               <Link
                 href="#"
@@ -102,7 +102,7 @@ const AccountSettings = () => {
               </div>
               <ChevronRightIcon className="h-5 w-auto" />
             </Link>
-          </Typography>
+          </div>
           <div className="grid gap-2 md:gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             {pages.map((page) => (
               <AccountMenuContainer
@@ -115,7 +115,7 @@ const AccountSettings = () => {
             ))}
           </div>
         </div>
-      )}
+
     </AccountSettingWrapper>
   )
 }

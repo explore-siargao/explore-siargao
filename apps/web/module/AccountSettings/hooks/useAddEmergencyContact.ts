@@ -9,7 +9,7 @@ export async function addEmergencyContact(
 ) {
   const apiService = new ApiService()
   return await apiService.post(
-    `${API_URL_USERS}/${personId}/emergency-contact/add/`,
+    `${API_URL_USERS}/${personId}/emergency-contact/add`,
     props
   )
 }
