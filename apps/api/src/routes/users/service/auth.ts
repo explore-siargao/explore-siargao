@@ -13,7 +13,7 @@ import { ResponseService } from '@/common/service/response'
 import randomNumber from '@/common/helpers/randomNumber'
 
 const prisma = new PrismaClient()
-const response = new ResponseService();
+const response = new ResponseService()
 
 export const verifySignIn = async (req: Request, res: Response) => {
   const { type, email } = req.query
@@ -140,12 +140,14 @@ export const register = async (req: Request, res: Response) => {
             phoneNumber: '',
           },
         })
-        res.json(response.success({
-          item: {
-            personalInfo: newPersonalInfo,
-          },
-          message: 'Successfully registered',
-        }))
+        res.json(
+          response.success({
+            item: {
+              personalInfo: newPersonalInfo,
+            },
+            message: 'Successfully registered',
+          })
+        )
       } else {
         res.json(response.error({ message: 'Email already exist' }))
       }

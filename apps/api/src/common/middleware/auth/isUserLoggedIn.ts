@@ -6,18 +6,21 @@ import { decode } from 'next-auth/jwt'
 import { ResponseService } from '@/common/service/response'
 import { E_RegistrationType, E_UserRole, T_Session } from '@repo/contract'
 
-const response = new ResponseService();
+const response = new ResponseService()
 
-const checkErrorMessage = (res: Response, message: string | 'jwt malformed' | 'jwt expired') => {
+const checkErrorMessage = (
+  res: Response,
+  message: string | 'jwt malformed' | 'jwt expired'
+) => {
   const error = {
-    "jwt malformed": "Invalid authentication credentials",
-    "jwt expired": "Authentication is expired, please login again",
-  };
+    'jwt malformed': 'Invalid authentication credentials',
+    'jwt expired': 'Authentication is expired, please login again',
+  }
   res.json(
     response.error({
-      message: typeof message === "string" ? message : error[message],
-    }),
-  );
+      message: typeof message === 'string' ? message : error[message],
+    })
+  )
 }
 
 const isUserLoggedIn = async (
@@ -67,7 +70,11 @@ const isUserLoggedIn = async (
       checkErrorMessage(res, message)
     }
   } else {
-    res.json(response.error({ message: 'You are not authorized to perform this action' }))
+    res.json(
+      response.error({
+        message: 'You are not authorized to perform this action',
+      })
+    )
   }
 }
 

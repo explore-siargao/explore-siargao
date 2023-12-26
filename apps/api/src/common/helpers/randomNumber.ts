@@ -8,4 +8,4 @@ const randomNumber = () => {
   return normalizedFloat
 }
 
-export default randomNumber;
+export default randomNumber
