@@ -8,7 +8,7 @@ import { E_RegistrationType, E_UserRole, T_Session } from '@repo/contract'
 
 const response = new ResponseService();
 
-const checkErrorMessage = (res: Response, message: 'jwt malformed' | 'jwt expired' | string) => {
+const checkErrorMessage = (res: Response, message: string | 'jwt malformed' | 'jwt expired') => {
   const error = {
     "jwt malformed": "Invalid authentication credentials",
     "jwt expired": "Authentication is expired, please login again",
