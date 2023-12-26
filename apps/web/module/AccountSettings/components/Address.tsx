@@ -35,7 +35,7 @@ const Address = ({
       onSuccess: (data: any) => {
         if (!data.error) {
           queryClient.invalidateQueries({
-            queryKey: ["personal-info"],
+            queryKey: ["session"],
           })
           toast.success(data.message)
           reset()
@@ -104,7 +104,7 @@ const Address = ({
                 {countriesIsPending ? (
                   <option>Loading</option>
                 ) : (
-                  countries.map((country: any) => (
+                  countries?.items?.map((country: any) => (
                     <option key={country.country}>{country.country}</option>
                   ))
                 )}

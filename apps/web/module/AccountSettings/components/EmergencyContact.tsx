@@ -1,6 +1,6 @@
 import { Button } from "@/common/components/ui/Button"
 import { Input } from "@/common/components/ui/Input"
-import { IEmergencyContact, IPersonalInfo } from "@/common/types/global"
+import { IEmergencyContact } from "@/common/types/global"
 import React, { useState } from "react"
 import { useForm } from "react-hook-form"
 import useAddEmergencyContact from "../hooks/useAddEmergencyContact"
@@ -8,12 +8,19 @@ import toast from "react-hot-toast"
 import { useQueryClient } from "@tanstack/react-query"
 import useRemoveEmergencyContact from "../hooks/useRemoveEmergencyContact"
 import { Typography } from "@/common/components/ui/Typography"
+import { T_EmergencyContact } from "@repo/contract"
 
 type PersonalInfoProps = {
   isButtonClicked: boolean
   contentId: string
 }
-const EmergencyContact = ({ emergencyContact, id }: IPersonalInfo) => {
+const EmergencyContact = ({
+  emergencyContact,
+  id,
+}: {
+  emergencyContact: T_EmergencyContact[]
+  id: number
+}) => {
   const [contentState, setContentState] = useState<PersonalInfoProps>({
     isButtonClicked: false,
     contentId: "",
@@ -38,7 +45,7 @@ const EmergencyContact = ({ emergencyContact, id }: IPersonalInfo) => {
       onSuccess: (data: any) => {
         if (!data.error) {
           queryClient.invalidateQueries({
-            queryKey: ["personal-info"],
+            queryKey: ["session"],
           })
           toast.success("Contact Successfully added")
           reset()
@@ -57,7 +64,7 @@ const EmergencyContact = ({ emergencyContact, id }: IPersonalInfo) => {
     onSuccess: (data: any) => {
       if (!data.error) {
         queryClient.invalidateQueries({
-          queryKey: ["personal-info"],
+          queryKey: ["session"],
         })
         toast.success("Contact Successfully added")
         reset()
@@ -95,7 +102,7 @@ const EmergencyContact = ({ emergencyContact, id }: IPersonalInfo) => {
               {emergencyContact?.length !== 0 ? "Edit" : "Add"}
             </button>
           </div>
-          {emergencyContact?.map((contact: IEmergencyContact) => (
+          {emergencyContact?.map((contact: T_EmergencyContact) => (
             <div key={contact.id} className="flex justify-between py-1">
               <Typography key={contact.id}>{contact.name}</Typography>
             </div>
@@ -123,7 +130,7 @@ const EmergencyContact = ({ emergencyContact, id }: IPersonalInfo) => {
             <Typography fontWeight={"light"}>
               A trusted contact we can alert in an urgent situation.
             </Typography>
-            {emergencyContact?.map((contact: IEmergencyContact) => (
+            {emergencyContact?.map((contact: T_EmergencyContact) => (
               <div key={contact.id} className="flex justify-between py-5">
                 <Typography key={contact.id}>{contact.name}</Typography>
                 <button

@@ -35,7 +35,7 @@ export class ApiService {
     endpoint: string,
     params?: Record<string, any>,
     signal?: AbortSignal
-  ): Promise<T | any> {
+  ): Promise<T> {
     const reqParams = new URLSearchParams(params).toString()
     const otherOptions = this.constructOtherOptions()
 

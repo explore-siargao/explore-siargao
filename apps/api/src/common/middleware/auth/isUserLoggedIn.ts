@@ -41,7 +41,16 @@ const isUserLoggedIn = async (
     try {
       const user = await prisma.user.findFirst({
         where: {
-          email: decoded.email,
+          email: decoded?.email,
+          deletedAt: null,
+        },
+        include: {
+          personalInfo: {
+            include: {
+              address: true,
+              emergrncyContacts: true,
+            },
+          },
         },
       })
       if (user && (user.deletedAt || user.deactivated)) {
@@ -54,6 +63,7 @@ const isUserLoggedIn = async (
         profilePicture: user?.profilePicture,
         role: user?.role,
         deactivated: user?.deactivated,
+        personalInfo: user?.personalInfo,
       }
       res.locals.user = authUser
       next()

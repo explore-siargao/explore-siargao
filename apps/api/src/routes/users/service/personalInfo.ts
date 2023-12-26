@@ -1,6 +1,7 @@
 import { Response, Request } from 'express'
 import { PrismaClient } from '@prisma/client'
 import { REQUIRED_VALUE_EMPTY } from '@repo/constants'
+
 export const getPersonalInfo = async (req: Request, res: Response) => {
   try {
     const prisma = new PrismaClient()

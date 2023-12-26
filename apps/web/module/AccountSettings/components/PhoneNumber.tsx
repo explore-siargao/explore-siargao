@@ -32,7 +32,7 @@ const PhoneNumber = ({ phoneNumber, userId }: IPersonalInfo) => {
       onSuccess: (data: any) => {
         if (!data.error) {
           queryClient.invalidateQueries({
-            queryKey: ["personal-info"],
+            queryKey: ["session"],
           })
           toast.success(data.message)
           resetPhoneNumber()

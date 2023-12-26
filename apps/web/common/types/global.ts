@@ -70,7 +70,7 @@ export interface IPaymentMethod {
 export interface ICoupon {
   id?: number
   createdBy?: number
-  usedBy?: number
+  usedBy?: number | null
   code?: string
   expirationDate?: string
   reward?: string

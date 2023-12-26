@@ -4,6 +4,7 @@ import useVerifySession from "@/common/hooks/useVerifySession"
 import { useRouter, usePathname } from "next/navigation"
 import useSessionStore from "../store/useSessionStore"
 import WholePageLoading from "./WholePageLoading"
+import { T_Session } from "@repo/contract"
 
 const AuthGuard = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter()
@@ -13,7 +14,7 @@ const AuthGuard = ({ children }: { children: React.ReactNode }) => {
   const removeSession = useSessionStore((state) => state.remove)
 
   if (data && !data.error && data.item && data.item.email && !isLoading) {
-    updateSession(data.item)
+    updateSession(data?.item as T_Session)
   } else if (data?.error && !isLoading) {
     const redirect = pathname !== "/" ? `?redirect_to=${pathname}` : ``
     removeSession()
