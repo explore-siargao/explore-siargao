@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from 'express'
 import validateCsrfToken from '@/common/helpers/validateCsrfToken'
-import { ResponseService } from '@/common/service/response';
+import { ResponseService } from '@/common/service/response'
 
-const response = new ResponseService();
+const response = new ResponseService()
 
 const isCsrfTokenValid = async (
   req: Request,
@@ -15,10 +15,18 @@ const isCsrfTokenValid = async (
     if (isTokenValid === 'valid') {
       next()
     } else {
-      res.json(response.error({ message: 'You are not authorized to perform this action' }))
+      res.json(
+        response.error({
+          message: 'You are not authorized to perform this action',
+        })
+      )
     }
   } else {
-    res.json(response.error({ message: 'You are not authorized to perform this action' }))
+    res.json(
+      response.error({
+        message: 'You are not authorized to perform this action',
+      })
+    )
   }
 }
 
