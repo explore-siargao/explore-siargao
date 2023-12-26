@@ -63,7 +63,7 @@ const isUserLoggedIn = async (
         profilePicture: user?.profilePicture,
         role: user?.role,
         deactivated: user?.deactivated,
-        personalInfo: user?.personalInfo
+        personalInfo: user?.personalInfo,
       }
       res.locals.user = authUser
       next()

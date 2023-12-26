@@ -44,10 +44,10 @@ const pages = [
 ]
 
 const AccountSettings = () => {
-  const session = useSessionStore((state) => state);
-  const firstName = session?.personalInfo?.firstName;
-  const lastName = session?.personalInfo?.lastName;
-  const email = session?.email;
+  const session = useSessionStore((state) => state)
+  const firstName = session?.personalInfo?.firstName
+  const lastName = session?.personalInfo?.lastName
+  const email = session?.email
 
   const firstCharOnly =
     typeof firstName === "string" && firstName.length > 0
@@ -58,64 +58,59 @@ const AccountSettings = () => {
     <AccountSettingWrapper>
       <Title className="pb-5 md:pb-0">Account</Title>
 
-        <div className="space-y-5">
-          <div className="pb-5 border-b md:border-none">
-            <div className="hidden md:block">
-              <span className="font-semibold">
-                {firstName +
-                  " " +
-                  lastName}
-              </span>
-              ,{" " + email + " "}
-              <span>•</span>{" "}
-              <Link
-                href="#"
-                className="font-semibold underline underline-offset-2"
-              >
-                Go to profile
-              </Link>
-            </div>
+      <div className="space-y-5">
+        <div className="pb-5 border-b md:border-none">
+          <div className="hidden md:block">
+            <span className="font-semibold">{firstName + " " + lastName}</span>,
+            {" " + email + " "}
+            <span>•</span>{" "}
             <Link
-              href={"#"}
-              className="flex md:hidden justify-between items-center"
+              href="#"
+              className="font-semibold underline underline-offset-2"
             >
-              <div className="flex space-x-4">
-                <div className="flex h-12 w-12 bg-primary-500 rounded-full items-center text-center">
-                  <Typography
-                    variant={"p"}
-                    className="w-full h-auto text-white"
-                    fontWeight={"bold"}
-                  >
-                    {firstCharOnly}
-                  </Typography>
-                </div>
-                <div className="flex flex-col">
-                  <Typography variant={"h4"}>{uppercaseFirstChar} </Typography>
-                  <Typography
-                    variant={"p"}
-                    fontWeight={"light"}
-                    className="mt-0 text-sm"
-                  >
-                    Show profile
-                  </Typography>
-                </div>
-              </div>
-              <ChevronRightIcon className="h-5 w-auto" />
+              Go to profile
             </Link>
           </div>
-          <div className="grid gap-2 md:gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-            {pages.map((page) => (
-              <AccountMenuContainer
-                key={page.id}
-                icon={<page.icon className="h-8 w-auto text-primary-700" />}
-                title={page.title}
-                content={page.content}
-                link={String(page.link)}
-              />
-            ))}
-          </div>
+          <Link
+            href={"#"}
+            className="flex md:hidden justify-between items-center"
+          >
+            <div className="flex space-x-4">
+              <div className="flex h-12 w-12 bg-primary-500 rounded-full items-center text-center">
+                <Typography
+                  variant={"p"}
+                  className="w-full h-auto text-white"
+                  fontWeight={"bold"}
+                >
+                  {firstCharOnly}
+                </Typography>
+              </div>
+              <div className="flex flex-col">
+                <Typography variant={"h4"}>{uppercaseFirstChar} </Typography>
+                <Typography
+                  variant={"p"}
+                  fontWeight={"light"}
+                  className="mt-0 text-sm"
+                >
+                  Show profile
+                </Typography>
+              </div>
+            </div>
+            <ChevronRightIcon className="h-5 w-auto" />
+          </Link>
         </div>
-
+        <div className="grid gap-2 md:gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          {pages.map((page) => (
+            <AccountMenuContainer
+              key={page.id}
+              icon={<page.icon className="h-8 w-auto text-primary-700" />}
+              title={page.title}
+              content={page.content}
+              link={String(page.link)}
+            />
+          ))}
+        </div>
+      </div>
     </AccountSettingWrapper>
   )
 }

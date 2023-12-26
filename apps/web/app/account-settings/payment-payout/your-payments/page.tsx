@@ -6,7 +6,7 @@ const page = () => {
   return (
     <AuthGuard>
       <YourPayments />
-    </AuthGuard> 
+    </AuthGuard>
   )
 }
 

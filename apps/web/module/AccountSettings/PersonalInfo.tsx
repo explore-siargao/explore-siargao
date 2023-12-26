@@ -14,8 +14,8 @@ import useSessionStore from "@/common/store/useSessionStore"
 import { T_EmergencyContact } from "@repo/contract"
 
 const PersonalInfo = () => {
-  const session = useSessionStore((state) => state);
-  const personalInfo = session?.personalInfo;
+  const session = useSessionStore((state) => state)
+  const personalInfo = session?.personalInfo
   return (
     <AccountSettingWrapper>
       <div>
@@ -33,14 +33,15 @@ const PersonalInfo = () => {
             lastName={personalInfo?.lastName}
             userId={session?.id as number}
           />
-          <EmailAddress email={session?.email as string} id={session?.id as number} />
+          <EmailAddress
+            email={session?.email as string}
+            id={session?.id as number}
+          />
           <PhoneNumber
             phoneNumber={personalInfo?.phoneNumber}
             userId={session?.id as number}
           />
-          <GovernmentId
-            governmentId={personalInfo?.governMentId}
-          />
+          <GovernmentId governmentId={personalInfo?.governMentId} />
           <Address
             country={personalInfo?.address?.country as string}
             city={personalInfo?.address?.city as string}
@@ -50,7 +51,9 @@ const PersonalInfo = () => {
             id={personalInfo?.id}
           />
           <EmergencyContact
-            emergencyContact={personalInfo?.emergrncyContacts as T_EmergencyContact[]}
+            emergencyContact={
+              personalInfo?.emergrncyContacts as T_EmergencyContact[]
+            }
             id={personalInfo?.id as number}
           />
         </div>

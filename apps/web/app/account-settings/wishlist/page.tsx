@@ -6,7 +6,7 @@ const page = () => {
   return (
     <AuthGuard>
       <Wishlist />
-    </AuthGuard> 
+    </AuthGuard>
   )
 }
 

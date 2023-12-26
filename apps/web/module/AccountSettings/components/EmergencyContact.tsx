@@ -14,7 +14,13 @@ type PersonalInfoProps = {
   isButtonClicked: boolean
   contentId: string
 }
-const EmergencyContact = ({ emergencyContact, id }: { emergencyContact: T_EmergencyContact[], id: number }) => {
+const EmergencyContact = ({
+  emergencyContact,
+  id,
+}: {
+  emergencyContact: T_EmergencyContact[]
+  id: number
+}) => {
   const [contentState, setContentState] = useState<PersonalInfoProps>({
     isButtonClicked: false,
     contentId: "",

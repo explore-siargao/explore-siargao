@@ -8,8 +8,10 @@ export const Z_BackendResponse = z.object({
   pageItemCount: z.number().optional(),
   allItemCount: z.number().optional(),
   currPage: z.number().optional(),
-  action: z.object({
-    type: z.string(),
-    description: z.string(),
-  }).optional(),
+  action: z
+    .object({
+      type: z.string(),
+      description: z.string(),
+    })
+    .optional(),
 })

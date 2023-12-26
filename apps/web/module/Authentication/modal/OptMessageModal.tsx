@@ -18,7 +18,7 @@ const OptMessageModal = () => {
   const isOpen = useOptMessageStore((state) => state.isOpen)
   const closeModal = useOptMessageStore((state) => state.setIsClose)
   const cancelButtonRef = useRef(null)
-  const session = useSessionStore((state) => state);
+  const session = useSessionStore((state) => state)
   const callBackReq = {
     onSuccess: (data: any) => {
       if (!data.error) {

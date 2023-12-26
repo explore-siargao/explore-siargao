@@ -31,12 +31,10 @@ const Payments = () => {
   const toggleVisibility = () => {
     setShowHide(!showHide)
   }
-  const session = useSessionStore((state) => state);
+  const session = useSessionStore((state) => state)
   const { data: paymentMethods, isPending: isPendingPaymentmethods } =
     useGetPaymentMethods(session.id)
-  const { mutate, isPending } = useUpdatePaymentMethod(
-    session.id
-  )
+  const { mutate, isPending } = useUpdatePaymentMethod(session.id)
   const { mutate: redeemCoupon, isPending: isPendingRedeemCoupon } =
     useUpdateCoupon(session.id)
 
