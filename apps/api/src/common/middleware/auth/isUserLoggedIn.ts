@@ -3,27 +3,26 @@ import { UNKNOWN_ERROR_OCCURRED } from '../../constants'
 import { nextAuthSecret } from '@/common/config/'
 import { PrismaClient } from '@prisma/client'
 import { decode } from 'next-auth/jwt'
+import { ResponseService } from '@/common/service/response'
+import { E_RegistrationType, E_UserRole, T_Session } from '@repo/contract'
 
-const checkErrorMessage = (res: Response, message: string) => {
-  if (message === 'jwt malformed') {
-    res.json({
-      error: true,
-      item: null,
-      message: 'Invalid authentication credentials',
-    })
-  } else if (message === 'jwt expired') {
-    res.json({
-      error: true,
-      item: null,
-      message: 'Authentication is expired, please login again',
-    })
-  } else {
-    res.json({
-      error: true,
-      item: null,
-      message: message,
-    })
+const response = new ResponseService()
+
+enum JWT_Error {
+  'jwt malformed' = 'jwt malformed',
+  'jwt expired' = 'jwt expired',
+}
+
+const checkErrorMessage = (res: Response, message: string | JWT_Error) => {
+  const error = {
+    'jwt malformed': 'Invalid authentication credentials',
+    'jwt expired': 'Authentication is expired, please login again',
   }
+  res.json(
+    response.error({
+      message: typeof message === 'string' ? message : error[message],
+    })
+  )
 }
 
 const isUserLoggedIn = async (
@@ -56,14 +55,15 @@ const isUserLoggedIn = async (
       if (user && (user.deletedAt || user.deactivated)) {
         throw new Error('We cannot find your account in our system')
       }
-      const authUser = {
-        id: user?.id,
-        registrationType: user?.registrationType,
-        email: user?.email,
-        profilePicture: user?.profilePicture,
-        role: user?.role,
-        deactivated: user?.deactivated,
-        personalInfo: user?.personalInfo,
+      const authUser: T_Session = {
+        id: user?.id as number,
+        registrationType: user?.registrationType as E_RegistrationType,
+        email: user?.email as string,
+        profilePicture: user?.profilePicture as string,
+        role: user?.role as E_UserRole,
+        deactivated: user?.deactivated as boolean,
+        // TODO: FIX THE ANY FOR THIS VALUE
+        personalInfo: user?.personalInfo as any,
       }
       res.locals.user = authUser
       next()
@@ -72,11 +72,11 @@ const isUserLoggedIn = async (
       checkErrorMessage(res, message)
     }
   } else {
-    res.json({
-      error: true,
-      item: null,
-      message: `You are not authorized to perform this action`,
-    })
+    res.json(
+      response.error({
+        message: 'You are not authorized to perform this action',
+      })
+    )
   }
 }
 

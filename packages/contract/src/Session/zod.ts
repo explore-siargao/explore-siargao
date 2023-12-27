@@ -6,7 +6,7 @@ export const Z_Session = z.object({
   email: z.string().nullable(),
   profilePicture: z.string().nullable(),
   registrationType: z.string().nullable(),
-  deactivated: z.string().nullable(),
+  deactivated: z.boolean().nullable(),
   role: z.string().nullable(),
   personalInfo: z.nullable(Z_PersonalInfo),
 })
