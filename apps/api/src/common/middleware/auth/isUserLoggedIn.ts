@@ -10,13 +10,10 @@ const response = new ResponseService()
 
 enum JWT_Error {
   'jwt malformed' = 'jwt malformed',
-  'jwt expired' = 'jwt expired'
+  'jwt expired' = 'jwt expired',
 }
 
-const checkErrorMessage = (
-  res: Response,
-  message: string | JWT_Error
-) => {
+const checkErrorMessage = (res: Response, message: string | JWT_Error) => {
   const error = {
     'jwt malformed': 'Invalid authentication credentials',
     'jwt expired': 'Authentication is expired, please login again',
