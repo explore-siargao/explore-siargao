@@ -8,9 +8,14 @@ import { E_RegistrationType, E_UserRole, T_Session } from '@repo/contract'
 
 const response = new ResponseService()
 
+enum JWT_Error {
+  'jwt malformed' = 'jwt malformed',
+  'jwt expired' = 'jwt expired'
+}
+
 const checkErrorMessage = (
   res: Response,
-  message: string | 'jwt malformed' | 'jwt expired'
+  message: string | JWT_Error
 ) => {
   const error = {
     'jwt malformed': 'Invalid authentication credentials',
