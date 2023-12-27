@@ -2,22 +2,19 @@ import { Response, Request } from 'express'
 import { PrismaClient, RegistrationType } from '@prisma/client'
 import { REQUIRED_VALUE_EMPTY } from '@repo/constants'
 import { encryptKey, nextAuthSecret, webUrl } from '@/common/config'
-import CryptoJS from 'crypto-js'
 import dayjs from 'dayjs'
 import { AuthEmail } from './authEmail'
 import verifyCaptcha from '@/common/helpers/verifyCaptcha'
 import validateCsrfToken from '@/common/helpers/validateCsrfToken'
 import { decode } from 'next-auth/jwt'
 import { capitalize } from 'lodash'
+import { Z_UserRegister } from '@repo/contract'
+import { ResponseService } from '@/common/service/response'
+import randomNumber from '@/common/helpers/randomNumber'
 
 const prisma = new PrismaClient()
-const cryptoRandom = () => {
-  const randomBytes = CryptoJS.lib.WordArray.random(8) // Use 8 bytes for a double-precision float
-  const randomHash = CryptoJS.SHA256(randomBytes.toString(CryptoJS.enc.Hex))
-  const normalizedFloat =
-    parseInt(randomHash.toString(CryptoJS.enc.Hex), 16) / Math.pow(2, 256)
-  return normalizedFloat
-}
+const response = new ResponseService()
+
 export const verifySignIn = async (req: Request, res: Response) => {
   const { type, email } = req.query
   if (type && email) {
@@ -95,16 +92,20 @@ export const verifySignIn = async (req: Request, res: Response) => {
 }
 
 export const verifySession = async (req: Request, res: Response) => {
-  res.json({
-    error: false,
-    item: res.locals.user,
-  })
+  res.json(response.success({ item: res.locals.user }))
 }
 
 export const register = async (req: Request, res: Response) => {
-  const { email, password, firstName, lastName, birthDate, registrationType } =
-    req.body
-  if (email && firstName && lastName && birthDate && registrationType) {
+  const isInputValid = Z_UserRegister.safeParse(req.body)
+  if (isInputValid.success) {
+    const {
+      email,
+      password,
+      firstName,
+      lastName,
+      birthDate,
+      registrationType,
+    } = req.body
     try {
       const user = await prisma.user.findFirst({
         where: {
@@ -139,32 +140,22 @@ export const register = async (req: Request, res: Response) => {
             phoneNumber: '',
           },
         })
-        res.json({
-          error: false,
-          item: {
-            personalInfo: newPersonalInfo,
-          },
-          message: 'Successfully registered',
-        })
+        res.json(
+          response.success({
+            item: {
+              personalInfo: newPersonalInfo,
+            },
+            message: 'Successfully registered',
+          })
+        )
       } else {
-        res.json({
-          error: true,
-          message: 'Email already exist',
-        })
+        res.json(response.error({ message: 'Email already exist' }))
       }
     } catch (err: any) {
-      res.json({
-        error: true,
-        items: null,
-        itemCount: 0,
-        message: err.message,
-      })
+      res.json(response.error({ message: err.message }))
     }
   } else {
-    res.json({
-      error: true,
-      message: REQUIRED_VALUE_EMPTY,
-    })
+    res.json(response.error({ message: REQUIRED_VALUE_EMPTY }))
   }
 }
 
@@ -293,7 +284,7 @@ export const forgot = async (req: Request, res: Response) => {
         },
       })
 
-      const code = Math.floor(100000 + cryptoRandom() * 900000)
+      const code = Math.floor(100000 + randomNumber() * 900000)
       const successMessage = `Email was sent to ${email}, please check before it expires.`
       const webVerifyUrl = `${webUrl}/new-password?email=${email}&code=${code}`
       const sendEmailParams = { to: email, magicLink: webVerifyUrl }
@@ -424,7 +415,7 @@ export const mfa = async (req: Request, res: Response) => {
         },
       })
 
-      const code = Math.floor(100000 + cryptoRandom() * 900000)
+      const code = Math.floor(100000 + randomNumber() * 900000)
       const successMessage = `Email was sent to ${user.email}, please check before it expires.`
       const sendEmailParams = { to: user.email, code: String(code) }
       const authEmail = new AuthEmail()
@@ -617,8 +608,8 @@ export const userDetails = async (req: Request, res: Response) => {
         item: {
           id: user?.id,
           email: user?.email,
-          canreceivedEmail: user?.canReceiveEmail,
-          RegistrationType: user?.registrationType,
+          canReceivedEmail: user?.canReceiveEmail,
+          registrationType: user?.registrationType,
           profilePicture: user?.profilePicture,
           personalInfo: user?.personalInfo,
         },

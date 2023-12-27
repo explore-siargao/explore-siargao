@@ -9,7 +9,7 @@
   "scripts": {
     "build": "npx tsc && tsc-alias -p tsconfig.json",
     "start": "cross-env NODE_ENV=production node build/index.js",
-    "dev": "cross-env NODE_ENV=development concurrently \"npx tsc --watch\" \"tsc-alias -p tsconfig.json --watch\" \"nodemon build/index.js\"",
+    "dev": "cross-env NODE_ENV=development nodemon --watch ../../packages/constants --watch ../../packages/contract --watch src src/index.ts",
     "postinstall": "npx prisma generate"
   },
   "dependencies": {
@@ -29,7 +29,8 @@
     "lodash": "^4.17.21",
     "next-auth": "^4.24.5",
     "react-email": "^1.10.0",
-    "zod": "^3.22.4"
+    "zod": "^3.22.4",
+    "@repo/contract": "*"
   },
   "devDependencies": {
     "@repo/typescript-config": "*",

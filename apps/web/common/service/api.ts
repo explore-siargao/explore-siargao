@@ -1,3 +1,5 @@
+import { T_BackendResponse } from "@repo/contract"
+
 enum EContentType {
   JSON = "application/json",
   formData = "multipart/form-data",
@@ -29,11 +31,11 @@ export class ApiService {
     return options
   }
 
-  async get<T = any>(
+  async get<T = T_BackendResponse>(
     endpoint: string,
     params?: Record<string, any>,
     signal?: AbortSignal
-  ): Promise<T | any> {
+  ): Promise<T> {
     const reqParams = new URLSearchParams(params).toString()
     const otherOptions = this.constructOtherOptions()
 
@@ -48,7 +50,7 @@ export class ApiService {
     return (await res).json()
   }
 
-  async post<T = any>(endpoint: string, body: any): Promise<T> {
+  async post<T = T_BackendResponse>(endpoint: string, body: any): Promise<T> {
     const otherOptions = this.constructOtherOptions()
     const res = fetch(`${this.BASE_URL}${endpoint}`, {
       method: "POST",
@@ -58,7 +60,7 @@ export class ApiService {
     return (await res).json()
   }
 
-  async patch(endpoint: string, body?: any) {
+  async patch<T = T_BackendResponse>(endpoint: string, body?: any): Promise<T> {
     const otherOptions = this.constructOtherOptions()
 
     const res = fetch(`${this.BASE_URL}${endpoint}`, {
@@ -69,7 +71,7 @@ export class ApiService {
     return (await res).json()
   }
 
-  async delete(endpoint: string) {
+  async delete<T = T_BackendResponse>(endpoint: string): Promise<T> {
     const otherOptions = this.constructOtherOptions()
 
     const res = fetch(`${this.BASE_URL}${endpoint}`, {
