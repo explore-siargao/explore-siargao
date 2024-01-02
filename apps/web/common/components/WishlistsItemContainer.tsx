@@ -16,6 +16,7 @@ import {
 import { Typography } from "./ui/Typography"
 import AddNoteModal from "@/module/AccountSettings/components/modals/AddNoteModal"
 import toast from "react-hot-toast"
+import MenuModal from "@/module/AccountSettings/components/modals/MenuModal"
 type ItemData = {
   id: number
   photo: string
@@ -31,37 +32,28 @@ type ItemData = {
 
 type WishlistsItemCProps = {
   datas: ItemData[]
-  isButtonClicked: boolean
-  contentId: string
 }
 
-const WishlistsItemContainer = ({
-  datas,
-  isButtonClicked,
-  contentId,
-}: WishlistsItemCProps) => {
+const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
   const [isClicked, setIsClicked] = useState(false)
   const handleClick = () => {
     setIsClicked((setIsClicked) => !setIsClicked)
   }
   const [addNote, setAddNote] = useState(false)
-  const [contentState, setContentState] = useState({
-    isButtonClicked: false,
-    buttonId: "",
-  })
+  const [openMenu, setOpenMenu] = useState(false)
+
   return (
     <div className="flex flex-col w-full xl:w-[920px]">
-      <div className="sticky w-full 2xl:w-[920px] top-16 md:top-28 bg-white z-50 flex border-b-gray-200 border-b py-4 items-center">
+      <div className="sticky w-full 2xl:w-[920px] top-26 bg-white z-50 flex border-b-gray-200 border-b py-4 items-center">
         <ArrowLeftIcon
           className="h-10 w-10 cursor-pointer rounded-full hover:bg-gray-50 p-2 -ml-3"
           //   onClick={() => router.push(LINK_ACCOUNT_WISHLIST)}
         />
-
         <Typography
           variant={"h4"}
           className="w-full text-left place-self-center font-semibold ml-4"
         >
-          asd{" "}
+          Wishlist Title
         </Typography>
         <div className="flex gap-3">
           <DocumentDuplicateIcon
@@ -72,7 +64,10 @@ const WishlistsItemContainer = ({
             }
             className="h-10 w-10 cursor-pointer rounded-full hover:bg-gray-50 p-2"
           />
-          <button className="h-10 w-10 cursor-pointer rounded-full hover:bg-gray-50 p-2 text-xs">
+          <button
+            className="h-10 w-10 cursor-pointer rounded-full hover:bg-gray-50 p-2 text-xs"
+            onClick={() => setOpenMenu(true)}
+          >
             •••
           </button>
         </div>
@@ -84,13 +79,13 @@ const WishlistsItemContainer = ({
         <div className="flex">
           <Typography
             variant={"h5"}
-            className="border-2 border-text-100 rounded-full hover:border-text-300 p-2"
+            className="border border-text-100 rounded-full hover:border-text-300 p-2"
           >
             Add dates
           </Typography>
           <Typography
             variant={"h5"}
-            className="border-2 border-text-100 rounded-full hover:border-text-300 p-2"
+            className="border border-text-100 rounded-full hover:border-text-300 p-2"
           >
             1 guest
           </Typography>
@@ -121,7 +116,8 @@ const WishlistsItemContainer = ({
                 </Title>
                 <div className="flex text-text-500 place-items-center gap-1">
                   <StarIcon className="h-4 w-auto" />
-                  {item.ratings} {item.reviews}
+                  {item.ratings}{" "}
+                  <span className="text-text-400">{item.reviews}</span>
                 </div>
               </div>
               <div className="text-text-300 text-sm">
@@ -137,45 +133,22 @@ const WishlistsItemContainer = ({
               </Typography>
             </div>
             <div>
-              {/* {!contentState.isButtonClicked ? (
-                <div className="flex justify-between py-5">
-                  <button
-                    onClick={() =>
-                      setContentState({
-                        isButtonClicked: !contentState.isButtonClicked,
-                        contentId: "legalName",
-                      })
-                    }
-                    className="text-text-300 underline hover:text-text-700 select-none "
-                  >
-                    Add a note
-                  </button>
-                </div>
-              ) : (
-                <div className="grid py-5">
-                  <Typography>Typography</Typography>
-                </div>
-              )} */}
-              {isButtonClicked === false ? (
-                <button
-                  // onClick={() =>
-                  //   setContentState({
-                  //     isButtonClicked: true,
-                  //   })
-                  // }
-                  onClick={() => setAddNote(true)}
-                  className="text-text-300 underline hover:text-text-700 select-none "
-                >
-                  Add a note
-                </button>
-              ) : (
-                "Notes"
-              )}
+              <button
+                onClick={() => setAddNote(true)}
+                className="text-text-300 underline hover:text-text-00 select-none "
+              >
+                Add a note
+              </button>
             </div>
           </li>
         ))}
       </ul>
-      <AddNoteModal isOpen={addNote} onClose={() => setAddNote(false)} />
+      <AddNoteModal
+        isOpen={addNote}
+        onClose={() => setAddNote(false)}
+        id="AddNote"
+      />
+      <MenuModal isOpen={openMenu} onClose={() => setOpenMenu(false)} />
     </div>
   )
 }
