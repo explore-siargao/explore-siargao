@@ -63,6 +63,6 @@ router.delete(
   isCsrfTokenValid,
   isUserLoggedIn,
   deleteWishGroup
-  )
+)
 
 export default router

@@ -24,23 +24,27 @@ export const getWishGroupsByUser = async (req: Request, res: Response) => {
       })
 
       if (getAllWishGroupByUser.length !== 0) {
-        res.json(response.success({
-          items:getAllWishGroupByUser,
-          allItemCount:getAllWishGroupByUser.length,
-          message:''
-        }))
+        res.json(
+          response.success({
+            items: getAllWishGroupByUser,
+            allItemCount: getAllWishGroupByUser.length,
+            message: '',
+          })
+        )
       } else {
-        res.json(response.success({
-          items: getAllWishGroupByUser,
-          allItemCount:getAllWishGroupByUser.length,
-          message:'No data found'
-        }))
+        res.json(
+          response.success({
+            items: getAllWishGroupByUser,
+            allItemCount: getAllWishGroupByUser.length,
+            message: 'No data found',
+          })
+        )
       }
     } else {
-      res.json(response.error({message:'User not exist in our system'}))
+      res.json(response.error({ message: 'User not exist in our system' }))
     }
   } catch (err: any) {
-    res.json(response.error({message:err.message}))
+    res.json(response.error({ message: err.message }))
   }
 }
 
@@ -60,16 +64,18 @@ export const wishGroupByUserAndTitle = async (req: Request, res: Response) => {
           userId: userId,
         },
       })
-      res.json(response.success({
-        items:getWishGroupByuserAndTitle,
-        allItemCount:getWishGroupByuserAndTitle.length,
-        message:''
-      }))
+      res.json(
+        response.success({
+          items: getWishGroupByuserAndTitle,
+          allItemCount: getWishGroupByuserAndTitle.length,
+          message: '',
+        })
+      )
     } else {
-      res.json(response.error({message:'User not exist in our system'}))
+      res.json(response.error({ message: 'User not exist in our system' }))
     }
   } catch (err: any) {
-    res.json(response.error({message:err.message}))
+    res.json(response.error({ message: err.message }))
   }
 }
 
@@ -91,11 +97,13 @@ export const addWishGroup = async (req: Request, res: Response) => {
         },
       })
       if (findWishGroup.length !== 0) {
-        res.json(response.success({
-          items: findWishGroup,
-          allItemCount:findWishGroup.length,
-          message:''
-        }))
+        res.json(
+          response.success({
+            items: findWishGroup,
+            allItemCount: findWishGroup.length,
+            message: '',
+          })
+        )
       } else {
         const findListing = await prisma.listing.findUnique({
           where: {
@@ -110,20 +118,24 @@ export const addWishGroup = async (req: Request, res: Response) => {
               listingId: listingId,
             },
           })
-          res.json(response.success({
-            item:newWishGroup,
-            allItemCount:1,
-            message:"Successfully added to wish group"
-          }))
+          res.json(
+            response.success({
+              item: newWishGroup,
+              allItemCount: 1,
+              message: 'Successfully added to wish group',
+            })
+          )
         } else {
-          res.json(response.error({message:'Booking item not found in our system'}))
+          res.json(
+            response.error({ message: 'Booking item not found in our system' })
+          )
         }
       }
     } else {
-      res.json(response.error({message:'User not exist in hour system'}))
+      res.json(response.error({ message: 'User not exist in hour system' }))
     }
   } catch (err: any) {
-    res.json(response.error({message:err.message}))
+    res.json(response.error({ message: err.message }))
   }
 }
 
@@ -158,22 +170,24 @@ export const addToExistingWishGroup = async (req: Request, res: Response) => {
               userId: userId,
             },
           })
-          res.json(response.success({
-            item:newWishGroup,
-            allItemCount:1,
-            message: `Wish list successfully added to ${getWishGroup.title}`,
-        }))
+          res.json(
+            response.success({
+              item: newWishGroup,
+              allItemCount: 1,
+              message: `Wish list successfully added to ${getWishGroup.title}`,
+            })
+          )
         } else {
-          res.json(response.error({message:'Invalid booking'}))
+          res.json(response.error({ message: 'Invalid booking' }))
         }
       } else {
-        res.json(response.error({message:'Wish group not found'}))
+        res.json(response.error({ message: 'Wish group not found' }))
       }
     } else {
-      res.json(response.error({message:'User not exist in our system'}))
+      res.json(response.error({ message: 'User not exist in our system' }))
     }
   } catch (err: any) {
-    res.json(response.error({message: err.message}))
+    res.json(response.error({ message: err.message }))
   }
 }
 
@@ -202,52 +216,70 @@ export const addNewWishGroup = async (req: Request, res: Response) => {
               listingId: listingId,
             },
           })
-          res.json(response.success({item:newWishGroup, allItemCount:1, message:'new Wish group successfully added'}))
+          res.json(
+            response.success({
+              item: newWishGroup,
+              allItemCount: 1,
+              message: 'new Wish group successfully added',
+            })
+          )
         } else {
-          res.json(response.error({message:'Item already exist in wishgroup'}))
+          res.json(
+            response.error({ message: 'Item already exist in wishgroup' })
+          )
         }
       } else {
-        res.json(response.error({message:'User not exist in our system'}))
+        res.json(response.error({ message: 'User not exist in our system' }))
       }
     } else {
-      res.json(response.error({message:REQUIRED_VALUE_EMPTY}))
+      res.json(response.error({ message: REQUIRED_VALUE_EMPTY }))
     }
   } catch (err: any) {
-    res.json(response.error({message:err.message}))
+    res.json(response.error({ message: err.message }))
   }
 }
 
-export const deleteWishGroup = async(req:Request, res:Response)=>{
-const userId = Number(req.params.userId)
-const wishGroupId = Number(req.params.wishGroupId)
+export const deleteWishGroup = async (req: Request, res: Response) => {
+  const userId = Number(req.params.userId)
+  const wishGroupId = Number(req.params.wishGroupId)
   try {
     const getUser = await prisma.user.findUnique({
-      where:{
-        id:userId
-      }
+      where: {
+        id: userId,
+      },
     })
-    if (getUser!==null) {
+    if (getUser !== null) {
       const findWishGroup = await prisma.wishGroup.findFirst({
-        where:{
-          id:wishGroupId,
-          userId:userId
-        }
+        where: {
+          id: wishGroupId,
+          userId: userId,
+        },
       })
-      if(findWishGroup!==null){
-      const removeWishGroup = await prisma.wishGroup.delete({
-        where:{
-          id:wishGroupId,
-          userId:userId
-        }
-      })
-      res.json(response.success({item:removeWishGroup, allItemCount:1, message:"Wishlist successfully deleted"}))
-    }else{
-      res.json(response.error({message:"Wishlist not found or its already deleted"}))
-    }
+      if (findWishGroup !== null) {
+        const removeWishGroup = await prisma.wishGroup.delete({
+          where: {
+            id: wishGroupId,
+            userId: userId,
+          },
+        })
+        res.json(
+          response.success({
+            item: removeWishGroup,
+            allItemCount: 1,
+            message: 'Wishlist successfully deleted',
+          })
+        )
+      } else {
+        res.json(
+          response.error({
+            message: 'Wishlist not found or its already deleted',
+          })
+        )
+      }
     } else {
-      res.json(response.error({message:"User not found in our system"}))
+      res.json(response.error({ message: 'User not found in our system' }))
     }
-  } catch (err:any) {
-   res.json(response.error({message: err.message}))
+  } catch (err: any) {
+    res.json(response.error({ message: err.message }))
   }
 }
