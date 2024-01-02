@@ -7,7 +7,7 @@ type Props = {
 }
 const AccountSettingWrapper = ({ children }: Props) => {
   return (
-    <WidthWrapper width={"secondary"} className="my-16 md:my-32">
+    <WidthWrapper width="small" className="mt-20 md:mt-32 lg:mt-48">
       {children}
     </WidthWrapper>
   )

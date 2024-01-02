@@ -11,8 +11,8 @@ export default async function layout({
 }) {
   return (
     <LayoutWrapper>
-      <Header contentWidth="full" />
-      {children}
+      <Header contentWidth="wide" />
+        {children}
       <BottomNavBar />
     </LayoutWrapper>
   )

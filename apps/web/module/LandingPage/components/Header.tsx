@@ -13,9 +13,9 @@ import Link from "next/link"
 import { WidthWrapper } from "@/common/components/WidthWrapper"
 
 function Header({
-  contentWidth = "primary",
+  contentWidth = "wide",
 }: {
-  contentWidth?: "primary" | "secondary" | "full"
+  contentWidth?: "medium" | "small" | "wide" | "full"
 }) {
   const { data: session } = useSession()
   const path = usePathname()

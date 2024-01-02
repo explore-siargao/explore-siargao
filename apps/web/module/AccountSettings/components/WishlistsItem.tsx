@@ -136,14 +136,14 @@ const tripGroup = [
 const WishlistsItem = () => {
   const router = useRouter()
   return (
-    <WidthWrapper width={"full"} className="py-24 lg:py-28 ">
+    <WidthWrapper width={"full"} className="py-24 lg:py-28 overflow-y-hidden">
       <div className="flex gap-2">
         <div className="relative">
           {/* @ts-ignore */}
           <WishlistsItemContainer datas={tripGroup} />
         </div>
-        <div className="h-screen w-full bg-red-200 hidden lg:block">
-          <MapBox />
+        <div className="h-screen w-full lg:block">
+          <Map />
         </div>
       </div>
     </WidthWrapper>
