@@ -116,6 +116,7 @@ export const addWishGroup = async (req: Request, res: Response) => {
               title: title,
               userId: userId,
               listingId: listingId,
+              note: null,
             },
           })
           res.json(
@@ -168,6 +169,7 @@ export const addToExistingWishGroup = async (req: Request, res: Response) => {
               title: getWishGroup.title,
               listingId: listingId,
               userId: userId,
+              note: null,
             },
           })
           res.json(
@@ -206,6 +208,7 @@ export const addNewWishGroup = async (req: Request, res: Response) => {
           where: {
             userId: userId,
             listingId: listingId,
+            note: null,
           },
         })
         if (getWishGroup === null) {
@@ -278,6 +281,54 @@ export const deleteWishGroup = async (req: Request, res: Response) => {
       }
     } else {
       res.json(response.error({ message: 'User not found in our system' }))
+    }
+  } catch (err: any) {
+    res.json(response.error({ message: err.message }))
+  }
+}
+
+export const addEditWishListNote = async (req: Request, res: Response) => {
+  const userId = Number(req.params.userId)
+  const wishGroupId = Number(req.params.wishGroupId)
+  const note = req.body.note
+  try {
+    const getUser = await prisma.user.findFirst({
+      where: {
+        id: userId,
+      },
+    })
+    if (getUser !== null) {
+      const getWish = await prisma.wishGroup.findFirst({
+        where: {
+          id: wishGroupId,
+        },
+      })
+      if (getWish !== null) {
+        if (note) {
+          const addorEditNote = await prisma.wishGroup.update({
+            where: {
+              userId: userId,
+              id: wishGroupId,
+            },
+            data: {
+              note: note,
+            },
+          })
+          res.json(
+            response.success({
+              item: addorEditNote,
+              allItemCount: 1,
+              message: 'Note successfully added',
+            })
+          )
+        } else {
+          res.json(response.error({ message: REQUIRED_VALUE_EMPTY }))
+        }
+      } else {
+        res.json(response.error({ message: 'Wish list not found' }))
+      }
+    } else {
+      res.json(response.error({ message: 'User not found to our system' }))
     }
   } catch (err: any) {
     res.json(response.error({ message: err.message }))
