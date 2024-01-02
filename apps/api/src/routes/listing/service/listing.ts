@@ -18,20 +18,24 @@ export const getAllListing = async (req: Request, res: Response) => {
       },
     })
     if (listings.length > 0) {
-      res.json(response.success({
-        items:listings,
-        allItemCount:listings.length,
-        message:''
-      }))
+      res.json(
+        response.success({
+          items: listings,
+          allItemCount: listings.length,
+          message: '',
+        })
+      )
     } else {
-      res.json(response.success({
-        items:listings,
-        allItemCount:listings.length,
-        message:'No data found'
-      }))
+      res.json(
+        response.success({
+          items: listings,
+          allItemCount: listings.length,
+          message: 'No data found',
+        })
+      )
     }
   } catch (err: any) {
-    res.json(response.error({message:err.message}))
+    res.json(response.error({ message: err.message }))
   }
 }
 
@@ -49,20 +53,24 @@ export const getListing = async (req: Request, res: Response) => {
       },
     })
     if (listing !== null) {
-      res.json(response.success({
-        item:listing,
-        allItemCount:1,
-        message:''
-      }))
+      res.json(
+        response.success({
+          item: listing,
+          allItemCount: 1,
+          message: '',
+        })
+      )
     } else {
-      res.json(response.success({
-        item:listing,
-        allItemCount:0,
-        message:'No data found'
-      }))
+      res.json(
+        response.success({
+          item: listing,
+          allItemCount: 0,
+          message: 'No data found',
+        })
+      )
     }
   } catch (err: any) {
-    res.json(response.error({message:err.message}))
+    res.json(response.error({ message: err.message }))
   }
 }
 
@@ -75,7 +83,7 @@ export const addListing = async (req: Request, res: Response) => {
     description,
     address,
     fee,
-    latitude ,
+    latitude,
     longitude,
     cleaningFee,
     serviceFee,
@@ -123,25 +131,27 @@ export const addListing = async (req: Request, res: Response) => {
             category: category,
             description: description,
             address: address,
-            longitude:longitude,
-            latitude:latitude,
+            longitude: longitude,
+            latitude: latitude,
             hostedById: hostId,
             listingPriceId: newPrice.id,
           },
         })
 
-        res.json(response.success({
-          item:newListing,
-          allItemCount:1,
-          message:'Listing item successfully added'
-        }))
+        res.json(
+          response.success({
+            item: newListing,
+            allItemCount: 1,
+            message: 'Listing item successfully added',
+          })
+        )
       } else {
-        res.json(response.error({message:REQUIRED_VALUE_EMPTY}))
+        res.json(response.error({ message: REQUIRED_VALUE_EMPTY }))
       }
     } else {
-      res.json(response.error({message:'This host not exist to our system'}))
+      res.json(response.error({ message: 'This host not exist to our system' }))
     }
   } catch (e: any) {
-    res.json(response.error({message:e.message}))
+    res.json(response.error({ message: e.message }))
   }
 }
