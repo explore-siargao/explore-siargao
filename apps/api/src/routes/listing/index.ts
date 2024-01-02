@@ -66,9 +66,6 @@ router.delete(
   deleteWishGroup
 )
 
-router.patch(
-  '/:userId/note/:wishGroupId',
-  addEditWishListNote
-)
+router.patch('/:userId/note/:wishGroupId', addEditWishListNote)
 
 export default router
