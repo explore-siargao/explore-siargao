@@ -1,9 +1,12 @@
 import { Response, Request } from 'express'
 import { PrismaClient } from '@prisma/client'
 import { REQUIRED_VALUE_EMPTY } from '@repo/constants'
+import { ResponseService } from '@/common/service/response'
+
+const prisma = new PrismaClient()
+const response = new ResponseService()
 export const getAllListing = async (req: Request, res: Response) => {
   try {
-    const prisma = new PrismaClient()
     const listings = await prisma.listing.findMany({
       include: {
         price: true,
@@ -15,33 +18,25 @@ export const getAllListing = async (req: Request, res: Response) => {
       },
     })
     if (listings.length > 0) {
-      res.json({
-        error: false,
-        items: listings,
-        itemCount: listings.length,
-        message: '',
-      })
+      res.json(response.success({
+        items:listings,
+        allItemCount:listings.length,
+        message:''
+      }))
     } else {
-      res.json({
-        error: false,
-        items: null,
-        itemCount: 0,
-        message: 'No data found',
-      })
+      res.json(response.success({
+        items:listings,
+        allItemCount:listings.length,
+        message:'No data found'
+      }))
     }
   } catch (err: any) {
-    res.json({
-      error: true,
-      items: null,
-      itemCount: 0,
-      message: err.message,
-    })
+    res.json(response.error({message:err.message}))
   }
 }
 
 export const getListing = async (req: Request, res: Response) => {
   try {
-    const prisma = new PrismaClient()
     const listing = await prisma.listing.findFirst({
       where: { id: Number(req.params.id) },
       include: {
@@ -54,32 +49,24 @@ export const getListing = async (req: Request, res: Response) => {
       },
     })
     if (listing !== null) {
-      res.json({
-        error: false,
-        items: listing,
-        itemCount: 1,
-        message: '',
-      })
+      res.json(response.success({
+        item:listing,
+        allItemCount:1,
+        message:''
+      }))
     } else {
-      res.json({
-        error: false,
-        items: null,
-        itemCount: 0,
-        message: 'No data found',
-      })
+      res.json(response.success({
+        item:listing,
+        allItemCount:0,
+        message:'No data found'
+      }))
     }
   } catch (err: any) {
-    res.json({
-      error: true,
-      items: null,
-      itemCount: 0,
-      message: err.message,
-    })
+    res.json(response.error({message:err.message}))
   }
 }
 
 export const addListing = async (req: Request, res: Response) => {
-  const prisma = new PrismaClient()
   const hostId = Number(req.params.hostId)
   const {
     imageUrls,
@@ -88,6 +75,8 @@ export const addListing = async (req: Request, res: Response) => {
     description,
     address,
     fee,
+    latitude ,
+    longitude,
     cleaningFee,
     serviceFee,
     checkIn,
@@ -99,7 +88,6 @@ export const addListing = async (req: Request, res: Response) => {
     const getHost = await prisma.user.findFirst({
       where: {
         id: hostId,
-        // role:"Host"
       },
     })
 
@@ -135,39 +123,25 @@ export const addListing = async (req: Request, res: Response) => {
             category: category,
             description: description,
             address: address,
+            longitude:longitude,
+            latitude:latitude,
             hostedById: hostId,
             listingPriceId: newPrice.id,
           },
         })
 
-        res.json({
-          error: false,
-          item: newListing,
-          itemCount: 1,
-          message: 'Listing successfully added',
-        })
+        res.json(response.success({
+          item:newListing,
+          allItemCount:1,
+          message:'Listing item successfully added'
+        }))
       } else {
-        res.json({
-          error: true,
-          items: null,
-          itemCount: 0,
-          message: REQUIRED_VALUE_EMPTY,
-        })
+        res.json(response.error({message:REQUIRED_VALUE_EMPTY}))
       }
     } else {
-      res.json({
-        error: true,
-        items: null,
-        itemCount: 0,
-        message: 'This host not exist to our system',
-      })
+      res.json(response.error({message:'This host not exist to our system'}))
     }
   } catch (e: any) {
-    res.json({
-      error: true,
-      items: null,
-      itemCount: 0,
-      message: e.message,
-    })
+    res.json(response.error({message:e.message}))
   }
 }
