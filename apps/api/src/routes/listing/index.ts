@@ -6,6 +6,7 @@ import {
   addNewWishGroup,
   addToExistingWishGroup,
   addWishGroup,
+  deleteWishGroup,
   getWishGroupsByUser,
   wishGroupByUserAndTitle,
 } from './service/wishGroup'
@@ -55,5 +56,13 @@ router.post(
   isUserLoggedIn,
   addToExistingWishGroup
 )
+
+router.delete(
+  '/wish-group/delete/:userId/:wishGroupId',
+  isOriginValid,
+  isCsrfTokenValid,
+  isUserLoggedIn,
+  deleteWishGroup
+  )
 
 export default router
