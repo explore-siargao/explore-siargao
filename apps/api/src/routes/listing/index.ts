@@ -3,6 +3,7 @@ import { addListing, getAllListing, getListing } from './service/listing'
 import isCsrfTokenValid from '@/common/middleware/auth/isCsrfTokenValid'
 import isOriginValid from '@/common/middleware/auth/isOriginValid'
 import {
+  addEditWishListNote,
   addNewWishGroup,
   addToExistingWishGroup,
   addWishGroup,
@@ -63,6 +64,11 @@ router.delete(
   isCsrfTokenValid,
   isUserLoggedIn,
   deleteWishGroup
+)
+
+router.patch(
+  '/:userId/note/:wishGroupId',
+  addEditWishListNote
 )
 
 export default router
