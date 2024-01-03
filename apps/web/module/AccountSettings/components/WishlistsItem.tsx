@@ -1,14 +1,7 @@
 "use client"
-import BookingBoxContainer from "@/common/components/BookingBoxContainer"
 import Map from "@/common/components/Map"
-import MapBox from "@/common/components/MapBox"
 import { WidthWrapper } from "@/common/components/WidthWrapper"
-import WishlistBoxContainer from "@/common/components/WishlistBoxContainer"
 import WishlistsItemContainer from "@/common/components/WishlistsItemContainer"
-import { Title } from "@/common/components/ui/Title"
-import { Typography } from "@/common/components/ui/Typography"
-import { LINK_ACCOUNT_WISHLIST } from "@/common/constants/links"
-import { ArrowLeftIcon } from "@heroicons/react/24/outline"
 import { useRouter } from "next/navigation"
 import React from "react"
 const tripGroup = [
@@ -142,8 +135,10 @@ const WishlistsItem = () => {
           {/* @ts-ignore */}
           <WishlistsItemContainer datas={tripGroup} />
         </div>
-        <div className="relative w-full hidden lg:block ">
-          <Map />
+        <div className="relative w-full hidden lg:block">
+          <div>
+            <Map />
+          </div>
         </div>
       </div>
     </WidthWrapper>

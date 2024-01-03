@@ -2,11 +2,12 @@ import ModalContainer from "@/common/components/ModalContainer"
 import ModalContainerFooter from "@/common/components/ModalContainer/ModalContainerFooter"
 import { Title } from "@/common/components/ui/Title"
 import { Typography } from "@/common/components/ui/Typography"
-import { Dialog, Transition } from "@headlessui/react"
+import { Dialog, Menu, Transition } from "@headlessui/react"
 import { ExclamationCircleIcon, StarIcon } from "@heroicons/react/20/solid"
 import Image from "next/image"
 import React, { Fragment, useRef, useState } from "react"
 import PriceBreakdownModal from "./PriceBreakdownModal"
+
 interface AddNoteProps {
   id: string
   isOpen: boolean
@@ -53,11 +54,8 @@ const AddNoteModal = ({ id, isOpen, onClose }: AddNoteProps) => {
                 leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                 leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
               >
-                <Dialog.Panel
-                  id={id}
-                  className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all w-full max-w-[720px] "
-                >
-                  <ModalContainer onClose={onClose} title="Add a note">
+                <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all w-full max-w-[720px] ">
+                  <ModalContainer key={id} onClose={onClose} title="Add a note">
                     <div className="p-10 grid grid-cols-2 gap-5 items-center">
                       <div className="h-72 rounded-2xl relative select-none">
                         <Image
@@ -91,15 +89,14 @@ const AddNoteModal = ({ id, isOpen, onClose }: AddNoteProps) => {
                           <Typography
                             variant={"p"}
                             fontWeight={"semiBold"}
-                            className="text-text-700"
+                            className="text-text-700 flex items-start"
                           >
-                            ₱3,419 <span className="text-text-400 ">night</span>{" "}
-                            <button
-                              onClick={() => setShowPrice(true)}
-                              className="text-text-300 text-sm underline"
-                            >
-                              ₱10,898 total
-                            </button>
+                            ₱3,419{" "}
+                            <span className="text-text-400 ml-1 mr-2">
+                              {" "}
+                              night
+                            </span>{" "}
+                            <PriceBreakdownModal buttonTitle="₱10,898 total" />
                           </Typography>
                         </div>
                         <textarea
@@ -144,6 +141,7 @@ const AddNoteModal = ({ id, isOpen, onClose }: AddNoteProps) => {
                         </div>
                       </div>
                     </div>
+
                     <ModalContainerFooter
                       positive="Save"
                       negative="Cancel"
@@ -158,11 +156,12 @@ const AddNoteModal = ({ id, isOpen, onClose }: AddNoteProps) => {
           </div>
         </Dialog>
       </Transition.Root>
-      <PriceBreakdownModal
+
+      {/* <PriceBreakdownModal
         isOpen={showPrice}
         onClose={() => setShowPrice(false)}
         id="Price"
-      />
+      /> */}
     </>
   )
 }

@@ -1,15 +1,10 @@
 "use client"
 import Image from "next/image"
-import React, { useState } from "react"
+import React, { useRef, useState } from "react"
 import { Title } from "./ui/Title"
-import {
-  DocumentDuplicateIcon,
-  HeartIcon,
-  ShareIcon,
-} from "@heroicons/react/24/outline"
+import { DocumentDuplicateIcon, HeartIcon } from "@heroicons/react/24/outline"
 import {
   ArrowLeftIcon,
-  ArrowUpTrayIcon,
   CheckCircleIcon,
   StarIcon,
 } from "@heroicons/react/20/solid"
@@ -17,6 +12,9 @@ import { Typography } from "./ui/Typography"
 import AddNoteModal from "@/module/AccountSettings/components/modals/AddNoteModal"
 import toast from "react-hot-toast"
 import MenuModal from "@/module/AccountSettings/components/modals/MenuModal"
+import { LINK_ACCOUNT_WISHLIST } from "../constants/links"
+import { useParams, useRouter } from "next/navigation"
+
 type ItemData = {
   id: number
   photo: string
@@ -36,18 +34,33 @@ type WishlistsItemCProps = {
 
 const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
   const [isClicked, setIsClicked] = useState(false)
+  const router = useRouter()
   const handleClick = () => {
     setIsClicked((setIsClicked) => !setIsClicked)
   }
   const [addNote, setAddNote] = useState(false)
   const [openMenu, setOpenMenu] = useState(false)
+  const showAddNoteModal = () => {
+    setAddNote(true)
+  }
+  const closeAddNoteModal = () => {
+    setAddNote(false)
+  }
 
+  const copyToClipboard = () => {
+    const copyText = document.createElement("textarea")
+    copyText.value = window.location.href
+    document.body.appendChild(copyText)
+    copyText.select()
+    document.execCommand("copy")
+    document.body.removeChild(copyText)
+  }
   return (
     <div className="flex flex-col w-full xl:w-[920px]">
       <div className="sticky w-full 2xl:w-[920px] top-26 bg-white z-50 flex border-b-gray-200 border-b py-4 items-center">
         <ArrowLeftIcon
           className="h-10 w-10 cursor-pointer rounded-full hover:bg-gray-50 p-2 -ml-3"
-          //   onClick={() => router.push(LINK_ACCOUNT_WISHLIST)}
+          onClick={() => router.push(LINK_ACCOUNT_WISHLIST)}
         />
         <Typography
           variant={"h4"}
@@ -57,11 +70,12 @@ const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
         </Typography>
         <div className="flex gap-3">
           <DocumentDuplicateIcon
-            onClick={() =>
+            onClick={() => {
               toast("Link copied!", {
                 icon: <CheckCircleIcon className="h-5 w-5 text-success-500" />,
               })
-            }
+              copyToClipboard()
+            }}
             className="h-10 w-10 cursor-pointer rounded-full hover:bg-gray-50 p-2"
           />
           <button
@@ -76,7 +90,7 @@ const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
         <Title className="w-full text-left place-self-center font-semibold">
           Wishlist title
         </Title>
-        <div className="flex">
+        <div className="flex mb-8">
           <Typography
             variant={"h5"}
             className="border border-text-100 rounded-full hover:border-text-300 p-2"
@@ -134,7 +148,7 @@ const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
             </div>
             <div>
               <button
-                onClick={() => setAddNote(true)}
+                onClick={showAddNoteModal}
                 className="text-text-300 underline hover:text-text-00 select-none "
               >
                 Add a note
@@ -143,11 +157,7 @@ const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
           </li>
         ))}
       </ul>
-      <AddNoteModal
-        isOpen={addNote}
-        onClose={() => setAddNote(false)}
-        id="AddNote"
-      />
+      <AddNoteModal isOpen={addNote} onClose={closeAddNoteModal} id="AddNote" />
       <MenuModal isOpen={openMenu} onClose={() => setOpenMenu(false)} />
     </div>
   )
