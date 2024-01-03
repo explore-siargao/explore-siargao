@@ -23,21 +23,21 @@ router.get('/:id', isCsrfTokenValid, isOriginValid, getListing)
 router.post('/:hostId', isOriginValid, isCsrfTokenValid, addListing)
 router.get(
   '/:userId/wish-group',
-  // isOriginValid,
-  // isCsrfTokenValid,
-  // isUserLoggedIn,
+  isOriginValid,
+  isCsrfTokenValid,
+  isUserLoggedIn,
   getWishGroupsByUser
 )
 router.get(
   '/:userId/:title/wishes',
-  // isOriginValid,
-  // isCsrfTokenValid,
-  // isUserLoggedIn,
+  isOriginValid,
+  isCsrfTokenValid,
+  isUserLoggedIn,
   wishGroupByUserAndTitle
 )
 
 router.post(
-  '/:userId/wish/:listingId',
+  '/:userId/wish/',
   isOriginValid,
   isCsrfTokenValid,
   isUserLoggedIn,
@@ -45,10 +45,10 @@ router.post(
 )
 
 router.post(
-  '/:userId/wish',
-  // isOriginValid,
-  // isCsrfTokenValid,
-  // isUserLoggedIn,
+  '/:userId/wish-group',
+  isOriginValid,
+  isCsrfTokenValid,
+  isUserLoggedIn,
   addNewWishGroup
 )
 

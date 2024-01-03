@@ -1,6 +1,7 @@
 import { ResponseService } from '@/common/service/response'
 import { PrismaClient } from '@prisma/client'
 import { REQUIRED_VALUE_EMPTY, USER_NOT_EXIST } from '@repo/constants'
+import { Z_WishGroup } from '@repo/contract'
 import { Request, Response } from 'express'
 
 const prisma = new PrismaClient()
@@ -81,6 +82,8 @@ export const wishGroupByUserAndTitle = async (req: Request, res: Response) => {
 
 export const addWishGroup = async (req: Request, res: Response) => {
   const userId = Number(req.params.userId)
+  const isValidInput = Z_WishGroup.safeParse(req.body)
+  if(isValidInput.success){
   const { title, listingId } = req.body
   try {
     const getUser = await prisma.user.findUnique({
@@ -137,13 +140,17 @@ export const addWishGroup = async (req: Request, res: Response) => {
   } catch (err: any) {
     res.json(response.error({ message: err.message }))
   }
+}else{
+  res.json(response.error({message:isValidInput.error.message}))
+}
 }
 
 export const addToExistingWishGroup = async (req: Request, res: Response) => {
   const listingId = req.body.listingId
   const userId = Number(req.params.userId)
   const wishGroupId = Number(req.params.wishGroupId)
-
+  const isValidInput = Z_WishGroup.safeParse(req.body)
+  if(isValidInput.success){
   try {
     const getUser = await prisma.user.findUnique({
       where: {
@@ -190,10 +197,15 @@ export const addToExistingWishGroup = async (req: Request, res: Response) => {
   } catch (err: any) {
     res.json(response.error({ message: err.message }))
   }
+}else{
+  res.json(response.error({message:isValidInput.error.message}))
+}
 }
 
 export const addNewWishGroup = async (req: Request, res: Response) => {
   const userId = Number(req.params.userId)
+  const isInputValid = Z_WishGroup.safeParse(req.body)
+  if(isInputValid.success){
   const { title, listingId } = req.body
   try {
     if (title && listingId) {
@@ -239,6 +251,9 @@ export const addNewWishGroup = async (req: Request, res: Response) => {
   } catch (err: any) {
     res.json(response.error({ message: err.message }))
   }
+}else{
+  res.json(response.error({message: isInputValid.error.message}))
+}
 }
 
 export const deleteWishGroup = async (req: Request, res: Response) => {
@@ -289,6 +304,8 @@ export const deleteWishGroup = async (req: Request, res: Response) => {
 export const addEditWishListNote = async (req: Request, res: Response) => {
   const userId = Number(req.params.userId)
   const wishGroupId = Number(req.params.wishGroupId)
+  const isValidInput = Z_WishGroup.safeParse(req.body)
+  if(isValidInput.success){
   const note = req.body.note
   try {
     const getUser = await prisma.user.findFirst({
@@ -332,12 +349,17 @@ export const addEditWishListNote = async (req: Request, res: Response) => {
   } catch (err: any) {
     res.json(response.error({ message: err.message }))
   }
+}else{
+res.json(response.error({message:isValidInput.error.message}))
+}
 }
 
 export const editTitle = async (req: Request, res: Response) => {
-  const oldTitle = req.body.oldTitle
-  const newTitle = req.body.newTitle
   const userId = Number(req.params.userId)
+  const isValidInput = Z_WishGroup.safeParse(req.body)
+  if(isValidInput.success){
+    const oldTitle = req.body.oldTitle
+    const newTitle = req.body.newTitle
   try {
     const getUser = await prisma.user.findUnique({
       where: {
@@ -375,6 +397,9 @@ export const editTitle = async (req: Request, res: Response) => {
   } catch (err: any) {
     res.json(response.error({ message: err.message }))
   }
+}else{
+  res.json(response.error({message:isValidInput.error.message}))
+}
 }
 
 export const deleteWishGroupByTitle = async (req: Request, res: Response) => {
