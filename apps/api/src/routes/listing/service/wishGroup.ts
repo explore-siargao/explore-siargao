@@ -334,3 +334,44 @@ export const addEditWishListNote = async (req: Request, res: Response) => {
     res.json(response.error({ message: err.message }))
   }
 }
+
+export const editTitle = async(req:Request, res:Response)=>{
+  const oldTitle = req.body.oldTitle
+  const newTitle = req.body.newTitle
+  const userId = Number(req.params.userId)
+  try {
+    const getUser = await prisma.user.findUnique({
+      where:{
+        id:userId
+      }
+    })
+    if (getUser!==null) {
+      if (oldTitle && newTitle) {
+        const updateTtitle = await prisma.wishGroup.updateMany({
+          where:{
+            userId:userId,
+            title:oldTitle
+          },
+          data:{
+            title:newTitle
+          }
+        })
+       if (updateTtitle.count!==0) {
+        res.json(response.success({
+          item:updateTtitle,
+          allItemCount:updateTtitle.count,
+          message:'Title successfully updated'
+        }))
+       } else {
+        res.json(response.error({message:'No title has been updated'}))
+       }
+      } else {
+        res.json(response.error({message:REQUIRED_VALUE_EMPTY}))
+      }
+    } else {
+      res.json(response.error({message:'User not exist in our system'}))
+    }
+  } catch (err:any) {
+    res.json(response.error({message:err.message}))
+  }
+}

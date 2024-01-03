@@ -8,6 +8,7 @@ import {
   addToExistingWishGroup,
   addWishGroup,
   deleteWishGroup,
+  editTitle,
   getWishGroupsByUser,
   wishGroupByUserAndTitle,
 } from './service/wishGroup'
@@ -21,9 +22,6 @@ router.get('/:id', isCsrfTokenValid, isOriginValid, getListing)
 router.post('/:hostId', isOriginValid, isCsrfTokenValid, addListing)
 router.get(
   '/:userId/wish-group',
-  isOriginValid,
-  isCsrfTokenValid,
-  isUserLoggedIn,
   getWishGroupsByUser
 )
 router.get(
@@ -67,5 +65,6 @@ router.delete(
 )
 
 router.patch('/:userId/note/:wishGroupId', addEditWishListNote)
+router.patch('/:userId/wish-group/update-title', editTitle)
 
 export default router
