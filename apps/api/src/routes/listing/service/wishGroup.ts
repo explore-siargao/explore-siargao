@@ -72,7 +72,7 @@ export const wishGroupByUserAndTitle = async (req: Request, res: Response) => {
         })
       )
     } else {
-      res.json(response.error({ message: USER_NOT_EXIST}))
+      res.json(response.error({ message: USER_NOT_EXIST }))
     }
   } catch (err: any) {
     res.json(response.error({ message: err.message }))
@@ -133,7 +133,7 @@ export const addWishGroup = async (req: Request, res: Response) => {
         }
       }
     } else {
-      res.json(response.error({ message:USER_NOT_EXIST}))
+      res.json(response.error({ message: USER_NOT_EXIST }))
     }
   } catch (err: any) {
     res.json(response.error({ message: err.message }))
@@ -186,7 +186,7 @@ export const addToExistingWishGroup = async (req: Request, res: Response) => {
         res.json(response.error({ message: 'Wish group not found' }))
       }
     } else {
-      res.json(response.error({ message:USER_NOT_EXIST}))
+      res.json(response.error({ message: USER_NOT_EXIST }))
     }
   } catch (err: any) {
     res.json(response.error({ message: err.message }))
@@ -232,7 +232,7 @@ export const addNewWishGroup = async (req: Request, res: Response) => {
           )
         }
       } else {
-        res.json(response.error({ message:USER_NOT_EXIST}))
+        res.json(response.error({ message: USER_NOT_EXIST }))
       }
     } else {
       res.json(response.error({ message: REQUIRED_VALUE_EMPTY }))
@@ -280,7 +280,7 @@ export const deleteWishGroup = async (req: Request, res: Response) => {
         )
       }
     } else {
-      res.json(response.error({ message:USER_NOT_EXIST}))
+      res.json(response.error({ message: USER_NOT_EXIST }))
     }
   } catch (err: any) {
     res.json(response.error({ message: err.message }))
@@ -328,7 +328,7 @@ export const addEditWishListNote = async (req: Request, res: Response) => {
         res.json(response.error({ message: 'Wish list not found' }))
       }
     } else {
-      res.json(response.error({ message:USER_NOT_EXIST}))
+      res.json(response.error({ message: USER_NOT_EXIST }))
     }
   } catch (err: any) {
     res.json(response.error({ message: err.message }))
@@ -371,46 +371,50 @@ export const editTitle = async (req: Request, res: Response) => {
         res.json(response.error({ message: REQUIRED_VALUE_EMPTY }))
       }
     } else {
-      res.json(response.error({ message: USER_NOT_EXIST}))
+      res.json(response.error({ message: USER_NOT_EXIST }))
     }
   } catch (err: any) {
     res.json(response.error({ message: err.message }))
   }
 }
 
-export const deleteWishGroupByTitle = async(req:Request, res:Response)=>{
+export const deleteWishGroupByTitle = async (req: Request, res: Response) => {
   const userId = Number(req.params.userId)
   const title = req.body.title
   try {
     const getUser = await prisma.user.findUnique({
-      where:{
-        id:userId
-      }
+      where: {
+        id: userId,
+      },
     })
-    if (getUser!==null) {
-      if(title){
+    if (getUser !== null) {
+      if (title) {
         const deleteWishGroups = await prisma.wishGroup.deleteMany({
-          where:{
-            userId:userId,
-            title:title
-          }
+          where: {
+            userId: userId,
+            title: title,
+          },
         })
-        if(deleteWishGroups.count!==0){
-          res.json(response.success({
-            item:deleteWishGroups,
-            allItemCount:deleteWishGroups.count,
-            message:'Wish group successfully deleted'
-          }))
-        }else{
-          res.json(response.error({message:'No wish group has been deleted'}))
+        if (deleteWishGroups.count !== 0) {
+          res.json(
+            response.success({
+              item: deleteWishGroups,
+              allItemCount: deleteWishGroups.count,
+              message: 'Wish group successfully deleted',
+            })
+          )
+        } else {
+          res.json(
+            response.error({ message: 'No wish group has been deleted' })
+          )
         }
-      }else{
-        res.json(response.error({message:REQUIRED_VALUE_EMPTY}))
+      } else {
+        res.json(response.error({ message: REQUIRED_VALUE_EMPTY }))
       }
     } else {
-      res.json(response.error({message:USER_NOT_EXIST}))
+      res.json(response.error({ message: USER_NOT_EXIST }))
     }
-  } catch (err:any) {
-    res.json(response.error({message:err.message}))
+  } catch (err: any) {
+    res.json(response.error({ message: err.message }))
   }
 }
