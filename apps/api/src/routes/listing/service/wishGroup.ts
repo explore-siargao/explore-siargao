@@ -50,7 +50,7 @@ export const getWishGroupsByUser = async (req: Request, res: Response) => {
 
 export const wishGroupByUserAndTitle = async (req: Request, res: Response) => {
   const userId = Number(req.params.userId)
-  const title = req.body.title
+  const title = req.params.title
   try {
     const getUser = await prisma.user.findUnique({
       where: {
@@ -81,8 +81,7 @@ export const wishGroupByUserAndTitle = async (req: Request, res: Response) => {
 
 export const addWishGroup = async (req: Request, res: Response) => {
   const userId = Number(req.params.userId)
-  const listingId = Number(req.params.listingId)
-  const { title } = req.body
+  const { title, listingId } = req.body
   try {
     const getUser = await prisma.user.findUnique({
       where: {
@@ -141,7 +140,7 @@ export const addWishGroup = async (req: Request, res: Response) => {
 }
 
 export const addToExistingWishGroup = async (req: Request, res: Response) => {
-  const listingId = Number(req.params.listingId)
+  const listingId = req.body.listingId
   const userId = Number(req.params.userId)
   const wishGroupId = Number(req.params.wishGroupId)
 
@@ -380,7 +379,7 @@ export const editTitle = async (req: Request, res: Response) => {
 
 export const deleteWishGroupByTitle = async (req: Request, res: Response) => {
   const userId = Number(req.params.userId)
-  const title = req.body.title
+  const title = req.params.title
   try {
     const getUser = await prisma.user.findUnique({
       where: {
