@@ -80,6 +80,18 @@ export interface ICoupon {
   deletedAt?: string
 }
 
+export interface IWishGroup{
+  id?: number,
+  title?: string,
+  newTitle?:string,
+  oldTitle?:string,
+  listingId?: number,
+  note?: string,
+  createdAt?: string
+  updatedAt?: string
+  deletedAt?: string
+}
+
 //stores
 type Email = {
   email: string

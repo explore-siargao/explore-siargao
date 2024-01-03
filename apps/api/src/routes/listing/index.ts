@@ -23,16 +23,16 @@ router.get('/:id', isCsrfTokenValid, isOriginValid, getListing)
 router.post('/:hostId', isOriginValid, isCsrfTokenValid, addListing)
 router.get(
   '/:userId/wish-group',
-  isOriginValid,
-  isCsrfTokenValid,
-  isUserLoggedIn,
+  // isOriginValid,
+  // isCsrfTokenValid,
+  // isUserLoggedIn,
   getWishGroupsByUser
 )
 router.get(
-  '/:userId/wishes',
-  isOriginValid,
-  isCsrfTokenValid,
-  isUserLoggedIn,
+  '/:userId/:title/wishes',
+  // isOriginValid,
+  // isCsrfTokenValid,
+  // isUserLoggedIn,
   wishGroupByUserAndTitle
 )
 
@@ -46,14 +46,14 @@ router.post(
 
 router.post(
   '/:userId/wish',
-  isOriginValid,
-  isCsrfTokenValid,
-  isUserLoggedIn,
+  // isOriginValid,
+  // isCsrfTokenValid,
+  // isUserLoggedIn,
   addNewWishGroup
 )
 
 router.post(
-  '/:userId/:wishGroupId/add-existing-group/:listingId',
+  '/:userId/:wishGroupId/add-existing-group',
   isOriginValid,
   isCsrfTokenValid,
   isUserLoggedIn,
@@ -83,7 +83,7 @@ router.patch(
   editTitle
 )
 router.delete(
-  '/:userId/wish-group/delete',
+  '/:userId/wish-group/delete/:title',
   isOriginValid,
   isCsrfTokenValid,
   isUserLoggedIn,
