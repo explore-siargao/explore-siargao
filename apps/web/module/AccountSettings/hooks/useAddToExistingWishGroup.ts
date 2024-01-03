@@ -15,11 +15,11 @@ export async function addToExisting(
   )
 }
 
-function useAddToExistingWishGroup(userId: number, wishGroupId:number) {
-    const query = useMutation({
-        mutationFn: (props: IWishGroup) =>
-          addToExisting(userId, wishGroupId,props),
-      })
+function useAddToExistingWishGroup(userId: number, wishGroupId: number) {
+  const query = useMutation({
+    mutationFn: (props: IWishGroup) =>
+      addToExisting(userId, wishGroupId, props),
+  })
   return query
 }
 export default useAddToExistingWishGroup

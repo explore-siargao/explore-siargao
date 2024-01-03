@@ -15,9 +15,10 @@ export async function addEditWishListNote(
   )
 }
 
-function useAddEditWishListNote(userId: number, wishGroupId:number) {
+function useAddEditWishListNote(userId: number, wishGroupId: number) {
   const query = useMutation({
-    mutationFn: (props: IWishGroup) => addEditWishListNote(userId, wishGroupId,props),
+    mutationFn: (props: IWishGroup) =>
+      addEditWishListNote(userId, wishGroupId, props),
   })
   return query
 }

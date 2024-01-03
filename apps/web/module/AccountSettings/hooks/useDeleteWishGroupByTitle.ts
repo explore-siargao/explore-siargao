@@ -3,10 +3,7 @@ import { IWishGroup } from "@/common/types/global"
 import { API_URL_BOOKINGS } from "@repo/constants"
 import { useMutation } from "@tanstack/react-query"
 
-export async function deleteWishGroup(
-  userId: number,
-  title:string
-) {
+export async function deleteWishGroup(userId: number, title: string) {
   const apiService = new ApiService()
   return await apiService.delete(
     `${API_URL_BOOKINGS}/${userId}/wish-group/delete/${String(title)}`
@@ -15,8 +12,7 @@ export async function deleteWishGroup(
 
 function useDeleteWishGroupByTitle(userId: number, title: string) {
   const query = useMutation({
-    mutationFn: (props: IWishGroup) =>
-      deleteWishGroup(userId,title),
+    mutationFn: (props: IWishGroup) => deleteWishGroup(userId, title),
   })
   return query
 }
