@@ -8,6 +8,7 @@ import {
   addToExistingWishGroup,
   addWishGroup,
   deleteWishGroup,
+  deleteWishGroupByTitle,
   editTitle,
   getWishGroupsByUser,
   wishGroupByUserAndTitle,
@@ -20,7 +21,13 @@ const router = express.Router()
 router.get('/', getAllListing)
 router.get('/:id', isCsrfTokenValid, isOriginValid, getListing)
 router.post('/:hostId', isOriginValid, isCsrfTokenValid, addListing)
-router.get('/:userId/wish-group', getWishGroupsByUser)
+router.get(
+'/:userId/wish-group', 
+isOriginValid,
+isCsrfTokenValid,
+isUserLoggedIn,
+getWishGroupsByUser
+)
 router.get(
   '/:userId/wishes',
   isOriginValid,
@@ -75,5 +82,10 @@ router.patch(
   isUserLoggedIn,
   editTitle
 )
+router.delete('/:userId/wish-group/delete',
+isOriginValid,
+isCsrfTokenValid,
+isUserLoggedIn,
+deleteWishGroupByTitle)
 
 export default router
