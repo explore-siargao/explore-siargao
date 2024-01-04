@@ -11,15 +11,16 @@ type Props = {
   photo: string
   title: string
   text: string
+  link: string
 }
-const WishlistBoxContainer = ({ title, text, photo }: Props) => {
+const WishlistBoxContainer = ({ title, link, text, photo }: Props) => {
   const [isHovered, setIsHovered] = useState(false)
   const [removeModal, setRemoveModal] = useState(false)
 
   return (
     <>
       <Link
-        href={"/account-settings/wishlist/1"}
+        href={"/account-settings/wishlist/group?title="+link}
         className="flex flex-col select-none"
       >
         <div

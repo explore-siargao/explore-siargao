@@ -1,7 +1,12 @@
+"use client"
 import React from "react"
 import { Title } from "@/common/components/ui/Title"
 import WishlistBoxContainer from "@/common/components/WishlistBoxContainer"
 import { WidthWrapper } from "@/common/components/WidthWrapper"
+import useWishGroupWithCount from "./hooks/useGetWishGroupWithCount"
+import useSessionStore from "@/common/store/useSessionStore"
+import { Spinner } from "@/common/components/ui/Spinner"
+import { Typography } from "@/common/components/ui/Typography"
 const WishlistGroup = [
   {
     id: 1,
@@ -36,19 +41,37 @@ const WishlistGroup = [
 ]
 
 const Wishlist = () => {
+  const session = useSessionStore((state)=>state)
+const {data,isPending} = useWishGroupWithCount(session?.id as number)
   return (
+    
     <WidthWrapper className="my-24 lg:my-32">
+      {isPending ? (
+         <Spinner size={"md"}>Loading...</Spinner>
+      ):(
+      <>
+      {data?.item?.length!==0? (
+      <>
       <Title>Wishlists</Title>
       <div className="grid gap-4 grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6">
-        {WishlistGroup.map((item) => (
-          <WishlistBoxContainer
-            key={item.id}
-            photo={item.pic}
-            title={item.name}
-            text={item.text}
-          />
-        ))}
-      </div>
+                {data?.item?.map((data: any, index: number) => (
+                  <WishlistBoxContainer
+                    key={data.id}
+                    photo={String(WishlistGroup[index]?.pic)}
+                    title={data.title}
+                    link={data.title}
+                    text={data._count + " saved"} />
+                ))}
+              </div>
+              </>
+      ) :(
+        <WidthWrapper>
+          <Typography variant={"h2"}>Create your first wishlist</Typography><br></br>
+        <Typography>As you search, click the heart icon to save your favorite places and Experiences to a wishlist.</Typography>
+      </WidthWrapper>
+      )}
+        </>
+      )}
     </WidthWrapper>
   )
 }

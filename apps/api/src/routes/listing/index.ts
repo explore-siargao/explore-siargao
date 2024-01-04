@@ -32,33 +32,33 @@ router.get(
 )
 router.get(
   '/:userId/:title/wishes',
-  isOriginValid,
-  isCsrfTokenValid,
-  isUserLoggedIn,
+  // isOriginValid,
+  // isCsrfTokenValid,
+  // isUserLoggedIn,
   wishGroupByUserAndTitle
 )
 
 router.post(
   '/:userId/wish/',
-  isOriginValid,
-  isCsrfTokenValid,
-  isUserLoggedIn,
+  // isOriginValid,
+  // isCsrfTokenValid,
+  // isUserLoggedIn,
   addWishGroup
 )
 
 router.post(
   '/:userId/wish-group',
-  isOriginValid,
-  isCsrfTokenValid,
-  isUserLoggedIn,
+  // isOriginValid,
+  // isCsrfTokenValid,
+  // isUserLoggedIn,
   addNewWishGroup
 )
 
 router.post(
   '/:userId/:wishGroupId/add-existing-group',
-  isOriginValid,
-  isCsrfTokenValid,
-  isUserLoggedIn,
+  // isOriginValid,
+  // isCsrfTokenValid,
+  // isUserLoggedIn,
   addToExistingWishGroup
 )
 

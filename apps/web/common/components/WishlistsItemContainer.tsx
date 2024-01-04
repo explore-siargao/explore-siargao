@@ -13,7 +13,10 @@ import AddNoteModal from "@/module/AccountSettings/components/modals/AddNoteModa
 import toast from "react-hot-toast"
 import MenuModal from "@/module/AccountSettings/components/modals/MenuModal"
 import { LINK_ACCOUNT_WISHLIST } from "../constants/links"
-import { useRouter } from "next/navigation"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import useGetWishGroupByUserAndTitle from "@/module/AccountSettings/hooks/useGetWishGroupByUserAndTitle"
+import useSessionStore from "../store/useSessionStore"
+import Link from "next/link"
 
 type ItemData = {
   id: number
@@ -50,13 +53,18 @@ const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
   const copyToClipboard = () => {
     navigator.clipboard.writeText(window.location.href)
   }
+  const session = useSessionStore((state)=>state)
+const params = useSearchParams()
+const title =params.get("title")
+  const {data, isPending} = useGetWishGroupByUserAndTitle(session.id as number, title as string)
   return (
     <div className="flex flex-col w-full xl:w-[920px]">
       <div className="sticky w-full 2xl:w-[920px] top-26 bg-white z-50 flex border-b-gray-200 border-b py-4 items-center">
+       <Link href={LINK_ACCOUNT_WISHLIST} >
         <ArrowLeftIcon
           className="h-10 w-10 cursor-pointer rounded-full hover:bg-gray-50 p-2 -ml-3"
-          onClick={() => router.push(LINK_ACCOUNT_WISHLIST)}
         />
+        </Link>
         <Typography
           variant={"h4"}
           className="w-full text-left place-self-center font-semibold ml-4"
@@ -101,36 +109,37 @@ const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
         </div>
       </div>
       <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 mx-auto w-full max-w-[2520px] justify-center">
-        {datas.map((item) => (
+        {data?.items?.map((item) => (
           <li key={item.id}>
             <div className="h-72 2xl:w-auto rounded-2xl relative select-none">
               <HeartIcon
+              id={item?.listing.id}
                 className={`absolute top-3 right-3 h-7 w-7 text-text-50 active:scale-90 ${
-                  isClicked ? "fill-error-500" : "fill-text-500/50 "
+                  !isClicked ? "fill-error-500" : "fill-text-500/50 "
                 }`}
                 onClick={handleClick}
               />
               <Image
-                src={item.photo}
+                src={JSON.parse(item.listing.imageUrls)[0].url}
                 width={300}
                 height={300}
-                alt={item.photo}
+                alt={JSON.parse(item.listing.imageUrls)[0].url}
                 className="object-cover h-full w-full rounded-xl"
               />
             </div>
             <div className="flex-1 -space-y-1 w-auto">
               <div className="flex justify-between">
                 <Title size={"ContentTitle"} className="text-text-500">
-                  {item.location}
+                  {item.listing.address}
                 </Title>
                 <div className="flex text-text-500 place-items-center gap-1">
                   <StarIcon className="h-4 w-auto" />
-                  {item.ratings}{" "}
-                  <span className="text-text-400">{item.reviews}</span>
+                  {item.listing.review.length !== 0 ? item.listing.review.rate : "0.0"}{" "}
+                  <span className="text-text-400">{"("+item.listing.review.length+")"}</span>
                 </div>
               </div>
               <div className="text-text-300 text-sm">
-                <Typography>{item.distance}</Typography>
+                <Typography>{item.listing.description}</Typography>
                 <p>{item.date}</p>
               </div>
               <Typography
@@ -138,7 +147,12 @@ const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
                 fontWeight={"semiBold"}
                 className="text-text-700 underline"
               >
-                {item.price} <span className="font-normal">{item.dayTime}</span>
+                {
+                  "₱" +
+                  (item?.listing.price?.fee +
+                    item.listing.price.cleaningFee +
+                    item.listing.price.serviceFee)
+                } <span className="font-normal">{item?.price?.isNight? "Night": ""}</span>
               </Typography>
             </div>
             <div>
