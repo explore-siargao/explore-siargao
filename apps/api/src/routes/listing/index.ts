@@ -11,6 +11,7 @@ import {
   deleteWishGroupByTitle,
   editTitle,
   getWishGroupsByUser,
+  wishGroupByTitle,
   wishGroupByUserAndTitle,
 } from './service/wishGroup'
 import isUserLoggedIn from '@/common/middleware/auth/isUserLoggedIn'
@@ -24,9 +25,9 @@ router.post('/:hostId', addListing)
 
 router.get(
   '/:userId/wish-group',
-  isOriginValid,
-  isCsrfTokenValid,
-  isUserLoggedIn,
+  // isOriginValid,
+  // isCsrfTokenValid,
+  // isUserLoggedIn,
   getWishGroupsByUser
 )
 router.get(
@@ -90,5 +91,7 @@ router.delete(
   isUserLoggedIn,
   deleteWishGroupByTitle
 )
+
+router.get('/:userId/group/wish', wishGroupByTitle)
 
 export default router
