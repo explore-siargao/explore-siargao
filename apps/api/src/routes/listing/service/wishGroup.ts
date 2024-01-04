@@ -7,14 +7,14 @@ import { Request, Response } from 'express'
 const prisma = new PrismaClient()
 const response = new ResponseService()
 
-async function getListingById(listingId: number, res?:Response) {
-  if(listingId){
-  return await prisma.listing.findUnique({
-    where: { id: listingId },
-  })
-}else{
-  return res?.json(response.error({message:REQUIRED_VALUE_EMPTY}))
-}
+async function getListingById(listingId: number, res?: Response) {
+  if (listingId) {
+    return await prisma.listing.findUnique({
+      where: { id: listingId },
+    })
+  } else {
+    return res?.json(response.error({ message: REQUIRED_VALUE_EMPTY }))
+  }
 }
 
 async function getUserById(userId: number) {
@@ -25,7 +25,7 @@ async function getUserById(userId: number) {
 
 async function getWishGroups(userId: number) {
   return await prisma.wishGroup.groupBy({
-    by:['title'],
+    by: ['title'],
     where: {
       userId: userId,
       deletedAt: null,
@@ -205,13 +205,19 @@ export const addToExistingWishGroup = async (req: Request, res: Response) => {
       return res.json(response.error({ message: 'Invalid booking' }))
     }
 
-    const newWishGroup = await createWishGroup(wishGroup.title, userId, listingId)
+    const newWishGroup = await createWishGroup(
+      wishGroup.title,
+      userId,
+      listingId
+    )
 
-    return res.json(response.success({
-      item: newWishGroup,
-      allItemCount: 1,
-      message: `Wish list successfully added to ${wishGroup.title}`,
-    }))
+    return res.json(
+      response.success({
+        item: newWishGroup,
+        allItemCount: 1,
+        message: `Wish list successfully added to ${wishGroup.title}`,
+      })
+    )
   } catch (err: any) {
     return res.json(response.error({ message: err.message }))
   }
@@ -241,7 +247,7 @@ export const addNewWishGroup = async (req: Request, res: Response) => {
     const existingWishGroup = await prisma.wishGroup.findFirst({
       where: {
         userId: userId,
-       title:title
+        title: title,
       },
     })
 
@@ -254,13 +260,17 @@ export const addNewWishGroup = async (req: Request, res: Response) => {
         },
       })
 
-      return res.json(response.success({
-        item: newWishGroup,
-        allItemCount: 1,
-        message: 'New Wish group successfully added',
-      }))
+      return res.json(
+        response.success({
+          item: newWishGroup,
+          allItemCount: 1,
+          message: 'New Wish group successfully added',
+        })
+      )
     } else {
-      return res.json(response.error({ message: 'Item already exists in wish group' }))
+      return res.json(
+        response.error({ message: 'Item already exists in wish group' })
+      )
     }
   } catch (err: any) {
     return res.json(response.error({ message: err.message }))
@@ -347,11 +357,13 @@ export const addEditWishListNote = async (req: Request, res: Response) => {
         },
       })
 
-      return res.json(response.success({
-        item: addOrEditNote,
-        allItemCount: 1,
-        message: 'Note successfully added',
-      }))
+      return res.json(
+        response.success({
+          item: addOrEditNote,
+          allItemCount: 1,
+          message: 'Note successfully added',
+        })
+      )
     } else {
       return res.json(response.error({ message: REQUIRED_VALUE_EMPTY }))
     }
@@ -390,13 +402,17 @@ export const editTitle = async (req: Request, res: Response) => {
       })
 
       if (updateTitle.count !== 0) {
-        return res.json(response.success({
-          item: updateTitle,
-          allItemCount: updateTitle.count,
-          message: 'Title successfully updated',
-        }))
+        return res.json(
+          response.success({
+            item: updateTitle,
+            allItemCount: updateTitle.count,
+            message: 'Title successfully updated',
+          })
+        )
       } else {
-        return res.json(response.error({ message: 'No title has been updated' }))
+        return res.json(
+          response.error({ message: 'No title has been updated' })
+        )
       }
     } else {
       return res.json(response.error({ message: REQUIRED_VALUE_EMPTY }))
