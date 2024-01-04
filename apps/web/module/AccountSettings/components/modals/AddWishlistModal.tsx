@@ -13,10 +13,30 @@ interface AddWishlistProps {
   onClose: () => void
 }
 const wishlist = [
-  { id: 1, name: "My wishlist", savedCount: "7 saved" },
-  { id: 2, name: "My wishlist", savedCount: "7 saved" },
-  { id: 3, name: "My wishlist", savedCount: "7 saved" },
-  { id: 4, name: "My wishlist", savedCount: "7 saved" },
+  {
+    id: 1,
+    name: "My wishlist",
+    savedCount: "7 saved",
+    pic: "http://localhost:3000/1.jpg",
+  },
+  {
+    id: 2,
+    name: "My wishlist",
+    savedCount: "7 saved",
+    pic: "http://localhost:3000/2.jpg",
+  },
+  {
+    id: 3,
+    name: "My wishlist",
+    savedCount: "7 saved",
+    pic: "http://localhost:3000/3.jpg",
+  },
+  {
+    id: 4,
+    name: "My wishlist",
+    savedCount: "7 saved",
+    pic: "http://localhost:3000/4.jpg",
+  },
 ]
 const AddWishlistModal = ({ isOpen, onClose }: AddWishlistProps) => {
   const cancelButtonRef = useRef(null)
@@ -31,10 +51,10 @@ const AddWishlistModal = ({ isOpen, onClose }: AddWishlistProps) => {
       <ModalContainer title="Add to wishlist" onClose={onClose}>
         <div className="p-6 grid grid-cols-2 max-h-[550px] overflow-y-auto">
           {wishlist.map((item) => (
-            <div className="flex flex-col">
+            <div className="flex flex-col" key={item.id}>
               <div className="h-60 w-60 rounded-3xl relative border border-text-100">
                 <Image
-                  src="http://localhost:3000/2.jpg"
+                  src={item.pic}
                   width={300}
                   height={300}
                   alt="photo"
