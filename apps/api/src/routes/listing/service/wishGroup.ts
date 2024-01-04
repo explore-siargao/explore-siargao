@@ -80,71 +80,6 @@ export const wishGroupByUserAndTitle = async (req: Request, res: Response) => {
   }
 }
 
-// export const addWishGroup = async (req: Request, res: Response) => {
-//   const userId = Number(req.params.userId)
-//   const isValidInput = Z_WishGroup.safeParse(req.body)
-//   if(isValidInput.success){
-//   const { title, listingId } = req.body
-//   try {
-//     const getUser = await prisma.user.findUnique({
-//       where: {
-//         id: userId,
-//       },
-//     })
-//     if (getUser) {
-//       const findWishGroup = await prisma.wishGroup.findMany({
-//         where: {
-//           userId: userId,
-//           deletedAt: null,
-//         },
-//       })
-//       if (findWishGroup.length !== 0) {
-//         res.json(
-//           response.success({
-//             items: findWishGroup,
-//             allItemCount: findWishGroup.length,
-//             message: '',
-//           })
-//         )
-//       } else {
-//         const findListing = await prisma.listing.findUnique({
-//           where: {
-//             id: listingId,
-//           },
-//         })
-//         if (findListing !== null) {
-//           const newWishGroup = await prisma.wishGroup.create({
-//             data: {
-//               title: title,
-//               userId: userId,
-//               listingId: listingId,
-//               note: null,
-//             },
-//           })
-//           res.json(
-//             response.success({
-//               item: newWishGroup,
-//               allItemCount: 1,
-//               message: 'Successfully added to wish group',
-//             })
-//           )
-//         } else {
-//           res.json(
-//             response.error({ message: 'Booking item not found in our system' })
-//           )
-//         }
-//       }
-//     } else {
-//       res.json(response.error({ message: USER_NOT_EXIST }))
-//     }
-//   } catch (err: any) {
-//     res.json(response.error({ message: err.message }))
-//   }
-// }else{
-//   res.json(response.error({message:isValidInput.error.message}))
-// }
-// }
-
 export const addWishGroup = async (req: Request, res: Response) => {
   const userId = Number(req.params.userId)
   const isValidInput = Z_WishGroup.safeParse(req.body)
@@ -220,115 +155,116 @@ async function createWishGroup(title: string, userId: number, listingId: number)
   })
 }
 
+
 export const addToExistingWishGroup = async (req: Request, res: Response) => {
   const listingId = req.body.listingId
   const userId = Number(req.params.userId)
   const wishGroupId = Number(req.params.wishGroupId)
   const isValidInput = Z_WishGroup.safeParse(req.body)
-  if(isValidInput.success){
-  try {
-    const getUser = await prisma.user.findUnique({
-      where: {
-        id: userId,
-      },
-    })
-    if (getUser !== null) {
-      const getWishGroup = await prisma.wishGroup.findUnique({
-        where: {
-          id: wishGroupId,
-        },
-      })
-      if (getWishGroup !== null) {
-        const getListing = await prisma.listing.findUnique({
-          where: {
-            id: listingId,
-          },
-        })
-        if (getListing !== null) {
-          const newWishGroup = await prisma.wishGroup.create({
-            data: {
-              title: getWishGroup.title,
-              listingId: listingId,
-              userId: userId,
-              note: null,
-            },
-          })
-          res.json(
-            response.success({
-              item: newWishGroup,
-              allItemCount: 1,
-              message: `Wish list successfully added to ${getWishGroup.title}`,
-            })
-          )
-        } else {
-          res.json(response.error({ message: 'Invalid booking' }))
-        }
-      } else {
-        res.json(response.error({ message: 'Wish group not found' }))
-      }
-    } else {
-      res.json(response.error({ message: USER_NOT_EXIST }))
-    }
-  } catch (err: any) {
-    res.json(response.error({ message: err.message }))
-  }
-}else{
-  res.json(response.error({message:isValidInput.error.message}))
-}
-}
-
-export const addNewWishGroup = async (req: Request, res: Response) => {
-  const userId = Number(req.params.userId)
-  const isInputValid = Z_WishGroup.safeParse(req.body)
-  if(isInputValid.success){
-  const { title, listingId } = req.body
-  try {
-    if (title && listingId) {
+  if (isValidInput.success) {
+    try {
       const getUser = await prisma.user.findUnique({
         where: {
           id: userId,
         },
       })
       if (getUser !== null) {
-        const getWishGroup = await prisma.wishGroup.findFirst({
+        const getWishGroup = await prisma.wishGroup.findUnique({
           where: {
-            userId: userId,
-            listingId: listingId,
-            note: null,
+            id: wishGroupId,
           },
         })
-        if (getWishGroup === null) {
-          const newWishGroup = await prisma.wishGroup.create({
-            data: {
-              userId: userId,
-              title: title,
-              listingId: listingId,
+        if (getWishGroup !== null) {
+          const getListing = await prisma.listing.findUnique({
+            where: {
+              id: listingId,
             },
           })
-          res.json(
-            response.success({
-              item: newWishGroup,
-              allItemCount: 1,
-              message: 'new Wish group successfully added',
+          if (getListing !== null) {
+            const newWishGroup = await prisma.wishGroup.create({
+              data: {
+                title: getWishGroup.title,
+                listingId: listingId,
+                userId: userId,
+                note: null,
+              },
             })
-          )
+            res.json(
+              response.success({
+                item: newWishGroup,
+                allItemCount: 1,
+                message: `Wish list successfully added to ${getWishGroup.title}`,
+              })
+            )
+          } else {
+            res.json(response.error({ message: 'Invalid booking' }))
+          }
         } else {
-          res.json(
-            response.error({ message: 'Item already exist in wishgroup' })
-          )
+          res.json(response.error({ message: 'Wish group not found' }))
         }
       } else {
         res.json(response.error({ message: USER_NOT_EXIST }))
       }
-    } else {
-      res.json(response.error({ message: REQUIRED_VALUE_EMPTY }))
+    } catch (err: any) {
+      res.json(response.error({ message: err.message }))
     }
-  } catch (err: any) {
-    res.json(response.error({ message: err.message }))
+  } else {
+    res.json(response.error({ message: isValidInput.error.message }))
   }
-}else{
-  res.json(response.error({message: isInputValid.error.message}))
 }
+
+export const addNewWishGroup = async (req: Request, res: Response) => {
+  const userId = Number(req.params.userId)
+  const isInputValid = Z_WishGroup.safeParse(req.body)
+  if (isInputValid.success) {
+    const { title, listingId } = req.body
+    try {
+      if (title && listingId) {
+        const getUser = await prisma.user.findUnique({
+          where: {
+            id: userId,
+          },
+        })
+        if (getUser !== null) {
+          const getWishGroup = await prisma.wishGroup.findFirst({
+            where: {
+              userId: userId,
+              listingId: listingId,
+              note: null,
+            },
+          })
+          if (getWishGroup === null) {
+            const newWishGroup = await prisma.wishGroup.create({
+              data: {
+                userId: userId,
+                title: title,
+                listingId: listingId,
+              },
+            })
+            res.json(
+              response.success({
+                item: newWishGroup,
+                allItemCount: 1,
+                message: 'new Wish group successfully added',
+              })
+            )
+          } else {
+            res.json(
+              response.error({ message: 'Item already exist in wishgroup' })
+            )
+          }
+        } else {
+          res.json(response.error({ message: USER_NOT_EXIST }))
+        }
+      } else {
+        res.json(response.error({ message: REQUIRED_VALUE_EMPTY }))
+      }
+    } catch (err: any) {
+      res.json(response.error({ message: err.message }))
+    }
+  } else {
+    res.json(response.error({ message: isInputValid.error.message }))
+  }
 }
 
 export const deleteWishGroup = async (req: Request, res: Response) => {
@@ -380,101 +316,101 @@ export const addEditWishListNote = async (req: Request, res: Response) => {
   const userId = Number(req.params.userId)
   const wishGroupId = Number(req.params.wishGroupId)
   const isValidInput = Z_WishGroup.safeParse(req.body)
-  if(isValidInput.success){
-  const note = req.body.note
-  try {
-    const getUser = await prisma.user.findFirst({
-      where: {
-        id: userId,
-      },
-    })
-    if (getUser !== null) {
-      const getWish = await prisma.wishGroup.findFirst({
+  if (isValidInput.success) {
+    const note = req.body.note
+    try {
+      const getUser = await prisma.user.findFirst({
         where: {
-          id: wishGroupId,
+          id: userId,
         },
       })
-      if (getWish !== null) {
-        if (note) {
-          const addorEditNote = await prisma.wishGroup.update({
-            where: {
-              userId: userId,
-              id: wishGroupId,
-            },
-            data: {
-              note: note,
-            },
-          })
-          res.json(
-            response.success({
-              item: addorEditNote,
-              allItemCount: 1,
-              message: 'Note successfully added',
+      if (getUser !== null) {
+        const getWish = await prisma.wishGroup.findFirst({
+          where: {
+            id: wishGroupId,
+          },
+        })
+        if (getWish !== null) {
+          if (note) {
+            const addorEditNote = await prisma.wishGroup.update({
+              where: {
+                userId: userId,
+                id: wishGroupId,
+              },
+              data: {
+                note: note,
+              },
             })
-          )
+            res.json(
+              response.success({
+                item: addorEditNote,
+                allItemCount: 1,
+                message: 'Note successfully added',
+              })
+            )
+          } else {
+            res.json(response.error({ message: REQUIRED_VALUE_EMPTY }))
+          }
         } else {
-          res.json(response.error({ message: REQUIRED_VALUE_EMPTY }))
+          res.json(response.error({ message: 'Wish list not found' }))
         }
       } else {
-        res.json(response.error({ message: 'Wish list not found' }))
+        res.json(response.error({ message: USER_NOT_EXIST }))
       }
-    } else {
-      res.json(response.error({ message: USER_NOT_EXIST }))
+    } catch (err: any) {
+      res.json(response.error({ message: err.message }))
     }
-  } catch (err: any) {
-    res.json(response.error({ message: err.message }))
+  } else {
+    res.json(response.error({ message: isValidInput.error.message }))
   }
-}else{
-res.json(response.error({message:isValidInput.error.message}))
-}
 }
 
 export const editTitle = async (req: Request, res: Response) => {
   const userId = Number(req.params.userId)
   const isValidInput = Z_WishGroup.safeParse(req.body)
-  if(isValidInput.success){
+  if (isValidInput.success) {
     const oldTitle = req.body.oldTitle
     const newTitle = req.body.newTitle
-  try {
-    const getUser = await prisma.user.findUnique({
-      where: {
-        id: userId,
-      },
-    })
-    if (getUser !== null) {
-      if (oldTitle && newTitle) {
-        const updateTtitle = await prisma.wishGroup.updateMany({
-          where: {
-            userId: userId,
-            title: oldTitle,
-          },
-          data: {
-            title: newTitle,
-          },
-        })
-        if (updateTtitle.count !== 0) {
-          res.json(
-            response.success({
-              item: updateTtitle,
-              allItemCount: updateTtitle.count,
-              message: 'Title successfully updated',
-            })
-          )
+    try {
+      const getUser = await prisma.user.findUnique({
+        where: {
+          id: userId,
+        },
+      })
+      if (getUser !== null) {
+        if (oldTitle && newTitle) {
+          const updateTtitle = await prisma.wishGroup.updateMany({
+            where: {
+              userId: userId,
+              title: oldTitle,
+            },
+            data: {
+              title: newTitle,
+            },
+          })
+          if (updateTtitle.count !== 0) {
+            res.json(
+              response.success({
+                item: updateTtitle,
+                allItemCount: updateTtitle.count,
+                message: 'Title successfully updated',
+              })
+            )
+          } else {
+            res.json(response.error({ message: 'No title has been updated' }))
+          }
         } else {
-          res.json(response.error({ message: 'No title has been updated' }))
+          res.json(response.error({ message: REQUIRED_VALUE_EMPTY }))
         }
       } else {
-        res.json(response.error({ message: REQUIRED_VALUE_EMPTY }))
+        res.json(response.error({ message: USER_NOT_EXIST }))
       }
-    } else {
-      res.json(response.error({ message: USER_NOT_EXIST }))
+    } catch (err: any) {
+      res.json(response.error({ message: err.message }))
     }
-  } catch (err: any) {
-    res.json(response.error({ message: err.message }))
+  } else {
+    res.json(response.error({ message: isValidInput.error.message }))
   }
-}else{
-  res.json(response.error({message:isValidInput.error.message}))
-}
 }
 
 export const deleteWishGroupByTitle = async (req: Request, res: Response) => {
