@@ -1,6 +1,6 @@
 "use client"
 import Image from "next/image"
-import React, { useRef, useState } from "react"
+import React, { useState } from "react"
 import { Title } from "./ui/Title"
 import { DocumentDuplicateIcon, HeartIcon } from "@heroicons/react/24/outline"
 import {
@@ -13,7 +13,7 @@ import AddNoteModal from "@/module/AccountSettings/components/modals/AddNoteModa
 import toast from "react-hot-toast"
 import MenuModal from "@/module/AccountSettings/components/modals/MenuModal"
 import { LINK_ACCOUNT_WISHLIST } from "../constants/links"
-import { useParams, useRouter } from "next/navigation"
+import { useRouter } from "next/navigation"
 
 type ItemData = {
   id: number
@@ -48,12 +48,7 @@ const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
   }
 
   const copyToClipboard = () => {
-    const copyText = document.createElement("textarea")
-    copyText.value = window.location.href
-    document.body.appendChild(copyText)
-    copyText.select()
-    document.execCommand("copy")
-    document.body.removeChild(copyText)
+    navigator.clipboard.writeText(window.location.href)
   }
   return (
     <div className="flex flex-col w-full xl:w-[920px]">

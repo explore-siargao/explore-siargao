@@ -106,6 +106,19 @@ const MenuModal = ({ isOpen: openModal, onClose: hideModal }: MenuProps) => {
       </ModalContainer>
     )
   }
+  const toRender = () => {
+    let componentToRender
+
+    if (modalState === 0) {
+      componentToRender = renderMenu()
+    } else if (modalState === 1) {
+      componentToRender = renderRename()
+    } else {
+      componentToRender = renderDelete()
+    }
+
+    return componentToRender
+  }
   return (
     <Transition.Root show={openModal} as={Fragment}>
       <Dialog
@@ -138,11 +151,7 @@ const MenuModal = ({ isOpen: openModal, onClose: hideModal }: MenuProps) => {
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
               <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all w-full max-w-md ">
-                {modalState === 0
-                  ? renderMenu()
-                  : modalState === 1
-                    ? renderRename()
-                    : renderDelete()}
+                {toRender}
               </Dialog.Panel>
             </Transition.Child>
           </div>

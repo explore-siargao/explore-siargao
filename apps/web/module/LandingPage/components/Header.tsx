@@ -15,7 +15,7 @@ import { WidthWrapper } from "@/common/components/WidthWrapper"
 function Header({
   contentWidth = "wide",
 }: {
-  contentWidth?: "medium" | "small" | "wide" | "full"
+  readonly contentWidth?: "medium" | "small" | "wide" | "full"
 }) {
   const { data: session } = useSession()
   const path = usePathname()

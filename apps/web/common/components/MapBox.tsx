@@ -1,5 +1,5 @@
 import { MapPinIcon } from "@heroicons/react/20/solid"
-import React, { useState } from "react"
+import React from "react"
 import Map, { Marker } from "react-map-gl"
 
 const TOKEN =

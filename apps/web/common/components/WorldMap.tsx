@@ -3,9 +3,9 @@ import { MapContainer, TileLayer, Popup } from "react-leaflet"
 import "leaflet/dist/leaflet.css"
 
 const location = [
-  { position: [9.8666632, 126.0499998] },
-  { position: [14.5995, 120.9842] },
-  { position: [7.1907, 125.4553] },
+  { id: 1, position: [9.8666632, 126.0499998] },
+  { id: 2, position: [14.5995, 120.9842] },
+  { id: 3, position: [7.1907, 125.4553] },
 ]
 
 const WorldMap = () => {
@@ -34,6 +34,7 @@ const WorldMap = () => {
             closeOnClick={false}
             //@ts-ignore
             position={item.position}
+            key={item.id}
           >
             Explore Siargao
           </Popup>
