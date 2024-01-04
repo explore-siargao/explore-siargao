@@ -2,6 +2,7 @@ import { Response, Request } from 'express'
 import { PrismaClient } from '@prisma/client'
 import { REQUIRED_VALUE_EMPTY } from '@repo/constants'
 import { ResponseService } from '@/common/service/response'
+import { Z_Listing } from '@repo/contract'
 
 const prisma = new PrismaClient()
 const response = new ResponseService()
@@ -76,6 +77,7 @@ export const getListing = async (req: Request, res: Response) => {
 
 export const addListing = async (req: Request, res: Response) => {
   const hostId = Number(req.params.hostId)
+  const isValidInput = Z_Listing.safeParse(req.body)
   const {
     imageUrls,
     title,
@@ -92,66 +94,72 @@ export const addListing = async (req: Request, res: Response) => {
     countGuest,
     isNight,
   } = req.body
-  try {
-    const getHost = await prisma.user.findFirst({
-      where: {
-        id: hostId,
-      },
-    })
+  if (isValidInput.success) {
+    try {
+      const getHost = await prisma.user.findFirst({
+        where: {
+          id: hostId,
+        },
+      })
 
-    if (getHost !== null) {
-      if (
-        imageUrls &&
-        title &&
-        category &&
-        description &&
-        address &&
-        fee &&
-        cleaningFee &&
-        serviceFee &&
-        checkIn &&
-        checkOut &&
-        countGuest
-      ) {
-        const newPrice = await prisma.listingPrice.create({
-          data: {
-            fee: fee,
-            cleaningFee: cleaningFee,
-            serviceFee: serviceFee,
-            checkIn: checkIn,
-            checkOut: checkOut,
-            countGuest: countGuest,
-            isNight: isNight,
-          },
-        })
-        const newListing = await prisma.listing.create({
-          data: {
-            imageUrls: JSON.stringify(imageUrls),
-            title: title,
-            category: category,
-            description: description,
-            address: address,
-            longitude: longitude,
-            latitude: latitude,
-            hostedById: hostId,
-            listingPriceId: newPrice.id,
-          },
-        })
-
-        res.json(
-          response.success({
-            item: newListing,
-            allItemCount: 1,
-            message: 'Listing item successfully added',
+      if (getHost !== null) {
+        if (
+          imageUrls &&
+          title &&
+          category &&
+          description &&
+          address &&
+          fee &&
+          cleaningFee &&
+          serviceFee &&
+          checkIn &&
+          checkOut &&
+          countGuest
+        ) {
+          const newPrice = await prisma.listingPrice.create({
+            data: {
+              fee: fee,
+              cleaningFee: cleaningFee,
+              serviceFee: serviceFee,
+              checkIn: checkIn,
+              checkOut: checkOut,
+              countGuest: countGuest,
+              isNight: isNight,
+            },
           })
-        )
+          const newListing = await prisma.listing.create({
+            data: {
+              imageUrls: JSON.stringify(imageUrls),
+              title: title,
+              category: category,
+              description: description,
+              address: address,
+              longitude: longitude,
+              latitude: latitude,
+              hostedById: hostId,
+              listingPriceId: Number(newPrice.id),
+            },
+          })
+
+          res.json(
+            response.success({
+              item: newListing,
+              allItemCount: 1,
+              message: 'Listing item successfully added',
+            })
+          )
+        } else {
+          res.json(response.error({ message: REQUIRED_VALUE_EMPTY }))
+        }
       } else {
-        res.json(response.error({ message: REQUIRED_VALUE_EMPTY }))
+        res.json(
+          response.error({ message: 'This host not exist to our system' })
+        )
       }
-    } else {
-      res.json(response.error({ message: 'This host not exist to our system' }))
+    } catch (e: any) {
+      res.json(response.error({ message: e.message }))
     }
-  } catch (e: any) {
-    res.json(response.error({ message: e.message }))
+  } else {
+    res.json(response.error({ message: isValidInput.error.message }))
   }
 }
