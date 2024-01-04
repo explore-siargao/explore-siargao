@@ -12,7 +12,7 @@ export default async function layout({
   return (
     <LayoutWrapper>
       <Header contentWidth="wide" />
-        {children}
+      {children}
       <BottomNavBar />
     </LayoutWrapper>
   )

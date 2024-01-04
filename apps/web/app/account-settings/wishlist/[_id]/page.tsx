@@ -6,7 +6,7 @@ const page = () => {
     <div className="overflow-y-hidden">
       <WishlistsItem />
     </div>
-  );
+  )
 }
 
 export default page
