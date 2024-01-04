@@ -97,34 +97,36 @@ export const getWishGroupsByUser = async (req: Request, res: Response) => {
   }
 }
 
-export const wishGroupByTitle = async(req:Request, res:Response)=>{
+export const wishGroupByTitle = async (req: Request, res: Response) => {
   const userId = Number(req.params.userId)
-  try{
-  const getUser = await prisma.user.findUnique({
-    where:{
-      id:userId
-    }
-  })
-  if(getUser!==null){
-    const groupWishGroup = await prisma.wishGroup.groupBy({
-      by:['title'],
-      _count:true,
-      where:{
-        userId:userId
-      }
+  try {
+    const getUser = await prisma.user.findUnique({
+      where: {
+        id: userId,
+      },
     })
-  
-    res.json(response.success({
-      item:groupWishGroup,
-      allItemCount:groupWishGroup.length,
-      message:''
-    }))
-  }else{
-    res.json(response.error({message:USER_NOT_EXIST}))
+    if (getUser !== null) {
+      const groupWishGroup = await prisma.wishGroup.groupBy({
+        by: ['title'],
+        _count: true,
+        where: {
+          userId: userId,
+        },
+      })
+
+      res.json(
+        response.success({
+          item: groupWishGroup,
+          allItemCount: groupWishGroup.length,
+          message: '',
+        })
+      )
+    } else {
+      res.json(response.error({ message: USER_NOT_EXIST }))
+    }
+  } catch (err: any) {
+    res.json(response.error({ message: err.message }))
   }
-}catch(err:any){
-  res.json(response.error({message:err.message}))
-}
 }
 
 export const wishGroupByUserAndTitle = async (req: Request, res: Response) => {
