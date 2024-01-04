@@ -97,27 +97,32 @@ export const addWishGroup = async (req: Request, res: Response) => {
     const wishGroups = await getWishGroups(userId)
 
     if (wishGroups.length !== 0) {
-      return res.json(response.success({
-        items: wishGroups,
-        allItemCount: wishGroups.length,
-        message: '',
-      }))
+      return res.json(
+        response.success({
+          items: wishGroups,
+          allItemCount: wishGroups.length,
+          message: '',
+        })
+      )
     }
 
     const listing = await getListingById(listingId)
 
     if (!listing) {
-      return res.json(response.error({ message: 'Booking item not found in our system' }))
+      return res.json(
+        response.error({ message: 'Booking item not found in our system' })
+      )
     }
 
     const newWishGroup = await createWishGroup(title, userId, listingId)
 
-    return res.json(response.success({
-      item: newWishGroup,
-      allItemCount: 1,
-      message: 'Successfully added to wish group',
-    }))
-
+    return res.json(
+      response.success({
+        item: newWishGroup,
+        allItemCount: 1,
+        message: 'Successfully added to wish group',
+      })
+    )
   } catch (err: any) {
     return res.json(response.error({ message: err.message }))
   }
@@ -144,7 +149,11 @@ async function getListingById(listingId: number) {
   })
 }
 
-async function createWishGroup(title: string, userId: number, listingId: number) {
+async function createWishGroup(
+  title: string,
+  userId: number,
+  listingId: number
+) {
   return await prisma.wishGroup.create({
     data: {
       title: title,
@@ -154,7 +163,6 @@ async function createWishGroup(title: string, userId: number, listingId: number)
     },
   })
 }
-
 
 export const addToExistingWishGroup = async (req: Request, res: Response) => {
   const listingId = req.body.listingId
