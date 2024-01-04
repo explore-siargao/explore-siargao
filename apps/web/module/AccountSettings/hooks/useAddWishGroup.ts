@@ -8,7 +8,10 @@ export async function addWishgroup(
   props: IWishGroup
 ) {
   const apiService = new ApiService()
-  return await apiService.post(`${API_URL_BOOKINGS}/${userId}/wish`, props)
+  return await apiService.post(
+    `${API_URL_BOOKINGS}/${userId}/wish-group`,
+    props
+  )
 }
 
 function useAddWishGroup(userId: number) {
