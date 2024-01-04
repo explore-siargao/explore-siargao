@@ -20,12 +20,13 @@ const router = express.Router()
 // DEFAULT
 router.get('/', getAllListing)
 router.get('/:id', isCsrfTokenValid, isOriginValid, getListing)
-router.post('/:hostId', isOriginValid, isCsrfTokenValid, addListing)
+router.post('/:hostId', addListing)
+
 router.get(
   '/:userId/wish-group',
-  // isOriginValid,
-  // isCsrfTokenValid,
-  // isUserLoggedIn,
+  isOriginValid,
+  isCsrfTokenValid,
+  isUserLoggedIn,
   getWishGroupsByUser
 )
 router.get(
@@ -38,25 +39,25 @@ router.get(
 
 router.post(
   '/:userId/wish/',
-  // isOriginValid,
-  // isCsrfTokenValid,
-  // isUserLoggedIn,
+  isOriginValid,
+  isCsrfTokenValid,
+  isUserLoggedIn,
   addWishGroup
 )
 
 router.post(
   '/:userId/wish-group',
-  // isOriginValid,
-  // isCsrfTokenValid,
-  // isUserLoggedIn,
+  isOriginValid,
+  isCsrfTokenValid,
+  isUserLoggedIn,
   addNewWishGroup
 )
 
 router.post(
   '/:userId/:wishGroupId/add-existing-group',
-  // isOriginValid,
-  // isCsrfTokenValid,
-  // isUserLoggedIn,
+  isOriginValid,
+  isCsrfTokenValid,
+  isUserLoggedIn,
   addToExistingWishGroup
 )
 
@@ -70,16 +71,16 @@ router.delete(
 
 router.patch(
   '/:userId/note/:wishGroupId',
-  // isOriginValid,
-  // isCsrfTokenValid,
-  // isUserLoggedIn,
+  isOriginValid,
+  isCsrfTokenValid,
+  isUserLoggedIn,
   addEditWishListNote
 )
 router.patch(
   '/:userId/wish-group/update-title',
-  // isOriginValid,
-  // isCsrfTokenValid,
-  // isUserLoggedIn,
+  isOriginValid,
+  isCsrfTokenValid,
+  isUserLoggedIn,
   editTitle
 )
 router.delete(

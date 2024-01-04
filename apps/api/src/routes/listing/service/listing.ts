@@ -2,6 +2,7 @@ import { Response, Request } from 'express'
 import { PrismaClient } from '@prisma/client'
 import { REQUIRED_VALUE_EMPTY } from '@repo/constants'
 import { ResponseService } from '@/common/service/response'
+import { Z_Listing } from '@repo/contract'
 
 const prisma = new PrismaClient()
 const response = new ResponseService()
@@ -75,7 +76,8 @@ export const getListing = async (req: Request, res: Response) => {
 }
 
 export const addListing = async (req: Request, res: Response) => {
-  const hostId = Number(req.params.hostId)
+  const hostId = Number(req.params.hostId) 
+  const isValidInput = Z_Listing.safeParse(req.body)
   const {
     imageUrls,
     title,
@@ -92,6 +94,7 @@ export const addListing = async (req: Request, res: Response) => {
     countGuest,
     isNight,
   } = req.body
+  if(isValidInput.success){
   try {
     const getHost = await prisma.user.findFirst({
       where: {
@@ -134,7 +137,7 @@ export const addListing = async (req: Request, res: Response) => {
             longitude: longitude,
             latitude: latitude,
             hostedById: hostId,
-            listingPriceId: newPrice.id,
+            listingPriceId: Number(newPrice.id),
           },
         })
 
@@ -154,4 +157,7 @@ export const addListing = async (req: Request, res: Response) => {
   } catch (e: any) {
     res.json(response.error({ message: e.message }))
   }
+}else{
+  res.json(response.error({message:isValidInput.error.message}))
+}
 }
