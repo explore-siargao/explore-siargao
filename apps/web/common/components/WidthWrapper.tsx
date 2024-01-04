@@ -7,12 +7,14 @@ const WidthWrapperVariants = cva(
   {
     variants: {
       width: {
-        primary: "px-4 lg:px-16",
-        secondary: "px-4 lg:px-40",
+        small: "px-4 xl:px-72 2xl:px-96",
+        medium: "px-4 2xl:px-40",
+        wide: "px-4 lg:px-5 max-w-full",
+        full: "max-w-full",
       },
     },
     defaultVariants: {
-      width: "primary",
+      width: "wide",
     },
   }
 )
