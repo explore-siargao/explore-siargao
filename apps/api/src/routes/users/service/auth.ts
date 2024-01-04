@@ -11,6 +11,7 @@ import { capitalize } from 'lodash'
 import { Z_UserRegister } from '@repo/contract'
 import { ResponseService } from '@/common/service/response'
 import randomNumber from '@/common/helpers/randomNumber'
+import CryptoJS from 'crypto-js'
 
 const prisma = new PrismaClient()
 const response = new ResponseService()
