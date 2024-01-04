@@ -1,8 +1,7 @@
 import ModalContainer from "@/common/components/ModalContainer"
 import { Typography } from "@/common/components/ui/Typography"
-import { Menu, Popover, Transition } from "@headlessui/react"
-import React, { Fragment, useEffect, useRef, useState } from "react"
-import { ChevronDownIcon } from "@heroicons/react/20/solid"
+import { Popover, Transition } from "@headlessui/react"
+import React, { Fragment, useState } from "react"
 
 interface PriceBreakdownProps {
   buttonTitle: React.ReactNode
