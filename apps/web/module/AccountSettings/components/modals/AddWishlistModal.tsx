@@ -2,18 +2,7 @@ import ModalContainer from "@/common/components/ModalContainer"
 import { Input } from "@/common/components/ui/Input"
 import { Dialog, Transition } from "@headlessui/react"
 import React, { Fragment, useRef, useState } from "react"
-import amex from "@/common/assets/amex.png"
-import discover from "@/common/assets/discover-card.png"
-import mastercard from "@/common/assets/mastercard.png"
-import visa from "@/common/assets/visa.png"
 import Image from "next/image"
-import useAddPaymentMethod from "../../hooks/useAddPaymentMethod"
-import { IPaymentMethod } from "@/common/types/global"
-import { useForm } from "react-hook-form"
-import { useQueryClient } from "@tanstack/react-query"
-import toast from "react-hot-toast"
-import valid from "card-validator"
-import ErrorMessage from "../ui/ErrorMessage"
 import ModalContainerFooter from "@/common/components/ModalContainer/ModalContainerFooter"
 import { Typography } from "@/common/components/ui/Typography"
 import { Title } from "@/common/components/ui/Title"
@@ -39,78 +28,71 @@ const AddWishlistModal = ({ isOpen, onClose }: AddWishlistProps) => {
   }
   const renderAddToWishlist = () => {
     return (
-      <>
-        <ModalContainer title="Add to wishlist" onClose={onClose}>
-          <div className="p-6 grid grid-cols-2 max-h-[550px] overflow-y-auto">
-            {wishlist.map((item) => (
-              <div className="flex flex-col">
-                <div className="h-60 w-60 rounded-3xl relative border border-text-100">
-                  <Image
-                    src="http://localhost:3000/2.jpg"
-                    width={300}
-                    height={300}
-                    alt="photo"
-                    className="object-cover h-full w-full rounded-3xl p-1"
-                  />
-                </div>
-                <div className="flex-1 ml-1 -space-y-1 w-auto">
-                  <Title size={"ContentTitle"} className="text-text-500">
-                    {item.name}
-                  </Title>
-                  <Typography className="text-text-300">
-                    {item.savedCount}
-                  </Typography>
-                </div>
+      <ModalContainer title="Add to wishlist" onClose={onClose}>
+        <div className="p-6 grid grid-cols-2 max-h-[550px] overflow-y-auto">
+          {wishlist.map((item) => (
+            <div className="flex flex-col">
+              <div className="h-60 w-60 rounded-3xl relative border border-text-100">
+                <Image
+                  src="http://localhost:3000/2.jpg"
+                  width={300}
+                  height={300}
+                  alt="photo"
+                  className="object-cover h-full w-full rounded-3xl p-1"
+                />
               </div>
-            ))}
-          </div>
-          <div className="w-full p-5">
-            <Button className="w-full" onClick={() => setModalState(1)}>
-              Create new wishlist
-            </Button>
-          </div>
-        </ModalContainer>
-      </>
+              <div className="flex-1 ml-1 -space-y-1 w-auto">
+                <Title size={"ContentTitle"} className="text-text-500">
+                  {item.name}
+                </Title>
+                <Typography className="text-text-300">
+                  {item.savedCount}
+                </Typography>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="w-full p-5">
+          <Button className="w-full" onClick={() => setModalState(1)}>
+            Create new wishlist
+          </Button>
+        </div>
+      </ModalContainer>
     )
   }
   const renderCreateWishlist = () => {
     return (
-      <>
-        <ModalContainer
-          title="Create wishlist"
-          onClose={() => setModalState(0)}
-        >
-          <div className="p-6">
-            <Input
-              inputLabel="Name"
-              inputId="name"
-              className={`w-full ${
-                inputValue.replace(/\s/g, "").length > 50 &&
-                "ring-error-600 focus-within:z-10 focus-within:ring-2 focus-within:ring-error-600"
-              }`}
-              onChange={handleTextAreaChange}
-            />
-            <Typography
-              variant={"h6"}
-              fontWeight={"bold"}
-              className={`${
-                inputValue.replace(/\s/g, "").length > 50
-                  ? "text-error-400 mt-2"
-                  : "text-text-400 mt-2"
-              }`}
-            >
-              {inputValue.replace(/\s/g, "").length}/50 characters{" "}
-            </Typography>{" "}
-          </div>
-          <ModalContainerFooter
-            isPending={false}
-            isSubmit={true}
-            positive="Create"
-            negative="clear"
-            buttonFn={() => null}
+      <ModalContainer title="Create wishlist" onClose={() => setModalState(0)}>
+        <div className="p-6">
+          <Input
+            inputLabel="Name"
+            inputId="name"
+            className={`w-full ${
+              inputValue.replace(/\s/g, "").length > 50 &&
+              "ring-error-600 focus-within:z-10 focus-within:ring-2 focus-within:ring-error-600"
+            }`}
+            onChange={handleTextAreaChange}
           />
-        </ModalContainer>
-      </>
+          <Typography
+            variant={"h6"}
+            fontWeight={"bold"}
+            className={`${
+              inputValue.replace(/\s/g, "").length > 50
+                ? "text-error-400 mt-2"
+                : "text-text-400 mt-2"
+            }`}
+          >
+            {inputValue.replace(/\s/g, "").length}/50 characters{" "}
+          </Typography>{" "}
+        </div>
+        <ModalContainerFooter
+          isPending={false}
+          isSubmit={true}
+          positive="Create"
+          negative="clear"
+          buttonFn={() => null}
+        />
+      </ModalContainer>
     )
   }
 
