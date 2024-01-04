@@ -8,6 +8,7 @@ export const LINK_GIFT = "/gift"
 export const LINK_ACCOUNT_SETTINGS = "/account-settings"
 export const LINK_ACCOUNT_PERSONAL_INFO = "/account-settings/personal-info"
 export const LINK_ACCOUNT_PAYMENT_PAYOUT = "/account-settings/payment-payout"
+export const LINK_ACCOUNT_BOOKING_REVIEWS = "/account-settings/booking-reviews"
 export const LINK_ACCOUNT_YOUR_PAYMENT =
   "/account-settings/payment-payout/your-payments"
 
