@@ -80,69 +80,144 @@ export const wishGroupByUserAndTitle = async (req: Request, res: Response) => {
   }
 }
 
+// export const addWishGroup = async (req: Request, res: Response) => {
+//   const userId = Number(req.params.userId)
+//   const isValidInput = Z_WishGroup.safeParse(req.body)
+//   if(isValidInput.success){
+//   const { title, listingId } = req.body
+//   try {
+//     const getUser = await prisma.user.findUnique({
+//       where: {
+//         id: userId,
+//       },
+//     })
+//     if (getUser) {
+//       const findWishGroup = await prisma.wishGroup.findMany({
+//         where: {
+//           userId: userId,
+//           deletedAt: null,
+//         },
+//       })
+//       if (findWishGroup.length !== 0) {
+//         res.json(
+//           response.success({
+//             items: findWishGroup,
+//             allItemCount: findWishGroup.length,
+//             message: '',
+//           })
+//         )
+//       } else {
+//         const findListing = await prisma.listing.findUnique({
+//           where: {
+//             id: listingId,
+//           },
+//         })
+//         if (findListing !== null) {
+//           const newWishGroup = await prisma.wishGroup.create({
+//             data: {
+//               title: title,
+//               userId: userId,
+//               listingId: listingId,
+//               note: null,
+//             },
+//           })
+//           res.json(
+//             response.success({
+//               item: newWishGroup,
+//               allItemCount: 1,
+//               message: 'Successfully added to wish group',
+//             })
+//           )
+//         } else {
+//           res.json(
+//             response.error({ message: 'Booking item not found in our system' })
+//           )
+//         }
+//       }
+//     } else {
+//       res.json(response.error({ message: USER_NOT_EXIST }))
+//     }
+//   } catch (err: any) {
+//     res.json(response.error({ message: err.message }))
+//   }
+// }else{
+//   res.json(response.error({message:isValidInput.error.message}))
+// }
+// }
+
 export const addWishGroup = async (req: Request, res: Response) => {
   const userId = Number(req.params.userId)
   const isValidInput = Z_WishGroup.safeParse(req.body)
-  if(isValidInput.success){
   const { title, listingId } = req.body
-  try {
-    const getUser = await prisma.user.findUnique({
-      where: {
-        id: userId,
-      },
-    })
-    if (getUser) {
-      const findWishGroup = await prisma.wishGroup.findMany({
-        where: {
-          userId: userId,
-          deletedAt: null,
-        },
-      })
-      if (findWishGroup.length !== 0) {
-        res.json(
-          response.success({
-            items: findWishGroup,
-            allItemCount: findWishGroup.length,
-            message: '',
-          })
-        )
-      } else {
-        const findListing = await prisma.listing.findUnique({
-          where: {
-            id: listingId,
-          },
-        })
-        if (findListing !== null) {
-          const newWishGroup = await prisma.wishGroup.create({
-            data: {
-              title: title,
-              userId: userId,
-              listingId: listingId,
-              note: null,
-            },
-          })
-          res.json(
-            response.success({
-              item: newWishGroup,
-              allItemCount: 1,
-              message: 'Successfully added to wish group',
-            })
-          )
-        } else {
-          res.json(
-            response.error({ message: 'Booking item not found in our system' })
-          )
-        }
-      }
-    } else {
-      res.json(response.error({ message: USER_NOT_EXIST }))
-    }
-  } catch (err: any) {
-    res.json(response.error({ message: err.message }))
+  if (!isValidInput.success) {
+    return res.json(response.error({ message: isValidInput.error.message }))
   }
-}else{
-  res.json(response.error({message:isValidInput.error.message}))
+
+  try {
+    const user = await getUserById(userId)
+    if (!user) {
+      return res.json(response.error({ message: USER_NOT_EXIST }))
+    }
+
+    const wishGroups = await getWishGroups(userId)
+
+    if (wishGroups.length !== 0) {
+      return res.json(response.success({
+        items: wishGroups,
+        allItemCount: wishGroups.length,
+        message: '',
+      }))
+    }
+
+    const listing = await getListingById(listingId)
+
+    if (!listing) {
+      return res.json(response.error({ message: 'Booking item not found in our system' }))
+    }
+
+    const newWishGroup = await createWishGroup(title, userId, listingId)
+
+    return res.json(response.success({
+      item: newWishGroup,
+      allItemCount: 1,
+      message: 'Successfully added to wish group',
+    }))
+
+  } catch (err: any) {
+    return res.json(response.error({ message: err.message }))
+  }
 }
+
+async function getUserById(userId: number) {
+  return await prisma.user.findUnique({
+    where: { id: userId },
+  })
+}
+
+async function getWishGroups(userId: number) {
+  return await prisma.wishGroup.findMany({
+    where: {
+      userId: userId,
+      deletedAt: null,
+    },
+  })
+}
+
+async function getListingById(listingId: number) {
+  return await prisma.listing.findUnique({
+    where: { id: listingId },
+  })
+}
+
+async function createWishGroup(title: string, userId: number, listingId: number) {
+  return await prisma.wishGroup.create({
+    data: {
+      title: title,
+      userId: userId,
+      listingId: listingId,
+      note: null,
+    },
+  })
 }
 
 export const addToExistingWishGroup = async (req: Request, res: Response) => {
