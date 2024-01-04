@@ -40,7 +40,7 @@ const wishlist = [
 ]
 const AddWishlistModal = ({ isOpen, onClose }: AddWishlistProps) => {
   const cancelButtonRef = useRef(null)
-  const [modalState, setModalState] = useState(0)
+  const [renderState, setRenderState] = useState(0)
   const [inputValue, setInputValue] = useState("")
   const handleTextAreaChange = (event: { target: { value: any } }) => {
     const newValue = event.target.value
@@ -73,7 +73,7 @@ const AddWishlistModal = ({ isOpen, onClose }: AddWishlistProps) => {
           ))}
         </div>
         <div className="w-full p-5">
-          <Button className="w-full" onClick={() => setModalState(1)}>
+          <Button className="w-full" onClick={() => setRenderState(1)}>
             Create new wishlist
           </Button>
         </div>
@@ -82,7 +82,7 @@ const AddWishlistModal = ({ isOpen, onClose }: AddWishlistProps) => {
   }
   const renderCreateWishlist = () => {
     return (
-      <ModalContainer title="Create wishlist" onClose={() => setModalState(0)}>
+      <ModalContainer title="Create wishlist" onClose={() => setRenderState(0)}>
         <div className="p-6">
           <Input
             inputLabel="Name"
@@ -148,7 +148,7 @@ const AddWishlistModal = ({ isOpen, onClose }: AddWishlistProps) => {
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
               <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:w-full sm:max-w-lg ">
-                {modalState === 0 ? renderAddToWishlist : renderCreateWishlist}
+                {renderState === 0 ? renderAddToWishlist : renderCreateWishlist}
               </Dialog.Panel>
             </Transition.Child>
           </div>
