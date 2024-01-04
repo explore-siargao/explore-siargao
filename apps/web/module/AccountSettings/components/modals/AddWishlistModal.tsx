@@ -38,7 +38,10 @@ const wishlist = [
     pic: "http://localhost:3000/4.jpg",
   },
 ]
-const AddWishlistModal = ({ isOpen, onClose }: AddWishlistProps) => {
+const AddWishlistModal = ({
+  isOpen: showModal,
+  onClose: hideModal,
+}: AddWishlistProps) => {
   const cancelButtonRef = useRef(null)
   const [renderState, setRenderState] = useState(0)
   const [inputValue, setInputValue] = useState("")
@@ -48,7 +51,7 @@ const AddWishlistModal = ({ isOpen, onClose }: AddWishlistProps) => {
   }
   const renderAddToWishlist = () => {
     return (
-      <ModalContainer title="Add to wishlist" onClose={onClose}>
+      <ModalContainer title="Add to wishlist" onClose={hideModal}>
         <div className="p-6 grid grid-cols-2 max-h-[550px] overflow-y-auto">
           {wishlist.map((item) => (
             <div className="flex flex-col" key={item.id}>
@@ -117,12 +120,12 @@ const AddWishlistModal = ({ isOpen, onClose }: AddWishlistProps) => {
   }
 
   return (
-    <Transition.Root show={isOpen} as="div">
+    <Transition.Root show={showModal} as="div">
       <Dialog
         as="div"
         className="relative z-50"
         initialFocus={cancelButtonRef}
-        onClose={onClose}
+        onClose={hideModal}
       >
         <Transition.Child
           as={Fragment}
