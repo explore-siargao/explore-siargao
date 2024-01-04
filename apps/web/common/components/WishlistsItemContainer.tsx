@@ -54,10 +54,13 @@ const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
   const copyToClipboard = () => {
     navigator.clipboard.writeText(window.location.href)
   }
-  const session = useSessionStore((state)=>state)
-const params = useSearchParams()
-const title =params.get("title")
-  const {data, isPending} = useGetWishGroupByUserAndTitle(session.id as number, title as string)
+  const session = useSessionStore((state) => state)
+  const params = useSearchParams()
+  const title = params.get("title")
+  const { data, isPending } = useGetWishGroupByUserAndTitle(
+    session.id as number,
+    title as string
+  )
   return (
     <>
     {isPending ? (
@@ -65,10 +68,8 @@ const title =params.get("title")
     ):(
     <div className="flex flex-col w-full xl:w-[920px]">
       <div className="sticky w-full 2xl:w-[920px] top-26 bg-white z-50 flex border-b-gray-200 border-b py-4 items-center">
-       <Link href={LINK_ACCOUNT_WISHLIST} >
-        <ArrowLeftIcon
-          className="h-10 w-10 cursor-pointer rounded-full hover:bg-gray-50 p-2 -ml-3"
-        />
+        <Link href={LINK_ACCOUNT_WISHLIST}>
+          <ArrowLeftIcon className="h-10 w-10 cursor-pointer rounded-full hover:bg-gray-50 p-2 -ml-3" />
         </Link>
         <Typography
           variant={"h4"}
@@ -118,7 +119,7 @@ const title =params.get("title")
           <li key={item.id}>
             <div className="h-72 2xl:w-auto rounded-2xl relative select-none">
               <HeartIcon
-              id={item?.listing.id}
+                id={item?.listing.id}
                 className={`absolute top-3 right-3 h-7 w-7 text-text-50 active:scale-90 ${
                   !isClicked ? "fill-error-500" : "fill-text-500/50 "
                 }`}
@@ -139,8 +140,12 @@ const title =params.get("title")
                 </Title>
                 <div className="flex text-text-500 place-items-center gap-1">
                   <StarIcon className="h-4 w-auto" />
-                  {item.listing.review.length !== 0 ? item.listing.review.rate : "0.0"}{" "}
-                  <span className="text-text-400">{"("+item.listing.review.length+")"}</span>
+                  {item.listing.review.length !== 0
+                    ? item.listing.review.rate
+                    : "0.0"}{" "}
+                  <span className="text-text-400">
+                    {"(" + item.listing.review.length + ")"}
+                  </span>
                 </div>
               </div>
               <div className="text-text-300 text-sm">
@@ -152,12 +157,13 @@ const title =params.get("title")
                 fontWeight={"semiBold"}
                 className="text-text-700 underline"
               >
-                {
-                  "₱" +
+                {"₱" +
                   (item?.listing.price?.fee +
                     item.listing.price.cleaningFee +
-                    item.listing.price.serviceFee)
-                } <span className="font-normal">{item?.price?.isNight? "Night": ""}</span>
+                    item.listing.price.serviceFee)}{" "}
+                <span className="font-normal">
+                  {item?.price?.isNight ? "Night" : ""}
+                </span>
               </Typography>
             </div>
             <div>

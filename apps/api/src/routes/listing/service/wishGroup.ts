@@ -144,14 +144,14 @@ export const wishGroupByUserAndTitle = async (req: Request, res: Response) => {
           title: title,
           userId: userId,
         },
-        include:{
-          listing:{
-            include:{
-              review:true,
-              price:true
-            }
-          }
-        }
+        include: {
+          listing: {
+            include: {
+              review: true,
+              price: true,
+            },
+          },
+        },
       })
       res.json(
         response.success({
