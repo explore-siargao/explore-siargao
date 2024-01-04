@@ -117,7 +117,7 @@ const AddWishlistModal = ({ isOpen, onClose }: AddWishlistProps) => {
   }
 
   return (
-    <Transition.Root show={isOpen} as={Fragment}>
+    <Transition.Root show={isOpen} as="div">
       <Dialog
         as="div"
         className="relative z-50"
