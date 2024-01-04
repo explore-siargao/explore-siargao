@@ -1,14 +1,14 @@
 import { z } from "zod"
 export const Z_Listing = z.object({
   id: z.number().optional(),
-  imageUrls: z.array(z.object(
-    {
+  imageUrls: z.array(
+    z.object({
       url: z.string(),
-      alt: z.string()
-    }
-  )),
+      alt: z.string(),
+    })
+  ),
   title: z.string(),
-  category: z.enum(["Accomodation","Rentals","Activity"]),
+  category: z.enum(["Accomodation", "Rentals", "Activity"]),
   description: z.string(),
   address: z.string(),
   longitude: z.number().optional(),
