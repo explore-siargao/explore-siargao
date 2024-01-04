@@ -13,10 +13,11 @@ import AddNoteModal from "@/module/AccountSettings/components/modals/AddNoteModa
 import toast from "react-hot-toast"
 import MenuModal from "@/module/AccountSettings/components/modals/MenuModal"
 import { LINK_ACCOUNT_WISHLIST } from "../constants/links"
-import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import {useRouter, useSearchParams } from "next/navigation"
 import useGetWishGroupByUserAndTitle from "@/module/AccountSettings/hooks/useGetWishGroupByUserAndTitle"
 import useSessionStore from "../store/useSessionStore"
 import Link from "next/link"
+import { Spinner } from "./ui/Spinner"
 
 type ItemData = {
   id: number
@@ -58,6 +59,10 @@ const params = useSearchParams()
 const title =params.get("title")
   const {data, isPending} = useGetWishGroupByUserAndTitle(session.id as number, title as string)
   return (
+    <>
+    {isPending ? (
+      <Spinner size={"md"}>Loading...</Spinner>
+    ):(
     <div className="flex flex-col w-full xl:w-[920px]">
       <div className="sticky w-full 2xl:w-[920px] top-26 bg-white z-50 flex border-b-gray-200 border-b py-4 items-center">
        <Link href={LINK_ACCOUNT_WISHLIST} >
@@ -168,7 +173,10 @@ const title =params.get("title")
       </ul>
       <AddNoteModal isOpen={addNote} onClose={closeAddNoteModal} id="AddNote" />
       <MenuModal isOpen={openMenu} onClose={() => setOpenMenu(false)} />
+     
     </div>
+    )}
+    </>
   )
 }
 
