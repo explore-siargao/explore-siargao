@@ -46,17 +46,17 @@ router.post(
 
 router.post(
   '/:userId/wish-group',
-  isOriginValid,
-  isCsrfTokenValid,
-  isUserLoggedIn,
+  // isOriginValid,
+  // isCsrfTokenValid,
+  // isUserLoggedIn,
   addNewWishGroup
 )
 
 router.post(
   '/:userId/:wishGroupId/add-existing-group',
-  isOriginValid,
-  isCsrfTokenValid,
-  isUserLoggedIn,
+  // isOriginValid,
+  // isCsrfTokenValid,
+  // isUserLoggedIn,
   addToExistingWishGroup
 )
 
@@ -70,16 +70,16 @@ router.delete(
 
 router.patch(
   '/:userId/note/:wishGroupId',
-  isOriginValid,
-  isCsrfTokenValid,
-  isUserLoggedIn,
+  // isOriginValid,
+  // isCsrfTokenValid,
+  // isUserLoggedIn,
   addEditWishListNote
 )
 router.patch(
   '/:userId/wish-group/update-title',
-  isOriginValid,
-  isCsrfTokenValid,
-  isUserLoggedIn,
+  // isOriginValid,
+  // isCsrfTokenValid,
+  // isUserLoggedIn,
   editTitle
 )
 router.delete(
