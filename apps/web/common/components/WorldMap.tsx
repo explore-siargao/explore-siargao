@@ -8,10 +8,8 @@ const location = [
   { position: [7.1907, 125.4553] },
 ]
 
-const Map = () => {
+const WorldMap = () => {
   const position = [9.8666632, 126.0499998]
-  const position1 = [14.5995, 120.9842]
-  const position2 = [7.1907, 125.4553]
 
   return (
     <div>
@@ -45,4 +43,4 @@ const Map = () => {
   )
 }
 
-export default Map
+export default WorldMap

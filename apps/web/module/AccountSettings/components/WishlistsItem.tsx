@@ -1,5 +1,5 @@
 "use client"
-import Map from "@/common/components/Map"
+import WorldMap from "@/common/components/WorldMap"
 import { WidthWrapper } from "@/common/components/WidthWrapper"
 import WishlistsItemContainer from "@/common/components/WishlistsItemContainer"
 import { useRouter } from "next/navigation"
@@ -137,7 +137,7 @@ const WishlistsItem = () => {
         </div>
         <div className="relative w-full hidden lg:block">
           <div>
-            <Map />
+            <WorldMap />
           </div>
         </div>
       </div>
