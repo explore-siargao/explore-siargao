@@ -18,15 +18,26 @@ interface AddNoteProps {
   id: number
   isOpen: boolean
   img: string
-  title:string
-  address:string
-  description:string
-  price:string
-  isNight:boolean
-  note:string
+  title: string
+  address: string
+  description: string
+  price: string
+  isNight: boolean
+  note: string
   onClose: () => void
 }
-const AddNoteModal = ({ id, isOpen, img, title, note, address, description, price, isNight, onClose }: AddNoteProps) => {
+const AddNoteModal = ({
+  id,
+  isOpen,
+  img,
+  title,
+  note,
+  address,
+  description,
+  price,
+  isNight,
+  onClose,
+}: AddNoteProps) => {
   console.log(note)
 
   const cancelButtonRef = useRef(null)
@@ -61,7 +72,7 @@ const AddNoteModal = ({ id, isOpen, img, title, note, address, description, pric
         toast.error(String(err))
       },
     }
-    mutate({...formData }, callBackReq)
+    mutate({ ...formData }, callBackReq)
   }
   return (
     <Transition.Root show={isOpen} as="div">
@@ -183,14 +194,14 @@ const AddNoteModal = ({ id, isOpen, img, title, note, address, description, pric
                     </div>
                   </div>
 
-                  <ModalContainerFooter
-                    positive="Save"
-                    negative="Cancel"
-                    isSubmit={true}
-                    isPending={isPending}
-                    buttonFn={() => null}
-                  />
-                </form>
+                    <ModalContainerFooter
+                      positive="Save"
+                      negative="Cancel"
+                      isSubmit={true}
+                      isPending={isPending}
+                      buttonFn={() => null}
+                    />
+                  </form>
                 </ModalContainer>
               </Dialog.Panel>
             </Transition.Child>

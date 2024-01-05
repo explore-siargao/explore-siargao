@@ -42,9 +42,9 @@ interface DetailsType {
   title: string
   address: string
   description: string
-  price: string,
-  note:string,
-  isNight:boolean
+  price: string
+  note: string
+  isNight: boolean
 }
 
 const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
@@ -55,8 +55,8 @@ const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
     address: "",
     description: "",
     price: "",
-    isNight:false,
-    note:""
+    isNight: false,
+    note: "",
   })
   const [isClicked, setIsClicked] = useState(false)
   const handleClick = () => {
@@ -194,7 +194,7 @@ const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
                       type="button"
                       onClick={() => {
                         setDetails({
-                          id:item.id,
+                          id: item.id,
                           img: JSON.parse(item.listing.imageUrls)[0].url,
                           title: item.listing.title,
                           address: item.listing.address,
@@ -203,8 +203,8 @@ const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
                             item?.listing.price?.fee +
                             item.listing.price.cleaningFee +
                             item.listing.price.serviceFee,
-                          isNight:item.listing.price.isNight,
-                          note:item.note
+                          isNight: item.listing.price.isNight,
+                          note: item.note,
                         })
                         showAddNoteModal()
                       }}
@@ -213,7 +213,7 @@ const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
                       Add a note
                     </button>
                   ) : (
-                    item.note+" "
+                    item.note + " "
                   )}
                   {item.note !== null && (
                     <button
@@ -226,11 +226,12 @@ const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
                           title: item.listing.title,
                           address: item.listing.address,
                           description: item.listing.description,
-                          price:item?.listing.price?.fee +
-                          item.listing.price.cleaningFee +
-                          item.listing.price.serviceFee,
-                          isNight:item.listing.price.isNight,
-                          note:item.note
+                          price:
+                            item?.listing.price?.fee +
+                            item.listing.price.cleaningFee +
+                            item.listing.price.serviceFee,
+                          isNight: item.listing.price.isNight,
+                          note: item.note,
                         })
                         showAddNoteModal()
                       }}
