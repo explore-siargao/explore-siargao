@@ -265,48 +265,53 @@
 // }
 
 // export default WishlistsItemContainer
-import { useState } from "react";
-import { ArrowLeftIcon, CheckCircleIcon, DocumentDuplicateIcon, HeartIcon, StarIcon } from "@heroicons/react/20/solid";
-import Image from "next/image";
-import Link from "next/link";
-import { useParams } from "next/navigation";
-import toast from "react-hot-toast";
-import { LINK_ACCOUNT_WISHLIST } from "../constants/links";
-import useGetWishGroupByUserAndTitle from "@/module/AccountSettings/hooks/useGetWishGroupByUserAndTitle";
-import useSessionStore from "../store/useSessionStore";
-import { Spinner } from "./ui/Spinner";
-import AddNoteModal from "@/module/AccountSettings/components/modals/AddNoteModal";
-import MenuModal from "@/module/AccountSettings/components/modals/MenuModal";
-import { Title } from "./ui/Title";
-import { Typography } from "./ui/Typography";
-
+import { useState } from "react"
+import {
+  ArrowLeftIcon,
+  CheckCircleIcon,
+  DocumentDuplicateIcon,
+  HeartIcon,
+  StarIcon,
+} from "@heroicons/react/20/solid"
+import Image from "next/image"
+import Link from "next/link"
+import { useParams } from "next/navigation"
+import toast from "react-hot-toast"
+import { LINK_ACCOUNT_WISHLIST } from "../constants/links"
+import useGetWishGroupByUserAndTitle from "@/module/AccountSettings/hooks/useGetWishGroupByUserAndTitle"
+import useSessionStore from "../store/useSessionStore"
+import { Spinner } from "./ui/Spinner"
+import AddNoteModal from "@/module/AccountSettings/components/modals/AddNoteModal"
+import MenuModal from "@/module/AccountSettings/components/modals/MenuModal"
+import { Title } from "./ui/Title"
+import { Typography } from "./ui/Typography"
 
 type ItemData = {
-  id: number;
-  photo: string;
-  location: string;
-  distance: string;
-  date: string;
-  price: string;
-  dayTime: string;
-  ratings: string;
-  reviews: number;
-  wishlistName: string;
-};
+  id: number
+  photo: string
+  location: string
+  distance: string
+  date: string
+  price: string
+  dayTime: string
+  ratings: string
+  reviews: number
+  wishlistName: string
+}
 
 type WishlistsItemCProps = {
-  datas: ItemData[];
-};
+  datas: ItemData[]
+}
 
 interface DetailsType {
-  id: number;
-  img: string;
-  title: string;
-  address: string;
-  description: string;
-  price: string;
-  note: string;
-  isNight: boolean;
+  id: number
+  img: string
+  title: string
+  address: string
+  description: string
+  price: string
+  note: string
+  isNight: boolean
 }
 
 const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
@@ -319,30 +324,30 @@ const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
     price: "",
     isNight: false,
     note: "",
-  });
-  const [isClicked, setIsClicked] = useState(false);
+  })
+  const [isClicked, setIsClicked] = useState(false)
   const handleClick = () => {
-    setIsClicked((prevState) => !prevState);
-  };
-  const [addNote, setAddNote] = useState(false);
-  const [openMenu, setOpenMenu] = useState(false);
+    setIsClicked((prevState) => !prevState)
+  }
+  const [addNote, setAddNote] = useState(false)
+  const [openMenu, setOpenMenu] = useState(false)
 
   const showAddNoteModal = () => {
-    setAddNote(true);
-  };
+    setAddNote(true)
+  }
   const closeAddNoteModal = () => {
-    setAddNote(false);
-  };
+    setAddNote(false)
+  }
 
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(window.location.href);
-  };
-  const session = useSessionStore((state) => state);
-  const params = useParams();
+    navigator.clipboard.writeText(window.location.href)
+  }
+  const session = useSessionStore((state) => state)
+  const params = useParams()
   const { data, isPending } = useGetWishGroupByUserAndTitle(
     session.id as number,
     params?._id as string
-  );
+  )
 
   return (
     <>
@@ -354,16 +359,21 @@ const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
             <Link href={LINK_ACCOUNT_WISHLIST}>
               <ArrowLeftIcon className="h-10 w-10 cursor-pointer rounded-full hover:bg-gray-50 p-2 -ml-3" />
             </Link>
-            <Typography variant={"h4"} className="w-full text-left place-self-center font-semibold ml-4">
+            <Typography
+              variant={"h4"}
+              className="w-full text-left place-self-center font-semibold ml-4"
+            >
               Wishlist Title
             </Typography>
             <div className="flex gap-3">
               <DocumentDuplicateIcon
                 onClick={() => {
                   toast("Link copied!", {
-                    icon: <CheckCircleIcon className="h-5 w-5 text-success-500" />,
-                  });
-                  copyToClipboard();
+                    icon: (
+                      <CheckCircleIcon className="h-5 w-5 text-success-500" />
+                    ),
+                  })
+                  copyToClipboard()
                 }}
                 className="h-10 w-10 cursor-pointer rounded-full hover:bg-gray-50 p-2"
               />
@@ -464,8 +474,8 @@ const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
                             item?.listing?.price.serviceFee,
                           isNight: item?.listing?.price.isNight,
                           note: item?.note,
-                        });
-                        showAddNoteModal();
+                        })
+                        showAddNoteModal()
                       }}
                       className="text-text-300 underline hover:text-text-00 select-none "
                     >
@@ -491,8 +501,8 @@ const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
                             item?.listing?.price.serviceFee,
                           isNight: item?.listing?.price.isNight,
                           note: item?.note,
-                        });
-                        showAddNoteModal();
+                        })
+                        showAddNoteModal()
                       }}
                       className="text-text-300 underline hover:text-text-00 select-none "
                     >
@@ -520,7 +530,7 @@ const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
         </div>
       )}
     </>
-  );
-};
+  )
+}
 
-export default WishlistsItemContainer;
+export default WishlistsItemContainer
