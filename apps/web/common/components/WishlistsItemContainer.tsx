@@ -13,7 +13,7 @@ import AddNoteModal from "@/module/AccountSettings/components/modals/AddNoteModa
 import toast from "react-hot-toast"
 import MenuModal from "@/module/AccountSettings/components/modals/MenuModal"
 import { LINK_ACCOUNT_WISHLIST } from "../constants/links"
-import { useRouter, useSearchParams } from "next/navigation"
+import { useParams, useRouter, useSearchParams } from "next/navigation"
 import useGetWishGroupByUserAndTitle from "@/module/AccountSettings/hooks/useGetWishGroupByUserAndTitle"
 import useSessionStore from "../store/useSessionStore"
 import Link from "next/link"
@@ -36,9 +36,29 @@ type WishlistsItemCProps = {
   datas: ItemData[]
 }
 
+interface detailsType {
+  id:number
+  img: string
+  title: string
+  address: string
+  description: string
+  price: string,
+  note:string,
+  isNight:boolean
+}
+
 const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
+  const [details, setDetails] = useState<detailsType>({
+    id:0,
+    img: "",
+    title: "",
+    address: "",
+    description: "",
+    price: "",
+    isNight:false,
+    note:""
+  })
   const [isClicked, setIsClicked] = useState(false)
-  const router = useRouter()
   const handleClick = () => {
     setIsClicked((setIsClicked) => !setIsClicked)
   }
@@ -55,11 +75,10 @@ const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
     navigator.clipboard.writeText(window.location.href)
   }
   const session = useSessionStore((state) => state)
-  const params = useSearchParams()
-  const title = params.get("title")
+  const params = useParams()
   const { data, isPending } = useGetWishGroupByUserAndTitle(
     session.id as number,
-    title as string
+    params?._id as string
   )
   return (
     <>
@@ -138,7 +157,7 @@ const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
                 <div className="flex-1 -space-y-1 w-auto">
                   <div className="flex justify-between">
                     <Title size={"ContentTitle"} className="text-text-500">
-                      {item.listing.address}
+                      {item.listing.title}
                     </Title>
                     <div className="flex text-text-500 place-items-center gap-1">
                       <StarIcon className="h-4 w-auto" />
@@ -151,8 +170,8 @@ const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
                     </div>
                   </div>
                   <div className="text-text-300 text-sm">
-                    <Typography>{item.listing.description}</Typography>
-                    <p>{item.date}</p>
+                    <Typography>{item.listing.address}</Typography>
+                    <p>{item.listing.description}</p>
                   </div>
                   <Typography
                     variant={"p"}
@@ -168,22 +187,75 @@ const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
                     </span>
                   </Typography>
                 </div>
-                <div>
-                  <button
-                    onClick={showAddNoteModal}
-                    className="text-text-300 underline hover:text-text-00 select-none "
-                  >
-                    Add a note
-                  </button>
+                <div className="bg-primary-100 w-full p-2 mt-2 rounded-lg">
+                  {item.note === null ? (
+                    <button
+                      id="AddNoteBtn"
+                      type="button"
+                      onClick={() => {
+                        setDetails({
+                          id:item.id,
+                          img: JSON.parse(item.listing.imageUrls)[0].url,
+                          title: item.listing.title,
+                          address: item.listing.address,
+                          description: item.listing.description,
+                          price:
+                            item?.listing.price?.fee +
+                            item.listing.price.cleaningFee +
+                            item.listing.price.serviceFee,
+                          isNight:item.listing.price.isNight,
+                          note:item.note
+                        })
+                        showAddNoteModal()
+                      }}
+                      className="text-text-300 underline hover:text-text-00 select-none "
+                    >
+                      Add a note
+                    </button>
+                  ) : (
+                    item.note+" "
+                  )}
+                  {item.note !== null && (
+                    <button
+                      type="button"
+                      id="EditNoteBtn"
+                      onClick={() => {
+                        setDetails({
+                          id: item.id,
+                          img: JSON.parse(item.listing.imageUrls)[0].url,
+                          title: item.listing.title,
+                          address: item.listing.address,
+                          description: item.listing.description,
+                          price:item?.listing.price?.fee +
+                          item.listing.price.cleaningFee +
+                          item.listing.price.serviceFee,
+                          isNight:item.listing.price.isNight,
+                          note:item.note
+                        })
+                        showAddNoteModal()
+                      }}
+                      className="text-text-300 underline hover:text-text-00 select-none "
+                    >
+                      Edit Note
+                    </button>
+                  )}
                 </div>
               </li>
             ))}
           </ul>
           <AddNoteModal
             isOpen={addNote}
+            img={details?.img}
+            title={details.title}
+            address={details.address}
+            description={details.description}
+            price={details.price as string}
+            isNight={details.isNight}
+            note={details.note}
             onClose={closeAddNoteModal}
-            id="AddNote"
+            id={details.id as number}
           />
+
           <MenuModal isOpen={openMenu} onClose={() => setOpenMenu(false)} />
         </div>
       )}

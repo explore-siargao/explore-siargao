@@ -5,22 +5,64 @@ import { Typography } from "@/common/components/ui/Typography"
 import { Dialog, Transition } from "@headlessui/react"
 import { ExclamationCircleIcon, StarIcon } from "@heroicons/react/20/solid"
 import Image from "next/image"
-import React, { Fragment, useRef, useState } from "react"
+import React, { Fragment, useEffect, useRef, useState } from "react"
 import PriceBreakdownModal from "./PriceBreakdownModal"
+import { IWishGroup } from "@/common/types/global"
+import { useForm } from "react-hook-form"
+import useAddEditWishListNote from "../../hooks/useAddEditWishListNote"
+import useSessionStore from "@/common/store/useSessionStore"
+import toast from "react-hot-toast"
+import { useQueryClient } from "@tanstack/react-query"
 
 interface AddNoteProps {
-  id: string
+  id: number
   isOpen: boolean
+  img: string
+  title:string
+  address:string
+  description:string
+  price:string
+  isNight:boolean
+  note:string
   onClose: () => void
 }
-const AddNoteModal = ({ id, isOpen, onClose }: AddNoteProps) => {
+const AddNoteModal = ({ id, isOpen, img, title, note, address, description, price, isNight, onClose }: AddNoteProps) => {
+  console.log(note)
+
   const cancelButtonRef = useRef(null)
   const [inputValue, setInputValue] = useState("")
+  const session = useSessionStore((state) => state)
   const handleTextAreaChange = (event: { target: { value: any } }) => {
     const newValue = event.target.value
     setInputValue(newValue)
   }
-
+  const queryClient = useQueryClient()
+  const {mutate, isPending} = useAddEditWishListNote(session.id as number, id)
+  const { register, reset, handleSubmit, getValues } = useForm<IWishGroup>()
+  
+  useEffect(() => {
+    if (isOpen) {
+      reset()
+    }
+  }, [isOpen, reset])
+  const onSubmit = (formData: IWishGroup) => {
+    const callBackReq = {
+      onSuccess: (data: any) => {
+        if (!data.error) {
+          queryClient.invalidateQueries({
+            queryKey: ["wish-group"],
+          })
+          toast.success(data.message)
+        } else {
+          toast.error(String(data.message))
+        }
+      },
+      onError: (err: any) => {
+        toast.error(String(err))
+      },
+    }
+    mutate({...formData }, callBackReq)
+  }
   return (
     <Transition.Root show={isOpen} as="div">
       <Dialog
@@ -54,10 +96,11 @@ const AddNoteModal = ({ id, isOpen, onClose }: AddNoteProps) => {
             >
               <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all w-full max-w-[720px] ">
                 <ModalContainer key={id} onClose={onClose} title="Add a note">
+                <form onSubmit={handleSubmit(onSubmit)}>
                   <div className="p-10 grid grid-cols-2 gap-5 items-center">
                     <div className="h-72 rounded-2xl relative select-none">
                       <Image
-                        src={"http://localhost:3000/5.jpg"}
+                        src={img}
                         width={300}
                         height={300}
                         alt=""
@@ -71,7 +114,7 @@ const AddNoteModal = ({ id, isOpen, onClose }: AddNoteProps) => {
                             size={"ContentTitle"}
                             className="text-text-500"
                           >
-                            Explore Siargao
+                          {title}
                           </Title>
                           <div className="flex text-text-500 place-items-center gap-1">
                             <StarIcon className="h-4 w-auto" />
@@ -79,27 +122,28 @@ const AddNoteModal = ({ id, isOpen, onClose }: AddNoteProps) => {
                           </div>
                         </div>
                         <Typography variant={"h5"} className="text-text-300">
-                          3 double beds
+                        {address}
                         </Typography>
                         <Typography variant={"h5"} className="text-text-300">
-                          5 nights, · Saved for Jan 6 – 11
+                          {description}
                         </Typography>
                         <Typography
                           variant={"p"}
                           fontWeight={"semiBold"}
                           className="text-text-700 flex items-start"
                         >
-                          ₱3,419{" "}
+                          ₱{price}{" "}
                           <span className="text-text-400 ml-1 mr-2">
                             {" "}
-                            night
+                            {isNight ? "night":""}
                           </span>{" "}
-                          <PriceBreakdownModal buttonTitle="₱10,898 total" />
+                          <PriceBreakdownModal buttonTitle={"₱"+price as string+" total"} />
                         </Typography>
                       </div>
                       <textarea
                         rows={7}
-                        id="addNote"
+                        id={String(id)}
+                        {...register("note")}
                         className={`text-sm block w-full resize-none bg-transparent rounded-lg ${
                           inputValue.replace(/\s/g, "").length > 250
                             ? "border-error-400 border-2 focus:border-error-400 focus:ring-error-400 ring-error-400"
@@ -107,7 +151,7 @@ const AddNoteModal = ({ id, isOpen, onClose }: AddNoteProps) => {
                         }`}
                         placeholder="Add a note"
                         onChange={handleTextAreaChange}
-                        defaultValue={""}
+                        defaultValue={note as string}
                       />
                       <div className="flex justify-between">
                         <Typography
@@ -143,9 +187,10 @@ const AddNoteModal = ({ id, isOpen, onClose }: AddNoteProps) => {
                     positive="Save"
                     negative="Cancel"
                     isSubmit={true}
-                    isPending={false}
+                    isPending={isPending}
                     buttonFn={() => null}
                   />
+                </form>
                 </ModalContainer>
               </Dialog.Panel>
             </Transition.Child>
