@@ -190,7 +190,7 @@ const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
                 <div className="bg-primary-100 w-full p-2 mt-2 rounded-lg">
                   {item.note === null ? (
                     <button
-                      id={"addNoteBtn"+item?.id}
+                      id={"addNoteBtn" + item?.id}
                       type="button"
                       onClick={() => {
                         setDetails({
@@ -218,7 +218,7 @@ const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
                   {item.note !== null && (
                     <button
                       type="button"
-                      id={"editBtn"+item?.id}
+                      id={"editBtn" + item?.id}
                       onClick={() => {
                         setDetails({
                           id: item?.id,
