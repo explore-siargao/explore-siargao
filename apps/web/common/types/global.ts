@@ -100,6 +100,17 @@ type Action = {
   updateEmail: (email: Email["email"]) => void
 }
 
+ export interface DetailsType {
+  id: number
+  img: string
+  title: string
+  address: string
+  description: string
+  price: string
+  note: string
+  isNight: boolean
+}
+
 enum UserRole {
   Admin,
   Host,

@@ -19,6 +19,7 @@ import AddNoteModal from "@/module/AccountSettings/components/modals/AddNoteModa
 import MenuModal from "@/module/AccountSettings/components/modals/MenuModal"
 import { Title } from "./ui/Title"
 import { Typography } from "./ui/Typography"
+import { DetailsType } from "../types/global"
 
 type ItemData = {
   id: number
@@ -35,17 +36,6 @@ type ItemData = {
 
 type WishlistsItemCProps = {
   datas: ItemData[]
-}
-
-interface DetailsType {
-  id: number
-  img: string
-  title: string
-  address: string
-  description: string
-  price: string
-  note: string
-  isNight: boolean
 }
 
 const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
