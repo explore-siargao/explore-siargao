@@ -18,15 +18,26 @@ interface AddNoteProps {
   id: number
   isOpen: boolean
   img: string
-  title:string
-  address:string
-  description:string
-  price:string
-  isNight:boolean
-  note:string
+  title: string
+  address: string
+  description: string
+  price: string
+  isNight: boolean
+  note: string
   onClose: () => void
 }
-const AddNoteModal = ({ id, isOpen, img, title, note, address, description, price, isNight, onClose }: AddNoteProps) => {
+const AddNoteModal = ({
+  id,
+  isOpen,
+  img,
+  title,
+  note,
+  address,
+  description,
+  price,
+  isNight,
+  onClose,
+}: AddNoteProps) => {
   console.log(note)
 
   const cancelButtonRef = useRef(null)
@@ -37,9 +48,9 @@ const AddNoteModal = ({ id, isOpen, img, title, note, address, description, pric
     setInputValue(newValue)
   }
   const queryClient = useQueryClient()
-  const {mutate, isPending} = useAddEditWishListNote(session.id as number, id)
+  const { mutate, isPending } = useAddEditWishListNote(session.id as number, id)
   const { register, reset, handleSubmit, getValues } = useForm<IWishGroup>()
-  
+
   useEffect(() => {
     if (isOpen) {
       reset()
@@ -61,7 +72,7 @@ const AddNoteModal = ({ id, isOpen, img, title, note, address, description, pric
         toast.error(String(err))
       },
     }
-    mutate({...formData }, callBackReq)
+    mutate({ ...formData }, callBackReq)
   }
   return (
     <Transition.Root show={isOpen} as="div">
@@ -96,101 +107,104 @@ const AddNoteModal = ({ id, isOpen, img, title, note, address, description, pric
             >
               <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all w-full max-w-[720px] ">
                 <ModalContainer key={id} onClose={onClose} title="Add a note">
-                <form onSubmit={handleSubmit(onSubmit)}>
-                  <div className="p-10 grid grid-cols-2 gap-5 items-center">
-                    <div className="h-72 rounded-2xl relative select-none">
-                      <Image
-                        src={img}
-                        width={300}
-                        height={300}
-                        alt=""
-                        className="object-cover h-full w-full rounded-xl"
-                      />
-                    </div>
-                    <div className="flex flex-col justify-between h-full">
-                      <div className="flex-1 -space-y-1 w-auto">
-                        <div className="flex justify-between">
-                          <Title
-                            size={"ContentTitle"}
-                            className="text-text-500"
-                          >
-                          {title}
-                          </Title>
-                          <div className="flex text-text-500 place-items-center gap-1">
-                            <StarIcon className="h-4 w-auto" />
-                            5.0 <span className="text-text-400">(123)</span>
-                          </div>
-                        </div>
-                        <Typography variant={"h5"} className="text-text-300">
-                        {address}
-                        </Typography>
-                        <Typography variant={"h5"} className="text-text-300">
-                          {description}
-                        </Typography>
-                        <Typography
-                          variant={"p"}
-                          fontWeight={"semiBold"}
-                          className="text-text-700 flex items-start"
-                        >
-                          ₱{price}{" "}
-                          <span className="text-text-400 ml-1 mr-2">
-                            {" "}
-                            {isNight ? "night":""}
-                          </span>{" "}
-                          <PriceBreakdownModal buttonTitle={"₱"+price as string+" total"} />
-                        </Typography>
+                  <form onSubmit={handleSubmit(onSubmit)}>
+                    <div className="p-10 grid grid-cols-2 gap-5 items-center">
+                      <div className="h-72 rounded-2xl relative select-none">
+                        <Image
+                          src={img}
+                          width={300}
+                          height={300}
+                          alt=""
+                          className="object-cover h-full w-full rounded-xl"
+                        />
                       </div>
-                      <textarea
-                        rows={7}
-                        id={String(id)}
-                        {...register("note")}
-                        className={`text-sm block w-full resize-none bg-transparent rounded-lg ${
-                          inputValue.replace(/\s/g, "").length > 250
-                            ? "border-error-400 border-2 focus:border-error-400 focus:ring-error-400 ring-error-400"
-                            : "focus:border-text-500 border-2 focus:ring-text-500"
-                        }`}
-                        placeholder="Add a note"
-                        onChange={handleTextAreaChange}
-                        defaultValue={note as string}
-                      />
-                      <div className="flex justify-between">
-                        <Typography
-                          variant={"h6"}
-                          fontWeight={"bold"}
-                          className={`${
+                      <div className="flex flex-col justify-between h-full">
+                        <div className="flex-1 -space-y-1 w-auto">
+                          <div className="flex justify-between">
+                            <Title
+                              size={"ContentTitle"}
+                              className="text-text-500"
+                            >
+                              {title}
+                            </Title>
+                            <div className="flex text-text-500 place-items-center gap-1">
+                              <StarIcon className="h-4 w-auto" />
+                              5.0 <span className="text-text-400">(123)</span>
+                            </div>
+                          </div>
+                          <Typography variant={"h5"} className="text-text-300">
+                            {address}
+                          </Typography>
+                          <Typography variant={"h5"} className="text-text-300">
+                            {description}
+                          </Typography>
+                          <Typography
+                            variant={"p"}
+                            fontWeight={"semiBold"}
+                            className="text-text-700 flex items-start"
+                          >
+                            ₱{price}{" "}
+                            <span className="text-text-400 ml-1 mr-2">
+                              {" "}
+                              {isNight ? "night" : ""}
+                            </span>{" "}
+                            <PriceBreakdownModal
+                              buttonTitle={(("₱" + price) as string) + " total"}
+                            />
+                          </Typography>
+                        </div>
+                        <textarea
+                          rows={7}
+                          id={String(id)}
+                          {...register("note")}
+                          className={`text-sm block w-full resize-none bg-transparent rounded-lg ${
                             inputValue.replace(/\s/g, "").length > 250
-                              ? "text-error-400 mt-2"
-                              : "text-text-400 mt-2"
+                              ? "border-error-400 border-2 focus:border-error-400 focus:ring-error-400 ring-error-400"
+                              : "focus:border-text-500 border-2 focus:ring-text-500"
                           }`}
-                        >
-                          {inputValue.replace(/\s/g, "").length}/250 characters
-                        </Typography>
-                        {inputValue.replace(/\s/g, "").length > 250 && (
+                          placeholder="Add a note"
+                          onChange={handleTextAreaChange}
+                          defaultValue={note as string}
+                        />
+                        <div className="flex justify-between">
                           <Typography
                             variant={"h6"}
                             fontWeight={"bold"}
-                            className={`flex items-center ${
+                            className={`${
                               inputValue.replace(/\s/g, "").length > 250
                                 ? "text-error-400 mt-2"
                                 : "text-text-400 mt-2"
                             }`}
                           >
-                            <ExclamationCircleIcon className="h-5 w-auto" />
-                            Over character limit
+                            {inputValue.replace(/\s/g, "").length}/250
+                            characters
                           </Typography>
-                        )}
+                          {inputValue.replace(/\s/g, "").length > 250 && (
+                            <Typography
+                              variant={"h6"}
+                              fontWeight={"bold"}
+                              className={`flex items-center ${
+                                inputValue.replace(/\s/g, "").length > 250
+                                  ? "text-error-400 mt-2"
+                                  : "text-text-400 mt-2"
+                              }`}
+                            >
+                              <ExclamationCircleIcon className="h-5 w-auto" />
+                              Over character limit
+                            </Typography>
+                          )}
+                        </div>
                       </div>
                     </div>
-                  </div>
 
-                  <ModalContainerFooter
-                    positive="Save"
-                    negative="Cancel"
-                    isSubmit={true}
-                    isPending={isPending}
-                    buttonFn={() => null}
-                  />
-                </form>
+                    <ModalContainerFooter
+                      positive="Save"
+                      negative="Cancel"
+                      isSubmit={true}
+                      isPending={isPending}
+                      buttonFn={() => null}
+                    />
+                  </form>
                 </ModalContainer>
               </Dialog.Panel>
             </Transition.Child>
