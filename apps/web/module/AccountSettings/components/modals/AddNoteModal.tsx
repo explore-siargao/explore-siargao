@@ -38,7 +38,7 @@ const AddNoteModal = ({ id, isOpen, img, title, note, address, description, pric
   }
   const queryClient = useQueryClient()
   const {mutate, isPending} = useAddEditWishListNote(session.id as number, id)
-  const { register, reset, handleSubmit, getValues } = useForm<IWishGroup>()
+  const { register, reset, handleSubmit} = useForm<IWishGroup>()
   
   useEffect(() => {
     if (isOpen) {
@@ -137,7 +137,7 @@ const AddNoteModal = ({ id, isOpen, img, title, note, address, description, pric
                             {" "}
                             {isNight ? "night":""}
                           </span>{" "}
-                          <PriceBreakdownModal buttonTitle={"₱"+price as string+" total"} />
+                          <PriceBreakdownModal buttonTitle={"₱"+price+" total"} />
                         </Typography>
                       </div>
                       <textarea
@@ -151,7 +151,7 @@ const AddNoteModal = ({ id, isOpen, img, title, note, address, description, pric
                         }`}
                         placeholder="Add a note"
                         onChange={handleTextAreaChange}
-                        defaultValue={note as string}
+                        defaultValue={note}
                       />
                       <div className="flex justify-between">
                         <Typography

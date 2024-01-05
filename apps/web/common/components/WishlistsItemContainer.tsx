@@ -13,7 +13,7 @@ import AddNoteModal from "@/module/AccountSettings/components/modals/AddNoteModa
 import toast from "react-hot-toast"
 import MenuModal from "@/module/AccountSettings/components/modals/MenuModal"
 import { LINK_ACCOUNT_WISHLIST } from "../constants/links"
-import { useParams, useRouter, useSearchParams } from "next/navigation"
+import { useParams} from "next/navigation"
 import useGetWishGroupByUserAndTitle from "@/module/AccountSettings/hooks/useGetWishGroupByUserAndTitle"
 import useSessionStore from "../store/useSessionStore"
 import Link from "next/link"
@@ -36,7 +36,7 @@ type WishlistsItemCProps = {
   datas: ItemData[]
 }
 
-interface detailsType {
+interface DetailsType {
   id:number
   img: string
   title: string
@@ -48,7 +48,7 @@ interface detailsType {
 }
 
 const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
-  const [details, setDetails] = useState<detailsType>({
+  const [details, setDetails] = useState<DetailsType>({
     id:0,
     img: "",
     title: "",
