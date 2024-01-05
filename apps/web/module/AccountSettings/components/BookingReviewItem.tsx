@@ -26,19 +26,6 @@ const BookingReviewItem = ({
   const handleClick = () => {
     setIsClicked(!isClicked)
   }
-  const [inputValue, setInputValue] = useState<string>("")
-
-  const handleTextAreaChange = (
-    event: React.ChangeEvent<HTMLTextAreaElement>
-  ) => {
-    const newValue = event.target.value
-    setInputValue(newValue)
-  }
-  const characterCount = inputValue.length
-  const handleParagraphClick = () => {
-    console.log("Paragraph clicked!")
-    // Add your logic here
-  }
   return (
     <>
       <div
