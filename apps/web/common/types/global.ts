@@ -100,7 +100,7 @@ type Action = {
   updateEmail: (email: Email["email"]) => void
 }
 
- export interface DetailsType {
+export interface DetailsType {
   id: number
   img: string
   title: string
