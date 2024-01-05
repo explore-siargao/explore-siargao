@@ -162,16 +162,16 @@ const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
                     <div className="flex text-text-500 place-items-center gap-1">
                       <StarIcon className="h-4 w-auto" />
                       {item.listing.review.length !== 0
-                        ? item.listing.review.rate
+                        ? item?.listing?.review.rate
                         : "0.0"}{" "}
                       <span className="text-text-400">
-                        {"(" + item.listing.review.length + ")"}
+                        {"(" + item?.listing?.review.length + ")"}
                       </span>
                     </div>
                   </div>
                   <div className="text-text-300 text-sm">
-                    <Typography>{item.listing.address}</Typography>
-                    <p>{item.listing.description}</p>
+                    <Typography>{item?.listing?.address}</Typography>
+                    <p>{item?.listing?.description}</p>
                   </div>
                   <Typography
                     variant={"p"}
@@ -179,9 +179,9 @@ const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
                     className="text-text-700 underline"
                   >
                     {"₱" +
-                      (item?.listing.price?.fee +
-                        item.listing.price.cleaningFee +
-                        item.listing.price.serviceFee)}{" "}
+                      (item?.listing?.price?.fee +
+                        item?.listing?.price.cleaningFee +
+                        item?.listing?.price.serviceFee)}{" "}
                     <span className="font-normal">
                       {item?.price?.isNight ? "Night" : ""}
                     </span>
@@ -190,21 +190,21 @@ const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
                 <div className="bg-primary-100 w-full p-2 mt-2 rounded-lg">
                   {item.note === null ? (
                     <button
-                      id="AddNoteBtn"
+                      id={"addNoteBtn"+item?.id}
                       type="button"
                       onClick={() => {
                         setDetails({
-                          id: item.id,
-                          img: JSON.parse(item.listing.imageUrls)[0].url,
-                          title: item.listing.title,
-                          address: item.listing.address,
-                          description: item.listing.description,
+                          id: item?.id,
+                          img: JSON.parse(item?.listing?.imageUrls)[0].url,
+                          title: item?.listing?.title,
+                          address: item?.listing?.address,
+                          description: item?.listing?.description,
                           price:
-                            item?.listing.price?.fee +
-                            item.listing.price.cleaningFee +
-                            item.listing.price.serviceFee,
-                          isNight: item.listing.price.isNight,
-                          note: item.note,
+                            item?.listing?.price?.fee +
+                            item?.listing?.price.cleaningFee +
+                            item?.listing?.price.serviceFee,
+                          isNight: item?.listing?.price.isNight,
+                          note: item?.note,
                         })
                         showAddNoteModal()
                       }}
@@ -218,20 +218,20 @@ const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
                   {item.note !== null && (
                     <button
                       type="button"
-                      id="EditNoteBtn"
+                      id={"editBtn"+item?.id}
                       onClick={() => {
                         setDetails({
-                          id: item.id,
-                          img: JSON.parse(item.listing.imageUrls)[0].url,
-                          title: item.listing.title,
-                          address: item.listing.address,
-                          description: item.listing.description,
+                          id: item?.id,
+                          img: JSON.parse(item?.listing?.imageUrls)[0].url,
+                          title: item?.listing?.title,
+                          address: item?.listing?.address,
+                          description: item?.listing?.description,
                           price:
-                            item?.listing.price?.fee +
-                            item.listing.price.cleaningFee +
-                            item.listing.price.serviceFee,
-                          isNight: item.listing.price.isNight,
-                          note: item.note,
+                            item?.listing?.price?.fee +
+                            item?.listing?.price.cleaningFee +
+                            item?.listing?.price.serviceFee,
+                          isNight: item?.listing?.price.isNight,
+                          note: item?.note,
                         })
                         showAddNoteModal()
                       }}
@@ -247,14 +247,14 @@ const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
           <AddNoteModal
             isOpen={addNote}
             img={details?.img}
-            title={details.title}
-            address={details.address}
-            description={details.description}
-            price={details.price as string}
-            isNight={details.isNight}
-            note={details.note}
+            title={details?.title}
+            address={details?.address}
+            description={details?.description}
+            price={details?.price as string}
+            isNight={details?.isNight}
+            note={details?.note}
             onClose={closeAddNoteModal}
-            id={details.id as number}
+            id={details?.id as number}
           />
 
           <MenuModal isOpen={openMenu} onClose={() => setOpenMenu(false)} />
