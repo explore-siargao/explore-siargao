@@ -20,7 +20,7 @@ const WishlistBoxContainer = ({ title, link, text, photo }: Props) => {
   return (
     <>
       <Link
-        href={"/account-settings/wishlist/group?title=" + link}
+        href={"/account-settings/wishlist/" + link}
         className="flex flex-col select-none"
       >
         <div

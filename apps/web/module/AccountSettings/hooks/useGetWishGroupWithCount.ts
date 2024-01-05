@@ -9,7 +9,7 @@ export async function getWishGroup(userId: number | undefined) {
 
 function useWishGroupWithCount(userId: number | undefined) {
   const query = useQuery({
-    queryKey: ["wish-group", userId],
+    queryKey: ["wish-group-count", userId],
     queryFn: () => getWishGroup(userId),
     refetchOnWindowFocus: false,
     enabled: !!userId,
