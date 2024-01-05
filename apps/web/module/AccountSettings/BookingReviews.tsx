@@ -2,6 +2,9 @@
 import AccountSettingWrapper from "@/common/components/AccountSettingWrapper"
 import React from "react"
 import BookingReviewItem from "./components/BookingReviewItem"
+import { Breadcrumb } from "@/common/components/ui/Breadcrumb"
+import { Title } from "@/common/components/ui/Title"
+import { LINK_ACCOUNT_SETTINGS } from "@/common/constants/links"
 
 const bookingReviewsDummy = [
   {
@@ -28,7 +31,15 @@ const bookingReviewsDummy = [
 
 const BookingReviews = () => {
   return (
-    <AccountSettingWrapper className="mt-20 md:mt-32 lg:mt-36 gap-y-4">
+    <AccountSettingWrapper>
+      <div>
+        <Breadcrumb
+          home="Account"
+          page="Booking Reviews"
+          link={LINK_ACCOUNT_SETTINGS}
+        />
+        <Title>Booking Reviews</Title>
+      </div>
       {bookingReviewsDummy.map((item) => (
         <BookingReviewItem
           id={item.id}
