@@ -8,7 +8,7 @@ import { Typography } from "./ui/Typography"
 import AddWishlistModal from "@/module/AccountSettings/components/modals/AddWishlistModal"
 
 type BookingProps = {
-  listingId:number
+  listingId: number
   photo: string
   distance: string
   location: string
@@ -80,7 +80,7 @@ const BookingBoxContainer = ({
         </div>
       </li>
       <AddWishlistModal
-      listingId={listingId}
+        listingId={listingId}
         isOpen={addWIshlistModal}
         onClose={() => setAddWIshlistModal(false)}
       />

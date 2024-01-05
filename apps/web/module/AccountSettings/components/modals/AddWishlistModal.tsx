@@ -15,7 +15,7 @@ import { useForm } from "react-hook-form"
 import { IWishGroup } from "@/common/types/global"
 
 interface AddWishlistProps {
-  listingId:number
+  listingId: number
   isOpen: boolean
   onClose: () => void
 }
@@ -50,7 +50,7 @@ const AddWishlistModal = ({
   isOpen: showModal,
   onClose: hideModal,
 }: AddWishlistProps) => {
-  const userId = useSessionStore((state)=>state).id
+  const userId = useSessionStore((state) => state).id
   const cancelButtonRef = useRef(null)
   const [renderState, setRenderState] = useState(0)
   const [inputValue, setInputValue] = useState("")
@@ -59,24 +59,24 @@ const AddWishlistModal = ({
     setInputValue(newValue)
   }
   const queryClient = useQueryClient()
-const {register, getValues} = useForm<IWishGroup>()
-const {mutate,isPending} = useAddWishGroup(userId as number)
-const callBackReq = {
-  onSuccess: (data: any) => {
-    if (!data.error) {
-      queryClient.invalidateQueries({
-        queryKey: ["wish-group-count"],
-      })
-      hideModal()
-      toast.success("Wish Group Successfully Created")
-    } else {
-      toast.error(String(data.message))
-    }
-  },
-  onError: (err: any) => {
-    toast.error(String(err))
-  },
-}
+  const { register, getValues } = useForm<IWishGroup>()
+  const { mutate, isPending } = useAddWishGroup(userId as number)
+  const callBackReq = {
+    onSuccess: (data: any) => {
+      if (!data.error) {
+        queryClient.invalidateQueries({
+          queryKey: ["wish-group-count"],
+        })
+        hideModal()
+        toast.success("Wish Group Successfully Created")
+      } else {
+        toast.error(String(data.message))
+      }
+    },
+    onError: (err: any) => {
+      toast.error(String(err))
+    },
+  }
   const renderAddToWishlist = () => {
     return (
       <ModalContainer title="Add to wishlist" onClose={hideModal}>
@@ -111,18 +111,18 @@ const callBackReq = {
       </ModalContainer>
     )
   }
-  const createNewWishGroup = ()=>{
-    mutate({title:getValues("title"),listingId:listingId},callBackReq)
+  const createNewWishGroup = () => {
+    mutate({ title: getValues("title"), listingId: listingId }, callBackReq)
   }
 
-  const renderCreateWishlist = (listingId:number) => {
+  const renderCreateWishlist = (listingId: number) => {
     return (
       <ModalContainer title="Create wishlist" onClose={() => setRenderState(0)}>
         <div className="p-6">
           <Input
             inputLabel="Name"
             inputId="createModal"
-            {...register("title",{required:"This field is required"})}
+            {...register("title", { required: "This field is required" })}
             disabled={isPending}
             className={`w-full ${
               inputValue.replace(/\s/g, "").length > 50 &&
@@ -185,7 +185,9 @@ const callBackReq = {
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
               <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:w-full sm:max-w-lg ">
-                {renderState === 0 ? renderAddToWishlist : renderCreateWishlist(listingId)}
+                {renderState === 0
+                  ? renderAddToWishlist
+                  : renderCreateWishlist(listingId)}
               </Dialog.Panel>
             </Transition.Child>
           </div>
