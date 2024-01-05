@@ -19,10 +19,13 @@ const DeleteWIshlistsModal = ({
   title,
   onClose,
 }: RemoveWishlistsProps) => {
-  const userId = useSessionStore((state)=>state).id
+  const userId = useSessionStore((state) => state).id
   const cancelButtonRef = useRef(null)
   const queryClient = useQueryClient()
-  const {mutate,isPending} = useDeleteWishGroupByTitle(userId as number, title)
+  const { mutate, isPending } = useDeleteWishGroupByTitle(
+    userId as number,
+    title
+  )
   const callBackReq = {
     onSuccess: (data: any) => {
       if (!data.error) {
@@ -40,8 +43,8 @@ const DeleteWIshlistsModal = ({
     },
   }
 
-  const deleteWishGroup = ()=>{
-    mutate({},callBackReq)
+  const deleteWishGroup = () => {
+    mutate({}, callBackReq)
   }
   return (
     <Transition.Root show={isOpen} as={Fragment}>
