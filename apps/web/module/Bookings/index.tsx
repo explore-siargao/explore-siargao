@@ -18,6 +18,7 @@ const Bookings = () => {
             {data?.items?.map((item: any) => (
               <BookingBoxContainer
                 key={item.id}
+                listingId={item.id}
                 location={item.address}
                 date={item.description}
                 distance={"100 kilometers away"}
