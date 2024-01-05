@@ -92,6 +92,14 @@ export interface IWishGroup {
   deletedAt?: string
 }
 
+export interface ComponentProps {
+  onClick: () => void
+  icon?: React.ReactNode
+  text?: string
+  note?: string
+  id?: string
+}
+
 //stores
 type Email = {
   email: string

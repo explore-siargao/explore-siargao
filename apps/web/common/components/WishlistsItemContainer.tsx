@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react"
+import {useState } from "react"
 import {
   ArrowLeftIcon,
   CheckCircleIcon,
@@ -19,7 +19,7 @@ import AddNoteModal from "@/module/AccountSettings/components/modals/AddNoteModa
 import MenuModal from "@/module/AccountSettings/components/modals/MenuModal"
 import { Title } from "./ui/Title"
 import { Typography } from "./ui/Typography"
-import { DetailsType } from "../types/global"
+import { ComponentProps, DetailsType } from "../types/global"
 
 type ItemData = {
   id: number
@@ -32,14 +32,6 @@ type ItemData = {
   ratings: string
   reviews: number
   wishlistName: string
-}
-
-interface ComponentProps {
-  onClick: () => void
-  icon?: React.ReactNode
-  text?: string
-  note?: string
-  id?: string
 }
 
 type WishlistsItemCProps = {
