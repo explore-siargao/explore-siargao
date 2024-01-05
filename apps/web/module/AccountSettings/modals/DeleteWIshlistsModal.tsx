@@ -3,6 +3,10 @@ import ModalContainerFooter from "@/common/components/ModalContainer/ModalContai
 import { Typography } from "@/common/components/ui/Typography"
 import { Dialog, Transition } from "@headlessui/react"
 import React, { Fragment, useRef } from "react"
+import useDeleteWishGroupByTitle from "../hooks/useDeleteWishGroupByTitle"
+import useSessionStore from "@/common/store/useSessionStore"
+import { useQueryClient } from "@tanstack/react-query"
+import toast from "react-hot-toast"
 
 interface RemoveWishlistsProps {
   isOpen: boolean
@@ -15,8 +19,33 @@ const DeleteWIshlistsModal = ({
   title,
   onClose,
 }: RemoveWishlistsProps) => {
+  const userId = useSessionStore((state) => state).id
   const cancelButtonRef = useRef(null)
+  const queryClient = useQueryClient()
+  const { mutate, isPending } = useDeleteWishGroupByTitle(
+    userId as number,
+    title
+  )
+  const callBackReq = {
+    onSuccess: (data: any) => {
+      if (!data.error) {
+        queryClient.invalidateQueries({
+          queryKey: ["wish-group-count"],
+        })
+        onClose()
+        toast.success("Wish Group Successfully deleted")
+      } else {
+        toast.error(String(data.message))
+      }
+    },
+    onError: (err: any) => {
+      toast.error(String(err))
+    },
+  }
 
+  const deleteWishGroup = () => {
+    mutate({}, callBackReq)
+  }
   return (
     <Transition.Root show={isOpen} as={Fragment}>
       <Dialog
@@ -61,9 +90,9 @@ const DeleteWIshlistsModal = ({
                   <ModalContainerFooter
                     positive="Delete"
                     negative="Cancel"
-                    isSubmit={true}
-                    isPending={true}
-                    buttonFn={() => null}
+                    isSubmit={false}
+                    isPending={isPending}
+                    buttonFn={() => deleteWishGroup()}
                   />
                 </ModalContainer>
               </Dialog.Panel>

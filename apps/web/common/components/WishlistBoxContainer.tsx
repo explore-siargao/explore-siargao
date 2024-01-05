@@ -19,10 +19,7 @@ const WishlistBoxContainer = ({ title, link, text, photo }: Props) => {
 
   return (
     <>
-      <Link
-        href={"/account-settings/wishlist/" + link}
-        className="flex flex-col select-none"
-      >
+      <div className="flex flex-col select-none">
         <div
           className="h-[150px] w-[150px] md:h-72 md:w-auto 2xl:h-72 2xl:w-auto rounded-3xl relative border border-text-100"
           onMouseEnter={() => setIsHovered(true)}
@@ -40,13 +37,15 @@ const WishlistBoxContainer = ({ title, link, text, photo }: Props) => {
               />
             </button>
           )}
-          <Image
-            src={photo}
-            width={300}
-            height={300}
-            alt={photo}
-            className="object-cover h-full w-full rounded-3xl p-1"
-          />
+          <Link href={"/account-settings/wishlist/" + link}>
+            <Image
+              src={photo}
+              width={300}
+              height={300}
+              alt={photo}
+              className="object-cover h-full w-full rounded-3xl p-1"
+            />
+          </Link>
         </div>
         <div className="flex-1 ml-1 -space-y-1 w-auto">
           <Title size={"ContentTitle"} className="text-text-500">
@@ -54,7 +53,8 @@ const WishlistBoxContainer = ({ title, link, text, photo }: Props) => {
           </Title>
           <Typography className="text-text-300">{text}</Typography>
         </div>
-      </Link>
+      </div>
+
       <DeleteWIshlistsModal
         isOpen={removeModal}
         onClose={() => setRemoveModal(false)}
