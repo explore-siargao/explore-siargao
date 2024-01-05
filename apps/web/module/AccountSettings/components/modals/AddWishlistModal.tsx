@@ -7,8 +7,15 @@ import ModalContainerFooter from "@/common/components/ModalContainer/ModalContai
 import { Typography } from "@/common/components/ui/Typography"
 import { Title } from "@/common/components/ui/Title"
 import { Button } from "@/common/components/ui/Button"
+import useAddWishGroup from "../../hooks/useAddWishGroup"
+import useSessionStore from "@/common/store/useSessionStore"
+import { useQueryClient } from "@tanstack/react-query"
+import toast from "react-hot-toast"
+import { useForm } from "react-hook-form"
+import { IWishGroup } from "@/common/types/global"
 
 interface AddWishlistProps {
+  listingId:number
   isOpen: boolean
   onClose: () => void
 }
@@ -39,9 +46,11 @@ const wishlist = [
   },
 ]
 const AddWishlistModal = ({
+  listingId,
   isOpen: showModal,
   onClose: hideModal,
 }: AddWishlistProps) => {
+  const userId = useSessionStore((state)=>state).id
   const cancelButtonRef = useRef(null)
   const [renderState, setRenderState] = useState(0)
   const [inputValue, setInputValue] = useState("")
@@ -49,6 +58,25 @@ const AddWishlistModal = ({
     const newValue = event.target.value
     setInputValue(newValue)
   }
+  const queryClient = useQueryClient()
+const {register, getValues} = useForm<IWishGroup>()
+const {mutate,isPending} = useAddWishGroup(userId as number)
+const callBackReq = {
+  onSuccess: (data: any) => {
+    if (!data.error) {
+      queryClient.invalidateQueries({
+        queryKey: ["wish-group-count"],
+      })
+      hideModal()
+      toast.success("Wish Group Successfully Created")
+    } else {
+      toast.error(String(data.message))
+    }
+  },
+  onError: (err: any) => {
+    toast.error(String(err))
+  },
+}
   const renderAddToWishlist = () => {
     return (
       <ModalContainer title="Add to wishlist" onClose={hideModal}>
@@ -83,13 +111,19 @@ const AddWishlistModal = ({
       </ModalContainer>
     )
   }
-  const renderCreateWishlist = () => {
+  const createNewWishGroup = ()=>{
+    mutate({title:getValues("title"),listingId:listingId},callBackReq)
+  }
+
+  const renderCreateWishlist = (listingId:number) => {
     return (
       <ModalContainer title="Create wishlist" onClose={() => setRenderState(0)}>
         <div className="p-6">
           <Input
             inputLabel="Name"
-            inputId="name"
+            inputId="createModal"
+            {...register("title",{required:"This field is required"})}
+            disabled={isPending}
             className={`w-full ${
               inputValue.replace(/\s/g, "").length > 50 &&
               "ring-error-600 focus-within:z-10 focus-within:ring-2 focus-within:ring-error-600"
@@ -109,11 +143,11 @@ const AddWishlistModal = ({
           </Typography>{" "}
         </div>
         <ModalContainerFooter
-          isPending={false}
-          isSubmit={true}
+          isPending={isPending}
+          isSubmit={false}
           positive="Create"
           negative="clear"
-          buttonFn={() => null}
+          buttonFn={() => createNewWishGroup()}
         />
       </ModalContainer>
     )
@@ -151,7 +185,7 @@ const AddWishlistModal = ({
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
               <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:w-full sm:max-w-lg ">
-                {renderState === 0 ? renderAddToWishlist : renderCreateWishlist}
+                {renderState === 0 ? renderAddToWishlist : renderCreateWishlist(listingId)}
               </Dialog.Panel>
             </Transition.Child>
           </div>
