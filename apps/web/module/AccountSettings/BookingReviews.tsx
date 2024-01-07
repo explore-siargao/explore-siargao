@@ -40,18 +40,20 @@ const BookingReviews = () => {
         />
         <Title>Booking Reviews</Title>
       </div>
-      {bookingReviewsDummy.map((item) => (
-        <BookingReviewItem
-          id={item.id}
-          joinedDate={item.joinedDate}
-          location={item.location}
-          name={item.name}
-          pic={item.pic}
-          reviewMessage={item.reviewMessage}
-          reviewedTime={item.reviewedTime}
-          key={item.id}
-        />
-      ))}
+      <div className="mt-6">
+        {bookingReviewsDummy.map((item) => (
+          <BookingReviewItem
+            id={item.id}
+            joinedDate={item.joinedDate}
+            location={item.location}
+            name={item.name}
+            pic={item.pic}
+            reviewMessage={item.reviewMessage}
+            reviewedTime={item.reviewedTime}
+            key={item.id}
+          />
+        ))}
+      </div>
     </AccountSettingWrapper>
   )
 }

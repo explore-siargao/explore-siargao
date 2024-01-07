@@ -29,7 +29,7 @@ const BookingReviewItem = ({
   return (
     <div
       key={id}
-      className="grid grid-flow-row lg:grid-cols-3 items-center lg:items-start divide-text-100 hover:bg-primary-100 rounded-xl p-5 gap-5 h-full w-full"
+      className="grid grid-flow-row lg:grid-cols-3 items-center lg:items-start divide-text-100 rounded-xl gap-5 h-full w-full mb-8"
     >
       <article className="col-span-2">
         <div className="flex justify-between">

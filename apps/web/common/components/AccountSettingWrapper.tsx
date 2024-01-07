@@ -11,7 +11,7 @@ const AccountSettingWrapper = ({ children, className }: Props) => {
   return (
     <WidthWrapper
       width="small"
-      className={cn("mt-20 md:mt-32 lg:mt-48", className)}
+      className={cn("mt-24 md:mt-36 lg:mt-40", className)}
     >
       {children}
     </WidthWrapper>
