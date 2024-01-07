@@ -6,8 +6,10 @@ import {
   CreditCardIcon,
   IdentificationIcon,
   HeartIcon,
+  StarIcon,
 } from "@heroicons/react/24/outline"
 import {
+  LINK_ACCOUNT_BOOKING_REVIEWS,
   LINK_ACCOUNT_PAYMENT_PAYOUT,
   LINK_ACCOUNT_PERSONAL_INFO,
   LINK_ACCOUNT_WISHLIST,
@@ -40,6 +42,13 @@ const pages = [
     title: "Payments & payouts",
     content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     link: LINK_ACCOUNT_PAYMENT_PAYOUT,
+  },
+  {
+    id: 4,
+    icon: StarIcon,
+    title: "Booking Reviews",
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    link: LINK_ACCOUNT_BOOKING_REVIEWS,
   },
 ]
 
