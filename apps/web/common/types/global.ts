@@ -110,6 +110,7 @@ type Action = {
 
 export interface DetailsType {
   id: number
+  link: string
   img: string
   title: string
   address: string
