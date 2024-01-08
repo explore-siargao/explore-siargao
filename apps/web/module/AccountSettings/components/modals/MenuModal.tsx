@@ -1,7 +1,9 @@
+"use client"
 import ModalContainer from "@/common/components/ModalContainer"
 import ModalContainerFooter from "@/common/components/ModalContainer/ModalContainerFooter"
 import { Input } from "@/common/components/ui/Input"
 import { Typography } from "@/common/components/ui/Typography"
+import useSessionStore from "@/common/store/useSessionStore"
 import { Dialog, Transition } from "@headlessui/react"
 import {
   ChevronRightIcon,
@@ -9,18 +11,84 @@ import {
   TrashIcon,
 } from "@heroicons/react/20/solid"
 import React, { Fragment, useRef, useState } from "react"
+import useEditWishGroupTitle from "../../hooks/useEditWishGroupTitle"
+import { useForm } from "react-hook-form"
+import { IWishGroup } from "@/common/types/global"
+import { useQueryClient } from "@tanstack/react-query"
+import toast from "react-hot-toast"
+import { useRouter } from "next/navigation"
+import { LINK_ACCOUNT_WISHLIST } from "@/common/constants/links"
+import useDeleteWishGroupByTitle from "../../hooks/useDeleteWishGroupByTitle"
 
 interface MenuProps {
   isOpen: boolean
   onClose: () => void
+  title: string
 }
-const MenuModal = ({ isOpen: openModal, onClose: hideModal }: MenuProps) => {
+
+const MenuModal = ({
+  isOpen: openModal,
+  onClose: hideModal,
+  title,
+}: MenuProps) => {
   const cancelButtonRef = useRef(null)
   const [modalState, setModalState] = useState(0)
   const [inputValue, setInputValue] = useState("")
   const handleTextAreaChange = (event: { target: { value: any } }) => {
     const newValue = event.target.value
     setInputValue(newValue)
+  }
+
+  const userId = useSessionStore((state) => state).id
+  const { mutate: renameTitle, isPending: renameTitleIsPending } =
+    useEditWishGroupTitle(userId)
+  const { mutate: deleteWishGroup, isPending: deleteWishGroupIsPending } =
+    useDeleteWishGroupByTitle(userId as number, title)
+  const { register, getValues } = useForm<IWishGroup>()
+  const queryClient = useQueryClient()
+  const router = useRouter()
+  const callBackReq = {
+    onSuccess: (data: any) => {
+      if (!data.error) {
+        queryClient.invalidateQueries({
+          queryKey: ["wish-group-count"],
+        })
+        router.push(LINK_ACCOUNT_WISHLIST + "/" + getValues("newTitle"))
+      } else {
+        toast.error(String(data.message))
+      }
+    },
+    onError: (err: any) => {
+      toast.error(String(err))
+    },
+  }
+
+  const callBackReq2 = {
+    onSuccess: (data: any) => {
+      if (!data.error) {
+        queryClient.invalidateQueries({
+          queryKey: ["wish-group-count"],
+        })
+        router.back()
+        toast.success(data.message)
+        router.push(LINK_ACCOUNT_WISHLIST)
+      } else {
+        toast.error(String(data.message))
+      }
+    },
+    onError: (err: any) => {
+      toast.error(String(err))
+    },
+  }
+  const renameWishListTitle = () => {
+    renameTitle(
+      { oldTitle: title, newTitle: getValues("newTitle") },
+      callBackReq
+    )
+  }
+
+  const deleteWishGroupFn = () => {
+    deleteWishGroup({}, callBackReq2)
   }
 
   const renderMenu = () => {
@@ -57,8 +125,10 @@ const MenuModal = ({ isOpen: openModal, onClose: hideModal }: MenuProps) => {
         <div className="p-6 flex flex-col ">
           <Input
             inputLabel="Name"
-            inputId="name"
-            defaultValue="Wishlist name"
+            {...register("newTitle", { required: "This field is required" })}
+            disabled={renameTitleIsPending}
+            inputId="newTitle"
+            defaultValue={title}
             className={`w-full ${
               inputValue.replace(/\s/g, "").length > 50 &&
               "ring-error-600 focus-within:z-10 focus-within:ring-2 focus-within:ring-error-600"
@@ -80,9 +150,9 @@ const MenuModal = ({ isOpen: openModal, onClose: hideModal }: MenuProps) => {
         <ModalContainerFooter
           positive="Remove"
           negative="Cancel"
-          isPending={false}
+          isPending={renameTitleIsPending}
           isSubmit={false}
-          buttonFn={() => null}
+          buttonFn={() => renameWishListTitle()}
         />
       </ModalContainer>
     )
@@ -93,15 +163,15 @@ const MenuModal = ({ isOpen: openModal, onClose: hideModal }: MenuProps) => {
         <div className="p-6 flex flex-col items-center">
           <Typography variant={"h3"}>Delete this wishlist?</Typography>
           <Typography className="text-text-400 font-light w-60 text-center">
-            "Wishlist name" will be permanently deleted.
+            {'"' + title + '"'} will be permanently deleted.
           </Typography>
         </div>
         <ModalContainerFooter
           positive="Delete"
           negative="Cancel"
           isSubmit={false}
-          isPending={false}
-          buttonFn={() => null}
+          isPending={deleteWishGroupIsPending}
+          buttonFn={() => deleteWishGroupFn()}
         />
       </ModalContainer>
     )

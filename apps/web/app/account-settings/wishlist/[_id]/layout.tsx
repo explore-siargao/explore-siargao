@@ -2,7 +2,9 @@ import "@/app/globals.css"
 import React from "react"
 import BottomNavBar from "@/module/Authentication/components/BottomNavBar"
 import Header from "@/module/LandingPage/components/Header"
-import LayoutWrapper from "@/common/components/LayoutWrapper"
+import { Toaster } from "react-hot-toast"
+import QueryClientWrapper from "@/common/components/QueryClientWrapper"
+import GlobalModalWrapper from "@/common/components/GlobalModalWrapper"
 
 export default async function layout({
   children,
@@ -10,10 +12,15 @@ export default async function layout({
   readonly children: React.ReactNode
 }) {
   return (
-    <LayoutWrapper>
-      <Header contentWidth="wide" />
-      {children}
-      <BottomNavBar />
-    </LayoutWrapper>
+    <>
+      <Toaster />
+      <QueryClientWrapper>
+        <GlobalModalWrapper>
+          <Header contentWidth="wide" />
+          {children}
+        </GlobalModalWrapper>
+        <BottomNavBar />
+      </QueryClientWrapper>
+    </>
   )
 }

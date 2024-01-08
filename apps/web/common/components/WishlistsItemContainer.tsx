@@ -34,9 +34,6 @@ type ItemData = {
   wishlistName: string
 }
 
-type WishlistsItemCProps = {
-  datas: ItemData[]
-}
 const HeartButton = ({
   isClicked,
   onClick,
@@ -72,9 +69,10 @@ const AddEditNoteButton = ({ onClick, id, note }: ComponentProps) => (
   </button>
 )
 
-const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
+const WishlistsItemContainer = () => {
   const [details, setDetails] = useState<DetailsType>({
     id: 0,
+    link: "",
     img: "",
     title: "",
     address: "",
@@ -103,6 +101,7 @@ const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
   const setDetailsForItem = (item: any) => {
     setDetails({
       id: item?.id,
+      link: item?.link,
       img: JSON.parse(item?.listing?.imageUrls)[0].url,
       title: item?.listing?.title,
       address: item?.listing?.address,
@@ -144,7 +143,7 @@ const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
               variant={"h4"}
               className="w-full text-left place-self-center font-semibold ml-4"
             >
-              Wishlist Title
+              {decodeURIComponent(params?._id as string)}
             </Typography>
             <div className="flex gap-3">
               <DocumentDuplicateIcon
@@ -162,9 +161,9 @@ const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
             </div>
           </div>
           {/* ... (other components remain unchanged) */}
-          <div className="overflow-y-auto h-[calc(100vh-190px)]">
-            <div className="grid gap-4 grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 w-full justify-center pt-4 pb-6 px-4">
-              {data?.items?.map((item) => (
+          <div className="grid gap-4 grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 w-full justify-center pt-4 pb-6 px-4">
+            {data?.items?.length !== 0 ? (
+              data?.items?.map((item) => (
                 <div key={item?.id}>
                   <div className="h-72 2xl:w-auto rounded-2xl relative select-none">
                     <HeartButton isClicked={isClicked} onClick={handleClick} />
@@ -227,8 +226,10 @@ const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
                     )}
                   </div>
                 </div>
-              ))}
-            </div>
+              ))
+            ) : (
+              <Typography>No data found</Typography>
+            )}
           </div>
           <AddNoteModal
             isOpen={addNote}
@@ -242,7 +243,11 @@ const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
             onClose={closeAddNoteModal}
             id={details?.id as number}
           />
-          <MenuModal isOpen={openMenu} onClose={() => setOpenMenu(false)} />
+          <MenuModal
+            isOpen={openMenu}
+            onClose={() => setOpenMenu(false)}
+            title={decodeURIComponent(params?._id as string)}
+          />
         </div>
       )}
     </>
