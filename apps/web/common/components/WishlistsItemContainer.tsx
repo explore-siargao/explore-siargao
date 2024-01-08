@@ -77,7 +77,7 @@ const AddEditNoteButton = ({ onClick, id, note }: ComponentProps) => (
 const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
   const [details, setDetails] = useState<DetailsType>({
     id: 0,
-    link:"",
+    link: "",
     img: "",
     title: "",
     address: "",
@@ -130,7 +130,7 @@ const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
     session.id as number,
     params?._id as string
   )
-  
+
   return (
     <>
       {isPending ? (
@@ -242,7 +242,11 @@ const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
             onClose={closeAddNoteModal}
             id={details?.id as number}
           />
-          <MenuModal isOpen={openMenu} onClose={() => setOpenMenu(false)} title={decodeURIComponent(params?._id as string)} />
+          <MenuModal
+            isOpen={openMenu}
+            onClose={() => setOpenMenu(false)}
+            title={decodeURIComponent(params?._id as string)}
+          />
         </div>
       )}
     </>

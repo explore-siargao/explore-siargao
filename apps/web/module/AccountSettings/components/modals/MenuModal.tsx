@@ -21,11 +21,15 @@ import { LINK_ACCOUNT_WISHLIST } from "@/common/constants/links"
 
 interface MenuProps {
   isOpen: boolean
-  onClose: () => void,
-  title:string
+  onClose: () => void
+  title: string
 }
 
-const MenuModal = ({ isOpen: openModal, onClose: hideModal, title }: MenuProps) => {
+const MenuModal = ({
+  isOpen: openModal,
+  onClose: hideModal,
+  title,
+}: MenuProps) => {
   const cancelButtonRef = useRef(null)
   const [modalState, setModalState] = useState(0)
   const [inputValue, setInputValue] = useState("")
@@ -34,9 +38,10 @@ const MenuModal = ({ isOpen: openModal, onClose: hideModal, title }: MenuProps) 
     setInputValue(newValue)
   }
 
-  const userId = useSessionStore((state)=>state).id
-  const {mutate:renameTitle, isPending:renameTitleIsPending } = useEditWishGroupTitle(userId)
-  const {register,reset, getValues} = useForm<IWishGroup>()
+  const userId = useSessionStore((state) => state).id
+  const { mutate: renameTitle, isPending: renameTitleIsPending } =
+    useEditWishGroupTitle(userId)
+  const { register, reset, getValues } = useForm<IWishGroup>()
   const queryClient = useQueryClient()
   const router = useRouter()
   const callBackReq = {
@@ -45,7 +50,7 @@ const MenuModal = ({ isOpen: openModal, onClose: hideModal, title }: MenuProps) 
         queryClient.invalidateQueries({
           queryKey: ["wish-group-count"],
         })
-        router.push(LINK_ACCOUNT_WISHLIST+"/"+getValues("newTitle"))
+        router.push(LINK_ACCOUNT_WISHLIST + "/" + getValues("newTitle"))
       } else {
         toast.error(String(data.message))
       }
@@ -54,9 +59,12 @@ const MenuModal = ({ isOpen: openModal, onClose: hideModal, title }: MenuProps) 
       toast.error(String(err))
     },
   }
-  
-  const renameWishListTitle =()=>{
-    renameTitle({oldTitle:title, newTitle:getValues("newTitle")}, callBackReq)
+
+  const renameWishListTitle = () => {
+    renameTitle(
+      { oldTitle: title, newTitle: getValues("newTitle") },
+      callBackReq
+    )
   }
 
   const renderMenu = () => {
@@ -93,7 +101,7 @@ const MenuModal = ({ isOpen: openModal, onClose: hideModal, title }: MenuProps) 
         <div className="p-6 flex flex-col ">
           <Input
             inputLabel="Name"
-            {...register("newTitle",{required:"This field is required"})}
+            {...register("newTitle", { required: "This field is required" })}
             disabled={renameTitleIsPending}
             inputId="newTitle"
             defaultValue={title as string}
