@@ -20,6 +20,7 @@ import MenuModal from "@/module/AccountSettings/components/modals/MenuModal"
 import { Title } from "./ui/Title"
 import { Typography } from "./ui/Typography"
 import { ComponentProps, DetailsType } from "../types/global"
+import { title } from "process"
 
 type ItemData = {
   id: number
@@ -76,6 +77,7 @@ const AddEditNoteButton = ({ onClick, id, note }: ComponentProps) => (
 const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
   const [details, setDetails] = useState<DetailsType>({
     id: 0,
+    link:"",
     img: "",
     title: "",
     address: "",
@@ -104,6 +106,7 @@ const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
   const setDetailsForItem = (item: any) => {
     setDetails({
       id: item?.id,
+      link: item?.link,
       img: JSON.parse(item?.listing?.imageUrls)[0].url,
       title: item?.listing?.title,
       address: item?.listing?.address,
@@ -127,7 +130,7 @@ const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
     session.id as number,
     params?._id as string
   )
-
+  
   return (
     <>
       {isPending ? (
@@ -143,7 +146,7 @@ const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
               variant={"h4"}
               className="w-full text-left place-self-center font-semibold ml-4"
             >
-              Wishlist Title
+              {decodeURIComponent(params?._id as string)}
             </Typography>
             <div className="flex gap-3">
               <DocumentDuplicateIcon
@@ -239,7 +242,7 @@ const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
             onClose={closeAddNoteModal}
             id={details?.id as number}
           />
-          <MenuModal isOpen={openMenu} onClose={() => setOpenMenu(false)} />
+          <MenuModal isOpen={openMenu} onClose={() => setOpenMenu(false)} title={decodeURIComponent(params?._id as string)} />
         </div>
       )}
     </>
