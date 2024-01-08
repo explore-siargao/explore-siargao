@@ -55,7 +55,7 @@ router.post(
 )
 
 router.post(
-  '/:userId/:wishGroupId/add-existing-group',
+  '/:userId/add-existing-group',
   // isOriginValid,
   // isCsrfTokenValid,
   // isUserLoggedIn,

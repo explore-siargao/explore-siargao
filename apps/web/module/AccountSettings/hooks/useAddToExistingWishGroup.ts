@@ -5,20 +5,19 @@ import { useMutation } from "@tanstack/react-query"
 
 export async function addToExisting(
   userId: number | undefined,
-  wishGroupId: number | undefined,
   props: IWishGroup
 ) {
   const apiService = new ApiService()
   return await apiService.post(
-    `${API_URL_BOOKINGS}/${userId}/${wishGroupId}/add-existing-group`,
+    `${API_URL_BOOKINGS}/${userId}/add-existing-group`,
     props
   )
 }
 
-function useAddToExistingWishGroup(userId: number, wishGroupId: number) {
+function useAddToExistingWishGroup(userId: number) {
   const query = useMutation({
     mutationFn: (props: IWishGroup) =>
-      addToExisting(userId, wishGroupId, props),
+      addToExisting(userId, props),
   })
   return query
 }

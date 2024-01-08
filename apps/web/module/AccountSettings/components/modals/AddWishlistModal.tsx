@@ -13,11 +13,14 @@ import { useQueryClient } from "@tanstack/react-query"
 import toast from "react-hot-toast"
 import { useForm } from "react-hook-form"
 import { IWishGroup } from "@/common/types/global"
+import useWishGroupWithCount from "../../hooks/useGetWishGroupWithCount"
+import { Spinner } from "@/common/components/ui/Spinner"
+import useAddToExistingWishGroup from "../../hooks/useAddToExistingWishGroup"
 
 interface AddWishlistProps {
   listingId: number
   isOpen: boolean
-  onClose: () => void
+  onClose: () => void,
 }
 const wishlist = [
   {
@@ -45,6 +48,7 @@ const wishlist = [
     pic: "http://localhost:3000/4.jpg",
   },
 ]
+
 const AddWishlistModal = ({
   listingId,
   isOpen: showModal,
@@ -60,7 +64,10 @@ const AddWishlistModal = ({
   }
   const queryClient = useQueryClient()
   const { register, getValues } = useForm<IWishGroup>()
-  const { mutate, isPending } = useAddWishGroup(userId as number)
+  const { mutate, isPending:addWishgroupIsPending } = useAddWishGroup(userId as number)
+  const {data: wishGroup, isPending:wishGroupIsPending} = useWishGroupWithCount(userId as number)
+  const {mutate:addExistingWishGroup, isPending:addExistingWishGroupIsPending} =
+  useAddToExistingWishGroup(userId as number)
   const callBackReq = {
     onSuccess: (data: any) => {
       if (!data.error) {
@@ -77,15 +84,22 @@ const AddWishlistModal = ({
       toast.error(String(err))
     },
   }
+  const addToExistingGroup = (title:string)=>{
+    addExistingWishGroup({title:title,listingId:listingId}, callBackReq)
+  }
+  
   const renderAddToWishlist = () => {
     return (
       <ModalContainer title="Add to wishlist" onClose={hideModal}>
+        {wishGroupIsPending ?(
+          <Spinner variant={"primary"} size={"lg"} className="mx-auto my-auto d-blockr">Loading...</Spinner>
+        ):(
         <div className="p-6 grid grid-cols-2 max-h-[550px] overflow-y-auto">
-          {wishlist.map((item) => (
-            <div className="flex flex-col" key={item.id}>
+          {wishGroup?.item?.map((item:any, index:number) => (
+            <div className="flex flex-col" key={index} onClick={()=>addToExistingGroup(item.title)}>
               <div className="h-60 w-60 rounded-3xl relative border border-text-100">
                 <Image
-                  src={item.pic}
+                  src={wishlist[0]?.pic as string}
                   width={300}
                   height={300}
                   alt="photo"
@@ -94,15 +108,16 @@ const AddWishlistModal = ({
               </div>
               <div className="flex-1 ml-1 -space-y-1 w-auto">
                 <Title size={"ContentTitle"} className="text-text-500">
-                  {item.name}
+                  {item.title}
                 </Title>
                 <Typography className="text-text-300">
-                  {item.savedCount}
+                  {item._count+" saved"}
                 </Typography>
               </div>
             </div>
           ))}
         </div>
+        )}
         <div className="w-full p-5">
           <Button className="w-full" onClick={() => setRenderState(1)}>
             Create new wishlist
@@ -123,7 +138,7 @@ const AddWishlistModal = ({
             inputLabel="Name"
             inputId="createModal"
             {...register("title", { required: "This field is required" })}
-            disabled={isPending}
+            disabled={addWishgroupIsPending}
             className={`w-full ${
               inputValue.replace(/\s/g, "").length > 50 &&
               "ring-error-600 focus-within:z-10 focus-within:ring-2 focus-within:ring-error-600"
@@ -143,7 +158,7 @@ const AddWishlistModal = ({
           </Typography>{" "}
         </div>
         <ModalContainerFooter
-          isPending={isPending}
+          isPending={addWishgroupIsPending}
           isSubmit={false}
           positive="Create"
           negative="clear"
