@@ -44,7 +44,6 @@ const Wishlist = () => {
   const session = useSessionStore((state) => state)
   const { data, isPending } = useWishGroupWithCount(session?.id as number)
   return (
-    <>
       <WidthWrapper className="my-24 lg:my-32">
         {isPending ? (
           <Spinner size={"md"}>Loading...</Spinner>
@@ -80,7 +79,6 @@ const Wishlist = () => {
           </>
         )}
       </WidthWrapper>
-    </>
   )
 }
 
