@@ -41,7 +41,7 @@ const MenuModal = ({
   const userId = useSessionStore((state) => state).id
   const { mutate: renameTitle, isPending: renameTitleIsPending } =
     useEditWishGroupTitle(userId)
-  const { register, reset, getValues } = useForm<IWishGroup>()
+  const { register, getValues } = useForm<IWishGroup>()
   const queryClient = useQueryClient()
   const router = useRouter()
   const callBackReq = {
@@ -104,7 +104,7 @@ const MenuModal = ({
             {...register("newTitle", { required: "This field is required" })}
             disabled={renameTitleIsPending}
             inputId="newTitle"
-            defaultValue={title as string}
+            defaultValue={title}
             className={`w-full ${
               inputValue.replace(/\s/g, "").length > 50 &&
               "ring-error-600 focus-within:z-10 focus-within:ring-2 focus-within:ring-error-600"
