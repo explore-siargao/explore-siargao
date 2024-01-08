@@ -19,13 +19,13 @@ export default async function layout({
   return (
     <>
       <Toaster />
-        <QueryClientWrapper>
-          <GlobalModalWrapper>
+      <QueryClientWrapper>
+        <GlobalModalWrapper>
           <Header contentWidth="wide" />
-            {children}
-          </GlobalModalWrapper>
-          <BottomNavBar />
-        </QueryClientWrapper>
-      </>
+          {children}
+        </GlobalModalWrapper>
+        <BottomNavBar />
+      </QueryClientWrapper>
+    </>
   )
 }

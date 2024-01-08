@@ -42,7 +42,8 @@ const MenuModal = ({
   const userId = useSessionStore((state) => state).id
   const { mutate: renameTitle, isPending: renameTitleIsPending } =
     useEditWishGroupTitle(userId)
-  const {mutate : deleteWishGroup, isPending : deleteWishGroupIsPending } = useDeleteWishGroupByTitle(userId as number,title)
+  const { mutate: deleteWishGroup, isPending: deleteWishGroupIsPending } =
+    useDeleteWishGroupByTitle(userId as number, title)
   const { register, getValues } = useForm<IWishGroup>()
   const queryClient = useQueryClient()
   const router = useRouter()
@@ -86,8 +87,8 @@ const MenuModal = ({
     )
   }
 
-  const deleteWishGroupFn = ()=>{
-    deleteWishGroup({},callBackReq2)
+  const deleteWishGroupFn = () => {
+    deleteWishGroup({}, callBackReq2)
   }
 
   const renderMenu = () => {
@@ -162,7 +163,7 @@ const MenuModal = ({
         <div className="p-6 flex flex-col items-center">
           <Typography variant={"h3"}>Delete this wishlist?</Typography>
           <Typography className="text-text-400 font-light w-60 text-center">
-            {'"'+title+'"'} will be permanently deleted.
+            {'"' + title + '"'} will be permanently deleted.
           </Typography>
         </div>
         <ModalContainerFooter
