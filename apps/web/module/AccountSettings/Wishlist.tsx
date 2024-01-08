@@ -44,41 +44,39 @@ const Wishlist = () => {
   const session = useSessionStore((state) => state)
   const { data, isPending } = useWishGroupWithCount(session?.id as number)
   return (
-      <WidthWrapper className="my-24 lg:my-32">
-        {isPending ? (
-          <Spinner size={"md"}>Loading...</Spinner>
-        ) : (
-          <>
-            {data?.item?.length !== 0 ? (
-              <>
-                <Title>Wishlists</Title>
-                <div className="grid gap-4 grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6">
-                  {data?.item?.map((data: any, index: number) => (
-                    <WishlistBoxContainer
-                      key={data?.id as number}
-                      photo={String(WishlistGroup[index]?.pic)}
-                      title={data?.title}
-                      link={data?.title}
-                      text={data?._count + " saved"}
-                    />
-                  ))}
-                </div>
-              </>
-            ) : (
-              <WidthWrapper>
-                <Typography variant={"h2"}>
-                  Create your first wishlist
-                </Typography>
-                <br></br>
-                <Typography>
-                  As you search, click the heart icon to save your favorite
-                  places and Experiences to a wishlist.
-                </Typography>
-              </WidthWrapper>
-            )}
-          </>
-        )}
-      </WidthWrapper>
+    <WidthWrapper className="my-24 lg:my-32">
+      {isPending ? (
+        <Spinner size={"md"}>Loading...</Spinner>
+      ) : (
+        <>
+          {data?.item?.length !== 0 ? (
+            <>
+              <Title>Wishlists</Title>
+              <div className="grid gap-4 grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6">
+                {data?.item?.map((data: any, index: number) => (
+                  <WishlistBoxContainer
+                    key={data?.id as number}
+                    photo={String(WishlistGroup[index]?.pic)}
+                    title={data?.title}
+                    link={data?.title}
+                    text={data?._count + " saved"}
+                  />
+                ))}
+              </div>
+            </>
+          ) : (
+            <WidthWrapper>
+              <Typography variant={"h2"}>Create your first wishlist</Typography>
+              <br></br>
+              <Typography>
+                As you search, click the heart icon to save your favorite places
+                and Experiences to a wishlist.
+              </Typography>
+            </WidthWrapper>
+          )}
+        </>
+      )}
+    </WidthWrapper>
   )
 }
 
