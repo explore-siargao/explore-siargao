@@ -20,7 +20,6 @@ import MenuModal from "@/module/AccountSettings/components/modals/MenuModal"
 import { Title } from "./ui/Title"
 import { Typography } from "./ui/Typography"
 import { ComponentProps, DetailsType } from "../types/global"
-import { title } from "process"
 
 type ItemData = {
   id: number
@@ -35,9 +34,6 @@ type ItemData = {
   wishlistName: string
 }
 
-type WishlistsItemCProps = {
-  datas: ItemData[]
-}
 const HeartButton = ({
   isClicked,
   onClick,
@@ -74,7 +70,7 @@ const AddEditNoteButton = ({ onClick, id, note }: ComponentProps) => (
   </button>
 )
 
-const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
+const WishlistsItemContainer = () => {
   const [details, setDetails] = useState<DetailsType>({
     id: 0,
     link: "",
@@ -165,7 +161,7 @@ const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
           </div>
           {/* ... (other components remain unchanged) */}
           <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 mx-auto w-full max-w-[2520px] justify-center">
-            {data?.items?.map((item) => (
+            { data?.items?.length !== 0 ? data?.items?.map((item) => (
               <li key={item?.id}>
                 <div className="h-72 2xl:w-auto rounded-2xl relative select-none">
                   <HeartButton isClicked={isClicked} onClick={handleClick} />
@@ -228,7 +224,7 @@ const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
                   )}
                 </div>
               </li>
-            ))}
+            )):(<Typography>No data found</Typography>)}
           </ul>
           <AddNoteModal
             isOpen={addNote}
