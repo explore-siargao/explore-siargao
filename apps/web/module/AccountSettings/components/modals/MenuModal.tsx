@@ -18,6 +18,7 @@ import { useQueryClient } from "@tanstack/react-query"
 import toast from "react-hot-toast"
 import { useRouter } from "next/navigation"
 import { LINK_ACCOUNT_WISHLIST } from "@/common/constants/links"
+import useDeleteWishGroupByTitle from "../../hooks/useDeleteWishGroupByTitle"
 
 interface MenuProps {
   isOpen: boolean
@@ -41,6 +42,8 @@ const MenuModal = ({
   const userId = useSessionStore((state) => state).id
   const { mutate: renameTitle, isPending: renameTitleIsPending } =
     useEditWishGroupTitle(userId)
+  const { mutate: deleteWishGroup, isPending: deleteWishGroupIsPending } =
+    useDeleteWishGroupByTitle(userId as number, title)
   const { register, getValues } = useForm<IWishGroup>()
   const queryClient = useQueryClient()
   const router = useRouter()
@@ -60,11 +63,32 @@ const MenuModal = ({
     },
   }
 
+  const callBackReq2 = {
+    onSuccess: (data: any) => {
+      if (!data.error) {
+        queryClient.invalidateQueries({
+          queryKey: ["wish-group-count"],
+        })
+        router.back()
+        toast.success(data.message)
+        router.push(LINK_ACCOUNT_WISHLIST)
+      } else {
+        toast.error(String(data.message))
+      }
+    },
+    onError: (err: any) => {
+      toast.error(String(err))
+    },
+  }
   const renameWishListTitle = () => {
     renameTitle(
       { oldTitle: title, newTitle: getValues("newTitle") },
       callBackReq
     )
+  }
+
+  const deleteWishGroupFn = () => {
+    deleteWishGroup({}, callBackReq2)
   }
 
   const renderMenu = () => {
@@ -139,15 +163,15 @@ const MenuModal = ({
         <div className="p-6 flex flex-col items-center">
           <Typography variant={"h3"}>Delete this wishlist?</Typography>
           <Typography className="text-text-400 font-light w-60 text-center">
-            "Wishlist name" will be permanently deleted.
+            {'"' + title + '"'} will be permanently deleted.
           </Typography>
         </div>
         <ModalContainerFooter
           positive="Delete"
           negative="Cancel"
           isSubmit={false}
-          isPending={false}
-          buttonFn={() => null}
+          isPending={deleteWishGroupIsPending}
+          buttonFn={() => deleteWishGroupFn()}
         />
       </ModalContainer>
     )

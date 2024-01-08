@@ -55,11 +55,11 @@ const Wishlist = () => {
               <div className="grid gap-4 grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6">
                 {data?.item?.map((data: any, index: number) => (
                   <WishlistBoxContainer
-                    key={data.id}
+                    key={data?.id as number}
                     photo={String(WishlistGroup[index]?.pic)}
-                    title={data.title}
-                    link={data.title}
-                    text={data._count + " saved"}
+                    title={data?.title}
+                    link={data?.title}
+                    text={data?._count + " saved"}
                   />
                 ))}
               </div>

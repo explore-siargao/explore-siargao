@@ -20,7 +20,6 @@ import MenuModal from "@/module/AccountSettings/components/modals/MenuModal"
 import { Title } from "./ui/Title"
 import { Typography } from "./ui/Typography"
 import { ComponentProps, DetailsType } from "../types/global"
-import { title } from "process"
 
 type ItemData = {
   id: number
@@ -35,9 +34,6 @@ type ItemData = {
   wishlistName: string
 }
 
-type WishlistsItemCProps = {
-  datas: ItemData[]
-}
 const HeartButton = ({
   isClicked,
   onClick,
@@ -74,7 +70,7 @@ const AddEditNoteButton = ({ onClick, id, note }: ComponentProps) => (
   </button>
 )
 
-const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
+const WishlistsItemContainer = () => {
   const [details, setDetails] = useState<DetailsType>({
     id: 0,
     link: "",
@@ -165,70 +161,74 @@ const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
           </div>
           {/* ... (other components remain unchanged) */}
           <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 mx-auto w-full max-w-[2520px] justify-center">
-            {data?.items?.map((item) => (
-              <li key={item?.id}>
-                <div className="h-72 2xl:w-auto rounded-2xl relative select-none">
-                  <HeartButton isClicked={isClicked} onClick={handleClick} />
-                  <Image
-                    src={JSON.parse(item.listing.imageUrls)[0].url}
-                    width={300}
-                    height={300}
-                    alt={JSON.parse(item.listing.imageUrls)[0].url}
-                    className="object-cover h-full w-full rounded-xl"
-                  />
-                </div>
-                <div className="flex-1 -space-y-1 w-auto">
-                  <div className="flex justify-between">
-                    <Title size={"ContentTitle"} className="text-text-500">
-                      {item?.listing?.title}
-                    </Title>
-                    <div className="flex text-text-500 place-items-center gap-1">
-                      <StarIcon className="h-4 w-auto" />
-                      {item?.listing?.review?.length !== 0
-                        ? item?.listing?.review?.rate
-                        : "0.0"}{" "}
-                      <span className="text-text-400">
-                        {"(" + item?.listing?.review.length + ")"}
-                      </span>
+            {data?.items?.length !== 0 ? (
+              data?.items?.map((item) => (
+                <li key={item?.id}>
+                  <div className="h-72 2xl:w-auto rounded-2xl relative select-none">
+                    <HeartButton isClicked={isClicked} onClick={handleClick} />
+                    <Image
+                      src={JSON.parse(item.listing.imageUrls)[0].url}
+                      width={300}
+                      height={300}
+                      alt={JSON.parse(item.listing.imageUrls)[0].url}
+                      className="object-cover h-full w-full rounded-xl"
+                    />
+                  </div>
+                  <div className="flex-1 -space-y-1 w-auto">
+                    <div className="flex justify-between">
+                      <Title size={"ContentTitle"} className="text-text-500">
+                        {item?.listing?.title}
+                      </Title>
+                      <div className="flex text-text-500 place-items-center gap-1">
+                        <StarIcon className="h-4 w-auto" />
+                        {item?.listing?.review?.length !== 0
+                          ? item?.listing?.review?.rate
+                          : "0.0"}{" "}
+                        <span className="text-text-400">
+                          {"(" + item?.listing?.review.length + ")"}
+                        </span>
+                      </div>
                     </div>
+                    <div className="text-text-300 text-sm">
+                      <Typography>{item?.listing?.address}</Typography>
+                      <p>{item?.listing?.description}</p>
+                    </div>
+                    <Typography
+                      variant={"p"}
+                      fontWeight={"semiBold"}
+                      className="text-text-700 underline"
+                    >
+                      {"₱" +
+                        (item?.listing?.price?.fee +
+                          item?.listing?.price.cleaningFee +
+                          item?.listing?.price.serviceFee)}{" "}
+                      <span className="font-normal">
+                        {item?.price?.isNight ? "Night" : ""}
+                      </span>
+                    </Typography>
                   </div>
-                  <div className="text-text-300 text-sm">
-                    <Typography>{item?.listing?.address}</Typography>
-                    <p>{item?.listing?.description}</p>
+                  <div className="bg-primary-100 w-full p-2 mt-2 rounded-lg">
+                    {item.note === null ? (
+                      <AddEditNoteButton
+                        onClick={() => showAddNoteModal(item)}
+                        id={"addNoteBtn" + item?.id}
+                      />
+                    ) : (
+                      item.note + " "
+                    )}
+                    {item.note !== null && (
+                      <AddEditNoteButton
+                        onClick={() => showAddNoteModal(item)}
+                        id={"editBtn" + item?.id}
+                        note={item.note}
+                      />
+                    )}
                   </div>
-                  <Typography
-                    variant={"p"}
-                    fontWeight={"semiBold"}
-                    className="text-text-700 underline"
-                  >
-                    {"₱" +
-                      (item?.listing?.price?.fee +
-                        item?.listing?.price.cleaningFee +
-                        item?.listing?.price.serviceFee)}{" "}
-                    <span className="font-normal">
-                      {item?.price?.isNight ? "Night" : ""}
-                    </span>
-                  </Typography>
-                </div>
-                <div className="bg-primary-100 w-full p-2 mt-2 rounded-lg">
-                  {item.note === null ? (
-                    <AddEditNoteButton
-                      onClick={() => showAddNoteModal(item)}
-                      id={"addNoteBtn" + item?.id}
-                    />
-                  ) : (
-                    item.note + " "
-                  )}
-                  {item.note !== null && (
-                    <AddEditNoteButton
-                      onClick={() => showAddNoteModal(item)}
-                      id={"editBtn" + item?.id}
-                      note={item.note}
-                    />
-                  )}
-                </div>
-              </li>
-            ))}
+                </li>
+              ))
+            ) : (
+              <Typography>No data found</Typography>
+            )}
           </ul>
           <AddNoteModal
             isOpen={addNote}
