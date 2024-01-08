@@ -39,7 +39,7 @@ async function getWishGroupById(wishGroupId: number) {
   })
 }
 
-async function getWishGroupByTitle(title: string, userId:number) {
+async function getWishGroupByTitle(title: string, userId: number) {
   return await prisma.wishGroup.findFirst({
     where: { title: title, userId: userId },
   })
@@ -239,7 +239,7 @@ export const addToExistingWishGroup = async (req: Request, res: Response) => {
       return res.json(response.error({ message: USER_NOT_EXIST }))
     }
 
-    const wishGroup = await getWishGroupByTitle(title,userId)
+    const wishGroup = await getWishGroupByTitle(title, userId)
 
     if (!wishGroup) {
       return res.json(response.error({ message: 'Wish group not found' }))

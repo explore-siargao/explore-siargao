@@ -16,8 +16,7 @@ export async function addToExisting(
 
 function useAddToExistingWishGroup(userId: number) {
   const query = useMutation({
-    mutationFn: (props: IWishGroup) =>
-      addToExisting(userId, props),
+    mutationFn: (props: IWishGroup) => addToExisting(userId, props),
   })
   return query
 }
