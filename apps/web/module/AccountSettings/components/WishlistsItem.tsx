@@ -127,14 +127,14 @@ const tripGroup = [
 ]
 const WishlistsItem = () => {
   return (
-    <WidthWrapper width={"full"} className="pt-24 lg:pt-28 overflow-y-hidden">
-      <div className="flex gap-2">
-        <div className="relative px-5">
+    <WidthWrapper width="full">
+      <div className="flex pt-28">
+        <div className="flex-1">
           {/* @ts-ignore */}
           <WishlistsItemContainer datas={tripGroup} />
         </div>
-        <div className="relative w-full hidden lg:block">
-          <div>
+        <div className="flex-1 hidden lg:block">
+          <div className="h-[calc(100vh-112px)] w-full">
             <WorldMap />
           </div>
         </div>

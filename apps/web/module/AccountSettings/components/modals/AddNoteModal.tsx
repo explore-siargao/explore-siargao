@@ -38,8 +38,6 @@ const AddNoteModal = ({
   isNight,
   onClose,
 }: AddNoteProps) => {
-  console.log(note)
-
   const cancelButtonRef = useRef(null)
   const [inputValue, setInputValue] = useState("")
   const session = useSessionStore((state) => state)

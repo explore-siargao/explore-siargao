@@ -3,7 +3,6 @@ import { useState } from "react"
 import {
   ArrowLeftIcon,
   CheckCircleIcon,
-  DocumentDuplicateIcon,
   HeartIcon,
   StarIcon,
 } from "@heroicons/react/20/solid"
@@ -20,6 +19,7 @@ import MenuModal from "@/module/AccountSettings/components/modals/MenuModal"
 import { Title } from "./ui/Title"
 import { Typography } from "./ui/Typography"
 import { ComponentProps, DetailsType } from "../types/global"
+import { DocumentDuplicateIcon } from "@heroicons/react/24/outline"
 
 type ItemData = {
   id: number
@@ -45,9 +45,8 @@ const HeartButton = ({
   onClick: () => void
 }) => (
   <HeartIcon
-    className={`absolute top-3 right-3 h-7 w-7 text-text-50 active:scale-90 ${
-      !isClicked ? "fill-error-500" : "fill-text-500/50 "
-    }`}
+    className={`absolute top-3 right-3 h-7 w-7 text-text-50 active:scale-90 ${!isClicked ? "fill-error-500" : "fill-text-500/50 "
+      }`}
     onClick={onClick}
   />
 )
@@ -67,7 +66,7 @@ const AddEditNoteButton = ({ onClick, id, note }: ComponentProps) => (
     type="button"
     id={id}
     onClick={onClick}
-    className="text-text-300 underline hover:text-text-00 select-none "
+    className="text-text-300 underline hover:text-text-00 select-none"
   >
     {note === null ? "Add a note" : "Edit Note"}
   </button>
@@ -131,11 +130,13 @@ const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
   return (
     <>
       {isPending ? (
-        <Spinner size={"md"}>Loading...</Spinner>
+        <div className="p-6">
+          <Spinner size="sm">Loading...</Spinner>
+        </div>
       ) : (
-        <div className="flex flex-col w-full xl:w-[920px]">
+        <div className="w-full">
           {/* ... (other components remain unchanged) */}
-          <div className="sticky w-full 2xl:w-[920px] top-26 bg-white z-50 flex border-b-gray-200 border-b py-4 items-center">
+          <div className="sticky w-full top-0 bg-white z-50 flex border-b-gray-100 border-b py-4 px-6 items-center mt-1">
             <Link href={LINK_ACCOUNT_WISHLIST}>
               <ArrowLeftIcon className="h-10 w-10 cursor-pointer rounded-full hover:bg-gray-50 p-2 -ml-3" />
             </Link>
@@ -161,72 +162,74 @@ const WishlistsItemContainer = ({ datas }: WishlistsItemCProps) => {
             </div>
           </div>
           {/* ... (other components remain unchanged) */}
-          <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 mx-auto w-full max-w-[2520px] justify-center">
-            {data?.items?.map((item) => (
-              <li key={item?.id}>
-                <div className="h-72 2xl:w-auto rounded-2xl relative select-none">
-                  <HeartButton isClicked={isClicked} onClick={handleClick} />
-                  <Image
-                    src={JSON.parse(item.listing.imageUrls)[0].url}
-                    width={300}
-                    height={300}
-                    alt={JSON.parse(item.listing.imageUrls)[0].url}
-                    className="object-cover h-full w-full rounded-xl"
-                  />
-                </div>
-                <div className="flex-1 -space-y-1 w-auto">
-                  <div className="flex justify-between">
-                    <Title size={"ContentTitle"} className="text-text-500">
-                      {item?.listing?.title}
-                    </Title>
-                    <div className="flex text-text-500 place-items-center gap-1">
-                      <StarIcon className="h-4 w-auto" />
-                      {item?.listing?.review?.length !== 0
-                        ? item?.listing?.review?.rate
-                        : "0.0"}{" "}
-                      <span className="text-text-400">
-                        {"(" + item?.listing?.review.length + ")"}
-                      </span>
+          <div className="overflow-y-auto h-[calc(100vh-190px)]">
+            <div className="grid gap-4 grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 w-full justify-center pt-4 pb-6 px-4">
+              {data?.items?.map((item) => (
+                <div key={item?.id}>
+                  <div className="h-72 2xl:w-auto rounded-2xl relative select-none">
+                    <HeartButton isClicked={isClicked} onClick={handleClick} />
+                    <Image
+                      src={JSON.parse(item.listing.imageUrls)[0].url}
+                      width={300}
+                      height={300}
+                      alt={JSON.parse(item.listing.imageUrls)[0].url}
+                      className="object-cover h-full w-full rounded-xl"
+                    />
+                  </div>
+                  <div className="flex-1 -space-y-1 w-auto">
+                    <div className="flex justify-between">
+                      <Title size={"ContentTitle"} className="text-text-500">
+                        {item?.listing?.title}
+                      </Title>
+                      <div className="flex text-text-500 place-items-center gap-1">
+                        <StarIcon className="h-4 w-auto" />
+                        {item?.listing?.review?.length !== 0
+                          ? item?.listing?.review?.rate
+                          : "0.0"}{" "}
+                        <span className="text-text-400">
+                          {"(" + item?.listing?.review.length + ")"}
+                        </span>
+                      </div>
                     </div>
+                    <div className="text-text-300 text-sm">
+                      <Typography>{item?.listing?.address}</Typography>
+                      <p>{item?.listing?.description}</p>
+                    </div>
+                    <Typography
+                      variant={"p"}
+                      fontWeight={"semiBold"}
+                      className="text-text-700 underline"
+                    >
+                      {"₱" +
+                        (item?.listing?.price?.fee +
+                          item?.listing?.price.cleaningFee +
+                          item?.listing?.price.serviceFee)}{" "}
+                      <span className="font-normal">
+                        {item?.price?.isNight ? "Night" : ""}
+                      </span>
+                    </Typography>
                   </div>
-                  <div className="text-text-300 text-sm">
-                    <Typography>{item?.listing?.address}</Typography>
-                    <p>{item?.listing?.description}</p>
+                  <div className="w-full mt-2 rounded-lg">
+                    {item.note === null ? (
+                      <AddEditNoteButton
+                        onClick={() => showAddNoteModal(item)}
+                        id={"addNoteBtn" + item?.id}
+                      />
+                    ) : (
+                      item.note + " "
+                    )}
+                    {item.note !== null && (
+                      <AddEditNoteButton
+                        onClick={() => showAddNoteModal(item)}
+                        id={"editBtn" + item?.id}
+                        note={item.note}
+                      />
+                    )}
                   </div>
-                  <Typography
-                    variant={"p"}
-                    fontWeight={"semiBold"}
-                    className="text-text-700 underline"
-                  >
-                    {"₱" +
-                      (item?.listing?.price?.fee +
-                        item?.listing?.price.cleaningFee +
-                        item?.listing?.price.serviceFee)}{" "}
-                    <span className="font-normal">
-                      {item?.price?.isNight ? "Night" : ""}
-                    </span>
-                  </Typography>
                 </div>
-                <div className="bg-primary-100 w-full p-2 mt-2 rounded-lg">
-                  {item.note === null ? (
-                    <AddEditNoteButton
-                      onClick={() => showAddNoteModal(item)}
-                      id={"addNoteBtn" + item?.id}
-                    />
-                  ) : (
-                    item.note + " "
-                  )}
-                  {item.note !== null && (
-                    <AddEditNoteButton
-                      onClick={() => showAddNoteModal(item)}
-                      id={"editBtn" + item?.id}
-                      note={item.note}
-                    />
-                  )}
-                </div>
-              </li>
-            ))}
-          </ul>
+              ))}
+            </div>
+          </div>
           <AddNoteModal
             isOpen={addNote}
             img={details?.img}
