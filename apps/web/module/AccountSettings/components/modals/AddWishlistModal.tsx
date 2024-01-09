@@ -106,8 +106,8 @@ const AddWishlistModal = ({
         ) : (
           <div className="p-6 grid grid-cols-2 max-h-[550px] overflow-y-auto">
             {wishGroup?.item?.map((item: any, index: number) => (
-              <div
-                role="button"
+              <button
+                type="button"
                 aria-label="button"
                 aria-hidden={true}
                 className="flex flex-col"
@@ -131,7 +131,7 @@ const AddWishlistModal = ({
                     {item._count + " saved"}
                   </Typography>
                 </div>
-              </div>
+              </button>
             ))}
           </div>
         )}
