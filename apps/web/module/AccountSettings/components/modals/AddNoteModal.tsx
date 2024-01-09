@@ -7,7 +7,7 @@ import { ExclamationCircleIcon, StarIcon } from "@heroicons/react/20/solid"
 import Image from "next/image"
 import React, { Fragment, useEffect, useRef, useState } from "react"
 import PriceBreakdownModal from "./PriceBreakdownModal"
-import { IWishGroup } from "@/common/types/global"
+import { IPrice, IWishGroup } from "@/common/types/global"
 import { useForm } from "react-hook-form"
 import useAddEditWishListNote from "../../hooks/useAddEditWishListNote"
 import useSessionStore from "@/common/store/useSessionStore"
@@ -21,8 +21,7 @@ interface AddNoteProps {
   title: string
   address: string
   description: string
-  price: string
-  isNight: boolean
+  price: IPrice
   note: string
   onClose: () => void
 }
@@ -35,10 +34,8 @@ const AddNoteModal = ({
   address,
   description,
   price,
-  isNight,
   onClose,
 }: AddNoteProps) => {
-  console.log(note)
 
   const cancelButtonRef = useRef(null)
   const [inputValue, setInputValue] = useState("")
@@ -143,13 +140,14 @@ const AddNoteModal = ({
                             fontWeight={"semiBold"}
                             className="text-text-700 flex items-start"
                           >
-                            ₱{price}{" "}
+                            ₱{price.fee}{" "}
                             <span className="text-text-400 ml-1 mr-2">
                               {" "}
-                              {isNight ? "night" : ""}
+                              {price.isNight ? "night" : ""}
                             </span>{" "}
                             <PriceBreakdownModal
-                              buttonTitle={"₱" + price + " total"}
+                              buttonTitle={"₱" + (price.fee+price.cleaningFee+price.serviceFee) + " total"}
+                              price={price}
                             />
                           </Typography>
                         </div>

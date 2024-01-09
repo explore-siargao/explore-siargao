@@ -1,13 +1,15 @@
 import ModalContainer from "@/common/components/ModalContainer"
 import { Typography } from "@/common/components/ui/Typography"
+import { IPrice } from "@/common/types/global"
 import { Popover, Transition } from "@headlessui/react"
 import React, { Fragment, useState } from "react"
 
 interface PriceBreakdownProps {
-  buttonTitle: React.ReactNode
+  buttonTitle: React.ReactNode,
+  price:IPrice
 }
 
-const PriceBreakdownModal = ({ buttonTitle }: PriceBreakdownProps) => {
+const PriceBreakdownModal = ({ buttonTitle, price }: PriceBreakdownProps) => {
   const [menuIsVisible, setMenuIsVisible] = useState<boolean>(false)
 
   return (
@@ -34,21 +36,21 @@ const PriceBreakdownModal = ({ buttonTitle }: PriceBreakdownProps) => {
               <div className="grid grid-flow-row p-6 gap-5">
                 <div className="flex justify-between">
                   <Typography className="text-text-600">
-                    ₱1,800 x 5 nights{" "}
+                    ₱{price.fee} x 1{" "}
                   </Typography>
-                  <Typography className="text-text-600">₱9,000 </Typography>
+                  <Typography className="text-text-600">₱{price.fee}</Typography>
                 </div>
                 <div className="flex justify-between ">
                   <Typography className="text-text-600">
                     Cleaning fee{" "}
                   </Typography>
-                  <Typography className="text-text-600">₱550</Typography>
+                  <Typography className="text-text-600">₱{price.cleaningFee}</Typography>
                 </div>
                 <div className="flex justify-between">
                   <Typography className="text-text-600">
                     ExploreSiargao service fee
                   </Typography>
-                  <Typography className="text-text-600">₱1,348</Typography>
+                  <Typography className="text-text-600">₱{price.serviceFee}</Typography>
                 </div>
               </div>
             </ModalContainer>

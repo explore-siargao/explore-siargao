@@ -19,7 +19,7 @@ import AddNoteModal from "@/module/AccountSettings/components/modals/AddNoteModa
 import MenuModal from "@/module/AccountSettings/components/modals/MenuModal"
 import { Title } from "./ui/Title"
 import { Typography } from "./ui/Typography"
-import { ComponentProps, DetailsType } from "../types/global"
+import { ComponentProps, DetailsType, IPrice } from "../types/global"
 
 type ItemData = {
   id: number
@@ -81,6 +81,12 @@ const WishlistsItemContainer = () => {
     price: "",
     isNight: false,
     note: "",
+    priceProps:{
+      fee:0,
+      cleaningFee:0,
+      serviceFee:0,
+      isNight:false
+    }
   })
 
   const [isClicked, setIsClicked] = useState(false)
@@ -113,6 +119,12 @@ const WishlistsItemContainer = () => {
         item?.listing?.price.serviceFee,
       isNight: item?.listing?.price.isNight,
       note: item?.note,
+      priceProps:{
+        fee:item?.listing?.price?.fee,
+        cleaningFee:item?.listing?.price?.cleaningFee,
+        serviceFee:item?.listing?.price?.serviceFee,
+        isNight:item?.listing?.price.isNight
+      }
     })
   }
 
@@ -236,8 +248,7 @@ const WishlistsItemContainer = () => {
             title={details?.title}
             address={details?.address}
             description={details?.description}
-            price={details?.price as string}
-            isNight={details?.isNight}
+            price={details?.priceProps}
             note={details?.note}
             onClose={closeAddNoteModal}
             id={details?.id as number}
