@@ -108,6 +108,7 @@ const AddWishlistModal = ({
             {wishGroup?.item?.map((item: any, index: number) => (
               <div
                 role="button"
+                tabIndex={0}
                 className="flex flex-col"
                 key={item.title}
                 onClick={() => addToExistingGroup(item.title)}
