@@ -136,13 +136,13 @@ export const getWishGroupsByUser = async (req: Request, res: Response) => {
 //   }
 // }
 export const wishGroupByTitle = async (req: Request, res: Response) => {
-  const userId = Number(req.params.userId);
+  const userId = Number(req.params.userId)
   try {
     const getUser = await prisma.user.findUnique({
       where: {
         id: userId,
       },
-    });
+    })
 
     if (getUser !== null) {
       const groupWishGroup = await prisma.wishGroup.groupBy({
@@ -151,7 +151,7 @@ export const wishGroupByTitle = async (req: Request, res: Response) => {
         where: {
           userId: userId,
         },
-      });
+      })
 
       // Map through the groupWishGroup array and add the new entity to each item
       const modifiedGroup = await Promise.all(
@@ -164,13 +164,13 @@ export const wishGroupByTitle = async (req: Request, res: Response) => {
             include: {
               listing: true,
             },
-          });
+          })
           return {
             ...item,
             imageUrl: imageUrl?.listing.imageUrls,
-          };
+          }
         })
-      );
+      )
 
       res.json(
         response.success({
@@ -178,14 +178,14 @@ export const wishGroupByTitle = async (req: Request, res: Response) => {
           allItemCount: groupWishGroup.length,
           message: '',
         })
-      );
+      )
     } else {
-      res.json(response.error({ message: USER_NOT_EXIST }));
+      res.json(response.error({ message: USER_NOT_EXIST }))
     }
   } catch (err: any) {
-    res.json(response.error({ message: err.message }));
+    res.json(response.error({ message: err.message }))
   }
-};
+}
 
 export const wishGroupByUserAndTitle = async (req: Request, res: Response) => {
   const userId = Number(req.params.userId)
