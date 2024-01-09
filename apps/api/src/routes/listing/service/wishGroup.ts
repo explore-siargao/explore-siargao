@@ -111,6 +111,7 @@ export const wishGroupByTitle = async (req: Request, res: Response) => {
         id: userId,
       },
     })
+
     if (getUser !== null) {
       const groupWishGroup = await prisma.wishGroup.groupBy({
         by: ['title'],
@@ -120,9 +121,28 @@ export const wishGroupByTitle = async (req: Request, res: Response) => {
         },
       })
 
+      // Map through the groupWishGroup array and add the new entity to each item
+      const modifiedGroup = await Promise.all(
+        groupWishGroup.map(async (item) => {
+          const imageUrl = await prisma.wishGroup.findFirst({
+            where: {
+              title: item.title,
+              userId: userId,
+            },
+            include: {
+              listing: true,
+            },
+          })
+          return {
+            ...item,
+            imageUrl: imageUrl?.listing.imageUrls,
+          }
+        })
+      )
+
       res.json(
         response.success({
-          item: groupWishGroup,
+          item: modifiedGroup, // Use the modifiedGroup array with the new entity
           allItemCount: groupWishGroup.length,
           message: '',
         })
