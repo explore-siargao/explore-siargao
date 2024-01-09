@@ -53,18 +53,18 @@ export interface IEmergencyContact {
   deletedAt?: string
 }
 
-export interface IPrice{
-id?: number
-fee:number
-cleaningFee:number
-serviceFee:number
-isNight:boolean
-checkIn?:string,
-checkOut?:string
-countGuest?:number
-createdAt?: string
-updatedAt?: string
-deletedAt?: string
+export interface IPrice {
+  id?: number
+  fee: number
+  cleaningFee: number
+  serviceFee: number
+  isNight: boolean
+  checkIn?: string
+  checkOut?: string
+  countGuest?: number
+  createdAt?: string
+  updatedAt?: string
+  deletedAt?: string
 }
 
 export interface IPaymentMethod {
@@ -132,7 +132,7 @@ export interface DetailsType {
   price: string
   note: string
   isNight: boolean
-  priceProps:IPrice
+  priceProps: IPrice
 }
 
 enum UserRole {

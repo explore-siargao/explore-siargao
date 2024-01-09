@@ -81,12 +81,12 @@ const WishlistsItemContainer = () => {
     price: "",
     isNight: false,
     note: "",
-    priceProps:{
-      fee:0,
-      cleaningFee:0,
-      serviceFee:0,
-      isNight:false
-    }
+    priceProps: {
+      fee: 0,
+      cleaningFee: 0,
+      serviceFee: 0,
+      isNight: false,
+    },
   })
 
   const [isClicked, setIsClicked] = useState(false)
@@ -119,12 +119,12 @@ const WishlistsItemContainer = () => {
         item?.listing?.price.serviceFee,
       isNight: item?.listing?.price.isNight,
       note: item?.note,
-      priceProps:{
-        fee:item?.listing?.price?.fee,
-        cleaningFee:item?.listing?.price?.cleaningFee,
-        serviceFee:item?.listing?.price?.serviceFee,
-        isNight:item?.listing?.price.isNight
-      }
+      priceProps: {
+        fee: item?.listing?.price?.fee,
+        cleaningFee: item?.listing?.price?.cleaningFee,
+        serviceFee: item?.listing?.price?.serviceFee,
+        isNight: item?.listing?.price.isNight,
+      },
     })
   }
 

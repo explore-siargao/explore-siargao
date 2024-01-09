@@ -5,8 +5,8 @@ import { Popover, Transition } from "@headlessui/react"
 import React, { Fragment, useState } from "react"
 
 interface PriceBreakdownProps {
-  buttonTitle: React.ReactNode,
-  price:IPrice
+  buttonTitle: React.ReactNode
+  price: IPrice
 }
 
 const PriceBreakdownModal = ({ buttonTitle, price }: PriceBreakdownProps) => {
@@ -38,19 +38,25 @@ const PriceBreakdownModal = ({ buttonTitle, price }: PriceBreakdownProps) => {
                   <Typography className="text-text-600">
                     ₱{price.fee} x 1{" "}
                   </Typography>
-                  <Typography className="text-text-600">₱{price.fee}</Typography>
+                  <Typography className="text-text-600">
+                    ₱{price.fee}
+                  </Typography>
                 </div>
                 <div className="flex justify-between ">
                   <Typography className="text-text-600">
                     Cleaning fee{" "}
                   </Typography>
-                  <Typography className="text-text-600">₱{price.cleaningFee}</Typography>
+                  <Typography className="text-text-600">
+                    ₱{price.cleaningFee}
+                  </Typography>
                 </div>
                 <div className="flex justify-between">
                   <Typography className="text-text-600">
                     ExploreSiargao service fee
                   </Typography>
-                  <Typography className="text-text-600">₱{price.serviceFee}</Typography>
+                  <Typography className="text-text-600">
+                    ₱{price.serviceFee}
+                  </Typography>
                 </div>
               </div>
             </ModalContainer>

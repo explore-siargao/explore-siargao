@@ -36,7 +36,6 @@ const AddNoteModal = ({
   price,
   onClose,
 }: AddNoteProps) => {
-
   const cancelButtonRef = useRef(null)
   const [inputValue, setInputValue] = useState("")
   const session = useSessionStore((state) => state)
@@ -146,7 +145,13 @@ const AddNoteModal = ({
                               {price.isNight ? "night" : ""}
                             </span>{" "}
                             <PriceBreakdownModal
-                              buttonTitle={"₱" + (price.fee+price.cleaningFee+price.serviceFee) + " total"}
+                              buttonTitle={
+                                "₱" +
+                                (price.fee +
+                                  price.cleaningFee +
+                                  price.serviceFee) +
+                                " total"
+                              }
                               price={price}
                             />
                           </Typography>
