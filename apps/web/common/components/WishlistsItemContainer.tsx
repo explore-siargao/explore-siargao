@@ -19,7 +19,7 @@ import AddNoteModal from "@/module/AccountSettings/components/modals/AddNoteModa
 import MenuModal from "@/module/AccountSettings/components/modals/MenuModal"
 import { Title } from "./ui/Title"
 import { Typography } from "./ui/Typography"
-import { ComponentProps, DetailsType, IPrice } from "../types/global"
+import { ComponentProps, DetailsType} from "../types/global"
 
 type ItemData = {
   id: number
