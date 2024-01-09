@@ -3,7 +3,6 @@ import { PrismaClient } from '@prisma/client'
 import { REQUIRED_VALUE_EMPTY, USER_NOT_EXIST } from '@repo/constants'
 import { Z_WishGroup } from '@repo/contract'
 import { Request, Response } from 'express'
-import { title } from 'process'
 
 const prisma = new PrismaClient()
 const response = new ResponseService()
@@ -104,37 +103,6 @@ export const getWishGroupsByUser = async (req: Request, res: Response) => {
   }
 }
 
-// export const wishGroupByTitle = async (req: Request, res: Response) => {
-//   const userId = Number(req.params.userId)
-//   try {
-//     const getUser = await prisma.user.findUnique({
-//       where: {
-//         id: userId,
-//       },
-//     })
-//     if (getUser !== null) {
-//       const groupWishGroup = await prisma.wishGroup.groupBy({
-//         by: ['title'],
-//         _count: true,
-//         where: {
-//           userId: userId,
-//         },
-//       })
-
-//       res.json(
-//         response.success({
-//           item: groupWishGroup,
-//           allItemCount: groupWishGroup.length,
-//           message: '',
-//         })
-//       )
-//     } else {
-//       res.json(response.error({ message: USER_NOT_EXIST }))
-//     }
-//   } catch (err: any) {
-//     res.json(response.error({ message: err.message }))
-//   }
-// }
 export const wishGroupByTitle = async (req: Request, res: Response) => {
   const userId = Number(req.params.userId)
   try {
