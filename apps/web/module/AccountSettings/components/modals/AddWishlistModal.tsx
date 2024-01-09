@@ -69,9 +69,9 @@ const AddWishlistModal = ({
   )
   const { data: wishGroup, isPending: wishGroupIsPending } =
     useWishGroupWithCount(userId as number)
-  const {
-    mutate: addExistingWishGroup
-  } = useAddToExistingWishGroup(userId as number)
+  const { mutate: addExistingWishGroup } = useAddToExistingWishGroup(
+    userId as number
+  )
   const callBackReq = {
     onSuccess: (data: any) => {
       if (!data.error) {
@@ -107,7 +107,7 @@ const AddWishlistModal = ({
           <div className="p-6 grid grid-cols-2 max-h-[550px] overflow-y-auto">
             {wishGroup?.item?.map((item: any, index: number) => (
               <div
-              role="button"
+                role="button"
                 className="flex flex-col"
                 key={item.title}
                 onClick={() => addToExistingGroup(item.title)}
