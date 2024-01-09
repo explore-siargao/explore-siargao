@@ -16,6 +16,7 @@ export const getAllListing = async (req: Request, res: Response) => {
         placeOffers: true,
         thingsToKnow: true,
         review: true,
+        wishes:true
       },
     })
     if (listings.length > 0) {
