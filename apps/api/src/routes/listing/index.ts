@@ -63,10 +63,10 @@ router.post(
 )
 
 router.delete(
-  '/wish-group/delete/:userId/:wishGroupId',
-  isOriginValid,
-  isCsrfTokenValid,
-  isUserLoggedIn,
+  '/:userId/wish-group/delete/:wishGroupId',
+  // isOriginValid,
+  // isCsrfTokenValid,
+  // isUserLoggedIn,
   deleteWishGroup
 )
 
