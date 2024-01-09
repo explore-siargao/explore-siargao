@@ -43,10 +43,10 @@ const HeartButton = ({
 }: {
   isClicked: boolean
   onClick: () => void
-  id:number
+  id: number
 }) => (
   <HeartIcon
-  id={"heart"+id}
+    id={"heart" + id}
     className={`absolute top-3 right-3 h-7 w-7 text-text-50 active:scale-90 ${
       !isClicked ? "fill-error-500" : "fill-text-500/50 "
     }`}
@@ -93,7 +93,6 @@ const WishlistsItemContainer = () => {
       isNight: false,
     },
   })
-
 
   const [addNote, setAddNote] = useState(false)
   const [openMenu, setOpenMenu] = useState(false)
@@ -154,24 +153,24 @@ const WishlistsItemContainer = () => {
   }
 
   const session = useSessionStore((state) => state)
-  const {mutate} = useRemoveFromWishGroup(1)
+  const { mutate } = useRemoveFromWishGroup(1)
   const params = useParams()
   const { data, isPending } = useGetWishGroupByUserAndTitle(
     session.id as number,
     params?._id as string
   )
   const [isClickedArray, setIsClickedArray] = useState<boolean[]>(() => {
-    return (data?.items || []).map(() => false);
-  });
+    return (data?.items || []).map(() => false)
+  })
 
-  const handleClick = (index: number, wishGroupId : number) => {
+  const handleClick = (index: number, wishGroupId: number) => {
     setIsClickedArray((prev) => {
-      const updatedArray = [...(prev!)]; 
-      updatedArray[index] = !prev![index];
-      mutate({id:wishGroupId}, callBackReq)
-      return updatedArray;
-    });
-  };
+      const updatedArray = [...prev!]
+      updatedArray[index] = !prev![index]
+      mutate({ id: wishGroupId }, callBackReq)
+      return updatedArray
+    })
+  }
 
   return (
     <>
@@ -211,10 +210,11 @@ const WishlistsItemContainer = () => {
               data?.items?.map((item, index) => (
                 <li key={item?.id}>
                   <div className="h-72 2xl:w-auto rounded-2xl relative select-none">
-                    <HeartButton 
-                    id={item.id}
-                     isClicked={Boolean(isClickedArray[index])}
-                      onClick={()=>handleClick(index,item?.id as number)} />
+                    <HeartButton
+                      id={item.id}
+                      isClicked={Boolean(isClickedArray[index])}
+                      onClick={() => handleClick(index, item?.id as number)}
+                    />
                     <Image
                       src={JSON.parse(item.listing.imageUrls)[0].url}
                       width={300}
