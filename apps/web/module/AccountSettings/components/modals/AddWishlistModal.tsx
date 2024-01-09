@@ -109,6 +109,7 @@ const AddWishlistModal = ({
               <div
                 role="button"
                 tabIndex={0}
+                aria-label="button"
                 className="flex flex-col"
                 key={item.title}
                 onClick={() => addToExistingGroup(item.title)}
