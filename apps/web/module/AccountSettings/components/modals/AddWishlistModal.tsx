@@ -70,8 +70,7 @@ const AddWishlistModal = ({
   const { data: wishGroup, isPending: wishGroupIsPending } =
     useWishGroupWithCount(userId as number)
   const {
-    mutate: addExistingWishGroup,
-    isPending: addExistingWishGroupIsPending,
+    mutate: addExistingWishGroup
   } = useAddToExistingWishGroup(userId as number)
   const callBackReq = {
     onSuccess: (data: any) => {
@@ -108,13 +107,14 @@ const AddWishlistModal = ({
           <div className="p-6 grid grid-cols-2 max-h-[550px] overflow-y-auto">
             {wishGroup?.item?.map((item: any, index: number) => (
               <div
+              role="button"
                 className="flex flex-col"
-                key={index}
+                key={item.title}
                 onClick={() => addToExistingGroup(item.title)}
               >
                 <div className="h-60 w-60 rounded-3xl relative border border-text-100">
                   <Image
-                    src={wishlist[0]?.pic as string}
+                    src={String(wishlist[0]?.pic)}
                     width={300}
                     height={300}
                     alt="photo"
