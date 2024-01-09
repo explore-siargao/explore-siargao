@@ -165,8 +165,8 @@ const WishlistsItemContainer = () => {
 
   const handleClick = (index: number, wishGroupId: number) => {
     setIsClickedArray((prev) => {
-      const updatedArray = [...prev!]
-      updatedArray[index] = !prev![index]
+      const updatedArray = [...prev]
+      updatedArray[index] = !prev[index]
       mutate({ id: wishGroupId }, callBackReq)
       return updatedArray
     })
