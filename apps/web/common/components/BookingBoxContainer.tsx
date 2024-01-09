@@ -15,7 +15,7 @@ type BookingProps = {
   date: string
   price: string
   dayTime: string
-  ratings: string,
+  ratings: string
   isHearted: boolean
 }
 
@@ -28,7 +28,7 @@ const BookingBoxContainer = ({
   photo,
   dayTime,
   ratings,
-  isHearted
+  isHearted,
 }: BookingProps) => {
   const [isClicked, setIsClicked] = useState(false)
   const handleClick = () => {
@@ -46,7 +46,7 @@ const BookingBoxContainer = ({
           >
             <HeartIcon
               className={` h-7 w-7 text-text-50 active:scale-90 ${
-                (isClicked || isHearted) ? "fill-error-500" : "fill-text-500/50 "
+                isClicked || isHearted ? "fill-error-500" : "fill-text-500/50 "
               }`}
               onClick={handleClick}
             />
