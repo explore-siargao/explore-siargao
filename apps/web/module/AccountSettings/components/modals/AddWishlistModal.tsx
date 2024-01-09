@@ -115,7 +115,7 @@ const AddWishlistModal = ({
               >
                 <div className="h-60 w-60 rounded-3xl relative border border-text-100">
                   <Image
-                    src={String(wishlist[0]?.pic)}
+                    src={JSON.parse(item?.imageUrl)[0].url}
                     width={300}
                     height={300}
                     alt="photo"
