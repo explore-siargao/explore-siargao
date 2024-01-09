@@ -148,11 +148,12 @@ const MenuModal = ({
           </Typography>
         </div>
         <ModalContainerFooter
-          positive="Remove"
+          positive="Rename"
           negative="Cancel"
           isPending={renameTitleIsPending}
           isSubmit={false}
           buttonFn={() => renameWishListTitle()}
+          onClose={() => setModalState(0)}
         />
       </ModalContainer>
     )
@@ -172,6 +173,7 @@ const MenuModal = ({
           isSubmit={false}
           isPending={deleteWishGroupIsPending}
           buttonFn={() => deleteWishGroupFn()}
+          onClose={() => setModalState(0)}
         />
       </ModalContainer>
     )

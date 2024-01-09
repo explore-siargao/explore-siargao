@@ -206,6 +206,7 @@ const AddNoteModal = ({
                       isSubmit={true}
                       isPending={isPending}
                       buttonFn={() => null}
+                      onClose={onClose}
                     />
                   </form>
                 </ModalContainer>
