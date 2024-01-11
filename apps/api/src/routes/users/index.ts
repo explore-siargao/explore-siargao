@@ -122,13 +122,7 @@ router.delete(
 )
 
 //Government Id
-router.get(
-  '/:personId/government-id', 
-  getAllGovernmentIdByPersonInfoId
-  )
-  
-router.post(
-  '/:personId/government-id',
- addGovernmentId
- )
+router.get('/:personId/government-id', getAllGovernmentIdByPersonInfoId)
+
+router.post('/:personId/government-id', addGovernmentId)
 export default router

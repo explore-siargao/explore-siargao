@@ -332,31 +332,37 @@ export const editAddress = async (req: Request, res: Response) => {
   }
 }
 
-export const getAllGovernmentIdByPersonInfoId = async(req:Request, res:Response)=>{
+export const getAllGovernmentIdByPersonInfoId = async (
+  req: Request,
+  res: Response
+) => {
   const prisma = new PrismaClient()
   const personId = Number(req.params.personId)
   try {
     const getPersonInfoId = await prisma.personalInfo.findUnique({
-      where:{
-        id:personId
-      }
+      where: {
+        id: personId,
+      },
     })
-    if(getPersonInfoId){
+    if (getPersonInfoId) {
       res.json({
-        error:false,
-        items:JSON.parse(getPersonInfoId?.governMentId as string),
-        itemCount: getPersonInfoId?.governMentId===null ? 0 : JSON.parse(getPersonInfoId?.governMentId as string).length,
-        message:""
+        error: false,
+        items: JSON.parse(getPersonInfoId?.governMentId as string),
+        itemCount:
+          getPersonInfoId?.governMentId === null
+            ? 0
+            : JSON.parse(getPersonInfoId?.governMentId as string).length,
+        message: '',
       })
-    }else{
+    } else {
       res.json({
         error: true,
         items: null,
         itemCount: 0,
-        message: "This person not found in our system",
+        message: 'This person not found in our system',
       })
     }
-  } catch (err:any) {
+  } catch (err: any) {
     res.json({
       error: true,
       items: null,
@@ -364,82 +370,89 @@ export const getAllGovernmentIdByPersonInfoId = async(req:Request, res:Response)
       message: err.message,
     })
   }
-} 
+}
 
-export const addGovernmentId = async(req:Request, res:Response) =>{
+export const addGovernmentId = async (req: Request, res: Response) => {
   const personId = Number(req.params.personId)
-  const {imagePath, type} = req.body
+  const { imagePath, type } = req.body
   const prisma = new PrismaClient()
   const isValidInput = Z_GovernmentId.safeParse(req.body)
   try {
     const getPersonIfo = await prisma.personalInfo.findUnique({
-      where:{
-        id:personId
-      }
+      where: {
+        id: personId,
+      },
     })
-    if(getPersonIfo){
-      if(isValidInput.success){
-      if(getPersonIfo.governMentId===null){
-        const addNewGovernmentId = await prisma.personalInfo.update({
-          where:{
-            id:personId
-          },
-          data:{
-           governMentId: JSON.stringify([{imagePath:imagePath, type:type, createdAt:new Date()}])
+    if (getPersonIfo) {
+      if (isValidInput.success) {
+        if (getPersonIfo.governMentId === null) {
+          const addNewGovernmentId = await prisma.personalInfo.update({
+            where: {
+              id: personId,
+            },
+            data: {
+              governMentId: JSON.stringify([
+                { imagePath: imagePath, type: type, createdAt: new Date() },
+              ]),
+            },
+          })
+          res.json({
+            error: false,
+            items: JSON.parse(addNewGovernmentId.governMentId as string),
+            itemCount: 1,
+            message: 'Government Id successfully added',
+          })
+        } else {
+          const updatedGovernmentId = JSON.parse(getPersonIfo.governMentId)
+          const typeAlreadyExists = updatedGovernmentId.some(
+            (govId: any) => govId.type === type
+          )
+          if (!typeAlreadyExists) {
+            updatedGovernmentId.push({
+              imageUrl: imagePath,
+              type: type,
+              createdAt: new Date(),
+            })
+            const updateGovId = await prisma.personalInfo.update({
+              where: {
+                id: personId,
+              },
+              data: {
+                governMentId: null, //JSON.stringify(updatedGovernmentId)
+              },
+            })
+            res.json({
+              error: false,
+              items: JSON.parse(updateGovId.governMentId as string),
+              itemCount: 1,
+              message: 'Government Id successfully added',
+            })
+          } else {
+            res.json({
+              error: true,
+              items: null,
+              itemCount: 0,
+              message: 'This type of id already exists',
+            })
           }
-        })
+        }
+      } else {
         res.json({
-          error:false,
-          items:JSON.parse(addNewGovernmentId.governMentId as string),
-          itemCount:1,
-          message:"Government Id successfully added"
+          error: true,
+          items: null,
+          itemCount: 0,
+          message: JSON.parse(isValidInput.error.message),
         })
-      }else{
-     const updatedGovernmentId = JSON.parse(getPersonIfo.governMentId);
-     const typeAlreadyExists = updatedGovernmentId.some((govId:any) => govId.type === type);
-     if (!typeAlreadyExists) {
-     updatedGovernmentId.push({ imageUrl: imagePath, type: type, createdAt: new Date() });
-     const updateGovId = await prisma.personalInfo.update({
-       where: {
-         id: personId
-       },
-       data: {
-        governMentId: null //JSON.stringify(updatedGovernmentId)
-       }
-     });
-     res.json({
-      error:false,
-      items:JSON.parse(updateGovId.governMentId as string),
-      itemCount:1,
-      message:"Government Id successfully added"
-    })
-    }else{
-        res.json({
-          error:true,
-          items:null,
-          itemCount:0,
-          message:"This type of id already exists"
-        })
-      
-    }
-  }
-  }else{
-    res.json({
-      error:true,
-      items:null,
-      itemCount:0,
-      message:JSON.parse(isValidInput.error.message)
-    })
-  }
-    }else{
+      }
+    } else {
       res.json({
-        error:true,
-        items:null,
-        itemCount:0,
-        message:"This person not found in our system"
+        error: true,
+        items: null,
+        itemCount: 0,
+        message: 'This person not found in our system',
       })
     }
-  } catch (err:any) {
+  } catch (err: any) {
     res.json({
       error: true,
       items: null,
