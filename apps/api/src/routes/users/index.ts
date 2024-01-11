@@ -17,7 +17,9 @@ import {
 import {
   addAddress,
   addEmergencyContact,
+  addGovernmentId,
   editAddress,
+  getAllGovernmentIdByPersonInfoId,
   getPersonalInfo,
   removeEmergencyContact,
   updatePersonalInfo,
@@ -29,7 +31,7 @@ import isCsrfTokenValid from '@/common/middleware/auth/isCsrfTokenValid'
 const router = express.Router()
 
 // DEFAULT
-router.get('/', isOriginValid, isCsrfTokenValid, isUserLoggedIn, getAllUsers)
+router.get('/', getAllUsers)
 router.post('/', isOriginValid, isCsrfTokenValid, isUserLoggedIn, addUser)
 
 // AUTH
@@ -70,11 +72,12 @@ router.get(
 // PERSONAL INFO
 router.get(
   '/personal-info/:userId',
-  isCsrfTokenValid,
-  isOriginValid,
-  isUserLoggedIn,
+  // isCsrfTokenValid,
+  // isOriginValid,
+  // isUserLoggedIn,
   getPersonalInfo
 )
+
 router.post(
   '/:personalInfoId/emergency-contact/add/',
   isCsrfTokenValid,
@@ -118,4 +121,14 @@ router.delete(
   removeEmergencyContact
 )
 
+//Government Id
+router.get(
+  '/:personId/government-id', 
+  getAllGovernmentIdByPersonInfoId
+  )
+  
+router.post(
+  '/:personId/government-id',
+ addGovernmentId
+ )
 export default router
