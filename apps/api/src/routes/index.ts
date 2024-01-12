@@ -5,6 +5,7 @@ import PaymentRoute from '@/routes/payments'
 import CountriesRoute from '@/routes/countries'
 import { API_ROOT } from '@repo/constants'
 
+const fileUpload = require("express-fileupload")
 export default function (app: Application) {
   app.use(`${API_ROOT}/users`, UsersRoute)
   app.use(`${API_ROOT}/bookings`, ListingRoute)

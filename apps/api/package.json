@@ -18,6 +18,8 @@
     "@react-email/components": "^0.0.12",
     "@react-email/render": "^0.0.10",
     "@repo/constants": "*",
+    "@repo/contract": "*",
+    "aws-sdk": "^2.1534.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "cross-env": "^7.0.3",
@@ -25,12 +27,12 @@
     "dayjs": "^1.11.10",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "express-fileupload": "^1.4.3",
     "jsonwebtoken": "^9.0.2",
     "lodash": "^4.17.21",
     "next-auth": "^4.24.5",
     "react-email": "^1.10.0",
-    "zod": "^3.22.4",
-    "@repo/contract": "*"
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@repo/typescript-config": "*",

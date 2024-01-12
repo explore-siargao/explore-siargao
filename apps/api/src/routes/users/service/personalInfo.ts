@@ -2,6 +2,11 @@ import { Response, Request } from 'express'
 import { PrismaClient } from '@prisma/client'
 import { REQUIRED_VALUE_EMPTY } from '@repo/constants'
 import { Z_GovernmentId } from '@repo/contract'
+import AWS from "aws-sdk"
+import { awsAccessKey, awsAccessSecret, awsRegion } from '@/common/config'
+
+
+
 
 export const getPersonalInfo = async (req: Request, res: Response) => {
   try {
@@ -372,9 +377,28 @@ export const getAllGovernmentIdByPersonInfoId = async (
   }
 }
 
+interface MulterRequest extends Request {
+  file: any;
+}
+
 export const addGovernmentId = async (req: Request, res: Response) => {
+  
+  AWS.config.update({
+    accessKeyId: awsAccessKey,
+    secretAccessKey:awsAccessSecret,
+    region:awsRegion
+    })
+    const s3 = new AWS.S3()
+    //@ts-ignore
+    const fileContent = Buffer.from(req.files?.data?.data, 'binary')
+    const params = {
+      Bucket: "exploresiargao-dev",
+      //@ts-ignore
+      Key: req.files.data.name,
+      Body: fileContent
+    }
   const personId = Number(req.params.personId)
-  const { imagePath, type } = req.body
+  const {type } = req.body
   const prisma = new PrismaClient()
   const isValidInput = Z_GovernmentId.safeParse(req.body)
   try {
@@ -386,16 +410,18 @@ export const addGovernmentId = async (req: Request, res: Response) => {
     if (getPersonIfo) {
       if (isValidInput.success) {
         if (getPersonIfo.governMentId === null) {
+        
           const addNewGovernmentId = await prisma.personalInfo.update({
             where: {
               id: personId,
             },
             data: {
               governMentId: JSON.stringify([
-                { imagePath: imagePath, type: type, createdAt: new Date() },
+                { imagePath: params.Key, type: type, createdAt: new Date() },
               ]),
             },
-          })
+          })  
+          s3.upload(params)
           res.json({
             error: false,
             items: JSON.parse(addNewGovernmentId.governMentId as string),
@@ -408,8 +434,9 @@ export const addGovernmentId = async (req: Request, res: Response) => {
             (govId: any) => govId.type === type
           )
           if (!typeAlreadyExists) {
+            s3.upload(params)
             updatedGovernmentId.push({
-              imageUrl: imagePath,
+              imageUrl: params.Key,
               type: type,
               createdAt: new Date(),
             })
@@ -418,7 +445,7 @@ export const addGovernmentId = async (req: Request, res: Response) => {
                 id: personId,
               },
               data: {
-                governMentId: null, //JSON.stringify(updatedGovernmentId)
+                governMentId:JSON.stringify(updatedGovernmentId)
               },
             })
             res.json({
