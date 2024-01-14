@@ -9,7 +9,7 @@ import AddWishlistModal from "@/module/AccountSettings/components/modals/AddWish
 
 type BookingProps = {
   listingId: number
-  photo: string
+  imageKey: string
   distance: string
   location: string
   date: string
@@ -25,7 +25,7 @@ const BookingBoxContainer = ({
   distance,
   location,
   price,
-  photo,
+  imageKey,
   dayTime,
   ratings,
   isHearted,
@@ -52,10 +52,10 @@ const BookingBoxContainer = ({
             />
           </button>
           <Image
-            src={photo}
+            src={`/assets/${imageKey}`}
             width={300}
             height={300}
-            alt={photo}
+            alt={date}
             className="object-cover h-full w-full rounded-xl"
           />
         </div>

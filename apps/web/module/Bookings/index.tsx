@@ -8,7 +8,6 @@ import useSessionStore from "@/common/store/useSessionStore"
 
 const Bookings = () => {
   const userId = useSessionStore((state) => state).id
-  console.log(userId)
   const { data, isPending } = useGetAllBookings()
 
   return (
@@ -32,7 +31,7 @@ const Bookings = () => {
                     item.price.cleaningFee +
                     item.price.serviceFee)
                 }
-                photo={JSON.parse(item.imageUrls)[0].url as string}
+                imageKey={JSON.parse(item.imageUrls)[0].fileKey as string}
                 dayTime={item.price.isNight ? "Night" : ""}
                 ratings={item.review.length !== 0 ? item.review.rate : "0.0"}
                 isHearted={

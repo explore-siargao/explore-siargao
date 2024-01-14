@@ -1,16 +1,16 @@
 import { Response, Request } from 'express'
-import { PrismaClient } from '@prisma/client'
-import { REQUIRED_VALUE_EMPTY } from '@repo/constants'
-import { Z_GovernmentId } from '@repo/contract'
-import AWS from "aws-sdk"
-import { awsAccessKey, awsAccessSecret, awsRegion } from '@/common/config'
+import { prisma } from "@/common/helpers/prismaClient"
+import { REQUIRED_VALUE_EMPTY, UNKNOWN_ERROR_OCCURRED } from '@repo/constants'
+import { FileService } from '@/common/service/file'
+import { T_GovernmentId, Z_Add_GovernmentId } from '@repo/contract'
+import { ResponseService } from '@/common/service/response'
 
-
-
+const response = new ResponseService()
+const fileService = new FileService()
 
 export const getPersonalInfo = async (req: Request, res: Response) => {
   try {
-    const prisma = new PrismaClient()
+    
     const getPersonalInfo = await prisma.personalInfo.findFirst({
       where: { userId: Number(req?.params?.userId) },
       include: {
@@ -46,7 +46,7 @@ export const getPersonalInfo = async (req: Request, res: Response) => {
 
 export const updatePersonalInfo = async (req: Request, res: Response) => {
   try {
-    const prisma = new PrismaClient()
+    
     const {
       firstName,
       lastName,
@@ -87,7 +87,7 @@ export const updatePersonalInfo = async (req: Request, res: Response) => {
 
 export const addEmergencyContact = async (req: Request, res: Response) => {
   try {
-    const prisma = new PrismaClient()
+    
     const { email, phoneNumber, name, relationship } = req.body
     const personalInfoId = Number(req.params.personalInfoId)
     if (name && relationship && (email || phoneNumber)) {
@@ -142,7 +142,7 @@ export const addEmergencyContact = async (req: Request, res: Response) => {
 }
 
 export const removeEmergencyContact = async (req: Request, res: Response) => {
-  const prisma = new PrismaClient()
+  
   const personId = Number(req.params.peronalInfoId)
   const emergencyContactId = Number(req.params.emergencyContactId)
   try {
@@ -201,7 +201,7 @@ export const removeEmergencyContact = async (req: Request, res: Response) => {
 
 export const addAddress = async (req: Request, res: Response) => {
   try {
-    const prisma = new PrismaClient()
+    
     const { country, streetAddress, city, province, zipCode } = req.body
     const personalInfoId = Number(req.params.personalInfoId)
     if (streetAddress && city && province && zipCode) {
@@ -278,7 +278,7 @@ export const addAddress = async (req: Request, res: Response) => {
 }
 
 export const editAddress = async (req: Request, res: Response) => {
-  const prisma = new PrismaClient()
+  
   const { streetAddress, city, province, zipCode, country } = req.body
   const userId = Number(req.params.userId)
   try {
@@ -341,7 +341,7 @@ export const getAllGovernmentIdByPersonInfoId = async (
   req: Request,
   res: Response
 ) => {
-  const prisma = new PrismaClient()
+  
   const personId = Number(req.params.personId)
   try {
     const getPersonInfoId = await prisma.personalInfo.findUnique({
@@ -377,114 +377,78 @@ export const getAllGovernmentIdByPersonInfoId = async (
   }
 }
 
-interface MulterRequest extends Request {
-  file: any;
-}
-
 export const addGovernmentId = async (req: Request, res: Response) => {
-  
-  AWS.config.update({
-    accessKeyId: awsAccessKey,
-    secretAccessKey:awsAccessSecret,
-    region:awsRegion
-    })
-    const s3 = new AWS.S3()
-    //@ts-ignore
-    const fileContent = Buffer.from(req.files?.data?.data, 'binary')
-    const params = {
-      Bucket: "exploresiargao-dev",
-      //@ts-ignore
-      Key: req.files.data.name,
-      Body: fileContent
-    }
-  const personId = Number(req.params.personId)
-  const {type } = req.body
-  const prisma = new PrismaClient()
-  const isValidInput = Z_GovernmentId.safeParse(req.body)
-  try {
-    const getPersonIfo = await prisma.personalInfo.findUnique({
-      where: {
-        id: personId,
-      },
-    })
-    if (getPersonIfo) {
-      if (isValidInput.success) {
+  const peronalInfoId = Number(req.params.peronalInfoId);
+  const files = req.files;
+  const isValidInput = Z_Add_GovernmentId.safeParse(req.body)
+  if (isValidInput.success && files) {
+    const { type } = req.body
+    try {
+      const getPersonIfo = await prisma.personalInfo.findUnique({
+        where: {
+          id: peronalInfoId,
+        },
+      })
+      if (getPersonIfo) {
+        const upload = await fileService.upload({ files });
         if (getPersonIfo.governMentId === null) {
-        
           const addNewGovernmentId = await prisma.personalInfo.update({
             where: {
-              id: personId,
+              id: peronalInfoId,
             },
             data: {
               governMentId: JSON.stringify([
-                { imagePath: params.Key, type: type, createdAt: new Date() },
-              ]),
+                { imageKey: upload.key, type: type, createdAt: new Date() },
+              ] as T_GovernmentId[]),
             },
-          })  
-          s3.upload(params)
-          res.json({
-            error: false,
-            items: JSON.parse(addNewGovernmentId.governMentId as string),
-            itemCount: 1,
-            message: 'Government Id successfully added',
           })
+          res.json(response.success({
+            items: JSON.parse(addNewGovernmentId.governMentId as string) as T_GovernmentId[],
+            message: 'Government Id successfully added',
+          }))
         } else {
-          const updatedGovernmentId = JSON.parse(getPersonIfo.governMentId)
+          const updatedGovernmentId = JSON.parse(getPersonIfo.governMentId) as T_GovernmentId[]
           const typeAlreadyExists = updatedGovernmentId.some(
-            (govId: any) => govId.type === type
+            (govId: T_GovernmentId) => govId.type === type
           )
           if (!typeAlreadyExists) {
-            s3.upload(params)
             updatedGovernmentId.push({
-              imageUrl: params.Key,
+              imageKey: upload.key,
               type: type,
               createdAt: new Date(),
             })
             const updateGovId = await prisma.personalInfo.update({
               where: {
-                id: personId,
+                id: peronalInfoId,
               },
               data: {
-                governMentId:JSON.stringify(updatedGovernmentId)
+                governMentId: JSON.stringify(updatedGovernmentId)
               },
             })
-            res.json({
-              error: false,
-              items: JSON.parse(updateGovId.governMentId as string),
-              itemCount: 1,
+            res.json(response.success({
+              items: JSON.parse(updateGovId.governMentId as string) as T_GovernmentId[],
               message: 'Government Id successfully added',
-            })
+            }))
           } else {
-            res.json({
-              error: true,
-              items: null,
-              itemCount: 0,
-              message: 'This type of id already exists',
-            })
+            res.json(response.error({
+              message: 'This type of Id already exists',
+            }))
           }
         }
+
       } else {
-        res.json({
-          error: true,
-          items: null,
-          itemCount: 0,
-          message: JSON.parse(isValidInput.error.message),
-        })
+        res.json(response.error({
+          message: 'This person not found in our system',
+        }))
       }
-    } else {
-      res.json({
-        error: true,
-        items: null,
-        itemCount: 0,
-        message: 'This person not found in our system',
-      })
+    } catch (err: any) {
+      res.json(response.error({
+        message: err.message
+      }))
     }
-  } catch (err: any) {
-    res.json({
-      error: true,
-      items: null,
-      itemCount: 0,
-      message: err.message,
-    })
+  } else {
+    res.json(response.error({
+      message: !isValidInput.success ? isValidInput.error.issues : UNKNOWN_ERROR_OCCURRED,
+    }))
   }
 }

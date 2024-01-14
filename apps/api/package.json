@@ -13,13 +13,13 @@
     "postinstall": "npx prisma generate"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.490.0",
     "@aws-sdk/client-ses": "^3.465.0",
     "@prisma/client": "^5.6.0",
     "@react-email/components": "^0.0.12",
     "@react-email/render": "^0.0.10",
     "@repo/constants": "*",
     "@repo/contract": "*",
-    "aws-sdk": "^2.1534.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "cross-env": "^7.0.3",
