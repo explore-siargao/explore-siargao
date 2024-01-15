@@ -25,7 +25,7 @@ model User {
   role             UserRole          @default(User)
   listing          Listing[]
   paymentMethod    PaymentMethod[]
-  wishes         WishGroup[]
+  wishes           WishGroup[]
   review           Review[]
   personalInfo     PersonalInfo?
   deactivated      Boolean           @default(false)
@@ -108,30 +108,46 @@ model MultiFactorAuth {
 }
 
 model Listing {
-  id             Int             @id @default(autoincrement())
-  hostedById     Int
-  hostedBy       User            @relation(fields: [hostedById], references: [id])
-  imageUrls      String          @db.LongText()
-  title          String          @db.VarChar(100)
-  description    String          @db.LongText()
-  address        String          @db.LongText()
-  listingPriceId Int             @unique
-  longitude      Decimal?        @db.Decimal()
-  latitude       Decimal?       @db.Decimal()
-  price          ListingPrice    @relation(fields: [listingPriceId], references: [id])
-  highLights     HighLights[]
-  placeOffers    PlaceOffers[]
-  thingsToKnow   ThingsToKnow[]
-  category       ListingCategory
-  review          Review[]
-  favoriteBy     String?
-  wishes       WishGroup[]
-  createdAt      DateTime        @default(now())
-  updatedAt      DateTime        @updatedAt
-  deletedAt      DateTime?
+  id                Int              @id @default(autoincrement())
+  hostedById        Int
+  hostedBy          User             @relation(fields: [hostedById], references: [id])
+  imageUrls         String           @db.LongText()
+  title             String           @db.VarChar(100)
+  basicAboutPlaceId Int?            @unique
+  basicAboutPlace   BasicAboutPlace? @relation(fields: [basicAboutPlaceId], references: [id], onDelete: Cascade)
+  description       String           @db.LongText()
+  address           String           @db.LongText()
+  listingPriceId    Int              @unique
+  longitude         Decimal?         @db.Decimal()
+  latitude          Decimal?         @db.Decimal()
+  price             ListingPrice     @relation(fields: [listingPriceId], references: [id])
+  highLights        ListingHighLights[]
+  placeOffers       PlaceOffers[]
+  thingsToKnow      ThingsToKnow[]
+  category          ListingCategory
+  review            Review[]
+  reports           ReportListing[]
+  favoriteBy        String?
+  wishes            WishGroup[]
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
+  deletedAt         DateTime?
 
+  @@index([basicAboutPlaceId])
   @@index([listingPriceId])
   @@index([hostedById])
+}
+
+model BasicAboutPlace {
+  id        Int       @id @default(autoincrement())
+  guests    Int       @db.Int()
+  bedRooms  Int       @db.Int()
+  beds      Int       @db.Int()
+  bathRooms Int       @db.Int()
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+  Listing   Listing?
 }
 
 model PaymentMethod {
@@ -149,6 +165,17 @@ model PaymentMethod {
   deletedAt      DateTime?
 
   @@index([userId])
+}
+
+model ReportListing {
+ id             Int       @id @default(autoincrement())
+reason          String    @db.Text()
+otherdetails    String    @db.Text()
+reportedBy      Int
+listingId       Int       
+listing         Listing   @relation(fields: [listingId], references: [id])
+
+@@index([listingId])
 }
 
 model Coupon {
@@ -187,12 +214,21 @@ model HighLights {
   title     String
   details   String
   icon      String
-  listingId Int
-  listing   Listing   @relation(fields: [listingId], references: [id])
+  listings  ListingHighLights[]
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   deletedAt DateTime?
+}
+
+model ListingHighLights{
+  id Int @id @default(autoincrement())
+  listingId Int
+  highLightsId Int
+  listing Listing @relation(fields: [listingId], references: [id])
+  highlights HighLights @relation(fields: [highLightsId], references: [id])
   @@index([listingId])
+  @@index([highLightsId])
+  @@unique([listingId,highLightsId])
 }
 
 model PlaceOffers {
@@ -280,10 +316,11 @@ model WishGroup {
   title     String    @db.VarChar(100)
   note      String?   @db.LongText()
   listingId Int
-  listing  Listing    @relation(fields: [listingId], references: [id])   
+  listing   Listing   @relation(fields: [listingId], references: [id])
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   deletedAt DateTime?
+
   @@index([userId])
   @@index([listingId])
 }
@@ -293,13 +330,14 @@ model Review {
   userId    Int
   user      User      @relation(fields: [userId], references: [id])
   listingId Int
-  listing Listing     @relation(fields: [listingId], references: [id])
+  listing   Listing   @relation(fields: [listingId], references: [id])
   rates     Float
   comment   String    @db.LongText()
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   deletedAt DateTime?
-@@index([listingId])
+
+  @@index([listingId])
   @@index([userId])
 }
 
