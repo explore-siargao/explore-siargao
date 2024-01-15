@@ -22,6 +22,7 @@ import {
   getHighLight,
   updateHighLight,
 } from './service/highLights'
+import { getAllListingHighlights, getListingHighlightsByListing } from './service/listingHighlights'
 
 const router = express.Router()
 
@@ -108,4 +109,8 @@ router.get('/highlights/:id', getHighLight)
 router.post('/:userId/highlights', addHighLight)
 router.patch('/:userId/highlights/:highLightId', updateHighLight)
 router.delete('/:userId/highlights/:highLightId', deleteHighLight)
+
+//listing-highlights
+router.get('/all/listing-highlights', getAllListingHighlights)
+router.get('/listing-highlights/:listingId', getListingHighlightsByListing)
 export default router
