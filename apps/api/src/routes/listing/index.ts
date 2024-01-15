@@ -15,6 +15,7 @@ import {
   wishGroupByUserAndTitle,
 } from './service/wishGroup'
 import isUserLoggedIn from '@/common/middleware/auth/isUserLoggedIn'
+import { addHighLight, deleteHighLight, getAllHighLights, getHighLight, updateHighLight } from './service/highLights'
 
 const router = express.Router()
 
@@ -23,6 +24,7 @@ router.get('/', getAllListing)
 router.get('/:id', isCsrfTokenValid, isOriginValid, getListing)
 router.post('/:hostId', addListing)
 
+//wish group
 router.get(
   '/:userId/wish-group',
   // isOriginValid,
@@ -94,4 +96,10 @@ router.delete(
 
 router.get('/:userId/group/wish', wishGroupByTitle)
 
+//highlights
+router.get('/all/highlights', getAllHighLights)
+router.get('/highlights/:id', getHighLight)
+router.post('/:userId/highlights', addHighLight)
+router.patch('/:userId/highlights/:highLightId', updateHighLight)
+router.delete('/:userId/highlights/:highLightId', deleteHighLight)
 export default router
