@@ -15,7 +15,13 @@ import {
   wishGroupByUserAndTitle,
 } from './service/wishGroup'
 import isUserLoggedIn from '@/common/middleware/auth/isUserLoggedIn'
-import { addHighLight, deleteHighLight, getAllHighLights, getHighLight, updateHighLight } from './service/highLights'
+import {
+  addHighLight,
+  deleteHighLight,
+  getAllHighLights,
+  getHighLight,
+  updateHighLight,
+} from './service/highLights'
 
 const router = express.Router()
 
