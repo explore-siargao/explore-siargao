@@ -69,57 +69,51 @@ export const addListingHighlight = async (req: Request, res: Response) => {
   const userId = Number(req.params.userId)
   const { listingId, highlightId } = req.body
   const inputIsValid = Z_ListingHighlight.safeParse(req.body)
-  if (inputIsValid.success) {
-    try {
-      if (listingId && highlightId) {
-        const getUser = await prisma.user.findUnique({
-          where: {
-            id: userId,
-          },
-        })
-        const getListingHighLight = await prisma.listingHighLights.findFirst({
-          where: {
-            listingId: listingId,
-            highLightsId: highlightId,
-          },
-        })
-        if (getUser) {
-          if (getListingHighLight) {
-            res.json(
-              response.error({ message: 'ListingHighlight already exist' })
-            )
-          } else {
-            const newListingHighLight = await prisma.listingHighLights.create({
-              data: {
-                listingId: listingId,
-                highLightsId: highlightId,
-              },
-            })
-            res.json(
-              response.success({
-                item: newListingHighLight,
-                allItemCount: 1,
-                message: 'Highlight successfully added to listing',
-              })
-            )
-          }
-        } else {
-          res.json(response.error({ message: USER_NOT_EXIST }))
-        }
-      } else {
-        res.json(
-          response.error({
-            message: REQUIRED_VALUE_EMPTY,
-          })
-        )
-      }
-    } catch (err: any) {
-      res.json(response.error({ message: err.message }))
+
+  if (!inputIsValid.success) {
+    return res.json(response.error({ message: JSON.parse(inputIsValid.error.message) }))
+  }
+
+  try {
+    if (!listingId || !highlightId) {
+      return res.json(response.error({ message: REQUIRED_VALUE_EMPTY }))
     }
-  } else {
+
+    const getUser = await prisma.user.findUnique({
+      where: { id: userId },
+    })
+
+    if (!getUser) {
+      return res.json(response.error({ message: USER_NOT_EXIST }))
+    }
+
+    const getListingHighLight = await prisma.listingHighLights.findFirst({
+      where: {
+        listingId: listingId,
+        highLightsId: highlightId,
+      },
+    })
+
+    if (getListingHighLight) {
+      return res.json(response.error({ message: 'ListingHighlight already exists' }))
+    }
+
+    const newListingHighLight = await prisma.listingHighLights.create({
+      data: {
+        listingId: listingId,
+        highLightsId: highlightId,
+      },
+    })
+
     res.json(
-      response.error({ message: JSON.parse(inputIsValid.error.message) })
+      response.success({
+        item: newListingHighLight,
+        allItemCount: 1,
+        message: 'Highlight successfully added to listing',
+      })
     )
+  } catch (err: any) {
+    res.json(response.error({ message: err.message }))
   }
 }
 
