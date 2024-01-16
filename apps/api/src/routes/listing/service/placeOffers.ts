@@ -3,7 +3,6 @@ import { PrismaClient } from '@prisma/client'
 import { REQUIRED_VALUE_EMPTY, USER_NOT_EXIST } from '@repo/constants'
 import { Z_PlaceOffers } from '@repo/contract'
 import { Request, Response } from 'express'
-import { json } from 'stream/consumers'
 
 const prisma = new PrismaClient()
 const response = new ResponseService()
