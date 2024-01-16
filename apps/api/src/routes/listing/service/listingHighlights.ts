@@ -71,7 +71,9 @@ export const addListingHighlight = async (req: Request, res: Response) => {
   const inputIsValid = Z_ListingHighlight.safeParse(req.body)
 
   if (!inputIsValid.success) {
-    return res.json(response.error({ message: JSON.parse(inputIsValid.error.message) }))
+    return res.json(
+      response.error({ message: JSON.parse(inputIsValid.error.message) })
+    )
   }
 
   try {
@@ -95,7 +97,9 @@ export const addListingHighlight = async (req: Request, res: Response) => {
     })
 
     if (getListingHighLight) {
-      return res.json(response.error({ message: 'ListingHighlight already exists' }))
+      return res.json(
+        response.error({ message: 'ListingHighlight already exists' })
+      )
     }
 
     const newListingHighLight = await prisma.listingHighLights.create({
