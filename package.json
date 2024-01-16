@@ -10,7 +10,8 @@
     "dev": "turbo dev",
     "start": "turbo start",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "build:api": "turbo run build --filter=@repo/constants && turbo run build --filter=@repo/contract && turbo run build --filter=api"
   },
   "devDependencies": {
     "@repo/eslint-config": "*",
