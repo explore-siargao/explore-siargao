@@ -35,6 +35,7 @@ import {
   getPlaceOffersById,
   updatePlaceOffers,
 } from './service/placeOffers'
+import { addListingPlaceOffer, deleteListingPlaceOffer, getAllListingPlaceOffers, getListingPlaceOffersByListing } from './service/listingPlaceOffers'
 
 const router = express.Router()
 
@@ -137,4 +138,15 @@ router.get('/place-offers/:id', getPlaceOffersById)
 router.post('/:userId/place-offers', addPlaceOffer)
 router.patch('/:userId/place-offers/:placeOfferId', updatePlaceOffers)
 router.delete('/:userId/place-offers/delete/:placeOfferId', deletePlaceOffers)
+
+//listing place offers
+router.get('/all/listing-place-offers', getAllListingPlaceOffers)
+router.get('/listing-place-offers/:listingId', getListingPlaceOffersByListing)
+router.post('/:userId/listing-place-offers', addListingPlaceOffer)
+router.delete(
+  '/:userId/listing-place-offers/delete/:listingPlaceOfferId',
+  deleteListingPlaceOffer
+)
+
 export default router
+
