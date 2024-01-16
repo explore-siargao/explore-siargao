@@ -122,7 +122,7 @@ model Listing {
   latitude          Decimal?         @db.Decimal()
   price             ListingPrice     @relation(fields: [listingPriceId], references: [id])
   highLights        ListingHighLights[]
-  placeOffers       PlaceOffers[]
+  placeOffers       ListingPlaceOffers[]
   thingsToKnow      ThingsToKnow[]
   category          ListingCategory
   review            Review[]
@@ -236,15 +236,27 @@ model ListingHighLights{
 
 model PlaceOffers {
   id        Int       @id @default(autoincrement())
-  listingId Int
-  listing   Listing   @relation(fields: [listingId], references: [id])
+ listingPlaceOffers ListingPlaceOffers[]
   icon      String
   title     String
+  category  String
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   deletedAt DateTime?
+}
 
+model ListingPlaceOffers{
+  id Int @id @default(autoincrement())
+  listingId Int
+  placeOfferId Int
+  listing Listing @relation(fields: [listingId], references: [id])
+  placeOffer PlaceOffers @relation(fields: [placeOfferId], references: [id])
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
   @@index([listingId])
+  @@index([placeOfferId])
+  @@unique([listingId,placeOfferId])
 }
 
 model ThingsToKnow {

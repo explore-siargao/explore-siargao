@@ -28,6 +28,7 @@ import {
   getAllListingHighlights,
   getListingHighlightsByListing,
 } from './service/listingHighlights'
+import { addPlaceOffer, deletePlaceOffers, getAllPlaceOffers, getPlaceOffersById, updatePlaceOffers } from './service/placeOffers'
 
 const router = express.Router()
 
@@ -123,4 +124,11 @@ router.delete(
   '/:userId/listing-highlights/delete/:listingHighlightId',
   deleteListingHighlight
 )
+
+//place to offers
+router.get('/all/place-offers', getAllPlaceOffers)
+router.get('/place-offers/:id', getPlaceOffersById)
+router.post('/:userId/place-offers', addPlaceOffer)
+router.patch('/:userId/place-offers/:placeOfferId', updatePlaceOffers)
+router.delete('/:userId/place-offers/delete/:placeOfferId', deletePlaceOffers)
 export default router

@@ -11,9 +11,17 @@ export const getAllListing = async (req: Request, res: Response) => {
     const listings = await prisma.listing.findMany({
       include: {
         price: true,
-        highLights: true,
+        highLights: {
+          include:{
+            highlights:true
+          }
+        },
         hostedBy: true,
-        placeOffers: true,
+        placeOffers:{
+          include:{
+            placeOffer:true
+          }
+        },
         thingsToKnow: true,
         review: true,
         wishes: true,
