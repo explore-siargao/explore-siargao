@@ -12,15 +12,15 @@ export const getAllListing = async (req: Request, res: Response) => {
       include: {
         price: true,
         highLights: {
-          include:{
-            highlights:true
-          }
+          include: {
+            highlights: true,
+          },
         },
         hostedBy: true,
-        placeOffers:{
-          include:{
-            placeOffer:true
-          }
+        placeOffers: {
+          include: {
+            placeOffer: true,
+          },
         },
         thingsToKnow: true,
         review: true,

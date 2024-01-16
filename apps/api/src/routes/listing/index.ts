@@ -28,7 +28,13 @@ import {
   getAllListingHighlights,
   getListingHighlightsByListing,
 } from './service/listingHighlights'
-import { addPlaceOffer, deletePlaceOffers, getAllPlaceOffers, getPlaceOffersById, updatePlaceOffers } from './service/placeOffers'
+import {
+  addPlaceOffer,
+  deletePlaceOffers,
+  getAllPlaceOffers,
+  getPlaceOffersById,
+  updatePlaceOffers,
+} from './service/placeOffers'
 
 const router = express.Router()
 
