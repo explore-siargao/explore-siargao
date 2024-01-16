@@ -35,7 +35,12 @@ import {
   getPlaceOffersById,
   updatePlaceOffers,
 } from './service/placeOffers'
-import { addListingPlaceOffer, deleteListingPlaceOffer, getAllListingPlaceOffers, getListingPlaceOffersByListing } from './service/listingPlaceOffers'
+import {
+  addListingPlaceOffer,
+  deleteListingPlaceOffer,
+  getAllListingPlaceOffers,
+  getListingPlaceOffersByListing,
+} from './service/listingPlaceOffers'
 
 const router = express.Router()
 
@@ -149,4 +154,3 @@ router.delete(
 )
 
 export default router
-

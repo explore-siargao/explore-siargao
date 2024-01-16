@@ -12,15 +12,15 @@ export const getAllListingPlaceOffers = async (req: Request, res: Response) => {
     const getListingPlaceOffers = await prisma.listingPlaceOffers.findMany({
       where: {
         deletedAt: null,
-        placeOffer:{
-            id:{
-                not:undefined
-            }
-        }
+        placeOffer: {
+          id: {
+            not: undefined,
+          },
+        },
       },
-      include:{
-        placeOffer:true
-      }
+      include: {
+        placeOffer: true,
+      },
     })
     if (getListingPlaceOffers.length !== 0) {
       res.json(
@@ -45,102 +45,103 @@ export const getAllListingPlaceOffers = async (req: Request, res: Response) => {
 }
 
 export const getListingPlaceOffersByListing = async (
-    req: Request,
-    res: Response
-  ) => {
-    const listingId = Number(req.params.listingId)
-    try {
-      const getListing = await prisma.listing.findUnique({
-        where: {
-          id: listingId,
-        },
-      })
-      if (getListing) {
-        const allListingPlaceOffersByListing =
-          await prisma.listingPlaceOffers.findMany({
-            where: {
-              listingId: listingId,
-              placeOffer:{
-                id:{
-                    not:undefined
-                }
+  req: Request,
+  res: Response
+) => {
+  const listingId = Number(req.params.listingId)
+  try {
+    const getListing = await prisma.listing.findUnique({
+      where: {
+        id: listingId,
+      },
+    })
+    if (getListing) {
+      const allListingPlaceOffersByListing =
+        await prisma.listingPlaceOffers.findMany({
+          where: {
+            listingId: listingId,
+            placeOffer: {
+              id: {
+                not: undefined,
+              },
             },
-            
           },
-          include:{
-            placeOffer:true
-          }
+          include: {
+            placeOffer: true,
+          },
         })
-        res.json(
-          response.success({
-            items: allListingPlaceOffersByListing,
-            allItemCount: allListingPlaceOffersByListing.length,
-            message: '',
-          })
-        )
-      } else {
-        res.json(response.error({ message: 'Listing not found in our system' }))
-      }
-    } catch (err: any) {
-      res.json(response.error({ message: err.message }))
-    }
-  }
-
-export const addListingPlaceOffer = async (req: Request, res: Response) => {
-    const userId = Number(req.params.userId)
-    const { listingId, placeOfferId } = req.body
-    const inputIsValid = Z_ListingPlaceOffer.safeParse(req.body)
-  
-    if (!inputIsValid.success) {
-      return res.json(
-        response.error({ message: JSON.parse(inputIsValid.error.message) })
-      )
-    }
-    try {
-      if (!listingId || !placeOfferId) {
-        return res.json(response.error({ message: REQUIRED_VALUE_EMPTY }))
-      }
-  
-      const getUser = await prisma.user.findUnique({
-        where: { id: userId },
-      })
-      if (!getUser) {
-        return res.json(response.error({ message: USER_NOT_EXIST }))
-      }
-      const getListingPlaceOffer = await prisma.listingPlaceOffers.findFirst({
-        where: {
-          listingId: listingId,
-          placeOfferId: placeOfferId,
-        },
-      })
-  
-      if (getListingPlaceOffer) {
-        return res.json(
-          response.error({ message: 'Place offer already assigned to this listing' })
-        )
-      }
-  
-      const newListingPlaceOffer = await prisma.listingPlaceOffers.create({
-        data: {
-          listingId: listingId,
-          placeOfferId: placeOfferId,
-        },
-      })
-  
       res.json(
         response.success({
-          item: newListingPlaceOffer,
-          allItemCount: 1,
-          message: 'Place Offer successfully added to listing',
+          items: allListingPlaceOffersByListing,
+          allItemCount: allListingPlaceOffersByListing.length,
+          message: '',
         })
       )
-    } catch (err: any) {
-      res.json(response.error({ message: err.message }))
+    } else {
+      res.json(response.error({ message: 'Listing not found in our system' }))
     }
+  } catch (err: any) {
+    res.json(response.error({ message: err.message }))
+  }
+}
+
+export const addListingPlaceOffer = async (req: Request, res: Response) => {
+  const userId = Number(req.params.userId)
+  const { listingId, placeOfferId } = req.body
+  const inputIsValid = Z_ListingPlaceOffer.safeParse(req.body)
+
+  if (!inputIsValid.success) {
+    return res.json(
+      response.error({ message: JSON.parse(inputIsValid.error.message) })
+    )
+  }
+  try {
+    if (!listingId || !placeOfferId) {
+      return res.json(response.error({ message: REQUIRED_VALUE_EMPTY }))
+    }
+
+    const getUser = await prisma.user.findUnique({
+      where: { id: userId },
+    })
+    if (!getUser) {
+      return res.json(response.error({ message: USER_NOT_EXIST }))
+    }
+    const getListingPlaceOffer = await prisma.listingPlaceOffers.findFirst({
+      where: {
+        listingId: listingId,
+        placeOfferId: placeOfferId,
+      },
+    })
+
+    if (getListingPlaceOffer) {
+      return res.json(
+        response.error({
+          message: 'Place offer already assigned to this listing',
+        })
+      )
+    }
+
+    const newListingPlaceOffer = await prisma.listingPlaceOffers.create({
+      data: {
+        listingId: listingId,
+        placeOfferId: placeOfferId,
+      },
+    })
+
+    res.json(
+      response.success({
+        item: newListingPlaceOffer,
+        allItemCount: 1,
+        message: 'Place Offer successfully added to listing',
+      })
+    )
+  } catch (err: any) {
+    res.json(response.error({ message: err.message }))
+  }
 }
 
 export const deleteListingPlaceOffer = async (req: Request, res: Response) => {
-    const userId = Number(req.params.userId)
+  const userId = Number(req.params.userId)
   const listingPlaceOfferId = Number(req.params.listingPlaceOfferId)
   try {
     const getUser = await prisma.user.findUnique({
