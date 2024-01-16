@@ -14,13 +14,15 @@ jobs:
         with:
           ref: dev
       - run: npm install
+      - name: Build api
+        run: npm run build:api
       - name: Delete pm2 api
         working-directory: apps/api
         run: pm2 delete api
         continue-on-error: true
       - name: Start pm2 api
         working-directory: apps/api
-        run: pm2 start npm --name api -- run dev
+        run: pm2 start npm --name api -- run start
       - name: Show pm2 api
         working-directory: apps/api
         run: pm2 describe api
