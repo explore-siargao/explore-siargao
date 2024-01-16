@@ -13,9 +13,9 @@ export const getAllListingHighlights = async (req: Request, res: Response) => {
       where: {
         deletedAt: null,
       },
-      include:{
-        highlights:true
-      }
+      include: {
+        highlights: true,
+      },
     })
     res.json(
       response.success({
@@ -46,9 +46,9 @@ export const getListingHighlightsByListing = async (
           where: {
             listingId: listingId,
           },
-          include:{
-            highlights:true
-          }
+          include: {
+            highlights: true,
+          },
         })
       res.json(
         response.success({
@@ -69,53 +69,57 @@ export const addListingHighlight = async (req: Request, res: Response) => {
   const userId = Number(req.params.userId)
   const { listingId, highlightId } = req.body
   const inputIsValid = Z_ListingHighlight.safeParse(req.body)
-  if(inputIsValid.success){
-  try {
-    if(listingId && highlightId){
-    const getUser = await prisma.user.findUnique({
-      where: {
-        id: userId,
-      },
-    })
-    const getListingHighLight = await prisma.listingHighLights.findFirst({
-      where: {
-        listingId: listingId,
-        highLightsId: highlightId,
-      },
-    })
-    if (getUser) {
-      if (getListingHighLight) {
-        res.json(response.error({ message: 'ListingHighlight already exist' }))
-      } else {
-        const newListingHighLight = await prisma.listingHighLights.create({
-          data: {
+  if (inputIsValid.success) {
+    try {
+      if (listingId && highlightId) {
+        const getUser = await prisma.user.findUnique({
+          where: {
+            id: userId,
+          },
+        })
+        const getListingHighLight = await prisma.listingHighLights.findFirst({
+          where: {
             listingId: listingId,
             highLightsId: highlightId,
           },
         })
+        if (getUser) {
+          if (getListingHighLight) {
+            res.json(
+              response.error({ message: 'ListingHighlight already exist' })
+            )
+          } else {
+            const newListingHighLight = await prisma.listingHighLights.create({
+              data: {
+                listingId: listingId,
+                highLightsId: highlightId,
+              },
+            })
+            res.json(
+              response.success({
+                item: newListingHighLight,
+                allItemCount: 1,
+                message: 'Highlight successfully added to listing',
+              })
+            )
+          }
+        } else {
+          res.json(response.error({ message: USER_NOT_EXIST }))
+        }
+      } else {
         res.json(
-          response.success({
-            item: newListingHighLight,
-            allItemCount: 1,
-            message: 'Highlight successfully added to listing',
+          response.error({
+            message: REQUIRED_VALUE_EMPTY,
           })
         )
-        
       }
-    } else {
-      res.json(response.error({ message: USER_NOT_EXIST }))
+    } catch (err: any) {
+      res.json(response.error({ message: err.message }))
     }
-  }else{
-    res.json(response.error({
-      message:REQUIRED_VALUE_EMPTY
-    }))
-  }
-  } catch (err: any) {
-    res.json(response.error({ message: err.message }))
-  }
-}
-  else{
-    res.json(response.error({message:JSON.parse(inputIsValid.error.message)}))
+  } else {
+    res.json(
+      response.error({ message: JSON.parse(inputIsValid.error.message) })
+    )
   }
 }
 
@@ -124,34 +128,40 @@ export const deleteListingHighlight = async (req: Request, res: Response) => {
   const listingHighlightId = Number(req.params.listingHighlightId)
   try {
     const getUser = await prisma.user.findUnique({
-      where:{
-        id: userId
-      }
+      where: {
+        id: userId,
+      },
     })
     const getListingHighlight = await prisma.listingHighLights.findUnique({
-      where:{
-        id:listingHighlightId
-      }
+      where: {
+        id: listingHighlightId,
+      },
     })
-    if(getUser){
-      if(getListingHighlight){
+    if (getUser) {
+      if (getListingHighlight) {
         const removeListingHighlight = await prisma.listingHighLights.delete({
-          where:{
-            id:listingHighlightId
-          }
+          where: {
+            id: listingHighlightId,
+          },
         })
-        res.json(response.success({
-          item:removeListingHighlight,
-          allItemCount:1,
-          message:"Listing Highlight successfully deleted"
-        }))
-      }else{
-        res.json(response.error({message:"Listing highlight not exist or already deleted"}))
+        res.json(
+          response.success({
+            item: removeListingHighlight,
+            allItemCount: 1,
+            message: 'Listing Highlight successfully deleted',
+          })
+        )
+      } else {
+        res.json(
+          response.error({
+            message: 'Listing highlight not exist or already deleted',
+          })
+        )
       }
-    }else{
-      res.json(response.error({message: USER_NOT_EXIST}))
+    } else {
+      res.json(response.error({ message: USER_NOT_EXIST }))
     }
-  } catch (err:any) {
-    res.json(response.error({message:err.message}))
-  } 
+  } catch (err: any) {
+    res.json(response.error({ message: err.message }))
+  }
 }
