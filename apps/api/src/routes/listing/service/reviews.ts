@@ -133,7 +133,7 @@ export const updateReview = async(req:Request, res:Response)=>{
             }
         })
         res.json(response.success({
-            item:updateReview,
+            item:updatereview,
             allItemCount:1,
             message:"Review successfully updated"
         }))
