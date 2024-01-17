@@ -53,6 +53,7 @@ import {
   getBasicAboutPlaceById,
   updateBasicAboutPlace,
 } from './service/basicAboutPlace'
+import { addCancellationPolicy, addHouseRule, addSafetypropertyRule, getAllRules, getRulesByCancellationPolicy, getRulesByHouseRule, getRulesBySafetyProperty, updateRule } from './service/rules'
 
 const router = express.Router()
 
@@ -176,5 +177,16 @@ router.delete('/:userId/reviews/delete/:reviewId', deleteReview)
 router.get('/basic-about-place/:id', getBasicAboutPlaceById)
 router.patch('/:userId/basic-about-place/:id', updateBasicAboutPlace)
 router.delete('/:userId/basic-about-place/:id', deleteBasicAboutPlace)
+
+//rules
+router.get('/all/rules', getAllRules)
+router.get('/rules/house-rule/:houseRuleId', getRulesByHouseRule)
+router.get('/rules/safety-property/:safetyPropertyId', getRulesBySafetyProperty)
+router.get('/rules/cancellation-policy/:cancelPolicyId', getRulesByCancellationPolicy)
+router.post('/:userId/rules/house-rule', addHouseRule)
+router.post('/:userId/rules/safety-property', addSafetypropertyRule)
+router.post('/:userId/rules/cancellation-policy', addCancellationPolicy)
+router.patch('/:userId/rules/:ruleId', updateRule)
+router.delete('/:userId/rules/:ruleId', updateRule)
 
 export default router
