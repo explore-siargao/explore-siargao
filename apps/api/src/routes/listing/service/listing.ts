@@ -105,7 +105,7 @@ export const addListing = async (req: Request, res: Response) => {
     guests,
     bedRooms,
     beds,
-    bathRooms
+    bathRooms,
   } = req.body
   if (isValidInput.success) {
     try {
@@ -130,7 +130,7 @@ export const addListing = async (req: Request, res: Response) => {
           countGuest &&
           guests &&
           bedRooms &&
-          beds && 
+          beds &&
           bathRooms
         ) {
           const newPrice = await prisma.listingPrice.create({
@@ -146,12 +146,12 @@ export const addListing = async (req: Request, res: Response) => {
           })
 
           const newBasicAboutPlace = await prisma.basicAboutPlace.create({
-            data:{
-              guests:guests,
-              bedRooms:bedRooms,
-              beds:beds,
-              bathRooms:bathRooms
-            }
+            data: {
+              guests: guests,
+              bedRooms: bedRooms,
+              beds: beds,
+              bathRooms: bathRooms,
+            },
           })
           const newListing = await prisma.listing.create({
             data: {
@@ -164,7 +164,7 @@ export const addListing = async (req: Request, res: Response) => {
               latitude: latitude,
               hostedById: hostId,
               listingPriceId: Number(newPrice.id),
-              basicAboutPlaceId:Number(newBasicAboutPlace.id)
+              basicAboutPlaceId: Number(newBasicAboutPlace.id),
             },
           })
 
@@ -187,6 +187,8 @@ export const addListing = async (req: Request, res: Response) => {
       res.json(response.error({ message: e.message }))
     }
   } else {
-    res.json(response.error({ message: JSON.parse(isValidInput.error.message) }))
+    res.json(
+      response.error({ message: JSON.parse(isValidInput.error.message) })
+    )
   }
 }

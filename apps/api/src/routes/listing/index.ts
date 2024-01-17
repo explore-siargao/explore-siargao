@@ -48,7 +48,11 @@ import {
   getReviewByListing,
   updateReview,
 } from './service/reviews'
-import { deleteBasicAboutPlace, getBasicAboutPlaceById, updateBasicAboutPlace } from './service/basicAboutPlace'
+import {
+  deleteBasicAboutPlace,
+  getBasicAboutPlaceById,
+  updateBasicAboutPlace,
+} from './service/basicAboutPlace'
 
 const router = express.Router()
 
