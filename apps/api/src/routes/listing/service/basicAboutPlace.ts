@@ -1,7 +1,6 @@
 import { ResponseService } from '@/common/service/response'
 import { PrismaClient } from '@prisma/client'
 import { REQUIRED_VALUE_EMPTY, USER_NOT_EXIST } from '@repo/constants'
-import { Z_BasicAboutPlace } from '@repo/contract'
 import { Request, Response } from 'express'
 
 const prisma = new PrismaClient()
