@@ -41,6 +41,7 @@ import {
   getAllListingPlaceOffers,
   getListingPlaceOffersByListing,
 } from './service/listingPlaceOffers'
+import { addReview, deleteReview, getReviewById, getReviewByListing, updateReview } from './service/reviews'
 
 const router = express.Router()
 
@@ -153,4 +154,10 @@ router.delete(
   deleteListingPlaceOffer
 )
 
+//reviews
+router.get('/reviews/:listingId', getReviewByListing)
+router.get('/reviews/view/:reviewId', getReviewById)
+router.post('/:userId/reviews/post', addReview)
+router.patch('/:userId/reviews/update/:reviewId', updateReview)
+router.delete('/:userId/reviews/delete/:reviewId', deleteReview)
 export default router

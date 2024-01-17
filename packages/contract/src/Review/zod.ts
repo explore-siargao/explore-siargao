@@ -2,7 +2,7 @@ import { z } from "zod"
 
 export const Z_Review = z.object({
   id: z.number().optional(),
-  userId: z.number(),
+  userId: z.number().optional(),
   listingId: z.number(),
   rates:z.number().min(1.0).max(5.0),
   comment:z.string().optional(),
