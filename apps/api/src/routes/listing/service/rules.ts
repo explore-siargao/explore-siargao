@@ -134,82 +134,48 @@ export const getRulesByCancellationPolicy = async (
   }
 }
 
-export const addHouseRule = async (req: Request, res: Response) => {
-  const userId = Number(req.params.userId)
-  const { title, listingId, icon, rule, description } = req.body
-  const inputIsValid = Z_Rule.safeParse(req.body)
-  if (!inputIsValid.success) {
-    return res.json(
-      response.error({ message: JSON.parse(inputIsValid.error.message) })
-    )
-  }
-  try {
-    const getUser = await prisma.user.findUnique({
-      where: {
-        id: userId,
-      },
-    })
-    if (!getUser) {
-      return res.json(response.error({ message: USER_NOT_EXIST }))
-    }
-    const newHouseRule = await prisma.houseRule.create({
-      data: {
-        title: title,
-        listingId: listingId,
-      },
-    })
-    const newRule = await prisma.rule.create({
-      data: {
-        icon: icon,
-        rule: rule,
-        description: description,
-        houseRuleId: newHouseRule.id,
-      },
-    })
-    res.json(
-      response.success({
-        item: newRule,
-        allItemCount: 1,
-        message: 'Rule successfully added',
-      })
-    )
-  } catch (err: any) {
-    res.json(response.error({ message: err.message }))
-  }
-}
-
-export const addSafetypropertyRule = async (req: Request, res: Response) => {
+const addRule = async (req: Request, res: Response, ruleType: string) => {
     const userId = Number(req.params.userId)
     const { title, listingId, icon, rule, description } = req.body
     const inputIsValid = Z_Rule.safeParse(req.body)
+  
     if (!inputIsValid.success) {
       return res.json(
         response.error({ message: JSON.parse(inputIsValid.error.message) })
       )
     }
+  
     try {
       const getUser = await prisma.user.findUnique({
         where: {
           id: userId,
         },
       })
+  
       if (!getUser) {
         return res.json(response.error({ message: USER_NOT_EXIST }))
       }
-      const newSafetyPropertyRule = await prisma.safetyProperty.create({
-        data: {
-          title: title,
-          listingId: listingId,
-        },
-      })
-      const newRule = await prisma.rule.create({
+  
+      const ruleData: Record<string, any> = {
+        title: title,
+        listingId: listingId,
+      }
+  
+      const newRule = await (prisma as any)[ruleType].create({
+        data: ruleData,
+      });
+  
+      const associationField = ruleType === 'safetyProperty' ? 'safePropertyId' : 'houseRuleId'
+  
+      await prisma.rule.create({
         data: {
           icon: icon,
           rule: rule,
           description: description,
-          safePropertyId: newSafetyPropertyRule.id,
+          [associationField]: newRule.id,
         },
       })
+  
       res.json(
         response.success({
           item: newRule,
@@ -220,6 +186,14 @@ export const addSafetypropertyRule = async (req: Request, res: Response) => {
     } catch (err: any) {
       res.json(response.error({ message: err.message }))
     }
+  }
+  
+  export const addSafetypropertyRule = async (req: Request, res: Response) => {
+    await addRule(req, res, 'safetyProperty')
+  }
+  
+  export const addHouseRule = async (req: Request, res: Response) => {
+    await addRule(req, res, 'houseRule')
   }
 
   export const addCancellationPolicy = async (req: Request, res: Response) => {
