@@ -48,6 +48,7 @@ import {
   getReviewByListing,
   updateReview,
 } from './service/reviews'
+import { deleteBasicAboutPlace, getBasicAboutPlaceById, updateBasicAboutPlace } from './service/basicAboutPlace'
 
 const router = express.Router()
 
@@ -166,4 +167,10 @@ router.get('/reviews/view/:reviewId', getReviewById)
 router.post('/:userId/reviews/post', addReview)
 router.patch('/:userId/reviews/update/:reviewId', updateReview)
 router.delete('/:userId/reviews/delete/:reviewId', deleteReview)
+
+//Basic about place
+router.get('/basic-about-place/:id', getBasicAboutPlaceById)
+router.patch('/:userId/basic-about-place/:id', updateBasicAboutPlace)
+router.delete('/:userId/basic-about-place/:id', deleteBasicAboutPlace)
+
 export default router

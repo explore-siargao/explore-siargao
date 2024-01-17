@@ -14,6 +14,7 @@ export const Z_Listing = z.object({
   longitude: z.number().optional(),
   latitude: z.number().optional(),
   hostedById: z.number().int().optional(),
+  basicAboutPlaceId: z.number().optional(),
   listingPriceId: z.number().int().optional(),
   createdAt: z.date().optional(),
   updatedAt: z.date().nullable().optional(),
