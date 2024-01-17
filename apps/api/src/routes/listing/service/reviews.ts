@@ -115,38 +115,40 @@ export const updateReview = async (req: Request, res: Response) => {
   const { rates, comment } = req.body
   if (rates || comment) {
     try {
-        const getUser = await prisma.user.findUnique({
-            where:{
-                id:userId
-            }
+      const getUser = await prisma.user.findUnique({
+        where: {
+          id: userId,
+        },
+      })
+      const getReview = await prisma.review.findUnique({
+        where: {
+          id: reviewId,
+        },
+      })
+      if (!getUser) {
+        return res.json(response.error({ message: USER_NOT_EXIST }))
+      }
+      if (!getReview) {
+        return res.json(response.error({ message: 'Review not found' }))
+      }
+      const updatereview = await prisma.review.update({
+        where: {
+          id: reviewId,
+        },
+        data: {
+          rates: rates,
+          comment: comment,
+        },
+      })
+      res.json(
+        response.success({
+          item: updatereview,
+          allItemCount: 1,
+          message: 'Review successfully updated',
         })
-        const getReview = await prisma.review.findUnique({
-            where:{
-                id:reviewId
-            }
-        })
-        if(!getUser){
-            return res.json(response.error({message:USER_NOT_EXIST}))
-        }
-        if(!getReview){
-            return res.json(response.error({message:"Review not found"}))
-        }
-        const updatereview = await prisma.review.update({
-            where:{
-                id:reviewId
-            },
-            data:{
-                rates:rates,
-                comment:comment
-            }
-        })
-        res.json(response.success({
-            item:updatereview,
-            allItemCount:1,
-            message:"Review successfully updated"
-        }))
-    } catch (err:any) {
-        res.json(response.error({message:err.message}))
+      )
+    } catch (err: any) {
+      res.json(response.error({ message: err.message }))
     }
   } else {
     res.json(response.error({ message: REQUIRED_VALUE_EMPTY }))
