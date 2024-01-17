@@ -53,7 +53,16 @@ import {
   getBasicAboutPlaceById,
   updateBasicAboutPlace,
 } from './service/basicAboutPlace'
-import { addCancellationPolicy, addHouseRule, addSafetypropertyRule, getAllRules, getRulesByCancellationPolicy, getRulesByHouseRule, getRulesBySafetyProperty, updateRule } from './service/rules'
+import {
+  addCancellationPolicy,
+  addHouseRule,
+  addSafetypropertyRule,
+  getAllRules,
+  getRulesByCancellationPolicy,
+  getRulesByHouseRule,
+  getRulesBySafetyProperty,
+  updateRule,
+} from './service/rules'
 
 const router = express.Router()
 
@@ -182,7 +191,10 @@ router.delete('/:userId/basic-about-place/:id', deleteBasicAboutPlace)
 router.get('/all/rules', getAllRules)
 router.get('/rules/house-rule/:houseRuleId', getRulesByHouseRule)
 router.get('/rules/safety-property/:safetyPropertyId', getRulesBySafetyProperty)
-router.get('/rules/cancellation-policy/:cancelPolicyId', getRulesByCancellationPolicy)
+router.get(
+  '/rules/cancellation-policy/:cancelPolicyId',
+  getRulesByCancellationPolicy
+)
 router.post('/:userId/rules/house-rule', addHouseRule)
 router.post('/:userId/rules/safety-property', addSafetypropertyRule)
 router.post('/:userId/rules/cancellation-policy', addCancellationPolicy)

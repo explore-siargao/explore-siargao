@@ -179,98 +179,99 @@ export const addHouseRule = async (req: Request, res: Response) => {
 }
 
 export const addSafetypropertyRule = async (req: Request, res: Response) => {
-    const userId = Number(req.params.userId)
-    const { title, listingId, icon, rule, description } = req.body
-    const inputIsValid = Z_Rule.safeParse(req.body)
-    if (!inputIsValid.success) {
-      return res.json(
-        response.error({ message: JSON.parse(inputIsValid.error.message) })
-      )
-    }
-    try {
-      const getUser = await prisma.user.findUnique({
-        where: {
-          id: userId,
-        },
-      })
-      if (!getUser) {
-        return res.json(response.error({ message: USER_NOT_EXIST }))
-      }
-      const newSafetyPropertyRule = await prisma.safetyProperty.create({
-        data: {
-          title: title,
-          listingId: listingId,
-        },
-      })
-      const newRule = await prisma.rule.create({
-        data: {
-          icon: icon,
-          rule: rule,
-          description: description,
-          safePropertyId: newSafetyPropertyRule.id,
-        },
-      })
-      res.json(
-        response.success({
-          item: newRule,
-          allItemCount: 1,
-          message: 'Rule successfully added',
-        })
-      )
-    } catch (err: any) {
-      res.json(response.error({ message: err.message }))
-    }
+  const userId = Number(req.params.userId)
+  const { title, listingId, icon, rule, description } = req.body
+  const inputIsValid = Z_Rule.safeParse(req.body)
+  if (!inputIsValid.success) {
+    return res.json(
+      response.error({ message: JSON.parse(inputIsValid.error.message) })
+    )
   }
+  try {
+    const getUser = await prisma.user.findUnique({
+      where: {
+        id: userId,
+      },
+    })
+    if (!getUser) {
+      return res.json(response.error({ message: USER_NOT_EXIST }))
+    }
+    const newSafetyPropertyRule = await prisma.safetyProperty.create({
+      data: {
+        title: title,
+        listingId: listingId,
+      },
+    })
+    const newRule = await prisma.rule.create({
+      data: {
+        icon: icon,
+        rule: rule,
+        description: description,
+        safePropertyId: newSafetyPropertyRule.id,
+      },
+    })
+    res.json(
+      response.success({
+        item: newRule,
+        allItemCount: 1,
+        message: 'Rule successfully added',
+      })
+    )
+  } catch (err: any) {
+    res.json(response.error({ message: err.message }))
+  }
+}
 
-  export const addCancellationPolicy = async (req: Request, res: Response) => {
-    const userId = Number(req.params.userId)
-    const { title, listingId, icon, rule, description, cancelationDueDate } = req.body
-    const inputIsValid = Z_Rule.safeParse(req.body)
-    if (!inputIsValid.success) {
-      return res.json(
-        response.error({ message: JSON.parse(inputIsValid.error.message) })
-      )
-    }
-    try {
-      const getUser = await prisma.user.findUnique({
-        where: {
-          id: userId,
-        },
-      })
-      if (!getUser) {
-        return res.json(response.error({ message: USER_NOT_EXIST }))
-      }
-      const newCancellationPolicy = await prisma.cancellationPolicy.create({
-        data: {
-          title: title,
-          listingId: listingId,
-          cancelationDueDate:cancelationDueDate
-        },
-      })
-      const newRule = await prisma.rule.create({
-        data: {
-          icon: icon,
-          rule: rule,
-          description: description,
-          cancellationPolicyId: newCancellationPolicy.id,
-        },
-      })
-      res.json(
-        response.success({
-          item: newRule,
-          allItemCount: 1,
-          message: 'Rule successfully added',
-        })
-      )
-    } catch (err: any) {
-      res.json(response.error({ message: err.message }))
-    }
+export const addCancellationPolicy = async (req: Request, res: Response) => {
+  const userId = Number(req.params.userId)
+  const { title, listingId, icon, rule, description, cancelationDueDate } =
+    req.body
+  const inputIsValid = Z_Rule.safeParse(req.body)
+  if (!inputIsValid.success) {
+    return res.json(
+      response.error({ message: JSON.parse(inputIsValid.error.message) })
+    )
   }
+  try {
+    const getUser = await prisma.user.findUnique({
+      where: {
+        id: userId,
+      },
+    })
+    if (!getUser) {
+      return res.json(response.error({ message: USER_NOT_EXIST }))
+    }
+    const newCancellationPolicy = await prisma.cancellationPolicy.create({
+      data: {
+        title: title,
+        listingId: listingId,
+        cancelationDueDate: cancelationDueDate,
+      },
+    })
+    const newRule = await prisma.rule.create({
+      data: {
+        icon: icon,
+        rule: rule,
+        description: description,
+        cancellationPolicyId: newCancellationPolicy.id,
+      },
+    })
+    res.json(
+      response.success({
+        item: newRule,
+        allItemCount: 1,
+        message: 'Rule successfully added',
+      })
+    )
+  } catch (err: any) {
+    res.json(response.error({ message: err.message }))
+  }
+}
 
 export const updateRule = async (req: Request, res: Response) => {
-    const userId = Number(req.params.userId)
+  const userId = Number(req.params.userId)
   const ruleId = Number(req.params.ruleId)
-  const {icon, rule, description, cancallationPolicy} = req.body
+  const { icon, rule, description, cancallationPolicy } = req.body
   if (icon || rule || description) {
     try {
       const getUser = await prisma.user.findUnique({
@@ -296,14 +297,14 @@ export const updateRule = async (req: Request, res: Response) => {
         data: {
           icon: icon,
           rule: rule,
-          description:description,
+          description: description,
         },
       })
       res.json(
         response.success({
           item: updateRule,
           allItemCount: 1,
-          message:"Rule successfully updated",
+          message: 'Rule successfully updated',
         })
       )
     } catch (err: any) {
@@ -315,46 +316,46 @@ export const updateRule = async (req: Request, res: Response) => {
 }
 
 export const deleteRule = async (req: Request, res: Response) => {
-    const userId = Number(req.params.userId)
-    const ruleId = Number(req.params.ruleId)
-    try {
-      const getUser = await prisma.user.findUnique({
-        where: {
-          id: userId,
-        },
-      })
-      const getRule = await prisma.rule.findUnique({
-        where: {
-          id: ruleId,
-        },
-      })
-      if (!getUser) {
-        return res.json(
-          response.error({
-            message: USER_NOT_EXIST,
-          })
-        )
-      }
-      if (!getRule) {
-        return res.json(
-          response.error({
-            message: 'Rule not found or already deleted',
-          })
-        )
-      }
-      const removeRule = await prisma.rule.delete({
-        where: {
-          id: ruleId,
-        },
-      })
-      res.json(
-        response.success({
-          item: removeRule,
-          allItemCount: 1,
-          message: 'Rule sucessfully deleted',
+  const userId = Number(req.params.userId)
+  const ruleId = Number(req.params.ruleId)
+  try {
+    const getUser = await prisma.user.findUnique({
+      where: {
+        id: userId,
+      },
+    })
+    const getRule = await prisma.rule.findUnique({
+      where: {
+        id: ruleId,
+      },
+    })
+    if (!getUser) {
+      return res.json(
+        response.error({
+          message: USER_NOT_EXIST,
         })
       )
-    } catch (err: any) {
-      res.json(response.error({ message: err.message }))
     }
+    if (!getRule) {
+      return res.json(
+        response.error({
+          message: 'Rule not found or already deleted',
+        })
+      )
+    }
+    const removeRule = await prisma.rule.delete({
+      where: {
+        id: ruleId,
+      },
+    })
+    res.json(
+      response.success({
+        item: removeRule,
+        allItemCount: 1,
+        message: 'Rule sucessfully deleted',
+      })
+    )
+  } catch (err: any) {
+    res.json(response.error({ message: err.message }))
+  }
 }
