@@ -246,7 +246,7 @@ export const addCancellationPolicy = async (req: Request, res: Response) => {
 export const updateRule = async (req: Request, res: Response) => {
   const userId = Number(req.params.userId)
   const ruleId = Number(req.params.ruleId)
-  const { icon, rule, description, cancallationPolicy } = req.body
+  const { icon, rule, description } = req.body
   if (icon || rule || description) {
     try {
       const getUser = await prisma.user.findUnique({
