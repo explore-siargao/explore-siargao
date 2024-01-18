@@ -77,6 +77,13 @@ import {
   getSafetyProperty,
   updateSafetyProperty,
 } from './service/safetyProperty'
+import {
+  deleteCancellationPolicy,
+  getAllCancellationPolicies,
+  getCancellationPoliciesByListing,
+  getCancellationPolicy,
+  updateCancellationPolicy,
+} from './service/cancellationPolicies'
 
 const router = express.Router()
 
@@ -228,5 +235,15 @@ router.get('/safety-properties/:listingId', getAllSafetyPropertiesByListing)
 router.get('/safety-properties/id/:id', getSafetyProperty)
 router.patch('/:userId/safety-properties/:id', updateSafetyProperty)
 router.delete('/:userId/safety-properties/:id', deleteSafetyProperty)
+
+//cancellation policies
+router.get('/all/cancellation-policies', getAllCancellationPolicies)
+router.get(
+  '/cancellation-policies/:listingId',
+  getCancellationPoliciesByListing
+)
+router.get('/cancellation-policies/id/:id', getCancellationPolicy)
+router.patch('/:userId/cancellation-policies/:id', updateCancellationPolicy)
+router.delete('/:userId/cancellation-policies/:id', deleteCancellationPolicy)
 
 export default router
