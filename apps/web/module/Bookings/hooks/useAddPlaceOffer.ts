@@ -3,7 +3,10 @@ import { API_URL_BOOKINGS } from "@repo/constants"
 import { T_PlaceOffers } from "@repo/contract"
 import { useMutation } from "@tanstack/react-query"
 
-export async function addPlaceOffer(userId: number | undefined, props: T_PlaceOffers) {
+export async function addPlaceOffer(
+  userId: number | undefined,
+  props: T_PlaceOffers
+) {
   const apiService = new ApiService()
   return await apiService.post(
     `${API_URL_BOOKINGS}/${userId}/place-offers`,

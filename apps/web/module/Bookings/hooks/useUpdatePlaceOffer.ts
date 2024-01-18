@@ -16,8 +16,7 @@ export async function updatePlaceOffer(
 
 function useUpdatePlaceOffer(userId: number | null) {
   const query = useMutation({
-    mutationFn: (props: T_PlaceOffers) =>
-    updatePlaceOffer(userId, props),
+    mutationFn: (props: T_PlaceOffers) => updatePlaceOffer(userId, props),
   })
   return query
 }
