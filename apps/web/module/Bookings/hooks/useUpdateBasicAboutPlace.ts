@@ -3,7 +3,10 @@ import { API_URL_BOOKINGS } from "@repo/constants"
 import { T_BasicAboutPlace } from "@repo/contract"
 import { useMutation } from "@tanstack/react-query"
 
-export async function updateBasicAboutPlace(userId: number | null, props: T_BasicAboutPlace) {
+export async function updateBasicAboutPlace(
+  userId: number | null,
+  props: T_BasicAboutPlace
+) {
   const apiService = new ApiService()
   return await apiService.patch(
     `${API_URL_BOOKINGS}/${userId}/basic-about-place/${props.id}`,
@@ -13,7 +16,8 @@ export async function updateBasicAboutPlace(userId: number | null, props: T_Basi
 
 function useUpdateBasicAboutPlace(userId: number | null) {
   const query = useMutation({
-    mutationFn: (props: T_BasicAboutPlace) => updateBasicAboutPlace(userId, props),
+    mutationFn: (props: T_BasicAboutPlace) =>
+      updateBasicAboutPlace(userId, props),
   })
   return query
 }
