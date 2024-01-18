@@ -1,6 +1,6 @@
 import { z } from "zod"
 
-export const Z_HouseRule = z.object({
+export const Z_SafetyProperty = z.object({
   id: z.number().optional(),
   title: z.string(),
   listingId: z.number(),
