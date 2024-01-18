@@ -63,6 +63,13 @@ import {
   getRulesBySafetyProperty,
   updateRule,
 } from './service/rules'
+import {
+  deleteHouseRule,
+  getAllHouseRules,
+  getAllHouseRulesByListing,
+  getHouseRule,
+  updateHouseRule,
+} from './service/houseRules'
 
 const router = express.Router()
 
@@ -200,5 +207,12 @@ router.post('/:userId/rules/safety-property', addSafetypropertyRule)
 router.post('/:userId/rules/cancellation-policy', addCancellationPolicy)
 router.patch('/:userId/rules/:ruleId', updateRule)
 router.delete('/:userId/rules/:ruleId', updateRule)
+
+//house rules
+router.get('/all/house-rules', getAllHouseRules)
+router.get('/house-rules/:listingId', getAllHouseRulesByListing)
+router.get('/house-rules/id/:id', getHouseRule)
+router.patch('/:userId/house-rules/:id', updateHouseRule)
+router.delete('/:userId/house-rules/:id', deleteHouseRule)
 
 export default router
