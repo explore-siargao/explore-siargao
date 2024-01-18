@@ -56,6 +56,7 @@ export const getListing = async (req: Request, res: Response) => {
     const listing = await prisma.listing.findFirst({
       where: { id: Number(req.params.id) },
       include: {
+        basicAboutPlace: true,
         price: true,
         highLights: true,
         hostedBy: true,
