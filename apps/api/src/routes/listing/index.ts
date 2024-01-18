@@ -41,6 +41,49 @@ import {
   getAllListingPlaceOffers,
   getListingPlaceOffersByListing,
 } from './service/listingPlaceOffers'
+import {
+  addReview,
+  deleteReview,
+  getReviewById,
+  getReviewByListing,
+  updateReview,
+} from './service/reviews'
+import {
+  deleteBasicAboutPlace,
+  getBasicAboutPlaceById,
+  updateBasicAboutPlace,
+} from './service/basicAboutPlace'
+import {
+  addCancellationPolicy,
+  addHouseRule,
+  addSafetypropertyRule,
+  getAllRules,
+  getRulesByCancellationPolicy,
+  getRulesByHouseRule,
+  getRulesBySafetyProperty,
+  updateRule,
+} from './service/rules'
+import {
+  deleteHouseRule,
+  getAllHouseRules,
+  getAllHouseRulesByListing,
+  getHouseRule,
+  updateHouseRule,
+} from './service/houseRules'
+import {
+  deleteSafetyProperty,
+  getAllSafetyProperties,
+  getAllSafetyPropertiesByListing,
+  getSafetyProperty,
+  updateSafetyProperty,
+} from './service/safetyProperty'
+import {
+  deleteCancellationPolicy,
+  getAllCancellationPolicies,
+  getCancellationPoliciesByListing,
+  getCancellationPolicy,
+  updateCancellationPolicy,
+} from './service/cancellationPolicies'
 
 const router = express.Router()
 
@@ -152,5 +195,55 @@ router.delete(
   '/:userId/listing-place-offers/delete/:listingPlaceOfferId',
   deleteListingPlaceOffer
 )
+
+//reviews
+router.get('/reviews/:listingId', getReviewByListing)
+router.get('/reviews/view/:reviewId', getReviewById)
+router.post('/:userId/reviews/post', addReview)
+router.patch('/:userId/reviews/update/:reviewId', updateReview)
+router.delete('/:userId/reviews/delete/:reviewId', deleteReview)
+
+//Basic about place
+router.get('/basic-about-place/:id', getBasicAboutPlaceById)
+router.patch('/:userId/basic-about-place/:id', updateBasicAboutPlace)
+router.delete('/:userId/basic-about-place/:id', deleteBasicAboutPlace)
+
+//rules
+router.get('/all/rules', getAllRules)
+router.get('/rules/house-rule/:houseRuleId', getRulesByHouseRule)
+router.get('/rules/safety-property/:safetyPropertyId', getRulesBySafetyProperty)
+router.get(
+  '/rules/cancellation-policy/:cancelPolicyId',
+  getRulesByCancellationPolicy
+)
+router.post('/:userId/rules/house-rule', addHouseRule)
+router.post('/:userId/rules/safety-property', addSafetypropertyRule)
+router.post('/:userId/rules/cancellation-policy', addCancellationPolicy)
+router.patch('/:userId/rules/:ruleId', updateRule)
+router.delete('/:userId/rules/:ruleId', updateRule)
+
+//house rules
+router.get('/all/house-rules', getAllHouseRules)
+router.get('/house-rules/:listingId', getAllHouseRulesByListing)
+router.get('/house-rules/id/:id', getHouseRule)
+router.patch('/:userId/house-rules/:id', updateHouseRule)
+router.delete('/:userId/house-rules/:id', deleteHouseRule)
+
+//safety properties
+router.get('/all/safety-properties', getAllSafetyProperties)
+router.get('/safety-properties/:listingId', getAllSafetyPropertiesByListing)
+router.get('/safety-properties/id/:id', getSafetyProperty)
+router.patch('/:userId/safety-properties/:id', updateSafetyProperty)
+router.delete('/:userId/safety-properties/:id', deleteSafetyProperty)
+
+//cancellation policies
+router.get('/all/cancellation-policies', getAllCancellationPolicies)
+router.get(
+  '/cancellation-policies/:listingId',
+  getCancellationPoliciesByListing
+)
+router.get('/cancellation-policies/id/:id', getCancellationPolicy)
+router.patch('/:userId/cancellation-policies/:id', updateCancellationPolicy)
+router.delete('/:userId/cancellation-policies/:id', deleteCancellationPolicy)
 
 export default router

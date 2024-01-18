@@ -22,7 +22,9 @@ export const getAllListing = async (req: Request, res: Response) => {
             placeOffer: true,
           },
         },
-        thingsToKnow: true,
+        houseRules: true,
+        safetyProperties: true,
+        cancellationPolicies: true,
         review: true,
         wishes: true,
       },
@@ -58,7 +60,9 @@ export const getListing = async (req: Request, res: Response) => {
         highLights: true,
         hostedBy: true,
         placeOffers: true,
-        thingsToKnow: true,
+        houseRules: true,
+        safetyProperties: true,
+        cancellationPolicies: true,
         review: true,
       },
     })
@@ -102,6 +106,10 @@ export const addListing = async (req: Request, res: Response) => {
     checkOut,
     countGuest,
     isNight,
+    guests,
+    bedRooms,
+    beds,
+    bathRooms,
   } = req.body
   if (isValidInput.success) {
     try {
@@ -123,7 +131,11 @@ export const addListing = async (req: Request, res: Response) => {
           serviceFee &&
           checkIn &&
           checkOut &&
-          countGuest
+          countGuest &&
+          guests &&
+          bedRooms &&
+          beds &&
+          bathRooms
         ) {
           const newPrice = await prisma.listingPrice.create({
             data: {
@@ -134,6 +146,15 @@ export const addListing = async (req: Request, res: Response) => {
               checkOut: checkOut,
               countGuest: countGuest,
               isNight: isNight,
+            },
+          })
+
+          const newBasicAboutPlace = await prisma.basicAboutPlace.create({
+            data: {
+              guests: guests,
+              bedRooms: bedRooms,
+              beds: beds,
+              bathRooms: bathRooms,
             },
           })
           const newListing = await prisma.listing.create({
@@ -147,6 +168,7 @@ export const addListing = async (req: Request, res: Response) => {
               latitude: latitude,
               hostedById: hostId,
               listingPriceId: Number(newPrice.id),
+              basicAboutPlaceId: Number(newBasicAboutPlace.id),
             },
           })
 
@@ -169,6 +191,8 @@ export const addListing = async (req: Request, res: Response) => {
       res.json(response.error({ message: e.message }))
     }
   } else {
-    res.json(response.error({ message: isValidInput.error.message }))
+    res.json(
+      response.error({ message: JSON.parse(isValidInput.error.message) })
+    )
   }
 }
