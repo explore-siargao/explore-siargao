@@ -70,7 +70,13 @@ import {
   getHouseRule,
   updateHouseRule,
 } from './service/houseRules'
-import { deleteSafetyProperty, getAllSafetyProperties, getAllSafetyPropertiesByListing, getSafetyProperty, updateSafetyProperty } from './service/safetyProperty'
+import {
+  deleteSafetyProperty,
+  getAllSafetyProperties,
+  getAllSafetyPropertiesByListing,
+  getSafetyProperty,
+  updateSafetyProperty,
+} from './service/safetyProperty'
 
 const router = express.Router()
 
