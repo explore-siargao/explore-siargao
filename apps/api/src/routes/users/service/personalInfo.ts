@@ -1,5 +1,5 @@
 import { Response, Request } from 'express'
-import { prisma } from "@/common/helpers/prismaClient"
+import { prisma } from '@/common/helpers/prismaClient'
 import { REQUIRED_VALUE_EMPTY, UNKNOWN_ERROR_OCCURRED } from '@repo/constants'
 import { FileService } from '@/common/service/file'
 import { T_GovernmentId, Z_Add_GovernmentId } from '@repo/contract'
@@ -10,7 +10,6 @@ const fileService = new FileService()
 
 export const getPersonalInfo = async (req: Request, res: Response) => {
   try {
-    
     const getPersonalInfo = await prisma.personalInfo.findFirst({
       where: { userId: Number(req?.params?.userId) },
       include: {
@@ -46,7 +45,6 @@ export const getPersonalInfo = async (req: Request, res: Response) => {
 
 export const updatePersonalInfo = async (req: Request, res: Response) => {
   try {
-    
     const {
       firstName,
       lastName,
@@ -87,7 +85,6 @@ export const updatePersonalInfo = async (req: Request, res: Response) => {
 
 export const addEmergencyContact = async (req: Request, res: Response) => {
   try {
-    
     const { email, phoneNumber, name, relationship } = req.body
     const personalInfoId = Number(req.params.personalInfoId)
     if (name && relationship && (email || phoneNumber)) {
@@ -142,7 +139,6 @@ export const addEmergencyContact = async (req: Request, res: Response) => {
 }
 
 export const removeEmergencyContact = async (req: Request, res: Response) => {
-  
   const personId = Number(req.params.peronalInfoId)
   const emergencyContactId = Number(req.params.emergencyContactId)
   try {
@@ -201,7 +197,6 @@ export const removeEmergencyContact = async (req: Request, res: Response) => {
 
 export const addAddress = async (req: Request, res: Response) => {
   try {
-    
     const { country, streetAddress, city, province, zipCode } = req.body
     const personalInfoId = Number(req.params.personalInfoId)
     if (streetAddress && city && province && zipCode) {
@@ -278,7 +273,6 @@ export const addAddress = async (req: Request, res: Response) => {
 }
 
 export const editAddress = async (req: Request, res: Response) => {
-  
   const { streetAddress, city, province, zipCode, country } = req.body
   const userId = Number(req.params.userId)
   try {
@@ -341,7 +335,6 @@ export const getAllGovernmentIdByPersonInfoId = async (
   req: Request,
   res: Response
 ) => {
-  
   const personId = Number(req.params.personId)
   try {
     const getPersonInfoId = await prisma.personalInfo.findUnique({
@@ -378,8 +371,8 @@ export const getAllGovernmentIdByPersonInfoId = async (
 }
 
 export const addGovernmentId = async (req: Request, res: Response) => {
-  const peronalInfoId = Number(req.params.peronalInfoId);
-  const files = req.files;
+  const peronalInfoId = Number(req.params.peronalInfoId)
+  const files = req.files
   const isValidInput = Z_Add_GovernmentId.safeParse(req.body)
   if (isValidInput.success && files) {
     const { type } = req.body
@@ -390,7 +383,7 @@ export const addGovernmentId = async (req: Request, res: Response) => {
         },
       })
       if (getPersonIfo) {
-        const upload = await fileService.upload({ files });
+        const upload = await fileService.upload({ files })
         if (getPersonIfo.governMentId === null) {
           const addNewGovernmentId = await prisma.personalInfo.update({
             where: {
@@ -402,12 +395,18 @@ export const addGovernmentId = async (req: Request, res: Response) => {
               ] as T_GovernmentId[]),
             },
           })
-          res.json(response.success({
-            items: JSON.parse(addNewGovernmentId.governMentId as string) as T_GovernmentId[],
-            message: 'Government Id successfully added',
-          }))
+          res.json(
+            response.success({
+              items: JSON.parse(
+                addNewGovernmentId.governMentId as string
+              ) as T_GovernmentId[],
+              message: 'Government Id successfully added',
+            })
+          )
         } else {
-          const updatedGovernmentId = JSON.parse(getPersonIfo.governMentId) as T_GovernmentId[]
+          const updatedGovernmentId = JSON.parse(
+            getPersonIfo.governMentId
+          ) as T_GovernmentId[]
           const typeAlreadyExists = updatedGovernmentId.some(
             (govId: T_GovernmentId) => govId.type === type
           )
@@ -422,33 +421,46 @@ export const addGovernmentId = async (req: Request, res: Response) => {
                 id: peronalInfoId,
               },
               data: {
-                governMentId: JSON.stringify(updatedGovernmentId)
+                governMentId: JSON.stringify(updatedGovernmentId),
               },
             })
-            res.json(response.success({
-              items: JSON.parse(updateGovId.governMentId as string) as T_GovernmentId[],
-              message: 'Government Id successfully added',
-            }))
+            res.json(
+              response.success({
+                items: JSON.parse(
+                  updateGovId.governMentId as string
+                ) as T_GovernmentId[],
+                message: 'Government Id successfully added',
+              })
+            )
           } else {
-            res.json(response.error({
-              message: 'This type of Id already exists',
-            }))
+            res.json(
+              response.error({
+                message: 'This type of Id already exists',
+              })
+            )
           }
         }
-
       } else {
-        res.json(response.error({
-          message: 'This person not found in our system',
-        }))
+        res.json(
+          response.error({
+            message: 'This person not found in our system',
+          })
+        )
       }
     } catch (err: any) {
-      res.json(response.error({
-        message: err.message
-      }))
+      res.json(
+        response.error({
+          message: err.message,
+        })
+      )
     }
   } else {
-    res.json(response.error({
-      message: !isValidInput.success ? isValidInput.error.issues : UNKNOWN_ERROR_OCCURRED,
-    }))
+    res.json(
+      response.error({
+        message: !isValidInput.success
+          ? isValidInput.error.issues
+          : UNKNOWN_ERROR_OCCURRED,
+      })
+    )
   }
 }

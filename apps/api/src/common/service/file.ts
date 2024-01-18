@@ -1,5 +1,12 @@
-import { S3ClientConfig, S3Client, PutObjectCommand, PutObjectCommandInput, GetObjectCommandInput, GetObjectCommand } from '@aws-sdk/client-s3';
-import { randomUUID } from 'crypto';
+import {
+  S3ClientConfig,
+  S3Client,
+  PutObjectCommand,
+  PutObjectCommandInput,
+  GetObjectCommandInput,
+  GetObjectCommand,
+} from '@aws-sdk/client-s3'
+import { randomUUID } from 'crypto'
 
 export type T_UploadFileParams = {
   files: any
@@ -37,19 +44,19 @@ export class FileService {
 
   async upload(uploadFileParams: T_UploadFileParams) {
     const { files, key } = uploadFileParams
-    const randomId = randomUUID();
+    const randomId = randomUUID()
     const fileContent = Buffer.from(files?.file?.data, 'binary')
     const params: PutObjectCommandInput = {
       Bucket: this.BUCKET_NAME,
-      Key: key? key : randomId,
-      Body: fileContent
+      Key: key ? key : randomId,
+      Body: fileContent,
     }
     const command = new PutObjectCommand(params)
-    const result = await this.s3ProviderClient.send(command);
+    const result = await this.s3ProviderClient.send(command)
     return {
       ...result,
-      key: key? key : randomId
-    };
+      key: key ? key : randomId,
+    }
   }
 
   async get(getParams: T_GetParams) {
@@ -59,8 +66,8 @@ export class FileService {
       Key: key,
     }
     const command = new GetObjectCommand(params)
-    const getObjectResult = await this.s3ProviderClient.send(command);
-    const fileBase64 = await getObjectResult.Body?.transformToString('base64');
+    const getObjectResult = await this.s3ProviderClient.send(command)
+    const fileBase64 = await getObjectResult.Body?.transformToString('base64')
     return Buffer.from(fileBase64 as string, 'base64')
   }
 }
