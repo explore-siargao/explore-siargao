@@ -63,7 +63,13 @@ import {
   getRulesBySafetyProperty,
   updateRule,
 } from './service/rules'
-import { deleteHouseRule, getAllHouseRules, getAllHouseRulesByListing, getHouseRule, updateHouseRule } from './service/houseRules'
+import {
+  deleteHouseRule,
+  getAllHouseRules,
+  getAllHouseRulesByListing,
+  getHouseRule,
+  updateHouseRule,
+} from './service/houseRules'
 
 const router = express.Router()
 
