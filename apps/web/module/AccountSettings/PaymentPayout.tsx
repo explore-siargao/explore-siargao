@@ -18,6 +18,7 @@ const renderPayouts = () => {
 const renderGuestContribution = () => {
   return <GuestContribution />
 }
+
 const PaymentPayout = () => {
   const [tableState, setTableState] = useState(0)
   let content

@@ -34,21 +34,14 @@ const BookingReviewItem = ({
       <article className="col-span-2">
         <div className="flex justify-between">
           <div className="flex items-center mb-4">
-            <Image
-              className="w-10 h-10 me-4 rounded-full"
-              src="http://localhost:3000/logo-single.png"
-              alt=""
-              width={300}
-              height={300}
-            />
             <div className="font-medium ">
               <p>
-                {name}{" "}
+                <strong>You reviewed</strong> {name}{" "}
                 <time
                   dateTime="2014-08-16 19:00"
                   className="block text-sm text-gray-500 d"
                 >
-                  {joinedDate}
+                  {reviewedTime}
                 </time>
               </p>
             </div>

@@ -8,7 +8,6 @@ import useSessionStore from "@/common/store/useSessionStore"
 
 const Bookings = () => {
   const userId = useSessionStore((state) => state).id
-  console.log(userId)
   const { data, isPending } = useGetAllBookings()
 
   return (
