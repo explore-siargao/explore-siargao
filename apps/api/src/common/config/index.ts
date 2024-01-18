@@ -13,3 +13,8 @@ export const webUrl = process.env.WEB_URL || ''
 export const captchaKeySecret = process.env.RECAPTCHA_KEY_SECRET || ''
 export const nodeEnv = process.env.NODE_ENV || ''
 export const nextAuthSecret = process.env.NEXTAUTH_SECRET || ''
+
+//AWS
+export const awsAccessKey = process.env.AWS_ACCESS_KEY || ''
+export const awsAccessSecret = process.env.AWS_SECRET_ACCESS_KEY || ''
+export const awsRegion = process.env.AWS_REGION

@@ -9,8 +9,6 @@ const ErrorMessage = ({ title, errors }: ErrorMessageProps) => {
   if (!errors || errors.length === 0) {
     return null // Don't render anything if there are no errors
   }
-
-  console.log(errors)
   return (
     <div className="bg-error-100 py-2 px-3 my-3 rounded-md">
       <div className="flex items-center space-x-2 w-full">
