@@ -57,6 +57,7 @@ import {
   addCancellationPolicy,
   addHouseRule,
   addSafetypropertyRule,
+  deleteRule,
   getAllRules,
   getRulesByCancellationPolicy,
   getRulesByHouseRule,
@@ -220,7 +221,7 @@ router.post('/:userId/rules/house-rule', addHouseRule)
 router.post('/:userId/rules/safety-property', addSafetypropertyRule)
 router.post('/:userId/rules/cancellation-policy', addCancellationPolicy)
 router.patch('/:userId/rules/:ruleId', updateRule)
-router.delete('/:userId/rules/:ruleId', updateRule)
+router.delete('/:userId/rules/:ruleId', deleteRule)
 
 //house rules
 router.get('/all/house-rules', getAllHouseRules)
