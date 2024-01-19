@@ -17,15 +17,15 @@ export const getAllListingHighlights = async (req: Request, res: Response) => {
         highlights: true,
       },
     })
-    if(allListingHighlights.length!==0){
-    res.json(
-      response.success({
-        items: allListingHighlights,
-        allItemCount: allListingHighlights.length,
-        message: '',
-      })
-    )
-    }else{
+    if (allListingHighlights.length !== 0) {
+      res.json(
+        response.success({
+          items: allListingHighlights,
+          allItemCount: allListingHighlights.length,
+          message: '',
+        })
+      )
+    } else {
       res.json(
         response.success({
           items: allListingHighlights,
@@ -60,23 +60,23 @@ export const getListingHighlightsByListing = async (
             highlights: true,
           },
         })
-        if(allListingHighlightsByListing.length!==0){
-      res.json(
-        response.success({
-          items: allListingHighlightsByListing,
-          allItemCount: allListingHighlightsByListing.length,
-          message: '',
-        })
-      )
-        }else{
-          res.json(
-            response.success({
-              items: allListingHighlightsByListing,
-              allItemCount: allListingHighlightsByListing.length,
-              message: 'No Listing highlights assigned to the listing',
-            })
-          )
-        }
+      if (allListingHighlightsByListing.length !== 0) {
+        res.json(
+          response.success({
+            items: allListingHighlightsByListing,
+            allItemCount: allListingHighlightsByListing.length,
+            message: '',
+          })
+        )
+      } else {
+        res.json(
+          response.success({
+            items: allListingHighlightsByListing,
+            allItemCount: allListingHighlightsByListing.length,
+            message: 'No Listing highlights assigned to the listing',
+          })
+        )
+      }
     } else {
       res.json(response.error({ message: 'Listing not found in our system' }))
     }

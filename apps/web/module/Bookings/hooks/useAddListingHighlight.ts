@@ -17,7 +17,7 @@ export async function addListingHighlight(
 function useAddListingHighlight(userId: number) {
   const query = useMutation({
     mutationFn: (props: T_ListingHighlight) =>
-    addListingHighlight(userId, props),
+      addListingHighlight(userId, props),
   })
   return query
 }
