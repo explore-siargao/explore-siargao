@@ -4,7 +4,9 @@ import { useQuery } from "@tanstack/react-query"
 
 export async function getRuleByHouseRule(houseRuleId: number | undefined) {
   const apiService = new ApiService()
-  return await apiService.get(`${API_URL_BOOKINGS}/rules/house-rule/${houseRuleId}`)
+  return await apiService.get(
+    `${API_URL_BOOKINGS}/rules/house-rule/${houseRuleId}`
+  )
 }
 
 function useGetRulesByHouseRule(houseRuleId: number | undefined) {
