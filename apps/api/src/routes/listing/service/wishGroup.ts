@@ -39,6 +39,12 @@ async function getWishGroupById(wishGroupId: number) {
   })
 }
 
+async function getWishGroupByTitle(title: string, userId: number) {
+  return await prisma.wishGroup.findFirst({
+    where: { title: title, userId: userId },
+  })
+}
+
 async function createWishGroup(
   title: string,
   userId: number,
@@ -105,6 +111,7 @@ export const wishGroupByTitle = async (req: Request, res: Response) => {
         id: userId,
       },
     })
+
     if (getUser !== null) {
       const groupWishGroup = await prisma.wishGroup.groupBy({
         by: ['title'],
@@ -114,9 +121,28 @@ export const wishGroupByTitle = async (req: Request, res: Response) => {
         },
       })
 
+      // Map through the groupWishGroup array and add the new entity to each item
+      const modifiedGroup = await Promise.all(
+        groupWishGroup.map(async (item) => {
+          const imageUrl = await prisma.wishGroup.findFirst({
+            where: {
+              title: item.title,
+              userId: userId,
+            },
+            include: {
+              listing: true,
+            },
+          })
+          return {
+            ...item,
+            imageUrl: imageUrl?.listing.imageUrls,
+          }
+        })
+      )
+
       res.json(
         response.success({
-          item: groupWishGroup,
+          item: modifiedGroup, // Use the modifiedGroup array with the new entity
           allItemCount: groupWishGroup.length,
           message: '',
         })
@@ -219,7 +245,7 @@ export const addWishGroup = async (req: Request, res: Response) => {
 export const addToExistingWishGroup = async (req: Request, res: Response) => {
   const listingId = req.body.listingId
   const userId = Number(req.params.userId)
-  const wishGroupId = Number(req.params.wishGroupId)
+  const title = req.body.title
   const isValidInput = Z_WishGroup.safeParse(req.body)
 
   if (!isValidInput.success) {
@@ -233,7 +259,7 @@ export const addToExistingWishGroup = async (req: Request, res: Response) => {
       return res.json(response.error({ message: USER_NOT_EXIST }))
     }
 
-    const wishGroup = await getWishGroupById(wishGroupId)
+    const wishGroup = await getWishGroupByTitle(title, userId)
 
     if (!wishGroup) {
       return res.json(response.error({ message: 'Wish group not found' }))
@@ -246,7 +272,7 @@ export const addToExistingWishGroup = async (req: Request, res: Response) => {
     }
 
     const newWishGroup = await createWishGroup(
-      wishGroup.title,
+      title as string,
       userId,
       listingId
     )

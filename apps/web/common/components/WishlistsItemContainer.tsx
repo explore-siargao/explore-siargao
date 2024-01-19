@@ -20,6 +20,8 @@ import { Title } from "./ui/Title"
 import { Typography } from "./ui/Typography"
 import { ComponentProps, DetailsType } from "../types/global"
 import { DocumentDuplicateIcon } from "@heroicons/react/24/outline"
+import useRemoveFromWishGroup from "@/module/AccountSettings/hooks/useRemoveFromWishGroup"
+import { useQueryClient } from "@tanstack/react-query"
 
 type ItemData = {
   id: number
@@ -37,13 +39,17 @@ type ItemData = {
 const HeartButton = ({
   isClicked,
   onClick,
+  id,
 }: {
   isClicked: boolean
   onClick: () => void
+  id: number
 }) => (
   <HeartIcon
-    className={`absolute top-3 right-3 h-7 w-7 text-text-50 active:scale-90 ${!isClicked ? "fill-error-500" : "fill-text-500/50 "
-      }`}
+    id={"heart" + id}
+    className={`absolute top-3 right-3 h-7 w-7 text-text-50 active:scale-90 ${
+      !isClicked ? "fill-error-500" : "fill-text-500/50 "
+    }`}
     onClick={onClick}
   />
 )
@@ -80,15 +86,16 @@ const WishlistsItemContainer = () => {
     price: "",
     isNight: false,
     note: "",
+    priceProps: {
+      fee: 0,
+      cleaningFee: 0,
+      serviceFee: 0,
+      isNight: false,
+    },
   })
 
-  const [isClicked, setIsClicked] = useState(false)
   const [addNote, setAddNote] = useState(false)
   const [openMenu, setOpenMenu] = useState(false)
-
-  const handleClick = () => {
-    setIsClicked((prevState) => !prevState)
-  }
   const showAddNoteModal = (item: any) => {
     setDetailsForItem(item)
     setAddNote(true)
@@ -112,7 +119,33 @@ const WishlistsItemContainer = () => {
         item?.listing?.price.serviceFee,
       isNight: item?.listing?.price.isNight,
       note: item?.note,
+      priceProps: {
+        fee: item?.listing?.price?.fee,
+        cleaningFee: item?.listing?.price?.cleaningFee,
+        serviceFee: item?.listing?.price?.serviceFee,
+        isNight: item?.listing?.price.isNight,
+      },
     })
+  }
+
+  const queryClient = useQueryClient()
+  const callBackReq = {
+    onSuccess: (data: any) => {
+      if (!data.error) {
+        queryClient.invalidateQueries({
+          queryKey: ["wish-group"],
+        })
+        queryClient.invalidateQueries({
+          queryKey: ["wish-group-count"],
+        })
+        toast.success("Wishlist Successfully rempved from group")
+      } else {
+        toast.error(String(data.message))
+      }
+    },
+    onError: (err: any) => {
+      toast.error(String(err))
+    },
   }
 
   const copyToClipboard = () => {
@@ -120,11 +153,24 @@ const WishlistsItemContainer = () => {
   }
 
   const session = useSessionStore((state) => state)
+  const { mutate } = useRemoveFromWishGroup(1)
   const params = useParams()
   const { data, isPending } = useGetWishGroupByUserAndTitle(
     session.id as number,
     params?._id as string
   )
+  const [isClickedArray, setIsClickedArray] = useState<boolean[]>(() => {
+    return (data?.items || []).map(() => false)
+  })
+
+  const handleClick = (index: number, wishGroupId: number) => {
+    setIsClickedArray((prev) => {
+      const updatedArray = [...prev]
+      updatedArray[index] = !prev[index]
+      mutate({ id: wishGroupId }, callBackReq)
+      return updatedArray
+    })
+  }
 
   return (
     <>
@@ -163,10 +209,14 @@ const WishlistsItemContainer = () => {
           {/* ... (other components remain unchanged) */}
           <div className="grid gap-4 grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 w-full justify-center pt-4 pb-6 px-4">
             {data?.items?.length !== 0 ? (
-              data?.items?.map((item) => (
+              data?.items?.map((item, index) => (
                 <div key={item?.id}>
                   <div className="h-72 2xl:w-auto rounded-2xl relative select-none">
-                    <HeartButton isClicked={isClicked} onClick={handleClick} />
+                    <HeartButton
+                      id={item.id}
+                      isClicked={Boolean(isClickedArray[index])}
+                      onClick={() => handleClick(index, item?.id as number)}
+                    />
                     <Image
                       src={JSON.parse(item.listing.imageUrls)[0].url}
                       width={300}
@@ -237,8 +287,7 @@ const WishlistsItemContainer = () => {
             title={details?.title}
             address={details?.address}
             description={details?.description}
-            price={details?.price as string}
-            isNight={details?.isNight}
+            price={details?.priceProps}
             note={details?.note}
             onClose={closeAddNoteModal}
             id={details?.id as number}

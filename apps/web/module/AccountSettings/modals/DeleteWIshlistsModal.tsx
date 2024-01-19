@@ -93,6 +93,7 @@ const DeleteWIshlistsModal = ({
                     isSubmit={false}
                     isPending={isPending}
                     buttonFn={() => deleteWishGroup()}
+                    onClose={onClose}
                   />
                 </ModalContainer>
               </Dialog.Panel>

@@ -9,13 +9,14 @@ import AddWishlistModal from "@/module/AccountSettings/components/modals/AddWish
 
 type BookingProps = {
   listingId: number
-  photo: string
+  imageKey: string
   distance: string
   location: string
   date: string
   price: string
   dayTime: string
   ratings: string
+  isHearted: boolean
 }
 
 const BookingBoxContainer = ({
@@ -24,9 +25,10 @@ const BookingBoxContainer = ({
   distance,
   location,
   price,
-  photo,
+  imageKey,
   dayTime,
   ratings,
+  isHearted,
 }: BookingProps) => {
   const [isClicked, setIsClicked] = useState(false)
   const handleClick = () => {
@@ -44,16 +46,16 @@ const BookingBoxContainer = ({
           >
             <HeartIcon
               className={` h-7 w-7 text-text-50 active:scale-90 ${
-                isClicked ? "fill-error-500" : "fill-text-500/50 "
+                isClicked || isHearted ? "fill-error-500" : "fill-text-500/50 "
               }`}
               onClick={handleClick}
             />
           </button>
           <Image
-            src={photo}
+            src={`/assets/${imageKey}`}
             width={300}
             height={300}
-            alt={photo}
+            alt={date}
             className="object-cover h-full w-full rounded-xl"
           />
         </div>

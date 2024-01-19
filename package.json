@@ -10,15 +10,17 @@
     "dev": "turbo dev",
     "start": "turbo start",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "build:api": "turbo run build --filter=@repo/constants && turbo run build --filter=@repo/contract && turbo run build --filter=api"
   },
   "devDependencies": {
     "@repo/eslint-config": "*",
     "@repo/typescript-config": "*",
+    "@types/express-fileupload": "^1.4.4",
     "@types/googlemaps": "^3.43.3",
     "@types/leaflet": "^1.9.8",
     "prettier": "^3.1.0",
-    "turbo": "^1.11.2"
+    "turbo": "^1.11.3"
   },
   "packageManager": "^npm@10.2.3",
   "workspaces": [

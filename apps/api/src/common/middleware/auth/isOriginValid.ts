@@ -11,8 +11,11 @@ const isOriginValid = async (
 ) => {
   const origin = req.headers['origin']
   const referer = req.headers['referer']
-  if (origin && referer) {
-    const isValid = String(referer).startsWith(webUrl) && origin === webUrl
+  const proxy = req.headers['x-forwarded-host']
+  if ((origin && referer) || proxy) {
+    const isValid =
+      (String(referer).startsWith(webUrl) && origin === webUrl) ||
+      webUrl.includes(proxy as string)
     if (isValid) {
       next()
     } else {
