@@ -16,7 +16,8 @@ export async function addListingPlaceOffer(
 
 function useAddListingPlaceOffer(userId: number) {
   const query = useMutation({
-    mutationFn: (props: T_ListingPlaceOffer) => addListingPlaceOffer(userId, props),
+    mutationFn: (props: T_ListingPlaceOffer) =>
+      addListingPlaceOffer(userId, props),
   })
   return query
 }
