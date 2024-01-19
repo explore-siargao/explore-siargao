@@ -2,11 +2,14 @@
 import React from "react"
 import { Title } from "@/common/components/ui/Title"
 import WishlistBoxContainer from "@/common/components/WishlistBoxContainer"
-import { WidthWrapper } from "@/common/components/WidthWrapper"
+import { Breadcrumb } from "@/common/components/ui/Breadcrumb"
 import useWishGroupWithCount from "./hooks/useGetWishGroupWithCount"
 import useSessionStore from "@/common/store/useSessionStore"
 import { Spinner } from "@/common/components/ui/Spinner"
 import { Typography } from "@/common/components/ui/Typography"
+import AccountSettingWrapper from "@/common/components/AccountSettingWrapper"
+import { LINK_ACCOUNT_SETTINGS } from "@/common/constants/links"
+
 const WishlistGroup = [
   {
     id: 1,
@@ -44,16 +47,23 @@ const Wishlist = () => {
   const session = useSessionStore((state) => state)
   const { data, isPending } = useWishGroupWithCount(session?.id as number)
   return (
-    <WidthWrapper className="my-24 lg:my-32">
+    <AccountSettingWrapper>
+      <div>
+        <Breadcrumb
+          home="Account"
+          page="Wishlists"
+          link={LINK_ACCOUNT_SETTINGS}
+        />
+        <Title>Wishlists</Title>
+      </div>
+      <div className="mt-4">
       {isPending ? (
         <Spinner size={"md"}>Loading...</Spinner>
       ) : (
         <>
           {data?.item?.length !== 0 ? (
-            <>
-              <Title>Wishlists</Title>
-              <div className="grid gap-4 grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6">
-                {data?.item?.map((data: any, index: number) => (
+              <div className="grid gap-4 grid-cols-2 md:grid-cols-3 2xl:grid-cols-3 3xl:grid-cols-4">
+                {data?.item?.map((data: any) => (
                   <WishlistBoxContainer
                     key={data?.id as number}
                     photo={JSON.parse(data?.imageUrl)[0].url}
@@ -63,20 +73,19 @@ const Wishlist = () => {
                   />
                 ))}
               </div>
-            </>
           ) : (
-            <WidthWrapper>
+            <div className="mt-4">
               <Typography variant={"h2"}>Create your first wishlist</Typography>
-              <br></br>
-              <Typography>
+              <Typography className="mt-2">
                 As you search, click the heart icon to save your favorite places
                 and Experiences to a wishlist.
               </Typography>
-            </WidthWrapper>
+            </div>
           )}
         </>
       )}
-    </WidthWrapper>
+      </div>
+    </AccountSettingWrapper>
   )
 }
 

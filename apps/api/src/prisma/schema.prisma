@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -14,21 +11,21 @@ datasource db {
 
 model User {
   id               Int               @id @default(autoincrement())
-  registrationType RegistrationType?
   email            String            @unique @db.VarChar(255)
   password         String?           @db.VarChar(255)
-  profilePicture   String?           @db.LongText()
-  canReceiveEmail  Boolean           @default(false)
   createdAt        DateTime          @default(now())
   updatedAt        DateTime          @updatedAt
   deletedAt        DateTime?
   role             UserRole          @default(User)
+  registrationType RegistrationType?
+  deactivated      Boolean           @default(false)
+  profilePicture   String?           @db.LongText
+  canReceiveEmail  Boolean           @default(false)
   listing          Listing[]
   paymentMethod    PaymentMethod[]
   wishes           WishGroup[]
   review           Review[]
   personalInfo     PersonalInfo?
-  deactivated      Boolean           @default(false)
   MultiFactorAuth  MultiFactorAuth[]
   Coupons          Coupon[]
 }
@@ -36,18 +33,18 @@ model User {
 model PersonalInfo {
   id                Int                 @id @default(autoincrement())
   userId            Int                 @unique
-  user              User                @relation(fields: [userId], references: [id])
   firstName         String              @db.VarChar(255)
   middleName        String?             @db.VarChar(255)
   lastName          String              @db.VarChar(255)
   birthDate         DateTime?
   governMentId      String?             @db.VarChar(255)
-  address           Addresses?
-  emergrncyContacts EmergencyContacts[]
   phoneNumber       String              @db.VarChar(20)
   createdAt         DateTime            @default(now())
   updatedAt         DateTime            @updatedAt
   deletedAt         DateTime?
+  user              User                @relation(fields: [userId], references: [id])
+  address           Addresses?
+  emergrncyContacts EmergencyContacts[]
 
   @@index([userId])
 }
@@ -55,14 +52,14 @@ model PersonalInfo {
 model EmergencyContacts {
   id            Int          @id @default(autoincrement())
   peronalInfoId Int
-  personalInfo  PersonalInfo @relation(fields: [peronalInfoId], references: [id])
-  name          String       @db.LongText()
+  name          String       @db.LongText
   relationship  String       @db.VarChar(100)
   email         String?      @db.VarChar(50)
   phoneNumber   String?      @db.VarChar(20)
   createdAt     DateTime     @default(now())
   updatedAt     DateTime     @updatedAt
   deletedAt     DateTime?
+  personalInfo  PersonalInfo @relation(fields: [peronalInfoId], references: [id])
 
   @@index([peronalInfoId])
 }
@@ -70,15 +67,15 @@ model EmergencyContacts {
 model Addresses {
   id            Int          @id @default(autoincrement())
   peronalInfoId Int          @unique
-  personalInfo  PersonalInfo @relation(fields: [peronalInfoId], references: [id])
-  streetAddress String?      @db.LongText()
-  city          String?      @db.LongText()
-  province      String?      @db.LongText()
-  zipCode       Int?         @db.Int()
-  country       String?      @db.VarChar(255)
   createdAt     DateTime     @default(now())
   updatedAt     DateTime     @updatedAt
   deletedAt     DateTime?
+  city          String?      @db.LongText
+  province      String?      @db.LongText
+  streetAddress String?      @db.LongText
+  zipCode       Int?
+  country       String?      @db.VarChar(255)
+  personalInfo  PersonalInfo @relation(fields: [peronalInfoId], references: [id])
 
   @@index([peronalInfoId])
 }
@@ -88,9 +85,9 @@ model ForgotPassword {
   email     String    @db.VarChar(255)
   code      String    @db.VarChar(255)
   used      Boolean   @default(false)
-  expiredAt DateTime
   createdAt DateTime  @default(now())
   deletedAt DateTime?
+  expiredAt DateTime
 }
 
 model MultiFactorAuth {
@@ -110,30 +107,30 @@ model MultiFactorAuth {
 model Listing {
   id                   Int                  @id @default(autoincrement())
   hostedById           Int
-  hostedBy             User                 @relation(fields: [hostedById], references: [id])
-  imageUrls            String               @db.LongText()
+  imageUrls            String               @db.LongText
   title                String               @db.VarChar(100)
-  basicAboutPlaceId    Int?                 @unique
-  basicAboutPlace      BasicAboutPlace?     @relation(fields: [basicAboutPlaceId], references: [id], onDelete: Cascade)
-  description          String               @db.LongText()
-  address              String               @db.LongText()
+  description          String               @db.LongText
+  address              String               @db.LongText
   listingPriceId       Int                  @unique
-  longitude            Decimal?             @db.Decimal()
-  latitude             Decimal?             @db.Decimal()
+  category             ListingCategory
+  favoriteBy           String?
+  createdAt            DateTime             @default(now())
+  updatedAt            DateTime             @updatedAt
+  deletedAt            DateTime?
+  latitude             Decimal?             @db.Decimal(10, 0)
+  longitude            Decimal?             @db.Decimal(10, 0)
+  basicAboutPlaceId    Int?                 @unique
+  hostedBy             User                 @relation(fields: [hostedById], references: [id])
+  basicAboutPlace      BasicAboutPlace?     @relation(fields: [basicAboutPlaceId], references: [id], onDelete: Cascade)
   price                ListingPrice         @relation(fields: [listingPriceId], references: [id])
   highLights           ListingHighLights[]
   placeOffers          ListingPlaceOffers[]
-  category             ListingCategory
   review               Review[]
   houseRules           HouseRule[]
   safetyProperties     SafetyProperty[]
   cancellationPolicies CancellationPolicy[]
   reports              ReportListing[]
-  favoriteBy           String?
   wishes               WishGroup[]
-  createdAt            DateTime             @default(now())
-  updatedAt            DateTime             @updatedAt
-  deletedAt            DateTime?
 
   @@index([basicAboutPlaceId])
   @@index([listingPriceId])
@@ -142,10 +139,10 @@ model Listing {
 
 model BasicAboutPlace {
   id        Int       @id @default(autoincrement())
-  guests    Int       @db.Int()
-  bedRooms  Int       @db.Int()
-  beds      Int       @db.Int()
-  bathRooms Int       @db.Int()
+  guests    Int
+  bedRooms  Int
+  beds      Int
+  bathRooms Int
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   deletedAt DateTime?
@@ -155,24 +152,24 @@ model BasicAboutPlace {
 model PaymentMethod {
   id             Int       @id @default(autoincrement())
   userId         Int
-  user           User      @relation(fields: [userId], references: [id])
   cardNumber     String    @unique
   expirationDate String    @db.VarChar(10)
   cvv            Int
   zipCode        Int
   countryRegion  String    @db.VarChar(255)
-  isDefault      Boolean   @default(false)
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
   deletedAt      DateTime?
+  isDefault      Boolean   @default(false)
+  user           User      @relation(fields: [userId], references: [id])
 
   @@index([userId])
 }
 
 model ReportListing {
   id           Int     @id @default(autoincrement())
-  reason       String  @db.Text()
-  otherdetails String  @db.Text()
+  reason       String  @db.Text
+  otherdetails String  @db.Text
   reportedBy   Int
   listingId    Int
   listing      Listing @relation(fields: [listingId], references: [id])
@@ -184,7 +181,6 @@ model Coupon {
   id             Int       @id @default(autoincrement())
   createdBy      Int?
   usedBy         Int?
-  user           User?     @relation(fields: [usedBy], references: [id])
   code           String    @unique
   expirationDate DateTime
   reward         String
@@ -192,15 +188,14 @@ model Coupon {
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
   deletedAt      DateTime?
+  user           User?     @relation(fields: [usedBy], references: [id])
 
   @@index([usedBy])
 }
 
 model ListingPrice {
   id          Int       @id @unique @default(autoincrement())
-  listing     Listing?
   fee         Int
-  cleaningFee Int
   serviceFee  Int
   isNight     Boolean?  @default(false)
   checkIn     DateTime
@@ -209,6 +204,8 @@ model ListingPrice {
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   deletedAt   DateTime?
+  cleaningFee Int
+  listing     Listing?
 }
 
 model HighLights {
@@ -216,21 +213,21 @@ model HighLights {
   title     String
   details   String
   icon      String
-  listings  ListingHighLights[]
   createdAt DateTime            @default(now())
   updatedAt DateTime            @updatedAt
   deletedAt DateTime?
+  listings  ListingHighLights[]
 }
 
 model ListingHighLights {
   id           Int        @id @default(autoincrement())
   listingId    Int
   highLightsId Int
+  createdAt    DateTime   @default(now())
+  deletedAt    DateTime?
+  updatedAt    DateTime   @updatedAt
   listing      Listing    @relation(fields: [listingId], references: [id])
   highlights   HighLights @relation(fields: [highLightsId], references: [id])
-  createdAt    DateTime   @default(now())
-  updatedAt    DateTime   @updatedAt
-  deletedAt    DateTime?
 
   @@unique([listingId, highLightsId])
   @@index([listingId])
@@ -239,24 +236,24 @@ model ListingHighLights {
 
 model PlaceOffers {
   id                 Int                  @id @default(autoincrement())
-  listingPlaceOffers ListingPlaceOffers[]
   icon               String
   title              String
-  category           String
   createdAt          DateTime             @default(now())
   updatedAt          DateTime             @updatedAt
   deletedAt          DateTime?
+  category           String
+  listingPlaceOffers ListingPlaceOffers[]
 }
 
 model ListingPlaceOffers {
   id           Int         @id @default(autoincrement())
   listingId    Int
   placeOfferId Int
-  listing      Listing     @relation(fields: [listingId], references: [id])
-  placeOffer   PlaceOffers @relation(fields: [placeOfferId], references: [id])
   createdAt    DateTime    @default(now())
   updatedAt    DateTime    @updatedAt
   deletedAt    DateTime?
+  listing      Listing     @relation(fields: [listingId], references: [id])
+  placeOffer   PlaceOffers @relation(fields: [placeOfferId], references: [id])
 
   @@unique([listingId, placeOfferId])
   @@index([listingId])
@@ -267,11 +264,11 @@ model HouseRule {
   id        Int       @id @default(autoincrement())
   title     String
   listingId Int
-  listing   Listing   @relation(fields: [listingId], references: [id])
-  rules     Rule[]
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   deletedAt DateTime?
+  listing   Listing   @relation(fields: [listingId], references: [id])
+  rules     Rule[]
 
   @@index([listingId])
 }
@@ -280,11 +277,11 @@ model SafetyProperty {
   id        Int       @id @default(autoincrement())
   title     String
   listingId Int
-  listing   Listing   @relation(fields: [listingId], references: [id])
-  rules     Rule[]
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   deletedAt DateTime?
+  listing   Listing   @relation(fields: [listingId], references: [id])
+  rules     Rule[]
 
   @@index([listingId])
 }
@@ -292,13 +289,13 @@ model SafetyProperty {
 model CancellationPolicy {
   id                 Int       @id @default(autoincrement())
   title              String
-  listingId          Int
-  listing            Listing   @relation(fields: [listingId], references: [id])
-  rules              Rule[]
   cancelationDueDate DateTime
   createdAt          DateTime  @default(now())
   updatedAt          DateTime  @updatedAt
   deletedAt          DateTime?
+  listingId          Int
+  listing            Listing   @relation(fields: [listingId], references: [id])
+  rules              Rule[]
 
   @@index([listingId])
 }
@@ -307,16 +304,16 @@ model Rule {
   id                   Int                 @id @default(autoincrement())
   icon                 String
   rule                 String
-  safePropertyId       Int?
-  safetyProperty       SafetyProperty?     @relation(fields: [safePropertyId], references: [id])
-  houseRuleId          Int?
-  houseRule            HouseRule?          @relation(fields: [houseRuleId], references: [id])
-  cancellationPolicyId Int?
-  cancallationPolicy   CancellationPolicy? @relation(fields: [cancellationPolicyId], references: [id])
-  description          String
   createdAt            DateTime            @default(now())
   updatedAt            DateTime            @updatedAt
   deletedAt            DateTime?
+  cancellationPolicyId Int?
+  description          String
+  houseRuleId          Int?
+  safePropertyId       Int?
+  safetyProperty       SafetyProperty?     @relation(fields: [safePropertyId], references: [id])
+  houseRule            HouseRule?          @relation(fields: [houseRuleId], references: [id])
+  cancallationPolicy   CancellationPolicy? @relation(fields: [cancellationPolicyId], references: [id])
 
   @@index([houseRuleId])
   @@index([cancellationPolicyId])
@@ -326,14 +323,14 @@ model Rule {
 model WishGroup {
   id        Int       @id @default(autoincrement())
   userId    Int
-  user      User      @relation(fields: [userId], references: [id])
   title     String    @db.VarChar(100)
-  note      String?   @db.LongText()
-  listingId Int
-  listing   Listing   @relation(fields: [listingId], references: [id])
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   deletedAt DateTime?
+  listingId Int
+  note      String?   @db.LongText
+  user      User      @relation(fields: [userId], references: [id])
+  listing   Listing   @relation(fields: [listingId], references: [id])
 
   @@index([userId])
   @@index([listingId])
@@ -342,14 +339,14 @@ model WishGroup {
 model Review {
   id        Int       @id @default(autoincrement())
   userId    Int
-  user      User      @relation(fields: [userId], references: [id])
-  listingId Int
-  listing   Listing   @relation(fields: [listingId], references: [id])
   rates     Float
-  comment   String    @db.LongText()
+  comment   String    @db.LongText
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   deletedAt DateTime?
+  listingId Int
+  user      User      @relation(fields: [userId], references: [id])
+  listing   Listing   @relation(fields: [listingId], references: [id])
 
   @@index([listingId])
   @@index([userId])
