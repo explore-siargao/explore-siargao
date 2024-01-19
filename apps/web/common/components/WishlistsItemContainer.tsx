@@ -3,7 +3,6 @@ import { useState } from "react"
 import {
   ArrowLeftIcon,
   CheckCircleIcon,
-  DocumentDuplicateIcon,
   HeartIcon,
   StarIcon,
 } from "@heroicons/react/20/solid"
@@ -20,6 +19,7 @@ import MenuModal from "@/module/AccountSettings/components/modals/MenuModal"
 import { Title } from "./ui/Title"
 import { Typography } from "./ui/Typography"
 import { ComponentProps, DetailsType } from "../types/global"
+import { DocumentDuplicateIcon } from "@heroicons/react/24/outline"
 import useRemoveFromWishGroup from "@/module/AccountSettings/hooks/useRemoveFromWishGroup"
 import { useQueryClient } from "@tanstack/react-query"
 
@@ -69,7 +69,7 @@ const AddEditNoteButton = ({ onClick, id, note }: ComponentProps) => (
     type="button"
     id={id}
     onClick={onClick}
-    className="text-text-300 underline hover:text-text-00 select-none "
+    className="text-text-300 underline hover:text-text-00 select-none"
   >
     {note === null ? "Add a note" : "Edit Note"}
   </button>
@@ -175,11 +175,13 @@ const WishlistsItemContainer = () => {
   return (
     <>
       {isPending ? (
-        <Spinner size={"md"}>Loading...</Spinner>
+        <div className="p-6">
+          <Spinner size="sm">Loading...</Spinner>
+        </div>
       ) : (
-        <div className="flex flex-col w-full xl:w-[920px]">
+        <div className="w-full">
           {/* ... (other components remain unchanged) */}
-          <div className="sticky w-full 2xl:w-[920px] top-26 bg-white z-50 flex border-b-gray-200 border-b py-4 items-center">
+          <div className="sticky w-full top-0 bg-white z-50 flex border-b-gray-100 border-b py-4 px-6 items-center mt-1">
             <Link href={LINK_ACCOUNT_WISHLIST}>
               <ArrowLeftIcon className="h-10 w-10 cursor-pointer rounded-full hover:bg-gray-50 p-2 -ml-3" />
             </Link>
@@ -205,10 +207,10 @@ const WishlistsItemContainer = () => {
             </div>
           </div>
           {/* ... (other components remain unchanged) */}
-          <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 mx-auto w-full max-w-[2520px] justify-center">
+          <div className="grid gap-4 grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 w-full justify-center pt-4 pb-6 px-4">
             {data?.items?.length !== 0 ? (
               data?.items?.map((item, index) => (
-                <li key={item?.id}>
+                <div key={item?.id}>
                   <div className="h-72 2xl:w-auto rounded-2xl relative select-none">
                     <HeartButton
                       id={item.id}
@@ -256,7 +258,7 @@ const WishlistsItemContainer = () => {
                       </span>
                     </Typography>
                   </div>
-                  <div className="bg-primary-100 w-full p-2 mt-2 rounded-lg">
+                  <div className="w-full mt-2 rounded-lg">
                     {item.note === null ? (
                       <AddEditNoteButton
                         onClick={() => showAddNoteModal(item)}
@@ -273,12 +275,12 @@ const WishlistsItemContainer = () => {
                       />
                     )}
                   </div>
-                </li>
+                </div>
               ))
             ) : (
               <Typography>No data found</Typography>
             )}
-          </ul>
+          </div>
           <AddNoteModal
             isOpen={addNote}
             img={details?.img}
