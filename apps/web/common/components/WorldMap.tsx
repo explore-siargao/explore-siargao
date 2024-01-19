@@ -2,9 +2,7 @@ import React from "react"
 import { MapContainer, TileLayer, Popup } from "react-leaflet"
 import "leaflet/dist/leaflet.css"
 
-const location = [
-  { id: 1, position: [9.8666632, 126.0499998] },
-]
+const location = [{ id: 1, position: [9.8666632, 126.0499998] }]
 
 const WorldMap = () => {
   const position = [9.8666632, 126.0499998]
