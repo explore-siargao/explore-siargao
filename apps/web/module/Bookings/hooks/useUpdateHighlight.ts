@@ -1,6 +1,6 @@
 import { ApiService } from "@/common/service/api"
 import { API_URL_BOOKINGS } from "@repo/constants"
-import { T_Highlights, T_PlaceOffers } from "@repo/contract"
+import { T_Highlights } from "@repo/contract"
 import { useMutation } from "@tanstack/react-query"
 
 export async function updateHighlight(
