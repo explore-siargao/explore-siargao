@@ -1,6 +1,6 @@
 import { ApiService } from "@/common/service/api"
 import { API_URL_BOOKINGS } from "@repo/constants"
-import {T_SafetyProperty } from "@repo/contract"
+import { T_SafetyProperty } from "@repo/contract"
 import { useMutation } from "@tanstack/react-query"
 
 export async function updateSafetyProperty(
@@ -16,7 +16,8 @@ export async function updateSafetyProperty(
 
 function useUpdateSafetyProperty(userId: number | null) {
   const query = useMutation({
-    mutationFn: (props: T_SafetyProperty) => updateSafetyProperty(userId, props),
+    mutationFn: (props: T_SafetyProperty) =>
+      updateSafetyProperty(userId, props),
   })
   return query
 }
