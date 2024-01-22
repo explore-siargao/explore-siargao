@@ -24,6 +24,7 @@ model User {
   deletedAt        DateTime?
   role             UserRole          @default(User)
   listing          Listing[]
+  reportListing   ReportListing[]
   paymentMethod    PaymentMethod[]
   wishes           WishGroup[]
   review           Review[]
@@ -174,9 +175,13 @@ model ReportListing {
   reason       String  @db.Text()
   otherdetails String  @db.Text()
   reportedBy   Int
+  user        User     @relation(fields: [reportedBy], references: [id])
   listingId    Int
   listing      Listing @relation(fields: [listingId], references: [id])
-
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  deletedAt      DateTime?
+@@index([reportedBy])
   @@index([listingId])
 }
 
