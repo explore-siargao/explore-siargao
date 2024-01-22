@@ -1,5 +1,11 @@
 import express from 'express'
-import { addListing, getAllListing, getListing } from './service/listing'
+import {
+  addListing,
+  deleteListing,
+  getAllListing,
+  getListing,
+  updateListing,
+} from './service/listing'
 import isCsrfTokenValid from '@/common/middleware/auth/isCsrfTokenValid'
 import isOriginValid from '@/common/middleware/auth/isOriginValid'
 import {
@@ -100,6 +106,8 @@ const router = express.Router()
 router.get('/', getAllListing)
 router.get('/:id', isCsrfTokenValid, isOriginValid, getListing)
 router.post('/:hostId', addListing)
+router.patch('/:userId/listing/:id', updateListing)
+router.delete('/:userId/listing/:id', deleteListing)
 
 //wish group
 router.get(
