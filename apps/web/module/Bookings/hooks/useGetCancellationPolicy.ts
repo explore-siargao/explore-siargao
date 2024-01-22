@@ -4,7 +4,9 @@ import { useQuery } from "@tanstack/react-query"
 
 export async function getCancellationPolicyById(id: number | undefined) {
   const apiService = new ApiService()
-  return await apiService.get(`${API_URL_BOOKINGS}/cancellation-policies/id/${id}`)
+  return await apiService.get(
+    `${API_URL_BOOKINGS}/cancellation-policies/id/${id}`
+  )
 }
 
 function useGetCancellationPolicy(id: number | undefined) {

@@ -1,6 +1,6 @@
 import { ApiService } from "@/common/service/api"
 import { API_URL_BOOKINGS } from "@repo/constants"
-import { T_CancellationPolicy} from "@repo/contract"
+import { T_CancellationPolicy } from "@repo/contract"
 import { useMutation } from "@tanstack/react-query"
 
 export async function updateCancellationPolicy(
@@ -16,7 +16,8 @@ export async function updateCancellationPolicy(
 
 function useUpdateCancellationPolicy(userId: number | null) {
   const query = useMutation({
-    mutationFn: (props: T_CancellationPolicy) => updateCancellationPolicy(userId, props),
+    mutationFn: (props: T_CancellationPolicy) =>
+      updateCancellationPolicy(userId, props),
   })
   return query
 }
