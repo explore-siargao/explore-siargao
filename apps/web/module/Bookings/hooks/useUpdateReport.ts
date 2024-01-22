@@ -3,7 +3,10 @@ import { API_URL_BOOKINGS } from "@repo/constants"
 import { T_ReportListing, T_Review } from "@repo/contract"
 import { useMutation } from "@tanstack/react-query"
 
-export async function updateReport(userId: number | null, props: T_ReportListing) {
+export async function updateReport(
+  userId: number | null,
+  props: T_ReportListing
+) {
   const apiService = new ApiService()
   return await apiService.patch(
     `${API_URL_BOOKINGS}/${userId}/reports/${props.id}`,
