@@ -6,7 +6,7 @@ export const Z_User = z.object({
   profilePicture: z.string(),
   role: z.nativeEnum(E_UserRole),
   email: z.string().email(),
-  password: z.string().min(8),
+  password: z.string().min(8).optional(),
   canReceiveEmail: z.boolean(),
   registrationType: z.nativeEnum(E_RegistrationType),
   createdAt: z.date().optional(),
