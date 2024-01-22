@@ -1,6 +1,6 @@
 import { ApiService } from "@/common/service/api"
 import { API_URL_BOOKINGS } from "@repo/constants"
-import { T_ReportListing, T_Review } from "@repo/contract"
+import { T_ReportListing } from "@repo/contract"
 import { useMutation } from "@tanstack/react-query"
 
 export async function updateReport(

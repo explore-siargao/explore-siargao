@@ -5,17 +5,11 @@ import { WidthWrapper } from "@/common/components/WidthWrapper"
 import useGetAllBookings from "../LandingPage/hooks/useGetAllBookings"
 import { Spinner } from "@/common/components/ui/Spinner"
 import useSessionStore from "@/common/store/useSessionStore"
-import useGetAllReports from "./hooks/useGetAllReports"
-import useGetReportsByListing from "./hooks/useGetReportsByListing"
-import useGetReport from "./hooks/useGetReport"
-import useAddReport from "./hooks/useAddReport"
-import useUpdateReport from "./hooks/useUpdateReport"
-import useRemoveReport from "./hooks/useRemoveReport"
 
 const Bookings = () => {
   const userId = useSessionStore((state) => state).id
   const { data, isPending } = useGetAllBookings()
-  const { mutate } = useRemoveReport(1, 3)
+
   return (
     <WidthWrapper className="my-24 lg:my-32">
       {isPending ? (
@@ -23,9 +17,6 @@ const Bookings = () => {
       ) : (
         <>
           <Title>Bookings</Title>
-          <button type="button" onClick={() => mutate()}>
-            Add
-          </button>
           <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 mx-auto w-full max-w-[2520px] justify-center">
             {data?.items?.map((item: any) => (
               <BookingBoxContainer
