@@ -1,5 +1,11 @@
 import express from 'express'
-import { addListing, deleteListing, getAllListing, getListing, updateListing } from './service/listing'
+import {
+  addListing,
+  deleteListing,
+  getAllListing,
+  getListing,
+  updateListing,
+} from './service/listing'
 import isCsrfTokenValid from '@/common/middleware/auth/isCsrfTokenValid'
 import isOriginValid from '@/common/middleware/auth/isOriginValid'
 import {
