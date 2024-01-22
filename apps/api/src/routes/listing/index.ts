@@ -85,7 +85,14 @@ import {
   getCancellationPolicy,
   updateCancellationPolicy,
 } from './service/cancellationPolicies'
-import { addReport, deleteReport, getAllReports, getReport, getReportsByListing, updateReport } from './service/reportListings'
+import {
+  addReport,
+  deleteReport,
+  getAllReports,
+  getReport,
+  getReportsByListing,
+  updateReport,
+} from './service/reportListings'
 
 const router = express.Router()
 
