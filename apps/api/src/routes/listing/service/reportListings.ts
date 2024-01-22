@@ -247,7 +247,7 @@ export const deleteReport = async (req: Request, res: Response) => {
         })
       )
     }
-    const removeReport = await prisma.review.delete({
+    const removeReport = await prisma.reportListing.delete({
       where: {
         id: id,
       },
