@@ -107,7 +107,7 @@ const AddNoteModal = ({
                     <div className="p-10 grid grid-cols-2 gap-5 items-center">
                       <div className="h-72 rounded-2xl relative select-none">
                         <Image
-                          src={img}
+                          src={`/assets/${img}`}
                           width={300}
                           height={300}
                           alt=""
