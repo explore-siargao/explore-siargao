@@ -39,7 +39,7 @@ const WishlistBoxContainer = ({ title, link, text, photo }: Props) => {
           )}
           <Link href={"/account-settings/wishlist/" + link}>
             <Image
-              src={photo}
+              src={`/assets/${photo}`}
               width={300}
               height={300}
               alt={photo}
