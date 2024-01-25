@@ -41,7 +41,6 @@ const BookingReviews = () => {
         {bookingReviewsDummy.map((item) => (
           <BookingReviewItem
             id={item.id}
-            joinedDate={item.joinedDate}
             location={item.location}
             name={item.name}
             pic={item.pic}
@@ -58,11 +57,8 @@ const BookingReviews = () => {
         {bookingReviewsDummy.map((item) => (
           <BookingReviewItemPending
             id={item.id}
-            joinedDate={item.joinedDate}
-            location={item.location}
             name={item.name}
             pic={item.pic}
-            reviewMessage={item.reviewMessage}
             reviewedTime={item.reviewedTime}
             key={item.id}
           />

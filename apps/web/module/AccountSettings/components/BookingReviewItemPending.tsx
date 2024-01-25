@@ -7,10 +7,7 @@ type BookingReviewItemProps = {
   id: number
   pic: string
   name: string
-  joinedDate: string
-  location: string
   reviewedTime: string
-  reviewMessage: string
 }
 
 const BookingReviewItemPending = ({

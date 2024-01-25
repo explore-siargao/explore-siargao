@@ -1,5 +1,4 @@
 import { Button } from "@/common/components/ui/Button"
-import { Title } from "@/common/components/ui/Title"
 import { Typography } from "@/common/components/ui/Typography"
 import { IPersonalInfo } from "@/common/types/global"
 import React, { useState } from "react"
