@@ -8,6 +8,7 @@ import {
   QuestionMarkCircleIcon,
   XMarkIcon,
 } from "@heroicons/react/20/solid"
+import { Typography } from "./Typography"
 
 const toastVariants = cva(
   "pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg",
@@ -78,8 +79,8 @@ const Toast = React.forwardRef<HTMLDivElement, ToastProps>(
           <div className="flex items-start">
             <div className="flex-shrink-0">{iconComponent}</div>
             <div className="ml-3 w-0 flex-1 pt-0.5">
-              <p className="text-sm font-medium ">{tittle}</p>
-              <p className="mt-1 text-sm ">{text}</p>
+              <Typography className="text-sm font-medium ">{tittle}</Typography>
+              <Typography className="mt-1 text-sm ">{text}</Typography>
             </div>
             <div className="ml-4 flex flex-shrink-0">
               <button

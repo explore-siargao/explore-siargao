@@ -6,6 +6,30 @@ require("dotenv").config({
 
 module.exports = {
   reactStrictMode: true,
+  images: {
+    remotePatterns: [
+      {
+        protocol: "http",
+        hostname: "localhost",
+        port: "3000",
+        pathname: "/*",
+      },
+      {
+        protocol: "http",
+        hostname: "localhost",
+        port: "3000",
+        pathname: "/assets/**",
+      },
+    ],
+  },
+  async rewrites() {
+    return [
+      {
+        source: "/assets/:path*",
+        destination: `${process.env.API_URL}/assets/:path*`,
+      },
+    ]
+  },
   env: {
     API_URL: process.env.API_URL,
     API_AUTH_URL: process.env.API_AUTH_URL,

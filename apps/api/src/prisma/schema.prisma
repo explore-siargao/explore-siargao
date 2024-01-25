@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -14,43 +11,349 @@ datasource db {
 
 model User {
   id               Int               @id @default(autoincrement())
-  registrationType RegistrationType?
   email            String            @unique @db.VarChar(255)
   password         String?           @db.VarChar(255)
-  firstName        String            @db.VarChar(255)
-  middleName       String?           @db.VarChar(255)
-  lastName         String            @db.VarChar(255)
-  address          String            @db.LongText
-  contactNumber    String            @db.VarChar(20)
-  birthDate        DateTime?
   createdAt        DateTime          @default(now())
   updatedAt        DateTime          @updatedAt
   deletedAt        DateTime?
   role             UserRole          @default(User)
-  multiFactorAuth  MultiFactorAuth[]
+  registrationType RegistrationType?
+  deactivated      Boolean           @default(false)
+  profilePicture   String?           @db.LongText
+  canReceiveEmail  Boolean           @default(false)
+  listing          Listing[]
+  reportListing   ReportListing[]
+  paymentMethod    PaymentMethod[]
+  wishes           WishGroup[]
+  review           Review[]
+  personalInfo     PersonalInfo?
+  MultiFactorAuth  MultiFactorAuth[]
+  Coupons          Coupon[]
+}
+
+model PersonalInfo {
+  id                Int                 @id @default(autoincrement())
+  userId            Int                 @unique
+  firstName         String              @db.VarChar(255)
+  middleName        String?             @db.VarChar(255)
+  lastName          String              @db.VarChar(255)
+  birthDate         DateTime?
+  governMentId      String?             @db.VarChar(255)
+  phoneNumber       String              @db.VarChar(20)
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+  deletedAt         DateTime?
+  user              User                @relation(fields: [userId], references: [id])
+  address           Addresses?
+  emergrncyContacts EmergencyContacts[]
+
+  @@index([userId])
+}
+
+model EmergencyContacts {
+  id            Int          @id @default(autoincrement())
+  peronalInfoId Int
+  name          String       @db.LongText
+  relationship  String       @db.VarChar(100)
+  email         String?      @db.VarChar(50)
+  phoneNumber   String?      @db.VarChar(20)
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  deletedAt     DateTime?
+  personalInfo  PersonalInfo @relation(fields: [peronalInfoId], references: [id])
+
+  @@index([peronalInfoId])
+}
+
+model Addresses {
+  id            Int          @id @default(autoincrement())
+  peronalInfoId Int          @unique
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  deletedAt     DateTime?
+  city          String?      @db.LongText
+  province      String?      @db.LongText
+  streetAddress String?      @db.LongText
+  zipCode       Int?
+  country       String?      @db.VarChar(255)
+  personalInfo  PersonalInfo @relation(fields: [peronalInfoId], references: [id])
+
+  @@index([peronalInfoId])
 }
 
 model ForgotPassword {
-  id               Int               @id @default(autoincrement())
-  email            String            @db.VarChar(255)
-  code             String            @db.VarChar(255)
-  used             Boolean           @default(false)
-  expiredAt        DateTime          
-  createdAt        DateTime          @default(now())
-  deletedAt        DateTime?
+  id        Int       @id @default(autoincrement())
+  email     String    @db.VarChar(255)
+  code      String    @db.VarChar(255)
+  used      Boolean   @default(false)
+  createdAt DateTime  @default(now())
+  deletedAt DateTime?
+  expiredAt DateTime
 }
 
 model MultiFactorAuth {
-  id               Int               @id @default(autoincrement())
-  userId           Int
-  type             String            @db.VarChar(255)
-  code             String            @db.VarChar(255)
-  used             Boolean           @default(false)
-  expiredAt        DateTime          
-  createdAt        DateTime          @default(now())
-  deletedAt        DateTime?
-  user             User              @relation(fields: [userId], references: [id])
+  id        Int       @id @default(autoincrement())
+  userId    Int
+  type      String    @db.VarChar(255)
+  code      String    @db.VarChar(255)
+  used      Boolean   @default(false)
+  expiredAt DateTime
+  createdAt DateTime  @default(now())
+  deletedAt DateTime?
+  user      User      @relation(fields: [userId], references: [id])
 
+  @@index([userId])
+}
+
+model Listing {
+  id                   Int                  @id @default(autoincrement())
+  hostedById           Int
+  imageUrls            String               @db.LongText
+  title                String               @db.VarChar(100)
+  description          String               @db.LongText
+  address              String               @db.LongText
+  listingPriceId       Int                  @unique
+  category             ListingCategory
+  favoriteBy           String?
+  createdAt            DateTime             @default(now())
+  updatedAt            DateTime             @updatedAt
+  deletedAt            DateTime?
+  latitude             Decimal?             @db.Decimal(10, 0)
+  longitude            Decimal?             @db.Decimal(10, 0)
+  basicAboutPlaceId    Int?                 @unique
+  hostedBy             User                 @relation(fields: [hostedById], references: [id])
+  basicAboutPlace      BasicAboutPlace?     @relation(fields: [basicAboutPlaceId], references: [id], onDelete: Cascade)
+  price                ListingPrice         @relation(fields: [listingPriceId], references: [id])
+  highLights           ListingHighLights[]
+  placeOffers          ListingPlaceOffers[]
+  review               Review[]
+  houseRules           HouseRule[]
+  safetyProperties     SafetyProperty[]
+  cancellationPolicies CancellationPolicy[]
+  reports              ReportListing[]
+  wishes               WishGroup[]
+
+  @@index([basicAboutPlaceId])
+  @@index([listingPriceId])
+  @@index([hostedById])
+}
+
+model BasicAboutPlace {
+  id        Int       @id @default(autoincrement())
+  guests    Int
+  bedRooms  Int
+  beds      Int
+  bathRooms Int
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+  Listing   Listing?
+}
+
+model PaymentMethod {
+  id             Int       @id @default(autoincrement())
+  userId         Int
+  cardNumber     String    @unique
+  expirationDate String    @db.VarChar(10)
+  cvv            Int
+  zipCode        Int
+  countryRegion  String    @db.VarChar(255)
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  deletedAt      DateTime?
+  isDefault      Boolean   @default(false)
+  user           User      @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+}
+
+model ReportListing {
+  id           Int     @id @default(autoincrement())
+  reason       String  @db.Text
+  otherdetails String  @db.Text
+  reportedBy   Int
+  user        User     @relation(fields: [reportedBy], references: [id])
+  listingId    Int
+  listing      Listing @relation(fields: [listingId], references: [id])
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  deletedAt      DateTime?
+@@index([reportedBy])
+  @@index([listingId])
+}
+
+model Coupon {
+  id             Int       @id @default(autoincrement())
+  createdBy      Int?
+  usedBy         Int?
+  code           String    @unique
+  expirationDate DateTime
+  reward         String
+  isUsed         Boolean
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  deletedAt      DateTime?
+  user           User?     @relation(fields: [usedBy], references: [id])
+
+  @@index([usedBy])
+}
+
+model ListingPrice {
+  id          Int       @id @unique @default(autoincrement())
+  fee         Int
+  serviceFee  Int
+  isNight     Boolean?  @default(false)
+  checkIn     DateTime
+  checkOut    DateTime
+  countGuest  Int
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  deletedAt   DateTime?
+  cleaningFee Int
+  listing     Listing?
+}
+
+model HighLights {
+  id        Int                 @id @default(autoincrement())
+  title     String
+  details   String
+  icon      String
+  createdAt DateTime            @default(now())
+  updatedAt DateTime            @updatedAt
+  deletedAt DateTime?
+  listings  ListingHighLights[]
+}
+
+model ListingHighLights {
+  id           Int        @id @default(autoincrement())
+  listingId    Int
+  highLightsId Int
+  createdAt    DateTime   @default(now())
+  deletedAt    DateTime?
+  updatedAt    DateTime   @updatedAt
+  listing      Listing    @relation(fields: [listingId], references: [id])
+  highlights   HighLights @relation(fields: [highLightsId], references: [id])
+
+  @@unique([listingId, highLightsId])
+  @@index([listingId])
+  @@index([highLightsId])
+}
+
+model PlaceOffers {
+  id                 Int                  @id @default(autoincrement())
+  icon               String
+  title              String
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  deletedAt          DateTime?
+  category           String
+  listingPlaceOffers ListingPlaceOffers[]
+}
+
+model ListingPlaceOffers {
+  id           Int         @id @default(autoincrement())
+  listingId    Int
+  placeOfferId Int
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  deletedAt    DateTime?
+  listing      Listing     @relation(fields: [listingId], references: [id])
+  placeOffer   PlaceOffers @relation(fields: [placeOfferId], references: [id])
+
+  @@unique([listingId, placeOfferId])
+  @@index([listingId])
+  @@index([placeOfferId])
+}
+
+model HouseRule {
+  id        Int       @id @default(autoincrement())
+  title     String
+  listingId Int
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+  listing   Listing   @relation(fields: [listingId], references: [id])
+  rules     Rule[]
+
+  @@index([listingId])
+}
+
+model SafetyProperty {
+  id        Int       @id @default(autoincrement())
+  title     String
+  listingId Int
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+  listing   Listing   @relation(fields: [listingId], references: [id])
+  rules     Rule[]
+
+  @@index([listingId])
+}
+
+model CancellationPolicy {
+  id                 Int       @id @default(autoincrement())
+  title              String
+  cancelationDueDate DateTime
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+  deletedAt          DateTime?
+  listingId          Int
+  listing            Listing   @relation(fields: [listingId], references: [id])
+  rules              Rule[]
+
+  @@index([listingId])
+}
+
+model Rule {
+  id                   Int                 @id @default(autoincrement())
+  icon                 String
+  rule                 String
+  createdAt            DateTime            @default(now())
+  updatedAt            DateTime            @updatedAt
+  deletedAt            DateTime?
+  cancellationPolicyId Int?
+  description          String
+  houseRuleId          Int?
+  safePropertyId       Int?
+  safetyProperty       SafetyProperty?     @relation(fields: [safePropertyId], references: [id])
+  houseRule            HouseRule?          @relation(fields: [houseRuleId], references: [id])
+  cancallationPolicy   CancellationPolicy? @relation(fields: [cancellationPolicyId], references: [id])
+
+  @@index([houseRuleId])
+  @@index([cancellationPolicyId])
+  @@index([safePropertyId])
+}
+
+model WishGroup {
+  id        Int       @id @default(autoincrement())
+  userId    Int
+  title     String    @db.VarChar(100)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+  listingId Int
+  note      String?   @db.LongText
+  user      User      @relation(fields: [userId], references: [id])
+  listing   Listing   @relation(fields: [listingId], references: [id])
+
+  @@index([userId])
+  @@index([listingId])
+}
+
+model Review {
+  id        Int       @id @default(autoincrement())
+  userId    Int
+  rates     Float
+  comment   String    @db.LongText
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+  listingId Int
+  user      User      @relation(fields: [userId], references: [id])
+  listing   Listing   @relation(fields: [listingId], references: [id])
+
+  @@index([listingId])
   @@index([userId])
 }
 
@@ -64,4 +367,10 @@ enum RegistrationType {
   Manual
   Facebook
   Google
+}
+
+enum ListingCategory {
+  Accomodation
+  Rentals
+  Activity
 }

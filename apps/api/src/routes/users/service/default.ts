@@ -6,11 +6,21 @@ import { encryptKey } from '@/common/config'
 export const getAllUsers = async (req: Request, res: Response) => {
   try {
     const prisma = new PrismaClient()
-    const users = await prisma.user.findMany({})
+    const users = await prisma.user.findMany({
+      include: {
+        personalInfo: {
+          include: {
+            emergrncyContacts: true,
+            address: true,
+          },
+        },
+      },
+    })
+    const addresses = await prisma.addresses.findMany({})
     if (users.length > 0) {
       res.json({
         error: false,
-        items: users,
+        items: [users, addresses],
         itemCount: users.length,
         message: '',
       })
@@ -39,20 +49,30 @@ export const addUser = async (req: Request, res: Response) => {
     const newUser = await prisma.user.create({
       data: {
         email: req.body.email,
-        firstName: req.body.firstName,
-        middleName: '',
         registrationType: req.body.registrationType,
-        lastName: req.body.lastName,
-        address: '',
-        birthDate: req.body.birthDate,
-        contactNumber: '',
         role: 'User',
         password: req.body.password ? String(encryptPassword) : null,
       },
     })
+    const newPersonalInfo = await prisma.personalInfo.create({
+      data: {
+        firstName: req.body.firstName,
+        middleName: '',
+        lastName: req.body.lastName,
+        birthDate: req.body.birthDate,
+        phoneNumber: '',
+        governMentId: '',
+        userId: newUser.id,
+      },
+    })
+
+    const [createUser, createpersonalInfo] = await Promise.all([
+      newUser,
+      newPersonalInfo,
+    ])
     res.json({
       error: false,
-      item: newUser,
+      item: [createUser, createpersonalInfo],
       itemCount: 1,
       message: 'User Successfully Created',
     })

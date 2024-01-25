@@ -8,6 +8,7 @@ import google from "@/common/assets/google-logo.png"
 import Image from "next/image"
 import { signIn } from "next-auth/react"
 import useGlobalInputEmail from "../store/useGlobalInputEmail"
+import { Typography } from "@/common/components/ui/Typography"
 
 enum Position {
   "end",
@@ -36,16 +37,18 @@ const PreSignUpForm = () => {
             placeholder="you@example.com"
             {...register("email", { required: true })}
           />
-          <p className="text-xs mt-1 text-text-500">
+          <Typography variant={"p"} className="text-xs mt-1 text-text-500">
             We'll email you trip confirmations and receipts.
-          </p>
+          </Typography>
         </div>
-        <Button className="w-full my-5" type="submit">
+        <Button className="w-full my-5" variant={"primary"} type="submit">
           Continue
         </Button>
         <div className="flex">
           <span className="border-b-2 h-0 w-full my-auto"></span>
-          <p className="text-xs mx-5">or</p>
+          <Typography variant={"p"} className="text-xs mx-5">
+            or
+          </Typography>
           <span className="border-b-2 shadow-md h-0 w-full my-auto"></span>
         </div>
         <div className="mt-6 grid gap-4">

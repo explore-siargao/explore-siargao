@@ -1,4 +1,4 @@
-import Cookies from "js-cookie"
+import { T_BackendResponse } from "@repo/contract"
 
 enum EContentType {
   JSON = "application/json",
@@ -7,12 +7,8 @@ enum EContentType {
 
 export class ApiService {
   private BASE_URL: string | undefined
-  private isAuthRequired: boolean = false
 
-  constructor(
-    hasAuthentication = true,
-    source: "main" | "auth" | "mock" = "main"
-  ) {
+  constructor(source: "main" | "auth" | "mock" = "main") {
     if (source === "main") {
       this.BASE_URL = process.env.API_URL
     } else if (source === "auth") {
@@ -20,36 +16,33 @@ export class ApiService {
     } else {
       this.BASE_URL = process.env.API_MOCK_URL
     }
-    this.isAuthRequired = hasAuthentication
   }
 
-  private constructHeader(isFormData = false, removeContentType = false) {
-    const accessToken = Cookies.get("accessToken")
-
-    const res = {
+  private constructOtherOptions(isFormData = false, removeContentType = false) {
+    const headers = {
       ...(!removeContentType && {
         "Content-Type": isFormData ? EContentType.formData : EContentType.JSON,
       }),
-      ...(accessToken && this.isAuthRequired
-        ? { Authorization: `Bearer ${accessToken}` }
-        : {}),
     } as Record<string, any>
-
-    return res
+    const options = {
+      headers,
+      credentials: "include" as RequestCredentials,
+    }
+    return options
   }
 
-  async get<T = any>(
+  async get<T = T_BackendResponse>(
     endpoint: string,
     params?: Record<string, any>,
     signal?: AbortSignal
-  ): Promise<T | any> {
+  ): Promise<T> {
     const reqParams = new URLSearchParams(params).toString()
-    const header = this.constructHeader()
+    const otherOptions = this.constructOtherOptions()
 
     const res = fetch(
       `${this.BASE_URL}${endpoint}${params ? `?${reqParams}` : ""}`,
       {
-        headers: header,
+        ...otherOptions,
         ...(signal ? { signal } : {}),
       }
     )
@@ -57,33 +50,33 @@ export class ApiService {
     return (await res).json()
   }
 
-  async post<T = any>(endpoint: string, body: any): Promise<T> {
-    const header = this.constructHeader()
+  async post<T = T_BackendResponse>(endpoint: string, body: any): Promise<T> {
+    const otherOptions = this.constructOtherOptions()
     const res = fetch(`${this.BASE_URL}${endpoint}`, {
       method: "POST",
       body: JSON.stringify(body),
-      headers: header,
+      ...otherOptions,
     })
     return (await res).json()
   }
 
-  async patch(endpoint: string, body: any) {
-    const header = this.constructHeader()
+  async patch<T = T_BackendResponse>(endpoint: string, body?: any): Promise<T> {
+    const otherOptions = this.constructOtherOptions()
 
     const res = fetch(`${this.BASE_URL}${endpoint}`, {
       method: "PATCH",
       body: JSON.stringify(body),
-      headers: header,
+      ...otherOptions,
     })
     return (await res).json()
   }
 
-  async delete(endpoint: string, payload: { [key: string]: string }) {
-    const header = this.constructHeader()
+  async delete<T = T_BackendResponse>(endpoint: string): Promise<T> {
+    const otherOptions = this.constructOtherOptions()
 
     const res = fetch(`${this.BASE_URL}${endpoint}`, {
       method: "DELETE",
-      headers: header,
+      ...otherOptions,
     })
     return (await res).json()
   }

@@ -1,8 +1,5 @@
 "use client"
-import { RegistrationType } from "@/common/types/global"
-import useRegister, {
-  T_Register,
-} from "@/module/Authentication/hooks/useRegister"
+import useRegister from "@/module/Authentication/hooks/useRegister"
 import React from "react"
 import { useForm } from "react-hook-form"
 import toast from "react-hot-toast"
@@ -13,7 +10,6 @@ import { Input } from "@/common/components/ui/Input"
 import { capitalizeFirstLetter } from "@/common/helpers/capitalizeFirstLetter"
 import { useParams, useRouter } from "next/navigation"
 import { signIn, useSession } from "next-auth/react"
-import Cookies from "js-cookie"
 import { APP_NAME } from "@repo/constants"
 import dayjs from "dayjs"
 import { Select } from "@/common/components/ui/Select"
@@ -24,6 +20,13 @@ import {
   CALENDAR_YEARS,
 } from "../constants"
 import useGlobalInputEmail from "../store/useGlobalInputEmail"
+import { Typography } from "@/common/components/ui/Typography"
+import useOptMessageStore from "@/common/store/useOptMessageStore"
+import {
+  E_RegistrationType,
+  T_BackendResponse,
+  T_UserRegister,
+} from "@repo/contract"
 
 type Props = {
   isSocial?: boolean
@@ -35,18 +38,18 @@ const SignUpForm = ({ isSocial = false }: Props) => {
   const { mutate: addUser, isPending: addUserIsPending } = useRegister()
   const createAccountEmail = useGlobalInputEmail((state) => state.email)
   const { register, handleSubmit } = useForm<
-    T_Register & { month: string; year: string; day: string }
+    T_UserRegister & { month: string; year: string; day: string }
   >({
     values: {
       email: (session?.user?.email as string) || createAccountEmail || "",
       firstName: "",
       lastName: "",
       birthDate: "",
-      password: "",
+      password: null,
       month: "",
       year: "",
       day: "",
-      registrationType: RegistrationType.Manual,
+      registrationType: E_RegistrationType.Manual,
     },
   })
   const params = useParams()
@@ -56,23 +59,21 @@ const SignUpForm = ({ isSocial = false }: Props) => {
       : "Manual"
 
   const onSubmit = async (
-    formData: T_Register & { month: string; year: string; day: string }
+    formData: T_UserRegister & { month: string; year: string; day: string }
   ) => {
     const callBackReq = {
-      onSuccess: (data: any) => {
-        if (!data.error) {
-          if (data.item && !addUserIsPending) {
-            Cookies.set("accessToken", data.item.accessToken)
-            if (signUpType === "Manual") {
-              signIn("credentials", {
-                callbackUrl: "/",
-                username: formData.email,
-                password: formData.password,
-              })
-            } else {
-              router.push("/")
-            }
+      onSuccess: (data: T_BackendResponse) => {
+        if (!data.error && !addUserIsPending) {
+          if (signUpType === "Manual") {
+            signIn("credentials", {
+              callbackUrl: "/",
+              username: formData.email,
+              password: formData.password,
+              redirect: false,
+            })
           }
+          setIsOpen()
+          router.push("/")
         } else {
           toast.error(String(data.message))
         }
@@ -81,7 +82,6 @@ const SignUpForm = ({ isSocial = false }: Props) => {
         toast.error(String(err))
       },
     }
-    // TODO: ADD CSRF TOKEN
     const { email, firstName, lastName, month, day, year, password } = formData
     const birthDate = dayjs(`${month}-${day}-${year}`, "MM-DD-YYYY")
     addUser(
@@ -91,11 +91,12 @@ const SignUpForm = ({ isSocial = false }: Props) => {
         lastName,
         birthDate: birthDate.format(),
         password,
-        registrationType: signUpType as unknown as RegistrationType,
+        registrationType: signUpType as E_RegistrationType,
       },
       callBackReq
     )
   }
+  const setIsOpen = useOptMessageStore((state) => state.setIsOpen)
 
   return (
     <div className="p-6">
@@ -119,9 +120,9 @@ const SignUpForm = ({ isSocial = false }: Props) => {
                 disabled={addUserIsPending}
               />
             </div>
-            <p className="text-xs mt-1 text-text-500">
+            <Typography variant={"p"} className="text-xs mt-1 text-text-500">
               Make sure it matches the name on your government ID.
-            </p>
+            </Typography>
           </div>
           <div>
             <div className="grid grid-cols-3 gap-4">
@@ -165,10 +166,10 @@ const SignUpForm = ({ isSocial = false }: Props) => {
                 ))}
               </Select>
             </div>
-            <p className="text-xs mt-1 text-text-500">
+            <Typography variant={"p"} className="text-xs mt-1 text-text-500">
               To sign up, you need to be at least 18. We will not share your
               personal information.
-            </p>
+            </Typography>
           </div>
           <div>
             <div className="isolate -space-y-px rounded-xl shadow-sm">
@@ -181,9 +182,9 @@ const SignUpForm = ({ isSocial = false }: Props) => {
                 disabled={addUserIsPending || isSocial}
               />
             </div>
-            <p className="text-xs mt-1 text-text-500">
+            <Typography variant={"p"} className="text-xs mt-1 text-text-500">
               We'll email you trip confirmations and receipts.
-            </p>
+            </Typography>
           </div>
           <div>
             {!isSocial && (
@@ -195,7 +196,10 @@ const SignUpForm = ({ isSocial = false }: Props) => {
                 disabled={addUserIsPending}
               />
             )}
-            <p className="text-xs mt-4 text-text-500 tracking-tighter">
+            <Typography
+              variant={"p"}
+              className="text-xs mt-4 text-text-500 tracking-tighter"
+            >
               By signing in or creating an account, you agree with our{" "}
               <Link href="#" className="text-info-500 underline">
                 Terms & conditions
@@ -205,9 +209,9 @@ const SignUpForm = ({ isSocial = false }: Props) => {
                 Privacy statement
               </Link>
               .
-            </p>
+            </Typography>
           </div>
-          <Button type="submit" className="w-full my-4">
+          <Button type="submit" variant={"primary"} className="w-full my-4">
             {addUserIsPending ? (
               <div className="animate-spin w-4 h-4 border-2 border-current border-t-transparent text-primary-200 rounded-full">
                 <span className="sr-only">Loading...</span>

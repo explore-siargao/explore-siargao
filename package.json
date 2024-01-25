@@ -1,4 +1,5 @@
 {
+  "version": "1.0.0",
   "name": "explore-siargao",
   "private": true,
   "prisma": {
@@ -8,14 +9,31 @@
     "setup": "npm install && npm run build",
     "build": "turbo build",
     "dev": "turbo dev",
+    "start": "turbo start",
+    "start:api": "turbo start --filter=api",
+    "build:api": "turbo run build --filter=@repo/constants && turbo run build --filter=@repo/contract && turbo run build --filter=api",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
+  },
+  "dependencies": {
+    "@hookform/error-message": "^2.0.1",
+    "@types/mapbox-gl": "^2.7.19",
+    "card-validator": "^9.0.0",
+    "leaflet": "^1.9.4",
+    "mapbox-gl": "^3.0.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-leaflet": "^4.2.1",
+    "react-map-gl": "^7.1.7"
   },
   "devDependencies": {
     "@repo/eslint-config": "*",
     "@repo/typescript-config": "*",
+    "@types/express-fileupload": "^1.4.4",
+    "@types/googlemaps": "^3.43.3",
+    "@types/leaflet": "^1.9.8",
     "prettier": "^3.1.0",
-    "turbo": "latest"
+    "turbo": "^1.11.3"
   },
   "packageManager": "^npm@10.2.3",
   "workspaces": [
@@ -26,6 +44,5 @@
     "node": ">=20.10.0",
     "npm": ">=10.2.3"
   },
-  "engineStrict": true,
-  "version": "1.0.0"
+  "engineStrict": true
 }

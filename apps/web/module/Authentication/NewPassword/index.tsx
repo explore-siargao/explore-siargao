@@ -9,7 +9,6 @@ import { useForm } from "react-hook-form"
 import useVerifyForgotPassword, {
   TVerifyForgotPassword,
 } from "../hooks/useVerifyForgotPassword"
-import Cookies from "js-cookie"
 import { signIn } from "next-auth/react"
 import toast from "react-hot-toast"
 
@@ -27,15 +26,12 @@ const NewPassword = () => {
     const { newPassword, confirmPassword } = data
     const callBackReq = {
       onSuccess: (data: any) => {
-        if (!data.error) {
-          if (data.item && !isPendingNewPassword) {
-            Cookies.set("accessToken", data.item.accessToken)
-            signIn("credentials", {
-              callbackUrl: "/",
-              username: email,
-              password: newPassword,
-            })
-          }
+        if (!data.error && !isPendingNewPassword) {
+          signIn("credentials", {
+            callbackUrl: "/",
+            username: email,
+            password: newPassword,
+          })
         } else {
           toast.error(String(data.message))
         }
@@ -86,6 +82,7 @@ const NewPassword = () => {
           <Button
             className="w-full my-5"
             type="submit"
+            variant={"primary"}
             disabled={isPendingNewPassword}
           >
             {isPendingNewPassword ? (

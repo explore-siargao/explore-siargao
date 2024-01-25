@@ -9,6 +9,7 @@ import useForgotPassword, { TForgotPassword } from "../hooks/useForgotPassword"
 import toast from "react-hot-toast"
 import ReCAPTCHA from "react-google-recaptcha"
 import useGlobalInputEmail from "../store/useGlobalInputEmail"
+import { Typography } from "@/common/components/ui/Typography"
 
 const ForgotPassword = () => {
   const recaptchaRef = useRef<ReCAPTCHA>(null)
@@ -63,10 +64,10 @@ const ForgotPassword = () => {
               {...register("email", { required: true })}
               disabled={isForgotPasswordPending}
             />
-            <p className="text-sm mt-2 text-text-300">
+            <Typography variant={"p"} className="text-sm mt-2 text-text-300">
               Please enter your email in the box above. We will send you link to
               access further instructions.
-            </p>
+            </Typography>
           </div>
           <ReCAPTCHA
             ref={recaptchaRef}
@@ -76,6 +77,7 @@ const ForgotPassword = () => {
           <Button
             className="w-full my-5"
             type="submit"
+            variant={"primary"}
             disabled={isForgotPasswordPending}
           >
             {isForgotPasswordPending ? (
