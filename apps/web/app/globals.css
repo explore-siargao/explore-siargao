@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-#verification-field ::-webkit-inner-spin-button,
-#verification-field ::-webkit-outer-spin-button {
+::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
   display: none;
 }

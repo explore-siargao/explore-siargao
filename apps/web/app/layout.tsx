@@ -1,8 +1,8 @@
 import type { Metadata } from "next"
 import { Nunito } from "next/font/google"
-import "./globals.css"
+import "@/app/globals.css"
 import QueryClientWrapper from "@/common/components/QueryClientWrapper"
-import AuthModalWrapper from "@/common/components/AuthModalWrapper"
+import GlobalModalWrapper from "@/common/components/GlobalModalWrapper"
 import { Toaster } from "react-hot-toast"
 import React from "react"
 import { getServerSession } from "next-auth/next"
@@ -11,6 +11,7 @@ import { LOGO_SINGLE_IMAGE } from "@/common/constants/index"
 import authOptions from "@/common/helpers/authOptions"
 import { APP_NAME } from "@repo/constants"
 import BottomNavBar from "@/module/Authentication/components/BottomNavBar"
+import Header from "@/module/LandingPage/components/Header"
 
 const nunito = Nunito({ subsets: ["latin"] })
 
@@ -32,10 +33,11 @@ export default async function RootLayout({
         <Toaster />
         <SessionProvider session={session}>
           <QueryClientWrapper>
-            <AuthModalWrapper>
+            <GlobalModalWrapper>
+              <Header />
               {children}
-              <BottomNavBar />
-            </AuthModalWrapper>
+            </GlobalModalWrapper>
+            <BottomNavBar />
           </QueryClientWrapper>
         </SessionProvider>
       </body>

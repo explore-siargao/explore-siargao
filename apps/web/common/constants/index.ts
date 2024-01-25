@@ -16,3 +16,7 @@ export const LOGIN_CONTENT_SUB_TEXT =
 export const VERIFICATION_CODE_TITTLE = "Verification Code"
 export const VERIFICATION_CODE_CONTENT =
   "Please enter 6 digits verificaiton code sent to your email to confirm your identity."
+
+export const THREE_MINUTES = 3 * 60 * 1000
+export const FIFTEEN_MINUTES = 15 * 60 * 1000
+export const TWELVE_MINUTES = 12 * 60 * 1000

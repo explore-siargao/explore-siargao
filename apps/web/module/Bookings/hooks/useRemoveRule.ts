@@ -1,0 +1,18 @@
+import { ApiService } from "@/common/service/api"
+import { API_URL_BOOKINGS } from "@repo/constants"
+import { useMutation } from "@tanstack/react-query"
+
+export async function removeRule(userId: number, ruleId: number) {
+  const apiService = new ApiService()
+  return await apiService.delete(
+    `${API_URL_BOOKINGS}/${userId}/rules/${ruleId}`
+  )
+}
+
+function useRemoveRule(userId: number, ruleId: number) {
+  const query = useMutation({
+    mutationFn: () => removeRule(userId, ruleId),
+  })
+  return query
+}
+export default useRemoveRule

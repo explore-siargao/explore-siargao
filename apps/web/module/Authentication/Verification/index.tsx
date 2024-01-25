@@ -12,6 +12,7 @@ import toast from "react-hot-toast"
 import useMultiFactor from "../hooks/useMultiFactor"
 import useVerifyMultiFactor from "../hooks/useVerifyMultiFactor"
 import { useRouter } from "next/navigation"
+import { Typography } from "@/common/components/ui/Typography"
 
 let currentOTPIndex: number = 0
 
@@ -88,12 +89,15 @@ const Verification = () => {
     <Container>
       <div className="p-6">
         <div className="pb-6 space-y-4 text-center">
-          <h1 className="font-semibold text-3xl pt-2">
+          <Typography variant={"h1"} className="pt-2">
             {VERIFICATION_CODE_TITTLE}
-          </h1>
-          <p className="text-sm leading-tight text-gray-500 mx-1">
+          </Typography>
+          <Typography
+            variant={"p"}
+            className="text-sm leading-tight text-gray-500 mx-1"
+          >
             {VERIFICATION_CODE_CONTENT}
-          </p>
+          </Typography>
         </div>
         <form className="space-y-6" method="POST">
           <div
@@ -125,11 +129,13 @@ const Verification = () => {
               className="w-full my-5"
               onClick={() => submitCode()}
               disabled={isVerifyMultiFactorPending}
+              variant={"primary"}
             >
               {SUBMIT_BUTTON_TEXT}
             </Button>
             <div className="text-sm text-center text-gray-500">
-              <span>Did not receive the code?</span>&nbsp;
+              <Typography variant={"p"}>Did not receive the code?</Typography>
+              &nbsp;
               <Button
                 type="button"
                 variant="link"
