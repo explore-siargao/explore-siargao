@@ -4,7 +4,6 @@ import { signOut, useSession } from "next-auth/react"
 import useVerifySignIn from "@/common/hooks/useVerifySignIn"
 import { useRouter, useParams, useSearchParams } from "next/navigation"
 import toast from "react-hot-toast"
-import WholePageLoading from "@/common/components/WholePageLoading"
 import { Spinner } from "@/common/components/ui/Spinner"
 
 const SessionVerifier = () => {

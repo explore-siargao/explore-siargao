@@ -32,13 +32,13 @@ const EmergencyContact = ({
     handleSubmit,
     formState: { errors },
   } = useForm<IEmergencyContact>()
-  const { mutate, isPending } = useAddEmergencyContact(id as number)
+  const { mutate, isPending } = useAddEmergencyContact(id)
   const {
     mutate: removeEmergencyContact,
     isPending: isPendingRemoveEmergencyContact,
-  } = useRemoveEmergencyContact(id as number)
+  } = useRemoveEmergencyContact(id)
   const queryClient = useQueryClient()
-  const [emergencyContactFormIsVisible, setEmergencyContactIsVisible] =
+  const [emergencyContactFormIsVisible, setEmergencyContactFormIsVisible] =
     useState(false)
   const onSubmit = (formData: IEmergencyContact) => {
     const callBackReq = {
@@ -121,7 +121,7 @@ const EmergencyContact = ({
                     isButtonClicked: !contentState.isButtonClicked,
                     contentId: " ",
                   })
-                  setEmergencyContactIsVisible(false)
+                  setEmergencyContactFormIsVisible(false)
                 }}
               >
                 Cancel
@@ -235,7 +235,7 @@ const EmergencyContact = ({
                     variant={"secondary"}
                     type="button"
                     className="text-lg font-semibold p-6"
-                    onClick={() => setEmergencyContactIsVisible(true)}
+                    onClick={() => setEmergencyContactFormIsVisible(true)}
                   >
                     Add new emergency contact
                   </Button>
