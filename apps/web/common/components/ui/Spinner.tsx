@@ -25,8 +25,8 @@ const spinnerVariants = cva("font-bold", {
 export interface SpinnerProps
   extends React.DetailsHTMLAttributes<HTMLDivElement>,
     VariantProps<typeof spinnerVariants> {
-      middle?: boolean
-    }
+  middle?: boolean
+}
 const Spinner = React.forwardRef<HTMLDivElement, SpinnerProps>(
   ({ variant, className, size, middle = false }, ref) => {
     return (
@@ -34,16 +34,14 @@ const Spinner = React.forwardRef<HTMLDivElement, SpinnerProps>(
         ref={ref}
         className={cn(
           className,
-          middle ? "flex min-h-screen flex-1 flex-col justify-center items-center py-12 sm:px-6 lg:px-8" : ""
+          middle
+            ? "flex min-h-screen flex-1 flex-col justify-center items-center py-12 sm:px-6 lg:px-8"
+            : ""
         )}
       >
         <svg
-        
           aria-hidden="true"
-          className={cn(
-            "animate-spin",
-            spinnerVariants({ variant, size })
-          )}
+          className={cn("animate-spin", spinnerVariants({ variant, size }))}
           viewBox="0 0 100 101"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -59,8 +57,6 @@ const Spinner = React.forwardRef<HTMLDivElement, SpinnerProps>(
         </svg>
         <span className="sr-only">Loading...</span>
       </div>
-
-
     )
   }
 )

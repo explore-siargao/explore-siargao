@@ -7,4 +7,4 @@ export const API_URL_USERS = "/api/users"
 export const API_URL_PAYMENTS = "/api/payments"
 export const API_URL_COUNTRIES = "/api/countries"
 export const API_URL_BOOKINGS = "/api/bookings"
-export const AUTH_GUARDED_ROUTES = ["/account-settings"];
+export const AUTH_GUARDED_ROUTES = ["/account-settings"]
