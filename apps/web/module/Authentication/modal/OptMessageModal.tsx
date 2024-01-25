@@ -1,28 +1,24 @@
 import ModalContainer from "@/common/components/ModalContainer"
 import { Dialog, Transition } from "@headlessui/react"
-import React, { Fragment, useRef } from "react"
+import React, { Fragment, useRef, useState } from "react"
 import { Typography } from "@/common/components/ui/Typography"
 import useOptMessageStore from "@/common/store/useOptMessageStore"
 import { CheckCircleIcon } from "@heroicons/react/24/outline"
 import { Button } from "@/common/components/ui/Button"
 import useSetReceivedEmail from "../hooks/useSetReceivedEmail"
 import toast from "react-hot-toast"
-import { useForm } from "react-hook-form"
-import { Spinner } from "@/common/components/ui/Spinner"
 import useSessionStore from "@/common/store/useSessionStore"
-interface OptChecked {
-  isChecked: boolean
-}
+
 const OptMessageModal = () => {
-  const { register, getValues } = useForm<OptChecked>()
   const isOpen = useOptMessageStore((state) => state.isOpen)
   const closeModal = useOptMessageStore((state) => state.setIsClose)
   const cancelButtonRef = useRef(null)
+  const [canReceived, setCanReceived] = useState(false)
   const session = useSessionStore((state) => state)
   const callBackReq = {
     onSuccess: (data: any) => {
       if (!data.error) {
-        toast.success(data.message)
+        toast.success(data.message, { duration: 5000 })
         closeModal()
       } else {
         toast.error(String(data.message))
@@ -33,7 +29,7 @@ const OptMessageModal = () => {
     },
   }
   const {
-    mutate: setCanReceivedEmail,
+    mutate: updateCanReceivedEmail,
     isPending: IsPendingCetCanReceivedEmail,
   } = useSetReceivedEmail(session.id as number, {
     onSuccess: callBackReq.onSuccess,
@@ -45,7 +41,10 @@ const OptMessageModal = () => {
         as="div"
         className="relative z-50"
         initialFocus={cancelButtonRef}
-        onClose={() => closeModal()}
+        onClose={() => {
+          closeModal()
+          if (canReceived) updateCanReceivedEmail()
+        }}
       >
         <Transition.Child
           as={Fragment}
@@ -82,24 +81,17 @@ const OptMessageModal = () => {
                       variant={"secondary"}
                       className="w-full mt-4"
                       onClick={() => {
-                        if (getValues("isChecked")) {
-                          setCanReceivedEmail()
-                        } else {
-                          closeModal()
-                        }
+                        closeModal()
+                        if (canReceived) updateCanReceivedEmail()
                       }}
                       disabled={IsPendingCetCanReceivedEmail}
                     >
-                      {IsPendingCetCanReceivedEmail ? (
-                        <Spinner>Loading...</Spinner>
-                      ) : (
-                        "OK"
-                      )}
+                      OK
                     </Button>
                     <div className="flex  mt-6">
                       <input
                         id="recieved"
-                        {...register("isChecked")}
+                        onChange={(e) => setCanReceived(e.target.checked)}
                         type="checkbox"
                         className="h-6 w-6 rounded border-gray-400 text-secondary-600 focus:ring-transparent"
                       />

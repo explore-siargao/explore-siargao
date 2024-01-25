@@ -54,48 +54,78 @@ const GovernmentId = ({ governmentId }: IPersonalInfo) => {
             We’ll need you to add an official government ID. This step helps
             make sure you’re really you.
           </Typography>
-
-          <div className="flex items-center justify-center w-full my-4">
-            <label
-              htmlFor="dropzone-file"
-              className="flex flex-col items-center justify-center w-full h-64 border-2 border-primary-300 border-dashed rounded-lg cursor-pointer bg-primary-50 hover:bg-primary-100"
-            >
-              <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                <svg
-                  className="w-8 h-8 mb-4 text-primary-500"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 20 16"
-                >
-                  <path
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
-                  />
-                </svg>
-                <Typography className="mb-2 text-text-500 d">
-                  <span className="font-semibold">Click to upload</span> or drag
-                  and drop
-                </Typography>
-                <Typography className="text-xs text-text-500">
-                  PNG, JPG or GIF (MAX. 800x400px)
-                </Typography>
+          <div className="grid grid-cols-2">
+            <div className="w-full my-4">
+              <h3 className="text-xl font-semibold">Your IDs</h3>
+              <div className="mt-4">
+                <p className="text-lg">
+                  1. Passport{" "}
+                  <span className="text-primary-500 underline cursor-pointer hover:text-primary-700">
+                    View File
+                  </span>
+                </p>
+                <p className="text-lg">
+                  2. Driver's License{" "}
+                  <span className="text-primary-500 underline cursor-pointer hover:text-primary-700">
+                    View File
+                  </span>
+                </p>
               </div>
-              <input
-                id="dropzone-file"
-                type="file"
-                className="hidden"
-                accept="image/png, image/gif, image/jpeg"
-              />
-            </label>
+            </div>
+            <div className="w-full my-4">
+              <h3 className="text-xl font-semibold">Upload your ID here</h3>
+              <div className="mt-4">
+                <select
+                  id="stars"
+                  className="pr-10 text-text-900 focus-within:z-10 focus-within:ring-2 focus-within:ring-text-600 text-sm rounded-md block"
+                >
+                  <option value="">ID Type</option>
+                  <option>Driver's License</option>
+                  <option>Passport</option>
+                  <option>National ID</option>
+                  <option>Postal ID</option>
+                </select>
+                <label
+                  htmlFor="dropzone-file"
+                  className="flex flex-col items-center justify-center w-full h-64 border-2 border-primary-300 border-dashed rounded-lg cursor-pointer bg-primary-50 hover:bg-primary-100 mt-4"
+                >
+                  <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                    <svg
+                      className="w-8 h-8 mb-4 text-primary-500"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 20 16"
+                    >
+                      <path
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+                      />
+                    </svg>
+                    <Typography className="mb-2 text-text-500 d">
+                      <span className="font-semibold">Click to upload</span> or
+                      drag and drop
+                    </Typography>
+                    <Typography className="text-xs text-text-500">
+                      PNG, JPG or GIF (MAX. 800x400px)
+                    </Typography>
+                  </div>
+                  <input
+                    id="dropzone-file"
+                    type="file"
+                    className="hidden"
+                    accept="image/png, image/gif, image/jpeg"
+                  />
+                </label>
+              </div>
+              <Button className="w-20 mt-4" size="sm">
+                Upload
+              </Button>
+            </div>
           </div>
-
-          <Button className="w-20" size={"sm"}>
-            Save
-          </Button>
         </div>
       )}
     </div>

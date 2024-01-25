@@ -45,7 +45,7 @@ const SignUpForm = ({ isSocial = false }: Props) => {
       firstName: "",
       lastName: "",
       birthDate: "",
-      password: "",
+      password: null,
       month: "",
       year: "",
       day: "",

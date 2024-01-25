@@ -18,6 +18,7 @@ import { useForm } from "react-hook-form"
 import useUpdateCoupon from "../hooks/useUpdateCoupon"
 import { Typography } from "@/common/components/ui/Typography"
 import useSessionStore from "@/common/store/useSessionStore"
+import { Spinner } from "@/common/components/ui/Spinner"
 
 const Payments = () => {
   const router = useRouter()
@@ -71,9 +72,7 @@ const Payments = () => {
   return (
     <>
       {isPendingPaymentmethods ? (
-        <div className="animate-spin w-4 h-4 border-2 border-current border-t-transparent text-primary-200 rounded-full">
-          <span className="sr-only">Loading...</span>
-        </div>
+        <Spinner className="mt-5" />
       ) : (
         <div className="space-y-10 my-5">
           <div>
