@@ -27,9 +27,10 @@ const BookingReviewItem = ({
     setIsClicked(!isClicked)
   }
   return (
+    <>
     <div
       key={id}
-      className="grid grid-flow-row lg:grid-cols-3 items-center lg:items-start divide-text-100 rounded-xl gap-5 h-full w-full mb-8"
+      className="grid grid-flow-row lg:grid-cols-3 items-center lg:items-start divide-text-100 rounded-xl gap-5 h-full w-full my-8"
     >
       <article className="col-span-2">
         <div className="flex justify-between">
@@ -153,6 +154,8 @@ const BookingReviewItem = ({
         />
       </div>
     </div>
+    <hr/>
+    </>
   )
 }
 

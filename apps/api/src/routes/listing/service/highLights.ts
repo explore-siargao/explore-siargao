@@ -14,13 +14,23 @@ export const getAllHighLights = async (req: Request, res: Response) => {
         deletedAt: null,
       },
     })
-    res.json(
-      response.success({
-        items: getAllHighlights,
-        allItemCount: getAllHighlights.length, // Corrected from getAllHighLights.length
-        message: '',
-      })
-    )
+    if (getAllHighlights.length !== 0) {
+      res.json(
+        response.success({
+          items: getAllHighlights,
+          allItemCount: getAllHighlights.length,
+          message: '',
+        })
+      )
+    } else {
+      res.json(
+        response.success({
+          items: getAllHighlights,
+          allItemCount: getAllHighlights.length,
+          message: 'No highlights data found',
+        })
+      )
+    }
   } catch (err: any) {
     res.json(response.error({ message: err.message }))
   }
