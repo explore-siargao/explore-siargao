@@ -13,8 +13,8 @@ const OptMessageModal = () => {
   const isOpen = useOptMessageStore((state) => state.isOpen)
   const closeModal = useOptMessageStore((state) => state.setIsClose)
   const cancelButtonRef = useRef(null)
-  const [canReceived, setCanReceived] = useState(false);
-  const session = useSessionStore((state) => state);
+  const [canReceived, setCanReceived] = useState(false)
+  const session = useSessionStore((state) => state)
   const callBackReq = {
     onSuccess: (data: any) => {
       if (!data.error) {
@@ -43,8 +43,7 @@ const OptMessageModal = () => {
         initialFocus={cancelButtonRef}
         onClose={() => {
           closeModal()
-          if(canReceived)
-          updateCanReceivedEmail()
+          if (canReceived) updateCanReceivedEmail()
         }}
       >
         <Transition.Child
@@ -83,8 +82,7 @@ const OptMessageModal = () => {
                       className="w-full mt-4"
                       onClick={() => {
                         closeModal()
-                        if(canReceived)
-                        updateCanReceivedEmail()
+                        if (canReceived) updateCanReceivedEmail()
                       }}
                       disabled={IsPendingCetCanReceivedEmail}
                     >

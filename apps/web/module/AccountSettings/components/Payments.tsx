@@ -72,7 +72,7 @@ const Payments = () => {
   return (
     <>
       {isPendingPaymentmethods ? (
-        <Spinner className="mt-5"/>
+        <Spinner className="mt-5" />
       ) : (
         <div className="space-y-10 my-5">
           <div>

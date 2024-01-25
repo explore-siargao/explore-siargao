@@ -55,7 +55,9 @@ const BookingReviewItemPending = ({
         </div>
 
         <Textarea className="mt-2" />
-        <Button variant="shaded" size="sm" className="mt-4">Submit review</Button>
+        <Button variant="shaded" size="sm" className="mt-4">
+          Submit review
+        </Button>
       </article>
 
       <div className="h-full w-72 2xl:w-full rounded-2xl relative ">

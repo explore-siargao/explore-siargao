@@ -57,11 +57,11 @@ const Wishlist = () => {
         <Title>Wishlists</Title>
       </div>
       <div className="mt-4">
-      {isPending ? (
-        <Spinner size={"md"}>Loading...</Spinner>
-      ) : (
-        <>
-          {data?.item?.length !== 0 ? (
+        {isPending ? (
+          <Spinner size={"md"}>Loading...</Spinner>
+        ) : (
+          <>
+            {data?.item?.length !== 0 ? (
               <div className="grid gap-4 grid-cols-2 md:grid-cols-3 2xl:grid-cols-3 3xl:grid-cols-4">
                 {data?.item?.map((data: any) => (
                   <WishlistBoxContainer
@@ -73,17 +73,19 @@ const Wishlist = () => {
                   />
                 ))}
               </div>
-          ) : (
-            <div className="mt-4">
-              <Typography variant={"h2"}>Create your first wishlist</Typography>
-              <Typography className="mt-2">
-                As you search, click the heart icon to save your favorite places
-                and Experiences to a wishlist.
-              </Typography>
-            </div>
-          )}
-        </>
-      )}
+            ) : (
+              <div className="mt-4">
+                <Typography variant={"h2"}>
+                  Create your first wishlist
+                </Typography>
+                <Typography className="mt-2">
+                  As you search, click the heart icon to save your favorite
+                  places and Experiences to a wishlist.
+                </Typography>
+              </div>
+            )}
+          </>
+        )}
       </div>
     </AccountSettingWrapper>
   )

@@ -59,8 +59,18 @@ const GovernmentId = ({ governmentId }: IPersonalInfo) => {
             <div className="w-full my-4">
               <h3 className="text-xl font-semibold">Your IDs</h3>
               <div className="mt-4">
-                <p className="text-lg">1. Passport <span className="text-primary-500 underline cursor-pointer hover:text-primary-700">View File</span></p>
-                <p className="text-lg">2. Driver's License <span className="text-primary-500 underline cursor-pointer hover:text-primary-700">View File</span></p>
+                <p className="text-lg">
+                  1. Passport{" "}
+                  <span className="text-primary-500 underline cursor-pointer hover:text-primary-700">
+                    View File
+                  </span>
+                </p>
+                <p className="text-lg">
+                  2. Driver's License{" "}
+                  <span className="text-primary-500 underline cursor-pointer hover:text-primary-700">
+                    View File
+                  </span>
+                </p>
               </div>
             </div>
             <div className="w-full my-4">
@@ -97,8 +107,8 @@ const GovernmentId = ({ governmentId }: IPersonalInfo) => {
                       />
                     </svg>
                     <Typography className="mb-2 text-text-500 d">
-                      <span className="font-semibold">Click to upload</span> or drag
-                      and drop
+                      <span className="font-semibold">Click to upload</span> or
+                      drag and drop
                     </Typography>
                     <Typography className="text-xs text-text-500">
                       PNG, JPG or GIF (MAX. 800x400px)

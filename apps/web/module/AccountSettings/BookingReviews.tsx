@@ -51,7 +51,7 @@ const BookingReviews = () => {
           />
         ))}
       </>
-    );
+    )
   } else if (tableState === 1) {
     content = (
       <>
@@ -68,7 +68,7 @@ const BookingReviews = () => {
           />
         ))}
       </>
-    );
+    )
   }
   return (
     <AccountSettingWrapper>
@@ -81,7 +81,7 @@ const BookingReviews = () => {
         <Title>Booking Reviews</Title>
       </div>
       <div className="hidden sm:block">
-      <div className="flex border-b border-b-text-50">
+        <div className="flex border-b border-b-text-50">
           <button
             className={combineClasses(
               tableState === 0
@@ -105,9 +105,7 @@ const BookingReviews = () => {
             Pending
           </button>
         </div>
-        <div className="mt-6">
-          {content}
-        </div>
+        <div className="mt-6">{content}</div>
       </div>
     </AccountSettingWrapper>
   )

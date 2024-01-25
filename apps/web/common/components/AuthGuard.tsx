@@ -14,7 +14,8 @@ const AuthGuard = ({ children }: { children: React.ReactNode }) => {
   const updateSession = useSessionStore((state) => state.update)
   const removeSession = useSessionStore((state) => state.remove)
 
-  const isRouteAuthGuarded = AUTH_GUARDED_ROUTES.filter((route) => pathname.includes(route)).length > 0;
+  const isRouteAuthGuarded =
+    AUTH_GUARDED_ROUTES.filter((route) => pathname.includes(route)).length > 0
 
   if (data && !data.error && data.item && data.item.email && !isLoading) {
     updateSession(data?.item as T_Session)
