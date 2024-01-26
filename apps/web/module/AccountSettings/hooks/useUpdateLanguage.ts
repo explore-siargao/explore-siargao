@@ -2,9 +2,13 @@ import { ApiService } from "@/common/service/api"
 import { API_URL_USERS } from "@repo/constants"
 import { useMutation } from "@tanstack/react-query"
 
+interface ILanguage {
+  language: string
+}
+
 export async function updateLanguage(
   personalInfoId: number | null,
-  props: string
+  props: ILanguage
 ) {
   const apiService = new ApiService()
   return await apiService.patch(
@@ -15,7 +19,7 @@ export async function updateLanguage(
 
 function useUpdateLanguage(personalInfoId: number | null) {
   const query = useMutation({
-    mutationFn: (props: string) => updateLanguage(personalInfoId, props),
+    mutationFn: (props: ILanguage) => updateLanguage(personalInfoId, props),
   })
   return query
 }
