@@ -68,7 +68,14 @@ router.get(
   isUserLoggedIn,
   userDetails
 )
-router.patch('/deactivate/:userId', deactivateAccount)
+router.patch(
+  '/deactivate/:userId',
+  isCsrfTokenValid,
+  isOriginValid,
+  isUserLoggedIn,
+  userDetails,
+deactivateAccount
+)
 
 // PERSONAL INFO
 router.get(
