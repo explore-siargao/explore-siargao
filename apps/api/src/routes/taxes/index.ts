@@ -1,6 +1,5 @@
-import express from "express";
-import { addTaxes } from "./services/addVatIdNumber";
-
+import express from 'express'
+import { addTaxes } from './services/addVatIdNumber'
 
 const router = express.Router()
 
