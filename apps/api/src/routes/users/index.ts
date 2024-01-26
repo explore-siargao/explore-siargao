@@ -74,7 +74,7 @@ router.patch(
   isOriginValid,
   isUserLoggedIn,
   userDetails,
-deactivateAccount
+  deactivateAccount
 )
 
 // PERSONAL INFO
