@@ -63,8 +63,8 @@ export const addUser = async (req: Request, res: Response) => {
         phoneNumber: '',
         governMentId: '',
         userId: newUser.id,
-        country:req.body.country,
-        language:"English"
+        country: req.body.country,
+        language: 'English',
       },
     })
 

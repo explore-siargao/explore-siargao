@@ -141,7 +141,7 @@ export const register = async (req: Request, res: Response) => {
             birthDate: dayjs(birthDate).format(),
             phoneNumber: '',
             country: country,
-            language: "English"
+            language: 'English',
           },
         })
         res.json(

@@ -465,37 +465,38 @@ export const addGovernmentId = async (req: Request, res: Response) => {
   }
 }
 
-export const updateLanguage = async(req:Request, res:Response)=>{
+export const updateLanguage = async (req: Request, res: Response) => {
   const personalInfoId = Number(req.params.personalInfoId)
-  const {language} = req.body
+  const { language } = req.body
   try {
-    if(!language){
-      return res.json(response.error({message:REQUIRED_VALUE_EMPTY}))
+    if (!language) {
+      return res.json(response.error({ message: REQUIRED_VALUE_EMPTY }))
     }
     const getPersonalInfo = await prisma.personalInfo.findFirst({
-      where:{
-        id:personalInfoId
-      }
+      where: {
+        id: personalInfoId,
+      },
     })
-    if(!getPersonalInfo){
-      return res.json(response.error({message:"Personal info not found"}))
+    if (!getPersonalInfo) {
+      return res.json(response.error({ message: 'Personal info not found' }))
     }
     const updateUserLanguage = await prisma.personalInfo.update({
-      where:{
-        id:personalInfoId
+      where: {
+        id: personalInfoId,
       },
-      data:{
-        language:language
-      }
+      data: {
+        language: language,
+      },
     })
-    res.json(response.success({
-      item:updateUserLanguage,
-      allItemCount:1,
-      message:"Language successfully updated"
-    }))
-
-  } catch (err:any) {
+    res.json(
+      response.success({
+        item: updateUserLanguage,
+        allItemCount: 1,
+        message: 'Language successfully updated',
+      })
+    )
+  } catch (err: any) {
     const message = err.message ? err.message : UNKNOWN_ERROR_OCCURRED
-    res.json(response.error({message:message}))
+    res.json(response.error({ message: message }))
   }
 }
