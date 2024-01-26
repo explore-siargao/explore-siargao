@@ -1,5 +1,5 @@
 import express from 'express'
-import { addUser, deactivateAccount, getAllUsers } from './service/default'
+import { addUser, deactivateAccount, getAllUsers, updatePassword } from './service/default'
 import {
   verifySignIn,
   verifySession,
@@ -76,7 +76,13 @@ router.patch(
   userDetails,
   deactivateAccount
 )
-
+router.patch(
+  '/change-password/:userId',
+  isCsrfTokenValid,
+  isOriginValid,
+  isUserLoggedIn,
+  updatePassword
+  )
 // PERSONAL INFO
 router.get(
   '/personal-info/:userId',
