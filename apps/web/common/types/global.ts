@@ -147,7 +147,7 @@ export enum RegistrationType {
   "Google",
 }
 
-export interface taxes {
+export interface ITaxes {
   id: number
   countryRegion: string
   vatId: string
