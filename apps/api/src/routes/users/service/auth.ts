@@ -106,7 +106,7 @@ export const register = async (req: Request, res: Response) => {
       lastName,
       birthDate,
       registrationType,
-      country
+      country,
     } = req.body
     try {
       const user = await prisma.user.findFirst({
@@ -140,8 +140,7 @@ export const register = async (req: Request, res: Response) => {
             lastName: lastName,
             birthDate: dayjs(birthDate).format(),
             phoneNumber: '',
-            country: country
-
+            country: country,
           },
         })
         res.json(
