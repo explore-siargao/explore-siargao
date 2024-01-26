@@ -1,4 +1,4 @@
-import { Response, Request} from 'express'
+import { Response, Request } from 'express'
 import { PrismaClient } from '@prisma/client'
 import CryptoJS from 'crypto-js'
 import { encryptKey } from '@/common/config'
@@ -88,34 +88,36 @@ export const addUser = async (req: Request, res: Response) => {
   }
 }
 
-export const deactivateAccount = async(req:Request, res:Response)=>{
+export const deactivateAccount = async (req: Request, res: Response) => {
   const response = new ResponseService()
   const prisma = new PrismaClient()
   const userId = Number(req.params.userId)
   try {
     const getUser = await prisma.user.findUnique({
-      where:{
-        id:userId
-      }
+      where: {
+        id: userId,
+      },
     })
-    if(!getUser){
-      return res.json(response.error({message:USER_NOT_EXIST}))
+    if (!getUser) {
+      return res.json(response.error({ message: USER_NOT_EXIST }))
     }
     const deactivateUser = await prisma.user.update({
-      where:{
-        id:userId
+      where: {
+        id: userId,
       },
-      data:{
-        deactivated: true
-      }
+      data: {
+        deactivated: true,
+      },
     })
-    res.json(response.success({
-      item:deactivateUser,
-      allItemCount:1,
-      message:"User Account successfully deactivated"
-    }))
-  } catch (err:any) {
+    res.json(
+      response.success({
+        item: deactivateUser,
+        allItemCount: 1,
+        message: 'User Account successfully deactivated',
+      })
+    )
+  } catch (err: any) {
     const message = err.message ? err.message : UNKNOWN_ERROR_OCCURRED
-    res.json(response.error({message:message}))
+    res.json(response.error({ message: message }))
   }
 }
