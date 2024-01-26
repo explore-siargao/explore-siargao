@@ -3,7 +3,7 @@ import { API_URL_USERS } from "@repo/constants"
 import { useMutation } from "@tanstack/react-query"
 
 export async function updateCurrency(
-  personalInfoId: string | null,
+  personalInfoId: number | null,
   props: string
 ) {
   const apiService = new ApiService()
@@ -13,7 +13,7 @@ export async function updateCurrency(
   )
 }
 
-function useUpdateCurrency(personalInfoId: string | null) {
+function useUpdateCurrency(personalInfoId: number | null) {
   const query = useMutation({
     mutationFn: (props: string) => updateCurrency(personalInfoId, props),
   })
