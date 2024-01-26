@@ -7,6 +7,37 @@ import { Request, Response } from 'express'
 const prisma = new PrismaClient()
 const response = new ResponseService()
 
+export const getTax = async (req: Request, res: Response) => {
+  const id = Number(req.params.id)
+  try {
+    const getTaxByUserId = await prisma.taxes.findUnique({
+      where: {
+        id: id,
+      },
+    })
+    if (getTaxByUserId !== null) {
+      res.json(
+        response.success({
+          item: getTaxByUserId,
+          allItemCount: 1,
+          message: '',
+        })
+      )
+    } else {
+      res.json({
+        success: true,
+        data: {
+          item: getTaxByUserId,
+          allItemCount: 0,
+          message: 'No tax record found!',
+        },
+      })
+    }
+  } catch (err: any) {
+    res.json(response.error({ message: err.message }))
+  }
+}
+
 export const addTaxes = async (req: Request, res: Response) => {
   const {
     countryRegion,
@@ -79,3 +110,4 @@ export const addTaxes = async (req: Request, res: Response) => {
     res.json(response.error({ message: err.message }))
   }
 }
+
