@@ -49,13 +49,14 @@ export const addTaxes = async (req: Request, res: Response) => {
                 zipPostalCode: zipPostalCode,
               },
             })
-            res.json(
-              response.success({
+            res.json({
+              success: true,
+              data: {
                 item: newTaxes,
                 allItemCount: 1,
                 message: 'New Tax successfully created',
-              })
-            )
+              },
+            });
           } else {
             res.json(
               response.error({
