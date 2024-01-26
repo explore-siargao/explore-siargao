@@ -22,6 +22,7 @@ import {
   getAllGovernmentIdByPersonInfoId,
   getPersonalInfo,
   removeEmergencyContact,
+  updateLanguage,
   updatePersonalInfo,
 } from './service/personalInfo'
 import isUserLoggedIn from '@/common/middleware/auth/isUserLoggedIn'
@@ -120,6 +121,8 @@ router.delete(
   isUserLoggedIn,
   removeEmergencyContact
 )
+
+router.patch('/personal-info/language/:personalInfoId', updateLanguage)
 
 //Government Id
 router.get('/:peronalInfoId/government-id', getAllGovernmentIdByPersonInfoId)
