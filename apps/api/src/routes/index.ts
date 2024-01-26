@@ -7,7 +7,6 @@ import CountriesRoute from '@/routes/countries'
 import taxesRoute from '@/routes/taxes'
 import { API_ROOT } from '@repo/constants'
 
-
 export default function (app: Application) {
   app.use(`/assets`, AssetsRoute)
   app.use(`${API_ROOT}/users`, UsersRoute)
