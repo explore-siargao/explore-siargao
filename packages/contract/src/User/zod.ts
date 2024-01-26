@@ -19,6 +19,7 @@ export const Z_UserRegister = z.object({
   firstName: z.string(),
   lastName: z.string(),
   birthDate: z.string(),
+  country: z.string(),
   password: z.string().min(8).nullable(),
   registrationType: z.nativeEnum(E_RegistrationType),
 })
