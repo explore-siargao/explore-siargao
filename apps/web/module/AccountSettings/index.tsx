@@ -13,6 +13,7 @@ import {
   LINK_ACCOUNT_PAYMENT_PAYOUT,
   LINK_ACCOUNT_PERSONAL_INFO,
   LINK_ACCOUNT_WISHLIST,
+  LINK_ACCOUNT_GLOBAL_PREFERENCES
 } from "@/common/constants/links"
 import { Title } from "@/common/components/ui/Title"
 import { Typography } from "@/common/components/ui/Typography"
@@ -20,6 +21,7 @@ import { capitalizeFirstLetter } from "@/common/helpers/capitalizeFirstLetter"
 import { ChevronRightIcon } from "@heroicons/react/20/solid"
 import Link from "next/link"
 import useSessionStore from "@/common/store/useSessionStore"
+import { Settings2 } from "lucide-react"
 
 const pages = [
   {
@@ -49,6 +51,13 @@ const pages = [
     title: "Booking Reviews",
     content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     link: LINK_ACCOUNT_BOOKING_REVIEWS,
+  },
+  {
+    id: 5,
+    icon: Settings2,
+    title: "Global Preferences",
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    link: LINK_ACCOUNT_GLOBAL_PREFERENCES,
   },
 ]
 

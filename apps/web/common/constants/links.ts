@@ -11,6 +11,7 @@ export const LINK_ACCOUNT_PAYMENT_PAYOUT = "/account-settings/payment-payout"
 export const LINK_ACCOUNT_BOOKING_REVIEWS = "/account-settings/booking-reviews"
 export const LINK_ACCOUNT_YOUR_PAYMENT =
   "/account-settings/payment-payout/your-payments"
+export const LINK_ACCOUNT_GLOBAL_PREFERENCES = "/account-settings/global-preferences"
 
 export const LINK_ACCOUNT_WISHLIST = "/account-settings/wishlist"
 export const LINK_ACCOUNT_BOOKINGS = "/account-settings/bookings"
