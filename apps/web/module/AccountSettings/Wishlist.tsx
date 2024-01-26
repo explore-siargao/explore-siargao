@@ -8,7 +8,7 @@ import useSessionStore from "@/common/store/useSessionStore"
 import { Spinner } from "@/common/components/ui/Spinner"
 import { Typography } from "@/common/components/ui/Typography"
 import AccountSettingWrapper from "@/common/components/AccountSettingWrapper"
-import { LINK_ACCOUNT_SETTINGS } from "@/common/constants/links"
+import { LINK_ACCOUNT } from "@/common/constants/links"
 
 const WishlistGroup = [
   {
@@ -52,7 +52,7 @@ const Wishlist = () => {
         <Breadcrumb
           home="Account"
           page="Wishlists"
-          link={LINK_ACCOUNT_SETTINGS}
+          link={LINK_ACCOUNT}
         />
         <Title>Wishlists</Title>
       </div>

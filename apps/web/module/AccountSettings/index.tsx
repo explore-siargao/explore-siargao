@@ -3,16 +3,11 @@ import React from "react"
 import AccountSettingWrapper from "@/common/components/AccountSettingWrapper"
 import { AccountMenuContainer } from "@/common/components/AccountMenuContainer"
 import {
-  CreditCardIcon,
-  IdentificationIcon,
-  HeartIcon,
-  StarIcon,
-} from "@heroicons/react/24/outline"
-import {
   LINK_ACCOUNT_BOOKING_REVIEWS,
   LINK_ACCOUNT_PAYMENT_PAYOUT,
   LINK_ACCOUNT_PERSONAL_INFO,
   LINK_ACCOUNT_WISHLIST,
+  LINK_ACCOUNT_LOGIN_SECURITY,
 } from "@/common/constants/links"
 import { Title } from "@/common/components/ui/Title"
 import { Typography } from "@/common/components/ui/Typography"
@@ -20,35 +15,43 @@ import { capitalizeFirstLetter } from "@/common/helpers/capitalizeFirstLetter"
 import { ChevronRightIcon } from "@heroicons/react/20/solid"
 import Link from "next/link"
 import useSessionStore from "@/common/store/useSessionStore"
+import { Star, ShieldHalf, CreditCard, Heart, SquareUser } from 'lucide-react';
 
 const pages = [
   {
     id: 1,
-    icon: IdentificationIcon,
+    icon: SquareUser,
     title: "Personal Info",
     content: "Labore est amet eiusmod proident.",
     link: LINK_ACCOUNT_PERSONAL_INFO,
   },
   {
     id: 2,
-    icon: HeartIcon,
+    icon: Heart,
     title: "Wishlists",
     content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     link: LINK_ACCOUNT_WISHLIST,
   },
   {
     id: 3,
-    icon: CreditCardIcon,
+    icon: CreditCard,
     title: "Payments & payouts",
     content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     link: LINK_ACCOUNT_PAYMENT_PAYOUT,
   },
   {
     id: 4,
-    icon: StarIcon,
+    icon: Star,
     title: "Booking Reviews",
     content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     link: LINK_ACCOUNT_BOOKING_REVIEWS,
+  },
+  {
+    id: 5,
+    icon: ShieldHalf,
+    title: "Login & security",
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    link: LINK_ACCOUNT_LOGIN_SECURITY,
   },
 ]
 

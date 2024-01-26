@@ -1,6 +1,6 @@
 "use client"
 import AccountSettingWrapper from "@/common/components/AccountSettingWrapper"
-import { LINK_ACCOUNT_SETTINGS } from "@/common/constants/links"
+import { LINK_ACCOUNT } from "@/common/constants/links"
 import React from "react"
 import LegalName from "./components/LegalName"
 import EmailAddress from "./components/EmailAddress"
@@ -12,19 +12,21 @@ import { Title } from "@/common/components/ui/Title"
 import { Breadcrumb } from "@/common/components/ui/Breadcrumb"
 import useSessionStore from "@/common/store/useSessionStore"
 import { T_EmergencyContact } from "@repo/contract"
+import { ACCOUNT } from "@/common/constants"
 
 const PersonalInfo = () => {
   const session = useSessionStore((state) => state)
   const personalInfo = session?.personalInfo
+  const TITLE = "Personal Info"
   return (
     <AccountSettingWrapper>
       <div>
         <Breadcrumb
-          home="Account"
-          page="Personal info"
-          link={LINK_ACCOUNT_SETTINGS}
+          home={ACCOUNT}
+          page={TITLE}
+          link={LINK_ACCOUNT}
         />
-        <Title>Personal info</Title>
+        <Title>{TITLE}</Title>
       </div>
       <div>
         <div className="divide-y">
