@@ -146,3 +146,19 @@ export enum RegistrationType {
   "Facebook",
   "Google",
 }
+
+export interface taxes {
+
+  id: number;
+  countryRegion: string;
+  vatId: string;
+  nameOnRegistration: string;
+  addressLine1: string;
+  addressLine2: string;
+  city: string;
+  provinceRegion: string;
+  zipPostalCode: string;
+  createdAt?: string;
+  updateAt?: string;
+  deleteAt?: string;
+}
