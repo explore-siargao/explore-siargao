@@ -500,3 +500,40 @@ export const updateLanguage = async (req: Request, res: Response) => {
     res.json(response.error({ message: message }))
   }
 }
+
+
+export const updateCurrency = async (req: Request, res: Response) => {
+  const personalInfoId = Number(req.params.personalInfoId)
+  const { currency } = req.body
+  try {
+    if (!currency) {
+      return res.json(response.error({ message: REQUIRED_VALUE_EMPTY }))
+    }
+    const getPersonalInfo = await prisma.personalInfo.findFirst({
+      where: {
+        id: personalInfoId,
+      },
+    })
+    if (!getPersonalInfo) {
+      return res.json(response.error({ message: 'Personal info not found' }))
+    }
+    const updateUserCurrency = await prisma.personalInfo.update({
+      where: {
+        id: personalInfoId,
+      },
+      data: {
+        currency: currency,
+      },
+    })
+    res.json(
+      response.success({
+        item: updateUserCurrency,
+        allItemCount: 1,
+        message: 'Currency successfully updated',
+      })
+    )
+  } catch (err: any) {
+    const message = err.message ? err.message : UNKNOWN_ERROR_OCCURRED
+    res.json(response.error({ message: message }))
+  }
+}

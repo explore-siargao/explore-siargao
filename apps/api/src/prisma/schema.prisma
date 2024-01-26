@@ -21,14 +21,16 @@ model User {
   deactivated      Boolean           @default(false)
   profilePicture   String?           @db.LongText
   canReceiveEmail  Boolean           @default(false)
+  tax              Tax?
   listing          Listing[]
-  reportListing   ReportListing[]
+  reportListing    ReportListing[]
   paymentMethod    PaymentMethod[]
   wishes           WishGroup[]
   review           Review[]
   personalInfo     PersonalInfo?
   MultiFactorAuth  MultiFactorAuth[]
   Coupons          Coupon[]
+  taxId            Int?
 }
 
 model PersonalInfo {
@@ -42,6 +44,7 @@ model PersonalInfo {
   phoneNumber       String              @db.VarChar(20)
   country           String              @db.VarChar(100)
   language          String              @db.VarChar(50)
+  currency          String              @db.VarChar(10)
   createdAt         DateTime            @default(now())
   updatedAt         DateTime            @updatedAt
   deletedAt         DateTime?
@@ -170,17 +173,18 @@ model PaymentMethod {
 }
 
 model ReportListing {
-  id           Int     @id @default(autoincrement())
-  reason       String  @db.Text
-  otherdetails String  @db.Text
+  id           Int       @id @default(autoincrement())
+  reason       String    @db.Text
+  otherdetails String    @db.Text
   reportedBy   Int
-  user        User     @relation(fields: [reportedBy], references: [id])
+  user         User      @relation(fields: [reportedBy], references: [id])
   listingId    Int
-  listing      Listing @relation(fields: [listingId], references: [id])
-  createdAt      DateTime  @default(now())
-  updatedAt      DateTime  @updatedAt
-  deletedAt      DateTime?
-@@index([reportedBy])
+  listing      Listing   @relation(fields: [listingId], references: [id])
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  deletedAt    DateTime?
+
+  @@index([reportedBy])
   @@index([listingId])
 }
 
@@ -357,6 +361,23 @@ model Review {
 
   @@index([listingId])
   @@index([userId])
+}
+
+model Tax {
+  id                 Int       @id @default(autoincrement())
+  countryRegion      String    @db.VarChar(255)
+  vatId              String    @db.VarChar(255)
+  nameOnRegistration String    @db.VarChar(255)
+  addressLine1       String    @db.VarChar(255)
+  addressLine2       String    @db.VarChar(255)
+  city               String    @db.VarChar(255)
+  provinceRegion     String    @db.VarChar(255)
+  zipPostalCode      String    @db.VarChar(255)
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+  deletedAt          DateTime?
+  User               User?    @relation(fields: [userId], references: [id])
+  userId             Int?      @unique      
 }
 
 enum UserRole {
