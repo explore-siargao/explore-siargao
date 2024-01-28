@@ -16,7 +16,7 @@ nvm use 20.10.0
 
 ### 2. Clone the project
 
-Make sure you have [Git](https://git-scm.com/) installed in local machine then run these commands in you PowerShell
+Make sure you have [Git](https://git-scm.com/) installed in local machine then run this command in your PowerShell or any other Terminal
 
 ```
 git clone https://github.com/explore-siargao/explore-siargao.git
@@ -45,6 +45,8 @@ Make sure that your current directory is `explore-siargao` folder, then run this
 ```
 npm run setup
 ```
+
+This will install the dependencies and build the project
 
 ### 6. Run the project
 
