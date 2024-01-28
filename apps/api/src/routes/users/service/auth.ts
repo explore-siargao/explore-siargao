@@ -114,6 +114,7 @@ export const register = async (req: Request, res: Response) => {
       "Australia": "AUD",
     }
     const currency: string = currencyByCountry[country as keyof typeof currencyByCountry];
+    const finalCurrency = currency ? currency :"USD"
     try {
       const user = await prisma.user.findFirst({
         where: {
@@ -148,7 +149,7 @@ export const register = async (req: Request, res: Response) => {
             phoneNumber: '',
             country: country,
             language: 'English',
-            currency: currency? currency : "USD"
+            currency: finalCurrency
           },
         })
         res.json(
