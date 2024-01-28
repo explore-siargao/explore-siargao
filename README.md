@@ -16,7 +16,7 @@ nvm use 20.10.0
 
 ### 2. Clone the project
 
-Make sure you have [Git](https://git-scm.com/) installed in local machine then run this command in your PowerShell or any other Terminal
+Make sure you have <a href="https://git-scm.com/" target="_blank">Git</a> installed in local machine then run this command in your PowerShell or any other Terminal
 
 ```
 git clone https://github.com/explore-siargao/explore-siargao.git
@@ -24,7 +24,7 @@ git clone https://github.com/explore-siargao/explore-siargao.git
 
 ### 3. Database Setup
 
-Go to this [file](/docs/local_database_setup.md) to implement the setup
+Go to this <a href="/docs/local_database_setup.md" target="_blank">file</a> to implement the setup
 
 ### 4. Setup TypeScript
 
