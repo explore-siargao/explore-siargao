@@ -109,9 +109,9 @@ export const register = async (req: Request, res: Response) => {
       country,
     } = req.body
     const currencyByCountry = {
-      "United States": "USD",
-      "Philippines": "PHP",
-      "Australia": "AUD",
+      'United States': 'USD',
+      Philippines: 'PHP',
+      Australia: 'AUD',
     }
     const currency: string = currencyByCountry[country as keyof typeof currencyByCountry];
     const finalCurrency = currency ? currency :"USD"

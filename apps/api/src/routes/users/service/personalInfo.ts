@@ -501,7 +501,6 @@ export const updateLanguage = async (req: Request, res: Response) => {
   }
 }
 
-
 export const updateCurrency = async (req: Request, res: Response) => {
   const personalInfoId = Number(req.params.personalInfoId)
   const { currency } = req.body
