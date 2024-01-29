@@ -22,7 +22,7 @@ model User {
   profilePicture   String?           @db.LongText
   canReceiveEmail  Boolean           @default(false)
   listing          Listing[]
-  reportListing   ReportListing[]
+  reportListing    ReportListing[]
   paymentMethod    PaymentMethod[]
   wishes           WishGroup[]
   review           Review[]
@@ -168,17 +168,18 @@ model PaymentMethod {
 }
 
 model ReportListing {
-  id           Int     @id @default(autoincrement())
-  reason       String  @db.Text
-  otherdetails String  @db.Text
+  id           Int       @id @default(autoincrement())
+  reason       String    @db.Text
+  otherdetails String    @db.Text
   reportedBy   Int
-  user        User     @relation(fields: [reportedBy], references: [id])
   listingId    Int
-  listing      Listing @relation(fields: [listingId], references: [id])
-  createdAt      DateTime  @default(now())
-  updatedAt      DateTime  @updatedAt
-  deletedAt      DateTime?
-@@index([reportedBy])
+  createdAt    DateTime  @default(now())
+  deletedAt    DateTime?
+  updatedAt    DateTime  @updatedAt
+  user         User      @relation(fields: [reportedBy], references: [id])
+  listing      Listing   @relation(fields: [listingId], references: [id])
+
+  @@index([reportedBy])
   @@index([listingId])
 }
 

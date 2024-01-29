@@ -7,9 +7,9 @@ export async function deactivateAccount(userId: number | undefined) {
   return await apiService.patch(`${API_URL_USERS}/deactivate/${userId}`)
 }
 
-function useDeactivateAccount(userId: number) {
+function useDeactivateAccount() {
   const query = useMutation({
-    mutationFn: () => deactivateAccount(userId),
+    mutationFn: (userId: number) => deactivateAccount(userId),
   })
   return query
 }

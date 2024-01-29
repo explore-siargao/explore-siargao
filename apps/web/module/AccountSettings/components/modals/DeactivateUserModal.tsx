@@ -1,35 +1,28 @@
 import ModalContainer from "@/common/components/ModalContainer"
 import { Dialog, Transition } from "@headlessui/react"
-import { useQueryClient } from "@tanstack/react-query"
 import React, { Fragment, useRef } from "react"
 import toast from "react-hot-toast"
-import useRemovePaymentmethod from "../../hooks/useRemovePaymentMethod"
 import ModalContainerFooter from "@/common/components/ModalContainer/ModalContainerFooter"
-import DialogPanelWrapper from "./DialogPanelWrapper"
+import useDeactivateAccount from "../../hooks/useDeactivateAccount"
 import ModalBackgroundProvider from "./ModalBackgroundProvider"
+import DialogPanelWrapper from "./DialogPanelWrapper"
 
-interface PaymentModalProps {
-  id: number
+interface DeactivateUserModalProps {
   userId: number
   isOpen: boolean
   onClose: () => void
 }
 
-const RemovePaymentModal = ({
-  id,
+const DeactivateUserModal = ({
   userId,
   isOpen: openModal,
   onClose: closeModal,
-}: PaymentModalProps) => {
+}: DeactivateUserModalProps) => {
   const cancelButtonRef = useRef(null)
-  const queryClient = useQueryClient()
-  const { mutate, isPending } = useRemovePaymentmethod(userId, id)
+  const { mutate, isPending } = useDeactivateAccount()
   const callBackReq = {
     onSuccess: (data: any) => {
       if (!data.error) {
-        queryClient.invalidateQueries({
-          queryKey: ["payment-method"],
-        })
         toast.success(data.message)
         closeModal()
       } else {
@@ -40,6 +33,7 @@ const RemovePaymentModal = ({
       toast.error(String(err))
     },
   }
+
   return (
     <Transition.Root show={openModal} as={Fragment}>
       <Dialog
@@ -50,20 +44,20 @@ const RemovePaymentModal = ({
       >
         <ModalBackgroundProvider />
         <DialogPanelWrapper>
-          <ModalContainer title="Remove payment method" onClose={closeModal}>
+          <ModalContainer title="Deactivate your account" onClose={closeModal}>
             <div className="p-6">
               <p className="text-text-400 font-light">
-                Are you sure you want to remove this payment method?
+                Are you sure you want to deactivate your account?
               </p>
             </div>
             <ModalContainerFooter
-              positive="Remove"
+              positive="Deactivate"
               negative="Cancel"
               isPending={isPending}
               isSubmit={false}
               onClose={closeModal}
               buttonFn={() => {
-                mutate({ id: id, userId: userId }, callBackReq)
+                mutate(userId, callBackReq)
               }}
             />
           </ModalContainer>
@@ -73,4 +67,4 @@ const RemovePaymentModal = ({
   )
 }
 
-export default RemovePaymentModal
+export default DeactivateUserModal
