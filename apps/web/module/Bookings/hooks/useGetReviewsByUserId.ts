@@ -16,4 +16,4 @@ function useGetReviewsByUserId(userId: number | undefined) {
   })
   return query
 }
-export default useGetReviewsByUserId;
+export default useGetReviewsByUserId
