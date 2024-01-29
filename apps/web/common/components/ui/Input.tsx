@@ -23,7 +23,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             htmlFor={id}
             className="block text-xs font-medium text-text-900"
           >
-            {label} {props.required && <Asterisk/>}
+            {label} {props.required && <Asterisk />}
           </label>
           <input
             type={type}
