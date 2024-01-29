@@ -207,8 +207,8 @@ const Payments = () => {
             ) : (
               <>
                 <Input
-                  inputId="couponCode"
-                  inputLabel="Enter coupon code"
+                  id="couponCode"
+                  label="Enter coupon code"
                   {...register("code", { required: true })}
                   disabled={isPendingRedeemCoupon}
                 />

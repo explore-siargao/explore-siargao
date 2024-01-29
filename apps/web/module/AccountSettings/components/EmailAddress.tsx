@@ -94,12 +94,13 @@ const EmailAddress = ({ email, id }: IUser) => {
           </Typography>
           <form onSubmit={handleEmailSubmit(onSubmitEmail)}>
             <Input
-              inputId="email"
-              inputLabel="Email Address"
+              id="email"
+              label="Email Address"
               placeholder="you@sample.com"
               defaultValue={email}
               className="my-4"
-              {...registerEmail("email")}
+              {...registerEmail("email", { required: true })}
+              required
             />
             <Button className="w-20" size={"sm"} type="submit">
               {isPendingEmail ? (
