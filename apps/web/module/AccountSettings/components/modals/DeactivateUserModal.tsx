@@ -4,6 +4,8 @@ import React, { Fragment, useRef } from "react"
 import toast from "react-hot-toast"
 import ModalContainerFooter from "@/common/components/ModalContainer/ModalContainerFooter"
 import useDeactivateAccount from "../../hooks/useDeactivateAccount"
+import ModalBackgroundProvider from "./ModalBackgroundProvider"
+import DialogPanelWrapper from "./DialogPanelWrapper"
 
 interface DeactivateUserModalProps {
   userId: number
@@ -40,53 +42,29 @@ const DeactivateUserModal = ({
         initialFocus={cancelButtonRef}
         onClose={closeModal}
       >
-        <Transition.Child
-          as={Fragment}
-          enter="ease-out duration-300"
-          enterFrom="opacity-0"
-          enterTo="opacity-100"
-          leave="ease-in duration-200"
-          leaveFrom="opacity-100"
-          leaveTo="opacity-0"
-        >
-          <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
-        </Transition.Child>
-        <div className="fixed inset-0 z-10 overflow-y-auto">
-          <div className="flex min-h-full items-end justify-center text-center sm:items-center">
-            <Transition.Child
-              as={Fragment}
-              enter="ease-out duration-300"
-              enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-              enterTo="opacity-100 translate-y-0 sm:scale-100"
-              leave="ease-in duration-200"
-              leaveFrom="opacity-100 translate-y-0 sm:scale-100"
-              leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-            >
-              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:w-full sm:max-w-lg ">
-                <ModalContainer
-                  title="Deactivate your account"
-                  onClose={closeModal}
-                >
-                  <div className="p-6">
-                    <p className="text-text-400 font-light">
-                      Are you sure you want to deactivate your account?
-                    </p>
-                  </div>
-                  <ModalContainerFooter
-                    positive="Deactivate"
-                    negative="Cancel"
-                    isPending={isPending}
-                    isSubmit={false}
-                    onClose={closeModal}
-                    buttonFn={() => {
-                      mutate(userId, callBackReq)
-                    }}
-                  />
-                </ModalContainer>
-              </Dialog.Panel>
-            </Transition.Child>
-          </div>
-        </div>
+        <ModalBackgroundProvider />
+        <DialogPanelWrapper>
+          <ModalContainer
+            title="Deactivate your account"
+            onClose={closeModal}
+          >
+            <div className="p-6">
+              <p className="text-text-400 font-light">
+                Are you sure you want to deactivate your account?
+              </p>
+            </div>
+            <ModalContainerFooter
+              positive="Deactivate"
+              negative="Cancel"
+              isPending={isPending}
+              isSubmit={false}
+              onClose={closeModal}
+              buttonFn={() => {
+                mutate(userId, callBackReq)
+              }}
+            />
+          </ModalContainer>
+        </DialogPanelWrapper>
       </Dialog>
     </Transition.Root>
   )
