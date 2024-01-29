@@ -12,7 +12,7 @@ export interface InputProps
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, id, label, errorMessage, ...props }, ref) => {
     return (
-      <>
+      <div>
         <div
           className={cn(
             "relative rounded-md px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-text-200 focus-within:z-10 focus-within:ring-2 focus-within:ring-text-600",
@@ -33,8 +33,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             {...props}
           />
         </div>
-        <Typography className="text-error-600 ml-1">{errorMessage}</Typography>
-      </>
+        {errorMessage && <Typography className="text-error-600 ml-1">{errorMessage}</Typography>}
+      </div>
     )
   }
 )
