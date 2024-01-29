@@ -94,9 +94,9 @@ router.post(
 )
 router.patch(
   '/address/:userId',
-  // isUserLoggedIn,
-  // isCsrfTokenValid,
-  // isOriginValid,..............
+  isUserLoggedIn,
+  isCsrfTokenValid,
+  isOriginValid,
   editAddress
 )
 router.patch(
