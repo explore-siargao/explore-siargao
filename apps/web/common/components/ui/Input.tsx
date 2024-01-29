@@ -33,7 +33,11 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             {...props}
           />
         </div>
-        {errorMessage && <Typography className="text-error-600 ml-1">{errorMessage}</Typography>}
+        {errorMessage && (
+          <Typography className="text-error-600 ml-1">
+            {errorMessage}
+          </Typography>
+        )}
       </div>
     )
   }
