@@ -37,7 +37,7 @@ const router = express.Router()
 
 // DEFAULT
 router.get('/', getAllUsers)
-router.post('/', isOriginValid, isCsrfTokenValid, isUserLoggedIn, addUser)
+router.post('/', addUser)
 
 // AUTH
 router.post('/auth/info', info) // Use for Manual log in for Next-Auth
@@ -78,7 +78,6 @@ router.patch(
   isCsrfTokenValid,
   isOriginValid,
   isUserLoggedIn,
-  userDetails,
   deactivateAccount
 )
 router.patch(
