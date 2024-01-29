@@ -20,20 +20,96 @@ export const getReviewByListing = async (req: Request, res: Response) => {
         where: {
           listingId: listingId,
         },
+        include: {
+          user: {
+            select: {
+              personalInfo: {
+                select: {
+                  firstName: true,
+                  middleName: true,
+                  lastName: true,
+                  address: true,
+                },
+              },
+            },
+          },
+        },
+      })
+      let overallRating = 0
+      let cleanlinessAverage = 0
+      let accuracyAverage = 0
+      let checkInAverage = 0
+      let communicationAverage = 0
+      let locationAverage = 0
+      let valueAverage = 0
+      let totalCleanliness = 0
+      let totalAccuracy = 0
+      let totalCheckIn = 0
+      let totalCommunication = 0
+      let totalLocation = 0
+      let totalValue = 0
+      let totalRating = 0
+      const transformedReviews = reviews.map((review) => {
+        totalCleanliness = totalCleanliness + review.cleanLinessRates
+        totalAccuracy = totalAccuracy + review.accuracyRates
+        totalCheckIn = totalCheckIn + review.checkInRates
+        totalCommunication = totalCommunication + review.communicationRates
+        totalLocation = totalLocation + review.locationRates
+        totalValue = totalValue + review.valueRates
+        cleanlinessAverage = totalCleanliness / reviews.length
+        accuracyAverage = totalAccuracy / reviews.length
+        checkInAverage = totalCheckIn / reviews.length
+        communicationAverage = totalCommunication / reviews.length
+        locationAverage = totalLocation / reviews.length
+        valueAverage = totalValue / reviews.length
+        return {
+          name: `${review?.user?.personalInfo?.firstName} ${review?.user?.personalInfo?.lastName}`,
+          rating:
+            (review.cleanLinessRates +
+              review.accuracyRates +
+              review.checkInRates +
+              review.communicationRates +
+              review.locationRates +
+              review.valueRates) /
+            6,
+          description: review.comment,
+          reviewDate: review.createdAt,
+          country: review.user.personalInfo?.address?.country,
+        }
       })
       if (reviews.length !== 0) {
         res.json(
           response.success({
-            items: reviews,
-            allItemCount: reviews.length,
+            item: {
+              reviews: transformedReviews,
+              average: {
+                cleanliness: cleanlinessAverage,
+                accuracy: accuracyAverage,
+                checkIn: checkInAverage,
+                communication: communicationAverage,
+                location: locationAverage,
+                value: valueAverage,
+              },
+              overallRating:
+                (cleanlinessAverage +
+                  accuracyAverage +
+                  checkInAverage +
+                  communicationAverage +
+                  locationAverage +
+                  valueAverage) /
+                6,
+              allItemCount: reviews.length,
+            },
             message: '',
           })
         )
       } else {
         res.json(
           response.success({
-            items: reviews,
-            allItemCount: reviews.length,
+            item: {
+              items: transformedReviews,
+              allItemCount: reviews.length,
+            },
             message: 'No reviews found on this listing item.',
           })
         )
