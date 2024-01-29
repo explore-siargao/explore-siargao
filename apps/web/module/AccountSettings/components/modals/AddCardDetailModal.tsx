@@ -218,6 +218,7 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
                           <Input
                             label="Expiration date"
                             id="expirationDate"
+                            placeholder="MM/YY"
                             type="text"
                             disabled={isPending}
                             {...register("expirationDate", {
@@ -257,6 +258,7 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
                             label="CVV"
                             id="cvv"
                             type="number"
+                            placeholder="123"
                             disabled={isPending}
                             {...register("cvv", {
                               minLength: 3,
