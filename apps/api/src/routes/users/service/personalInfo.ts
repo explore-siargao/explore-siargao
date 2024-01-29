@@ -197,9 +197,10 @@ export const removeEmergencyContact = async (req: Request, res: Response) => {
 
 export const addAddress = async (req: Request, res: Response) => {
   try {
-    const { country, streetAddress, city, province, zipCode } = req.body
+    const { country, streetAddress, city, stateProvince, aptSuite, zipCode } =
+      req.body
     const personalInfoId = Number(req.params.personalInfoId)
-    if (streetAddress && city && province && zipCode) {
+    if ((streetAddress && city && stateProvince) || (aptSuite && zipCode)) {
       const getPersonalInfo = await prisma.personalInfo.findFirst({
         where: {
           id: personalInfoId,
@@ -219,7 +220,8 @@ export const addAddress = async (req: Request, res: Response) => {
               country: country,
               streetAddress: streetAddress,
               city: city,
-              province: province,
+              aptSuite: aptSuite,
+              stateProvince: stateProvince,
               zipCode: zipCode,
             },
           })
@@ -233,8 +235,9 @@ export const addAddress = async (req: Request, res: Response) => {
             data: {
               streetAddress: streetAddress,
               city: city,
-              province: province,
+              stateProvince: stateProvince,
               country: country,
+              aptSuite: aptSuite,
               zipCode: zipCode,
             },
           })
@@ -273,10 +276,14 @@ export const addAddress = async (req: Request, res: Response) => {
 }
 
 export const editAddress = async (req: Request, res: Response) => {
-  const { streetAddress, city, province, zipCode, country } = req.body
+  const { streetAddress, city, stateProvince, zipCode, aptSuite, country } =
+    req.body
   const userId = Number(req.params.userId)
   try {
-    if (streetAddress && city && province && zipCode && country) {
+    if (
+      (streetAddress && city && stateProvince) ||
+      (aptSuite && zipCode && country)
+    ) {
       const personalInfo = await prisma.personalInfo.findUnique({
         where: {
           userId: userId,
@@ -294,7 +301,8 @@ export const editAddress = async (req: Request, res: Response) => {
           data: {
             streetAddress: streetAddress,
             city: city,
-            province: province,
+            stateProvince: stateProvince,
+            aptSuite: aptSuite,
             country: country,
             zipCode: zipCode,
           },
