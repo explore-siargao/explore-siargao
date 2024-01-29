@@ -73,7 +73,16 @@ export const getReviewById = async (req: Request, res: Response) => {
 
 export const addReview = async (req: Request, res: Response) => {
   const userId = Number(req.params.userId)
-  const { listingId, rates, comment } = req.body
+  const {
+    listingId,
+    cleanLinessRates,
+    accuracyRates,
+    checkInRates,
+    communicationRates,
+    locationRates,
+    valueRates,
+    comment,
+  } = req.body
   const inputIsValid = Z_Review.safeParse(req.body)
   if (!inputIsValid.success) {
     return res.json(
@@ -86,14 +95,27 @@ export const addReview = async (req: Request, res: Response) => {
         id: userId,
       },
     })
+    const getListing = await prisma.listing.findUnique({
+      where: {
+        id: listingId,
+      },
+    })
     if (!getUser) {
       return res.json(response.error({ message: USER_NOT_EXIST }))
+    }
+    if (!getListing) {
+      return res.json(response.error({ message: 'Listing not found' }))
     }
     const newReview = await prisma.review.create({
       data: {
         userId: userId,
         listingId: listingId,
-        rates: rates,
+        cleanLinessRates: cleanLinessRates,
+        accuracyRates: accuracyRates,
+        checkInRates: checkInRates,
+        communicationRates: communicationRates,
+        locationRates: locationRates,
+        valueRates: valueRates,
         comment: comment,
       },
     })
@@ -112,8 +134,24 @@ export const addReview = async (req: Request, res: Response) => {
 export const updateReview = async (req: Request, res: Response) => {
   const userId = Number(req.params.userId)
   const reviewId = Number(req.params.reviewId)
-  const { rates, comment } = req.body
-  if (rates || comment) {
+  const {
+    cleanLinessRates,
+    accuracyRates,
+    checkInRates,
+    communicationRates,
+    locationRates,
+    valueRates,
+    comment,
+  } = req.body
+  if (
+    cleanLinessRates ||
+    accuracyRates ||
+    checkInRates ||
+    communicationRates ||
+    locationRates ||
+    valueRates ||
+    comment
+  ) {
     try {
       const getUser = await prisma.user.findUnique({
         where: {
@@ -136,7 +174,12 @@ export const updateReview = async (req: Request, res: Response) => {
           id: reviewId,
         },
         data: {
-          rates: rates,
+          cleanLinessRates: cleanLinessRates,
+          accuracyRates: accuracyRates,
+          checkInRates: checkInRates,
+          communicationRates: communicationRates,
+          locationRates: locationRates,
+          valueRates: valueRates,
           comment: comment,
         },
       })
