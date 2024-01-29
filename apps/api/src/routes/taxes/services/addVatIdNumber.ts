@@ -4,17 +4,16 @@ import { REQUIRED_VALUE_EMPTY, USER_NOT_EXIST } from '@repo/constants'
 import { Z_Taxes } from '@repo/contract'
 import { Request, Response } from 'express'
 
-
 const response = new ResponseService()
 
 export const getTax = async (req: Request, res: Response) => {
-  const userId = Number(req.params.userId);
+  const userId = Number(req.params.userId)
   try {
     const getTaxesByUserId = await prisma.tax.findMany({
       where: {
         userId: userId,
       },
-    });
+    })
 
     if (getTaxesByUserId.length > 0) {
       res.json({
@@ -24,7 +23,7 @@ export const getTax = async (req: Request, res: Response) => {
           allItemCount: getTaxesByUserId.length,
           message: '',
         },
-      });
+      })
     } else {
       res.json({
         success: true,
@@ -33,13 +32,12 @@ export const getTax = async (req: Request, res: Response) => {
           allItemCount: 0,
           message: 'No tax records found for the given userId!',
         },
-      });
+      })
     }
   } catch (err: any) {
-    res.json(response.error({ message: err.message }));
+    res.json(response.error({ message: err.message }))
   }
-};
-
+}
 
 export const addTaxes = async (req: Request, res: Response) => {
   const {
@@ -114,4 +112,3 @@ export const addTaxes = async (req: Request, res: Response) => {
     res.json(response.error({ message: err.message }))
   }
 }
-
