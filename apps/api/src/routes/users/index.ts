@@ -22,6 +22,7 @@ import {
   getAllGovernmentIdByPersonInfoId,
   getPersonalInfo,
   removeEmergencyContact,
+  updateCurrency,
   updateLanguage,
   updatePersonalInfo,
 } from './service/personalInfo'
@@ -123,6 +124,7 @@ router.delete(
 )
 
 router.patch('/personal-info/language/:personalInfoId', updateLanguage)
+router.patch('/personal-info/currency/:personalInfoId', updateCurrency)
 
 //Government Id
 router.get('/:peronalInfoId/government-id', getAllGovernmentIdByPersonInfoId)
