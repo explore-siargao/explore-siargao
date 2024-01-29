@@ -1,9 +1,8 @@
 import { ResponseService } from '@/common/service/response'
 import { PrismaClient } from '@prisma/client'
 import { REQUIRED_VALUE_EMPTY, USER_NOT_EXIST } from '@repo/constants'
-import { T_Review, Z_Review } from '@repo/contract'
+import {Z_Review } from '@repo/contract'
 import { Request, Response } from 'express'
-import { sum } from 'lodash'
 
 const prisma = new PrismaClient()
 const response = new ResponseService()
