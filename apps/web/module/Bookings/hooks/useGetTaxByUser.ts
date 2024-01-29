@@ -2,17 +2,17 @@ import { ApiService } from "@/common/service/api"
 import { API_URL_TAX } from "@repo/constants"
 import { useQuery } from "@tanstack/react-query"
 
-export async function geTaxId(taxId: string | undefined) {
+export async function geTaxId(userId: number | undefined) {
   const apiService = new ApiService()
-  return await apiService.get(`${API_URL_TAX}/id`)
+  return await apiService.get(`${API_URL_TAX}/${userId}`)
 }
 
-function useGEtTaxByUser(taxId: string | undefined) {
+function useGEtTaxByUser(userId: number | undefined) {
   const query = useQuery({
-    queryKey: ["tax", taxId],
-    queryFn: () => geTaxId(taxId),
+    queryKey: ["tax", userId],
+    queryFn: () => geTaxId(userId),
     refetchOnWindowFocus: false,
-    enabled: !!taxId,
+    enabled: !!userId,
   })
   return query
 }

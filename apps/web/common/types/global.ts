@@ -148,7 +148,7 @@ export enum RegistrationType {
 }
 
 export interface ITaxes {
-  id: number
+  id?: number
   countryRegion: string
   vatId: string
   nameOnRegistration: string
