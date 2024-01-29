@@ -47,7 +47,7 @@ const isUserLoggedIn = async (
           personalInfo: {
             include: {
               address: true,
-              emergrncyContacts: true,
+              emergencyContacts: true,
             },
           },
         },

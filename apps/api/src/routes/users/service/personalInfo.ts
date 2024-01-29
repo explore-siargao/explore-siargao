@@ -14,7 +14,7 @@ export const getPersonalInfo = async (req: Request, res: Response) => {
       where: { userId: Number(req?.params?.userId) },
       include: {
         user: true,
-        emergrncyContacts: true,
+        emergencyContacts: true,
         address: true,
       },
     })
@@ -63,7 +63,7 @@ export const updatePersonalInfo = async (req: Request, res: Response) => {
         lastName: lastName,
         middleName: middleName,
         birthDate: birthDate,
-        governMentId: governmentId,
+        governmentId: governmentId,
         phoneNumber: phoneNumber,
       },
     })
@@ -345,11 +345,11 @@ export const getAllGovernmentIdByPersonInfoId = async (
     if (getPersonInfoId) {
       res.json({
         error: false,
-        items: JSON.parse(getPersonInfoId?.governMentId as string),
+        items: JSON.parse(getPersonInfoId?.governmentId as string),
         itemCount:
-          getPersonInfoId?.governMentId === null
+          getPersonInfoId?.governmentId === null
             ? 0
-            : JSON.parse(getPersonInfoId?.governMentId as string).length,
+            : JSON.parse(getPersonInfoId?.governmentId as string).length,
         message: '',
       })
     } else {
@@ -384,13 +384,13 @@ export const addGovernmentId = async (req: Request, res: Response) => {
       })
       if (getPersonIfo) {
         const upload = await fileService.upload({ files })
-        if (getPersonIfo.governMentId === null) {
+        if (getPersonIfo.governmentId === null) {
           const addNewGovernmentId = await prisma.personalInfo.update({
             where: {
               id: peronalInfoId,
             },
             data: {
-              governMentId: JSON.stringify([
+              governmentId: JSON.stringify([
                 { imageKey: upload.key, type: type, createdAt: new Date() },
               ] as T_GovernmentId[]),
             },
@@ -398,14 +398,14 @@ export const addGovernmentId = async (req: Request, res: Response) => {
           res.json(
             response.success({
               items: JSON.parse(
-                addNewGovernmentId.governMentId as string
+                addNewGovernmentId.governmentId as string
               ) as T_GovernmentId[],
               message: 'Government Id successfully added',
             })
           )
         } else {
           const updatedGovernmentId = JSON.parse(
-            getPersonIfo.governMentId
+            getPersonIfo.governmentId
           ) as T_GovernmentId[]
           const typeAlreadyExists = updatedGovernmentId.some(
             (govId: T_GovernmentId) => govId.type === type
@@ -421,13 +421,13 @@ export const addGovernmentId = async (req: Request, res: Response) => {
                 id: peronalInfoId,
               },
               data: {
-                governMentId: JSON.stringify(updatedGovernmentId),
+                governmentId: JSON.stringify(updatedGovernmentId),
               },
             })
             res.json(
               response.success({
                 items: JSON.parse(
-                  updateGovId.governMentId as string
+                  updateGovId.governmentId as string
                 ) as T_GovernmentId[],
                 message: 'Government Id successfully added',
               })
