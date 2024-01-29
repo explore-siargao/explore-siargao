@@ -50,6 +50,7 @@ const SignUpForm = ({ isSocial = false }: Props) => {
       year: "",
       day: "",
       registrationType: E_RegistrationType.Manual,
+      country: ""
     },
   })
   const params = useParams()
@@ -92,6 +93,7 @@ const SignUpForm = ({ isSocial = false }: Props) => {
         birthDate: birthDate.format(),
         password,
         registrationType: signUpType as E_RegistrationType,
+        country: ""
       },
       callBackReq
     )
@@ -185,6 +187,15 @@ const SignUpForm = ({ isSocial = false }: Props) => {
             <Typography variant={"p"} className="text-xs mt-1 text-text-500">
               We'll email you trip confirmations and receipts.
             </Typography>
+          </div>
+          <div>
+            <Input
+              inputLabel="Country"
+              inputId="country"
+              type="text"
+              {...register("country", { required: true })}
+              disabled={addUserIsPending}
+            />
           </div>
           <div>
             {!isSocial && (
