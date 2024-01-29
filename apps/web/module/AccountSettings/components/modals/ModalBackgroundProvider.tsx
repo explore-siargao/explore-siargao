@@ -1,9 +1,9 @@
 import React, { Fragment } from "react"
 import { Transition } from "@headlessui/react"
 
-const ModalBackgroundProvider= () => {
+const ModalBackgroundProvider = () => {
   return (
-    <Transition.Child 
+    <Transition.Child
       as={Fragment}
       enter="ease-out duration-300"
       enterFrom="opacity-0"

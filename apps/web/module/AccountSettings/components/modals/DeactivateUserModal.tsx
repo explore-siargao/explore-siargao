@@ -44,10 +44,7 @@ const DeactivateUserModal = ({
       >
         <ModalBackgroundProvider />
         <DialogPanelWrapper>
-          <ModalContainer
-            title="Deactivate your account"
-            onClose={closeModal}
-          >
+          <ModalContainer title="Deactivate your account" onClose={closeModal}>
             <div className="p-6">
               <p className="text-text-400 font-light">
                 Are you sure you want to deactivate your account?

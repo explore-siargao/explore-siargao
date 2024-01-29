@@ -50,10 +50,7 @@ const RemovePaymentModal = ({
       >
         <ModalBackgroundProvider />
         <DialogPanelWrapper>
-          <ModalContainer
-            title="Remove payment method"
-            onClose={closeModal}
-          >
+          <ModalContainer title="Remove payment method" onClose={closeModal}>
             <div className="p-6">
               <p className="text-text-400 font-light">
                 Are you sure you want to remove this payment method?
