@@ -54,6 +54,14 @@ export const addUser = async (req: Request, res: Response) => {
         password: req.body.password ? String(encryptPassword) : null,
       },
     })
+    const currencyByCountry = {
+      'United States': 'USD',
+      Philippines: 'PHP',
+      Australia: 'AUD',
+    }
+    const currency: string =
+      currencyByCountry[req.body.country as keyof typeof currencyByCountry]
+    const finalCurrency = currency ?? 'USD'
     const newPersonalInfo = await prisma.personalInfo.create({
       data: {
         firstName: req.body.firstName,
@@ -63,6 +71,9 @@ export const addUser = async (req: Request, res: Response) => {
         phoneNumber: '',
         governMentId: '',
         userId: newUser.id,
+        country: req.body.country,
+        language: 'English',
+        currency: finalCurrency,
       },
     })
 

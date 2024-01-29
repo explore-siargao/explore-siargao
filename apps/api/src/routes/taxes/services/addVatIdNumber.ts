@@ -1,11 +1,43 @@
 import { ResponseService } from '@/common/service/response'
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '@/common/helpers/prismaClient'
 import { REQUIRED_VALUE_EMPTY, USER_NOT_EXIST } from '@repo/constants'
 import { Z_Taxes } from '@repo/contract'
 import { Request, Response } from 'express'
 
-const prisma = new PrismaClient()
 const response = new ResponseService()
+
+export const getTax = async (req: Request, res: Response) => {
+  const userId = Number(req.params.userId)
+  try {
+    const getTaxesByUserId = await prisma.tax.findMany({
+      where: {
+        userId: userId,
+      },
+    })
+
+    if (getTaxesByUserId.length > 0) {
+      res.json({
+        success: true,
+        data: {
+          items: getTaxesByUserId,
+          allItemCount: getTaxesByUserId.length,
+          message: '',
+        },
+      })
+    } else {
+      res.json({
+        success: true,
+        data: {
+          items: getTaxesByUserId,
+          allItemCount: 0,
+          message: 'No tax records found for the given userId!',
+        },
+      })
+    }
+  } catch (err: any) {
+    res.json(response.error({ message: err.message }))
+  }
+}
 
 export const addTaxes = async (req: Request, res: Response) => {
   const {
@@ -38,8 +70,9 @@ export const addTaxes = async (req: Request, res: Response) => {
       ) {
         const inputIsValid = Z_Taxes.safeParse(req.body)
         if (inputIsValid.success) {
-          const newTaxes = await prisma.taxes.create({
+          const newTaxes = await prisma.tax.create({
             data: {
+              userId: userId,
               countryRegion: countryRegion,
               vatId: vatId,
               nameOnRegistration: nameOnRegistration,
