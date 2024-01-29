@@ -10,7 +10,7 @@ export const getAllUsers = async (req: Request, res: Response) => {
       include: {
         personalInfo: {
           include: {
-            emergrncyContacts: true,
+            emergencyContacts: true,
             address: true,
           },
         },
@@ -61,7 +61,7 @@ export const addUser = async (req: Request, res: Response) => {
         lastName: req.body.lastName,
         birthDate: req.body.birthDate,
         phoneNumber: '',
-        governMentId: '',
+        governmentId: '',
         userId: newUser.id,
       },
     })

@@ -38,14 +38,14 @@ model PersonalInfo {
   middleName        String?             @db.VarChar(255)
   lastName          String              @db.VarChar(255)
   birthDate         DateTime?
-  governMentId      String?             @db.VarChar(255)
+  governmentId      String?             @db.VarChar(255)
   phoneNumber       String              @db.VarChar(20)
   createdAt         DateTime            @default(now())
   updatedAt         DateTime            @updatedAt
   deletedAt         DateTime?
   user              User                @relation(fields: [userId], references: [id])
   address           Addresses?
-  emergrncyContacts EmergencyContacts[]
+  emergencyContacts EmergencyContacts[]
 
   @@index([userId])
 }
