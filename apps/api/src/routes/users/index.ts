@@ -78,7 +78,6 @@ router.patch(
   isCsrfTokenValid,
   isOriginValid,
   isUserLoggedIn,
-  userDetails,
   deactivateAccount
 )
 router.patch(
