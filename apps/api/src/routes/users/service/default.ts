@@ -61,7 +61,7 @@ export const addUser = async (req: Request, res: Response) => {
     }
     const currency: string =
       currencyByCountry[req.body.country as keyof typeof currencyByCountry]
-      const finalCurrency = currency ?? 'USD';
+    const finalCurrency = currency ?? 'USD'
     const newPersonalInfo = await prisma.personalInfo.create({
       data: {
         firstName: req.body.firstName,
