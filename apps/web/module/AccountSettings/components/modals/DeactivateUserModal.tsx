@@ -31,6 +31,7 @@ const DeactivateUserModal = ({
       toast.error(String(err))
     },
   }
+
   return (
     <Transition.Root show={openModal} as={Fragment}>
       <Dialog
@@ -50,7 +51,6 @@ const DeactivateUserModal = ({
         >
           <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
         </Transition.Child>
-
         <div className="fixed inset-0 z-10 overflow-y-auto">
           <div className="flex min-h-full items-end justify-center text-center sm:items-center">
             <Transition.Child
