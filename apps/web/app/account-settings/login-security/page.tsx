@@ -1,6 +1,6 @@
 import AuthGuard from "@/common/components/AuthGuard"
 import LoginSecurity from "@/module/AccountSettings/LoginSecurity"
-import { APP_NAME } from '@repo/constants'
+import { APP_NAME } from "@repo/constants"
 import { Metadata } from "next"
 import React from "react"
 

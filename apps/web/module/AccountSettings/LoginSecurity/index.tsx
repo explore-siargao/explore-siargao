@@ -13,15 +13,11 @@ const LoginSecurity = () => {
   return (
     <AccountSettingWrapper>
       <div>
-        <Breadcrumb
-          home={ACCOUNT}
-          page={TITLE}
-          link={LINK_ACCOUNT}
-        />
+        <Breadcrumb home={ACCOUNT} page={TITLE} link={LINK_ACCOUNT} />
         <Title>{TITLE}</Title>
       </div>
       <div className="mt-4">
-        <UpdatePassword/>
+        <UpdatePassword />
         <DeactivateAccount />
       </div>
     </AccountSettingWrapper>

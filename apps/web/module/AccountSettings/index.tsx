@@ -15,7 +15,7 @@ import { capitalizeFirstLetter } from "@/common/helpers/capitalizeFirstLetter"
 import { ChevronRightIcon } from "@heroicons/react/20/solid"
 import Link from "next/link"
 import useSessionStore from "@/common/store/useSessionStore"
-import { Star, ShieldHalf, CreditCard, Heart, SquareUser } from 'lucide-react';
+import { Star, ShieldHalf, CreditCard, Heart, SquareUser } from "lucide-react"
 
 const pages = [
   {

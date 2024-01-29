@@ -24,11 +24,7 @@ const UpdatePassword = () => {
     isButtonClicked: false,
     contentId: "",
   })
-  const {
-    register,
-    reset,
-    handleSubmit,
-  } = useForm<T_UpdatePassword>()
+  const { register, reset, handleSubmit } = useForm<T_UpdatePassword>()
   const isPending = false
   // const { mutate, isPending } = useUpdatePersonalInfo(1)
 

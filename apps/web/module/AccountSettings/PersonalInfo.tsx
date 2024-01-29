@@ -21,11 +21,7 @@ const PersonalInfo = () => {
   return (
     <AccountSettingWrapper>
       <div>
-        <Breadcrumb
-          home={ACCOUNT}
-          page={TITLE}
-          link={LINK_ACCOUNT}
-        />
+        <Breadcrumb home={ACCOUNT} page={TITLE} link={LINK_ACCOUNT} />
         <Title>{TITLE}</Title>
       </div>
       <div>
