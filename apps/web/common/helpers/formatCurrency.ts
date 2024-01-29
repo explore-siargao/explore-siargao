@@ -1,7 +1,19 @@
-const formatCurrency = (amount: number, currency: string) => {
-  const formatter = new Intl.NumberFormat("en-PH", {
+const formatCurrency = (amount: number, country?: "Philippines" | "United States" | "Australia") => {
+  const countryFormat: Record<string, string> = {
+    "Philippines": "en-PH",
+    "United States": "en-US",
+    "Australia": "en-AU",
+  };
+
+  const countryCurrency: Record<string, string> = {
+    "Philippines": "PHP",
+    "United States": "USD",
+    "Australia": "AUD",
+  };
+
+  const formatter = new Intl.NumberFormat(countryFormat[country || "United States"], {
     style: "currency",
-    currency: currency,
+    currency: countryCurrency[country || "United States"],
     minimumFractionDigits: 0,
     maximumFractionDigits: 2,
   })
