@@ -22,7 +22,7 @@ model User {
   profilePicture   String?           @db.LongText
   canReceiveEmail  Boolean           @default(false)
   listing          Listing[]
-  reportListing   ReportListing[]
+  reportListing    ReportListing[]
   paymentMethod    PaymentMethod[]
   wishes           WishGroup[]
   review           Review[]
@@ -168,17 +168,18 @@ model PaymentMethod {
 }
 
 model ReportListing {
-  id           Int     @id @default(autoincrement())
-  reason       String  @db.Text
-  otherdetails String  @db.Text
+  id           Int       @id @default(autoincrement())
+  reason       String    @db.Text
+  otherdetails String    @db.Text
   reportedBy   Int
-  user        User     @relation(fields: [reportedBy], references: [id])
+  user         User      @relation(fields: [reportedBy], references: [id])
   listingId    Int
-  listing      Listing @relation(fields: [listingId], references: [id])
-  createdAt      DateTime  @default(now())
-  updatedAt      DateTime  @updatedAt
-  deletedAt      DateTime?
-@@index([reportedBy])
+  listing      Listing   @relation(fields: [listingId], references: [id])
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  deletedAt    DateTime?
+
+  @@index([reportedBy])
   @@index([listingId])
 }
 
@@ -342,16 +343,21 @@ model WishGroup {
 }
 
 model Review {
-  id        Int       @id @default(autoincrement())
-  userId    Int
-  rates     Float
-  comment   String    @db.LongText
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  deletedAt DateTime?
-  listingId Int
-  user      User      @relation(fields: [userId], references: [id])
-  listing   Listing   @relation(fields: [listingId], references: [id])
+  id                 Int       @id @default(autoincrement())
+  userId             Int
+  cleanLinessRates   Int       @db.Int()
+  accuracyRates      Int       @db.Int()
+  checkInRates       Int       @db.Int()
+  communicationRates Int       @db.Int()
+  locationRates      Int       @db.Int()
+  valueRates         Int       @db.Int()
+  comment            String    @db.LongText
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+  deletedAt          DateTime?
+  listingId          Int
+  user               User      @relation(fields: [userId], references: [id])
+  listing            Listing   @relation(fields: [listingId], references: [id])
 
   @@index([listingId])
   @@index([userId])
