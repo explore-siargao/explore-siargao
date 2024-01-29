@@ -5,7 +5,7 @@ export const Z_BackendResponse = z.object({
   message: z.nullable(z.union([z.string(), z.any().array()])).optional(),
   item: z.record(z.any()).nullable().optional(),
   items: z.array(z.record(z.any())).nullable().optional(),
-  average:z.object({}).optional(),
+  average: z.object({}).optional(),
   overallRating: z.number().optional(),
   pageItemCount: z.number().optional(),
   allItemCount: z.number().optional(),
