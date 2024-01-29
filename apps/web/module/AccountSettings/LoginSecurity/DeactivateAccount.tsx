@@ -13,7 +13,7 @@ const DeactivateAccount = () => {
           </div>
           <button
             onClick={() => setDeactivateUserModal(true)}
-            className="text-error-500 hover:underline self-start select-none "
+            className="text-error-500 underline self-start select-none"
           >
             Deactivate
           </button>
