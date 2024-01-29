@@ -72,8 +72,9 @@ model Addresses {
   updatedAt     DateTime     @updatedAt
   deletedAt     DateTime?
   city          String?      @db.LongText
-  province      String?      @db.LongText
+  stateProvince String?      @db.LongText
   streetAddress String?      @db.LongText
+  aptSuite      String?      @db.LongText
   zipCode       Int?
   country       String?      @db.VarChar(255)
   personalInfo  PersonalInfo @relation(fields: [peronalInfoId], references: [id])
