@@ -1,12 +1,12 @@
-import Link from "next/link";
-import { WidthWrapper } from "./WidthWrapper";
-import { Title } from "./ui/Title";
-import { Typography } from "./ui/Typography";
-import LanguageIcon from "./icons/LanguageIcon";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebook } from '@fortawesome/free-brands-svg-icons';
-import { faTwitter } from '@fortawesome/free-brands-svg-icons';
-import { faInstagram } from '@fortawesome/free-brands-svg-icons';
+import Link from "next/link"
+import { WidthWrapper } from "./WidthWrapper"
+import { Title } from "./ui/Title"
+import { Typography } from "./ui/Typography"
+import LanguageIcon from "./icons/LanguageIcon"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faFacebook } from "@fortawesome/free-brands-svg-icons"
+import { faTwitter } from "@fortawesome/free-brands-svg-icons"
+import { faInstagram } from "@fortawesome/free-brands-svg-icons"
 
 const Footer = () => {
   return (
@@ -97,25 +97,32 @@ const Footer = () => {
             <Link href={""} className="mx-2">
               Your Privacy Choices
             </Link>{" "}
-           
             <label className="relative inline-flex cursor-pointer top-1">
               <input type="checkbox" value="" className="sr-only peer" />
               <div className="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-            </label>      
+            </label>
           </div>
           <div className="flex items-center justify-center">
-  <LanguageIcon />
-  <Typography className="mx-2">English{"(US)"}</Typography>
-  <Typography fontWeight={"bold"} className="mx-3">&#8369;</Typography>
-  <Typography className="mx-2">PHP</Typography>
-  <Link href={""}><FontAwesomeIcon icon={faFacebook} size="sm" className="ml-2" /></Link>
-  <Link href={""}><FontAwesomeIcon icon={faTwitter} size="sm" className="mx-2" /></Link>
-  <Link href={""}><FontAwesomeIcon icon={faInstagram} size="sm" className="mx-2" /></Link>
-</div>
+            <LanguageIcon />
+            <Typography className="mx-2">English{"(US)"}</Typography>
+            <Typography fontWeight={"bold"} className="mx-3">
+              &#8369;
+            </Typography>
+            <Typography className="mx-2">PHP</Typography>
+            <Link href={""}>
+              <FontAwesomeIcon icon={faFacebook} size="sm" className="ml-2" />
+            </Link>
+            <Link href={""}>
+              <FontAwesomeIcon icon={faTwitter} size="sm" className="mx-2" />
+            </Link>
+            <Link href={""}>
+              <FontAwesomeIcon icon={faInstagram} size="sm" className="mx-2" />
+            </Link>
+          </div>
         </div>
       </WidthWrapper>
     </div>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer
