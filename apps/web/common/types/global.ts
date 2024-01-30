@@ -26,6 +26,7 @@ export interface IPersonalInfo {
   createdAt?: string
   updatedAt?: string
   deletedAt?: string
+  country?: string
 }
 
 export interface IAddress {
