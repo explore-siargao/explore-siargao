@@ -23,7 +23,7 @@ const Title = React.forwardRef<HTMLDivElement, TitleProps>(
   ({ className, size, children }, ref) => {
     return (
       <Typography className={cn(titleVariants({ size, className }))}>
-        {children}
+        {children} 
       </Typography>
     )
   }
