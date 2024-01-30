@@ -31,8 +31,8 @@ const PreSignUpForm = () => {
       <div className="p-6 space-y-4">
         <div>
           <Input
-            inputLabel="Email"
-            inputId="email"
+            label="Email"
+            id="email"
             type="email"
             placeholder="you@example.com"
             {...register("email", { required: true })}

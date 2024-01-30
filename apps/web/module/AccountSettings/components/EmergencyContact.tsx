@@ -155,8 +155,8 @@ const EmergencyContact = ({
                 <div className="my-4 space-y-4">
                   <div>
                     <Input
-                      inputId="name"
-                      inputLabel="Name"
+                      id="name"
+                      label="Name"
                       {...register("name", {
                         required: "This field is required",
                       })}
@@ -169,8 +169,8 @@ const EmergencyContact = ({
                   </div>
                   <div>
                     <Input
-                      inputId="relationship"
-                      inputLabel="Relationship"
+                      id="relationship"
+                      label="Relationship"
                       {...register("relationship", {
                         required: "This field is required",
                       })}
@@ -195,8 +195,8 @@ const EmergencyContact = ({
                   </select>
                   <div className="grid grid-cols-2 gap-4">
                     <Input
-                      inputId="email"
-                      inputLabel="Email"
+                      id="email"
+                      label="Email"
                       {...register("email", {
                         required: "This field ia required",
                       })}
@@ -209,8 +209,8 @@ const EmergencyContact = ({
                       }
                     />
                     <Input
-                      inputId="contactNumber"
-                      inputLabel="Phone Number"
+                      id="contactNumber"
+                      label="Phone Number"
                       {...register("phoneNumber", {
                         required: "This field ia required",
                       })}

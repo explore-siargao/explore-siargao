@@ -124,10 +124,10 @@ const MenuModal = ({
       <ModalContainer onClose={() => setModalState(0)} title="Rename wishlist">
         <div className="p-6 flex flex-col ">
           <Input
-            inputLabel="Name"
+            label="Name"
             {...register("newTitle", { required: "This field is required" })}
             disabled={renameTitleIsPending}
-            inputId="newTitle"
+            id="newTitle"
             defaultValue={title}
             className={`w-full ${
               inputValue.replace(/\s/g, "").length > 50 &&

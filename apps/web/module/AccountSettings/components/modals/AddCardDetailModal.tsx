@@ -191,8 +191,8 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
                           ]}
                         />
                         <Input
-                          inputLabel="Card Number"
-                          inputId="cardNumber"
+                          label="Card Number"
+                          id="cardNumber"
                           placeholder="0000 0000 0000 0000"
                           type="text"
                           className="mb-2"
@@ -216,8 +216,9 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
 
                         <div className="grid grid-flow-col space-x-2">
                           <Input
-                            inputLabel="Expiration date"
-                            inputId="expirationDate"
+                            label="Expiration date"
+                            id="expirationDate"
+                            placeholder="MM/YY"
                             type="text"
                             disabled={isPending}
                             {...register("expirationDate", {
@@ -254,9 +255,10 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
                             })}
                           />
                           <Input
-                            inputLabel="CVV"
-                            inputId="cvv"
+                            label="CVV"
+                            id="cvv"
                             type="number"
+                            placeholder="123"
                             disabled={isPending}
                             {...register("cvv", {
                               minLength: 3,
@@ -268,8 +270,8 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
                         </div>
                       </div>
                       <Input
-                        inputLabel="Zip code"
-                        inputId="zipCode"
+                        label="Zip code"
+                        id="zipCode"
                         type="number"
                         disabled={isPending}
                         {...register("zipCode", {
