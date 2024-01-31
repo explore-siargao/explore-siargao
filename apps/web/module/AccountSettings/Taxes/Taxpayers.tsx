@@ -18,9 +18,9 @@ const Taxpayers = ({ firstName, lastName, userId, country }: IPersonalInfo) => {
     contentId: "",
   })
   const {
-    register: registerLegalName,
-    reset: resetLegalName,
-    handleSubmit: handleLegalNameSubmit,
+    register,
+    reset,
+    handleSubmit,
   } = useForm<IPersonalInfo>()
   const { mutate: mutateLegalName, isPending: isPendingLegalName } =
     useUpdatePersonalInfo(userId as number)
@@ -34,7 +34,7 @@ const Taxpayers = ({ firstName, lastName, userId, country }: IPersonalInfo) => {
             queryKey: ["session"],
           })
           toast.success(data.message)
-          resetLegalName()
+          reset()
         } else {
           toast.error(String(data.message))
         }
@@ -87,19 +87,19 @@ const Taxpayers = ({ firstName, lastName, userId, country }: IPersonalInfo) => {
           <Typography fontWeight={"light"}>
             If you are VAT-registered, please add your VAT ID.
           </Typography>
-          <form onSubmit={handleLegalNameSubmit(onSubmitLegalName)}>
+          <form onSubmit={handleSubmit(onSubmitLegalName)}>
             <div className="grid grid-cols-2 gap-4 my-4">
               <Input
                 inputId="firstName"
                 inputLabel="VAT ID Number"
                 defaultValue={firstName}
-                {...registerLegalName("firstName")}
+                {...register("firstName")}
               />
               <Input
                 inputId="lastName"
                 inputLabel="Name on Registration"
                 defaultValue={lastName}
-                {...registerLegalName("lastName")}
+                {...register("lastName")}
               />
             </div>
             <div className="grid grid-cols-2 gap-4 my-4">
@@ -107,13 +107,13 @@ const Taxpayers = ({ firstName, lastName, userId, country }: IPersonalInfo) => {
                 inputId="firstName"
                 inputLabel="Address line 1"
                 defaultValue={firstName}
-                {...registerLegalName("firstName")}
+                {...register("firstName")}
               />
               <Input
                 inputId="lastName"
                 inputLabel="Address line 2 (optional)"
                 defaultValue={lastName}
-                {...registerLegalName("lastName")}
+                {...register("lastName")}
               />
             </div>
             <div className="grid grid-cols-2 gap-4 my-4">
@@ -121,13 +121,13 @@ const Taxpayers = ({ firstName, lastName, userId, country }: IPersonalInfo) => {
                 inputId="firstName"
                 inputLabel="City"
                 defaultValue={firstName}
-                {...registerLegalName("firstName")}
+                {...register("firstName")}
               />
               <Input
                 inputId="lastName"
                 inputLabel="Province"
                 defaultValue={lastName}
-                {...registerLegalName("lastName")}
+                {...register("lastName")}
               />
             </div>
             <div className="grid grid-cols-2 gap-4 my-4">
@@ -135,13 +135,13 @@ const Taxpayers = ({ firstName, lastName, userId, country }: IPersonalInfo) => {
                 inputId="country"
                 inputLabel="Country"
                 defaultValue={country}
-                {...registerLegalName("country")}
+                {...register("country")}
               />
               <Input
                 inputId="firstName"
                 inputLabel="Zip/postal code"
                 defaultValue={firstName}
-                {...registerLegalName("firstName")}
+                {...register("firstName")}
               />
             </div>
             <Button className="w-20" size={"sm"} type="submit">
