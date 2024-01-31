@@ -88,7 +88,7 @@ const AddReview = () => {
             <Separator className='bg-gray-200 my-6'/>
           </div>
           <Textarea placeholder='Comment...' {...register("comment")} required />
-          <Button type="submit" variant="shaded" size="sm" className="mt-4">
+          <Button type="submit" variant={'primary'} size="sm" className="mt-4">
             Submit review
           </Button>
         </form>
