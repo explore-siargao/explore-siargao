@@ -5,7 +5,7 @@ import { WidthWrapper } from "@/common/components/WidthWrapper"
 import useGetAllBookings from "../LandingPage/hooks/useGetAllBookings"
 import { Spinner } from "@/common/components/ui/Spinner"
 import useSessionStore from "@/common/store/useSessionStore"
-import { TitleSection } from "./SingleView/TitleSection"
+import { TitleSection } from "./SingleView/components/TitleSection"
 
 
 const Bookings = () => {
@@ -45,17 +45,6 @@ const Bookings = () => {
           </ul>
         </>
       )}
-
-  <TitleSection
-      title="What this place offers" size="medium" className="border-2">
-        <div className="mt-2">
-        ...Content
-        </div>
-        <div className="mt-2">
-        ...Content
-        </div>
-  </TitleSection>
-
     </WidthWrapper>
   )
 }
