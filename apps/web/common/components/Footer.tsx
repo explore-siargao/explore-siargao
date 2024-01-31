@@ -13,73 +13,73 @@ import {
 
 const Footer = () => {
   return (
-    <div className="bg-gray-100 py-6">
+    <div className="bg-gray-100 pb-6 pt-24">
       <WidthWrapper width={"medium"}>
         <div className="md:flex border-b-2 pb-4 md:pb-11">
-          <div className="md:flex-1 pb-4 md:pb-0 md:mr-4 border-b md:border-b-0">
-            <Title size={"sub"}>Support</Title>
+          <div className="md:flex-1 pb-4 md:pb-0 md:mr-4 border-b  md:border-b-0">
+            <Title size={"sub"} className="mb-1">Support</Title>
             <Link href={""}>
-              <Typography>About ExploreSiargao</Typography>
+              <Typography className="mb-1">About ExploreSiargao</Typography>
             </Link>
             <Link href={""}>
-              <Typography>Help center</Typography>
+              <Typography className="mb-1">Help center</Typography>
             </Link>
             <Link href={""}>
-              <Typography>FAQ{"'s"}</Typography>
+              <Typography className="mb-1">FAQ{"'s"}</Typography>
             </Link>
             <Link href={""}>
-              <Typography>Terms{" & "}conditions</Typography>
+              <Typography className="mb-1">Terms{" & "}conditions</Typography>
             </Link>
             <Link href={""}>
-              <Typography>Privacy{" & "}cookies statement</Typography>
+              <Typography className="mb-1">Privacy{" & "}cookies statement</Typography>
             </Link>
           </div>
-          <div className="md:flex-1 pb-4 pt-4 md:pt-4 md:pb-0 md:mr-4 border-b md:border-b-0">
-            <Title size={"sub"}>Exploresiargao</Title>
+          <div className="md:flex-1 pb-4 pt-4 md:pt-0 md:pb-0 md:mr-4 border-b md:border-b-0">
+            <Title size={"sub"} className="mb-1">Exploresiargao</Title>
             <Link href={""}>
-              <Typography>Accommodation</Typography>
+              <Typography className="mb-1">Accommodation</Typography>
             </Link>
             <Link href={""}>
-              <Typography>Activities</Typography>
+              <Typography className="mb-1">Activities</Typography>
             </Link>
             <Link href={""}>
-              <Typography>Rentals</Typography>
+              <Typography className="mb-1">Rentals</Typography>
             </Link>
             <Link href={""}>
-              <Typography>Guides</Typography>
+              <Typography className="mb-1">Guides</Typography>
             </Link>
             <Link href={""}>
-              <Typography>Blog</Typography>
+              <Typography className="mb-1">Blog</Typography>
             </Link>
           </div>
           <div className="md:flex-1 pb-4 pt-4 md:pb-0 md:pt-0 md:mr-4 border-b md:border-b-0">
-            <Title size={"sub"}>Destinations</Title>
+            <Title size={"sub"} className="mb-1">Destinations</Title>
             <Link href={""}>
-              <Typography>General Luna</Typography>
+              <Typography className="mb-1">General Luna</Typography>
             </Link>
             <Link href={""}>
-              <Typography>Malinao</Typography>
+              <Typography className="mb-1">Malinao</Typography>
             </Link>
             <Link href={""}>
-              <Typography>Catangnan</Typography>
+              <Typography className="mb-1">Catangnan</Typography>
             </Link>
             <Link href={""}>
-              <Typography>Pacifico</Typography>
+              <Typography className="mb-1">Pacifico</Typography>
             </Link>
             <Link href={""}>
-              <Typography>Burgos</Typography>
+              <Typography className="mb-1">Burgos</Typography>
             </Link>
           </div>
           <div className="md:flex-1 pt-4 md:pt-0 md:border-b-0">
-            <Title size={"sub"}>Partner with us</Title>
+            <Title size={"sub"} className="mb-1">Partner with us</Title>
             <Link href={""}>
-              <Typography>List your business</Typography>
+              <Typography className="mb-1">List your business</Typography>
             </Link>
             <Link href={""}>
-              <Typography>Partner terms{" & "}conditions</Typography>
+              <Typography className="mb-1">Partner terms{" & "}conditions</Typography>
             </Link>
             <Link href={""}>
-              <Typography>Partner responsibilities</Typography>
+              <Typography className="mb-1">Partner responsibilities</Typography>
             </Link>
           </div>
         </div>
