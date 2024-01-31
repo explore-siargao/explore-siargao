@@ -66,7 +66,7 @@ export const getAllHouseRulesByListing = async (
       res.json(
         response.success({
           item: getHouseRulesByListingId,
-          allItemCount:1,
+          allItemCount: 1,
           message: '',
         })
       )
