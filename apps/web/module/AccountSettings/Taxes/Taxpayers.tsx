@@ -17,11 +17,7 @@ const Taxpayers = ({ firstName, lastName, userId, country }: IPersonalInfo) => {
     isButtonClicked: false,
     contentId: "",
   })
-  const {
-    register,
-    reset,
-    handleSubmit,
-  } = useForm<IPersonalInfo>()
+  const { register, reset, handleSubmit } = useForm<IPersonalInfo>()
   const { mutate: mutateLegalName, isPending: isPendingLegalName } =
     useUpdatePersonalInfo(userId as number)
   const queryClient = useQueryClient()
