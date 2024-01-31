@@ -9,7 +9,7 @@ interface IconDescriptionProps {
 const IconDescription: React.FC<IconDescriptionProps> = ({
   icon: Icon,
   desc,
-  isStrikeThrough = false
+  isStrikeThrough = false,
 }) => {
   const IconDescriptionStyle = isStrikeThrough
     ? { textDecoration: "line-through" }
