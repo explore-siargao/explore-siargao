@@ -6,7 +6,7 @@ const page = () => {
   return (
     <AuthGuard>
       <div className="h-screen">
-      <AccountSettings />
+        <AccountSettings />
       </div>
     </AuthGuard>
   )
