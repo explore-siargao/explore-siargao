@@ -135,14 +135,14 @@ export const getRulesByCancellationPolicy = async (
 }
 
 const addRule = async (req: Request, res: Response, ruleType: string) => {
-  const userId = Number(req.params.userId)
-  const { title, listingId, icon, rule, description } = req.body
-  const inputIsValid = Z_Rule.safeParse(req.body)
+  const userId = Number(req.params.userId);
+  const { title, listingId, icon, rule, description } = req.body;
+  const inputIsValid = Z_Rule.safeParse(req.body);
 
   if (!inputIsValid.success) {
     return res.json(
       response.error({ message: JSON.parse(inputIsValid.error.message) })
-    )
+    );
   }
 
   try {
@@ -150,32 +150,48 @@ const addRule = async (req: Request, res: Response, ruleType: string) => {
       where: {
         id: userId,
       },
-    })
+    });
 
     if (!getUser) {
-      return res.json(response.error({ message: USER_NOT_EXIST }))
+      return res.json(response.error({ message: USER_NOT_EXIST }));
     }
 
-    const ruleData: Record<string, any> = {
-      title: title,
-      listingId: listingId,
-    }
+  
+    const existingHouseRule = await prisma.houseRule.findFirst({
+      where: {
+        title: title,
+        listingId: listingId,
+      },
+    });
 
-    const newRule = await (prisma as any)[ruleType].create({
-      data: ruleData,
-    })
+    let houseRuleId;
+
+    if (existingHouseRule) {
+
+      houseRuleId = existingHouseRule.id;
+    } else {
+ 
+      const newHouseRule = await prisma.houseRule.create({
+        data: {
+          title: title,
+          listingId: listingId,
+        },
+      });
+
+      houseRuleId = newHouseRule.id;
+    }
 
     const associationField =
-      ruleType === 'safetyProperty' ? 'safePropertyId' : 'houseRuleId'
+      ruleType === 'safetyProperty' ? 'safePropertyId' : 'houseRuleId';
 
-    await prisma.rule.create({
+    const newRule = await prisma.rule.create({
       data: {
         icon: icon,
         rule: rule,
         description: description,
-        [associationField]: newRule.id,
+        [associationField]: houseRuleId,
       },
-    })
+    });
 
     res.json(
       response.success({
@@ -183,11 +199,12 @@ const addRule = async (req: Request, res: Response, ruleType: string) => {
         allItemCount: 1,
         message: 'Rule successfully added',
       })
-    )
+    );
   } catch (err: any) {
-    res.json(response.error({ message: err.message }))
+    res.json(response.error({ message: err.message }));
   }
-}
+};
+
 
 export const addSafetypropertyRule = async (req: Request, res: Response) => {
   await addRule(req, res, 'safetyProperty')

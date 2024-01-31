@@ -54,7 +54,7 @@ export const getAllHouseRulesByListing = async (
         response.error({ message: 'This listing is not found on our system' })
       )
     }
-    const getHouseRulesByListingId = await prisma.houseRule.findMany({
+    const getHouseRulesByListingId = await prisma.houseRule.findFirst({
       where: {
         listingId: listingId,
       },
@@ -62,19 +62,19 @@ export const getAllHouseRulesByListing = async (
         rules: true,
       },
     })
-    if (getHouseRulesByListingId.length !== 0) {
+    if (getHouseRulesByListingId?.rules.length !== 0) {
       res.json(
         response.success({
-          items: getHouseRulesByListingId,
-          allItemCount: getHouseRulesByListingId.length,
+          item: getHouseRulesByListingId,
+          allItemCount:1,
           message: '',
         })
       )
     } else {
       res.json(
         response.success({
-          items: getHouseRulesByListingId,
-          allItemCount: getHouseRulesByListingId.length,
+          item: getHouseRulesByListingId,
+          allItemCount: 1,
           message: 'No House rules data found',
         })
       )
