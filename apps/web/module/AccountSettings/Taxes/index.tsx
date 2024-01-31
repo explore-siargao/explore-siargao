@@ -16,24 +16,20 @@ const Taxes = () => {
   if (tableState === 0) {
     content = (
       <>
-        <Taxpayers/>
+        <Taxpayers />
       </>
     )
   } else if (tableState === 1) {
     content = (
       <>
-        <TaxDocuments/>
+        <TaxDocuments />
       </>
     )
   }
   return (
     <AccountSettingWrapper>
       <div>
-        <Breadcrumb
-          home="Account"
-          page={TITLE}
-          link={LINK_ACCOUNT_SETTINGS}
-        />
+        <Breadcrumb home="Account" page={TITLE} link={LINK_ACCOUNT_SETTINGS} />
         <Title>{TITLE}</Title>
       </div>
       <div className="hidden sm:block">
