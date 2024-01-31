@@ -1,13 +1,15 @@
 import { Typography } from '@/common/components/ui/Typography'
 import React from 'react'
+import useSessionStore from "../../../common/store/useSessionStore.ts"
 
 const PreferredCurrency = () => {
+  const currency = useSessionStore((state) => state).personalInfo.currency
   return (
     <div className="flex justify-between py-5">
       <div>
         <Typography variant="p">Preferred Currency</Typography>
         <Typography fontWeight="light">
-          Philippine Peso
+          {currency}
         </Typography>
       </div>
       <button
