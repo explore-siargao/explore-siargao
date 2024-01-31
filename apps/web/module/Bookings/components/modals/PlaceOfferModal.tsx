@@ -63,7 +63,7 @@ const PlaceOfferModal = ({ isOpen, onClose, datas }: PlaceOfferModalProps) => {
                             {data.iconDesc.map((iconDesc) => (
                               <div className="py-4 border-b" key={iconDesc.id}>
                                 <IconDescription
-                                    // @ts-ignore
+                                  // @ts-ignore
                                   icon={iconDesc.icon}
                                   // @ts-ignore
                                   desc={iconDesc.desc}
