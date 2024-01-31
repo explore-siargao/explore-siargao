@@ -1,7 +1,5 @@
-import { Cctv } from 'lucide-react'
+import { Cctv } from "lucide-react"
 const IconCCTV = () => {
-    return (
-        <Cctv />
-    )
+  return <Cctv />
 }
 export default IconCCTV
