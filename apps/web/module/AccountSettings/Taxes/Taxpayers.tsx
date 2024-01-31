@@ -131,7 +131,7 @@ const Taxpayers = ({ firstName, lastName, userId, country }: IPersonalInfo) => {
               />
             </div>
             <div className="grid grid-cols-2 gap-4 my-4">
-            <Input
+              <Input
                 inputId="country"
                 inputLabel="Country"
                 defaultValue={country}
