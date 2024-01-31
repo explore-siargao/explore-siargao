@@ -1,4 +1,4 @@
-import Gift from "@/module/gift"
+import Gift from "@/module/Gift"
 import React from "react"
 
 const page = () => {

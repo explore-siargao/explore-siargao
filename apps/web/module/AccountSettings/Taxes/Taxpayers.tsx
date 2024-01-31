@@ -12,7 +12,7 @@ type PersonalInfoProps = {
   contentId: string
 }
 
-const Taxpayers = ({ firstName, lastName, userId }: IPersonalInfo) => {
+const Taxpayers = ({ firstName, lastName, userId, country }: IPersonalInfo) => {
   const [contentState, setContentState] = useState<PersonalInfoProps>({
     isButtonClicked: false,
     contentId: "",
@@ -131,6 +131,12 @@ const Taxpayers = ({ firstName, lastName, userId }: IPersonalInfo) => {
               />
             </div>
             <div className="grid grid-cols-2 gap-4 my-4">
+            <Input
+                inputId="country"
+                inputLabel="Country"
+                defaultValue={country}
+                {...registerLegalName("country")}
+              />
               <Input
                 inputId="firstName"
                 inputLabel="Zip/postal code"
