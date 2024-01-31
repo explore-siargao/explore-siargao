@@ -7,7 +7,6 @@ import { Spinner } from "@/common/components/ui/Spinner"
 import useSessionStore from "@/common/store/useSessionStore"
 import { TitleSection } from "./SingleView/components/TitleSection"
 
-
 const Bookings = () => {
   const userId = useSessionStore((state) => state).id
   const { data, isPending } = useGetAllBookings()
