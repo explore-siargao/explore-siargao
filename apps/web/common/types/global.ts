@@ -106,6 +106,18 @@ export interface IWishGroup {
   deletedAt?: string
 }
 
+export interface IReview {
+  userId?: number,
+  listingId?: number,
+  cleanLinessRates?: number,
+  accuracyRates?: number,
+  checkInRates?: number,
+  communicationRates?: number,
+  locationRates?: number,
+  valueRates?: number,
+  comment?: string,
+}
+
 export interface ComponentProps {
   onClick: () => void
   icon?: React.ReactNode
