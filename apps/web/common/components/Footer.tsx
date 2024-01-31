@@ -17,7 +17,9 @@ const Footer = () => {
       <WidthWrapper width={"medium"}>
         <div className="md:flex border-b-2 pb-4 md:pb-11">
           <div className="md:flex-1 pb-4 md:pb-0 md:mr-4 border-b  md:border-b-0">
-            <Title size={"sub"} className="mb-1">Support</Title>
+            <Title size={"sub"} className="mb-1">
+              Support
+            </Title>
             <Link href={""}>
               <Typography className="mb-1">About ExploreSiargao</Typography>
             </Link>
@@ -31,11 +33,15 @@ const Footer = () => {
               <Typography className="mb-1">Terms{" & "}conditions</Typography>
             </Link>
             <Link href={""}>
-              <Typography className="mb-1">Privacy{" & "}cookies statement</Typography>
+              <Typography className="mb-1">
+                Privacy{" & "}cookies statement
+              </Typography>
             </Link>
           </div>
           <div className="md:flex-1 pb-4 pt-4 md:pt-0 md:pb-0 md:mr-4 border-b md:border-b-0">
-            <Title size={"sub"} className="mb-1">Exploresiargao</Title>
+            <Title size={"sub"} className="mb-1">
+              Exploresiargao
+            </Title>
             <Link href={""}>
               <Typography className="mb-1">Accommodation</Typography>
             </Link>
@@ -53,7 +59,9 @@ const Footer = () => {
             </Link>
           </div>
           <div className="md:flex-1 pb-4 pt-4 md:pb-0 md:pt-0 md:mr-4 border-b md:border-b-0">
-            <Title size={"sub"} className="mb-1">Destinations</Title>
+            <Title size={"sub"} className="mb-1">
+              Destinations
+            </Title>
             <Link href={""}>
               <Typography className="mb-1">General Luna</Typography>
             </Link>
@@ -71,12 +79,16 @@ const Footer = () => {
             </Link>
           </div>
           <div className="md:flex-1 pt-4 md:pt-0 md:border-b-0">
-            <Title size={"sub"} className="mb-1">Partner with us</Title>
+            <Title size={"sub"} className="mb-1">
+              Partner with us
+            </Title>
             <Link href={""}>
               <Typography className="mb-1">List your business</Typography>
             </Link>
             <Link href={""}>
-              <Typography className="mb-1">Partner terms{" & "}conditions</Typography>
+              <Typography className="mb-1">
+                Partner terms{" & "}conditions
+              </Typography>
             </Link>
             <Link href={""}>
               <Typography className="mb-1">Partner responsibilities</Typography>
