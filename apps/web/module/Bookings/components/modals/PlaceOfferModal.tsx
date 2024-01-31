@@ -1,6 +1,6 @@
 import ModalContainer from "@/common/components/ModalContainer"
 import { Dialog, Transition } from "@headlessui/react"
-import React, { Fragment, useRef, useState } from "react"
+import React, { Fragment, useRef } from "react"
 import { TitleSection } from "../../SingleView/components/TitleSection"
 import IconDescription from "../../SingleView/components/IconDescription"
 
