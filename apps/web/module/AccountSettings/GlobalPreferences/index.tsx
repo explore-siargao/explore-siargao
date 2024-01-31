@@ -15,17 +15,13 @@ const GlobalPreferences = () => {
   return (
     <AccountSettingWrapper>
       <div>
-        <Breadcrumb
-          home="Account"
-          page={TITLE}
-          link={LINK_ACCOUNT_SETTINGS}
-        />
+        <Breadcrumb home="Account" page={TITLE} link={LINK_ACCOUNT_SETTINGS} />
         <Title>{TITLE}</Title>
       </div>
       <div className="mt-4">
         <div className="divide-y">
-          <PreferredLanguage/>
-          <PreferredCurrency/>
+          <PreferredLanguage />
+          <PreferredCurrency />
         </div>
       </div>
     </AccountSettingWrapper>

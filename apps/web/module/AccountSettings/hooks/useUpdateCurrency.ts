@@ -3,7 +3,7 @@ import { API_URL_USERS } from "@repo/constants"
 import { useMutation } from "@tanstack/react-query"
 
 interface ICuurency {
-  currency :string
+  currency: string
 }
 export async function updateCurrency(
   personalInfoId: number | null,

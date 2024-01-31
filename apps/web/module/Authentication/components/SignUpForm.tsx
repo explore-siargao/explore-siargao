@@ -83,7 +83,8 @@ const SignUpForm = ({ isSocial = false }: Props) => {
         toast.error(String(err))
       },
     }
-    const { email, firstName, lastName, month, day, year, password, country } = formData
+    const { email, firstName, lastName, month, day, year, password, country } =
+      formData
     const birthDate = dayjs(`${month}-${day}-${year}`, "MM-DD-YYYY")
     addUser(
       {
@@ -93,7 +94,7 @@ const SignUpForm = ({ isSocial = false }: Props) => {
         birthDate: birthDate.format(),
         password,
         registrationType: signUpType as E_RegistrationType,
-        country
+        country,
       },
       callBackReq
     )

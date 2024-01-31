@@ -13,7 +13,7 @@ import {
   LINK_ACCOUNT_PAYMENT_PAYOUT,
   LINK_ACCOUNT_PERSONAL_INFO,
   LINK_ACCOUNT_WISHLIST,
-  LINK_ACCOUNT_GLOBAL_PREFERENCES
+  LINK_ACCOUNT_GLOBAL_PREFERENCES,
 } from "@/common/constants/links"
 import { Title } from "@/common/components/ui/Title"
 import { Typography } from "@/common/components/ui/Typography"

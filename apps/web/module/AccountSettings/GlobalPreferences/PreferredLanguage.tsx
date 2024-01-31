@@ -1,5 +1,5 @@
-import { Typography } from '@/common/components/ui/Typography'
-import React from 'react'
+import { Typography } from "@/common/components/ui/Typography"
+import React from "react"
 import useSessionStore from "../../../common/store/useSessionStore.ts"
 
 const PreferredLanguage = () => {
@@ -8,9 +8,7 @@ const PreferredLanguage = () => {
     <div className="flex justify-between py-5">
       <div>
         <Typography variant="p">Preferred Language</Typography>
-        <Typography fontWeight="light">
-          {language}
-        </Typography>
+        <Typography fontWeight="light">{language}</Typography>
       </div>
       <button
         disabled
