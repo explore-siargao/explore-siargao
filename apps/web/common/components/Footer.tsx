@@ -97,7 +97,6 @@ const Footer = () => {
             <Link href={""} className="mx-2">
               Privacy
             </Link>{" "}
-        
           </div>
           <div className="flex items-center justify-center">
             <LanguageIcon />
