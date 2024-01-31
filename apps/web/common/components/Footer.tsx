@@ -13,7 +13,7 @@ import {
 
 const Footer = () => {
   return (
-    <div className="bg-gray-100 pb-6 pt-24">
+    <div className="bg-gray-100 pb-6 pt-16">
       <WidthWrapper width={"medium"}>
         <div className="md:flex border-b-2 pb-4 md:pb-11">
           <div className="md:flex-1 pb-4 md:pb-0 md:mr-4 border-b  md:border-b-0">
