@@ -1,9 +1,8 @@
 import ModalContainer from "@/common/components/ModalContainer"
-import { Dialog, Transition } from "@headlessui/react"
 import { useQueryClient } from "@tanstack/react-query"
-import React, { Fragment, useRef } from "react"
+import React from "react"
 import toast from "react-hot-toast"
-import useRemovePaymentmethod from "../../hooks/useRemovePaymentMethod"
+import useRemovePaymentMethod from "../../hooks/useRemovePaymentMethod"
 import ModalContainerFooter from "@/common/components/ModalContainer/ModalContainerFooter"
 
 interface PaymentModalProps {
@@ -19,9 +18,8 @@ const RemovePaymentModal = ({
   isOpen: openModal,
   onClose: closeModal,
 }: PaymentModalProps) => {
-  const cancelButtonRef = useRef(null)
   const queryClient = useQueryClient()
-  const { mutate, isPending } = useRemovePaymentmethod(userId, id)
+  const { mutate, isPending } = useRemovePaymentMethod(userId, id)
   const callBackReq = {
     onSuccess: (data: any) => {
       if (!data.error) {
@@ -39,63 +37,27 @@ const RemovePaymentModal = ({
     },
   }
   return (
-    <Transition.Root show={openModal} as={Fragment}>
-      <Dialog
-        as="div"
-        className="relative z-50"
-        initialFocus={cancelButtonRef}
+    <ModalContainer
+      title="Remove payment method"
+      isOpen={openModal}
+      onClose={closeModal}
+    >
+      <div className="p-6">
+        <p className="text-text-400 font-light">
+          Are you sure you want to remove this payment method?
+        </p>
+      </div>
+      <ModalContainerFooter
+        positive="Remove"
+        negative="Cancel"
+        isPending={isPending}
+        isSubmit={false}
         onClose={closeModal}
-      >
-        <Transition.Child
-          as={Fragment}
-          enter="ease-out duration-300"
-          enterFrom="opacity-0"
-          enterTo="opacity-100"
-          leave="ease-in duration-200"
-          leaveFrom="opacity-100"
-          leaveTo="opacity-0"
-        >
-          <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
-        </Transition.Child>
-
-        <div className="fixed inset-0 z-10 overflow-y-auto">
-          <div className="flex min-h-full items-end justify-center text-center sm:items-center">
-            <Transition.Child
-              as={Fragment}
-              enter="ease-out duration-300"
-              enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-              enterTo="opacity-100 translate-y-0 sm:scale-100"
-              leave="ease-in duration-200"
-              leaveFrom="opacity-100 translate-y-0 sm:scale-100"
-              leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-            >
-              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:w-full sm:max-w-lg ">
-                <ModalContainer
-                  title="Remove payment method"
-                  onClose={closeModal}
-                >
-                  <div className="p-6">
-                    <p className="text-text-400 font-light">
-                      Are you sure you want to remove this payment method?
-                    </p>
-                  </div>
-                  <ModalContainerFooter
-                    positive="Remove"
-                    negative="Cancel"
-                    isPending={isPending}
-                    isSubmit={false}
-                    onClose={closeModal}
-                    buttonFn={() => {
-                      mutate({ id: id, userId: userId }, callBackReq)
-                    }}
-                  />
-                </ModalContainer>
-              </Dialog.Panel>
-            </Transition.Child>
-          </div>
-        </div>
-      </Dialog>
-    </Transition.Root>
+        buttonFn={() => {
+          mutate({ id: id, userId: userId }, callBackReq)
+        }}
+      />
+    </ModalContainer>
   )
 }
 

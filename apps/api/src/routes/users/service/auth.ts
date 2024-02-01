@@ -1,6 +1,6 @@
 import { Response, Request } from 'express'
 import { PrismaClient, RegistrationType } from '@prisma/client'
-import { REQUIRED_VALUE_EMPTY } from '@repo/constants'
+import { APP_NAME, REQUIRED_VALUE_EMPTY } from '@repo/constants'
 import { encryptKey, nextAuthSecret, webUrl } from '@/common/config'
 import dayjs from 'dayjs'
 import { AuthEmail } from './authEmail'
@@ -669,7 +669,7 @@ export const setCanReceivedEmail = async (req: Request, res: Response) => {
         error: false,
         item: setCanRecievedEmail,
         itemCount: 1,
-        message: 'You will now received an email from exploreSiargao',
+        message: `You will now received an email from ${APP_NAME}`,
       })
     } else {
       res.json({

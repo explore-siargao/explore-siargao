@@ -4,9 +4,10 @@ import { IPersonalInfo } from "@/common/types/global"
 import React, { useState } from "react"
 import useUpdatePersonalInfo from "../hooks/useUpdatePersonalInfo"
 import { useQueryClient } from "@tanstack/react-query"
-import toast from "react-hot-toast"
 import { useForm } from "react-hook-form"
 import { Typography } from "@/common/components/ui/Typography"
+import toast from "react-hot-toast"
+
 type PersonalInfoProps = {
   isButtonClicked: boolean
   contentId: string

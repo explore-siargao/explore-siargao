@@ -16,9 +16,7 @@ const titleVariants = cva("font-semibold", {
 })
 export interface TitleProps
   extends React.DetailsHTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof titleVariants> {
-  children: string
-}
+    VariantProps<typeof titleVariants> {}
 const Title = React.forwardRef<HTMLDivElement, TitleProps>(
   ({ className, size, children }) => {
     return (
