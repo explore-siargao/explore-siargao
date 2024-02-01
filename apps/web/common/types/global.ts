@@ -21,6 +21,7 @@ export interface IPersonalInfo {
   birthDate?: string
   governmentId?: string
   phoneNumber?: string
+  country?: string
   address?: IAddress
   emergencyContact?: IEmergencyContact[]
   createdAt?: string
