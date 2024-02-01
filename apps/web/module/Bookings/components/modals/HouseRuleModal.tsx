@@ -27,7 +27,7 @@ const HouseRuleModal = ({
 }: HouseRuleModalProps) => {
   const cancelButtonRef = useRef(null)
   return (
-    <Transition.Root show={ isOpen } as="div">
+    <Transition.Root show={isOpen} as="div">
       <Dialog
         as="div"
         className="relative z-50"
