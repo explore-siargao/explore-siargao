@@ -18,7 +18,7 @@ const Gift = () => {
           Let's redeem your gift <br /> card
         </Typography>
         <div className="space-y-5">
-          <Input inputId="pin" inputLabel="Pin" />
+          <Input id="pin" label="Pin" />
           <Typography variant={"p"}>
             By redeeming, you agree to the ExploreSiargao Gift Card Terms.
           </Typography>

@@ -151,8 +151,8 @@ const AddWishlistModal = ({
       <ModalContainer title="Create wishlist" onClose={() => setRenderState(0)}>
         <div className="p-6">
           <Input
-            inputLabel="Name"
-            inputId="createModal"
+            label="Name"
+            id="createModal"
             {...register("title", { required: "This field is required" })}
             disabled={addWishgroupIsPending}
             className={`w-full ${

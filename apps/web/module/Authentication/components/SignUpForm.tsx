@@ -83,7 +83,8 @@ const SignUpForm = ({ isSocial = false }: Props) => {
         toast.error(String(err))
       },
     }
-    const { email, firstName, lastName, month, day, year, password } = formData
+    const { email, firstName, lastName, month, day, year, password, country } =
+      formData
     const birthDate = dayjs(`${month}-${day}-${year}`, "MM-DD-YYYY")
     addUser(
       {
@@ -93,7 +94,7 @@ const SignUpForm = ({ isSocial = false }: Props) => {
         birthDate: birthDate.format(),
         password,
         registrationType: signUpType as E_RegistrationType,
-        country: ""
+        country,
       },
       callBackReq
     )
@@ -107,15 +108,15 @@ const SignUpForm = ({ isSocial = false }: Props) => {
           <div>
             <div>
               <Input
-                inputLabel="First Name"
-                inputId="firstName"
+                label="First Name"
+                id="firstName"
                 type="text"
                 {...register("firstName", { required: true })}
                 disabled={addUserIsPending}
               />
               <Input
-                inputLabel="Last name"
-                inputId="lastName"
+                label="Last name"
+                id="lastName"
                 type="text"
                 className="mt-2"
                 {...register("lastName", { required: true })}
@@ -174,10 +175,19 @@ const SignUpForm = ({ isSocial = false }: Props) => {
             </Typography>
           </div>
           <div>
+            <Input
+              label="Country"
+              id="country"
+              type="text"
+              {...register("country", { required: true })}
+              disabled={addUserIsPending}
+            />
+          </div>
+          <div>
             <div className="isolate -space-y-px rounded-xl shadow-sm">
               <Input
-                inputLabel="Email"
-                inputId="email"
+                label="Email"
+                id="email"
                 type="email"
                 {...register("email", { required: true })}
                 placeholder="you@example.com"
@@ -190,8 +200,8 @@ const SignUpForm = ({ isSocial = false }: Props) => {
           </div>
           <div>
             <Input
-              inputLabel="Country"
-              inputId="country"
+              label="Country"
+              id="country"
               type="text"
               {...register("country", { required: true })}
               disabled={addUserIsPending}
@@ -200,8 +210,8 @@ const SignUpForm = ({ isSocial = false }: Props) => {
           <div>
             {!isSocial && (
               <Input
-                inputLabel="Password"
-                inputId="password"
+                label="Password"
+                id="password"
                 type="password"
                 {...register("password", { required: true })}
                 disabled={addUserIsPending}

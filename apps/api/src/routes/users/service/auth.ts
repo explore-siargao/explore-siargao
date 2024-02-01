@@ -611,7 +611,7 @@ export const userDetails = async (req: Request, res: Response) => {
           personalInfo: {
             include: {
               address: true,
-              emergrncyContacts: true,
+              emergencyContacts: true,
             },
           },
         },

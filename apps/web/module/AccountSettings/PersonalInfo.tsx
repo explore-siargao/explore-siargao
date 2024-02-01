@@ -41,7 +41,7 @@ const PersonalInfo = () => {
             phoneNumber={personalInfo?.phoneNumber}
             userId={session?.id as number}
           />
-          <GovernmentId governmentId={personalInfo?.governMentId} />
+          <GovernmentId governmentId={personalInfo?.governmentId} />
           <Address
             country={personalInfo?.address?.country as string}
             city={personalInfo?.address?.city as string}
@@ -52,7 +52,7 @@ const PersonalInfo = () => {
           />
           <EmergencyContact
             emergencyContact={
-              personalInfo?.emergrncyContacts as T_EmergencyContact[]
+              personalInfo?.emergencyContacts as T_EmergencyContact[]
             }
             id={personalInfo?.id as number}
           />

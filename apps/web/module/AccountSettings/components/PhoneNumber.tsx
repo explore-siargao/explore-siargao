@@ -92,8 +92,8 @@ const PhoneNumber = ({ phoneNumber, userId }: IPersonalInfo) => {
           <form onSubmit={handlePhoneNumberSubmit(onSubmitPhoneNumber)}>
             <div className="grid grid-cols-2 gap-4 my-4">
               <Input
-                inputId="phoneNumber"
-                inputLabel="Phone number"
+                id="phoneNumber"
+                label="Phone number"
                 defaultValue={
                   phoneNumber !== "" ? phoneNumber : "Enter a new phone number"
                 }
