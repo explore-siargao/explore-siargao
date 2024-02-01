@@ -35,16 +35,12 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
 )
 
 export interface SelectOptionProps
-  extends React.OptionHTMLAttributes<HTMLOptionElement> { }
+  extends React.OptionHTMLAttributes<HTMLOptionElement> {}
 
 const Option = React.forwardRef<HTMLOptionElement, SelectOptionProps>(
   ({ className, children, ...props }, ref) => {
     return (
-      <option
-        ref={ref}
-        className={className}
-        {...props}
-      >
+      <option ref={ref} className={className} {...props}>
         {children}
       </option>
     )
