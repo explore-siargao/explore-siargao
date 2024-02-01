@@ -1,7 +1,7 @@
-import ModalContainer from "@/common/components/ModalContainer"
 import { Typography } from "@/common/components/ui/Typography"
 import { IPrice } from "@/common/types/global"
 import { Popover, Transition } from "@headlessui/react"
+import { APP_NAME } from "@repo/constants"
 import React, { Fragment, useState } from "react"
 
 interface PriceBreakdownProps {
@@ -32,7 +32,16 @@ const PriceBreakdownModal = ({ buttonTitle, price }: PriceBreakdownProps) => {
           leaveTo="opacity-0 translate-y-1"
         >
           <Popover.Panel className="absolute -right-0 top-5 shadow-sm rounded-2xl z-10 mt-5 min-w-[400px] w-full">
-            <ModalContainer title="Price breakdown">
+            <div className="bg-white shadow rounded-2xl ">
+              <div className="flex border-b-gray-200 border-b p-4">
+                <div className="flex-1">
+                  <h1
+                    className={`w-full text-center place-self-center font-semibold`}
+                  >
+                    Price breakdown
+                  </h1>
+                </div>
+              </div>
               <div className="grid grid-flow-row p-6 gap-5">
                 <div className="flex justify-between">
                   <Typography className="text-text-600">
@@ -52,14 +61,14 @@ const PriceBreakdownModal = ({ buttonTitle, price }: PriceBreakdownProps) => {
                 </div>
                 <div className="flex justify-between">
                   <Typography className="text-text-600">
-                    ExploreSiargao service fee
+                    {APP_NAME} service fee
                   </Typography>
                   <Typography className="text-text-600">
                     ₱{price.serviceFee}
                   </Typography>
                 </div>
               </div>
-            </ModalContainer>
+            </div>
           </Popover.Panel>
         </Transition>
       )}
