@@ -8,19 +8,18 @@ interface IconDescription {
   icon: React.ElementType[]
   desc: string[]
 }
-
-interface ShowModalProps {
-    title: string
-    contents: string[]
-    iconDesc: IconDescription[]
-  }
+interface ShowModalContent {
+  id: number
+  title: string
+  iconDesc: IconDescription[]
+}
 interface ShowMoreModalProps {
   isOpen: boolean
   onClose: () => void
-  contents: ShowModalProps[]
+  datas: ShowModalContent[]
 }
 
-const ShowMoreModalContent = ({ isOpen, onClose, contents }: ShowMoreModalProps) => {
+const ShowMoreModalContent = ({ isOpen, onClose, datas }: ShowMoreModalProps) => {
   const cancelButtonRef = useRef(null)
   return (
     <Transition.Root show={true} as="div">
@@ -59,9 +58,9 @@ const ShowMoreModalContent = ({ isOpen, onClose, contents }: ShowMoreModalProps)
                     <Title title="What this place offers">
                         <div className="py-2">
                             <ul>
-                                {contents.map((contents, index) => (
+                                {/* {contents.map((contents, index) => (
                                 <li className='mt-2' key={index}>{contents.Content}</li>
-                                ))}
+                                ))} */}
                             </ul>
                         </div>
                     </Title>
