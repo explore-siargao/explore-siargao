@@ -25,7 +25,6 @@ const HouseRuleModal = ({
   houseRules,
 }: HouseRuleModalProps) => {
   return (
-
     <ModalContainer onClose={onClose} isOpen={isOpen}>
       <div className="px-5 pt-4  md:h-[500px] md:overflow-y-auto">
         <div className="font-semibold text-2xl pt-7">
@@ -33,8 +32,8 @@ const HouseRuleModal = ({
         </div>
         <div className="text-lg font-normal py-4">
           <h2>
-            You'll be staying in someone's home, so please treat it
-            with care and respect.
+            You'll be staying in someone's home, so please treat it with care
+            and respect.
           </h2>
         </div>
 
