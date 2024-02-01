@@ -1,6 +1,4 @@
-import { WidthWrapper } from "@/common/components/WidthWrapper"
 import { Button } from "@/common/components/ui/Button"
-
 interface BookingDescriptionProps {
   generalDescription: string
 }
