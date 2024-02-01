@@ -16,8 +16,8 @@ const Bookings = () => {
     rules: [
       { id: 1, rule: "Be home at 2am.." },
       { id: 2, rule: "Clean up after yourself." },
-    ]
-  };
+    ],
+  }
 
   return (
     <WidthWrapper className="my-24 lg:my-32">
@@ -53,7 +53,7 @@ const Bookings = () => {
         </>
       )}
 
-<HouseRule title={houseRules.title} rules={houseRules.rules}></HouseRule>
+      <HouseRule title={houseRules.title} rules={houseRules.rules}></HouseRule>
     </WidthWrapper>
   )
 }
