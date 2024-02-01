@@ -30,8 +30,5 @@
     "node": ">=20.10.0",
     "npm": ">=10.2.3"
   },
-  "engineStrict": true,
-  "dependencies": {
-    "@heroicons/react": "^2.1.1"
-  }
+  "engineStrict": true
 }
