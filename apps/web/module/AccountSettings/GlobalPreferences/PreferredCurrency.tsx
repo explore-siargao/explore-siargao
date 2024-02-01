@@ -8,7 +8,9 @@ const PreferredCurrency = () => {
     <div className="flex justify-between py-5">
       <div>
         <Typography variant="p">Preferred Currency</Typography>
-        <Typography fontWeight="light">{session?.personalInfo?.currency}</Typography>
+        <Typography fontWeight="light">
+          {session?.personalInfo?.currency}
+        </Typography>
       </div>
       <button
         disabled

@@ -50,7 +50,7 @@ const SignUpForm = ({ isSocial = false }: Props) => {
       year: "",
       day: "",
       registrationType: E_RegistrationType.Manual,
-      country: ""
+      country: "",
     },
   })
   const params = useParams()
@@ -183,12 +183,12 @@ const SignUpForm = ({ isSocial = false }: Props) => {
             </Typography>
           </div>
           <div>
-          <Select {...register("country")} label="Country" required>
-            <Option value="">Select Country</Option>
-            {COUNTRIES.map((country) => (
-              <Option value={country.code}>{country.name}</Option>
-            ))}
-          </Select>
+            <Select {...register("country")} label="Country" required>
+              <Option value="">Select Country</Option>
+              {COUNTRIES.map((country) => (
+                <Option value={country.code}>{country.name}</Option>
+              ))}
+            </Select>
           </div>
           <div>
             <div className="isolate -space-y-px rounded-xl shadow-sm">

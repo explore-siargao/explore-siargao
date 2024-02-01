@@ -8,7 +8,9 @@ const PreferredLanguage = () => {
     <div className="flex justify-between py-5">
       <div>
         <Typography variant="p">Preferred Language</Typography>
-        <Typography fontWeight="light">{session?.personalInfo?.language}</Typography>
+        <Typography fontWeight="light">
+          {session?.personalInfo?.language}
+        </Typography>
       </div>
       <button
         disabled
