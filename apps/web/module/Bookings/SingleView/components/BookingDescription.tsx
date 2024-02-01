@@ -14,7 +14,7 @@ const BookingDescription: React.FC<BookingDescriptionProps> = ({
       ? generalDescription.slice(0, maximumLength) + "....."
       : generalDescription
   return (
-    <WidthWrapper className="flex" width={"medium"}>
+    <div>
       <div className="flex text-sm mb-2 ml-4">{slicedDescription}</div>
       <Button
         className="justify-start flex text-sm font-semibold underline"
@@ -22,7 +22,7 @@ const BookingDescription: React.FC<BookingDescriptionProps> = ({
       >
         Show more &gt;
       </Button>
-    </WidthWrapper>
+    </div>
   )
 }
 
