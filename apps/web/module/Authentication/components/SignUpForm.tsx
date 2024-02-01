@@ -10,7 +10,7 @@ import { Input } from "@/common/components/ui/Input"
 import { capitalizeFirstLetter } from "@/common/helpers/capitalizeFirstLetter"
 import { useParams, useRouter } from "next/navigation"
 import { signIn, useSession } from "next-auth/react"
-import { APP_NAME } from "@repo/constants"
+import { APP_NAME, COUNTRIES } from "@repo/constants"
 import dayjs from "dayjs"
 import { Option, Select } from "@/common/components/ui/Select"
 import {
@@ -50,6 +50,7 @@ const SignUpForm = ({ isSocial = false }: Props) => {
       year: "",
       day: "",
       registrationType: E_RegistrationType.Manual,
+      country: "",
     },
   })
   const params = useParams()
@@ -82,7 +83,8 @@ const SignUpForm = ({ isSocial = false }: Props) => {
         toast.error(String(err))
       },
     }
-    const { email, firstName, lastName, month, day, year, password } = formData
+    const { email, firstName, lastName, month, day, year, password, country } =
+      formData
     const birthDate = dayjs(`${month}-${day}-${year}`, "MM-DD-YYYY")
     addUser(
       {
@@ -92,6 +94,7 @@ const SignUpForm = ({ isSocial = false }: Props) => {
         birthDate: birthDate.format(),
         password,
         registrationType: signUpType as E_RegistrationType,
+        country,
       },
       callBackReq
     )
@@ -178,6 +181,14 @@ const SignUpForm = ({ isSocial = false }: Props) => {
               To sign up, you need to be at least 18. We will not share your
               personal information.
             </Typography>
+          </div>
+          <div>
+            <Select {...register("country")} label="Country" required>
+              <Option value="">Select Country</Option>
+              {COUNTRIES.map((country) => (
+                <Option value={country.code}>{country.name}</Option>
+              ))}
+            </Select>
           </div>
           <div>
             <div className="isolate -space-y-px rounded-xl shadow-sm">

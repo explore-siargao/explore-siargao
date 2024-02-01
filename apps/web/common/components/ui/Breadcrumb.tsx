@@ -12,9 +12,9 @@ export interface BreadcrumbProps
 }
 
 const Breadcrumb = React.forwardRef<HTMLDivElement, BreadcrumbProps>(
-  ({ page, home, link, pageLink }) => {
+  ({ page, home, link, pageLink }, ref) => {
     return (
-      <div className="flex items-center text-text-400">
+      <div ref={ref} className="flex items-center text-text-400">
         <Link href={link} className="font-semibold hover:underline">
           {home}
         </Link>
