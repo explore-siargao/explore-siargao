@@ -1,7 +1,6 @@
 import ModalContainer from "@/common/components/ModalContainer"
 import { Input } from "@/common/components/ui/Input"
-import { Dialog, Transition } from "@headlessui/react"
-import React, { Fragment, useRef, useState } from "react"
+import React, { useRef, useState } from "react"
 import Image from "next/image"
 import ModalContainerFooter from "@/common/components/ModalContainer/ModalContainerFooter"
 import { Typography } from "@/common/components/ui/Typography"
@@ -22,32 +21,6 @@ interface AddWishlistProps {
   isOpen: boolean
   onClose: () => void
 }
-const wishlist = [
-  {
-    id: 1,
-    name: "My wishlist",
-    savedCount: "7 saved",
-    pic: "http://localhost:3000/1.jpg",
-  },
-  {
-    id: 2,
-    name: "My wishlist",
-    savedCount: "7 saved",
-    pic: "http://localhost:3000/2.jpg",
-  },
-  {
-    id: 3,
-    name: "My wishlist",
-    savedCount: "7 saved",
-    pic: "http://localhost:3000/3.jpg",
-  },
-  {
-    id: 4,
-    name: "My wishlist",
-    savedCount: "7 saved",
-    pic: "http://localhost:3000/4.jpg",
-  },
-]
 
 const AddWishlistModal = ({
   listingId,
@@ -94,7 +67,11 @@ const AddWishlistModal = ({
 
   const renderAddToWishlist = () => {
     return (
-      <ModalContainer title="Add to wishlist" onClose={hideModal}>
+      <ModalContainer
+        title="Add to wishlist"
+        onClose={hideModal}
+        isOpen={showModal}
+      >
         {wishGroupIsPending ? (
           <Spinner
             variant={"primary"}
@@ -146,9 +123,13 @@ const AddWishlistModal = ({
     mutate({ title: getValues("title"), listingId: listingId }, callBackReq)
   }
 
-  const renderCreateWishlist = (listingId: number) => {
+  const renderCreateWishlist = () => {
     return (
-      <ModalContainer title="Create wishlist" onClose={() => setRenderState(0)}>
+      <ModalContainer
+        title="Create wishlist"
+        onClose={() => setRenderState(0)}
+        isOpen={showModal}
+      >
         <div className="p-6">
           <Input
             label="Name"
@@ -185,46 +166,7 @@ const AddWishlistModal = ({
   }
 
   return (
-    <Transition.Root show={showModal} as="div">
-      <Dialog
-        as="div"
-        className="relative z-50"
-        initialFocus={cancelButtonRef}
-        onClose={hideModal}
-      >
-        <Transition.Child
-          as={Fragment}
-          enter="ease-out duration-300"
-          enterFrom="opacity-0"
-          enterTo="opacity-100"
-          leave="ease-in duration-200"
-          leaveFrom="opacity-100"
-          leaveTo="opacity-0"
-        >
-          <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
-        </Transition.Child>
-
-        <div className="fixed inset-0 z-10 overflow-y-auto">
-          <div className="flex min-h-full items-end justify-center text-center sm:items-center">
-            <Transition.Child
-              as={Fragment}
-              enter="ease-out duration-300"
-              enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-              enterTo="opacity-100 translate-y-0 sm:scale-100"
-              leave="ease-in duration-200"
-              leaveFrom="opacity-100 translate-y-0 sm:scale-100"
-              leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-            >
-              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:w-full sm:max-w-lg ">
-                {renderState === 0
-                  ? renderAddToWishlist
-                  : renderCreateWishlist(listingId)}
-              </Dialog.Panel>
-            </Transition.Child>
-          </div>
-        </div>
-      </Dialog>
-    </Transition.Root>
+    <>{renderState === 0 ? renderAddToWishlist() : renderCreateWishlist()}</>
   )
 }
 
