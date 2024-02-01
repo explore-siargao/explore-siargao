@@ -1,14 +1,16 @@
 import { Typography } from "@/common/components/ui/Typography"
+import useSessionStore from "@/common/store/useSessionStore"
 import React from "react"
-import useSessionStore from "../../../common/store/useSessionStore.ts"
 
 const PreferredCurrency = () => {
-  const currency = useSessionStore((state) => state).personalInfo.currency
+  const session = useSessionStore((state) => state)
   return (
     <div className="flex justify-between py-5">
       <div>
         <Typography variant="p">Preferred Currency</Typography>
-        <Typography fontWeight="light">{currency}</Typography>
+        <Typography fontWeight="light">
+          {session?.personalInfo?.currency}
+        </Typography>
       </div>
       <button
         disabled
