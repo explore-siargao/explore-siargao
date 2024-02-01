@@ -108,15 +108,15 @@ const SignUpForm = ({ isSocial = false }: Props) => {
           <div>
             <div>
               <Input
-                inputLabel="First Name"
-                inputId="firstName"
+                label="First Name"
+                id="firstName"
                 type="text"
                 {...register("firstName", { required: true })}
                 disabled={addUserIsPending}
               />
               <Input
-                inputLabel="Last name"
-                inputId="lastName"
+                label="Last name"
+                id="lastName"
                 type="text"
                 className="mt-2"
                 {...register("lastName", { required: true })}
@@ -186,8 +186,8 @@ const SignUpForm = ({ isSocial = false }: Props) => {
           <div>
             <div className="isolate -space-y-px rounded-xl shadow-sm">
               <Input
-                inputLabel="Email"
-                inputId="email"
+                label="Email"
+                id="email"
                 type="email"
                 {...register("email", { required: true })}
                 placeholder="you@example.com"
@@ -201,8 +201,8 @@ const SignUpForm = ({ isSocial = false }: Props) => {
           <div>
             {!isSocial && (
               <Input
-                inputLabel="Password"
-                inputId="password"
+                label="Password"
+                id="password"
                 type="password"
                 {...register("password", { required: true })}
                 disabled={addUserIsPending}

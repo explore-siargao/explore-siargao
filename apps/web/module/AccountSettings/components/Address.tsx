@@ -111,30 +111,30 @@ const Address = ({
               </select>
               <div className="grid grid-cols-2 gap-4">
                 <Input
-                  inputId="streetAddress"
-                  inputLabel="Street address"
+                  id="streetAddress"
+                  label="Street address"
                   disabled={isPending}
                   defaultValue={streetAddress}
                   {...register("streetAddress")}
                 />
                 <Input
-                  inputId="city"
-                  inputLabel="city"
+                  id="city"
+                  label="city"
                   disabled={isPending}
                   defaultValue={city}
                   {...register("city")}
                 />
                 <Input
-                  inputId="stateProvice"
+                  id="stateProvice"
                   disabled={isPending}
-                  inputLabel="State/Province"
+                  label="State/Province"
                   defaultValue={province}
                   {...register("province")}
                 />
                 <Input
-                  inputId="zipCode"
+                  id="zipCode"
                   type="number"
-                  inputLabel="zip code"
+                  label="zip code"
                   disabled={isPending}
                   defaultValue={zipCode}
                   {...register("zipCode")}

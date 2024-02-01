@@ -91,14 +91,14 @@ const LegalName = ({ firstName, lastName, userId }: IPersonalInfo) => {
           <form onSubmit={handleLegalNameSubmit(onSubmitLegalName)}>
             <div className="grid grid-cols-2 gap-4 my-4">
               <Input
-                inputId="firstName"
-                inputLabel="First name"
+                id="firstName"
+                label="First name"
                 defaultValue={firstName}
                 {...registerLegalName("firstName")}
               />
               <Input
-                inputId="lastName"
-                inputLabel="Last name"
+                id="lastName"
+                label="Last name"
                 defaultValue={lastName}
                 {...registerLegalName("lastName")}
               />
