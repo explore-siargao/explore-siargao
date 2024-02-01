@@ -169,7 +169,7 @@ export const updateDescription = async (req: Request, res: Response) => {
     }
   } catch (err: any) {
     const message = err.message ? err.message : UNKNOWN_ERROR_OCCURRED
-    res.json(response.error({message:message}))
+    res.json(response.error({ message: message }))
   }
 }
 
@@ -209,6 +209,6 @@ export const deleteDescription = async (req: Request, res: Response) => {
     )
   } catch (err: any) {
     const message = err.message ? err.message : UNKNOWN_ERROR_OCCURRED
-    res.json(response.error({message:message}))
+    res.json(response.error({ message: message }))
   }
 }
