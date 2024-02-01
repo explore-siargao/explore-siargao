@@ -7,7 +7,6 @@ import { Spinner } from "@/common/components/ui/Spinner"
 import useSessionStore from "@/common/store/useSessionStore"
 
 const Bookings = () => {
-
   const userId = useSessionStore((state) => state).id
   const { data, isPending } = useGetAllBookings()
 
@@ -44,7 +43,7 @@ const Bookings = () => {
           </ul>
         </>
       )}
-      </WidthWrapper>
+    </WidthWrapper>
   )
 }
 
