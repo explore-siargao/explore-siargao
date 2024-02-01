@@ -6,9 +6,8 @@ import {
   LINK_LOGOUT,
 } from "@/common/constants/links"
 import { Bars3Icon, UserCircleIcon } from "@heroicons/react/20/solid"
-import React, { Fragment, useState } from "react"
+import React, { Fragment } from "react"
 import { Popover, Transition } from "@headlessui/react"
-import Link from "next/link"
 import { useSession } from "next-auth/react"
 
 const unAuthMenus = [

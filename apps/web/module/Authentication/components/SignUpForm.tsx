@@ -10,7 +10,7 @@ import { Input } from "@/common/components/ui/Input"
 import { capitalizeFirstLetter } from "@/common/helpers/capitalizeFirstLetter"
 import { useParams, useRouter } from "next/navigation"
 import { signIn, useSession } from "next-auth/react"
-import { APP_NAME } from "@repo/constants"
+import { APP_NAME, COUNTRIES } from "@repo/constants"
 import dayjs from "dayjs"
 import { Option, Select } from "@/common/components/ui/Select"
 import {
@@ -183,13 +183,12 @@ const SignUpForm = ({ isSocial = false }: Props) => {
             </Typography>
           </div>
           <div>
-            <Input
-              label="Country"
-              id="country"
-              type="text"
-              {...register("country", { required: true })}
-              disabled={addUserIsPending}
-            />
+          <Select {...register("country")} label="Country" required>
+            <Option value="">Select Country</Option>
+            {COUNTRIES.map((country) => (
+              <Option value={country.code}>{country.name}</Option>
+            ))}
+          </Select>
           </div>
           <div>
             <div className="isolate -space-y-px rounded-xl shadow-sm">
@@ -206,15 +205,6 @@ const SignUpForm = ({ isSocial = false }: Props) => {
             <Typography variant={"p"} className="text-xs mt-1 text-text-500">
               We'll email you trip confirmations and receipts.
             </Typography>
-          </div>
-          <div>
-            <Input
-              label="Country"
-              id="country"
-              type="text"
-              {...register("country", { required: true })}
-              disabled={addUserIsPending}
-            />
           </div>
           <div>
             {!isSocial && (
