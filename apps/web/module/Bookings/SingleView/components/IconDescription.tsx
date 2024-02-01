@@ -3,15 +3,15 @@ import React from "react"
 interface IconDescriptionProps {
   icon: React.ElementType
   desc: React.ReactNode
-  isStrikeThrough?: boolean
+  isNotIncluded?: boolean
 }
 
 const IconDescription: React.FC<IconDescriptionProps> = ({
   icon: Icon,
   desc,
-  isStrikeThrough = false,
+  isNotIncluded = false,
 }) => {
-  const IconDescriptionStyle = isStrikeThrough
+  const IconDescriptionStyle = isNotIncluded
     ? { textDecoration: "line-through" }
     : {}
 

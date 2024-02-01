@@ -22,17 +22,13 @@ const PlaceOffers = () => {
         <IconDescription icon={LucideCigaretteOff} desc="No smoking" />
         <IconDescription icon={LucideAlarmSmoke} desc="Smoke alarm" />
         <IconDescription icon={LucideBed} desc="Bed" />
-        <IconDescription
-          icon={LucideAngry}
-          desc="Angry people"
-          isStrikeThrough
-        />
+        <IconDescription icon={LucideAngry} desc="Angry people" />
         <IconDescription
           icon={LucideAlarmClock}
           desc="Alarm clock"
-          isStrikeThrough
+          isNotIncluded
         />
-        <IconDescription icon={LucideBug} desc="No bugs" isStrikeThrough />
+        <IconDescription icon={LucideBug} desc="No bugs" />
       </div>
       <Button className="mt-5" variant={"shaded"}>
         Show all 56 amenities
