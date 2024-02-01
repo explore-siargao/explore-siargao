@@ -10,6 +10,7 @@ import {
   faTwitter,
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons"
+import { APP_NAME } from "@repo/constants"
 
 const Footer = () => {
   return (
@@ -21,7 +22,7 @@ const Footer = () => {
               Support
             </Title>
             <Link href={""}>
-              <Typography className="mb-1">About ExploreSiargao</Typography>
+              <Typography className="mb-1">About {APP_NAME}</Typography>
             </Link>
             <Link href={""}>
               <Typography className="mb-1">Help center</Typography>
@@ -40,7 +41,7 @@ const Footer = () => {
           </div>
           <div className="md:flex-1 pb-4 pt-4 md:pt-0 md:pb-0 md:mr-4 border-b md:border-b-0">
             <Title size={"sub"} className="mb-1">
-              Exploresiargao
+              {APP_NAME}
             </Title>
             <Link href={""}>
               <Typography className="mb-1">Accommodation</Typography>
@@ -97,7 +98,7 @@ const Footer = () => {
         </div>
         <div className="md:flex items-center mt-5 justify-between">
           <div className="md:flex-1">
-            &copy; 2024 ExploreSiargao &middot;
+            &copy; 2024 {APP_NAME} &middot;
             <Link href={""} className="mx-2">
               Terms
             </Link>{" "}

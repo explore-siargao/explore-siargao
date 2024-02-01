@@ -1,6 +1,7 @@
 import { Typography } from "@/common/components/ui/Typography"
 import { IPrice } from "@/common/types/global"
 import { Popover, Transition } from "@headlessui/react"
+import { APP_NAME } from "@repo/constants"
 import React, { Fragment, useState } from "react"
 
 interface PriceBreakdownProps {
@@ -58,7 +59,7 @@ const PriceBreakdownModal = ({ buttonTitle, price }: PriceBreakdownProps) => {
                 </div>
                 <div className="flex justify-between">
                   <Typography className="text-text-600">
-                    ExploreSiargao service fee
+                    {APP_NAME} service fee
                   </Typography>
                   <Typography className="text-text-600">
                     ₱{price.serviceFee}

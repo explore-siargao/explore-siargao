@@ -7,6 +7,7 @@ import { Button } from "@/common/components/ui/Button"
 import useSetReceivedEmail from "../hooks/useSetReceivedEmail"
 import toast from "react-hot-toast"
 import useSessionStore from "@/common/store/useSessionStore"
+import { APP_NAME } from "@repo/constants"
 
 const OptMessageModal = () => {
   const isOpen = useOptMessageStore((state) => state.isOpen)
@@ -64,7 +65,7 @@ const OptMessageModal = () => {
             className="text-sm select-none text-left ml-2"
           >
             I’d like to receive travel tips, uplifting content, and
-            exclusive deals from ExploreSiargao. You can opt out at
+            exclusive deals from {APP_NAME}. You can opt out at
             any time.
           </label>
         </div>
