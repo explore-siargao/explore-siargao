@@ -20,7 +20,7 @@ export interface TitleProps
   children: string
 }
 const Title = React.forwardRef<HTMLDivElement, TitleProps>(
-  ({ className, size, children }, ref) => {
+  ({ className, size, children }) => {
     return (
       <Typography className={cn(titleVariants({ size, className }))}>
         {children}
