@@ -64,9 +64,8 @@ const OptMessageModal = () => {
             htmlFor="recieved"
             className="text-sm select-none text-left ml-2"
           >
-            I’d like to receive travel tips, uplifting content, and
-            exclusive deals from {APP_NAME}. You can opt out at
-            any time.
+            I’d like to receive travel tips, uplifting content, and exclusive
+            deals from {APP_NAME}. You can opt out at any time.
           </label>
         </div>
       </div>

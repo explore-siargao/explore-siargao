@@ -53,7 +53,9 @@ const ModalContainer = ({ children, title, onClose, isOpen }: Props) => {
                       />
                     </div>
                     <div className="flex-1">
-                      <h1 className={`w-full text-center place-self-center font-semibold`}>
+                      <h1
+                        className={`w-full text-center place-self-center font-semibold`}
+                      >
                         {title}
                       </h1>
                     </div>

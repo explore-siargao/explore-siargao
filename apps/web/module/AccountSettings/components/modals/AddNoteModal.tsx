@@ -70,11 +70,7 @@ const AddNoteModal = ({
     mutate({ ...formData }, callBackReq)
   }
   return (
-    <ModalContainer
-      onClose={onClose}
-      title="Add a note"
-      isOpen={isOpen}
-    >
+    <ModalContainer onClose={onClose} title="Add a note" isOpen={isOpen}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="p-10 grid grid-cols-2 gap-5 items-center">
           <div className="h-72 rounded-2xl relative select-none">
@@ -89,10 +85,7 @@ const AddNoteModal = ({
           <div className="flex flex-col justify-between h-full">
             <div className="flex-1 -space-y-1 w-auto">
               <div className="flex justify-between">
-                <Title
-                  size={"ContentTitle"}
-                  className="text-text-500"
-                >
+                <Title size={"ContentTitle"} className="text-text-500">
                   {title}
                 </Title>
                 <div className="flex text-text-500 place-items-center gap-1">
@@ -119,9 +112,7 @@ const AddNoteModal = ({
                 <PriceBreakdownModal
                   buttonTitle={
                     "₱" +
-                    (price.fee +
-                      price.cleaningFee +
-                      price.serviceFee) +
+                    (price.fee + price.cleaningFee + price.serviceFee) +
                     " total"
                   }
                   price={price}
@@ -132,10 +123,11 @@ const AddNoteModal = ({
               rows={7}
               id={String(id)}
               {...register("note")}
-              className={`text-sm block w-full resize-none bg-transparent rounded-lg ${inputValue.replace(/\s/g, "").length > 250
+              className={`text-sm block w-full resize-none bg-transparent rounded-lg ${
+                inputValue.replace(/\s/g, "").length > 250
                   ? "border-error-400 border-2 focus:border-error-400 focus:ring-error-400 ring-error-400"
                   : "focus:border-text-500 border-2 focus:ring-text-500"
-                }`}
+              }`}
               placeholder="Add a note"
               onChange={handleTextAreaChange}
               defaultValue={note}
@@ -144,22 +136,23 @@ const AddNoteModal = ({
               <Typography
                 variant={"h6"}
                 fontWeight={"bold"}
-                className={`${inputValue.replace(/\s/g, "").length > 250
+                className={`${
+                  inputValue.replace(/\s/g, "").length > 250
                     ? "text-error-400 mt-2"
                     : "text-text-400 mt-2"
-                  }`}
+                }`}
               >
-                {inputValue.replace(/\s/g, "").length}/250
-                characters
+                {inputValue.replace(/\s/g, "").length}/250 characters
               </Typography>
               {inputValue.replace(/\s/g, "").length > 250 && (
                 <Typography
                   variant={"h6"}
                   fontWeight={"bold"}
-                  className={`flex items-center ${inputValue.replace(/\s/g, "").length > 250
+                  className={`flex items-center ${
+                    inputValue.replace(/\s/g, "").length > 250
                       ? "text-error-400 mt-2"
                       : "text-text-400 mt-2"
-                    }`}
+                  }`}
                 >
                   <ExclamationCircleIcon className="h-5 w-auto" />
                   Over character limit

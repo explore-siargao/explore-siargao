@@ -15,8 +15,8 @@ const GuestContribution = () => {
       <Typography fontWeight={"light"} className="pb-4">
         To show their appreciation for great hospitality, guests can send an
         optional financial contribution to a host after completing a stay or an
-        {APP_NAME} Experience. You can choose to automatically allow or
-        decline future contributions from guests.
+        {APP_NAME} Experience. You can choose to automatically allow or decline
+        future contributions from guests.
       </Typography>
       <div className="flex justify-between border-b border-b-text-100 py-5">
         <label htmlFor="switchToggle" className="w-full">

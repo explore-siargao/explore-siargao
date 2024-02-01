@@ -67,7 +67,11 @@ const AddWishlistModal = ({
 
   const renderAddToWishlist = () => {
     return (
-      <ModalContainer title="Add to wishlist" onClose={hideModal} isOpen={showModal}>
+      <ModalContainer
+        title="Add to wishlist"
+        onClose={hideModal}
+        isOpen={showModal}
+      >
         {wishGroupIsPending ? (
           <Spinner
             variant={"primary"}
@@ -121,25 +125,31 @@ const AddWishlistModal = ({
 
   const renderCreateWishlist = () => {
     return (
-      <ModalContainer title="Create wishlist" onClose={() => setRenderState(0)} isOpen={showModal}>
+      <ModalContainer
+        title="Create wishlist"
+        onClose={() => setRenderState(0)}
+        isOpen={showModal}
+      >
         <div className="p-6">
           <Input
             label="Name"
             id="createModal"
             {...register("title", { required: "This field is required" })}
             disabled={addWishgroupIsPending}
-            className={`w-full ${inputValue.replace(/\s/g, "").length > 50 &&
+            className={`w-full ${
+              inputValue.replace(/\s/g, "").length > 50 &&
               "ring-error-600 focus-within:z-10 focus-within:ring-2 focus-within:ring-error-600"
-              }`}
+            }`}
             onChange={handleTextAreaChange}
           />
           <Typography
             variant={"h6"}
             fontWeight={"bold"}
-            className={`${inputValue.replace(/\s/g, "").length > 50
+            className={`${
+              inputValue.replace(/\s/g, "").length > 50
                 ? "text-error-400 mt-2"
                 : "text-text-400 mt-2"
-              }`}
+            }`}
           >
             {inputValue.replace(/\s/g, "").length}/50 characters{" "}
           </Typography>{" "}
@@ -156,11 +166,7 @@ const AddWishlistModal = ({
   }
 
   return (
-    <>
-      {renderState === 0
-        ? renderAddToWishlist()
-        : renderCreateWishlist()}
-    </>
+    <>{renderState === 0 ? renderAddToWishlist() : renderCreateWishlist()}</>
   )
 }
 

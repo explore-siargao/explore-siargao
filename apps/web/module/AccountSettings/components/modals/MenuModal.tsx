@@ -118,7 +118,11 @@ const MenuModal = ({
   }
   const renderRename = () => {
     return (
-      <ModalContainer onClose={() => setModalState(0)} title="Rename wishlist" isOpen={openModal}>
+      <ModalContainer
+        onClose={() => setModalState(0)}
+        title="Rename wishlist"
+        isOpen={openModal}
+      >
         <div className="p-6 flex flex-col ">
           <Input
             label="Name"
@@ -188,11 +192,7 @@ const MenuModal = ({
 
     return componentToRender
   }
-  return (
-    <>
-      {toRender}
-    </>
-  )
+  return <>{toRender}</>
 }
 
 export default MenuModal

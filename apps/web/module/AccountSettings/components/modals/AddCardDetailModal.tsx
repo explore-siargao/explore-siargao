@@ -108,13 +108,9 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
       })
     }
   }
-  
+
   return (
-    <ModalContainer
-      title="Add card details"
-      isOpen={isOpen}
-      onClose={onClose}
-    >
+    <ModalContainer title="Add card details" isOpen={isOpen} onClose={onClose}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="p-6 space-y-2">
           <div className="flex gap-2">
@@ -176,10 +172,7 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
                 onChange: (e) => {
                   const value = e.target.value
                   const trimmedValue = value.replace(/\s/g, "")
-                  const spacedValue = trimmedValue.replace(
-                    /(.{4})/g,
-                    "$1 "
-                  )
+                  const spacedValue = trimmedValue.replace(/(.{4})/g, "$1 ")
                   setValue("cardNumber", String(spacedValue).trim())
                   validateCard()
                 },
@@ -199,24 +192,15 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
                   required: "This field is required",
                   onChange: (e) => {
                     let value = e.target.value
-                    if (
-                      e.nativeEvent.inputType ===
-                      "deleteContentBackward"
-                    ) {
+                    if (e.nativeEvent.inputType === "deleteContentBackward") {
                       value = value.slice(0, -2)
                       setValue("expirationDate", value)
                     } else {
                       value = value.replace(/\//g, "")
-                      const slashValue = value.replace(
-                        /(.{2})/g,
-                        "$1/"
-                      )
+                      const slashValue = value.replace(/(.{2})/g, "$1/")
                       const newValue = String(slashValue).trim()
                       if (newValue.length > 5) {
-                        setValue(
-                          "expirationDate",
-                          newValue.slice(0, -1)
-                        )
+                        setValue("expirationDate", newValue.slice(0, -1))
                         validateExpirationDate()
                       } else {
                         setValue("expirationDate", newValue.trim())
