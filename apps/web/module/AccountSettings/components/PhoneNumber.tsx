@@ -7,6 +7,7 @@ import { useQueryClient } from "@tanstack/react-query"
 import toast from "react-hot-toast"
 import { useForm } from "react-hook-form"
 import { Typography } from "@/common/components/ui/Typography"
+import { APP_NAME } from "@repo/constants"
 
 type PersonalInfoProps = {
   isButtonClicked: boolean
@@ -86,14 +87,14 @@ const PhoneNumber = ({ phoneNumber, userId }: IPersonalInfo) => {
             </button>
           </div>
           <Typography variant={"p"} fontWeight={"light"}>
-            Add a number so confirmed guests and ExploreSiargao can get in
-            touch. You can add other numbers and choose how they’re used
+            Add a number so confirmed guests and {APP_NAME} can get in touch.
+            You can add other numbers and choose how they’re used
           </Typography>
           <form onSubmit={handlePhoneNumberSubmit(onSubmitPhoneNumber)}>
             <div className="grid grid-cols-2 gap-4 my-4">
               <Input
-                inputId="phoneNumber"
-                inputLabel="Phone number"
+                id="phoneNumber"
+                label="Phone number"
                 defaultValue={
                   phoneNumber !== "" ? phoneNumber : "Enter a new phone number"
                 }

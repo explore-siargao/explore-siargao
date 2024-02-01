@@ -3,7 +3,7 @@ import AccountSettingWrapper from "@/common/components/AccountSettingWrapper"
 import React, { useState } from "react"
 import { Breadcrumb } from "@/common/components/ui/Breadcrumb"
 import { Title } from "@/common/components/ui/Title"
-import { LINK_ACCOUNT_SETTINGS } from "@/common/constants/links"
+import { LINK_ACCOUNT } from "@/common/constants/links"
 import combineClasses from "@/common/helpers/combineClasses"
 import Taxpayers from "./Taxpayers"
 import TaxDocuments from "./TaxDocuments"
@@ -29,7 +29,7 @@ const Taxes = () => {
   return (
     <AccountSettingWrapper>
       <div>
-        <Breadcrumb home="Account" page={TITLE} link={LINK_ACCOUNT_SETTINGS} />
+        <Breadcrumb home="Account" page={TITLE} link={LINK_ACCOUNT} />
         <Title>{TITLE}</Title>
       </div>
       <div className="hidden sm:block">

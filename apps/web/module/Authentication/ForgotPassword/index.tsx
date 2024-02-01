@@ -57,12 +57,13 @@ const ForgotPassword = () => {
         <div className="p-6 space-y-4">
           <div>
             <Input
-              inputLabel="Email"
-              inputId="email"
+              label="Email"
+              id="email"
               type="email"
               placeholder="you@example.com"
               {...register("email", { required: true })}
               disabled={isForgotPasswordPending}
+              required
             />
             <Typography variant={"p"} className="text-sm mt-2 text-text-300">
               Please enter your email in the box above. We will send you link to

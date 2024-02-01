@@ -64,15 +64,15 @@ const NewPassword = () => {
         <div className="p-6 space-y-4">
           <div>
             <Input
-              inputLabel="Enter New Password"
-              inputId="newPassword"
+              label="Enter New Password"
+              id="newPassword"
               type="password"
               {...register("newPassword")}
               disabled={isPendingNewPassword}
             />
             <Input
-              inputLabel="Confirm password"
-              inputId="confirmPassword"
+              label="Confirm password"
+              id="confirmPassword"
               type="password"
               className="mt-2"
               {...register("confirmPassword")}

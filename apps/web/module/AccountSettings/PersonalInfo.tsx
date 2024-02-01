@@ -1,6 +1,6 @@
 "use client"
 import AccountSettingWrapper from "@/common/components/AccountSettingWrapper"
-import { LINK_ACCOUNT_SETTINGS } from "@/common/constants/links"
+import { LINK_ACCOUNT } from "@/common/constants/links"
 import React from "react"
 import LegalName from "./components/LegalName"
 import EmailAddress from "./components/EmailAddress"
@@ -22,7 +22,7 @@ const PersonalInfo = () => {
         <Breadcrumb
           home="Account"
           page="Personal info"
-          link={LINK_ACCOUNT_SETTINGS}
+          link={LINK_ACCOUNT}
         />
         <Title>Personal info</Title>
       </div>
@@ -41,7 +41,7 @@ const PersonalInfo = () => {
             phoneNumber={personalInfo?.phoneNumber}
             userId={session?.id as number}
           />
-          <GovernmentId governmentId={personalInfo?.governMentId} />
+          <GovernmentId governmentId={personalInfo?.governmentId} />
           <Address
             country={personalInfo?.address?.country as string}
             city={personalInfo?.address?.city as string}
@@ -52,7 +52,7 @@ const PersonalInfo = () => {
           />
           <EmergencyContact
             emergencyContact={
-              personalInfo?.emergrncyContacts as T_EmergencyContact[]
+              personalInfo?.emergencyContacts as T_EmergencyContact[]
             }
             id={personalInfo?.id as number}
           />

@@ -4,7 +4,7 @@ import React, { useState } from "react"
 import BookingReviewItem from "./components/BookingReviewItem"
 import { Breadcrumb } from "@/common/components/ui/Breadcrumb"
 import { Title } from "@/common/components/ui/Title"
-import { LINK_ACCOUNT_SETTINGS } from "@/common/constants/links"
+import { LINK_ACCOUNT } from "@/common/constants/links"
 import combineClasses from "@/common/helpers/combineClasses"
 import BookingReviewItemPending from "./components/BookingReviewItemPending"
 
@@ -72,7 +72,7 @@ const BookingReviews = () => {
         <Breadcrumb
           home="Account"
           page="Booking Reviews"
-          link={LINK_ACCOUNT_SETTINGS}
+          link={LINK_ACCOUNT}
         />
         <Title>Booking Reviews</Title>
       </div>

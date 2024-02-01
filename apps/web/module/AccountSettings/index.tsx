@@ -14,6 +14,7 @@ import {
   LINK_ACCOUNT_PERSONAL_INFO,
   LINK_ACCOUNT_WISHLIST,
   LINK_ACCOUNT_TAXES,
+  LINK_ACCOUNT_GLOBAL_PREFERENCES,
 } from "@/common/constants/links"
 import { Title } from "@/common/components/ui/Title"
 import { Typography } from "@/common/components/ui/Typography"
@@ -21,7 +22,7 @@ import { capitalizeFirstLetter } from "@/common/helpers/capitalizeFirstLetter"
 import { ChevronRightIcon } from "@heroicons/react/20/solid"
 import Link from "next/link"
 import useSessionStore from "@/common/store/useSessionStore"
-import { File } from "lucide-react"
+import { Settings2, File } from "lucide-react"
 
 const pages = [
   {
@@ -58,6 +59,13 @@ const pages = [
     title: "Taxes",
     content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     link: LINK_ACCOUNT_TAXES,
+  },
+  {
+    id: 6,
+    icon: Settings2,
+    title: "Global Preferences",
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    link: LINK_ACCOUNT_GLOBAL_PREFERENCES,
   },
 ]
 

@@ -86,56 +86,56 @@ const Taxpayers = ({ firstName, lastName, userId, country }: IPersonalInfo) => {
           <form onSubmit={handleSubmit(onSubmitLegalName)}>
             <div className="grid grid-cols-2 gap-4 my-4">
               <Input
-                inputId="firstName"
-                inputLabel="VAT ID Number"
+                id="firstName"
+                label="VAT ID Number"
                 defaultValue={firstName}
                 {...register("firstName")}
               />
               <Input
-                inputId="lastName"
-                inputLabel="Name on Registration"
+                id="lastName"
+                label="Name on Registration"
                 defaultValue={lastName}
                 {...register("lastName")}
               />
             </div>
             <div className="grid grid-cols-2 gap-4 my-4">
               <Input
-                inputId="firstName"
-                inputLabel="Address line 1"
+                id="firstName"
+                label="Address line 1"
                 defaultValue={firstName}
                 {...register("firstName")}
               />
               <Input
-                inputId="lastName"
-                inputLabel="Address line 2 (optional)"
+                id="lastName"
+                label="Address line 2 (optional)"
                 defaultValue={lastName}
                 {...register("lastName")}
               />
             </div>
             <div className="grid grid-cols-2 gap-4 my-4">
               <Input
-                inputId="firstName"
-                inputLabel="City"
+                id="firstName"
+                label="City"
                 defaultValue={firstName}
                 {...register("firstName")}
               />
               <Input
-                inputId="lastName"
-                inputLabel="Province"
+                id="lastName"
+                label="Province"
                 defaultValue={lastName}
                 {...register("lastName")}
               />
             </div>
             <div className="grid grid-cols-2 gap-4 my-4">
               <Input
-                inputId="country"
-                inputLabel="Country"
+                id="country"
+                label="Country"
                 defaultValue={country}
                 {...register("country")}
               />
               <Input
-                inputId="firstName"
-                inputLabel="Zip/postal code"
+                id="firstName"
+                label="Zip/postal code"
                 defaultValue={firstName}
                 {...register("firstName")}
               />
