@@ -198,14 +198,7 @@ export const addListing = async (req: Request, res: Response) => {
 export const updateListing = async (req: Request, res: Response) => {
   const userId = Number(req.params.userId)
   const id = Number(req.params.id)
-  const {
-    imageUrls,
-    title,
-    category,
-    address,
-    latitude,
-    longitude,
-  } = req.body
+  const { imageUrls, title, category, address, latitude, longitude } = req.body
   try {
     const getUser = await prisma.user.findUnique({
       where: {
@@ -230,14 +223,7 @@ export const updateListing = async (req: Request, res: Response) => {
         })
       )
     }
-    if (
-      imageUrls ||
-      title ||
-      category ||
-      address ||
-      latitude ||
-      longitude
-    ) {
+    if (imageUrls || title || category || address || latitude || longitude) {
       const updateListing = await prisma.listing.update({
         where: {
           id: id,

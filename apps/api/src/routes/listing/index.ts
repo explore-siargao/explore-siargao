@@ -99,7 +99,13 @@ import {
   getReportsByListing,
   updateReport,
 } from './service/reportListings'
-import { addDescription, deleteDescription, getDescription, getDescriptionByListing, updateDescription } from './service/listingDescription'
+import {
+  addDescription,
+  deleteDescription,
+  getDescription,
+  getDescriptionByListing,
+  updateDescription,
+} from './service/listingDescription'
 
 const router = express.Router()
 
