@@ -23,12 +23,12 @@ interface HouseRuleModalProps {
 const HouseRuleModal = ({ isOpen, onClose, houseRules }: HouseRuleModalProps) => {
   const cancelButtonRef = useRef(null)
   return (
-    <Transition.Root show={true} as="div">
+    <Transition.Root show={ isOpen } as="div">
       <Dialog
         as="div"
         className="relative z-50"
         initialFocus={cancelButtonRef}
-        onClose={() => {}}
+        onClose={onClose}
       >
         <Transition.Child
           as={Fragment}
