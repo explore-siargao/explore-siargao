@@ -20,7 +20,11 @@ interface HouseRuleModalProps {
   houseRules: HouseRule[]
 }
 
-const HouseRuleModal = ({ isOpen, onClose, houseRules }: HouseRuleModalProps) => {
+const HouseRuleModal = ({
+  isOpen,
+  onClose,
+  houseRules,
+}: HouseRuleModalProps) => {
   const cancelButtonRef = useRef(null)
   return (
     <Transition.Root show={ isOpen } as="div">
@@ -60,26 +64,28 @@ const HouseRuleModal = ({ isOpen, onClose, houseRules }: HouseRuleModalProps) =>
                       <h1>House Rules</h1>
                     </div>
                     <div className="text-lg font-normal py-4">
-                      <h2>You'll be staying in someone's home, so please treat it with care and respect.
-                       </h2>
+                      <h2>
+                        You'll be staying in someone's home, so please treat it
+                        with care and respect.
+                      </h2>
                     </div>
-                    
-                  {houseRules.map((data) => (
-                        <div className="py-2 pt-5" key={data.id}>
-                          <TitleSection title={data.title}>
-                            {data.rules.map((rule: any) => (
-                              <div className="py-4 border-b" key={rule.id}>
-                                <IconDescription
-                                  // @ts-ignore
-                                  icon={rule.icon}
-                                  // @ts-ignore
-                                  desc={rule.desc}
-                                />
-                              </div>
-                            ))}
-                          </TitleSection>
-                        </div>
-                      ))}
+
+                    {houseRules.map((data) => (
+                      <div className="py-2 pt-5" key={data.id}>
+                        <TitleSection title={data.title}>
+                          {data.rules.map((rule: any) => (
+                            <div className="py-4 border-b" key={rule.id}>
+                              <IconDescription
+                                // @ts-ignore
+                                icon={rule.icon}
+                                // @ts-ignore
+                                desc={rule.desc}
+                              />
+                            </div>
+                          ))}
+                        </TitleSection>
+                      </div>
+                    ))}
                   </div>
                 </ModalContainer>
               </Dialog.Panel>
