@@ -18,7 +18,7 @@ export interface TitleProps
   extends React.DetailsHTMLAttributes<HTMLDivElement>,
     VariantProps<typeof titleVariants> {}
 const Title = React.forwardRef<HTMLDivElement, TitleProps>(
-  ({ className, size, children }, ref) => {
+  ({ className, size, children }) => {
     return (
       <Typography className={cn(titleVariants({ size, className }))}>
         {children}
