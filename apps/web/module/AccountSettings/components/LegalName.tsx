@@ -4,10 +4,10 @@ import { IPersonalInfo } from "@/common/types/global"
 import React, { useState } from "react"
 import useUpdatePersonalInfo from "../hooks/useUpdatePersonalInfo"
 import { useQueryClient } from "@tanstack/react-query"
-import toast from "react-hot-toast"
 import { useForm } from "react-hook-form"
 import { Typography } from "@/common/components/ui/Typography"
-import SelectCountry from "@/common/components/SelectCountry"
+import toast from "react-hot-toast"
+
 type PersonalInfoProps = {
   isButtonClicked: boolean
   contentId: string
@@ -28,24 +28,23 @@ const LegalName = ({ firstName, lastName, userId }: IPersonalInfo) => {
   const queryClient = useQueryClient()
 
   const onSubmitLegalName = (formData: IPersonalInfo) => {
-    console.log('ddd', formData)
-    // const callBackReq = {
-    //   onSuccess: (data: any) => {
-    //     if (!data.error) {
-    //       queryClient.invalidateQueries({
-    //         queryKey: ["session"],
-    //       })
-    //       toast.success(data.message)
-    //       resetLegalName()
-    //     } else {
-    //       toast.error(String(data.message))
-    //     }
-    //   },
-    //   onError: (err: any) => {
-    //     toast.error(String(err))
-    //   },
-    // }
-    // mutateLegalName({ ...formData }, callBackReq)
+    const callBackReq = {
+      onSuccess: (data: any) => {
+        if (!data.error) {
+          queryClient.invalidateQueries({
+            queryKey: ["session"],
+          })
+          toast.success(data.message)
+          resetLegalName()
+        } else {
+          toast.error(String(data.message))
+        }
+      },
+      onError: (err: any) => {
+        toast.error(String(err))
+      },
+    }
+    mutateLegalName({ ...formData }, callBackReq)
   }
 
   return (
@@ -98,7 +97,6 @@ const LegalName = ({ firstName, lastName, userId }: IPersonalInfo) => {
                 defaultValue={firstName}
                 {...registerLegalName("firstName")}
               />
-              <SelectCountry {...registerLegalName("country")} />
               <Input
                 id="lastName"
                 label="Last name"

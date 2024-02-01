@@ -1,26 +1,23 @@
 import React from 'react'
-import * as SelectPrimitive from "@radix-ui/react-select"
 import {
   Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/common/components/ui/new/select"
+  Option
+} from "@/common/components/ui/Select"
 import { COUNTRIES } from '@repo/constants'
+import { UseFormRegister, FieldValues } from 'react-hook-form'
 
 export interface SelectProps
-  extends React.ComponentPropsWithoutRef<typeof SelectPrimitive.Root> {}
+  extends React.SelectHTMLAttributes<HTMLSelectElement> { 
+    register: UseFormRegister<FieldValues>
+  }
 
 const SelectCountry = (props: SelectProps) => {
   return (
-    <Select {...props}>
-      <SelectTrigger label="Country">
-        <SelectValue placeholder="Select Country" />
-      </SelectTrigger>
-      <SelectContent>
-        {COUNTRIES.map((country) => <SelectItem value={country.code}>{country.name}</SelectItem>)}
-      </SelectContent>
+    <Select {...props} {...props.register("country")} label="Country">
+      <Option value="">
+        Select Country
+      </Option>
+      {COUNTRIES.map((country) => <Option value={country.code}>{country.name}</Option>)}
     </Select>
   )
 }
