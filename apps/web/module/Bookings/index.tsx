@@ -5,10 +5,24 @@ import { WidthWrapper } from "@/common/components/WidthWrapper"
 import useGetAllBookings from "../LandingPage/hooks/useGetAllBookings"
 import { Spinner } from "@/common/components/ui/Spinner"
 import useSessionStore from "@/common/store/useSessionStore"
+import ShowMoreModalContent from "./SingleView/components/ShowMoreModalContent"
 
 const Bookings = () => {
+
   const userId = useSessionStore((state) => state).id
   const { data, isPending } = useGetAllBookings()
+
+  const modalContent = {
+    title: "Main Title Here",
+    contents: [
+      { contents: "Content 1" },
+      { contents: "Content 2" },
+      { contents: "Content 3" },
+      { contents: "Content 4" },
+      { contents: "Content 5" },
+    ]
+  };
+
 
   return (
     <WidthWrapper className="my-24 lg:my-32">
@@ -43,7 +57,8 @@ const Bookings = () => {
           </ul>
         </>
       )}
-    </WidthWrapper>
+      <ShowMoreModalContent title={modalContent.title} contents={modalContent.contents}/>
+      </WidthWrapper>
   )
 }
 
