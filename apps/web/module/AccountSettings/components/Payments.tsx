@@ -19,6 +19,7 @@ import useUpdateCoupon from "../hooks/useUpdateCoupon"
 import { Typography } from "@/common/components/ui/Typography"
 import useSessionStore from "@/common/store/useSessionStore"
 import { Spinner } from "@/common/components/ui/Spinner"
+import { APP_NAME } from "@repo/constants"
 
 const Payments = () => {
   const router = useRouter()
@@ -190,7 +191,7 @@ const Payments = () => {
           </div>
           <div>
             <Title size={"sub"} className="pb-4">
-              ExploreSiargao gift credit
+              {APP_NAME} gift credit
             </Title>
             <Button onClick={() => router.push(LINK_GIFT)}>
               Add gift card

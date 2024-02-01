@@ -2,6 +2,7 @@ import React from "react"
 import { Button } from "@/common/components/ui/Button"
 import { Input } from "@/common/components/ui/Input"
 import { Typography } from "@/common/components/ui/Typography"
+import { APP_NAME } from "@repo/constants"
 
 const Gift = () => {
   return (
@@ -20,7 +21,7 @@ const Gift = () => {
         <div className="space-y-5">
           <Input id="pin" label="Pin" />
           <Typography variant={"p"}>
-            By redeeming, you agree to the ExploreSiargao Gift Card Terms.
+            By redeeming, you agree to the {APP_NAME} Gift Card Terms.
           </Typography>
           <Button variant={"primary"} className="w-full">
             Redeem gift card
