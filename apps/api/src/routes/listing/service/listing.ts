@@ -96,7 +96,6 @@ export const addListing = async (req: Request, res: Response) => {
     imageUrls,
     title,
     category,
-    description,
     address,
     fee,
     latitude,
@@ -125,7 +124,6 @@ export const addListing = async (req: Request, res: Response) => {
           imageUrls &&
           title &&
           category &&
-          description &&
           address &&
           fee &&
           cleaningFee &&
@@ -163,7 +161,6 @@ export const addListing = async (req: Request, res: Response) => {
               imageUrls: JSON.stringify(imageUrls),
               title: title,
               category: category,
-              description: description,
               address: address,
               longitude: longitude,
               latitude: latitude,
@@ -205,7 +202,6 @@ export const updateListing = async (req: Request, res: Response) => {
     imageUrls,
     title,
     category,
-    description,
     address,
     latitude,
     longitude,
@@ -238,7 +234,6 @@ export const updateListing = async (req: Request, res: Response) => {
       imageUrls ||
       title ||
       category ||
-      description ||
       address ||
       latitude ||
       longitude
@@ -249,7 +244,6 @@ export const updateListing = async (req: Request, res: Response) => {
         },
         data: {
           title: title,
-          description: description,
           category: category,
           imageUrls: imageUrls,
           address: address,

@@ -99,6 +99,7 @@ import {
   getReportsByListing,
   updateReport,
 } from './service/reportListings'
+import { addDescription, getDescription } from './service/listingDescription'
 
 const router = express.Router()
 
@@ -270,5 +271,9 @@ router.get('/reports/id/:id', getReport)
 router.post('/:userId/reports', addReport)
 router.patch('/:userId/reports/:id', updateReport)
 router.delete('/:userId/reports/:id', deleteReport)
+
+//listing description
+router.get('/listing-description/:id', getDescription)
+router.post('/:userId/listing-description/:listingId', addDescription)
 
 export default router
