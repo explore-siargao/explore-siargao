@@ -55,9 +55,17 @@ const HouseRuleModal = ({ isOpen, onClose, houseRules }: HouseRuleModalProps) =>
             >
               <Dialog.Panel className="relative transform rounded-lg bg-white text-left shadow-xl transition-all w-full h-full md:w-1/2">
                 <ModalContainer title="" onClose={onClose}>
-                  <div className="px-5 pt-4  md:h-[700px] md:overflow-y-auto">
+                  <div className="px-5 pt-4  md:h-[500px] md:overflow-y-auto">
+                    <div className="font-semibold text-2xl pt-7">
+                      <h1>House Rules</h1>
+                    </div>
+                    <div className="text-lg font-normal py-4">
+                      <h2>You'll be staying in someone's home, so please treat it with care and respect.
+                       </h2>
+                    </div>
+                    
                   {houseRules.map((data) => (
-                        <div className="py-2" key={data.id}>
+                        <div className="py-2 pt-5" key={data.id}>
                           <TitleSection title={data.title}>
                             {data.rules.map((rule: any) => (
                               <div className="py-4 border-b" key={rule.id}>

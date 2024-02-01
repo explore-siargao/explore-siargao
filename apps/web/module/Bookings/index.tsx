@@ -5,33 +5,11 @@ import { WidthWrapper } from "@/common/components/WidthWrapper"
 import useGetAllBookings from "../LandingPage/hooks/useGetAllBookings"
 import { Spinner } from "@/common/components/ui/Spinner"
 import useSessionStore from "@/common/store/useSessionStore"
-import { LucideAArrowDown } from "lucide-react"
-import HouseRuleModal from "./components/modals/HouseRuleModal"
 
 const Bookings = () => {
 
   const userId = useSessionStore((state) => state).id
   const { data, isPending } = useGetAllBookings()
-
-  const modalContent = [
-    {
-      id: 1,
-    title: "Check in and out",
-    rules: [
-      { id: 1, desc: "Check-in after 2:00 PM", icon: LucideAArrowDown},
-      { id: 2, desc: "Checkout before 12:00 PM", icon: LucideAArrowDown},
-      { id: 3, desc: "Self check-in with building staff", icon: LucideAArrowDown},
-    ]
-    },
-    {
-      id: 1,
-    title: "During your stay",
-    rules: [
-      { id: 1, desc: "4 guests maximum", icon: LucideAArrowDown},
-    ]
-    },
-  ];
-
 
   return (
     <WidthWrapper className="my-24 lg:my-32">
@@ -66,7 +44,6 @@ const Bookings = () => {
           </ul>
         </>
       )}
-      <HouseRuleModal isOpen={true} onClose={()=> {}} houseRules={modalContent}/>
       </WidthWrapper>
   )
 }
