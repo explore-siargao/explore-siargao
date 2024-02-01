@@ -6,22 +6,26 @@ import useGetAllBookings from "../LandingPage/hooks/useGetAllBookings"
 import { Spinner } from "@/common/components/ui/Spinner"
 import useSessionStore from "@/common/store/useSessionStore"
 import ShowMoreModalContent from "./SingleView/components/ShowMoreModalContent"
+import { LucideAArrowDown } from "lucide-react"
 
 const Bookings = () => {
 
   const userId = useSessionStore((state) => state).id
   const { data, isPending } = useGetAllBookings()
 
-  const modalContent = {
-    title: "Main Title Here",
-    contents: [
-      { contents: "Content 1" },
-      { contents: "Content 2" },
-      { contents: "Content 3" },
-      { contents: "Content 4" },
-      { contents: "Content 5" },
+  const modalContent = [
+    {
+      id: 1,
+    title: "House Rules",
+    rules: [
+      { id: 1, rule: "Content 1", icon: LucideAArrowDown},
+      { id: 2, rule: "Content 2", icon: LucideAArrowDown},
+      { id: 3, rule: "Content 3", icon: LucideAArrowDown},
+      { id: 4, rule: "Content 4", icon: LucideAArrowDown},
+      { id: 5, rule: "Content 5", icon: LucideAArrowDown},
     ]
-  };
+    },
+  ];
 
 
   return (
@@ -57,7 +61,7 @@ const Bookings = () => {
           </ul>
         </>
       )}
-      <ShowMoreModalContent title={modalContent.title} contents={modalContent.contents}/>
+      <ShowMoreModalContent isOpen={true} onClose={()=> {}} houseRules={modalContent}/>
       </WidthWrapper>
   )
 }

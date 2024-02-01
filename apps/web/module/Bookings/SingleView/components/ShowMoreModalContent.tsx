@@ -1,25 +1,27 @@
 import ModalContainer from "@/common/components/ModalContainer"
-import { Title } from "@/common/components/ui/Title"
 import { Dialog, Transition } from "@headlessui/react"
 import React, { Fragment, useRef } from "react"
+import IconDescription from "./IconDescription"
+import HouseRule from "./HouseRule"
+import { TitleSection } from "./TitleSection"
 
 interface IconDescription {
   id: number
-  icon: React.ElementType[]
-  desc: string[]
+  rule: string
+  icon: React.ElementType
 }
 interface ShowModalContent {
   id: number
   title: string
-  iconDesc: IconDescription[]
+  rules: IconDescription[]
 }
 interface ShowMoreModalProps {
   isOpen: boolean
   onClose: () => void
-  datas: ShowModalContent[]
+  houseRules: ShowModalContent[]
 }
 
-const ShowMoreModalContent = ({ isOpen, onClose, datas }: ShowMoreModalProps) => {
+const ShowMoreModalContent = ({ isOpen, onClose, houseRules }: ShowMoreModalProps) => {
   const cancelButtonRef = useRef(null)
   return (
     <Transition.Root show={true} as="div">
@@ -55,15 +57,22 @@ const ShowMoreModalContent = ({ isOpen, onClose, datas }: ShowMoreModalProps) =>
               <Dialog.Panel className="relative transform rounded-lg bg-white text-left shadow-xl transition-all w-full h-full md:w-1/2">
                 <ModalContainer title="" onClose={onClose}>
                   <div className="px-5 pt-4  md:h-[700px] md:overflow-y-auto">
-                    <Title title="What this place offers">
-                        <div className="py-2">
-                            <ul>
-                                {/* {contents.map((contents, index) => (
-                                <li className='mt-2' key={index}>{contents.Content}</li>
-                                ))} */}
-                            </ul>
+                  {houseRules.map((data) => (
+                        <div className="py-2" key={data.id}>
+                          <TitleSection title={data.title}>
+                            {data.rules.map((rule: any) => (
+                              <div className="py-4 border-b" key={rule.id}>
+                                <IconDescription
+                                  // @ts-ignore
+                                  icon={iconDesc.icon}
+                                  // @ts-ignore
+                                  desc={iconDesc.rules}
+                                />
+                              </div>
+                            ))}
+                          </TitleSection>
                         </div>
-                    </Title>
+                      ))}
                   </div>
                 </ModalContainer>
               </Dialog.Panel>
