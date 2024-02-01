@@ -5,8 +5,8 @@ import { WidthWrapper } from "@/common/components/WidthWrapper"
 import useGetAllBookings from "../LandingPage/hooks/useGetAllBookings"
 import { Spinner } from "@/common/components/ui/Spinner"
 import useSessionStore from "@/common/store/useSessionStore"
-import ShowMoreModalContent from "./SingleView/components/ShowMoreModalContent"
 import { LucideAArrowDown } from "lucide-react"
+import HouseRuleModal from "./components/modals/HouseRuleModal"
 
 const Bookings = () => {
 
@@ -16,13 +16,18 @@ const Bookings = () => {
   const modalContent = [
     {
       id: 1,
-    title: "House Rules",
+    title: "Check in and out",
     rules: [
-      { id: 1, rule: "Content 1", icon: LucideAArrowDown},
-      { id: 2, rule: "Content 2", icon: LucideAArrowDown},
-      { id: 3, rule: "Content 3", icon: LucideAArrowDown},
-      { id: 4, rule: "Content 4", icon: LucideAArrowDown},
-      { id: 5, rule: "Content 5", icon: LucideAArrowDown},
+      { id: 1, desc: "Check-in after 2:00 PM", icon: LucideAArrowDown},
+      { id: 2, desc: "Checkout before 12:00 PM", icon: LucideAArrowDown},
+      { id: 3, desc: "Self check-in with building staff", icon: LucideAArrowDown},
+    ]
+    },
+    {
+      id: 1,
+    title: "During your stay",
+    rules: [
+      { id: 1, desc: "4 guests maximum", icon: LucideAArrowDown},
     ]
     },
   ];
@@ -61,7 +66,7 @@ const Bookings = () => {
           </ul>
         </>
       )}
-      <ShowMoreModalContent isOpen={true} onClose={()=> {}} houseRules={modalContent}/>
+      <HouseRuleModal isOpen={true} onClose={()=> {}} houseRules={modalContent}/>
       </WidthWrapper>
   )
 }

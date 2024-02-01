@@ -1,27 +1,26 @@
 import ModalContainer from "@/common/components/ModalContainer"
 import { Dialog, Transition } from "@headlessui/react"
 import React, { Fragment, useRef } from "react"
-import IconDescription from "./IconDescription"
-import HouseRule from "./HouseRule"
-import { TitleSection } from "./TitleSection"
+import { TitleSection } from "../../SingleView/components/TitleSection"
+import IconDescription from "../../SingleView/components/IconDescription"
 
 interface IconDescription {
   id: number
-  rule: string
+  desc: string
   icon: React.ElementType
 }
-interface ShowModalContent {
+interface HouseRule {
   id: number
   title: string
   rules: IconDescription[]
 }
-interface ShowMoreModalProps {
+interface HouseRuleModalProps {
   isOpen: boolean
   onClose: () => void
-  houseRules: ShowModalContent[]
+  houseRules: HouseRule[]
 }
 
-const ShowMoreModalContent = ({ isOpen, onClose, houseRules }: ShowMoreModalProps) => {
+const HouseRuleModal = ({ isOpen, onClose, houseRules }: HouseRuleModalProps) => {
   const cancelButtonRef = useRef(null)
   return (
     <Transition.Root show={true} as="div">
@@ -64,9 +63,9 @@ const ShowMoreModalContent = ({ isOpen, onClose, houseRules }: ShowMoreModalProp
                               <div className="py-4 border-b" key={rule.id}>
                                 <IconDescription
                                   // @ts-ignore
-                                  icon={iconDesc.icon}
+                                  icon={rule.icon}
                                   // @ts-ignore
-                                  desc={iconDesc.rules}
+                                  desc={rule.desc}
                                 />
                               </div>
                             ))}
@@ -84,4 +83,4 @@ const ShowMoreModalContent = ({ isOpen, onClose, houseRules }: ShowMoreModalProp
   )
 }
 
-export default ShowMoreModalContent
+export default HouseRuleModal
