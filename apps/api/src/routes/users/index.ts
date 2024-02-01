@@ -32,7 +32,7 @@ const router = express.Router()
 
 // DEFAULT
 router.get('/', getAllUsers)
-router.post('/', addUser)
+router.post('/', isOriginValid, isCsrfTokenValid, isUserLoggedIn, addUser)
 
 // AUTH
 router.post('/auth/info', info) // Use for Manual log in for Next-Auth
