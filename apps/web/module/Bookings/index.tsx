@@ -5,10 +5,19 @@ import { WidthWrapper } from "@/common/components/WidthWrapper"
 import useGetAllBookings from "../LandingPage/hooks/useGetAllBookings"
 import { Spinner } from "@/common/components/ui/Spinner"
 import useSessionStore from "@/common/store/useSessionStore"
+import HouseRule from "./SingleView/components/HouseRule"
 
 const Bookings = () => {
   const userId = useSessionStore((state) => state).id
   const { data, isPending } = useGetAllBookings()
+
+  const houseRules = {
+    title: "House Rule",
+    rules: [
+      { id: 1, rule: "Be home at 2am.." },
+      { id: 2, rule: "Clean up after yourself." },
+    ]
+  };
 
   return (
     <WidthWrapper className="my-24 lg:my-32">
@@ -43,6 +52,8 @@ const Bookings = () => {
           </ul>
         </>
       )}
+
+<HouseRule title={houseRules.title} rules={houseRules.rules}></HouseRule>
     </WidthWrapper>
   )
 }

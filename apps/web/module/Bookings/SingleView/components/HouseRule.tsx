@@ -3,7 +3,7 @@ import React from "react"
 
 interface HouseRules {
   title: string
-  rules: string[]
+  rules: any;
 }
 
 const HouseRule: React.FC<HouseRules> = ({ title, rules }) => {
@@ -12,16 +12,15 @@ const HouseRule: React.FC<HouseRules> = ({ title, rules }) => {
       <Typography fontWeight={"semiBold"} className="px-10">
         {title}
       </Typography>
-      <Typography className="px-10">
         <ul>
-          {rules.map((rule, index) => (
-            // @ts-ignore
-            <li className="mt-2" key={index}>
-              {rule.rule}
+          {rules.map((rule: any) => (
+            <li className="mt-2" key={rule.rule.id}>
+              <Typography className="px-10">
+                      {rule.rule}
+              </Typography>
             </li>
           ))}
         </ul>
-      </Typography>
     </div>
   )
 }
