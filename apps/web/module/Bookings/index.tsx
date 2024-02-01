@@ -11,6 +11,7 @@ import useUpdateLanguage from "../AccountSettings/hooks/useUpdateLanguage"
 const Bookings = () => {
   const userId = useSessionStore((state) => state).id
   const { data, isPending } = useGetAllBookings()
+  const { mutate } = useUpdateCurrency(1)
   return (
     <WidthWrapper className="my-24 lg:my-32">
       {isPending ? (
@@ -18,6 +19,9 @@ const Bookings = () => {
       ) : (
         <>
           <Title>Bookings</Title>
+          <button type="button" onClick={() => mutate({ currency: "PHP" })}>
+            Add
+          </button>
           <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 mx-auto w-full max-w-[2520px] justify-center">
             {data?.items?.map((item: any) => (
               <BookingBoxContainer

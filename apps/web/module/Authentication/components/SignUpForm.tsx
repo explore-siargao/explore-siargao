@@ -45,6 +45,7 @@ const SignUpForm = ({ isSocial = false }: Props) => {
       firstName: "",
       lastName: "",
       birthDate: "",
+      country: "",
       password: null,
       month: "",
       year: "",
@@ -82,7 +83,8 @@ const SignUpForm = ({ isSocial = false }: Props) => {
         toast.error(String(err))
       },
     }
-    const { email, firstName, lastName, month, day, year, password } = formData
+    const { email, firstName, lastName, month, day, year, password, country } =
+      formData
     const birthDate = dayjs(`${month}-${day}-${year}`, "MM-DD-YYYY")
     addUser(
       {
@@ -92,6 +94,7 @@ const SignUpForm = ({ isSocial = false }: Props) => {
         birthDate: birthDate.format(),
         password,
         registrationType: signUpType as E_RegistrationType,
+        country,
       },
       callBackReq
     )
@@ -170,6 +173,15 @@ const SignUpForm = ({ isSocial = false }: Props) => {
               To sign up, you need to be at least 18. We will not share your
               personal information.
             </Typography>
+          </div>
+          <div>
+            <Input
+              inputLabel="Country"
+              inputId="country"
+              type="text"
+              {...register("country", { required: true })}
+              disabled={addUserIsPending}
+            />
           </div>
           <div>
             <div className="isolate -space-y-px rounded-xl shadow-sm">
