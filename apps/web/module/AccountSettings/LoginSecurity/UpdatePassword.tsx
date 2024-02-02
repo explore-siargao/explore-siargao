@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form"
 import { Typography } from "@/common/components/ui/Typography"
 import { Title } from "@/common/components/ui/Title"
 import { T_BackendResponse } from "@repo/contract"
+import useSessionStore from "@/common/store/useSessionStore"
 
 type T_UpdatePassword = {
   oldPassword: string
@@ -26,8 +27,10 @@ const UpdatePassword = () => {
   })
   const { register, reset, handleSubmit } = useForm<T_UpdatePassword>()
   const isPending = false
+  const registrationType = useSessionStore((state)=>state).registrationType
+  const changePasswordDate = useSessionStore((state)=>state).changePasswordAt
   // const { mutate, isPending } = useUpdatePersonalInfo(1)
-
+console.log(changePasswordDate)
   const onSubmitLegalName = (formData: T_UpdatePassword) => {
     const callBackReq = {
       onSuccess: (data: T_BackendResponse) => {
@@ -44,7 +47,27 @@ const UpdatePassword = () => {
     }
     // mutate({ ...formData }, callBackReq)
   }
-
+  const changePasswordLastUpdated = (changePasswordAt: string | Date | null | undefined): number | null => {
+    if (!changePasswordAt) {
+      return 0; 
+    }
+  
+    const currentDate = new Date();
+    const passwordChangeDate = new Date(changePasswordAt);
+  
+    if (isNaN(passwordChangeDate.getTime())) {
+      return 0;
+    }
+  
+    // Calculate the difference in months
+    const monthsDifference = (currentDate.getFullYear() - passwordChangeDate.getFullYear()) * 12 +
+      currentDate.getMonth() - passwordChangeDate.getMonth();
+  
+    return monthsDifference;
+  };
+  const passwordDuration = changePasswordLastUpdated(changePasswordDate as string)
+  const passwordDescription = registrationType==="Manual" ? `Password updated ${passwordDuration} month ago` : `You are registered using ${registrationType}`
+  
   return (
     <>
       <Title size="sub">Update password</Title>
@@ -54,17 +77,18 @@ const UpdatePassword = () => {
             <div>
               <Typography variant="p">Password</Typography>
               <Typography fontWeight="light">
-                Password updated 1 month ago
+               {passwordDescription}
               </Typography>
             </div>
             <button
+            disabled={registrationType!=="Manual"}
               onClick={() =>
                 setContentState({
                   isButtonClicked: !contentState.isButtonClicked,
                   contentId: "legalName",
                 })
               }
-              className="underline self-start select-none "
+              className="underline self-start select-none disabled:opacity-40"
             >
               Edit
             </button>
