@@ -3,16 +3,11 @@ import React from "react"
 import AccountSettingWrapper from "@/common/components/AccountSettingWrapper"
 import { AccountMenuContainer } from "@/common/components/AccountMenuContainer"
 import {
-  CreditCardIcon,
-  IdentificationIcon,
-  HeartIcon,
-  StarIcon,
-} from "@heroicons/react/24/outline"
-import {
   LINK_ACCOUNT_BOOKING_REVIEWS,
   LINK_ACCOUNT_PAYMENT_PAYOUT,
   LINK_ACCOUNT_PERSONAL_INFO,
   LINK_ACCOUNT_WISHLIST,
+  LINK_ACCOUNT_LOGIN_SECURITY,
   LINK_ACCOUNT_TAXES,
   LINK_ACCOUNT_GLOBAL_PREFERENCES,
 } from "@/common/constants/links"
@@ -22,7 +17,15 @@ import { capitalizeFirstLetter } from "@/common/helpers/capitalizeFirstLetter"
 import { ChevronRightIcon } from "@heroicons/react/20/solid"
 import Link from "next/link"
 import useSessionStore from "@/common/store/useSessionStore"
-import { Settings2, File } from "lucide-react"
+import {
+  Star,
+  ShieldHalf,
+  CreditCard,
+  Heart,
+  SquareUser,
+  Settings2,
+  File,
+} from "lucide-react"
 import { E_UserRole } from "@repo/contract"
 
 const AccountSettings = () => {
@@ -40,7 +43,7 @@ const AccountSettings = () => {
   const pages = [
     {
       id: 1,
-      icon: IdentificationIcon,
+      icon: SquareUser,
       title: "Personal Info",
       content: "Labore est amet eiusmod proident.",
       link: LINK_ACCOUNT_PERSONAL_INFO,
@@ -48,7 +51,7 @@ const AccountSettings = () => {
     },
     {
       id: 2,
-      icon: HeartIcon,
+      icon: Heart,
       title: "Wishlists",
       content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       link: LINK_ACCOUNT_WISHLIST,
@@ -56,7 +59,7 @@ const AccountSettings = () => {
     },
     {
       id: 3,
-      icon: CreditCardIcon,
+      icon: CreditCard,
       title: "Payments & payouts",
       content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       link: LINK_ACCOUNT_PAYMENT_PAYOUT,
@@ -64,7 +67,7 @@ const AccountSettings = () => {
     },
     {
       id: 4,
-      icon: StarIcon,
+      icon: Star,
       title: "Booking Reviews",
       content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       link: LINK_ACCOUNT_BOOKING_REVIEWS,
@@ -72,6 +75,14 @@ const AccountSettings = () => {
     },
     {
       id: 5,
+      icon: ShieldHalf,
+      title: "Login & security",
+      content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      link: LINK_ACCOUNT_LOGIN_SECURITY,
+      show: true,
+    },
+    {
+      id: 6,
       icon: File,
       title: "Taxes",
       content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
@@ -79,7 +90,7 @@ const AccountSettings = () => {
       show: session.role === E_UserRole.Host,
     },
     {
-      id: 6,
+      id: 7,
       icon: Settings2,
       title: "Global Preferences",
       content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",

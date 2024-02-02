@@ -7,6 +7,7 @@ export const Z_Session = z.object({
   profilePicture: z.string().nullable(),
   registrationType: z.string().nullable(),
   deactivated: z.boolean().nullable(),
+  changePasswordAt: z.string().nullable(),
   role: z.nativeEnum(E_UserRole),
   personalInfo: z.nullable(Z_PersonalInfo),
 })

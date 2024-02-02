@@ -1,5 +1,10 @@
 import express from 'express'
-import { addUser, getAllUsers } from './service/default'
+import {
+  addUser,
+  deactivateAccount,
+  getAllUsers,
+  updatePassword,
+} from './service/default'
 import {
   verifySignIn,
   verifySession,
@@ -34,7 +39,7 @@ const router = express.Router()
 
 // DEFAULT
 router.get('/', getAllUsers)
-router.post('/', isOriginValid, isCsrfTokenValid, isUserLoggedIn, addUser)
+router.post('/', addUser)
 
 // AUTH
 router.post('/auth/info', info) // Use for Manual log in for Next-Auth
@@ -70,16 +75,27 @@ router.get(
   isUserLoggedIn,
   userDetails
 )
-
-// PERSONAL INFO
+router.patch(
+  '/deactivate/:userId',
+  isCsrfTokenValid,
+  isOriginValid,
+  isUserLoggedIn,
+  deactivateAccount
+)
+router.patch(
+  '/change-password/:userId',
+  isCsrfTokenValid,
+  isOriginValid,
+  isUserLoggedIn,
+  updatePassword
+)
 router.get(
   '/personal-info/:userId',
-  // isCsrfTokenValid,
-  // isOriginValid,
-  // isUserLoggedIn,
+  isCsrfTokenValid,
+  isOriginValid,
+  isUserLoggedIn,
   getPersonalInfo
 )
-
 router.post(
   '/:personalInfoId/emergency-contact/add/',
   isCsrfTokenValid,
