@@ -7,7 +7,9 @@ import { Typography } from "@/common/components/ui/Typography"
 import { Title } from "@/common/components/ui/Title"
 import { T_BackendResponse } from "@repo/contract"
 import useSessionStore from "@/common/store/useSessionStore"
-import useUpdateAccountPassword, { T_ChangePassword } from "../hooks/useUpdateAccountPassword"
+import useUpdateAccountPassword, {
+  T_ChangePassword,
+} from "../hooks/useUpdateAccountPassword"
 import dayjs from "dayjs"
 
 type T_ContentState = {
@@ -39,16 +41,14 @@ const UpdatePassword = () => {
     }
     mutate({ ...formData }, callBackReq)
   }
-  const changePasswordLastUpdated = (
-    changePasswordAt: string
-  ): number => {
-    const isDateValid = dayjs(changePasswordAt).isValid();
+  const changePasswordLastUpdated = (changePasswordAt: string): number => {
+    const isDateValid = dayjs(changePasswordAt).isValid()
     if (!changePasswordAt && isDateValid) {
       return 0
     }
     const currentDate = dayjs()
     const passwordChangeDate = dayjs(changePasswordAt)
-    return currentDate.diff(passwordChangeDate, 'day')
+    return currentDate.diff(passwordChangeDate, "day")
   }
   const passwordDuration = changePasswordLastUpdated(
     session.changePasswordAt as string
