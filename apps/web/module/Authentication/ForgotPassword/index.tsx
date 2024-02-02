@@ -63,6 +63,7 @@ const ForgotPassword = () => {
               placeholder="you@example.com"
               {...register("email", { required: true })}
               disabled={isForgotPasswordPending}
+              required
             />
             <Typography variant={"p"} className="text-sm mt-2 text-text-300">
               Please enter your email in the box above. We will send you link to
