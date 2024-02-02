@@ -117,7 +117,8 @@ model Listing {
   hostedById           Int
   imageUrls            String               @db.LongText
   title                String               @db.VarChar(100)
-  description          String               @db.LongText
+  descriptionId        Int?                 @unique
+  listingDescription   ListingDescription?  @relation(fields: [descriptionId], references: [id])
   address              String               @db.LongText
   listingPriceId       Int                  @unique
   category             ListingCategory
@@ -143,6 +144,21 @@ model Listing {
   @@index([basicAboutPlaceId])
   @@index([listingPriceId])
   @@index([hostedById])
+  @@index([descriptionId])
+}
+
+model ListingDescription {
+  id                 Int       @id @default(autoincrement())
+  listingId          Int?       @unique
+  listing           Listing?
+  generalDescription String    @db.LongText()
+  aboutSpace         String?   @db.LongText()
+  aboutGuestAccess   String?   @db.LongText()
+  otherThingsNote    String?   @db.LongText()
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+  deletedAt          DateTime?
+  @@index([listingId])
 }
 
 model BasicAboutPlace {
