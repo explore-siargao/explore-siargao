@@ -3,6 +3,7 @@ import React, { useRef } from "react"
 import toast from "react-hot-toast"
 import ModalContainerFooter from "@/common/components/ModalContainer/ModalContainerFooter"
 import useDeactivateAccount from "../../hooks/useDeactivateAccount"
+import { signOut } from "next-auth/react"
 
 interface DeactivateUserModalProps {
   userId: number
@@ -21,6 +22,7 @@ const DeactivateUserModal = ({
       if (!data.error) {
         toast.success(data.message)
         closeModal()
+        signOut({ callbackUrl: "/" })
       } else {
         toast.error(String(data.message))
       }
