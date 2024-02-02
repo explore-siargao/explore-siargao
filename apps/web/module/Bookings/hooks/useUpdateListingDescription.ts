@@ -14,9 +14,10 @@ export async function updateListingDescription(
   )
 }
 
-function useUpdateListingDescription( userId: number | null) {
+function useUpdateListingDescription(userId: number | null) {
   const query = useMutation({
-    mutationFn: (props: T_ListingDescription) => updateListingDescription( userId, props),
+    mutationFn: (props: T_ListingDescription) =>
+      updateListingDescription(userId, props),
   })
   return query
 }
