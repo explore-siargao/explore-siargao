@@ -31,7 +31,11 @@ const DeactivateUserModal = ({
   }
 
   return (
-    <ModalContainer title="Deactivate your account" onClose={closeModal} isOpen={openModal}>
+    <ModalContainer
+      title="Deactivate your account"
+      onClose={closeModal}
+      isOpen={openModal}
+    >
       <div className="p-6">
         <p className="text-text-400 font-light">
           Are you sure you want to deactivate your account?
