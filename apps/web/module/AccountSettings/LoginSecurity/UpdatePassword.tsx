@@ -133,9 +133,9 @@ const UpdatePassword = () => {
                   {...register("newPassword")}
                 />
                 <Input
-                  id="confirmPassword"
+                  id="confirmNewPassword"
                   type="password"
-                  label="Confirm Password"
+                  label="Confirm New Password"
                   {...register("confirmNewPassword")}
                 />
               </div>
