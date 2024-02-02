@@ -134,15 +134,17 @@ const AccountSettings = () => {
           </Link>
         </div>
         <div className="grid gap-2 md:gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-          {pages.filter((page) => page.show).map((page) => (
-            <AccountMenuContainer
-              key={page.id}
-              icon={<page.icon className="h-8 w-auto text-primary-700" />}
-              title={page.title}
-              content={page.content}
-              link={String(page.link)}
-            />
-          ))}
+          {pages
+            .filter((page) => page.show)
+            .map((page) => (
+              <AccountMenuContainer
+                key={page.id}
+                icon={<page.icon className="h-8 w-auto text-primary-700" />}
+                title={page.title}
+                content={page.content}
+                link={String(page.link)}
+              />
+            ))}
         </div>
       </div>
     </AccountSettingWrapper>

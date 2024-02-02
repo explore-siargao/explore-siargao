@@ -19,11 +19,7 @@ const PersonalInfo = () => {
   return (
     <AccountSettingWrapper>
       <div>
-        <Breadcrumb
-          home="Account"
-          page="Personal info"
-          link={LINK_ACCOUNT}
-        />
+        <Breadcrumb home="Account" page="Personal info" link={LINK_ACCOUNT} />
         <Title>Personal info</Title>
       </div>
       <div>

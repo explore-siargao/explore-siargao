@@ -49,11 +49,7 @@ const Wishlist = () => {
   return (
     <AccountSettingWrapper>
       <div>
-        <Breadcrumb
-          home="Account"
-          page="Wishlists"
-          link={LINK_ACCOUNT}
-        />
+        <Breadcrumb home="Account" page="Wishlists" link={LINK_ACCOUNT} />
         <Title>Wishlists</Title>
       </div>
       <div className="mt-4">

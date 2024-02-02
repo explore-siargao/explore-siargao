@@ -12,11 +12,11 @@ import { useRouter } from "next/navigation"
 import { E_UserRole } from "@repo/contract"
 
 const Taxes = () => {
-  const router = useRouter();
-  const session = useSessionStore((state) => state);
+  const router = useRouter()
+  const session = useSessionStore((state) => state)
   const [tableState, setTableState] = useState(0)
 
-  if(session.role !== E_UserRole.Host) {
+  if (session.role !== E_UserRole.Host) {
     router.push(LINK_ACCOUNT)
   }
 
