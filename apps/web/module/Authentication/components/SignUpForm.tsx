@@ -186,7 +186,7 @@ const SignUpForm = ({ isSocial = false }: Props) => {
             <Select {...register("country")} label="Country" required>
               <Option value="">Select Country</Option>
               {COUNTRIES.map((country) => (
-                <Option value={country.code}>{country.name}</Option>
+                <Option key={country.code} value={country.code}>{country.name}</Option>
               ))}
             </Select>
           </div>

@@ -24,15 +24,11 @@ const Taxes = () => {
   let content
   if (tableState === 0) {
     content = (
-      <>
-        <Taxpayers />
-      </>
+      <Taxpayers />
     )
   } else if (tableState === 1) {
     content = (
-      <>
-        <TaxDocuments />
-      </>
+      <TaxDocuments />
     )
   }
   return (
