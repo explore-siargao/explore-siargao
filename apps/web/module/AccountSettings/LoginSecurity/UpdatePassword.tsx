@@ -119,7 +119,7 @@ const UpdatePassword = () => {
             <form onSubmit={handleSubmit(onSubmitLegalName)}>
               <div className="grid grid-cols-2 gap-4 my-4">
                 <Input
-                  id="firstName"
+                  id="oldPassword"
                   type="password"
                   label="Old Password"
                   {...register("oldPassword")}
@@ -127,15 +127,15 @@ const UpdatePassword = () => {
               </div>
               <div className="grid grid-cols-2 gap-4 my-4">
                 <Input
-                  id="firstName"
-                  type="New password"
-                  label="First name"
+                  id="newPassword"
+                  type="password"
+                  label="New Password"
                   {...register("newPassword")}
                 />
                 <Input
-                  id="lastName"
-                  type="Confirm new password"
-                  label="Last name"
+                  id="confirmNewPassword"
+                  type="password"
+                  label="Confirm New Password"
                   {...register("confirmNewPassword")}
                 />
               </div>
