@@ -16,7 +16,7 @@ const ModalContainer = ({ children, title, onClose, isOpen }: Props) => {
     <Transition.Root show={isOpen} as={Fragment}>
       <Dialog
         as="div"
-        className="relative z-50 w-[700px]"
+        className="relative z-50"
         initialFocus={cancelButtonRef}
         onClose={onClose}
       >
