@@ -23,13 +23,9 @@ const Taxes = () => {
   const TITLE = "Taxes"
   let content
   if (tableState === 0) {
-    content = (
-      <Taxpayers />
-    )
+    content = <Taxpayers />
   } else if (tableState === 1) {
-    content = (
-      <TaxDocuments />
-    )
+    content = <TaxDocuments />
   }
   return (
     <AccountSettingWrapper>

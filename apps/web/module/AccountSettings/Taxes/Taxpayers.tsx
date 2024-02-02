@@ -101,7 +101,9 @@ const Taxpayers = () => {
               >
                 <Option value="">Select Country</Option>
                 {COUNTRIES.map((country) => (
-                  <Option key={country.code} value={country.code}>{country.name}</Option>
+                  <Option key={country.code} value={country.code}>
+                    {country.name}
+                  </Option>
                 ))}
               </Select>
               <Input
