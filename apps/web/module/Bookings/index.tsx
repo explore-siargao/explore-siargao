@@ -1,11 +1,10 @@
-import React from "react"
+import React, { useState } from "react"
 import { Title } from "@/common/components/ui/Title"
 import BookingBoxContainer from "@/common/components/BookingBoxContainer"
 import { WidthWrapper } from "@/common/components/WidthWrapper"
 import useGetAllBookings from "../LandingPage/hooks/useGetAllBookings"
 import { Spinner } from "@/common/components/ui/Spinner"
 import useSessionStore from "@/common/store/useSessionStore"
-import ToggleSwitch from "@/common/components/ui/Toggle"
 
 const Bookings = () => {
   const userId = useSessionStore((state) => state).id
@@ -40,10 +39,7 @@ const Bookings = () => {
                 }
               />
             ))}
-          </ul>
-          <ToggleSwitch checked={false} onChange={function (checked: boolean): void {
-              throw new Error("Function not implemented.")
-            } } />
+          </ul>           
         </>
       )}
     </WidthWrapper>
