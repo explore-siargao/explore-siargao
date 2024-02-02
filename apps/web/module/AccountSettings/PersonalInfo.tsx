@@ -45,7 +45,7 @@ const PersonalInfo = () => {
           <Address
             country={personalInfo?.address?.country as string}
             city={personalInfo?.address?.city as string}
-            province={personalInfo?.address?.province as string}
+            province={personalInfo?.address?.stateProvince as string}
             streetAddress={personalInfo?.address?.streetAddress as string}
             zipCode={personalInfo?.address?.zipCode as number}
             id={personalInfo?.id}
