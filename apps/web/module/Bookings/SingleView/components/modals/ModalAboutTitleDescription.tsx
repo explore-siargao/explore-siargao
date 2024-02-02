@@ -54,7 +54,7 @@ const ModalAboutTitleDescription = ({
         </div>
       </div>
     </ModalContainer>
-  );
+  )
 }
 
 export default ModalAboutTitleDescription
