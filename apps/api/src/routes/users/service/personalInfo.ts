@@ -197,9 +197,10 @@ export const removeEmergencyContact = async (req: Request, res: Response) => {
 
 export const addAddress = async (req: Request, res: Response) => {
   try {
-    const { country, streetAddress, city, province, zipCode } = req.body
+    const { country, streetAddress, city, stateProvince, aptSuite, zipCode } =
+      req.body
     const personalInfoId = Number(req.params.personalInfoId)
-    if (streetAddress && city && province && zipCode) {
+    if ((streetAddress && city && stateProvince) || (aptSuite && zipCode)) {
       const getPersonalInfo = await prisma.personalInfo.findFirst({
         where: {
           id: personalInfoId,
@@ -219,7 +220,8 @@ export const addAddress = async (req: Request, res: Response) => {
               country: country,
               streetAddress: streetAddress,
               city: city,
-              province: province,
+              aptSuite: aptSuite,
+              stateProvince: stateProvince,
               zipCode: zipCode,
             },
           })
@@ -233,8 +235,9 @@ export const addAddress = async (req: Request, res: Response) => {
             data: {
               streetAddress: streetAddress,
               city: city,
-              province: province,
+              stateProvince: stateProvince,
               country: country,
+              aptSuite: aptSuite,
               zipCode: zipCode,
             },
           })
@@ -273,10 +276,14 @@ export const addAddress = async (req: Request, res: Response) => {
 }
 
 export const editAddress = async (req: Request, res: Response) => {
-  const { streetAddress, city, province, zipCode, country } = req.body
+  const { streetAddress, city, stateProvince, zipCode, aptSuite, country } =
+    req.body
   const userId = Number(req.params.userId)
   try {
-    if (streetAddress && city && province && zipCode && country) {
+    if (
+      (streetAddress && city && stateProvince) ||
+      (aptSuite && zipCode && country)
+    ) {
       const personalInfo = await prisma.personalInfo.findUnique({
         where: {
           userId: userId,
@@ -294,7 +301,8 @@ export const editAddress = async (req: Request, res: Response) => {
           data: {
             streetAddress: streetAddress,
             city: city,
-            province: province,
+            stateProvince: stateProvince,
+            aptSuite: aptSuite,
             country: country,
             zipCode: zipCode,
           },
@@ -462,5 +470,77 @@ export const addGovernmentId = async (req: Request, res: Response) => {
           : UNKNOWN_ERROR_OCCURRED,
       })
     )
+  }
+}
+
+export const updateLanguage = async (req: Request, res: Response) => {
+  const personalInfoId = Number(req.params.personalInfoId)
+  const { language } = req.body
+  try {
+    if (!language) {
+      return res.json(response.error({ message: REQUIRED_VALUE_EMPTY }))
+    }
+    const getPersonalInfo = await prisma.personalInfo.findFirst({
+      where: {
+        id: personalInfoId,
+      },
+    })
+    if (!getPersonalInfo) {
+      return res.json(response.error({ message: 'Personal info not found' }))
+    }
+    const updateUserLanguage = await prisma.personalInfo.update({
+      where: {
+        id: personalInfoId,
+      },
+      data: {
+        language: language,
+      },
+    })
+    res.json(
+      response.success({
+        item: updateUserLanguage,
+        allItemCount: 1,
+        message: 'Language successfully updated',
+      })
+    )
+  } catch (err: any) {
+    const message = err.message ? err.message : UNKNOWN_ERROR_OCCURRED
+    res.json(response.error({ message: message }))
+  }
+}
+
+export const updateCurrency = async (req: Request, res: Response) => {
+  const personalInfoId = Number(req.params.personalInfoId)
+  const { currency } = req.body
+  try {
+    if (!currency) {
+      return res.json(response.error({ message: REQUIRED_VALUE_EMPTY }))
+    }
+    const getPersonalInfo = await prisma.personalInfo.findFirst({
+      where: {
+        id: personalInfoId,
+      },
+    })
+    if (!getPersonalInfo) {
+      return res.json(response.error({ message: 'Personal info not found' }))
+    }
+    const updateUserCurrency = await prisma.personalInfo.update({
+      where: {
+        id: personalInfoId,
+      },
+      data: {
+        currency: currency,
+      },
+    })
+    res.json(
+      response.success({
+        item: updateUserCurrency,
+        allItemCount: 1,
+        message: 'Currency successfully updated',
+      })
+    )
+  } catch (err: any) {
+    const message = err.message ? err.message : UNKNOWN_ERROR_OCCURRED
+    res.json(response.error({ message: message }))
   }
 }

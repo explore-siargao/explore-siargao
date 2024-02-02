@@ -1,14 +1,13 @@
 "use client"
 import {
-  LINK_ACCOUNT_SETTINGS,
+  LINK_ACCOUNT,
   LINK_CREATE_ACCOUNT,
   LINK_LOGIN,
   LINK_LOGOUT,
 } from "@/common/constants/links"
 import { Bars3Icon, UserCircleIcon } from "@heroicons/react/20/solid"
-import React, { Fragment, useState } from "react"
+import React, { Fragment } from "react"
 import { Popover, Transition } from "@headlessui/react"
-import Link from "next/link"
 import { useSession } from "next-auth/react"
 
 const unAuthMenus = [
@@ -25,7 +24,7 @@ const unAuthMenus = [
 const authMenus = [
   {
     name: "Account",
-    href: LINK_ACCOUNT_SETTINGS,
+    href: LINK_ACCOUNT,
   },
   {
     name: "Log out",

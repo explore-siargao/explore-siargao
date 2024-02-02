@@ -1,6 +1,6 @@
 "use client"
 import AccountSettingWrapper from "@/common/components/AccountSettingWrapper"
-import { LINK_ACCOUNT_SETTINGS } from "@/common/constants/links"
+import { LINK_ACCOUNT } from "@/common/constants/links"
 import React from "react"
 import LegalName from "./components/LegalName"
 import EmailAddress from "./components/EmailAddress"
@@ -19,11 +19,7 @@ const PersonalInfo = () => {
   return (
     <AccountSettingWrapper>
       <div>
-        <Breadcrumb
-          home="Account"
-          page="Personal info"
-          link={LINK_ACCOUNT_SETTINGS}
-        />
+        <Breadcrumb home="Account" page="Personal info" link={LINK_ACCOUNT} />
         <Title>Personal info</Title>
       </div>
       <div>
@@ -45,7 +41,7 @@ const PersonalInfo = () => {
           <Address
             country={personalInfo?.address?.country as string}
             city={personalInfo?.address?.city as string}
-            province={personalInfo?.address?.province as string}
+            province={personalInfo?.address?.stateProvince as string}
             streetAddress={personalInfo?.address?.streetAddress as string}
             zipCode={personalInfo?.address?.zipCode as number}
             id={personalInfo?.id}

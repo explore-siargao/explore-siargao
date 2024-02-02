@@ -9,8 +9,11 @@
     "lint": "eslint . --max-warnings 0"
   },
   "dependencies": {
+    "@fortawesome/free-brands-svg-icons": "^6.5.1",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",
+    "@radix-ui/react-select": "^2.0.0",
     "@radix-ui/react-slot": "^1.0.2",
     "@tanstack/react-query": "^5.0.0",
     "@tanstack/react-query-devtools": "^5.8.3",

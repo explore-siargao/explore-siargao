@@ -2,7 +2,7 @@
 import React, { useState } from "react"
 import AccountSettingWrapper from "@/common/components/AccountSettingWrapper"
 import { Title } from "@/common/components/ui/Title"
-import { LINK_ACCOUNT_SETTINGS } from "@/common/constants/links"
+import { LINK_ACCOUNT } from "@/common/constants/links"
 import combineClasses from "@/common/helpers/combineClasses"
 import Payments from "./components/Payments"
 import Payouts from "./components/Payouts"
@@ -36,7 +36,7 @@ const PaymentPayout = () => {
         <Breadcrumb
           home="Account"
           page="Payments & payouts"
-          link={LINK_ACCOUNT_SETTINGS}
+          link={LINK_ACCOUNT}
         />
         <Title>Payments & payouts</Title>
       </div>

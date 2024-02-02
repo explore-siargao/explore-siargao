@@ -10,7 +10,6 @@ import useSessionStore from "@/common/store/useSessionStore"
 const Bookings = () => {
   const userId = useSessionStore((state) => state).id
   const { data, isPending } = useGetAllBookings()
-
   return (
     <WidthWrapper className="my-24 lg:my-32">
       {isPending ? (
