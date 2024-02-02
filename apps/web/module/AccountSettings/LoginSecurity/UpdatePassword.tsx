@@ -27,10 +27,10 @@ const UpdatePassword = () => {
   })
   const { register, reset, handleSubmit } = useForm<T_UpdatePassword>()
   const isPending = false
-  const registrationType = useSessionStore((state)=>state).registrationType
-  const changePasswordDate = useSessionStore((state)=>state).changePasswordAt
+  const registrationType = useSessionStore((state) => state).registrationType
+  const changePasswordDate = useSessionStore((state) => state).changePasswordAt
   // const { mutate, isPending } = useUpdatePersonalInfo(1)
-console.log(changePasswordDate)
+  console.log(changePasswordDate)
   const onSubmitLegalName = (formData: T_UpdatePassword) => {
     const callBackReq = {
       onSuccess: (data: T_BackendResponse) => {
@@ -47,27 +47,36 @@ console.log(changePasswordDate)
     }
     // mutate({ ...formData }, callBackReq)
   }
-  const changePasswordLastUpdated = (changePasswordAt: string | Date | null | undefined): number | null => {
+  const changePasswordLastUpdated = (
+    changePasswordAt: string | Date | null | undefined
+  ): number | null => {
     if (!changePasswordAt) {
-      return 0; 
+      return 0
     }
-  
-    const currentDate = new Date();
-    const passwordChangeDate = new Date(changePasswordAt);
-  
+
+    const currentDate = new Date()
+    const passwordChangeDate = new Date(changePasswordAt)
+
     if (isNaN(passwordChangeDate.getTime())) {
-      return 0;
+      return 0
     }
-  
+
     // Calculate the difference in months
-    const monthsDifference = (currentDate.getFullYear() - passwordChangeDate.getFullYear()) * 12 +
-      currentDate.getMonth() - passwordChangeDate.getMonth();
-  
-    return monthsDifference;
-  };
-  const passwordDuration = changePasswordLastUpdated(changePasswordDate as string)
-  const passwordDescription = registrationType==="Manual" ? `Password updated ${passwordDuration} month ago` : `You are registered using ${registrationType}`
-  
+    const monthsDifference =
+      (currentDate.getFullYear() - passwordChangeDate.getFullYear()) * 12 +
+      currentDate.getMonth() -
+      passwordChangeDate.getMonth()
+
+    return monthsDifference
+  }
+  const passwordDuration = changePasswordLastUpdated(
+    changePasswordDate as string
+  )
+  const passwordDescription =
+    registrationType === "Manual"
+      ? `Password updated ${passwordDuration} month ago`
+      : `You are registered using ${registrationType}`
+
   return (
     <>
       <Title size="sub">Update password</Title>
@@ -76,12 +85,10 @@ console.log(changePasswordDate)
           <div className="flex justify-between py-5">
             <div>
               <Typography variant="p">Password</Typography>
-              <Typography fontWeight="light">
-               {passwordDescription}
-              </Typography>
+              <Typography fontWeight="light">{passwordDescription}</Typography>
             </div>
             <button
-            disabled={registrationType!=="Manual"}
+              disabled={registrationType !== "Manual"}
               onClick={() =>
                 setContentState({
                   isButtonClicked: !contentState.isButtonClicked,
