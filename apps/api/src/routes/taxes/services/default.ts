@@ -16,9 +16,9 @@ export const getVat = async (req: Request, res: Response) => {
     })
 
     if (getTaxesByUserId) {
-      res.json(response.success({ item: getTaxesByUserId, }))
+      res.json(response.success({ item: getTaxesByUserId }))
     } else {
-      res.json(response.error({ message: 'No VAT records found', }))
+      res.json(response.error({ message: 'No VAT records found' }))
     }
   } catch (err: any) {
     res.json(response.error({ message: err.message }))
@@ -35,8 +35,8 @@ export const addUpdateVat = async (req: Request, res: Response) => {
     city,
     provinceRegion,
     zipPostalCode,
-    userId
-  } = req.body; 
+    userId,
+  } = req.body
   const vat = {
     countryRegion,
     vatId,
@@ -46,7 +46,7 @@ export const addUpdateVat = async (req: Request, res: Response) => {
     city,
     provinceRegion,
     zipPostalCode,
-    userId
+    userId,
   }
   const validateInputs = Z_Taxes.safeParse(vat)
   if (validateInputs.success) {
@@ -62,7 +62,7 @@ export const addUpdateVat = async (req: Request, res: Response) => {
             userId: userId,
           },
         })
-        if(!getVat) {
+        if (!getVat) {
           const newTaxes = await prisma.tax.create({
             data: vat,
           })

@@ -6,19 +6,7 @@ import isCsrfTokenValid from '@/common/middleware/auth/isCsrfTokenValid'
 
 const router = express.Router()
 
-router.post(
-  '/', 
-  isOriginValid,
-  isCsrfTokenValid,
-  isUserLoggedIn,
-  addUpdateVat
-)
-router.get(
-  '/:userId',
-  isOriginValid,
-  isCsrfTokenValid,
-  isUserLoggedIn,
-  getVat
-)
+router.post('/', isOriginValid, isCsrfTokenValid, isUserLoggedIn, addUpdateVat)
+router.get('/:userId', isOriginValid, isCsrfTokenValid, isUserLoggedIn, getVat)
 
 export default router

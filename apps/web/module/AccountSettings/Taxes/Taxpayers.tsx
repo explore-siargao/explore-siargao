@@ -24,7 +24,9 @@ const Taxpayers = () => {
     contentId: "",
   })
   const { data, isLoading } = useGetTaxByUser(session.id as number)
-  const { register, reset, handleSubmit } = useForm<T_Taxes>({ values: data?.item })
+  const { register, reset, handleSubmit } = useForm<T_Taxes>({
+    values: data?.item,
+  })
   const { mutate, isPending } = useAddTax()
   const queryClient = useQueryClient()
 
