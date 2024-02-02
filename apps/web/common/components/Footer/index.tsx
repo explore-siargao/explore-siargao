@@ -23,7 +23,7 @@ const Footer = () => {
             </Typography>
             <ul>
               {SUPPORT.map((item) => (
-                <li>
+                <li key={item.name}>
                   <Link href={item.link}>
                     <Typography className="mb-1 hover:underline inline-block hover:duration-300 cursor-pointer text-sm text-text-500">{item.name}</Typography>
                   </Link>
@@ -37,7 +37,7 @@ const Footer = () => {
             </Typography>
             <ul>
               {EXPLORE_SIARGAO.map((item) => (
-                <li>
+                <li key={item.name}>
                   <Link href={item.link}>
                     <Typography className="mb-1 hover:underline inline-block hover:duration-300 cursor-pointer text-sm text-text-500">{item.name}</Typography>
                   </Link>
@@ -51,7 +51,7 @@ const Footer = () => {
             </Typography>
             <ul>
               {DESTINATION.map((item) => (
-                <li>
+                <li key={item.name}>
                   <Link href={item.link}>
                     <Typography className="mb-1 hover:underline inline-block hover:duration-300 cursor-pointer text-sm text-text-500">{item.name}</Typography>
                   </Link>
@@ -65,7 +65,7 @@ const Footer = () => {
             </Typography>
             <ul>
               {PARTNER_WITH_US.map((item) => (
-                <li>
+                <li key={item.name}>
                   <Link href={item.link}>
                     <Typography className="mb-1 hover:underline inline-block hover:duration-300 cursor-pointer text-sm text-text-500">{item.name}</Typography>
                   </Link>
