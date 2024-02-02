@@ -1,5 +1,5 @@
 import { z } from "zod"
-import { Z_PersonalInfo } from ".."
+import { E_UserRole, Z_PersonalInfo } from ".."
 
 export const Z_Session = z.object({
   id: z.number().nullable(),
@@ -7,6 +7,7 @@ export const Z_Session = z.object({
   profilePicture: z.string().nullable(),
   registrationType: z.string().nullable(),
   deactivated: z.boolean().nullable(),
-  role: z.string().nullable(),
+  changePasswordAt: z.string().nullable(),
+  role: z.nativeEnum(E_UserRole),
   personalInfo: z.nullable(Z_PersonalInfo),
 })

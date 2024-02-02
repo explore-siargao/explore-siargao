@@ -10,9 +10,9 @@ import { Input } from "@/common/components/ui/Input"
 import { capitalizeFirstLetter } from "@/common/helpers/capitalizeFirstLetter"
 import { useParams, useRouter } from "next/navigation"
 import { signIn, useSession } from "next-auth/react"
-import { APP_NAME } from "@repo/constants"
+import { APP_NAME, COUNTRIES } from "@repo/constants"
 import dayjs from "dayjs"
-import { Select } from "@/common/components/ui/Select"
+import { Option, Select } from "@/common/components/ui/Select"
 import {
   CALENDAR_DAYS,
   CALENDAR_MONTHS_NUM,
@@ -50,6 +50,7 @@ const SignUpForm = ({ isSocial = false }: Props) => {
       year: "",
       day: "",
       registrationType: E_RegistrationType.Manual,
+      country: "",
     },
   })
   const params = useParams()
@@ -82,7 +83,8 @@ const SignUpForm = ({ isSocial = false }: Props) => {
         toast.error(String(err))
       },
     }
-    const { email, firstName, lastName, month, day, year, password } = formData
+    const { email, firstName, lastName, month, day, year, password, country } =
+      formData
     const birthDate = dayjs(`${month}-${day}-${year}`, "MM-DD-YYYY")
     addUser(
       {
@@ -92,6 +94,7 @@ const SignUpForm = ({ isSocial = false }: Props) => {
         birthDate: birthDate.format(),
         password,
         registrationType: signUpType as E_RegistrationType,
+        country,
       },
       callBackReq
     )
@@ -105,19 +108,21 @@ const SignUpForm = ({ isSocial = false }: Props) => {
           <div>
             <div>
               <Input
-                inputLabel="First Name"
-                inputId="firstName"
+                label="First Name"
+                id="firstName"
                 type="text"
                 {...register("firstName", { required: true })}
                 disabled={addUserIsPending}
+                required
               />
               <Input
-                inputLabel="Last name"
-                inputId="lastName"
+                label="Last name"
+                id="lastName"
                 type="text"
                 className="mt-2"
                 {...register("lastName", { required: true })}
                 disabled={addUserIsPending}
+                required
               />
             </div>
             <Typography variant={"p"} className="text-xs mt-1 text-text-500">
@@ -127,42 +132,48 @@ const SignUpForm = ({ isSocial = false }: Props) => {
           <div>
             <div className="grid grid-cols-3 gap-4">
               <Select
+                label="Month"
                 defaultValue="Month"
                 {...register("month", { required: true })}
+                required
               >
-                <option disabled value="">
-                  Month
-                </option>
+                <Option disabled value="">
+                  Select
+                </Option>
                 {CALENDAR_MONTHS_STR.map((month, index) => (
-                  <option key={month} value={CALENDAR_MONTHS_NUM[index]}>
+                  <Option key={month} value={CALENDAR_MONTHS_NUM[index]}>
                     {month}
-                  </option>
+                  </Option>
                 ))}
               </Select>
               <Select
+                label="Day"
                 defaultValue="Day"
                 {...register("day", { required: true })}
+                required
               >
-                <option disabled value="">
-                  Day
-                </option>
+                <Option disabled value="">
+                  Select
+                </Option>
                 {CALENDAR_DAYS.map((day) => (
-                  <option key={day} value={`${day}`}>
+                  <Option key={day} value={`${day}`}>
                     {day}
-                  </option>
+                  </Option>
                 ))}
               </Select>
               <Select
+                label="Year"
                 defaultValue="Year"
                 {...register("year", { required: true })}
+                required
               >
-                <option disabled value="">
-                  Year
-                </option>
+                <Option disabled value="">
+                  Select
+                </Option>
                 {CALENDAR_YEARS.map((year) => (
-                  <option key={year} value={`${year}`}>
+                  <Option key={year} value={`${year}`}>
                     {year}
-                  </option>
+                  </Option>
                 ))}
               </Select>
             </div>
@@ -172,14 +183,25 @@ const SignUpForm = ({ isSocial = false }: Props) => {
             </Typography>
           </div>
           <div>
+            <Select {...register("country")} label="Country" required>
+              <Option value="">Select Country</Option>
+              {COUNTRIES.map((country) => (
+                <Option key={country.code} value={country.code}>
+                  {country.name}
+                </Option>
+              ))}
+            </Select>
+          </div>
+          <div>
             <div className="isolate -space-y-px rounded-xl shadow-sm">
               <Input
-                inputLabel="Email"
-                inputId="email"
+                label="Email"
+                id="email"
                 type="email"
                 {...register("email", { required: true })}
                 placeholder="you@example.com"
                 disabled={addUserIsPending || isSocial}
+                required
               />
             </div>
             <Typography variant={"p"} className="text-xs mt-1 text-text-500">
@@ -189,11 +211,12 @@ const SignUpForm = ({ isSocial = false }: Props) => {
           <div>
             {!isSocial && (
               <Input
-                inputLabel="Password"
-                inputId="password"
+                label="Password"
+                id="password"
                 type="password"
                 {...register("password", { required: true })}
                 disabled={addUserIsPending}
+                required
               />
             )}
             <Typography

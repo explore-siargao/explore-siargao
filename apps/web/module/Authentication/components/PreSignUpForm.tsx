@@ -31,11 +31,12 @@ const PreSignUpForm = () => {
       <div className="p-6 space-y-4">
         <div>
           <Input
-            inputLabel="Email"
-            inputId="email"
+            label="Email"
+            id="email"
             type="email"
             placeholder="you@example.com"
             {...register("email", { required: true })}
+            required
           />
           <Typography variant={"p"} className="text-xs mt-1 text-text-500">
             We'll email you trip confirmations and receipts.
