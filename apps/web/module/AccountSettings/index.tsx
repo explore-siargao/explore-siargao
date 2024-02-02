@@ -3,16 +3,12 @@ import React from "react"
 import AccountSettingWrapper from "@/common/components/AccountSettingWrapper"
 import { AccountMenuContainer } from "@/common/components/AccountMenuContainer"
 import {
-  CreditCardIcon,
-  IdentificationIcon,
-  HeartIcon,
-  StarIcon,
-} from "@heroicons/react/24/outline"
-import {
   LINK_ACCOUNT_BOOKING_REVIEWS,
   LINK_ACCOUNT_PAYMENT_PAYOUT,
   LINK_ACCOUNT_PERSONAL_INFO,
   LINK_ACCOUNT_WISHLIST,
+  LINK_ACCOUNT_LOGIN_SECURITY,
+  LINK_ACCOUNT_TAXES,
   LINK_ACCOUNT_GLOBAL_PREFERENCES,
 } from "@/common/constants/links"
 import { Title } from "@/common/components/ui/Title"
@@ -21,45 +17,16 @@ import { capitalizeFirstLetter } from "@/common/helpers/capitalizeFirstLetter"
 import { ChevronRightIcon } from "@heroicons/react/20/solid"
 import Link from "next/link"
 import useSessionStore from "@/common/store/useSessionStore"
-import { Settings2 } from "lucide-react"
-
-const pages = [
-  {
-    id: 1,
-    icon: IdentificationIcon,
-    title: "Personal Info",
-    content: "Labore est amet eiusmod proident.",
-    link: LINK_ACCOUNT_PERSONAL_INFO,
-  },
-  {
-    id: 2,
-    icon: HeartIcon,
-    title: "Wishlists",
-    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    link: LINK_ACCOUNT_WISHLIST,
-  },
-  {
-    id: 3,
-    icon: CreditCardIcon,
-    title: "Payments & payouts",
-    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    link: LINK_ACCOUNT_PAYMENT_PAYOUT,
-  },
-  {
-    id: 4,
-    icon: StarIcon,
-    title: "Booking Reviews",
-    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    link: LINK_ACCOUNT_BOOKING_REVIEWS,
-  },
-  {
-    id: 5,
-    icon: Settings2,
-    title: "Global Preferences",
-    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    link: LINK_ACCOUNT_GLOBAL_PREFERENCES,
-  },
-]
+import {
+  Star,
+  ShieldHalf,
+  CreditCard,
+  Heart,
+  SquareUser,
+  Settings2,
+  File,
+} from "lucide-react"
+import { E_UserRole } from "@repo/contract"
 
 const AccountSettings = () => {
   const session = useSessionStore((state) => state)
@@ -72,10 +39,69 @@ const AccountSettings = () => {
       ? String(firstName.charAt(0)).toUpperCase()
       : ""
   const uppercaseFirstChar = capitalizeFirstLetter(firstName as string)
+
+  const pages = [
+    {
+      id: 1,
+      icon: SquareUser,
+      title: "Personal Info",
+      content: "Labore est amet eiusmod proident.",
+      link: LINK_ACCOUNT_PERSONAL_INFO,
+      show: true,
+    },
+    {
+      id: 2,
+      icon: Heart,
+      title: "Wishlists",
+      content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      link: LINK_ACCOUNT_WISHLIST,
+      show: true,
+    },
+    {
+      id: 3,
+      icon: CreditCard,
+      title: "Payments & payouts",
+      content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      link: LINK_ACCOUNT_PAYMENT_PAYOUT,
+      show: true,
+    },
+    {
+      id: 4,
+      icon: Star,
+      title: "Booking Reviews",
+      content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      link: LINK_ACCOUNT_BOOKING_REVIEWS,
+      show: true,
+    },
+    {
+      id: 5,
+      icon: ShieldHalf,
+      title: "Login & security",
+      content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      link: LINK_ACCOUNT_LOGIN_SECURITY,
+      show: true,
+    },
+    {
+      id: 6,
+      icon: File,
+      title: "Taxes",
+      content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      link: LINK_ACCOUNT_TAXES,
+      show: session.role === E_UserRole.Host,
+    },
+    {
+      id: 7,
+      icon: Settings2,
+      title: "Global Preferences",
+      content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      link: LINK_ACCOUNT_GLOBAL_PREFERENCES,
+      show: true,
+    },
+  ]
+
   return (
     <AccountSettingWrapper>
       <Title className="pb-5 md:pb-0">Account</Title>
-
       <div className="space-y-5">
         <div className="pb-5 border-b md:border-none">
           <div className="hidden md:block">
@@ -118,15 +144,17 @@ const AccountSettings = () => {
           </Link>
         </div>
         <div className="grid gap-2 md:gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-          {pages.map((page) => (
-            <AccountMenuContainer
-              key={page.id}
-              icon={<page.icon className="h-8 w-auto text-primary-700" />}
-              title={page.title}
-              content={page.content}
-              link={String(page.link)}
-            />
-          ))}
+          {pages
+            .filter((page) => page.show)
+            .map((page) => (
+              <AccountMenuContainer
+                key={page.id}
+                icon={<page.icon className="h-8 w-auto text-primary-700" />}
+                title={page.title}
+                content={page.content}
+                link={String(page.link)}
+              />
+            ))}
         </div>
       </div>
     </AccountSettingWrapper>

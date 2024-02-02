@@ -1,6 +1,6 @@
 "use client"
 import {
-  LINK_ACCOUNT_SETTINGS,
+  LINK_ACCOUNT,
   LINK_CREATE_ACCOUNT,
   LINK_LOGIN,
   LINK_LOGOUT,
@@ -24,7 +24,7 @@ const unAuthMenus = [
 const authMenus = [
   {
     name: "Account",
-    href: LINK_ACCOUNT_SETTINGS,
+    href: LINK_ACCOUNT,
   },
   {
     name: "Log out",

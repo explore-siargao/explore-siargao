@@ -8,6 +8,7 @@ export const API_URL_PAYMENTS = "/api/payments"
 export const API_URL_COUNTRIES = "/api/countries"
 export const API_URL_BOOKINGS = "/api/bookings"
 export const AUTH_GUARDED_ROUTES = ["/account-settings"]
+export const API_URL_TAX = "/api/taxes"
 export const COUNTRIES = [
   { code: "AF", name: "Afghanistan" },
   { code: "AX", name: "\u00c5land Islands" },
