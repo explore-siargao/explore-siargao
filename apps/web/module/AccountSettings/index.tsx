@@ -73,9 +73,8 @@ const AccountSettings = () => {
       : ""
   const uppercaseFirstChar = capitalizeFirstLetter(firstName as string)
   return (
-    <AccountSettingWrapper className="mb-4">
+    <AccountSettingWrapper>
       <Title className="pb-5 md:pb-0">Account</Title>
-
       <div className="space-y-5">
         <div className="pb-5 border-b md:border-none">
           <div className="hidden md:block">

@@ -47,7 +47,7 @@ const Wishlist = () => {
   const session = useSessionStore((state) => state)
   const { data, isPending } = useWishGroupWithCount(session?.id as number)
   return (
-    <AccountSettingWrapper className="mb-4">
+    <AccountSettingWrapper>
       <div>
         <Breadcrumb
           home="Account"
