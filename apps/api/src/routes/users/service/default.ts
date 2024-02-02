@@ -140,7 +140,7 @@ export const updatePassword = async (req: Request, res: Response) => {
   const prisma = new PrismaClient()
   const response = new ResponseService()
   const userId = Number(req.params.userId)
-  const { currentPassword, newPassword, confirmPassword } = req.body
+  const { currentPassword, newPassword, confirmNewPassword } = req.body
   try {
     const getUser = await prisma.user.findUnique({
       where: {
@@ -150,10 +150,10 @@ export const updatePassword = async (req: Request, res: Response) => {
     if (!getUser) {
       return res.json(response.error({ message: USER_NOT_EXIST }))
     }
-    if (!(currentPassword && newPassword && confirmPassword)) {
+    if (!(currentPassword && newPassword && confirmNewPassword)) {
       return res.json(response.error({ message: REQUIRED_VALUE_EMPTY }))
     }
-    if (newPassword !== confirmPassword) {
+    if (newPassword !== confirmNewPassword) {
       return res.json(response.error({ message: 'Password not matched' }))
     }
     const decryptPassword = CryptoJS.AES.decrypt(
@@ -169,7 +169,7 @@ export const updatePassword = async (req: Request, res: Response) => {
       encryptKey
     )
     if (decryptCurrentPassword.toString() !== decryptPassword.toString()) {
-      return res.json(response.error({ message: 'Wrong current password' }))
+      return res.json(response.error({ message: 'Wrong old password' }))
     }
     const encryptNewPassword = CryptoJS.AES.encrypt(newPassword, encryptKey)
     const updateUserPassword = await prisma.user.update({

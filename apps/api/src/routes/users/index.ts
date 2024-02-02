@@ -89,15 +89,13 @@ router.patch(
   isUserLoggedIn,
   updatePassword
 )
-// PERSONAL INFO
 router.get(
   '/personal-info/:userId',
-  // isCsrfTokenValid,
-  // isOriginValid,
-  // isUserLoggedIn,
+  isCsrfTokenValid,
+  isOriginValid,
+  isUserLoggedIn,
   getPersonalInfo
 )
-
 router.post(
   '/:personalInfoId/emergency-contact/add/',
   isCsrfTokenValid,

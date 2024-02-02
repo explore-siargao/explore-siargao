@@ -2,15 +2,15 @@ import { ApiService } from "@/common/service/api"
 import { API_URL_USERS } from "@repo/constants"
 import { useMutation } from "@tanstack/react-query"
 
-interface IChangePassword {
+export type T_ChangePassword = {
   currentPassword: string
   newPassword: string
-  confirmPassword: string
+  confirmNewPassword: string
 }
 
 export async function updateUserPassword(
   userId: number | null,
-  props: IChangePassword
+  props: T_ChangePassword
 ) {
   const apiService = new ApiService()
   return await apiService.patch(
@@ -21,7 +21,7 @@ export async function updateUserPassword(
 
 function useUpdateAccountPassword(userId: number | null) {
   const query = useMutation({
-    mutationFn: (props: IChangePassword) => updateUserPassword(userId, props),
+    mutationFn: (props: T_ChangePassword) => updateUserPassword(userId, props),
   })
   return query
 }

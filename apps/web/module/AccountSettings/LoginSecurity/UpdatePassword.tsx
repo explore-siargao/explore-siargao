@@ -1,19 +1,14 @@
 import { Button } from "@/common/components/ui/Button"
 import { Input } from "@/common/components/ui/Input"
 import React, { useState } from "react"
-import useUpdatePersonalInfo from "../hooks/useUpdatePersonalInfo"
 import toast from "react-hot-toast"
 import { useForm } from "react-hook-form"
 import { Typography } from "@/common/components/ui/Typography"
 import { Title } from "@/common/components/ui/Title"
 import { T_BackendResponse } from "@repo/contract"
 import useSessionStore from "@/common/store/useSessionStore"
-
-type T_UpdatePassword = {
-  oldPassword: string
-  newPassword: string
-  confirmNewPassword: string
-}
+import useUpdateAccountPassword, { T_ChangePassword } from "../hooks/useUpdateAccountPassword"
+import dayjs from "dayjs"
 
 type T_ContentState = {
   isButtonClicked: boolean
@@ -25,13 +20,10 @@ const UpdatePassword = () => {
     isButtonClicked: false,
     contentId: "",
   })
-  const { register, reset, handleSubmit } = useForm<T_UpdatePassword>()
-  const isPending = false
-  const registrationType = useSessionStore((state) => state).registrationType
-  const changePasswordDate = useSessionStore((state) => state).changePasswordAt
-  // const { mutate, isPending } = useUpdatePersonalInfo(1)
-  console.log(changePasswordDate)
-  const onSubmitLegalName = (formData: T_UpdatePassword) => {
+  const { register, reset, handleSubmit } = useForm<T_ChangePassword>()
+  const session = useSessionStore((state) => state)
+  const { mutate, isPending } = useUpdateAccountPassword(session.id)
+  const onSubmitLegalName = (formData: T_ChangePassword) => {
     const callBackReq = {
       onSuccess: (data: T_BackendResponse) => {
         if (!data.error) {
@@ -45,37 +37,26 @@ const UpdatePassword = () => {
         toast.error(String(err))
       },
     }
-    // mutate({ ...formData }, callBackReq)
+    mutate({ ...formData }, callBackReq)
   }
   const changePasswordLastUpdated = (
-    changePasswordAt: string | Date | null | undefined
-  ): number | null => {
-    if (!changePasswordAt) {
+    changePasswordAt: string
+  ): number => {
+    const isDateValid = dayjs(changePasswordAt).isValid();
+    if (!changePasswordAt && isDateValid) {
       return 0
     }
-
-    const currentDate = new Date()
-    const passwordChangeDate = new Date(changePasswordAt)
-
-    if (isNaN(passwordChangeDate.getTime())) {
-      return 0
-    }
-
-    // Calculate the difference in months
-    const monthsDifference =
-      (currentDate.getFullYear() - passwordChangeDate.getFullYear()) * 12 +
-      currentDate.getMonth() -
-      passwordChangeDate.getMonth()
-
-    return monthsDifference
+    const currentDate = dayjs()
+    const passwordChangeDate = dayjs(changePasswordAt)
+    return currentDate.diff(passwordChangeDate, 'day')
   }
   const passwordDuration = changePasswordLastUpdated(
-    changePasswordDate as string
+    session.changePasswordAt as string
   )
   const passwordDescription =
-    registrationType === "Manual"
-      ? `Password updated ${passwordDuration} month ago`
-      : `You are registered using ${registrationType}`
+    session.registrationType === "Manual"
+      ? `Password updated ${passwordDuration} days ago`
+      : `You are registered using ${session.registrationType}`
 
   return (
     <>
@@ -88,7 +69,7 @@ const UpdatePassword = () => {
               <Typography fontWeight="light">{passwordDescription}</Typography>
             </div>
             <button
-              disabled={registrationType !== "Manual"}
+              disabled={session.registrationType !== "Manual"}
               onClick={() =>
                 setContentState({
                   isButtonClicked: !contentState.isButtonClicked,
@@ -122,7 +103,7 @@ const UpdatePassword = () => {
                   id="oldPassword"
                   type="password"
                   label="Old Password"
-                  {...register("oldPassword")}
+                  {...register("currentPassword")}
                 />
               </div>
               <div className="grid grid-cols-2 gap-4 my-4">
