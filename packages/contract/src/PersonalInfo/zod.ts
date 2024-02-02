@@ -11,6 +11,8 @@ export const Z_PersonalInfo = z.object({
   birthDate: z.string(),
   governmentId: z.string(),
   address: Z_Address,
+  currency: z.string(),
+  language: z.string(),
   emergencyContacts: z.array(Z_EmergencyContact),
   phoneNumber: z.string(),
   createdAt: z.date().optional(),
