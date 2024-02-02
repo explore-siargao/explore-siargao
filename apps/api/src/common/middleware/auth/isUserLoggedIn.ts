@@ -62,6 +62,7 @@ const isUserLoggedIn = async (
         profilePicture: user?.profilePicture as string,
         role: user?.role as E_UserRole,
         deactivated: user?.deactivated as boolean,
+        changePasswordAt: String(user?.changePasswordAt),
         // TODO: FIX THE ANY FOR THIS VALUE
         personalInfo: user?.personalInfo as any,
       }
