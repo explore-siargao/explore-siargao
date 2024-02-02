@@ -5,6 +5,7 @@ export const LOGO_SINGLE_IMAGE = "/logo-single.png"
 export const ADD_USER_SUCCESS_MESSAGE = "User Successfully added"
 
 export const SUBMIT_BUTTON_TEXT = "Submit"
+export const ACCOUNT = "Account"
 export const RESEND_BUTTON_TEXT = "Resend"
 export const AGREE_CONTINUE_BUTTON_TEXT = "Continue"
 export const CONTINUE_BUTTON_TEXT = "Continue"

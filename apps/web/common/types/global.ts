@@ -21,6 +21,7 @@ export interface IPersonalInfo {
   birthDate?: string
   governmentId?: string
   phoneNumber?: string
+  country?: string
   address?: IAddress
   emergencyContact?: IEmergencyContact[]
   createdAt?: string
@@ -157,4 +158,19 @@ export enum RegistrationType {
   "Manual",
   "Facebook",
   "Google",
+}
+
+export interface ITaxes {
+  id?: number
+  countryRegion: string
+  vatId: string
+  nameOnRegistration: string
+  addressLine1: string
+  addressLine2: string
+  city: string
+  provinceRegion: string
+  zipPostalCode: string
+  createdAt?: string
+  updateAt?: string
+  deleteAt?: string
 }

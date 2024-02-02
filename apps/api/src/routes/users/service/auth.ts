@@ -1,6 +1,6 @@
 import { Response, Request } from 'express'
 import { PrismaClient, RegistrationType } from '@prisma/client'
-import { REQUIRED_VALUE_EMPTY } from '@repo/constants'
+import { APP_NAME, REQUIRED_VALUE_EMPTY } from '@repo/constants'
 import { encryptKey, nextAuthSecret, webUrl } from '@/common/config'
 import dayjs from 'dayjs'
 import { AuthEmail } from './authEmail'
@@ -106,7 +106,16 @@ export const register = async (req: Request, res: Response) => {
       lastName,
       birthDate,
       registrationType,
+      country,
     } = req.body
+    const currencyByCountry = {
+      'United States': 'USD',
+      Philippines: 'PHP',
+      Australia: 'AUD',
+    }
+    const currency: string =
+      currencyByCountry[country as keyof typeof currencyByCountry]
+    const selectedCurrency = currency ?? 'USD'
     try {
       const user = await prisma.user.findFirst({
         where: {
@@ -139,6 +148,9 @@ export const register = async (req: Request, res: Response) => {
             lastName: lastName,
             birthDate: dayjs(birthDate).format(),
             phoneNumber: '',
+            country: country,
+            language: 'English',
+            currency: selectedCurrency,
           },
         })
         res.json(
@@ -599,7 +611,7 @@ export const userDetails = async (req: Request, res: Response) => {
           personalInfo: {
             include: {
               address: true,
-              emergrncyContacts: true,
+              emergencyContacts: true,
             },
           },
         },
@@ -657,7 +669,7 @@ export const setCanReceivedEmail = async (req: Request, res: Response) => {
         error: false,
         item: setCanRecievedEmail,
         itemCount: 1,
-        message: 'You will now received an email from exploreSiargao',
+        message: `You will now received an email from ${APP_NAME}`,
       })
     } else {
       res.json({
