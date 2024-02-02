@@ -1,44 +1,37 @@
 "use client"
-import React, { useState } from "react"
 import AccountSettingWrapper from "@/common/components/AccountSettingWrapper"
+import React, { useState } from "react"
+import { Breadcrumb } from "@/common/components/ui/Breadcrumb"
 import { Title } from "@/common/components/ui/Title"
 import { LINK_ACCOUNT } from "@/common/constants/links"
 import combineClasses from "@/common/helpers/combineClasses"
-import Payments from "./components/Payments"
-import Payouts from "./components/Payouts"
-import GuestContribution from "./components/GuestContribution"
-import { Breadcrumb } from "@/common/components/ui/Breadcrumb"
+import Taxpayers from "./Taxpayers"
+import TaxDocuments from "./TaxDocuments"
+import useSessionStore from "@/common/store/useSessionStore"
+import { useRouter } from "next/navigation"
+import { E_UserRole } from "@repo/contract"
 
-const renderPayments = () => {
-  return <Payments />
-}
-const renderPayouts = () => {
-  return <Payouts />
-}
-const renderGuestContribution = () => {
-  return <GuestContribution />
-}
-
-const PaymentPayout = () => {
+const Taxes = () => {
+  const router = useRouter()
+  const session = useSessionStore((state) => state)
   const [tableState, setTableState] = useState(0)
-  let content
 
+  if (session.role !== E_UserRole.Host) {
+    router.push(LINK_ACCOUNT)
+  }
+
+  const TITLE = "Taxes"
+  let content
   if (tableState === 0) {
-    content = renderPayments()
+    content = <Taxpayers />
   } else if (tableState === 1) {
-    content = renderPayouts()
-  } else {
-    content = renderGuestContribution()
+    content = <TaxDocuments />
   }
   return (
     <AccountSettingWrapper>
       <div>
-        <Breadcrumb
-          home="Account"
-          page="Payments & payouts"
-          link={LINK_ACCOUNT}
-        />
-        <Title>Payments & payouts</Title>
+        <Breadcrumb home="Account" page={TITLE} link={LINK_ACCOUNT} />
+        <Title>{TITLE}</Title>
       </div>
       <div className="hidden sm:block">
         <div className="flex border-b border-b-text-50">
@@ -51,7 +44,7 @@ const PaymentPayout = () => {
             )}
             onClick={() => setTableState(0)}
           >
-            Payments
+            Taxpayers
           </button>
           <button
             className={combineClasses(
@@ -62,24 +55,13 @@ const PaymentPayout = () => {
             )}
             onClick={() => setTableState(1)}
           >
-            Payouts
-          </button>
-          <button
-            className={combineClasses(
-              tableState === 2
-                ? "border-text-900 text-text-900"
-                : "border-transparent text-text-500 hover:border-text-300 hover:text-text-700",
-              "whitespace-nowrap border-b-2 py-4 px-8 text-sm font-medium"
-            )}
-            onClick={() => setTableState(2)}
-          >
-            Guest contributions
+            Tax Documents
           </button>
         </div>
-        {content}
+        <div className="mt-6">{content}</div>
       </div>
     </AccountSettingWrapper>
   )
 }
 
-export default PaymentPayout
+export default Taxes
