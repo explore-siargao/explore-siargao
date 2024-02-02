@@ -156,24 +156,37 @@ const addRule = async (req: Request, res: Response, ruleType: string) => {
       return res.json(response.error({ message: USER_NOT_EXIST }))
     }
 
-    const ruleData: Record<string, any> = {
-      title: title,
-      listingId: listingId,
-    }
-
-    const newRule = await (prisma as any)[ruleType].create({
-      data: ruleData,
+    const existingHouseRule = await prisma.houseRule.findFirst({
+      where: {
+        title: title,
+        listingId: listingId,
+      },
     })
+
+    let houseRuleId
+
+    if (existingHouseRule) {
+      houseRuleId = existingHouseRule.id
+    } else {
+      const newHouseRule = await prisma.houseRule.create({
+        data: {
+          title: title,
+          listingId: listingId,
+        },
+      })
+
+      houseRuleId = newHouseRule.id
+    }
 
     const associationField =
       ruleType === 'safetyProperty' ? 'safePropertyId' : 'houseRuleId'
 
-    await prisma.rule.create({
+    const newRule = await prisma.rule.create({
       data: {
         icon: icon,
         rule: rule,
         description: description,
-        [associationField]: newRule.id,
+        [associationField]: houseRuleId,
       },
     })
 
