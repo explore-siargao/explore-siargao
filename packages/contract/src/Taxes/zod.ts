@@ -2,6 +2,7 @@ import z from "zod"
 
 export const Z_Taxes = z.object({
   id: z.number().optional(),
+  userId: z.number().optional(),
   countryRegion: z.string(),
   vatId: z.string(),
   nameOnRegistration: z.string(),

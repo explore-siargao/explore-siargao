@@ -1,33 +1,39 @@
 import { Button } from "@/common/components/ui/Button"
 import { Input } from "@/common/components/ui/Input"
-import { IPersonalInfo } from "@/common/types/global"
 import React, { useState } from "react"
-import useUpdatePersonalInfo from "../hooks/useUpdatePersonalInfo"
 import { useQueryClient } from "@tanstack/react-query"
 import toast from "react-hot-toast"
 import { useForm } from "react-hook-form"
 import { Typography } from "@/common/components/ui/Typography"
-type PersonalInfoProps = {
+import { Select, Option } from "@/common/components/ui/Select"
+import { COUNTRIES } from "@repo/constants"
+import { T_Taxes } from "@repo/contract"
+import useAddTax from "@/module/Bookings/hooks/useAddTax"
+import useSessionStore from "@/common/store/useSessionStore"
+import useGetTaxByUser from "@/module/Bookings/hooks/useGetTaxByUser"
+
+type ContentStateProps = {
   isButtonClicked: boolean
   contentId: string
 }
 
-const Taxpayers = ({ firstName, lastName, userId, country }: IPersonalInfo) => {
-  const [contentState, setContentState] = useState<PersonalInfoProps>({
+const Taxpayers = () => {
+  const session = useSessionStore((state) => state)
+  const [contentState, setContentState] = useState<ContentStateProps>({
     isButtonClicked: false,
     contentId: "",
   })
-  const { register, reset, handleSubmit } = useForm<IPersonalInfo>()
-  const { mutate: mutateLegalName, isPending: isPendingLegalName } =
-    useUpdatePersonalInfo(userId as number)
+  const { data, isLoading } = useGetTaxByUser(session.id as number)
+  const { register, reset, handleSubmit } = useForm<T_Taxes>({ values: data?.item })
+  const { mutate, isPending } = useAddTax()
   const queryClient = useQueryClient()
 
-  const onSubmitLegalName = (formData: IPersonalInfo) => {
+  const onSubmit = (formData: T_Taxes) => {
     const callBackReq = {
       onSuccess: (data: any) => {
         if (!data.error) {
           queryClient.invalidateQueries({
-            queryKey: ["session"],
+            queryKey: ["tax", session.id],
           })
           toast.success(data.message)
           reset()
@@ -39,7 +45,7 @@ const Taxpayers = ({ firstName, lastName, userId, country }: IPersonalInfo) => {
         toast.error(String(err))
       },
     }
-    mutateLegalName({ ...formData }, callBackReq)
+    mutate({ ...formData, userId: session.id as number }, callBackReq)
   }
 
   return (
@@ -83,65 +89,76 @@ const Taxpayers = ({ firstName, lastName, userId, country }: IPersonalInfo) => {
           <Typography fontWeight={"light"}>
             If you are VAT-registered, please add your VAT ID.
           </Typography>
-          <form onSubmit={handleSubmit(onSubmitLegalName)}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className="grid grid-cols-2 gap-4 my-4">
-              <Input
-                id="firstName"
-                label="VAT ID Number"
-                defaultValue={firstName}
-                {...register("firstName")}
-              />
-              <Input
-                id="lastName"
-                label="Name on Registration"
-                defaultValue={lastName}
-                {...register("lastName")}
-              />
-            </div>
-            <div className="grid grid-cols-2 gap-4 my-4">
-              <Input
-                id="firstName"
-                label="Address line 1"
-                defaultValue={firstName}
-                {...register("firstName")}
-              />
-              <Input
-                id="lastName"
-                label="Address line 2 (optional)"
-                defaultValue={lastName}
-                {...register("lastName")}
-              />
-            </div>
-            <div className="grid grid-cols-2 gap-4 my-4">
-              <Input
-                id="firstName"
-                label="City"
-                defaultValue={firstName}
-                {...register("firstName")}
-              />
-              <Input
-                id="lastName"
-                label="Province"
-                defaultValue={lastName}
-                {...register("lastName")}
-              />
-            </div>
-            <div className="grid grid-cols-2 gap-4 my-4">
-              <Input
-                id="country"
+              <Select
+                {...register("countryRegion")}
                 label="Country"
-                defaultValue={country}
-                {...register("country")}
+                disabled={isLoading || isPending}
+                required
+              >
+                <Option value="">Select Country</Option>
+                {COUNTRIES.map((country) => (
+                  <Option value={country.code}>{country.name}</Option>
+                ))}
+              </Select>
+              <Input
+                id="vatId"
+                label="VAT ID Number"
+                {...register("vatId")}
+                disabled={isLoading || isPending}
+                required
+              />
+            </div>
+            <div className="grid grid-cols-2 gap-4 my-4">
+              <Input
+                id="nameOnReg"
+                label="Name on Registration"
+                {...register("nameOnRegistration")}
+                disabled={isLoading || isPending}
+                required
               />
               <Input
-                id="firstName"
+                id="addressLine1"
+                label="Address line 1"
+                {...register("addressLine1")}
+                disabled={isLoading || isPending}
+                required
+              />
+            </div>
+            <div className="grid grid-cols-2 gap-4 my-4">
+              <Input
+                id="addressLine2"
+                label="Address line 2"
+                {...register("addressLine2")}
+                disabled={isLoading || isPending}
+              />
+              <Input
+                id="city"
+                label="City"
+                {...register("city")}
+                disabled={isLoading || isPending}
+                required
+              />
+            </div>
+            <div className="grid grid-cols-2 gap-4 my-4">
+              <Input
+                id="province"
+                label="Province"
+                {...register("provinceRegion")}
+                disabled={isLoading || isPending}
+                required
+              />
+              <Input
+                id="zip"
                 label="Zip/postal code"
-                defaultValue={firstName}
-                {...register("firstName")}
+                {...register("zipPostalCode")}
+                disabled={isLoading || isPending}
+                required
               />
             </div>
             <Button className="w-20" size={"sm"} type="submit">
-              {isPendingLegalName ? (
+              {isPending ? (
                 <div className="animate-spin w-4 h-4 border-2 border-current border-t-transparent text-primary-200 rounded-full">
                   <span className="sr-only">Loading...</span>
                 </div>

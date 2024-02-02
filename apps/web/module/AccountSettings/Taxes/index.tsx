@@ -16,9 +16,9 @@ const Taxes = () => {
   const session = useSessionStore((state) => state)
   const [tableState, setTableState] = useState(0)
 
-  if (session.role !== E_UserRole.Host) {
-    router.push(LINK_ACCOUNT)
-  }
+  // if (session.role !== E_UserRole.Host) {
+  //   router.push(LINK_ACCOUNT)
+  // }
 
   const TITLE = "Taxes"
   let content
