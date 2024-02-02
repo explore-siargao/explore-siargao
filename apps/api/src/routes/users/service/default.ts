@@ -178,6 +178,7 @@ export const updatePassword = async (req: Request, res: Response) => {
       },
       data: {
         password: encryptNewPassword.toString(),
+        changePasswordAt: new Date(),
       },
     })
     res.json(
