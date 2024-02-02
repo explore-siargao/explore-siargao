@@ -1,4 +1,4 @@
-import { APP_NAME } from "@repo/constants";
+import { APP_NAME } from "@repo/constants"
 
 export const SUPPORT = [
   {
@@ -25,7 +25,7 @@ export const SUPPORT = [
     link: "/",
     name: "Help center",
   },
-];
+]
 
 export const EXPLORE_SIARGAO = [
   {
@@ -48,7 +48,7 @@ export const EXPLORE_SIARGAO = [
     link: "/",
     name: "Blog",
   },
-];
+]
 
 export const DESTINATION = [
   {
@@ -70,8 +70,8 @@ export const DESTINATION = [
   {
     link: "/",
     name: "Burgos",
-  }
-];
+  },
+]
 
 export const PARTNER_WITH_US = [
   {
@@ -85,5 +85,5 @@ export const PARTNER_WITH_US = [
   {
     link: "/",
     name: "Partner responsibilities",
-  }
-];
+  },
+]

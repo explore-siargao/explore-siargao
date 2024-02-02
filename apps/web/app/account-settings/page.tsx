@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 const page = () => {
   return (
     <AuthGuard>
-        <AccountSettings />
+      <AccountSettings />
     </AuthGuard>
   )
 }
