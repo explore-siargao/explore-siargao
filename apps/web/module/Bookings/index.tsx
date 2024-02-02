@@ -1,3 +1,4 @@
+"use client";
 import React from "react"
 import { Title } from "@/common/components/ui/Title"
 import BookingBoxContainer from "@/common/components/BookingBoxContainer"
@@ -5,6 +6,7 @@ import { WidthWrapper } from "@/common/components/WidthWrapper"
 import useGetAllBookings from "../LandingPage/hooks/useGetAllBookings"
 import { Spinner } from "@/common/components/ui/Spinner"
 import useSessionStore from "@/common/store/useSessionStore"
+import AboutTitleDescTest from "./SingleView/components/AboutTitleDescTest";
 
 const Bookings = () => {
   const userId = useSessionStore((state) => state).id
@@ -41,6 +43,7 @@ const Bookings = () => {
               />
             ))}
           </ul>
+          <AboutTitleDescTest/>
         </>
       )}
     </WidthWrapper>
