@@ -14,27 +14,27 @@ import { APP_NAME } from "@repo/constants"
 
 const Footer = () => {
   return (
-    <div className="bg-gray-100 pb-6 pt-16">
+    <div className="bg-gray-100 pb-6 pt-16 bottom-0">
       <WidthWrapper width={"medium"}>
         <div className="md:flex border-b-2 pb-4 md:pb-11">
           <div className="md:flex-1 pb-4 md:pb-0 md:mr-4 border-b  md:border-b-0">
             <Title size={"sub"} className="mb-1">
               Support
             </Title>
-            <Link href={""}>
-              <Typography className="mb-1">About {APP_NAME}</Typography>
+            <Link href={""} className="">
+              <Typography className="mb-1 hover:underline inline-block hover:duration-300 cursor-pointer">About {APP_NAME}</Typography>
             </Link>
             <Link href={""}>
-              <Typography className="mb-1">Help center</Typography>
+              <Typography className="mb-1 hover:underline hover:duration-300 cursor-pointer">Help center</Typography>
             </Link>
             <Link href={""}>
-              <Typography className="mb-1">FAQ{"'s"}</Typography>
+              <Typography className="mb-1 hover:underline hover:duration-300 cursor-pointer">FAQ{"'s"}</Typography>
             </Link>
             <Link href={""}>
-              <Typography className="mb-1">Terms{" & "}conditions</Typography>
+              <Typography className="mb-1 hover:underline hover:duration-300 cursor-pointer">Terms{" & "}conditions</Typography>
             </Link>
             <Link href={""}>
-              <Typography className="mb-1">
+              <Typography className="mb-1 hover:underline hover:duration-300 cursor-pointer">
                 Privacy{" & "}cookies statement
               </Typography>
             </Link>
@@ -43,20 +43,20 @@ const Footer = () => {
             <Title size={"sub"} className="mb-1">
               {APP_NAME}
             </Title>
-            <Link href={""}>
+            <Link href={""} className="hover:underline hover:duration-300 cursor-pointer">
               <Typography className="mb-1">Accommodation</Typography>
             </Link>
-            <Link href={""}>
+            <Link href={""} className="hover:underline hover:duration-300 cursor-pointer">
               <Typography className="mb-1">Activities</Typography>
             </Link>
-            <Link href={""}>
+            <Link href={""} className="hover:underline hover:duration-300 cursor-pointer">
               <Typography className="mb-1">Rentals</Typography>
             </Link>
-            <Link href={""}>
+            <Link href={""} className="hover:underline hover:duration-300 cursor-pointer">
               <Typography className="mb-1">Guides</Typography>
             </Link>
             <Link href={""}>
-              <Typography className="mb-1">Blog</Typography>
+              <Typography className="mb-1 hover:underline hover:duration-300 cursor-pointer">Blog</Typography>
             </Link>
           </div>
           <div className="md:flex-1 pb-4 pt-4 md:pb-0 md:pt-0 md:mr-4 border-b md:border-b-0">
@@ -64,19 +64,19 @@ const Footer = () => {
               Destinations
             </Title>
             <Link href={""}>
-              <Typography className="mb-1">General Luna</Typography>
+              <Typography className="mb-1 mb-1 hover:underline hover:duration-300 cursor-pointer">General Luna</Typography>
             </Link>
             <Link href={""}>
-              <Typography className="mb-1">Malinao</Typography>
+              <Typography className="mb-1 mb-1 hover:underline hover:duration-300 cursor-pointer">Malinao</Typography>
             </Link>
             <Link href={""}>
-              <Typography className="mb-1">Catangnan</Typography>
+              <Typography className="mb-1 mb-1 hover:underline hover:duration-300 cursor-pointer">Catangnan</Typography>
             </Link>
             <Link href={""}>
-              <Typography className="mb-1">Pacifico</Typography>
+              <Typography className="mb-1 mb-1 hover:underline hover:duration-300 cursor-pointer">Pacifico</Typography>
             </Link>
             <Link href={""}>
-              <Typography className="mb-1">Burgos</Typography>
+              <Typography className="mb-1 mb-1 hover:underline hover:duration-300 cursor-pointer">Burgos</Typography>
             </Link>
           </div>
           <div className="md:flex-1 pt-4 md:pt-0 md:border-b-0">
@@ -84,32 +84,25 @@ const Footer = () => {
               Partner with us
             </Title>
             <Link href={""}>
-              <Typography className="mb-1">List your business</Typography>
+              <Typography className="mb-1 mb-1 hover:underline hover:duration-300 cursor-pointer">List your business</Typography>
             </Link>
             <Link href={""}>
-              <Typography className="mb-1">
+              <Typography className="mb-1 mb-1 hover:underline hover:duration-300 cursor-pointer">
                 Partner terms{" & "}conditions
               </Typography>
             </Link>
             <Link href={""}>
-              <Typography className="mb-1">Partner responsibilities</Typography>
+              <Typography className="mb-1 mb-1 hover:underline hover:duration-300 cursor-pointer">Partner responsibilities</Typography>
             </Link>
           </div>
         </div>
         <div className="md:flex items-center mt-5 justify-between">
           <div className="md:flex-1">
             &copy; 2024 {APP_NAME} &middot;
-            <Link href={""} className="mx-2">
-              Terms
-            </Link>{" "}
-            &middot;
-            <Link href={""} className="mx-2">
+            <Link href={""} className="mx-2 mb-1 hover:underline hover:duration-300 cursor-pointer">
               Sitemap
             </Link>{" "}
             &middot;
-            <Link href={""} className="mx-2">
-              Privacy
-            </Link>{" "}
           </div>
           <div className="flex items-center justify-center">
             <LanguageIcon />
@@ -117,15 +110,15 @@ const Footer = () => {
             <Typography fontWeight={"bold"} className="mx-3">
               &#8369;
             </Typography>
-            <Typography className="mx-2">PHP</Typography>
+            <Typography className="mx-2 mb-1 hover:underline hover:duration-300 cursor-pointer">PHP</Typography>
             <Link href={""}>
-              <FontAwesomeIcon icon={faFacebook} size="sm" className="ml-2" />
+              <FontAwesomeIcon icon={faFacebook} size="sm" className="ml-2 hover:underline hover:duration-300 cursor-pointer" />
             </Link>
             <Link href={""}>
-              <FontAwesomeIcon icon={faTwitter} size="sm" className="mx-2" />
+              <FontAwesomeIcon icon={faTwitter} size="sm" className="mx-2 hover:underline hover:duration-300 cursor-pointer" />
             </Link>
             <Link href={""}>
-              <FontAwesomeIcon icon={faInstagram} size="sm" className="mx-2" />
+              <FontAwesomeIcon icon={faInstagram} size="sm" className="mx-2 hover:underline hover:duration-300 cursor-pointer" />
             </Link>
           </div>
         </div>
