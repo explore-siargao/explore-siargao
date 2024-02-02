@@ -1,4 +1,3 @@
-import React, { useState } from "react"
 import { Title } from "@/common/components/ui/Title"
 import BookingBoxContainer from "@/common/components/BookingBoxContainer"
 import { WidthWrapper } from "@/common/components/WidthWrapper"
@@ -39,7 +38,7 @@ const Bookings = () => {
                 }
               />
             ))}
-          </ul>           
+          </ul>
         </>
       )}
     </WidthWrapper>
