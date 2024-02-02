@@ -69,11 +69,7 @@ const BookingReviews = () => {
   return (
     <AccountSettingWrapper>
       <div>
-        <Breadcrumb
-          home="Account"
-          page="Booking Reviews"
-          link={LINK_ACCOUNT}
-        />
+        <Breadcrumb home="Account" page="Booking Reviews" link={LINK_ACCOUNT} />
         <Title>Booking Reviews</Title>
       </div>
       <div className="hidden sm:block">

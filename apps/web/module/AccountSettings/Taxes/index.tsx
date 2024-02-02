@@ -7,12 +7,21 @@ import { LINK_ACCOUNT } from "@/common/constants/links"
 import combineClasses from "@/common/helpers/combineClasses"
 import Taxpayers from "./Taxpayers"
 import TaxDocuments from "./TaxDocuments"
+import useSessionStore from "@/common/store/useSessionStore"
+import { useRouter } from "next/navigation"
+import { E_UserRole } from "@repo/contract"
 
 const Taxes = () => {
+  const router = useRouter()
+  const session = useSessionStore((state) => state)
   const [tableState, setTableState] = useState(0)
+
+  if (session.role !== E_UserRole.Host) {
+    router.push(LINK_ACCOUNT)
+  }
+
   const TITLE = "Taxes"
   let content
-
   if (tableState === 0) {
     content = (
       <>
