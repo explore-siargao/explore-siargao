@@ -79,6 +79,7 @@ const AccountSettings = () => {
       title: "Login & security",
       content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       link: LINK_ACCOUNT_LOGIN_SECURITY,
+      show: true,
     },
     {
       id: 6,
