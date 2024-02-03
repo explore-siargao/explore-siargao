@@ -7,6 +7,8 @@ import { Title } from "@/common/components/ui/Title"
 import { LINK_ACCOUNT_SETTINGS } from "@/common/constants/links"
 import combineClasses from "@/common/helpers/combineClasses"
 import BookingReviewItemPending from "./components/BookingReviewItemPending"
+import useGetReviewsByUserId from "../Bookings/hooks/useGetReviewsByUserId"
+import useSessionStore from "@/common/store/useSessionStore"
 
 const bookingReviewsDummy = [
   {
@@ -36,7 +38,9 @@ const bookingReviewsDummy = [
 const BookingReviews = () => {
   const [tableState, setTableState] = useState(0)
   let content
-
+  const userId = useSessionStore().id
+  const { data } = useGetReviewsByUserId(userId as number)
+  console.log(data)
   if (tableState === 0) {
     content = (
       <>
