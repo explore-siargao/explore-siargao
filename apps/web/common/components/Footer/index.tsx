@@ -14,7 +14,7 @@ import { Globe } from "lucide-react"
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-100 pb-6 pt-16 bottom-0 border-t border-gray-200 mt-12">
+    <footer className="bg-gray-100 pb-6 pt-10 2xl:pt-16 bottom-0 border-t border-gray-200 mt-12">
       <WidthWrapper width={"medium"}>
         <div className="md:flex border-b pb-4 md:pb-11">
           <div className="md:flex-1 pb-4 md:pb-0 md:mr-4 border-b md:border-b-0">
@@ -93,7 +93,7 @@ const Footer = () => {
               <Typography className="text-sm">Sitemap</Typography>
             </Link>{" "}
           </div>
-          <div className="flex gap-2 items-center justify-center">
+          <div className="flex gap-2 md:items-center md:justify-center mt-2 md:mt-0">
             <Globe className="h-4 w-4" />
             <Typography className="text-sm">English (US)</Typography>
             <Typography fontWeight={"bold"} className="text-sm">

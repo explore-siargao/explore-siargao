@@ -51,6 +51,7 @@ const SignUpForm = ({ isSocial = false }: Props) => {
       day: "",
       registrationType: E_RegistrationType.Manual,
       country: "",
+      canReceiveEmail: false,
     },
   })
   const params = useParams()
@@ -83,8 +84,17 @@ const SignUpForm = ({ isSocial = false }: Props) => {
         toast.error(String(err))
       },
     }
-    const { email, firstName, lastName, month, day, year, password, country } =
-      formData
+    const {
+      email,
+      firstName,
+      lastName,
+      month,
+      day,
+      year,
+      password,
+      country,
+      canReceiveEmail,
+    } = formData
     const birthDate = dayjs(`${month}-${day}-${year}`, "MM-DD-YYYY")
     addUser(
       {
@@ -95,6 +105,7 @@ const SignUpForm = ({ isSocial = false }: Props) => {
         password,
         registrationType: signUpType as E_RegistrationType,
         country,
+        canReceiveEmail: Boolean(canReceiveEmail),
       },
       callBackReq
     )
@@ -248,14 +259,14 @@ const SignUpForm = ({ isSocial = false }: Props) => {
             <div className="relative flex items-start mt-4">
               <div className="flex h-6 items-center">
                 <input
-                  id="comments"
-                  name="comments"
+                  id="canReceiveEmail"
                   type="checkbox"
+                  {...register("canReceiveEmail")}
                   disabled={addUserIsPending}
                   className="h-6 w-6 rounded border-gray-400 text-secondary-600 focus:ring-transparent"
                 />
                 <label
-                  htmlFor="comments"
+                  htmlFor="canReceiveEmail"
                   className="text-text-500 ml-3 text-xs leading-2"
                 >
                   I’d like to receive travel tips, uplifting content, and

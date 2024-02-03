@@ -111,6 +111,7 @@ export const register = async (req: Request, res: Response) => {
       birthDate,
       registrationType,
       country,
+      canReceiveEmail,
     } = req.body
     const currencyByCountry = {
       'United States': 'USD',
@@ -141,6 +142,7 @@ export const register = async (req: Request, res: Response) => {
             registrationType: registrationType,
             role: 'User',
             password: password ? String(encryptPassword) : null,
+            canReceiveEmail,
           },
         })
 
