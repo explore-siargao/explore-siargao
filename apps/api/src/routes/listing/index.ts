@@ -52,6 +52,7 @@ import {
   deleteReview,
   getReviewById,
   getReviewByListing,
+  getReviewsByUserId,
   updateReview,
 } from './service/reviews'
 import {
@@ -214,6 +215,7 @@ router.delete(
 )
 
 //reviews
+router.get('/reviews/user/:userId', getReviewsByUserId)
 router.get('/reviews/:listingId', getReviewByListing)
 router.get('/reviews/view/:reviewId', getReviewById)
 router.post('/:userId/reviews/post', addReview)
