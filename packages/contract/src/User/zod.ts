@@ -23,4 +23,5 @@ export const Z_UserRegister = z.object({
   country: z.string(),
   password: z.string().min(8).nullable(),
   registrationType: z.nativeEnum(E_RegistrationType),
+  canReceiveEmail: z.boolean(),
 })
