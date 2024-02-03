@@ -108,11 +108,13 @@ const AddReview = () => {
                 <RatingCategoryCard description={reviewSteps[stepIndex]?.description as string} />
                 <StarRating totalStars={5} size='md' name={reviewSteps[stepIndex]?.fieldName as string} />
               </div> : 
-              <div className='flex flex-col items-center justify-center px-8'>
-                <Textarea placeholder='Comment...' {...form.register("comment")} className='w-full' required />
+              <div className='flex flex-col items-center px-8'>
+                <div className='text-left w-full'>
+                  Let us know below what you think about your booking
+                </div>
+                <Textarea placeholder='Leave your comment here...' {...form.register("comment")} className='w-full mt-2' required />
               </div>
             }
-
             <div className='flex w-full justify-between items-center p-8'>
               <div>
                 {stepIndex > 0 && (
