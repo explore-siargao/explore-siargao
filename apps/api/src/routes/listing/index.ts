@@ -215,25 +215,29 @@ router.delete(
 )
 
 //reviews
-router.get('/reviews/user/:userId', 
+router.get(
+  '/reviews/user/:userId',
   isOriginValid,
   isCsrfTokenValid,
   isUserLoggedIn,
   getReviewsByUserId
 )
-router.get('/reviews/:listingId', 
+router.get(
+  '/reviews/:listingId',
   isOriginValid,
   isCsrfTokenValid,
   isUserLoggedIn,
   getReviewByListing
-  )
-router.get('/reviews/view/:reviewId', 
+)
+router.get(
+  '/reviews/view/:reviewId',
   isOriginValid,
   isCsrfTokenValid,
   isUserLoggedIn,
   getReviewById
 )
-router.post('/:userId/reviews/post', 
+router.post(
+  '/:userId/reviews/post',
   isOriginValid,
   isCsrfTokenValid,
   isUserLoggedIn,
