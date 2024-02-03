@@ -18,6 +18,7 @@ const bookingReviewsDummy = [
       "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorem omnis similique illum id quo soluta atque tenetur necessitatibus reprehenderit perspiciatis, dolores, aliquid voluptate aut maxime perferendis provident distinctio nulla magni alias dolore facilis? Accusantium, sit. Quo neque numquam itaque minus libero sapiente eum iste odio eius soluta ulla soluta ulla hello pmi nas an asd ! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorem omnis similique illum id quo soluta atque tenetur necessitatibus reprehenderit perspiciatis, dolores",
     location: "United Kingdom",
     reviewedTime: "March 3, 2017",
+    averageRating: 3
   },
   {
     id: 2,
@@ -28,6 +29,7 @@ const bookingReviewsDummy = [
     reviewMessage:
       "Laborum nisi consectetur esse irure consequat nulla nulla eu fugiat duis incididunt quis laborum. Nulla ea adipisicing ex et occaecat commodo sint ea do officia irure. Aliquip do incididunt ut sunt. Aliquip velit non consequat velit sit minim laborum voluptate sunt ex excepteur ad deserunt.",
     reviewedTime: "March 3, 2017",
+    averageRating: 5
   },
 ]
 
@@ -47,6 +49,7 @@ const BookingReviews = () => {
             reviewMessage={item.reviewMessage}
             reviewedTime={item.reviewedTime}
             key={item.id}
+            averageRating={item.averageRating}
           />
         ))}
       </>
