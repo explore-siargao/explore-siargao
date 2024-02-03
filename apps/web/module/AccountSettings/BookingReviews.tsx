@@ -41,21 +41,71 @@ const BookingReviews = () => {
   const userId = useSessionStore().id
   const { data } = useGetReviewsByUserId(userId as number)
   console.log(data)
+
+  type ratingsSchema = {
+    accuracyRates: number,
+    checkInRates: number,
+    cleanLinessRates: number,
+    communicationRates: number,
+    locationRates: number,
+    valueRates: number
+  };
+
+  function getAverageStars(ratings: ratingsSchema) {
+    // Extract values from the ratings object
+    const values = Object.values(ratings);
+
+    // Calculate the sum of all values
+    const sum = values.reduce((acc, currentValue) => acc + currentValue, 0);
+
+    // Calculate the average
+    const average = sum / values.length;
+
+    // Round up the average
+    const roundedAverage = Math.ceil(average);
+
+    return roundedAverage;
+  }
+  
   if (tableState === 0) {
     content = (
       <>
-        {bookingReviewsDummy.map((item) => (
-          <BookingReviewItem
-            id={item.id}
-            location={item.location}
-            name={item.name}
-            pic={item.pic}
-            reviewMessage={item.reviewMessage}
-            reviewedTime={item.reviewedTime}
-            key={item.id}
-            averageRating={item.averageRating}
-          />
-        ))}
+        {data?.items?.map((item) => {
+          const ratings = {
+            accuracyRates: item.accuracyRates,
+            checkInRates: item.checkInRates,
+            cleanLinessRates: item.cleanLinessRates,
+            communicationRates: item.communicationRates,
+            locationRates: item.locationRates,
+            valueRates: item.valueRates
+          }
+
+          const reviewDate = new Date(item.createdAt)
+
+          const months = [
+            "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+          ];
+
+          const year = reviewDate.getFullYear();
+          const monthIndex = reviewDate.getMonth();
+          const day = reviewDate.getDate();
+
+          const monthName = months[monthIndex];
+          
+          return (
+            <BookingReviewItem
+              id={item.listing.id}
+              location={item.listing.address}
+              name={item.listing.title}
+              pic={""}
+              reviewMessage={item.comment}
+              reviewedTime={`${monthName} ${day}, ${year}`}
+              key={item.id}
+              averageRating={getAverageStars(ratings)}
+            />
+          )
+        })}
       </>
     )
   } else if (tableState === 1) {

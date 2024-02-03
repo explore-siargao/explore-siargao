@@ -151,6 +151,9 @@ export const getReviewsByUserId = async (req: Request, res: Response) => {
   const userId = Number(req.params.userId)
   try {
     const getReviewByUserId = await prisma.review.findMany({
+      include:{
+        listing: true
+      },
       where: {
         userId,
         deletedAt: null,

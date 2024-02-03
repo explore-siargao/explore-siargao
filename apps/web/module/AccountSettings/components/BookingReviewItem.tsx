@@ -38,38 +38,17 @@ const BookingReviewItem = ({
             <div className="flex items-center mb-4">
               <div className="font-medium ">
                 <p>
-                  <strong>You reviewed</strong> {name}{" "}
-                  <time
-                    dateTime="2014-08-16 19:00"
-                    className="block text-sm text-gray-500 d"
-                  >
-                    {reviewedTime}
-                  </time>
+                  <strong>You reviewed</strong>{name}{" "}
+                  {reviewedTime}
                 </p>
               </div>
             </div>
             <Button variant={"primary"}>View listing</Button>
           </div>
           <ReviewStarRating totalStars={5} rating={averageRating} size={'sm'} />
-          
-          <footer className="mb-5 text-sm text-gray-500">
-            <p>
-              Reviewed in the {location}{" "}
-              <time dateTime="2017-03-03 19:00">{reviewedTime}</time>
-            </p>
-          </footer>
           {/* <div className="overflow-hidden h-28"> */}
 
-          {reviewMessage.length > 350 ? (
-            <div className={isClicked ? "overflow-hidden h-28" : ""}>
-              <Typography className="text-text-400">
-                {reviewMessage}
-                {reviewMessage.length}
-              </Typography>
-            </div>
-          ) : (
-            <Typography className="text-text-400">{reviewMessage}</Typography>
-          )}
+          <Typography className="text-text-400 mt-4">{reviewMessage}</Typography>
           <button
             className="relative block text-sm font-medium text-secondary-600 hover:underline w-full pb-5"
             onClick={handleClick}
