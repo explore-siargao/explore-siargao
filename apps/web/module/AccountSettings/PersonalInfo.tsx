@@ -1,6 +1,6 @@
 "use client"
 import AccountSettingWrapper from "@/common/components/AccountSettingWrapper"
-import { LINK_ACCOUNT_SETTINGS } from "@/common/constants/links"
+import { LINK_ACCOUNT } from "@/common/constants/links"
 import React from "react"
 import LegalName from "./components/LegalName"
 import EmailAddress from "./components/EmailAddress"
@@ -12,19 +12,17 @@ import { Title } from "@/common/components/ui/Title"
 import { Breadcrumb } from "@/common/components/ui/Breadcrumb"
 import useSessionStore from "@/common/store/useSessionStore"
 import { T_EmergencyContact } from "@repo/contract"
+import { ACCOUNT } from "@/common/constants"
 
 const PersonalInfo = () => {
   const session = useSessionStore((state) => state)
   const personalInfo = session?.personalInfo
+  const TITLE = "Personal Info"
   return (
     <AccountSettingWrapper>
       <div>
-        <Breadcrumb
-          home="Account"
-          page="Personal info"
-          link={LINK_ACCOUNT_SETTINGS}
-        />
-        <Title>Personal info</Title>
+        <Breadcrumb home={ACCOUNT} page={TITLE} link={LINK_ACCOUNT} />
+        <Title>{TITLE}</Title>
       </div>
       <div>
         <div className="divide-y">
@@ -41,18 +39,18 @@ const PersonalInfo = () => {
             phoneNumber={personalInfo?.phoneNumber}
             userId={session?.id as number}
           />
-          <GovernmentId governmentId={personalInfo?.governMentId} />
+          <GovernmentId governmentId={personalInfo?.governmentId} />
           <Address
             country={personalInfo?.address?.country as string}
             city={personalInfo?.address?.city as string}
-            province={personalInfo?.address?.province as string}
+            province={personalInfo?.address?.stateProvince as string}
             streetAddress={personalInfo?.address?.streetAddress as string}
             zipCode={personalInfo?.address?.zipCode as number}
             id={personalInfo?.id}
           />
           <EmergencyContact
             emergencyContact={
-              personalInfo?.emergrncyContacts as T_EmergencyContact[]
+              personalInfo?.emergencyContacts as T_EmergencyContact[]
             }
             id={personalInfo?.id as number}
           />

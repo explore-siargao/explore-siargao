@@ -68,15 +68,15 @@ const LoginForm = () => {
         </h1>
         <div>
           <Input
-            inputLabel="Email"
-            inputId="email"
+            label="Email"
+            id="email"
             type="email"
             {...register("email", { required: true })}
             disabled={isLoginPending}
           />
           <Input
-            inputLabel="Password"
-            inputId="password"
+            label="Password"
+            id="password"
             type="password"
             className="mt-2"
             {...register("password", { required: true })}

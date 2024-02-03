@@ -147,6 +147,31 @@ export const getReviewById = async (req: Request, res: Response) => {
   }
 }
 
+export const getReviewsByUserId = async (req: Request, res: Response) => {
+  const userId = Number(req.params.userId)
+  try {
+    const getReviewByUserId = await prisma.review.findMany({
+      where: {
+        userId,
+        deletedAt: null,
+      },
+    })
+    if (getReviewByUserId) {
+      res.json(
+        response.success({
+          items: getReviewByUserId,
+          allItemCount: getReviewByUserId.length,
+          message: '',
+        })
+      )
+    } else {
+      res.json(response.error({ message: 'User has no reviews' }))
+    }
+  } catch (err: any) {
+    res.json(response.error({ message: err.message }))
+  }
+}
+
 export const addReview = async (req: Request, res: Response) => {
   const userId = Number(req.params.userId)
   const {
