@@ -10,6 +10,7 @@ import {
   LINK_ACCOUNT_LOGIN_SECURITY,
   LINK_ACCOUNT_TAXES,
   LINK_ACCOUNT_GLOBAL_PREFERENCES,
+  LINK_ACCOUNT_NOTIFICATIONS,
 } from "@/common/constants/links"
 import { Title } from "@/common/components/ui/Title"
 import { Typography } from "@/common/components/ui/Typography"
@@ -25,6 +26,7 @@ import {
   SquareUser,
   Settings2,
   File,
+  Megaphone,
 } from "lucide-react"
 import { E_UserRole } from "@repo/contract"
 
@@ -83,6 +85,14 @@ const AccountSettings = () => {
     },
     {
       id: 6,
+      icon: Megaphone,
+      title: "Notifications",
+      content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      link: LINK_ACCOUNT_NOTIFICATIONS,
+      show: true,
+    },
+    {
+      id: 7,
       icon: File,
       title: "Taxes",
       content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
@@ -90,7 +100,7 @@ const AccountSettings = () => {
       show: session.role === E_UserRole.Host,
     },
     {
-      id: 7,
+      id: 8,
       icon: Settings2,
       title: "Global Preferences",
       content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",

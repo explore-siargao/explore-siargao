@@ -12,7 +12,9 @@ export const metadata: Metadata = {
 const page = () => {
   return (
     <AuthGuard>
-      <AccountSettings />
+      <div className="min-h-screen">
+        <AccountSettings />
+      </div>
     </AuthGuard>
   )
 }

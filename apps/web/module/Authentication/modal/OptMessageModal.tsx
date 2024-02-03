@@ -12,7 +12,7 @@ import { APP_NAME } from "@repo/constants"
 const OptMessageModal = () => {
   const isOpen = useOptMessageStore((state) => state.isOpen)
   const closeModal = useOptMessageStore((state) => state.setIsClose)
-  const [canReceived, setCanReceived] = useState(false)
+  const [canReceive, setCanReceive] = useState(false)
   const session = useSessionStore((state) => state)
   const callBackReq = {
     onSuccess: (data: any) => {
@@ -47,7 +47,7 @@ const OptMessageModal = () => {
           className="w-full mt-4"
           onClick={() => {
             closeModal()
-            if (canReceived) updateCanReceivedEmail()
+            if (canReceive) updateCanReceivedEmail({ canReceive })
           }}
           disabled={IsPendingCetCanReceivedEmail}
         >
@@ -55,8 +55,8 @@ const OptMessageModal = () => {
         </Button>
         <div className="flex  mt-6">
           <input
-            id="recieved"
-            onChange={(e) => setCanReceived(e.target.checked)}
+            id="received"
+            onChange={(e) => setCanReceive(e.target.checked)}
             type="checkbox"
             className="h-6 w-6 rounded border-gray-400 text-secondary-600 focus:ring-transparent"
           />

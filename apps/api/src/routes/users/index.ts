@@ -17,7 +17,7 @@ import {
   mfaVerify,
   updateUserEmail,
   userDetails,
-  setCanReceivedEmail,
+  setCanReceiveEmail,
 } from './service/auth'
 import {
   addAddress,
@@ -129,7 +129,7 @@ router.patch(
   isCsrfTokenValid,
   isOriginValid,
   isUserLoggedIn,
-  setCanReceivedEmail
+  setCanReceiveEmail
 )
 router.delete(
   '/:peronalInfoId/emergency-contact/:emergencyContactId',

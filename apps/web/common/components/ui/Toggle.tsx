@@ -3,6 +3,8 @@ import { Switch } from "@headlessui/react"
 
 interface ToggleSwitchProps {
   checked: boolean
+  defaultChecked?: boolean
+  disabled?: boolean
   onChange: () => void
 }
 
@@ -10,14 +12,21 @@ function classNames(...classes: (string | boolean)[]): string {
   return classes.filter(Boolean).join(" ")
 }
 
-const ToggleSwitch: React.FC<ToggleSwitchProps> = ({ checked, onChange }) => {
+const ToggleSwitch: React.FC<ToggleSwitchProps> = ({
+  checked,
+  defaultChecked,
+  disabled,
+  onChange,
+}) => {
   return (
     <Switch
       checked={checked}
+      defaultChecked={defaultChecked}
       onChange={onChange}
+      disabled={disabled}
       className={classNames(
         checked ? "bg-primary-600" : "bg-gray-200",
-        "relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary-600 focus:ring-offset-2"
+        "relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary-600 focus:ring-offset-2 disabled:opacity-60"
       )}
     >
       <span className="sr-only">Use setting</span>

@@ -4,11 +4,10 @@ import { LINK_ACCOUNT } from "@/common/constants/links"
 import React from "react"
 import { Title } from "@/common/components/ui/Title"
 import { Breadcrumb } from "@/common/components/ui/Breadcrumb"
-import PreferredLanguage from "./PreferredLanguage"
-import PreferredCurrency from "./PreferredCurrency"
+import OptIn from "./OptIn"
 
-const GlobalPreferences = () => {
-  const TITLE = "Global Preferences"
+const Notifications = () => {
+  const TITLE = "Notifications"
   return (
     <AccountSettingWrapper>
       <div>
@@ -17,12 +16,11 @@ const GlobalPreferences = () => {
       </div>
       <div className="mt-4">
         <div className="divide-y">
-          <PreferredLanguage />
-          <PreferredCurrency />
+          <OptIn />
         </div>
       </div>
     </AccountSettingWrapper>
   )
 }
 
-export default GlobalPreferences
+export default Notifications
