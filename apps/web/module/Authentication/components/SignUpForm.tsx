@@ -84,8 +84,17 @@ const SignUpForm = ({ isSocial = false }: Props) => {
         toast.error(String(err))
       },
     }
-    const { email, firstName, lastName, month, day, year, password, country, canReceiveEmail } =
-      formData
+    const {
+      email,
+      firstName,
+      lastName,
+      month,
+      day,
+      year,
+      password,
+      country,
+      canReceiveEmail,
+    } = formData
     const birthDate = dayjs(`${month}-${day}-${year}`, "MM-DD-YYYY")
     addUser(
       {
@@ -252,7 +261,7 @@ const SignUpForm = ({ isSocial = false }: Props) => {
                 <input
                   id="canReceiveEmail"
                   type="checkbox"
-                  {...register("canReceiveEmail", )}
+                  {...register("canReceiveEmail")}
                   disabled={addUserIsPending}
                   className="h-6 w-6 rounded border-gray-400 text-secondary-600 focus:ring-transparent"
                 />
