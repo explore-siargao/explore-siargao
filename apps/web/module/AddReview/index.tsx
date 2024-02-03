@@ -1,9 +1,9 @@
 "use client"
 import StarRating from '@/common/components/ui/StarRating'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import RatingCategoryCard from './RatingCategoryCard'
 import { Separator } from '@/common/components/ui/Separator'
-import { useForm } from 'react-hook-form'
+import { useForm, FormProvider } from 'react-hook-form'
 import { Textarea } from '@/common/components/ui/Textarea'
 import { Button } from '@/common/components/ui/Button'
 import { useParams } from 'next/navigation'
@@ -11,31 +11,32 @@ import useSessionStore from '@/common/store/useSessionStore'
 import { WidthWrapper } from '@/common/components/WidthWrapper'
 import toast from 'react-hot-toast'
 import useAddReview from './hooks/useAddReview'
+import useGetListing from '../LandingPage/hooks/useGetListing'
+import { ArrowLeft, ArrowRight } from 'lucide-react'
+import { Title } from '@/common/components/ui/Title'
 
 const AddReview = () => {
   const params = useParams()
-  const [cleanLinessRates, setCleanlinessRates] = useState<number>(0)
-  const [accuracyRates, setAccuracyRates] = useState<number>(0)
-  const [checkInRates, setCheckInRates] = useState<number>(0)
-  const [communicationRates, setCommunicationRates] = useState<number>(0)
-  const [locationRates, setLocationRates] = useState<number>(0)
-  const [valueRates, setValueRates] = useState<number>(0)
+  const [stepIndex, setStepIndex] = useState<number>(0)
   const listingId = Number(params.listingId)
-
+  
   const userId = useSessionStore((state) => state).id
   const { mutate } = useAddReview(userId as number)
+  const { data } = useGetListing(listingId)
+  const form = useForm()
+  const watchedFields = form.watch();
+  const stepHandler = (action: 'back' | 'next') => {
+    if(action === 'back') {
+      setStepIndex(stepIndex - 1)
+    } else {
+      setStepIndex(stepIndex + 1)
+    }
+  }
   
-  const { register, handleSubmit } = useForm()
   const onSubmit = (values: any) => {
     const formattedValues = {
       listingId,
-      cleanLinessRates,
-      accuracyRates,
-      checkInRates,
-      communicationRates,
-      locationRates,
-      valueRates,
-      comment: values.comment
+      ...values
     }
 
     const callBackReq = {
@@ -52,46 +53,107 @@ const AddReview = () => {
     }
     mutate(formattedValues, callBackReq)
   }
-
+  
+  const reviewSteps = [
+    {
+      title: 'Cleanliness',
+      description: 'How would you rate the cleanliness of the accommodation?',
+      fieldName: 'cleanlinessRates'
+    },
+    {
+      title: 'Accuracy',
+      description: 'How would you rate the accuracy of the information about the accommodation?',
+      fieldName: 'accuracyRates'
+    },
+    {
+      title: 'Check-in',
+      description: 'How would you rate the efficiency of the check-in process at the accommodation?',
+      fieldName: 'checkInRates'
+    },
+    {
+      title: 'Communication',
+      description: 'How would you rate the responsiveness of communication from the accommodation staff?',
+      fieldName: 'communicationRates'
+    },
+    {
+      title: 'Location',
+      description: 'How would you rate the convenience and accessibility of the location',
+      fieldName: 'locationRates'
+    },
+    {
+      title: 'Value',
+      description: 'How would you rate the overall value for money of your accommodation?',
+      fieldName: 'valueRates'
+    },
+  ]
+  
   return (
-    <WidthWrapper className="my-24 lg:my-32">
-      <div className='flex justify-center'>
-        <form className='max-w-3xl flex flex-col gap-y-4' onSubmit={handleSubmit(onSubmit)}>
-          <div className='flex flex-col items-center justify-center'>
-            <RatingCategoryCard description='How would you rate the cleanliness of the accommodation?' />
-            <StarRating totalStars={5} size='md' onChange={setCleanlinessRates} />
-            <Separator className='bg-gray-200 my-6'/>
+    <WidthWrapper width={'small'} className="mt-24 md:mt-36 lg:mt-40">
+      <Title className="pb-8 mb-8 md:pb-0 justify-center">Review Booking</Title>
+      
+      <div className='flex h-96 md:flex-row flex-col gap-x-20 justify-center mb-20'>
+      
+        <FormProvider {...form}>
+          <form className='w-full h-full border rounded-md flex flex-col justify-between gap-y-4' onSubmit={form.handleSubmit(onSubmit)}>
+            <div className='flex gap-x-2 p-2'>
+              {[...Array(7)].map((_, index) => (
+                <div
+                  key={index}
+                  className={`w-full h-1 ${index === stepIndex ? "bg-primary-600" : "bg-primary-300"}`}
+                ></div>
+              ))}
+            </div>
+            {stepIndex <= 5 ?
+              <div className='flex flex-col items-center justify-center px-8'>
+                <RatingCategoryCard description={reviewSteps[stepIndex]?.description as string} />
+                <StarRating totalStars={5} size='md' name={reviewSteps[stepIndex]?.fieldName as string} />
+              </div> : 
+              <div className='flex flex-col items-center justify-center px-8'>
+                <Textarea placeholder='Comment...' {...form.register("comment")} className='w-full' required />
+              </div>
+            }
+
+            <div className='flex w-full justify-between items-center p-8'>
+              <div>
+                {stepIndex > 0 && (
+                  <div onClick={() => stepHandler('back')} className='flex w-max items-center gap-x-2 text-primary-600 hover:underline cursor-pointer'>
+                    <ArrowLeft />
+                    Back
+                  </div> 
+                )} 
+              </div>
+              <div>
+                {stepIndex < 6 && (
+                  <div onClick={form.watch(reviewSteps[stepIndex]?.fieldName as string) == undefined ? undefined : () => stepHandler('next')} className={`flex w-max items-center gap-x-2 text-primary-600 hover:underline cursor-pointer ${form.watch(reviewSteps[stepIndex]?.fieldName as string) == undefined ? 'opacity-50 pointer-events-none' : ''}`}>
+                    Next
+                    <ArrowRight />
+                  </div>
+                )}
+                {stepIndex === 6 && (
+                  <Button type="submit" variant={'primary'} size="sm">
+                    Submit review
+                  </Button>
+                )}
+              </div>
+              
+            </div>
+
+          </form>
+        </FormProvider>
+        <div className='w-full flex flex-col gap-y-4 h-full'>
+          <div className='w-full p-4 border bg-primary-50 rounded-md h-full'>
+
           </div>
-          <div className='flex flex-col items-center justify-center gap-y-2'>
-            <RatingCategoryCard description='How would you rate the accuracy of the information about the accommodation?' />
-            <StarRating totalStars={5} size='md' onChange={setAccuracyRates} />
-            <Separator className='bg-gray-200 my-6'/>
+          <div>
+            <div className='font-medium'>
+              {data?.item?.title}
+            </div>
+            <div className='text-gray-400'>
+              {data?.item?.address}
+            </div>
           </div>
-          <div className='flex flex-col items-center justify-center gap-y-2'>
-            <RatingCategoryCard description='How would you rate the efficiency of the check-in process at the accommodation?' />
-            <StarRating totalStars={5} size='md' onChange={setCheckInRates} />
-            <Separator className='bg-gray-200 my-6'/>
-          </div>
-          <div className='flex flex-col items-center justify-center gap-y-2'>
-            <RatingCategoryCard description='How would you rate the responsiveness of communication from the accommodation staff?' />
-            <StarRating totalStars={5} size='md' onChange={setCommunicationRates} />
-            <Separator className='bg-gray-200 my-6'/>
-          </div>
-          <div className='flex flex-col items-center justify-center gap-y-2'>
-            <RatingCategoryCard description='How would you rate the convenience and accessibility of the location?' />
-            <StarRating totalStars={5} size='md' onChange={setLocationRates} />
-            <Separator className='bg-gray-200 my-6'/>
-          </div>
-          <div className='flex flex-col items-center justify-center gap-y-2'>
-            <RatingCategoryCard description='How would you rate the overall value for money of your accommodation?' />
-            <StarRating totalStars={5} size='md' onChange={setValueRates} />
-            <Separator className='bg-gray-200 my-6'/>
-          </div>
-          <Textarea placeholder='Comment...' {...register("comment")} required />
-          <Button type="submit" variant={'primary'} size="sm" className="mt-4">
-            Submit review
-          </Button>
-        </form>
+        </div>
+        
       </div>
     </WidthWrapper>
   )

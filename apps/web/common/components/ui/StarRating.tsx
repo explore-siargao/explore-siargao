@@ -1,25 +1,30 @@
 "use client"
 import { StarIcon } from '@heroicons/react/20/solid';
-import React, { forwardRef, useState } from 'react';
+import React, { forwardRef, useEffect, useRef, useState } from 'react';
+import { useFormContext } from 'react-hook-form';
 
 export interface StarRatingProps {
   totalStars: number;
   className?: string;
-  onChange?: (rating: number) => void;
   size?: 'sm' | 'md' | 'lg'
+  name: string,
+  onChange?: () => void;
 }
 
 const StarRating = forwardRef<HTMLDivElement, StarRatingProps>(
-  ({ totalStars, className, onChange, size = 'md' }, ref) => {
-    const [rating, setRating] = useState(0);
+  ({ totalStars, className, name, onChange, size = 'md' }, ref) => {
+    const { setValue, watch } = useFormContext();
     const [hoverRating, setHoverRating] = useState(0);
+    const rating = watch(name);
 
     const handleStarClick = (index: number) => {
       const newRating = index + 1;
-      setRating(newRating);
-      if (onChange) onChange(newRating);
+      setValue(name, newRating)
+      if (onChange) {
+        onChange();
+      }
     };
-
+    
     const handleStarHover = (index: number) => {
       setHoverRating(index + 1);
     };
