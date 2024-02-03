@@ -24,10 +24,7 @@ const OptIn = () => {
       toast.error(String(err))
     },
   }
-  const {
-    mutate,
-    isPending,
-  } = useSetReceivedEmail(session.id as number, {
+  const { mutate, isPending } = useSetReceivedEmail(session.id as number, {
     onSuccess: callBackReq.onSuccess,
     onError: callBackReq.onError,
   })
@@ -36,9 +33,15 @@ const OptIn = () => {
       <div className="text-sm mt-2 border-b border-text-100">
         <div className="flex justify-between py-5">
           <div>
-            <Typography variant="p">Travel tips, uplifting content and exclusive deals</Typography>
+            <Typography variant="p">
+              Travel tips, uplifting content and exclusive deals
+            </Typography>
           </div>
-          <ToggleSwitch checked={session.canReceiveEmail} onChange={() => mutate({ canReceive: !session.canReceiveEmail })} disabled={isPending} />
+          <ToggleSwitch
+            checked={session.canReceiveEmail}
+            onChange={() => mutate({ canReceive: !session.canReceiveEmail })}
+            disabled={isPending}
+          />
         </div>
       </div>
     </>

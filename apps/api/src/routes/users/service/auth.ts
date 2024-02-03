@@ -1,6 +1,10 @@
 import { Response, Request } from 'express'
 import { PrismaClient, RegistrationType } from '@prisma/client'
-import { APP_NAME, REQUIRED_VALUE_EMPTY, USER_NOT_AUTHORIZED } from '@repo/constants'
+import {
+  APP_NAME,
+  REQUIRED_VALUE_EMPTY,
+  USER_NOT_AUTHORIZED,
+} from '@repo/constants'
 import { encryptKey, nextAuthSecret, webUrl } from '@/common/config'
 import dayjs from 'dayjs'
 import { AuthEmail } from './authEmail'
@@ -650,7 +654,7 @@ export const userDetails = async (req: Request, res: Response) => {
 export const setCanReceiveEmail = async (req: Request, res: Response) => {
   const prisma = new PrismaClient()
   const userId = Number(req.params.userId)
-  const canReceive = req.body.canReceive;
+  const canReceive = req.body.canReceive
   if (typeof canReceive === 'boolean') {
     try {
       const user = await prisma.user.findUnique({
@@ -670,28 +674,30 @@ export const setCanReceiveEmail = async (req: Request, res: Response) => {
         res.json(
           response.success({
             item: setCanReceiveEmail,
-            message: canReceive ? `You will now received an email from ${APP_NAME}` : `You are now removed from ${APP_NAME} email notification`,
+            message: canReceive
+              ? `You will now received an email from ${APP_NAME}`
+              : `You are now removed from ${APP_NAME} email notification`,
           })
-        );
+        )
       } else {
         res.json(
           response.error({
             message: USER_NOT_AUTHORIZED,
           })
-        );
+        )
       }
     } catch (err: any) {
       res.json(
         response.error({
           message: err.message,
         })
-      );
+      )
     }
   } else {
     res.json(
       response.error({
         message: REQUIRED_VALUE_EMPTY,
       })
-    );
+    )
   }
 }

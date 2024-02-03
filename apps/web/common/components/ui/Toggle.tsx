@@ -12,7 +12,12 @@ function classNames(...classes: (string | boolean)[]): string {
   return classes.filter(Boolean).join(" ")
 }
 
-const ToggleSwitch: React.FC<ToggleSwitchProps> = ({ checked, defaultChecked, disabled, onChange }) => {
+const ToggleSwitch: React.FC<ToggleSwitchProps> = ({
+  checked,
+  defaultChecked,
+  disabled,
+  onChange,
+}) => {
   return (
     <Switch
       checked={checked}
