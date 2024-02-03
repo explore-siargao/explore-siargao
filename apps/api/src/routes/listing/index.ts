@@ -215,10 +215,30 @@ router.delete(
 )
 
 //reviews
-router.get('/reviews/user/:userId', getReviewsByUserId)
-router.get('/reviews/:listingId', getReviewByListing)
-router.get('/reviews/view/:reviewId', getReviewById)
-router.post('/:userId/reviews/post', addReview)
+router.get('/reviews/user/:userId', 
+  isOriginValid,
+  isCsrfTokenValid,
+  isUserLoggedIn,
+  getReviewsByUserId
+)
+router.get('/reviews/:listingId', 
+  isOriginValid,
+  isCsrfTokenValid,
+  isUserLoggedIn,
+  getReviewByListing
+  )
+router.get('/reviews/view/:reviewId', 
+  isOriginValid,
+  isCsrfTokenValid,
+  isUserLoggedIn,
+  getReviewById
+)
+router.post('/:userId/reviews/post', 
+  isOriginValid,
+  isCsrfTokenValid,
+  isUserLoggedIn,
+  addReview
+)
 router.patch('/:userId/reviews/update/:reviewId', updateReview)
 router.delete('/:userId/reviews/delete/:reviewId', deleteReview)
 
