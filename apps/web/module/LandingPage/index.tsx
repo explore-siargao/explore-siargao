@@ -7,8 +7,10 @@ import Bookings from "../Bookings"
 function LandingPage() {
   return (
     <AuthGuard>
-      <Bookings />
-      <BottomNavBar />
+      <div className="min-h-screen">
+        <Bookings />
+        <BottomNavBar />
+      </div>
     </AuthGuard>
   )
 }
