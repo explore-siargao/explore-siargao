@@ -6,7 +6,7 @@ import { Separator } from '@/common/components/ui/Separator'
 import { useForm, FormProvider } from 'react-hook-form'
 import { Textarea } from '@/common/components/ui/Textarea'
 import { Button } from '@/common/components/ui/Button'
-import { useParams } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import useSessionStore from '@/common/store/useSessionStore'
 import { WidthWrapper } from '@/common/components/WidthWrapper'
 import toast from 'react-hot-toast'
@@ -16,6 +16,7 @@ import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { Title } from '@/common/components/ui/Title'
 
 const AddReview = () => {
+  const router = useRouter()
   const params = useParams()
   const [stepIndex, setStepIndex] = useState<number>(0)
   const listingId = Number(params.listingId)
@@ -43,6 +44,7 @@ const AddReview = () => {
       onSuccess: (data: any) => {
         if (!data.error) {
           toast.success(data.message)
+          router.push('/account-settings/booking-reviews')
         } else {
           toast.error(String(data.message))
         }
@@ -58,7 +60,7 @@ const AddReview = () => {
     {
       title: 'Cleanliness',
       description: 'How would you rate the cleanliness of the accommodation?',
-      fieldName: 'cleanlinessRates'
+      fieldName: 'cleanLinessRates'
     },
     {
       title: 'Accuracy',
