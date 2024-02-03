@@ -5,7 +5,9 @@ import React from "react"
 const GlobalPreferencePage = () => {
   return (
     <AuthGuard>
-      <GlobalPreferences />
+      <div className="min-h-screen">
+        <GlobalPreferences />
+      </div>
     </AuthGuard>
   )
 }

@@ -5,7 +5,9 @@ import React from "react"
 const TaxesPage = () => {
   return (
     <AuthGuard>
-      <Taxes />
+      <div className="min-h-screen">
+        <Taxes />
+      </div>
     </AuthGuard>
   )
 }
