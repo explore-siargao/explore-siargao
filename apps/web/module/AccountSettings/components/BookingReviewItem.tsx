@@ -38,16 +38,28 @@ const BookingReviewItem = ({
             <div className="flex items-center mb-4">
               <div className="font-medium ">
                 <p>
-                  <strong>You reviewed</strong>{name}{" "}
-                  {reviewedTime}
+                  <strong>You reviewed</strong> {name}{" "}
+                  <time
+                    dateTime="2014-08-16 19:00"
+                    className="block text-sm text-gray-500 d"
+                  >
+                    January 4, 2024 to January 9, 2024
+                  </time>
                 </p>
               </div>
             </div>
             <Button variant={"primary"}>View listing</Button>
           </div>
-          <ReviewStarRating totalStars={5} rating={averageRating} size={'sm'} />
-          {/* <div className="overflow-hidden h-28"> */}
-
+          <div className="flex flex-col gap-y">
+            <ReviewStarRating totalStars={5} rating={averageRating} size={'sm'} />
+            <time
+              dateTime="2014-08-16 19:00"
+              className="block text-sm text-gray-500 mt"
+            >
+              {reviewedTime}
+            </time>
+          </div>
+          
           <Typography className="text-text-400 mt-4">{reviewMessage}</Typography>
           <button
             className="relative block text-sm font-medium text-secondary-600 hover:underline w-full pb-5"
