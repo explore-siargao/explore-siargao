@@ -5,7 +5,9 @@ import React from "react"
 const page = () => {
   return (
     <AuthGuard>
-      <YourPayments />
+      <div className="min-h-screen">
+        <YourPayments />
+      </div>
     </AuthGuard>
   )
 }

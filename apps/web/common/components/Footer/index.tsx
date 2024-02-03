@@ -14,7 +14,7 @@ import { Globe } from "lucide-react"
 
 const Footer = () => {
   return (
-    <div className="bg-gray-100 pb-6 pt-16 bottom-0 border-t border-gray-200">
+    <footer className="bg-gray-100 pb-6 pt-16 bottom-0 border-t border-gray-200 mt-12">
       <WidthWrapper width={"medium"}>
         <div className="md:flex border-b pb-4 md:pb-11">
           <div className="md:flex-1 pb-4 md:pb-0 md:mr-4 border-b md:border-b-0">
@@ -126,7 +126,7 @@ const Footer = () => {
           </div>
         </div>
       </WidthWrapper>
-    </div>
+    </footer>
   )
 }
 
