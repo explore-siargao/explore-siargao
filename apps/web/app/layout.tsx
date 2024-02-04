@@ -36,9 +36,7 @@ export default async function RootLayout({
           <QueryClientWrapper>
             <GlobalModalWrapper>
               <Header />
-              <div className="min-h-screen">
-                {children}
-              </div>
+              <div className="min-h-screen">{children}</div>
               <Footer />
             </GlobalModalWrapper>
             <BottomNavBar />

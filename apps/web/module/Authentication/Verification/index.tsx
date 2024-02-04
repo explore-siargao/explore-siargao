@@ -91,7 +91,8 @@ const Verification = () => {
             variant={"p"}
             className="text-sm leading-tight text-gray-500 mx-1"
           >
-            Please enter 6 digits verification code sent to your email to confirm your identity.
+            Please enter 6 digits verification code sent to your email to
+            confirm your identity.
           </Typography>
         </div>
         <form className="space-y-6" method="POST">

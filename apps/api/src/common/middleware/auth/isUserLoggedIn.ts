@@ -5,7 +5,7 @@ import { PrismaClient } from '@prisma/client'
 import { decode } from 'next-auth/jwt'
 import { ResponseService } from '@/common/service/response'
 import { E_RegistrationType, E_UserRole, T_Session } from '@repo/contract'
-import { USER_NOT_AUTHORIZED } from "@/common/constants"
+import { USER_NOT_AUTHORIZED } from '@/common/constants'
 
 const response = new ResponseService()
 
