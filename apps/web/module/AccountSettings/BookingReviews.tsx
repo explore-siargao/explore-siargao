@@ -22,7 +22,7 @@ const bookingReviewsDummy = [
       "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorem omnis similique illum id quo soluta atque tenetur necessitatibus reprehenderit perspiciatis, dolores, aliquid voluptate aut maxime perferendis provident distinctio nulla magni alias dolore facilis? Accusantium, sit. Quo neque numquam itaque minus libero sapiente eum iste odio eius soluta ulla soluta ulla hello pmi nas an asd ! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorem omnis similique illum id quo soluta atque tenetur necessitatibus reprehenderit perspiciatis, dolores",
     location: "United Kingdom",
     reviewedTime: "March 3, 2017",
-    averageRating: 3
+    averageRating: 3,
   },
   {
     id: 2,
@@ -33,7 +33,7 @@ const bookingReviewsDummy = [
     reviewMessage:
       "Laborum nisi consectetur esse irure consequat nulla nulla eu fugiat duis incididunt quis laborum. Nulla ea adipisicing ex et occaecat commodo sint ea do officia irure. Aliquip do incididunt ut sunt. Aliquip velit non consequat velit sit minim laborum voluptate sunt ex excepteur ad deserunt.",
     reviewedTime: "March 3, 2017",
-    averageRating: 5
+    averageRating: 5,
   },
 ]
 
@@ -46,35 +46,45 @@ const BookingReviews = () => {
   console.log(listingData)
 
   type ratingsSchema = {
-    accuracyRates: number,
-    checkInRates: number,
-    cleanLinessRates: number,
-    communicationRates: number,
-    locationRates: number,
+    accuracyRates: number
+    checkInRates: number
+    cleanLinessRates: number
+    communicationRates: number
+    locationRates: number
     valueRates: number
-  };
+  }
 
   function getAverageStars(ratings: ratingsSchema) {
     // Extract values from the ratings object
-    const values = Object.values(ratings);
+    const values = Object.values(ratings)
 
     // Calculate the sum of all values
-    const sum = values.reduce((acc, currentValue) => acc + currentValue, 0);
+    const sum = values.reduce((acc, currentValue) => acc + currentValue, 0)
 
     // Calculate the average
-    const average = sum / values.length;
+    const average = sum / values.length
 
     // Round up the average
-    const roundedAverage = Math.ceil(average);
+    const roundedAverage = Math.ceil(average)
 
-    return roundedAverage;
+    return roundedAverage
   }
 
   const months = [
-    "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
-  ];
-  
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ]
+
   if (tableState === 0) {
     content = (
       <>
@@ -85,17 +95,17 @@ const BookingReviews = () => {
             cleanLinessRates: item.cleanLinessRates,
             communicationRates: item.communicationRates,
             locationRates: item.locationRates,
-            valueRates: item.valueRates
+            valueRates: item.valueRates,
           }
 
           const reviewDate = new Date(item.createdAt)
 
-          const year = reviewDate.getFullYear();
-          const monthIndex = reviewDate.getMonth();
-          const day = reviewDate.getDate();
+          const year = reviewDate.getFullYear()
+          const monthIndex = reviewDate.getMonth()
+          const day = reviewDate.getDate()
 
-          const monthName = months[monthIndex];
-          
+          const monthName = months[monthIndex]
+
           return (
             <>
               <BookingReviewItem
@@ -108,7 +118,7 @@ const BookingReviews = () => {
                 key={item.id}
                 averageRating={getAverageStars(ratings)}
               />
-              {index === reviewsByUserId.items?.length! - 1 ? <></> : <hr /> }
+              {index === reviewsByUserId.items?.length! - 1 ? <></> : <hr />}
             </>
           )
         })}
@@ -125,7 +135,7 @@ const BookingReviews = () => {
               pic={JSON.stringify(item.imageUrls)}
               key={item.id}
             />
-            {index === listingData.items?.length! - 1 ? <></> : <hr /> }
+            {index === listingData.items?.length! - 1 ? <></> : <hr />}
           </div>
         ))}
       </div>

@@ -2,7 +2,7 @@ import { Button } from "@/common/components/ui/Button"
 import { Typography } from "@/common/components/ui/Typography"
 import Image from "next/image"
 import React, { useState } from "react"
-import ReviewStarRating from './ReviewStarRating'
+import ReviewStarRating from "./ReviewStarRating"
 
 type BookingReviewItemProps = {
   id: number
@@ -21,7 +21,7 @@ const BookingReviewItem = ({
   reviewMessage,
   location,
   reviewedTime,
-  averageRating
+  averageRating,
 }: BookingReviewItemProps) => {
   const [isClicked, setIsClicked] = useState(false)
   const handleClick = () => {
@@ -51,7 +51,11 @@ const BookingReviewItem = ({
             <Button variant={"primary"}>View listing</Button>
           </div>
           <div className="flex flex-col gap-y">
-            <ReviewStarRating totalStars={5} rating={averageRating} size={'sm'} />
+            <ReviewStarRating
+              totalStars={5}
+              rating={averageRating}
+              size={"sm"}
+            />
             <time
               dateTime="2014-08-16 19:00"
               className="block text-sm text-gray-500 mt"
@@ -59,8 +63,10 @@ const BookingReviewItem = ({
               {reviewedTime}
             </time>
           </div>
-          
-          <Typography className="text-text-400 mt-4">{reviewMessage}</Typography>
+
+          <Typography className="text-text-400 mt-4">
+            {reviewMessage}
+          </Typography>
           <button
             className="relative block text-sm font-medium text-secondary-600 hover:underline w-full pb-5"
             onClick={handleClick}
