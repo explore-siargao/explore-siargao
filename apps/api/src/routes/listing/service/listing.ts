@@ -1,6 +1,6 @@
 import { Response, Request } from 'express'
 import { PrismaClient } from '@prisma/client'
-import { REQUIRED_VALUE_EMPTY, USER_NOT_EXIST } from '@repo/constants'
+import { REQUIRED_VALUE_EMPTY, USER_NOT_EXIST } from '@/common/constants'
 import { ResponseService } from '@/common/service/response'
 import { Z_Listing } from '@repo/contract'
 
@@ -96,7 +96,6 @@ export const addListing = async (req: Request, res: Response) => {
     imageUrls,
     title,
     category,
-    description,
     address,
     fee,
     latitude,
@@ -125,7 +124,6 @@ export const addListing = async (req: Request, res: Response) => {
           imageUrls &&
           title &&
           category &&
-          description &&
           address &&
           fee &&
           cleaningFee &&
@@ -163,7 +161,6 @@ export const addListing = async (req: Request, res: Response) => {
               imageUrls: JSON.stringify(imageUrls),
               title: title,
               category: category,
-              description: description,
               address: address,
               longitude: longitude,
               latitude: latitude,
@@ -201,15 +198,7 @@ export const addListing = async (req: Request, res: Response) => {
 export const updateListing = async (req: Request, res: Response) => {
   const userId = Number(req.params.userId)
   const id = Number(req.params.id)
-  const {
-    imageUrls,
-    title,
-    category,
-    description,
-    address,
-    latitude,
-    longitude,
-  } = req.body
+  const { imageUrls, title, category, address, latitude, longitude } = req.body
   try {
     const getUser = await prisma.user.findUnique({
       where: {
@@ -234,22 +223,13 @@ export const updateListing = async (req: Request, res: Response) => {
         })
       )
     }
-    if (
-      imageUrls ||
-      title ||
-      category ||
-      description ||
-      address ||
-      latitude ||
-      longitude
-    ) {
+    if (imageUrls || title || category || address || latitude || longitude) {
       const updateListing = await prisma.listing.update({
         where: {
           id: id,
         },
         data: {
           title: title,
-          description: description,
           category: category,
           imageUrls: imageUrls,
           address: address,

@@ -4,19 +4,20 @@ import { LINK_ACCOUNT } from "@/common/constants/links"
 import React from "react"
 import { Title } from "@/common/components/ui/Title"
 import { Breadcrumb } from "@/common/components/ui/Breadcrumb"
-import useSessionStore from "@/common/store/useSessionStore"
 import PreferredLanguage from "./PreferredLanguage"
 import PreferredCurrency from "./PreferredCurrency"
+import { ACCOUNT, GLOBAL_PREFERENCES } from "@/common/constants"
 
 const GlobalPreferences = () => {
-  const session = useSessionStore((state) => state)
-  const personalInfo = session?.personalInfo
-  const TITLE = "Global Preferences"
   return (
     <AccountSettingWrapper>
       <div>
-        <Breadcrumb home="Account" page={TITLE} link={LINK_ACCOUNT} />
-        <Title>{TITLE}</Title>
+        <Breadcrumb
+          home={ACCOUNT}
+          page={GLOBAL_PREFERENCES}
+          link={LINK_ACCOUNT}
+        />
+        <Title>{GLOBAL_PREFERENCES}</Title>
       </div>
       <div className="mt-4">
         <div className="divide-y">

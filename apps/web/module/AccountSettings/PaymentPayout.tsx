@@ -8,6 +8,7 @@ import Payments from "./components/Payments"
 import Payouts from "./components/Payouts"
 import GuestContribution from "./components/GuestContribution"
 import { Breadcrumb } from "@/common/components/ui/Breadcrumb"
+import { ACCOUNT, PAYMENTS_PAYOUTS } from "@/common/constants"
 
 const renderPayments = () => {
   return <Payments />
@@ -34,11 +35,11 @@ const PaymentPayout = () => {
     <AccountSettingWrapper>
       <div>
         <Breadcrumb
-          home="Account"
-          page="Payments & payouts"
+          home={ACCOUNT}
+          page={PAYMENTS_PAYOUTS}
           link={LINK_ACCOUNT}
         />
-        <Title>Payments & payouts</Title>
+        <Title>{PAYMENTS_PAYOUTS}</Title>
       </div>
       <div className="hidden sm:block">
         <div className="flex border-b border-b-text-50">

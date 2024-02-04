@@ -1,12 +1,7 @@
 "use client"
 import Container from "@/common/components/Container"
 import { Button } from "@/common/components/ui/Button"
-import {
-  RESEND_BUTTON_TEXT,
-  SUBMIT_BUTTON_TEXT,
-  VERIFICATION_CODE_CONTENT,
-  VERIFICATION_CODE_TITTLE,
-} from "@/common/constants"
+import { SUBMIT } from "@/common/constants"
 import React, { useEffect, useRef, useState } from "react"
 import toast from "react-hot-toast"
 import useMultiFactor from "../hooks/useMultiFactor"
@@ -90,13 +85,14 @@ const Verification = () => {
       <div className="p-6">
         <div className="pb-6 space-y-4 text-center">
           <Typography variant={"h1"} className="pt-2">
-            {VERIFICATION_CODE_TITTLE}
+            Verification Code
           </Typography>
           <Typography
             variant={"p"}
             className="text-sm leading-tight text-gray-500 mx-1"
           >
-            {VERIFICATION_CODE_CONTENT}
+            Please enter 6 digits verification code sent to your email to
+            confirm your identity.
           </Typography>
         </div>
         <form className="space-y-6" method="POST">
@@ -131,7 +127,7 @@ const Verification = () => {
               disabled={isVerifyMultiFactorPending}
               variant={"primary"}
             >
-              {SUBMIT_BUTTON_TEXT}
+              {SUBMIT}
             </Button>
             <div className="text-sm text-center text-gray-500">
               <Typography variant={"p"}>Did not receive the code?</Typography>
@@ -143,7 +139,7 @@ const Verification = () => {
                 onClick={() => sendMultiFactorCode()}
                 disabled={isMultiFactorPending}
               >
-                {RESEND_BUTTON_TEXT}
+                Resend
               </Button>
             </div>
           </div>

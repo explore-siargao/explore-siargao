@@ -13,5 +13,6 @@ export const LINK_ACCOUNT_YOUR_PAYMENT = `${LINK_ACCOUNT}/payment-payout/your-pa
 export const LINK_ACCOUNT_LOGIN_SECURITY = `${LINK_ACCOUNT}/login-security`
 export const LINK_ACCOUNT_WISHLIST = `${LINK_ACCOUNT}/wishlist`
 export const LINK_ACCOUNT_BOOKINGS = `${LINK_ACCOUNT}/bookings`
+export const LINK_ACCOUNT_NOTIFICATIONS = `${LINK_ACCOUNT}/notifications`
 export const LINK_ACCOUNT_TAXES = `${LINK_ACCOUNT}/taxes`
 export const LINK_ACCOUNT_GLOBAL_PREFERENCES = `${LINK_ACCOUNT}/global-preferences`

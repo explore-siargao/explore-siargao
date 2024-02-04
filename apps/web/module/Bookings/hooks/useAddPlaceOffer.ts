@@ -1,5 +1,5 @@
 import { ApiService } from "@/common/service/api"
-import { API_URL_BOOKINGS } from "@repo/constants"
+import { API_URL_BOOKINGS } from "@/common/constants"
 import { T_PlaceOffers } from "@repo/contract"
 import { useMutation } from "@tanstack/react-query"
 

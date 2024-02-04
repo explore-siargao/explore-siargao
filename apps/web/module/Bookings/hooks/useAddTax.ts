@@ -1,4 +1,4 @@
-import { API_URL_TAX } from "@repo/constants"
+import { API_URL_TAX } from "@/common/constants"
 import { useMutation } from "@tanstack/react-query"
 import { ApiService } from "@/common/service/api"
 import { T_Taxes } from "@repo/contract"
