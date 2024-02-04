@@ -159,7 +159,7 @@ const BookingReviews = () => {
             )}
             onClick={() => setTableState(1)}
           >
-            Pending
+            To Review
           </button>
         </div>
         <div className="mt-6">{content}</div>
