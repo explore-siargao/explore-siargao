@@ -4,7 +4,7 @@ import {
   REQUIRED_VALUE_EMPTY,
   UNKNOWN_ERROR_OCCURRED,
   USER_NOT_EXIST,
-} from '@repo/constants'
+} from '@/common/constants'
 import { Z_ListingDescription } from '@repo/contract'
 import { Request, Response } from 'express'
 const response = new ResponseService()

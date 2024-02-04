@@ -5,14 +5,14 @@ import React from "react"
 import { Title } from "@/common/components/ui/Title"
 import { Breadcrumb } from "@/common/components/ui/Breadcrumb"
 import OptIn from "./OptIn"
+import { ACCOUNT, NOTIFICATIONS } from "@/common/constants"
 
 const Notifications = () => {
-  const TITLE = "Notifications"
   return (
     <AccountSettingWrapper>
       <div>
-        <Breadcrumb home="Account" page={TITLE} link={LINK_ACCOUNT} />
-        <Title>{TITLE}</Title>
+        <Breadcrumb home={ACCOUNT} page={NOTIFICATIONS} link={LINK_ACCOUNT} />
+        <Title>{NOTIFICATIONS}</Title>
       </div>
       <div className="mt-4">
         <div className="divide-y">

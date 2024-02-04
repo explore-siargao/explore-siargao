@@ -1,10 +1,11 @@
 import { Response, Request } from 'express'
 import { PrismaClient, RegistrationType } from '@prisma/client'
 import {
-  APP_NAME,
   REQUIRED_VALUE_EMPTY,
   USER_NOT_AUTHORIZED,
-} from '@repo/constants'
+  USER_NOT_EXIST,
+} from '@/common/constants'
+import { APP_NAME } from '@repo/constants'
 import { encryptKey, nextAuthSecret, webUrl } from '@/common/config'
 import dayjs from 'dayjs'
 import { AuthEmail } from './authEmail'
@@ -267,7 +268,7 @@ export const info = async (req: Request, res: Response) => {
   } else {
     res.json({
       error: true,
-      message: 'You are not authorized to perform this action',
+      message: USER_NOT_AUTHORIZED,
     })
   }
 }
@@ -586,7 +587,7 @@ export const updateUserEmail = async (req: Request, res: Response) => {
         error: true,
         items: null,
         itemCount: 0,
-        message: 'User not exist to our system',
+        message: USER_NOT_EXIST,
       })
     }
   } catch (err: any) {
@@ -648,7 +649,7 @@ export const userDetails = async (req: Request, res: Response) => {
       error: true,
       item: null,
       itemCount: 0,
-      message: `You are not authorized to perform this action`,
+      message: USER_NOT_AUTHORIZED,
     })
   }
 }

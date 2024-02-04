@@ -1,5 +1,5 @@
 import { ApiService } from "@/common/service/api"
-import { API_URL_USERS } from "@repo/constants"
+import { API_URL_USERS } from "@/common/constants"
 import { T_GovernmentId } from "@repo/contract"
 import { useMutation } from "@tanstack/react-query"
 

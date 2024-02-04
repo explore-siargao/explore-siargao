@@ -1,6 +1,9 @@
-import { FIFTEEN_MINUTES, TWELVE_MINUTES } from "@/common/constants"
+import {
+  FIFTEEN_MINUTES,
+  TWELVE_MINUTES,
+  API_URL_BOOKINGS,
+} from "@/common/constants"
 import { ApiService } from "@/common/service/api"
-import { API_URL_BOOKINGS } from "@repo/constants"
 import { useQuery } from "@tanstack/react-query"
 
 export async function getAllBookings() {

@@ -1,5 +1,5 @@
 import { ApiService } from "@/common/service/api"
-import { API_URL_TAX } from "@repo/constants"
+import { API_URL_TAX } from "@/common/constants"
 import { T_Taxes, T_BackendResponse } from "@repo/contract"
 import { useQuery } from "@tanstack/react-query"
 

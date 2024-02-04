@@ -29,6 +29,16 @@ import {
   Megaphone,
 } from "lucide-react"
 import { E_UserRole } from "@repo/contract"
+import {
+  PAYMENTS_PAYOUTS,
+  PERSONAL_INFO,
+  WISHLISTS,
+  BOOKING_REVIEWS,
+  LOGIN_SECURITY,
+  NOTIFICATIONS,
+  TAXES,
+  GLOBAL_PREFERENCES,
+} from "@/common/constants"
 
 const AccountSettings = () => {
   const session = useSessionStore((state) => state)
@@ -46,7 +56,7 @@ const AccountSettings = () => {
     {
       id: 1,
       icon: SquareUser,
-      title: "Personal Info",
+      title: PERSONAL_INFO,
       content: "Labore est amet eiusmod proident.",
       link: LINK_ACCOUNT_PERSONAL_INFO,
       show: true,
@@ -54,7 +64,7 @@ const AccountSettings = () => {
     {
       id: 2,
       icon: Heart,
-      title: "Wishlists",
+      title: WISHLISTS,
       content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       link: LINK_ACCOUNT_WISHLIST,
       show: true,
@@ -62,7 +72,7 @@ const AccountSettings = () => {
     {
       id: 3,
       icon: CreditCard,
-      title: "Payments & payouts",
+      title: PAYMENTS_PAYOUTS,
       content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       link: LINK_ACCOUNT_PAYMENT_PAYOUT,
       show: true,
@@ -70,7 +80,7 @@ const AccountSettings = () => {
     {
       id: 4,
       icon: Star,
-      title: "Booking Reviews",
+      title: BOOKING_REVIEWS,
       content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       link: LINK_ACCOUNT_BOOKING_REVIEWS,
       show: true,
@@ -78,7 +88,7 @@ const AccountSettings = () => {
     {
       id: 5,
       icon: ShieldHalf,
-      title: "Login & security",
+      title: LOGIN_SECURITY,
       content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       link: LINK_ACCOUNT_LOGIN_SECURITY,
       show: true,
@@ -86,7 +96,7 @@ const AccountSettings = () => {
     {
       id: 6,
       icon: Megaphone,
-      title: "Notifications",
+      title: NOTIFICATIONS,
       content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       link: LINK_ACCOUNT_NOTIFICATIONS,
       show: true,
@@ -94,7 +104,7 @@ const AccountSettings = () => {
     {
       id: 7,
       icon: File,
-      title: "Taxes",
+      title: TAXES,
       content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       link: LINK_ACCOUNT_TAXES,
       show: session.role === E_UserRole.Host,
@@ -102,7 +112,7 @@ const AccountSettings = () => {
     {
       id: 8,
       icon: Settings2,
-      title: "Global Preferences",
+      title: GLOBAL_PREFERENCES,
       content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       link: LINK_ACCOUNT_GLOBAL_PREFERENCES,
       show: true,
