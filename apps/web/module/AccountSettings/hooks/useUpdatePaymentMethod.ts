@@ -1,6 +1,6 @@
 import { ApiService } from "@/common/service/api"
 import { IPaymentMethod } from "@/common/types/global"
-import { API_URL_PAYMENTS } from "@repo/constants"
+import { API_URL_PAYMENTS } from "@/common/constants"
 import { useMutation } from "@tanstack/react-query"
 
 export async function updatePaymentMethod(

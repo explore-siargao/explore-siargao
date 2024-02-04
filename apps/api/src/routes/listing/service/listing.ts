@@ -1,6 +1,6 @@
 import { Response, Request } from 'express'
 import { PrismaClient } from '@prisma/client'
-import { REQUIRED_VALUE_EMPTY, USER_NOT_EXIST } from '@repo/constants'
+import { REQUIRED_VALUE_EMPTY, USER_NOT_EXIST } from '@/common/constants'
 import { ResponseService } from '@/common/service/response'
 import { Z_Listing } from '@repo/contract'
 

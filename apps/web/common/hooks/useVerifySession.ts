@@ -1,4 +1,4 @@
-import { API_URL_USERS } from "@repo/constants"
+import { API_URL_USERS } from "@/common/constants"
 import { useQuery } from "@tanstack/react-query"
 import { ApiService } from "@/common/service/api"
 import { FIFTEEN_MINUTES, TWELVE_MINUTES } from "../constants"
