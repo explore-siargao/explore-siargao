@@ -78,7 +78,7 @@ const SignUpForm = ({ isSocial = false }: Props) => {
             queryClient.invalidateQueries({
               queryKey: ["session"],
             })
-          } 
+          }
           setIsOpen()
           router.push("/")
         } else {
