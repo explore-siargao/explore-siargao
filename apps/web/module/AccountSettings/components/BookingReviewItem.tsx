@@ -98,7 +98,6 @@ const BookingReviewItem = ({
           />
         </div>
       </div>
-      <hr />
     </>
   )
 }

@@ -10,6 +10,7 @@ import BookingReviewItemPending from "./components/BookingReviewItemPending"
 import useGetReviewsByUserId from "../Bookings/hooks/useGetReviewsByUserId"
 import useSessionStore from "@/common/store/useSessionStore"
 import { ACCOUNT, BOOKING_REVIEWS } from "@/common/constants"
+import useGetListings from "./hooks/useGetListings"
 
 const bookingReviewsDummy = [
   {
@@ -40,8 +41,9 @@ const BookingReviews = () => {
   const [tableState, setTableState] = useState(0)
   let content
   const userId = useSessionStore().id
-  const { data } = useGetReviewsByUserId(userId as number)
-  console.log(data)
+  const { data: reviewsByUserId } = useGetReviewsByUserId(userId as number)
+  const { data: listingData } = useGetListings()
+  console.log(listingData)
 
   type ratingsSchema = {
     accuracyRates: number,
@@ -67,11 +69,16 @@ const BookingReviews = () => {
 
     return roundedAverage;
   }
+
+  const months = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
   
   if (tableState === 0) {
     content = (
       <>
-        {data?.items?.map((item) => {
+        {reviewsByUserId?.items?.map((item, index) => {
           const ratings = {
             accuracyRates: item.accuracyRates,
             checkInRates: item.checkInRates,
@@ -83,11 +90,6 @@ const BookingReviews = () => {
 
           const reviewDate = new Date(item.createdAt)
 
-          const months = [
-            "January", "February", "March", "April", "May", "June",
-            "July", "August", "September", "October", "November", "December"
-          ];
-
           const year = reviewDate.getFullYear();
           const monthIndex = reviewDate.getMonth();
           const day = reviewDate.getDate();
@@ -95,33 +97,38 @@ const BookingReviews = () => {
           const monthName = months[monthIndex];
           
           return (
-            <BookingReviewItem
-              id={item.listing.id}
-              location={item.listing.address}
-              name={item.listing.title}
-              pic={""}
-              reviewMessage={item.comment}
-              reviewedTime={`${monthName} ${day}, ${year}`}
-              key={item.id}
-              averageRating={getAverageStars(ratings)}
-            />
+            <>
+              <BookingReviewItem
+                id={item.listing.id}
+                location={item.listing.address}
+                name={item.listing.title}
+                pic={""}
+                reviewMessage={item.comment}
+                reviewedTime={`${monthName} ${day}, ${year}`}
+                key={item.id}
+                averageRating={getAverageStars(ratings)}
+              />
+              {index === reviewsByUserId.items?.length! - 1 ? <></> : <hr /> }
+            </>
           )
         })}
       </>
     )
   } else if (tableState === 1) {
     content = (
-      <>
-        {bookingReviewsDummy.map((item) => (
-          <BookingReviewItemPending
-            id={item.id}
-            name={item.name}
-            pic={item.pic}
-            reviewedTime={item.reviewedTime}
-            key={item.id}
-          />
+      <div className="flex flex-col">
+        {listingData?.items?.map((item, index) => (
+          <div>
+            <BookingReviewItemPending
+              id={item.id}
+              name={item.title}
+              pic={JSON.stringify(item.imageUrls)}
+              key={item.id}
+            />
+            {index === listingData.items?.length! - 1 ? <></> : <hr /> }
+          </div>
         ))}
-      </>
+      </div>
     )
   }
   return (

@@ -1,13 +1,15 @@
 import { Button } from "@/common/components/ui/Button"
 import { Textarea } from "@/common/components/ui/Textarea"
+import { Typography } from "@/common/components/ui/Typography"
 import Image from "next/image"
+import { useRouter } from "next/navigation"
 import React from "react"
 
 type BookingReviewItemProps = {
   id: number
-  pic: string
+  pic?: string
   name: string
-  reviewedTime: string
+  reviewedTime?: string
 }
 
 const BookingReviewItemPending = ({
@@ -16,55 +18,32 @@ const BookingReviewItemPending = ({
   pic,
   reviewedTime,
 }: BookingReviewItemProps) => {
+  const router = useRouter()
   return (
     <div
       key={id}
-      className="grid grid-flow-row lg:grid-cols-3 items-center lg:items-start divide-text-100 rounded-xl gap-5 h-full w-full mb-8"
+      className="flex w-full p-6 gap-x-4 items-center"
     >
-      <article className="col-span-2">
-        <div className="flex justify-between">
-          <div className="flex items-center mb-4">
-            <div className="font-medium ">
-              <p>
-                {name}{" "}
-                <time
-                  dateTime="2014-08-16 19:00"
-                  className="block text-sm text-gray-500 d"
-                >
-                  {reviewedTime}
-                </time>
-              </p>
-            </div>
+      <div className="flex w-full gap-x-4 items-center">
+        <div className="h-24 w-24 rounded bg-primary-100">
+        </div>
+        <div className="h-full grid grid-cols-3 gap-4 content-between">
+          <div className="col-span-3">
+            <Typography variant={'h1'}>
+              {name}
+            </Typography>
           </div>
-          <Button variant={"primary"}>View listing</Button>
+          <div className="col-span-3">
+            <Button onClick={() => router.push(`/add-review/${id}`)} variant={"primary"}>
+              Add Review
+            </Button>
+          </div>
         </div>
-        <div className="flex items-center mb-1 space-x-1 rtl:space-x-reverse">
-          <select
-            id="stars"
-            className="pr-10 text-text-900 focus-within:z-10 focus-within:ring-2 focus-within:ring-text-600 text-sm rounded-md block"
-          >
-            <option>5 stars</option>
-            <option>4 stars</option>
-            <option>3 stars</option>
-            <option>2 stars</option>
-            <option>1 star</option>
-          </select>
-        </div>
-
-        <Textarea className="mt-2" />
-        <Button variant="shaded" size="sm" className="mt-4">
-          Submit review
-        </Button>
-      </article>
-
-      <div className="h-full w-72 2xl:w-full rounded-2xl relative ">
-        <Image
-          src={pic}
-          width={300}
-          height={300}
-          alt={pic}
-          className="object-cover h-full w-full rounded-xl"
-        />
+      </div>
+      <div className="w-full text-right">
+        <Typography variant={'p'} className="text-gray-500 flex-shrink-0">
+          June 7, 2024 to June 12, 2024
+        </Typography>
       </div>
     </div>
   )
