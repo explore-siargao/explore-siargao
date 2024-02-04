@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query"
 
 export async function getReviewByUserId(userId: number | undefined) {
   const apiService = new ApiService()
-  return await apiService.get(`${API_URL_BOOKINGS}/user/${userId}`)
+  return await apiService.get(`${API_URL_BOOKINGS}/reviews/user/${userId}`)
 }
 
 function useGetReviewsByUserId(userId: number | undefined) {
