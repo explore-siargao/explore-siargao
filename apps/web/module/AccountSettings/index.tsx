@@ -29,7 +29,16 @@ import {
   Megaphone,
 } from "lucide-react"
 import { E_UserRole } from "@repo/contract"
-import { PAYMENTS_PAYOUTS, PERSONAL_INFO, WISHLISTS, BOOKING_REVIEWS, LOGIN_SECURITY, NOTIFICATIONS, TAXES, GLOBAL_PREFERENCES } from "@/common/constants"
+import {
+  PAYMENTS_PAYOUTS,
+  PERSONAL_INFO,
+  WISHLISTS,
+  BOOKING_REVIEWS,
+  LOGIN_SECURITY,
+  NOTIFICATIONS,
+  TAXES,
+  GLOBAL_PREFERENCES,
+} from "@/common/constants"
 
 const AccountSettings = () => {
   const session = useSessionStore((state) => state)

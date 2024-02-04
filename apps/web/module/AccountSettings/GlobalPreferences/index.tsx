@@ -12,7 +12,11 @@ const GlobalPreferences = () => {
   return (
     <AccountSettingWrapper>
       <div>
-        <Breadcrumb home={ACCOUNT} page={GLOBAL_PREFERENCES} link={LINK_ACCOUNT} />
+        <Breadcrumb
+          home={ACCOUNT}
+          page={GLOBAL_PREFERENCES}
+          link={LINK_ACCOUNT}
+        />
         <Title>{GLOBAL_PREFERENCES}</Title>
       </div>
       <div className="mt-4">

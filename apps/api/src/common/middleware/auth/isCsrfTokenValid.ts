@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express'
 import validateCsrfToken from '@/common/helpers/validateCsrfToken'
 import { ResponseService } from '@/common/service/response'
-import { USER_NOT_AUTHORIZED } from "@/common/constants"
+import { USER_NOT_AUTHORIZED } from '@/common/constants'
 
 const response = new ResponseService()
 
