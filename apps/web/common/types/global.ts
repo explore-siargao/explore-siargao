@@ -108,15 +108,15 @@ export interface IWishGroup {
 }
 
 export interface IReview {
-  userId?: number,
-  listingId?: number,
-  cleanLinessRates?: number,
-  accuracyRates?: number,
-  checkInRates?: number,
-  communicationRates?: number,
-  locationRates?: number,
-  valueRates?: number,
-  comment?: string,
+  userId?: number
+  listingId?: number
+  cleanLinessRates?: number
+  accuracyRates?: number
+  checkInRates?: number
+  communicationRates?: number
+  locationRates?: number
+  valueRates?: number
+  comment?: string
 }
 
 export interface ComponentProps {
