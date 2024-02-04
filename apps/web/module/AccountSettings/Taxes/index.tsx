@@ -10,6 +10,7 @@ import TaxDocuments from "./TaxDocuments"
 import useSessionStore from "@/common/store/useSessionStore"
 import { useRouter } from "next/navigation"
 import { E_UserRole } from "@repo/contract"
+import { ACCOUNT } from "@/common/constants"
 
 const Taxes = () => {
   const router = useRouter()
@@ -30,7 +31,7 @@ const Taxes = () => {
   return (
     <AccountSettingWrapper>
       <div>
-        <Breadcrumb home="Account" page={TITLE} link={LINK_ACCOUNT} />
+        <Breadcrumb home={ACCOUNT} page={TITLE} link={LINK_ACCOUNT} />
         <Title>{TITLE}</Title>
       </div>
       <div className="hidden sm:block">

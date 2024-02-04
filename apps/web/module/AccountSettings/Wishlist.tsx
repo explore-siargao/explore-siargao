@@ -9,39 +9,7 @@ import { Spinner } from "@/common/components/ui/Spinner"
 import { Typography } from "@/common/components/ui/Typography"
 import AccountSettingWrapper from "@/common/components/AccountSettingWrapper"
 import { LINK_ACCOUNT } from "@/common/constants/links"
-
-const WishlistGroup = [
-  {
-    id: 1,
-    pic: "http://localhost:3000/2.jpg",
-    name: "My Wishlist",
-    text: "1 saved",
-  },
-  {
-    id: 2,
-    pic: "http://localhost:3000/3.jpg",
-    name: "Vacation",
-    text: "3 saved",
-  },
-  {
-    id: 3,
-    pic: "http://localhost:3000/4.jpg",
-    name: "Wanted",
-    text: "2 saved",
-  },
-  {
-    id: 4,
-    pic: "http://localhost:3000/5.jpg",
-    name: "Wanted",
-    text: "2 saved",
-  },
-  {
-    id: 5,
-    pic: "http://localhost:3000/1.jpg",
-    name: "Wanted",
-    text: "2 saved",
-  },
-]
+import { ACCOUNT, WISHLISTS } from "@/common/constants"
 
 const Wishlist = () => {
   const session = useSessionStore((state) => state)
@@ -49,8 +17,8 @@ const Wishlist = () => {
   return (
     <AccountSettingWrapper>
       <div>
-        <Breadcrumb home="Account" page="Wishlists" link={LINK_ACCOUNT} />
-        <Title>Wishlists</Title>
+        <Breadcrumb home={ACCOUNT} page={WISHLISTS} link={LINK_ACCOUNT} />
+        <Title>{WISHLISTS}</Title>
       </div>
       <div className="mt-4">
         {isPending ? (

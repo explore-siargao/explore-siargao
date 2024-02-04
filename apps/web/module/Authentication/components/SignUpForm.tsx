@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form"
 import toast from "react-hot-toast"
 import { Button } from "@/common/components/ui/Button"
 import Link from "next/link"
-import { AGREE_CONTINUE_BUTTON_TEXT } from "@/common/constants/index"
+import { CONTINUE } from "@/common/constants"
 import { Input } from "@/common/components/ui/Input"
 import { capitalizeFirstLetter } from "@/common/helpers/capitalizeFirstLetter"
 import { useParams, useRouter } from "next/navigation"
@@ -27,6 +27,7 @@ import {
   T_BackendResponse,
   T_UserRegister,
 } from "@repo/contract"
+import { useQueryClient } from "@tanstack/react-query"
 
 type Props = {
   isSocial?: boolean
@@ -37,6 +38,7 @@ const SignUpForm = ({ isSocial = false }: Props) => {
   const { data: session } = useSession()
   const { mutate: addUser, isPending: addUserIsPending } = useRegister()
   const createAccountEmail = useGlobalInputEmail((state) => state.email)
+  const queryClient = useQueryClient()
   const { register, handleSubmit } = useForm<
     T_UserRegister & { month: string; year: string; day: string }
   >({
@@ -51,6 +53,7 @@ const SignUpForm = ({ isSocial = false }: Props) => {
       day: "",
       registrationType: E_RegistrationType.Manual,
       country: "",
+      canReceiveEmail: false,
     },
   })
   const params = useParams()
@@ -63,14 +66,17 @@ const SignUpForm = ({ isSocial = false }: Props) => {
     formData: T_UserRegister & { month: string; year: string; day: string }
   ) => {
     const callBackReq = {
-      onSuccess: (data: T_BackendResponse) => {
+      onSuccess: async (data: T_BackendResponse) => {
         if (!data.error && !addUserIsPending) {
           if (signUpType === "Manual") {
-            signIn("credentials", {
+            await signIn("credentials", {
               callbackUrl: "/",
               username: formData.email,
               password: formData.password,
               redirect: false,
+            })
+            queryClient.invalidateQueries({
+              queryKey: ["session"],
             })
           }
           setIsOpen()
@@ -83,8 +89,17 @@ const SignUpForm = ({ isSocial = false }: Props) => {
         toast.error(String(err))
       },
     }
-    const { email, firstName, lastName, month, day, year, password, country } =
-      formData
+    const {
+      email,
+      firstName,
+      lastName,
+      month,
+      day,
+      year,
+      password,
+      country,
+      canReceiveEmail,
+    } = formData
     const birthDate = dayjs(`${month}-${day}-${year}`, "MM-DD-YYYY")
     addUser(
       {
@@ -95,6 +110,7 @@ const SignUpForm = ({ isSocial = false }: Props) => {
         password,
         registrationType: signUpType as E_RegistrationType,
         country,
+        canReceiveEmail: Boolean(canReceiveEmail),
       },
       callBackReq
     )
@@ -240,7 +256,7 @@ const SignUpForm = ({ isSocial = false }: Props) => {
                 <span className="sr-only">Loading...</span>
               </div>
             ) : (
-              AGREE_CONTINUE_BUTTON_TEXT
+              CONTINUE
             )}
           </Button>
           <div className="w-full border-b-2 mt-2" />
@@ -248,14 +264,14 @@ const SignUpForm = ({ isSocial = false }: Props) => {
             <div className="relative flex items-start mt-4">
               <div className="flex h-6 items-center">
                 <input
-                  id="comments"
-                  name="comments"
+                  id="canReceiveEmail"
                   type="checkbox"
+                  {...register("canReceiveEmail")}
                   disabled={addUserIsPending}
                   className="h-6 w-6 rounded border-gray-400 text-secondary-600 focus:ring-transparent"
                 />
                 <label
-                  htmlFor="comments"
+                  htmlFor="canReceiveEmail"
                   className="text-text-500 ml-3 text-xs leading-2"
                 >
                   I’d like to receive travel tips, uplifting content, and

@@ -5,6 +5,7 @@ import { PrismaClient } from '@prisma/client'
 import { decode } from 'next-auth/jwt'
 import { ResponseService } from '@/common/service/response'
 import { E_RegistrationType, E_UserRole, T_Session } from '@repo/contract'
+import { USER_NOT_AUTHORIZED } from '@/common/constants'
 
 const response = new ResponseService()
 
@@ -62,6 +63,7 @@ const isUserLoggedIn = async (
         profilePicture: user?.profilePicture as string,
         role: user?.role as E_UserRole,
         deactivated: user?.deactivated as boolean,
+        canReceiveEmail: user?.canReceiveEmail as boolean,
         changePasswordAt: String(user?.changePasswordAt),
         // TODO: FIX THE ANY FOR THIS VALUE
         personalInfo: user?.personalInfo as any,
@@ -75,7 +77,7 @@ const isUserLoggedIn = async (
   } else {
     res.json(
       response.error({
-        message: 'You are not authorized to perform this action',
+        message: USER_NOT_AUTHORIZED,
       })
     )
   }

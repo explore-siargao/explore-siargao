@@ -1,7 +1,6 @@
 "use client"
 import React, { useRef, useState } from "react"
 import { Button } from "@/common/components/ui/Button"
-import { SEND_EMAIL_BUTTON_TEXT } from "@/common/constants"
 import AuthContainer from "@/common/components/AuthContainer"
 import { Input } from "@/common/components/ui/Input"
 import { useForm } from "react-hook-form"
@@ -86,7 +85,7 @@ const ForgotPassword = () => {
                 <span className="sr-only">Loading...</span>
               </div>
             ) : (
-              SEND_EMAIL_BUTTON_TEXT
+              "Send email"
             )}
           </Button>
         </div>

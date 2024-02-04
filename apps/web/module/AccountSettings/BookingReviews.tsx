@@ -7,6 +7,7 @@ import { Title } from "@/common/components/ui/Title"
 import { LINK_ACCOUNT } from "@/common/constants/links"
 import combineClasses from "@/common/helpers/combineClasses"
 import BookingReviewItemPending from "./components/BookingReviewItemPending"
+import { ACCOUNT, BOOKING_REVIEWS } from "@/common/constants"
 
 const bookingReviewsDummy = [
   {
@@ -69,8 +70,8 @@ const BookingReviews = () => {
   return (
     <AccountSettingWrapper>
       <div>
-        <Breadcrumb home="Account" page="Booking Reviews" link={LINK_ACCOUNT} />
-        <Title>Booking Reviews</Title>
+        <Breadcrumb home={ACCOUNT} page={BOOKING_REVIEWS} link={LINK_ACCOUNT} />
+        <Title>{BOOKING_REVIEWS}</Title>
       </div>
       <div className="hidden sm:block">
         <div className="flex border-b border-b-text-50">
