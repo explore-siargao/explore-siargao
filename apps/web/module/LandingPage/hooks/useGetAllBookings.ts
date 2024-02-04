@@ -1,4 +1,8 @@
-import { FIFTEEN_MINUTES, TWELVE_MINUTES, API_URL_BOOKINGS } from "@/common/constants"
+import {
+  FIFTEEN_MINUTES,
+  TWELVE_MINUTES,
+  API_URL_BOOKINGS,
+} from "@/common/constants"
 import { ApiService } from "@/common/service/api"
 import { useQuery } from "@tanstack/react-query"
 
