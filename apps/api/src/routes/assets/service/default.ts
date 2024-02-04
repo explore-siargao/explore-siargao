@@ -1,6 +1,6 @@
 import { Response, Request } from 'express'
 import { FileService } from '@/common/service/file'
-import { REQUIRED_VALUE_EMPTY } from '@repo/constants'
+import { REQUIRED_VALUE_EMPTY } from '@/common/constants'
 
 const fileService = new FileService()
 

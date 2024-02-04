@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form"
 import toast from "react-hot-toast"
 import { Button } from "@/common/components/ui/Button"
 import Link from "next/link"
-import { AGREE_CONTINUE_BUTTON_TEXT } from "@/common/constants/index"
+import { CONTINUE } from "@/common/constants"
 import { Input } from "@/common/components/ui/Input"
 import { capitalizeFirstLetter } from "@/common/helpers/capitalizeFirstLetter"
 import { useParams, useRouter } from "next/navigation"
@@ -251,7 +251,7 @@ const SignUpForm = ({ isSocial = false }: Props) => {
                 <span className="sr-only">Loading...</span>
               </div>
             ) : (
-              AGREE_CONTINUE_BUTTON_TEXT
+              CONTINUE
             )}
           </Button>
           <div className="w-full border-b-2 mt-2" />

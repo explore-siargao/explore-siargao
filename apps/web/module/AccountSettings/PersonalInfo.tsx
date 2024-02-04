@@ -12,17 +12,16 @@ import { Title } from "@/common/components/ui/Title"
 import { Breadcrumb } from "@/common/components/ui/Breadcrumb"
 import useSessionStore from "@/common/store/useSessionStore"
 import { T_EmergencyContact } from "@repo/contract"
-import { ACCOUNT } from "@/common/constants"
+import { ACCOUNT, PERSONAL_INFO } from "@/common/constants"
 
 const PersonalInfo = () => {
   const session = useSessionStore((state) => state)
   const personalInfo = session?.personalInfo
-  const TITLE = "Personal Info"
   return (
     <AccountSettingWrapper>
       <div>
-        <Breadcrumb home={ACCOUNT} page={TITLE} link={LINK_ACCOUNT} />
-        <Title>{TITLE}</Title>
+        <Breadcrumb home={ACCOUNT} page={PERSONAL_INFO} link={LINK_ACCOUNT} />
+        <Title>{PERSONAL_INFO}</Title>
       </div>
       <div>
         <div className="divide-y">

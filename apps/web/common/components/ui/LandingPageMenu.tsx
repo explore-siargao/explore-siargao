@@ -9,6 +9,7 @@ import { Bars3Icon, UserCircleIcon } from "@heroicons/react/20/solid"
 import React, { Fragment } from "react"
 import { Popover, Transition } from "@headlessui/react"
 import { useSession } from "next-auth/react"
+import { ACCOUNT } from "@/common/constants"
 
 const unAuthMenus = [
   {
@@ -23,7 +24,7 @@ const unAuthMenus = [
 
 const authMenus = [
   {
-    name: "Account",
+    name: ACCOUNT,
     href: LINK_ACCOUNT,
   },
   {

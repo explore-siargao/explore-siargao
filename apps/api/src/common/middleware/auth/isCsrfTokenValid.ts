@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express'
 import validateCsrfToken from '@/common/helpers/validateCsrfToken'
 import { ResponseService } from '@/common/service/response'
+import { USER_NOT_AUTHORIZED } from "@/common/constants"
 
 const response = new ResponseService()
 
@@ -17,14 +18,14 @@ const isCsrfTokenValid = async (
     } else {
       res.json(
         response.error({
-          message: 'You are not authorized to perform this action',
+          message: USER_NOT_AUTHORIZED,
         })
       )
     }
   } else {
     res.json(
       response.error({
-        message: 'You are not authorized to perform this action',
+        message: USER_NOT_AUTHORIZED,
       })
     )
   }

@@ -1,6 +1,6 @@
 import { ApiService } from "@/common/service/api"
 import { IWishGroup } from "@/common/types/global"
-import { API_URL_BOOKINGS } from "@repo/constants"
+import { API_URL_BOOKINGS } from "@/common/constants"
 import { useMutation } from "@tanstack/react-query"
 
 export async function addWishgroup(

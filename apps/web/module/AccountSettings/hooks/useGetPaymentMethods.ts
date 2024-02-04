@@ -1,5 +1,5 @@
 import { ApiService } from "@/common/service/api"
-import { API_URL_PAYMENTS } from "@repo/constants"
+import { API_URL_PAYMENTS } from "@/common/constants"
 import { useQuery } from "@tanstack/react-query"
 
 export async function getPaymentMethods(userId: number | null) {

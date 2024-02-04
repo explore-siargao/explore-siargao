@@ -5,7 +5,7 @@ import {
   REQUIRED_VALUE_EMPTY,
   UNKNOWN_ERROR_OCCURRED,
   USER_NOT_EXIST,
-} from '@repo/constants'
+} from '@/common/constants'
 import { ResponseService } from '@/common/service/response'
 import { encryptKey } from '@/common/config'
 export const getAllUsers = async (req: Request, res: Response) => {
