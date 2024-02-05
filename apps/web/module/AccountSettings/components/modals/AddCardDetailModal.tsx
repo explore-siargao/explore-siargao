@@ -179,6 +179,7 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
                   validateCard()
                 },
               })}
+              required
             />
 
             <div className="grid grid-flow-col space-x-2">
@@ -211,6 +212,7 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
                     }
                   },
                 })}
+                required
               />
               <Input
                 label="CVV"
@@ -224,6 +226,7 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
                   required: "This field is required",
                   onChange: () => validateCvv(),
                 })}
+                required
               />
             </div>
           </div>
@@ -236,6 +239,7 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
               minLength: 4,
               required: "This field is required",
             })}
+            required
           />
          <div>
             <Select {...register("countryRegion")} label="Country" required>
