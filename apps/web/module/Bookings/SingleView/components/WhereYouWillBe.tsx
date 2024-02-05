@@ -1,9 +1,7 @@
-
-import {Typography} from "@/common/components/ui/Typography"
+import { Typography } from "@/common/components/ui/Typography"
 import React, { useState } from "react"
 import { TitleSection } from "./TitleSection"
 import { Button } from "@/common/components/ui/Button"
-
 
 interface WhereYouWillBe {
   title: string
