@@ -1,7 +1,10 @@
+"use client"
+
 import {Typography} from "@/common/components/ui/Typography"
 import React, { useState } from "react"
 import { TitleSection } from "./TitleSection"
 import { Button } from "@/common/components/ui/Button"
+
 
 interface WhereYouWillBe {
   title: string
@@ -17,10 +20,10 @@ const WhereYouWillBe: React.FC<WhereYouWillBe> = ({ title }) => {
   const [readMore, setReadMore ] = useState(false)
   const [secondReadMore, secondSetReadMore] = useState(false)
   const toggleReadMore = () => {
-    setReadMore(!readMore)
+    setReadMore(readMore ? false : true)
   }
   const toggleSecondReadMore = () => {
-    secondSetReadMore(!secondReadMore)
+    secondSetReadMore(readMore ? false : true)
   }
   return (
     <div>
