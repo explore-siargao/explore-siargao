@@ -1,7 +1,4 @@
-import {
-  Typography,
-  typographyVariants,
-} from "@/common/components/ui/Typography"
+import {Typography} from "@/common/components/ui/Typography"
 import React, { useState } from "react"
 import { TitleSection } from "./TitleSection"
 import { Button } from "@/common/components/ui/Button"
@@ -17,7 +14,7 @@ const WhereYouWillBe: React.FC<WhereYouWillBe> = ({ title }) => {
     "The property, given its close proximity to the refreshing hillside town of Tagaytay and clear blue beaches of Nasugbu, provides a quick escape. The property, given its close proximity to the refreshing hillside town of Tagaytay and clear blue beaches of Nasugbu, provides a quick escape"
 
   const maxLength = 100
-  const [readMore, setReadMore] = useState(false)
+  const [readMore, setReadMore ] = useState(false)
   const [secondReadMore, secondSetReadMore] = useState(false)
   const toggleReadMore = () => {
     setReadMore(!readMore)
