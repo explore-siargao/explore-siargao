@@ -1,5 +1,5 @@
 "use client"
-import {Typography} from "@/common/components/ui/Typography"
+import { Typography } from "@/common/components/ui/Typography"
 import React, { useState } from "react"
 import { TitleSection } from "./TitleSection"
 import { Button } from "@/common/components/ui/Button"
@@ -16,15 +16,14 @@ const WhereYouWillBe: React.FC<WhereYouWillBe> = ({ title }) => {
 
   const maxLength = 100
 
-
   const useToggle = (initialState) => {
-    const [state, setState] = useState(initialState);
-    const toggle = () => setState(!state);
-    return [state, toggle];
-  };
-  
-  const [readMore, toggleReadMore] = useToggle(false);
-  const [secondReadMore, toggleSecondReadMore] = useToggle(false);
+    const [state, setState] = useState(initialState)
+    const toggle = () => setState(!state)
+    return [state, toggle]
+  }
+
+  const [readMore, toggleReadMore] = useToggle(false)
+  const [secondReadMore, toggleSecondReadMore] = useToggle(false)
 
   return (
     <div>
