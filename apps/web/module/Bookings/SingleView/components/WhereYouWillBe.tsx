@@ -1,4 +1,4 @@
-
+"use client"
 import {Typography} from "@/common/components/ui/Typography"
 import React, { useState } from "react"
 import { TitleSection } from "./TitleSection"
@@ -16,14 +16,17 @@ const WhereYouWillBe: React.FC<WhereYouWillBe> = ({ title }) => {
     "The property, given its close proximity to the refreshing hillside town of Tagaytay and clear blue beaches of Nasugbu, provides a quick escape. The property, given its close proximity to the refreshing hillside town of Tagaytay and clear blue beaches of Nasugbu, provides a quick escape"
 
   const maxLength = 100
-  const [readMore, setReadMore] = useState(false)
-  const [secondReadMore, secondSetReadMore] = useState(false)
-  const toggleReadMore = () => {
-    setReadMore(readMore ? false : true)
-  }
-  const toggleSecondReadMore = () => {
-    secondSetReadMore(readMore ? false : true)
-  }
+
+
+  const useToggle = (initialState) => {
+    const [state, setState] = useState(initialState);
+    const toggle = () => setState(!state);
+    return [state, toggle];
+  };
+  
+  const [readMore, toggleReadMore] = useToggle(false);
+  const [secondReadMore, toggleSecondReadMore] = useToggle(false);
+
   return (
     <div>
       <h1 className="font-bold text-3xl px-4 mb-5">Where You'll be</h1>
