@@ -4,7 +4,6 @@ import React, { useState } from "react"
 import { TitleSection } from "./TitleSection"
 import { Button } from "@/common/components/ui/Button"
 
-
 interface WhereYouWillBe {
   title: string
 }
