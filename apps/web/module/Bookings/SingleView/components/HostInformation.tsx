@@ -1,11 +1,8 @@
-import { Title } from "@/common/components/ui/Title"
 import { Typography } from "@/common/components/ui/Typography"
 import {
-  LucideMedal,
   LucideShield,
   LucideShieldCheck,
   LucideStar,
-  LucideStarOff,
   LucideUser,
 } from "lucide-react"
 import Image from "next/image"
