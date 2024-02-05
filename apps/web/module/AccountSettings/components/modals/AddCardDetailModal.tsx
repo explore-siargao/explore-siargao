@@ -242,7 +242,13 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
             required
           />
           <div>
-            <Select {...register("countryRegion",{required:"This field is required"})} label="Country" required>
+            <Select
+              {...register("countryRegion", {
+                required: "This field is required",
+              })}
+              label="Country"
+              required
+            >
               <Option value={""}>Select Country</Option>
               {COUNTRIES.map((country) => (
                 <Option key={country.code} value={country.code}>
