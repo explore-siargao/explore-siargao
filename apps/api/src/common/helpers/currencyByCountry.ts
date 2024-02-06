@@ -1,5 +1,5 @@
-const pound ="Pound"
-const eur = "EUR"
+const pound = 'Pound'
+const eur = 'EUR'
 export const currencyByCountry = {
   US: 'USD',
   PH: 'PHP',
@@ -43,5 +43,5 @@ export const currencyByCountry = {
   SK: eur,
   SI: eur,
   ES: eur,
-  IL:"Shekels"
+  IL: 'Shekels',
 }
