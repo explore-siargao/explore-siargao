@@ -115,7 +115,7 @@ export const register = async (req: Request, res: Response) => {
       country,
       canReceiveEmail,
     } = req.body
-    
+
     const currency: string =
       currencyByCountry[country as keyof typeof currencyByCountry]
     const selectedCurrency = currency ?? 'USD'
