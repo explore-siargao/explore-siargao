@@ -41,5 +41,5 @@ export const currencyByCountry = {
   SK: 'EUR',
   SI: 'EUR',
   ES: 'EUR',
-  IL:"Shekels"
+  IL: 'Shekels',
 }
