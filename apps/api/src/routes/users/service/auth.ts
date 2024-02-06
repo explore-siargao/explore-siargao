@@ -675,7 +675,7 @@ export const setCanReceiveEmail = async (req: Request, res: Response) => {
           response.success({
             item: setCanReceiveEmail,
             message: canReceive
-              ? `You will now received an email from ${APP_NAME}`
+              ? `You will now receive emails from ${APP_NAME}`
               : `You are now removed from ${APP_NAME} email notification`,
           })
         )
