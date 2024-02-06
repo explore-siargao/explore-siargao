@@ -16,7 +16,8 @@ export async function updateReservation(
 
 function useUpdateReservation(userId: number | null | undefined) {
   const query = useMutation({
-    mutationFn: (props: T_ReservationListing) => updateReservation(userId, props),
+    mutationFn: (props: T_ReservationListing) =>
+      updateReservation(userId, props),
   })
   return query
 }

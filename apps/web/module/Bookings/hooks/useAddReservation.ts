@@ -8,7 +8,10 @@ export async function addReservation(
   props: T_ReservationListing
 ) {
   const apiService = new ApiService()
-  return await apiService.post(`${API_URL_BOOKINGS}/${userId}/reservation-listing`, props)
+  return await apiService.post(
+    `${API_URL_BOOKINGS}/${userId}/reservation-listing`,
+    props
+  )
 }
 
 function useAddReservation(userId: number) {
