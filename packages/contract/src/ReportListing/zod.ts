@@ -2,8 +2,9 @@ import { z } from "zod"
 
 export const Z_ReportListing = z.object({
   id: z.number().optional(),
+  name:z.string(),
   reason: z.string(),
-  otherdetails: z.string(),
+  description: z.string().optional(),
   reportedBy: z.number().optional(),
   listingId: z.number(),
   createdAt: z.date().optional(),
