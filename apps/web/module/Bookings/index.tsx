@@ -6,8 +6,6 @@ import { WidthWrapper } from "@/common/components/WidthWrapper"
 import useGetAllBookings from "../LandingPage/hooks/useGetAllBookings"
 import { Spinner } from "@/common/components/ui/Spinner"
 import useSessionStore from "@/common/store/useSessionStore"
-import SectionInfo from "./SingleView/components/SectionInfo"
-import sectionInfoData from "@/module/Bookings/Jsons/sectionInfo.json"
 
 const Bookings = () => {
   const userId = useSessionStore((state) => state).id
@@ -45,7 +43,6 @@ const Bookings = () => {
           </ul>
         </>
       )}
-      <SectionInfo title={sectionInfoData.title} address={sectionInfoData.address} guest={sectionInfoData.guest} bedroom={sectionInfoData.bedroom} beds={sectionInfoData.beds} baths={sectionInfoData.baths} reviews={sectionInfoData.reviews} stars={sectionInfoData.stars}/>
     </WidthWrapper>
   )
 }
