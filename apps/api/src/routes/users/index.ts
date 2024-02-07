@@ -34,6 +34,7 @@ import {
 import isUserLoggedIn from '@/common/middleware/auth/isUserLoggedIn'
 import isOriginValid from '@/common/middleware/auth/isOriginValid'
 import isCsrfTokenValid from '@/common/middleware/auth/isCsrfTokenValid'
+import { getHostDetailsInListing } from './service/hostDetails'
 
 const router = express.Router()
 
@@ -146,3 +147,6 @@ router.patch('/personal-info/currency/:personalInfoId', updateCurrency)
 router.get('/:peronalInfoId/government-id', getAllGovernmentIdByPersonInfoId)
 router.post('/:peronalInfoId/government-id', addGovernmentId)
 export default router
+
+//Host Details
+router.get('/:hostId/host-details-listing/:listingId', getHostDetailsInListing)
