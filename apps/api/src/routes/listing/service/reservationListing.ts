@@ -2,7 +2,11 @@ import { prisma } from '@/common/helpers/prismaClient'
 import { Z_ReservationListing } from '@repo/contract'
 import { Request, Response } from 'express'
 import { ResponseService } from '@/common/service/response'
-import { UNKNOWN_ERROR_OCCURRED, USER_NOT_EXIST } from '@/common/constants'
+import {
+  REQUIRED_VALUE_EMPTY,
+  UNKNOWN_ERROR_OCCURRED,
+  USER_NOT_EXIST,
+} from '@/common/constants'
 
 const response = new ResponseService()
 export const getReservation = async (req: Request, res: Response) => {
@@ -60,12 +64,12 @@ export const getReservation = async (req: Request, res: Response) => {
             getReservation.listing.hostedBy.personalInfo?.firstName +
             ' ' +
             getReservation.listing.hostedBy.personalInfo?.lastName,
-          description:
-            getReservation.listing.listingDescription?.generalDescription ? 
-            getReservation.listing.listingDescription?.generalDescription :
-            "No description yet",
-            cleaningFee: getReservation.listing.price.cleaningFee,
-            serviceFee:getReservation.listing.price.serviceFee,
+          description: getReservation.listing.listingDescription
+            ?.generalDescription
+            ? getReservation.listing.listingDescription?.generalDescription
+            : 'No description yet',
+          cleaningFee: getReservation.listing.price.cleaningFee,
+          serviceFee: getReservation.listing.price.serviceFee,
           cancelationPolicies: getReservation.listing.cancellationPolicies[0],
           generalRule: getReservation.listing.houseRules[0],
           reviewRate: 5.0, // No formula yet because model is not match to latest model of review
@@ -95,6 +99,64 @@ export const getReservation = async (req: Request, res: Response) => {
           message: 'No Listing Reservation found',
         })
       )
+    }
+  } catch (err: any) {
+    const message = err.message ? err.message : UNKNOWN_ERROR_OCCURRED
+    res.json(response.error({ message: message }))
+  }
+}
+
+export const updateReservation = async (req: Request, res: Response) => {
+  const userId = Number(req.params.userId)
+  const id = Number(req.params.id)
+  const { reservationDate, currentFee, guestCount, isNight, messageToHost } =
+    req.body
+
+  try {
+    const getUser = await prisma.user.findUnique({
+      where: {
+        id: userId,
+      },
+    })
+    const getReservation = await prisma.reservationListing.findUnique({
+      where: {
+        id: id,
+      },
+    })
+    if (!getUser) {
+      return res.json(response.error({ message: USER_NOT_EXIST }))
+    }
+    if (!getReservation) {
+      return res.json(response.error({ message: 'No reservation found' }))
+    }
+    if (
+      reservationDate ||
+      currentFee ||
+      guestCount ||
+      isNight ||
+      messageToHost
+    ) {
+      const updateReservationListing = await prisma.reservationListing.update({
+        where: {
+          id: id,
+        },
+        data: {
+          reservationDate: reservationDate,
+          currentFee: currentFee,
+          guestCount: guestCount,
+          isNight: isNight,
+          messageToHost: messageToHost,
+        },
+      })
+      res.json(
+        response.success({
+          item: updateReservationListing,
+          allItemCount: 1,
+          message: 'Reservation listing successfully updated',
+        })
+      )
+    } else {
+      return res.json(response.error({ message: REQUIRED_VALUE_EMPTY }))
     }
   } catch (err: any) {
     const message = err.message ? err.message : UNKNOWN_ERROR_OCCURRED
