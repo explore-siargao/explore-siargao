@@ -12,7 +12,7 @@ function useGetHostDetailsInListing(hostId: number, listingId: number | undefine
     queryKey: ["host-details-listing", hostId, listingId],
     queryFn: () => getHostDetailsInListing(hostId, listingId),
     refetchOnWindowFocus: false,
-    enabled: !!listingId,
+    enabled: !!hostId && !!listingId,
   })
   return query
 }
