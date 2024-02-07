@@ -4,8 +4,7 @@ import React, { useState } from "react"
 import { TitleSection } from "./TitleSection"
 import { Typography } from "@/common/components/ui/Typography"
 import Link from "next/dist/client/link"
-import { Heart, HeartCrack, Share, Star, Upload } from "lucide-react"
-import IconDescription from "./IconDescription"
+import { Heart, Share, Star } from "lucide-react"
 
 interface SectionInfoProps {
   title: string
@@ -34,7 +33,6 @@ const SectionInfo = ({
   }
 
   return (
-    <>
       <div>
         <WidthWrapper className="flex flex justify-between" width={"medium"}>
           <div className="justify-between md:flex text-start">
@@ -143,7 +141,6 @@ const SectionInfo = ({
           </div>
         </WidthWrapper>
       </div>
-    </>
   )
 }
 
