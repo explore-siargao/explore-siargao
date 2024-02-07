@@ -34,7 +34,6 @@ const SectionInfo = ({
 
   return (
     <div>
-      <WidthWrapper className="flex flex justify-between" width={"medium"}>
         <div className="justify-between md:flex text-start">
           <div className="text-right">
             <h1 className="text-2xl font-semibold md:flex text-start">
@@ -134,7 +133,6 @@ const SectionInfo = ({
             </Link>{" "}
           </div>
         </div>
-      </WidthWrapper>
     </div>
   )
 }
