@@ -121,7 +121,7 @@ export const getReport = async (req: Request, res: Response) => {
 
 export const addReport = async (req: Request, res: Response) => {
   const userId = Number(req.params.userId)
-  const {name, reason, description, listingId } = req.body
+  const { name, reason, description, listingId } = req.body
   const isInputValid = Z_ReportListing.safeParse(req.body)
   try {
     const getUser = await prisma.user.findUnique({
@@ -151,7 +151,7 @@ export const addReport = async (req: Request, res: Response) => {
     }
     const newReport = await prisma.reportListing.create({
       data: {
-        name:name,
+        name: name,
         reason: reason,
         description: description,
         listingId: listingId,
@@ -173,7 +173,7 @@ export const addReport = async (req: Request, res: Response) => {
 export const updateReport = async (req: Request, res: Response) => {
   const userId = Number(req.params.userId)
   const id = Number(req.params.id)
-  const {name, reason, description } = req.body
+  const { name, reason, description } = req.body
   try {
     const getUser = await prisma.user.findUnique({
       where: {
@@ -201,7 +201,7 @@ export const updateReport = async (req: Request, res: Response) => {
           id: id,
         },
         data: {
-          name:name,
+          name: name,
           reason: reason,
           description: description,
         },

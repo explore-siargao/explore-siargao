@@ -2,7 +2,7 @@ import { z } from "zod"
 
 export const Z_ReportListing = z.object({
   id: z.number().optional(),
-  name:z.string(),
+  name: z.string(),
   reason: z.string(),
   description: z.string().optional(),
   reportedBy: z.number().optional(),
