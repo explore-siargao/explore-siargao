@@ -220,3 +220,48 @@ export const addReservation = async (req: Request, res: Response) => {
     res.json(response.error({ message: message }))
   }
 }
+
+export const deleteReservation = async (req: Request, res: Response) => {
+  const userId = Number(req.params.userId)
+  const id = Number(req.params.id)
+  try {
+    const getUser = await prisma.user.findUnique({
+      where: {
+        id: userId,
+      },
+    })
+    const getReservation = await prisma.reservationListing.findUnique({
+      where: {
+        id: id,
+      },
+    })
+    if (!getUser) {
+      return res.json(
+        response.error({
+          message: USER_NOT_EXIST,
+        })
+      )
+    }
+    if (!getReservation) {
+      return res.json(
+        response.error({
+          message: 'Reservation not found or already deleted',
+        })
+      )
+    }
+    const removeReservation = await prisma.reservationListing.delete({
+      where: {
+        id: id,
+      },
+    })
+    res.json(
+      response.success({
+        item: removeReservation,
+        allItemCount: 1,
+        message: 'Listing Reservation sucessfully deleted',
+      })
+    )
+  } catch (err: any) {
+    res.json(response.error({ message: err.message }))
+  }
+}
