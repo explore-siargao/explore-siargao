@@ -9,6 +9,108 @@ import {
 } from '@/common/constants'
 
 const response = new ResponseService()
+
+export const getReservationByListing = async(req:Request, res:Response)=>{
+const listingId = Number(req.params.listingId)
+try {
+  const getListing = await prisma.listing.findUnique({
+    where:{
+      id:listingId
+    }
+  })
+  if(!getListing){
+    return res.json(response.error({message:"No Listing found"}))
+  }
+  const getReservationsByListingId = await prisma.reservationListing.findMany({
+    where:{
+      listingId:listingId
+    },
+      include: {
+        user: {
+          include: {
+            personalInfo: true,
+          },
+        },
+        listing: {
+          include: {
+            hostedBy: {
+              include: {
+                personalInfo: true,
+              },
+            },
+            listingDescription: true,
+            price: true,
+            cancellationPolicies: {
+              include: {
+                rules: true,
+              },
+            },
+            houseRules: {
+              include: {
+                rules: true,
+              },
+            },
+            review: true,
+          },
+        },
+      },
+  })
+  if(getReservationsByListingId.length===0){
+    return res.json(response.success({
+      items:getReservationsByListingId,
+      allItemCount:getReservationsByListingId.length,
+      message:"No Listing reservation found"
+    }))
+  }
+  const finalData =getReservationsByListingId.map((newData)=>(
+    {
+      user: {
+        fullName:
+          newData.user.personalInfo?.firstName +
+          ' ' +
+          newData.user.personalInfo?.lastName,
+        phoneNumber: newData.user.personalInfo?.phoneNumber,
+      },
+      listing: {
+        title: newData.listing.title,
+        image: JSON.parse(newData.listing.imageUrls)[0],
+
+        hostedBy:
+        newData.listing.hostedBy.personalInfo?.firstName +
+          ' ' +
+          newData.listing.hostedBy.personalInfo?.lastName,
+        description: newData.listing.listingDescription
+          ?.generalDescription
+          ? newData.listing.listingDescription?.generalDescription
+          : 'No description yet',
+        cleaningFee: newData.listing.price.cleaningFee,
+        serviceFee: newData.listing.price.serviceFee,
+        cancelationPolicies: newData.listing.cancellationPolicies[0],
+        generalRule: newData.listing.houseRules[0],
+        reviewRate: 5.0, // No formula yet because model is not match to latest model of review
+      },
+      isNight: newData.isNight,
+      reservationDates: newData.reservationDate,
+      guestCount: newData.guestCount,
+      messageToHost: newData.messageToHost
+        ? newData.messageToHost
+        : 'No message',
+      currentFee: newData.currentFee,
+      totalFee: newData.totalFee,
+      balanceFee: newData.totalFee - newData.currentFee,
+    }
+  ))
+  res.json(response.success({
+    items:finalData,
+    allItemCount:getReservationsByListingId.length,
+    message:""
+  }))
+} catch (err:any) {
+  const message = err.message ? err.message : UNKNOWN_ERROR_OCCURRED
+  res.json(response.error({message:message}))
+}
+}
+
 export const getReservation = async (req: Request, res: Response) => {
   const id = Number(req.params.id)
   try {
