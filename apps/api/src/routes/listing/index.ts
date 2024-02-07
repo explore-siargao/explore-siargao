@@ -106,7 +106,7 @@ import {
   getDescriptionByListing,
   updateDescription,
 } from './service/listingDescription'
-import { addReservation } from './service/reservationListing'
+import { addReservation, getReservation } from './service/reservationListing'
 
 const router = express.Router()
 
@@ -287,6 +287,7 @@ router.patch('/:userId/listing-description/:id', updateDescription)
 router.delete('/:userId/listing-description/:id', deleteDescription)
 
 //listing reservation
+router.get('/reservation-listing/:id', getReservation)
 router.post('/:userId/reservation-listing', addReservation)
 
 export default router
