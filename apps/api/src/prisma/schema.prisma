@@ -195,21 +195,24 @@ model PaymentMethod {
 }
 
 model ReservationListing {
-  id              Int           @id @default(autoincrement())
+  id              Int               @id @default(autoincrement())
   listingId       Int
-  listing         Listing       @relation(fields: [listingId], references: [id])
+  listing         Listing           @relation(fields: [listingId], references: [id])
   userId          Int
-  user            User          @relation(fields: [userId], references: [id])
-  reservationDate String        @db.VarChar(50)
-  guestCount      Int           @db.Int()
-  totalFee        BigInt        @db.BigInt()
-  currentFee      BigInt        @db.BigInt()
+  user            User              @relation(fields: [userId], references: [id])
+  reservationDate String            @db.VarChar(50)
+  guestCount      Int               @db.Int()
+  totalFee        Int               @db.Int()
+  currentFee      Int               @db.Int()
   paymentMethodId Int
-  paymentMethod   PaymentMethod @relation(fields: [paymentMethodId], references: [id])
+  paymentMethod   PaymentMethod     @relation(fields: [paymentMethodId], references: [id])
+  isNight         Boolean           @default(false)
   status          ReservationStatus @default(Pending)
-  createdAt       DateTime      @default(now())
-  updatedAt       DateTime      @updatedAt
+  messageToHost   String?           @db.LongText()
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
   deletedAt       DateTime?
+
   @@index([listingId])
   @@index([userId])
   @@index([paymentMethodId])
