@@ -192,8 +192,9 @@ model PaymentMethod {
 
 model ReportListing {
   id           Int       @id @default(autoincrement())
-  reason       String    @db.Text
-  otherdetails String    @db.Text
+  name         String   @db.VarChar(200)
+  reason       String    @db.Text()
+  description String?    @db.LongText()
   reportedBy   Int
   user         User      @relation(fields: [reportedBy], references: [id])
   listingId    Int
