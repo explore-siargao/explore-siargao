@@ -5,10 +5,10 @@ import {LucideChevronLeft } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 
-interface ContactHostProps{
-    hostName:string,
-    listingName:string
-    hostImage?:string
+interface ContactHostProps {
+  hostName: string
+  listingName: string
+  hostImage?: string
 }
 
 const ContactHost = ({hostName,listingName,hostImage}:ContactHostProps)=>{
@@ -39,7 +39,7 @@ return(
     <Button variant={"outline"} size={"lg"} className="font-extrabold">Send Message</Button>
    </div>
     </div>
-)
+  )
 }
 
 export default ContactHost
