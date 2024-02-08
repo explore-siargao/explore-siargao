@@ -1,7 +1,7 @@
 import { Button } from "@/common/components/ui/Button"
 import { Textarea } from "@/common/components/ui/Textarea"
 import { Typography } from "@/common/components/ui/Typography"
-import {LucideChevronLeft } from "lucide-react"
+import { LucideChevronLeft } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -11,8 +11,12 @@ interface ContactHostProps {
   hostImage?: string
 }
 
-const ContactHost = ({hostName,listingName,hostImage}:ContactHostProps)=>{
-return(
+const ContactHost = ({
+  hostName,
+  listingName,
+  hostImage,
+}: ContactHostProps) => {
+  return (
     <div className="w-full">
         <div className="py-8">
     <Link href="">
