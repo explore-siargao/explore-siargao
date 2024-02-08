@@ -1,9 +1,8 @@
 import { Button } from "@/common/components/ui/Button"
-import { Input } from "@/common/components/ui/Input"
 import { Textarea } from "@/common/components/ui/Textarea"
-import { Title } from "@/common/components/ui/Title"
 import { Typography } from "@/common/components/ui/Typography"
-import {LucideArrowBigLeft, LucideBarChartBig, LucideChevronFirst, LucideChevronLeft } from "lucide-react"
+import {LucideChevronLeft } from "lucide-react"
+import Image from "next/image"
 import Link from "next/link"
 
 interface ContactHostProps{
@@ -12,7 +11,7 @@ interface ContactHostProps{
     hostImage?:string
 }
 
-const ContactHost = ({hostName,listingName}:ContactHostProps)=>{
+const ContactHost = ({hostName,listingName,hostImage}:ContactHostProps)=>{
 return(
     <div className="w-full">
         <div className="py-8">
@@ -26,7 +25,12 @@ return(
     <Typography className="text-gray-400">{listingName}</Typography>
     </div>
     <div>
+    {!hostImage ? (
         <div className="bg-primary-400 w-16 h-16 rounded-full ring-1"></div>
+    ):(
+        
+        <Image src={hostImage as string} width={2} height={2} alt="image" />
+    )}
     </div>
    </div>
    <div className="w-full py-6">
