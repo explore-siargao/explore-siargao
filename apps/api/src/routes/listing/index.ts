@@ -109,9 +109,9 @@ import {
 import {
   addReservation,
   deleteReservation,
+  getAllReservationByUser,
   getReservation,
   getReservationByListing,
-  getReservationByUser,
   updateReservation,
 } from './service/reservationListing'
 
@@ -294,7 +294,7 @@ router.patch('/:userId/listing-description/:id', updateDescription)
 router.delete('/:userId/listing-description/:id', deleteDescription)
 
 //listing reservation
-router.get('/reservation-listing/user/:userId', getReservationByUser)
+router.get('/reservation-listing/user/:userId', getAllReservationByUser)
 router.get('/reservation-listing/:id', getReservation)
 router.get('/reservation-listing/listing/:listingId', getReservationByListing)
 router.post('/:userId/reservation-listing', addReservation)

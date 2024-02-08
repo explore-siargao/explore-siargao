@@ -10,7 +10,7 @@ import {
 
 const response = new ResponseService()
 
-export const getReservationByUser = async (req: Request, res: Response) => {
+export const getAllReservationByUser = async (req: Request, res: Response) => {
   const userId = Number(req.params.userId)
   try {
     const getUser = await prisma.user.findUnique({
@@ -19,9 +19,9 @@ export const getReservationByUser = async (req: Request, res: Response) => {
       },
     })
     if (!getUser) {
-      return res.json(response.error({ message: 'No user found' }))
+      return res.json(response.error({ message: 'No user found!' }))
     }
-    const getReservationsByUserId = await prisma.reservationListing.findMany({
+    const getAllReservationByUserId = await prisma.reservationListing.findMany({
       where: {
         userId: userId,
       },
@@ -55,54 +55,54 @@ export const getReservationByUser = async (req: Request, res: Response) => {
         },
       },
     })
-    if (getReservationsByUserId.length === 0) {
+    if (getAllReservationByUserId.length === 0) {
       return res.json(
         response.success({
-          items: getReservationsByUserId,
-          allItemCount: getReservationsByUserId.length,
-          message: 'No Listing reservation found',
+          items: getAllReservationByUserId,
+          allItemCount: getAllReservationByUserId.length,
+          message: 'No Listing reservation found!',
         })
       )
     }
-    const finalData = getReservationsByUserId.map((newData) => ({
+    const dataFinal = getAllReservationByUserId.map((newDataEntry) => ({
       user: {
         fullName:
-          newData.user.personalInfo?.firstName +
+          newDataEntry.user.personalInfo?.firstName +
           ' ' +
-          newData.user.personalInfo?.lastName,
-        phoneNumber: newData.user.personalInfo?.phoneNumber,
+          newDataEntry.user.personalInfo?.lastName,
+        phoneNumber: newDataEntry.user.personalInfo?.phoneNumber,
       },
       listing: {
-        title: newData.listing.title,
-        image: JSON.parse(newData.listing.imageUrls)[0],
+        title: newDataEntry.listing.title,
+        image: JSON.parse(newDataEntry.listing.imageUrls)[0],
 
         hostedBy:
-          newData.listing.hostedBy.personalInfo?.firstName +
+          newDataEntry.listing.hostedBy.personalInfo?.firstName +
           ' ' +
-          newData.listing.hostedBy.personalInfo?.lastName,
-        description: newData.listing.listingDescription?.generalDescription
-          ? newData.listing.listingDescription?.generalDescription
-          : 'No description yet',
-        cleaningFee: newData.listing.price.cleaningFee,
-        serviceFee: newData.listing.price.serviceFee,
-        cancelationPolicies: newData.listing.cancellationPolicies[0],
-        generalRule: newData.listing.houseRules[0],
-        reviewRate: 5.0, // No formula yet because model is not match to latest model of review
+          newDataEntry.listing.hostedBy.personalInfo?.lastName,
+        description: newDataEntry.listing.listingDescription?.generalDescription
+          ? newDataEntry.listing.listingDescription?.generalDescription
+          : 'No description yet!',
+        cleaningFee: newDataEntry.listing.price.cleaningFee,
+        serviceFee: newDataEntry.listing.price.serviceFee,
+        cancelationPolicies: newDataEntry.listing.cancellationPolicies[0],
+        generalRule: newDataEntry.listing.houseRules[0],
+        reviewRate: 5.0,
       },
-      isNight: newData.isNight,
-      reservationDates: newData.reservationDate,
-      guestCount: newData.guestCount,
-      messageToHost: newData.messageToHost
-        ? newData.messageToHost
-        : 'No message',
-      currentFee: newData.currentFee,
-      totalFee: newData.totalFee,
-      balanceFee: newData.totalFee - newData.currentFee,
+      isNight: newDataEntry.isNight,
+      reservationDates: newDataEntry.reservationDate,
+      guestCount: newDataEntry.guestCount,
+      messageToHost: newDataEntry.messageToHost
+        ? newDataEntry.messageToHost
+        : 'No message!',
+      currentFee: newDataEntry.currentFee,
+      totalFee: newDataEntry.totalFee,
+      balanceFee: newDataEntry.totalFee - newDataEntry.currentFee,
     }))
     res.json(
       response.success({
-        items: finalData,
-        allItemCount: getReservationsByUserId.length,
+        items: dataFinal,
+        allItemCount: getAllReservationByUserId.length,
         message: '',
       })
     )
