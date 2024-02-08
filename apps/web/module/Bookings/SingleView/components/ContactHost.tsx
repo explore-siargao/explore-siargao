@@ -29,7 +29,7 @@ return(
         <div className="bg-primary-400 w-16 h-16 rounded-full ring-1"></div>
     ):(
         
-        <Image src={hostImage as string} width={2} height={2} alt="image" />
+        <Image src={"/"+hostImage} width={2} height={2} alt="image" />
     )}
     </div>
    </div>
