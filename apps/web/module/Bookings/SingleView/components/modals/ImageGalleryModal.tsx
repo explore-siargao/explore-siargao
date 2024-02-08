@@ -3,12 +3,12 @@ import { Button } from "@/common/components/ui/Button"
 import Image from "next/image"
 import { Heart, Upload } from "lucide-react"
 
-interface ImageGalleryModal {
+interface ImageGalleryModalProps {
     isOpen: boolean
     onClose: () => void
 }
 
-const ImageGalleryModal = ({isOpen, onClose}: ImageGalleryModal) => {
+const ImageGalleryModal = ({isOpen, onClose}: ImageGalleryModalProps) => {
 
     const imgSrc = [
         "https://www.travelandleisure.com/thmb/_XsBCRprdQriog2hTCkuiT3f7lc=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/TAL-airbnb-listing-NEWAIRBNB1123-a67a0e07c4e846e2ae4e653d201e47af.jpg",
