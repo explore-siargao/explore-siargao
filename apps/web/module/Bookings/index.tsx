@@ -25,9 +25,7 @@ const Bookings = () => {
                 location={item.address}
                 date={item.description}
                 distance={"100 kilometers away"}
-                price={
-                  "₱" +
-                  (item.price)}
+                price={"₱" + item.price}
                 imageKey={item.imageKey[0].fileKey as string}
                 dayTime={item.price.isNight ? "Night" : ""}
                 ratings={item.ratings}

@@ -36,7 +36,7 @@ const BookingBoxContainer = ({
     setIsClicked((setIsClicked) => !setIsClicked)
   }
   const [addWIshlistModal, setAddWIshlistModal] = useState(false)
-  const userId = useSessionStore((state)=>state).id
+  const userId = useSessionStore((state) => state).id
   return (
     <>
       <li>
@@ -45,16 +45,18 @@ const BookingBoxContainer = ({
             onClick={() => setAddWIshlistModal(true)}
             className="absolute top-3 right-3"
           >
-            {
-              userId ?(
-            <HeartIcon
-              className={` h-7 w-7 text-text-50 active:scale-90 ${
-                isClicked || isHearted ? "fill-error-500" : "fill-text-500/50 "
-              }`}
-              onClick={handleClick}
-            />
-              ):("")
-          }
+            {userId ? (
+              <HeartIcon
+                className={` h-7 w-7 text-text-50 active:scale-90 ${
+                  isClicked || isHearted
+                    ? "fill-error-500"
+                    : "fill-text-500/50 "
+                }`}
+                onClick={handleClick}
+              />
+            ) : (
+              ""
+            )}
           </button>
           <Image
             src={`/assets/${imageKey}`}

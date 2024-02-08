@@ -10,7 +10,7 @@ export const getAllListing = async (req: Request, res: Response) => {
   try {
     const listings = await prisma.listing.findMany({
       include: {
-        listingDescription:true,
+        listingDescription: true,
         price: true,
         highLights: {
           include: {
@@ -31,18 +31,22 @@ export const getAllListing = async (req: Request, res: Response) => {
       },
     })
     if (listings.length > 0) {
-      const customListings = listings.map((customListing)=>(
-        {
-          id:customListing.id,
-          imageKey:JSON.parse(customListing.imageKeys),
-          address:customListing.address,
-          price:(customListing.price.fee+customListing.price.serviceFee+customListing.price.cleaningFee),
-          ratings:(customListing.review.length !== 0 ? customListing.review[0]?.rates : "0.0"),
-          distance:"10 kilometer away",
-          dayTime:(customListing.price.isNight ? "Night" : ""),
-          wishes:customListing.wishes
-        }
-      ))
+      const customListings = listings.map((customListing) => ({
+        id: customListing.id,
+        imageKey: JSON.parse(customListing.imageKeys),
+        address: customListing.address,
+        price:
+          customListing.price.fee +
+          customListing.price.serviceFee +
+          customListing.price.cleaningFee,
+        ratings:
+          customListing.review.length !== 0
+            ? customListing.review[0]?.rates
+            : '0.0',
+        distance: '10 kilometer away',
+        dayTime: customListing.price.isNight ? 'Night' : '',
+        wishes: customListing.wishes,
+      }))
       res.json(
         response.success({
           items: customListings,
@@ -69,26 +73,26 @@ export const getListing = async (req: Request, res: Response) => {
     const listing = await prisma.listing.findFirst({
       where: { id: Number(req.params.id) },
       include: {
-        listingDescription:true,
+        listingDescription: true,
         basicAboutPlace: true,
         price: true,
         highLights: true,
         hostedBy: true,
         placeOffers: true,
         houseRules: {
-          include:{
-            rules:true
-          }
+          include: {
+            rules: true,
+          },
         },
         safetyProperties: {
-          include:{
-            rules:true
-          }
+          include: {
+            rules: true,
+          },
         },
         cancellationPolicies: {
-          include:{
-            rules:true
-          }
+          include: {
+            rules: true,
+          },
         },
         review: true,
       },
@@ -142,7 +146,7 @@ export const addListing = async (req: Request, res: Response) => {
       const getHost = await prisma.user.findFirst({
         where: {
           id: hostId,
-          role:"Host"
+          role: 'Host',
         },
       })
 
