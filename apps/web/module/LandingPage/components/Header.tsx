@@ -64,14 +64,7 @@ function Header({
                       size="sm"
                       onClick={() => router.push(LINK_LOGIN)}
                     >
-                      Login
-                    </Button>
-                    <Button
-                      variant="link"
-                      size="sm"
-                      onClick={() => router.push(LINK_CREATE_ACCOUNT)}
-                    >
-                      Sign up
+                      Login | Sign up
                     </Button>
                   </div>
                 )}
