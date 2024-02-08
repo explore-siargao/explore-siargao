@@ -12,8 +12,9 @@ import { WidthWrapper } from "@/common/components/WidthWrapper"
 import toast from "react-hot-toast"
 import useAddReview from "./hooks/useAddReview"
 import useGetListing from "../LandingPage/hooks/useGetListing"
-import { ArrowLeft, ArrowRight } from "lucide-react"
+import { ArrowLeft, ArrowRight, LucideChevronLeft } from "lucide-react"
 import { Title } from "@/common/components/ui/Title"
+import Link from "next/link"
 
 const AddReview = () => {
   const router = useRouter()
@@ -96,7 +97,10 @@ const AddReview = () => {
 
   return (
     <WidthWrapper width={"small"} className="mt-24 md:mt-36 lg:mt-40">
-      <Title className="pb-8 mb-8 md:pb-0 justify-center">Review Booking</Title>
+      <Link href={"/account-settings/booking-reviews"} >
+        <LucideChevronLeft strokeWidth={1} />
+      </Link>
+      <Title className="pb-8 mt-8 mb-8 md:pb-0 justify-center">Review Booking</Title>
 
       <div className="flex h-96 md:flex-row flex-col gap-x-20 justify-center mb-20">
         <FormProvider {...form}>
