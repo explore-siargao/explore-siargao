@@ -6,7 +6,6 @@ import { WidthWrapper } from "@/common/components/WidthWrapper"
 import useGetAllBookings from "../LandingPage/hooks/useGetAllBookings"
 import { Spinner } from "@/common/components/ui/Spinner"
 import useSessionStore from "@/common/store/useSessionStore"
-import ContactHost from "./SingleView/components/ContactHost"
 
 const Bookings = () => {
   const userId = useSessionStore((state) => state).id
