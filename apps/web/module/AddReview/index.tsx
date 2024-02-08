@@ -97,10 +97,12 @@ const AddReview = () => {
 
   return (
     <WidthWrapper width={"small"} className="mt-24 md:mt-36 lg:mt-40">
-      <Link href={"/account-settings/booking-reviews"} >
+      <Link href={"/account-settings/booking-reviews"}>
         <LucideChevronLeft strokeWidth={1} />
       </Link>
-      <Title className="pb-8 mt-8 mb-8 md:pb-0 justify-center">Review Booking</Title>
+      <Title className="pb-8 mt-8 mb-8 md:pb-0 justify-center">
+        Review Booking
+      </Title>
 
       <div className="flex h-96 md:flex-row flex-col gap-x-20 justify-center mb-20">
         <FormProvider {...form}>
