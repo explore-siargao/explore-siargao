@@ -17,10 +17,10 @@ const ReviewCategory = ({
   if (isHorizontal) {
     return (
       <div>
-        <div className="flex justify-between items-center w-full lg:px-4 py-4">
+        <div className="flex justify-between items-center w-full py-4">
           <div className="flex space-x-3 items-center">
             <Icon.type {...Icon.props} />
-            <Typography variant={"h5"} className="font-bold">
+            <Typography variant={"h5"} className="font-semibold">
               {title}
             </Typography>
           </div>
