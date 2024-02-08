@@ -12,14 +12,21 @@ interface UserReviewProps {
   showMore: boolean
 }
 
-const UserReview = ({imageSrc, name, origin, rate, date, review, showMore}: UserReviewProps) => {
-
+const UserReview = ({
+  imageSrc,
+  name,
+  origin,
+  rate,
+  date,
+  review,
+  showMore,
+}: UserReviewProps) => {
   const displayStars = () => {
-    const stars = [];
-    for(var i = 0; i < rate; i++) {
-      stars.push(<StarIcon key={i} className="h-3 w-3" />);
+    const stars = []
+    for (var i = 0; i < rate; i++) {
+      stars.push(<StarIcon key={i} className="h-3 w-3" />)
     }
-    
+
     return stars
   }
 
@@ -27,12 +34,7 @@ const UserReview = ({imageSrc, name, origin, rate, date, review, showMore}: User
     <div>
       <div className="flex items-center">
         <div className="profile-con h-14 w-14 relative rounded-full bg-primary-500">
-          <Image
-            src={imageSrc}
-            layout="fill"
-            objectFit="contain"
-            alt=""
-          />
+          <Image src={imageSrc} layout="fill" objectFit="contain" alt="" />
         </div>
         <div className="ml-4">
           <Typography variant={"h4"} className="font-bold">
@@ -53,7 +55,13 @@ const UserReview = ({imageSrc, name, origin, rate, date, review, showMore}: User
       <Typography variant={"h5"} className="font-semibold mt-2">
         {review}
       </Typography>
-      {showMore ? (<button className="text-sm font-semibold underline mt-2">Show more</button>) : ''}
+      {showMore ? (
+        <button className="text-sm font-semibold underline mt-2">
+          Show more
+        </button>
+      ) : (
+        ""
+      )}
     </div>
   )
 }
