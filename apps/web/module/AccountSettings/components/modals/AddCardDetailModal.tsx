@@ -14,6 +14,8 @@ import toast from "react-hot-toast"
 import valid from "card-validator"
 import ErrorMessage from "../ui/ErrorMessage"
 import ModalContainerFooter from "@/common/components/ModalContainer/ModalContainerFooter"
+import { Option, Select } from "@/common/components/ui/Select"
+import { COUNTRIES } from "@repo/constants"
 
 interface CardDetailModal {
   isOpen: boolean
@@ -177,6 +179,7 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
                   validateCard()
                 },
               })}
+              required
             />
 
             <div className="grid grid-flow-col space-x-2">
@@ -209,6 +212,7 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
                     }
                   },
                 })}
+                required
               />
               <Input
                 label="CVV"
@@ -222,6 +226,7 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
                   required: "This field is required",
                   onChange: () => validateCvv(),
                 })}
+                required
               />
             </div>
           </div>
@@ -234,21 +239,24 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
               minLength: 4,
               required: "This field is required",
             })}
+            required
           />
-          <select
-            id="countries"
-            disabled={isPending}
-            className=" text-text-900 focus:ring-gray-900  focus:ring-2  focus:border-transparent text-sm rounded-lg block h-14 w-full"
-            {...register("countryRegion", {
-              required: "This field is required",
-            })}
-          >
-            <option value="">Country/Region</option>
-            <option value="US">United state</option>
-            <option value="Ph">Philippines</option>
-            <option value="CH">China</option>
-            <option value="ITALIAN">Italian</option>
-          </select>
+          <div>
+            <Select
+              {...register("countryRegion", {
+                required: "This field is required",
+              })}
+              label="Country"
+              required
+            >
+              <Option value={""}>Select Country</Option>
+              {COUNTRIES.map((country) => (
+                <Option key={country.code} value={country.code}>
+                  {country.name}
+                </Option>
+              ))}
+            </Select>
+          </div>
         </div>
         <ModalContainerFooter
           isPending={isPending}

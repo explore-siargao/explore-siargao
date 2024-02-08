@@ -8,6 +8,7 @@ import {
 } from '@/common/constants'
 import { ResponseService } from '@/common/service/response'
 import { encryptKey } from '@/common/config'
+import { currencyByCountry } from '@/common/helpers/currencyByCountry'
 export const getAllUsers = async (req: Request, res: Response) => {
   try {
     const prisma = new PrismaClient()
@@ -59,11 +60,7 @@ export const addUser = async (req: Request, res: Response) => {
         password: req.body.password ? String(encryptPassword) : null,
       },
     })
-    const currencyByCountry = {
-      'United States': 'USD',
-      Philippines: 'PHP',
-      Australia: 'AUD',
-    }
+
     const currency: string =
       currencyByCountry[req.body.country as keyof typeof currencyByCountry]
     const finalCurrency = currency ?? 'USD'
