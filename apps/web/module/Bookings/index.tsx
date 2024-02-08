@@ -44,7 +44,11 @@ const Bookings = () => {
           </ul>
         </>
       )}
-      <ContactHost listingName="Hello Listing" hostName="Ramil" hostImage="hello"/>
+      <ContactHost
+        listingName="Hello Listing"
+        hostName="Ramil"
+        hostImage="hello"
+      />
     </WidthWrapper>
   )
 }
