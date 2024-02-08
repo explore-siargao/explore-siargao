@@ -2,7 +2,7 @@ import z from "zod"
 
 export const Z_ReservationListing = z.object({
   id: z.number().optional(),
-  userId: z.number(),
+  userId: z.number().optional(),
   listingId: z.number(),
   reservationDate: z.string(),
   currentFee: z.number(),
