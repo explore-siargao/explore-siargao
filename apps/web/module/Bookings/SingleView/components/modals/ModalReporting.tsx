@@ -41,9 +41,6 @@ const ModalReporting = ({
   const selectedReport = reportListingArr.find(
     (report) => report.name === selectedOption
   )
-  const selectedRes = reportListingArr.find(
-    (report) => report.name === selectedReason
-  )
 
   return (
     <ModalContainer onClose={onClose} isOpen={isOpen}>
