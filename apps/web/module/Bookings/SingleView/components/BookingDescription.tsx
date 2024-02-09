@@ -1,7 +1,7 @@
 import { Button } from "@/common/components/ui/Button"
 interface BookingDescriptionProps {
   generalDescription: string
-  onClick:()=>void
+  onClick: () => void
 }
 
 const BookingDescription: React.FC<BookingDescriptionProps> = ({
@@ -17,7 +17,7 @@ const BookingDescription: React.FC<BookingDescriptionProps> = ({
     <div>
       <div className="flex text-md mb-2 ml-4">{slicedDescription}</div>
       <Button
-      onClick={onClick}
+        onClick={onClick}
         className="justify-start flex text-sm font-semibold underline"
         variant={"ghost"}
       >

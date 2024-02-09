@@ -71,28 +71,31 @@ const ImagesDummy = [
   },
 ]
 
-const highlightsDummy =[
- {
-  id:1,
-  icon: LucideBook,
-  title: "Self check-in",
-  desc: "You can check in with the building staff."
- },
- {
-  id:2,
-  icon: LucideMapPin,
-  title: "Great location",
-  desc: "94% of recent guests gave the location a 5-star rating."
- },
+const highlightsDummy = [
+  {
+    id: 1,
+    icon: LucideBook,
+    title: "Self check-in",
+    desc: "You can check in with the building staff.",
+  },
+  {
+    id: 2,
+    icon: LucideMapPin,
+    title: "Great location",
+    desc: "94% of recent guests gave the location a 5-star rating.",
+  },
 ]
 
 const DescriptionDummy = {
-  generalDes:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi assumenda repellat placeat, quos aperiam amet obcaecati harum eum ipsum, ratione quam magnam sequi pariatur magni libero tempore odio numquam tenetur?",
-  aboutSpace: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi assumenda repellat placeat, quos aperiam amet obcaecati harum eum ipsum, ratione quam magnam sequi pariatur magni libero tempore odio numquam tenetur?",
-  aboutGuestAccess: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi assumenda repellat placeat, quos aperiam amet obcaecati harum eum ipsum, ratione quam magnam sequi pariatur magni libero tempore odio numquam tenetur?",
-  otherThingsNote: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi assumenda repellat placeat, quos aperiam amet obcaecati harum eum ipsum, ratione quam magnam sequi pariatur magni libero tempore odio numquam tenetur?"
+  generalDes:
+    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi assumenda repellat placeat, quos aperiam amet obcaecati harum eum ipsum, ratione quam magnam sequi pariatur magni libero tempore odio numquam tenetur?",
+  aboutSpace:
+    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi assumenda repellat placeat, quos aperiam amet obcaecati harum eum ipsum, ratione quam magnam sequi pariatur magni libero tempore odio numquam tenetur?",
+  aboutGuestAccess:
+    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi assumenda repellat placeat, quos aperiam amet obcaecati harum eum ipsum, ratione quam magnam sequi pariatur magni libero tempore odio numquam tenetur?",
+  otherThingsNote:
+    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi assumenda repellat placeat, quos aperiam amet obcaecati harum eum ipsum, ratione quam magnam sequi pariatur magni libero tempore odio numquam tenetur?",
 }
-  
 
 export const SingleView = () => {
   const [galleryModalOpen, setGalleryModalOpen] = useState(false)
@@ -112,15 +115,18 @@ export const SingleView = () => {
         <div>
           <div className="w-full">
             <div className="w-full border-b py-4">
-            <HighlightsSection 
-            hostName={HostDummy.hostName}
-            hostProfilePic={HostDummy.hostProfilePic}
-            hostDuration="Superhost  &#183; 11 months hosting"
-            highlights={highlightsDummy} 
-            />
+              <HighlightsSection
+                hostName={HostDummy.hostName}
+                hostProfilePic={HostDummy.hostProfilePic}
+                hostDuration="Superhost  &#183; 11 months hosting"
+                highlights={highlightsDummy}
+              />
             </div>
             <div className="w-full border-b py-4">
-            <BookingDescription onClick={()=>setDescriptionModalOpen(true)} generalDescription={DescriptionDummy.generalDes} />
+              <BookingDescription
+                onClick={() => setDescriptionModalOpen(true)}
+                generalDescription={DescriptionDummy.generalDes}
+              />
             </div>
           </div>
           <div>{/* What place offer */}</div>
@@ -182,9 +188,9 @@ export const SingleView = () => {
         isOpen={galleryModalOpen}
         onClose={() => setGalleryModalOpen(false)}
       />
-      <ModalAboutTitleDescription 
+      <ModalAboutTitleDescription
         isOpen={descriptionModalOpen}
-        onClose={()=>setDescriptionModalOpen(false)}
+        onClose={() => setDescriptionModalOpen(false)}
         listingDesc={DescriptionDummy}
       />
     </WidthWrapper>
