@@ -10,7 +10,6 @@ interface IconTitleDescription {
 interface HighlightsProps {
   hostName: string
   hostDuration: string
-  hostProfilePic: string
   highlights: IconTitleDescription[]
 }
 
