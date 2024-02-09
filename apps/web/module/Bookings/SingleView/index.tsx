@@ -1,5 +1,4 @@
 import { WidthWrapper } from "@/common/components/WidthWrapper"
-import { Title } from "@/common/components/ui/Title"
 import { Typography } from "@/common/components/ui/Typography"
 import ThingsToKnow from "./components/ThingsToKnow"
 import { Button } from "@/common/components/ui/Button"
@@ -42,8 +41,24 @@ const HostDummy = {
 
 export const SingleView = () => {
   return (
-    <WidthWrapper width={"medium"} className="my-24 lg:my-32 border-b">
-      <div className="w-full border-b pb-8">
+    <WidthWrapper width="medium" className="my-24 lg:my-32">
+      <div className="grid grid-cols-1 md:grid-cols-2 border-b pb-6">
+        <div>
+          <div>
+            {/* Description */}
+          </div>
+          <div>
+            {/* What place offer */}
+          </div>
+          <div>
+            {/* Date range picker */}
+          </div>
+        </div>
+        <div>
+          {/* Only add the reservation panel here */}
+        </div>
+      </div>
+      <div className="border-b pb-6 pt-6">
         <HostInformation
           countReviews={HostDummy.countReviews}
           hostName={HostDummy.hostName}
@@ -54,8 +69,7 @@ export const SingleView = () => {
           rules={HostDummy.rules}
         />
       </div>
-
-      <div className="mt-6 w-full">
+      <div className="pt-10">
         <Typography variant={"h2"}>Things to know</Typography>
         <div className="flex w-full mt-4 mb-6">
           <div className="w-full md:w-1/3">
