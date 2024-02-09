@@ -3,7 +3,7 @@ import AuthGuard from "@/common/components/AuthGuard"
 import React from "react"
 import { APP_NAME } from "@repo/constants"
 import { Metadata } from "next"
-import { ACCOMODATION} from "@/common/constants"
+import { ACCOMODATION } from "@/common/constants"
 import SingleView from "@/module/Bookings/SingleView"
 
 export const metadata: Metadata = {
