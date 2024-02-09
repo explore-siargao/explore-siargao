@@ -75,8 +75,9 @@ const userReviews = [
     origin: "Mandaluyong",
     rate: 5,
     date: "January 1, 1889",
-    review: "Owner David is available by email and phone and Messenger and usually on-site, and managers Genny and Bert are available on-site and by phone and Messenger.",
-    showMore: true
+    review:
+      "Owner David is available by email and phone and Messenger and usually on-site, and managers Genny and Bert are available on-site and by phone and Messenger.",
+    showMore: true,
   },
   {
     imageSrc: "2.jpg",
@@ -85,7 +86,7 @@ const userReviews = [
     rate: 4,
     date: "February 15, 1890",
     review: "Great experience overall! Maayos ang doormat",
-    showMore: true
+    showMore: true,
   },
   {
     imageSrc: "1.jpg",
@@ -93,8 +94,9 @@ const userReviews = [
     origin: "Mandaluyong",
     rate: 5,
     date: "January 1, 1889",
-    review: "Owner David is available by email and phone and Messenger and usually on-site, and managers Genny and Bert are available on-site and by phone and Messenger.",
-    showMore: true
+    review:
+      "Owner David is available by email and phone and Messenger and usually on-site, and managers Genny and Bert are available on-site and by phone and Messenger.",
+    showMore: true,
   },
   {
     imageSrc: "2.jpg",
@@ -103,14 +105,9 @@ const userReviews = [
     rate: 4,
     date: "February 15, 1890",
     review: "Great experience overall! Maayos ang doormat",
-    showMore: true
+    showMore: true,
   },
-  
-  
-
-];
-
-
+]
 
 export const SingleView = () => {
   const [galleryModalOpen, setGalleryModalOpen] = useState(false)
@@ -118,17 +115,15 @@ export const SingleView = () => {
     setGalleryModalOpen(true)
   }
 
-  const [showMoreModalOpen, setShowMoreModalOpen] = useState(false);
+  const [showMoreModalOpen, setShowMoreModalOpen] = useState(false)
 
   const openShowMoreModal = () => {
-    setShowMoreModalOpen(true);
-  };
+    setShowMoreModalOpen(true)
+  }
   const closeShowMoreModal = () => {
-    setShowMoreModalOpen(false);
-  };
+    setShowMoreModalOpen(false)
+  }
 
-
-  
   return (
     <WidthWrapper width="medium" className="my-24 lg:my-32">
       <div className="w-full pb-8">
@@ -157,8 +152,8 @@ export const SingleView = () => {
         />
       </div>
 
-      <div >
-        <HeadReview/>
+      <div>
+        <HeadReview />
       </div>
 
       <div className="pt-10">
@@ -178,12 +173,19 @@ export const SingleView = () => {
               </div>
             </div>
           ))}
-        </div>  
-        <Button variant={"outline"} className="my-6"  onClick={openShowMoreModal}>
-            Show Reviews
+        </div>
+        <Button
+          variant={"outline"}
+          className="my-6"
+          onClick={openShowMoreModal}
+        >
+          Show Reviews
         </Button>
-        <UserReviewModal isOpen={showMoreModalOpen}  onClose={() => closeShowMoreModal()} />
-    </div>
+        <UserReviewModal
+          isOpen={showMoreModalOpen}
+          onClose={() => closeShowMoreModal()}
+        />
+      </div>
       <div className="pt-10">
         <Typography variant={"h2"}>Things to know</Typography>
         <div className="flex w-full mt-4 mb-6">
