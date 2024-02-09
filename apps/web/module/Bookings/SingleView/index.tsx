@@ -1,8 +1,12 @@
+"use client"
 import { WidthWrapper } from "@/common/components/WidthWrapper"
 import { Typography } from "@/common/components/ui/Typography"
 import ThingsToKnow from "./components/ThingsToKnow"
 import { Button } from "@/common/components/ui/Button"
 import HostInformation from "./components/HostInformation"
+import ImageGallery from "./components/ImageGallery"
+import ImageGalleryModal from "./components/modals/ImageGalleryModal"
+import { useState } from "react"
 const HouseRulesDummy = [
   { id: 1, rule: "Check-in: 12:00 PM - 7:00 PM" },
   { id: 2, rule: "Checkout before 10:00 AM" },
@@ -39,9 +43,42 @@ const HostDummy = {
   responseTime: "Reply after 4 Hours",
 }
 
+const ImagesDummy = [
+  {
+    fileKey: "1.jpg",
+    alt: "Image 1",
+  },
+  {
+    fileKey: "2.jpg",
+    alt: "Image 2",
+  },
+  {
+    fileKey: "3.jpg",
+    alt: "Image 3",
+  },
+  {
+    fileKey: "4.jpg",
+    alt: "Image 4",
+  },
+  {
+    fileKey: "5.jpg",
+    alt: "Image 5",
+  },
+]
+
 export const SingleView = () => {
+  const [galleryModalOpen, setGalleryModalOpen] = useState(false)
+  const openModal = () => {
+    setGalleryModalOpen(true)
+  }
   return (
     <WidthWrapper width="medium" className="my-24 lg:my-32">
+      <div className="w-full pb-8">
+        <Typography variant={"h2"} className="py-4">
+          {"Listing Title"}
+        </Typography>
+        <ImageGallery imageKeys={ImagesDummy} openModal={openModal} />
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-2 border-b pb-6">
         <div>
           <div>
@@ -107,6 +144,11 @@ export const SingleView = () => {
           </div>
         </div>
       </div>
+
+      <ImageGalleryModal
+        isOpen={galleryModalOpen}
+        onClose={() => setGalleryModalOpen(false)}
+      />
     </WidthWrapper>
   )
 }
