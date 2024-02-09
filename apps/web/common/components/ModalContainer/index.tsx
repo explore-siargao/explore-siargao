@@ -2,15 +2,23 @@
 import { XMarkIcon } from "@heroicons/react/20/solid"
 import React, { useRef, Fragment } from "react"
 import { Dialog, Transition } from "@headlessui/react"
+import { cn } from "@/common/helpers/cn"
 
 type Props = {
   children: React.ReactNode
   title?: string
   isOpen: boolean
   onClose: () => void
+  size?: "sm" | "md" | "lg" | "full"
 }
 
-const ModalContainer = ({ children, title, onClose, isOpen }: Props) => {
+const ModalContainer = ({
+  children,
+  title,
+  onClose,
+  isOpen,
+  size = "lg",
+}: Props) => {
   const cancelButtonRef = useRef(null)
   return (
     <Transition.Root show={isOpen} as={Fragment}>
@@ -43,7 +51,17 @@ const ModalContainer = ({ children, title, onClose, isOpen }: Props) => {
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:w-full sm:max-w-lg">
+              <Dialog.Panel
+                className={cn(
+                  "relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all",
+                  {
+                    "m-5 w-full h-auto md:w-4/12": size === "sm",
+                    "m-5 w-full h-auto md:w-8/12": size === "md",
+                    "m-5 w-full h-auto md:w-10/12": size === "lg",
+                    "w-screen h-screen": size === "full",
+                  }
+                )}
+              >
                 <div className="bg-white shadow rounded-2xl">
                   <div className="flex border-b-gray-200 border-b p-4">
                     <div>
