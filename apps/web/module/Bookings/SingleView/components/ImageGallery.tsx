@@ -18,7 +18,7 @@ const ImageGallery = ({ imageKeys, openModal }: Imagesprops) => {
             src={`/assets/${imageKeys[0]?.fileKey}`}
             layout="fill"
             objectFit="cover"
-            alt={imageKeys[0]?.alt as string}
+            alt={String(imageKeys[0]?.alt)}
           />
         </div>
         <div className="grid grid-cols-2 gap-2">
@@ -27,7 +27,7 @@ const ImageGallery = ({ imageKeys, openModal }: Imagesprops) => {
               src={`/assets/${imageKeys[1]?.fileKey}`}
               layout="fill"
               objectFit="cover"
-              alt={imageKeys[1]?.alt as string}
+              alt={String(imageKeys[1]?.alt)}
             />
           </div>
           <div className="relative bg-gray-200">
@@ -35,7 +35,7 @@ const ImageGallery = ({ imageKeys, openModal }: Imagesprops) => {
               src={`/assets/${imageKeys[2]?.fileKey}`}
               layout="fill"
               objectFit="cover"
-              alt={imageKeys[2]?.alt as string}
+              alt={String(imageKeys[2]?.alt)}
             />
           </div>
           <div className="relative bg-gray-200">
@@ -43,7 +43,7 @@ const ImageGallery = ({ imageKeys, openModal }: Imagesprops) => {
               src={`/assets/${imageKeys[3]?.fileKey}`}
               layout="fill"
               objectFit="cover"
-              alt={imageKeys[3]?.alt as string}
+              alt={String(imageKeys[3]?.alt)}
             />
           </div>
           <div className="relative bg-gray-200">
@@ -51,7 +51,7 @@ const ImageGallery = ({ imageKeys, openModal }: Imagesprops) => {
               src={`/assets/${imageKeys[4]?.fileKey}`}
               layout="fill"
               objectFit="cover"
-              alt={imageKeys[4]?.alt as string}
+              alt={String(imageKeys[4]?.alt)}
             />
           </div>
         </div>
