@@ -1,26 +1,32 @@
-import { useState } from "react";
+import { useState } from "react"
 import { Title } from "./ui/Title"
 import { Typography } from "./ui/Typography"
 
 interface RightRadioListProps {
   title: string
   lists: {
-     id: number | string; option: string; description?: string 
-}[]
-  defaultSelectedId?: number | string;
+    id: number | string
+    option: string
+    description?: string
+  }[]
+  defaultSelectedId?: number | string
   description?: string
-  onSelect: (option: string) => void;
+  onSelect: (option: string) => void
 }
 
-const RightRadioList: React.FC<RightRadioListProps> = ({title, lists, onSelect, defaultSelectedId }) => {
+const RightRadioList: React.FC<RightRadioListProps> = ({
+  title,
+  lists,
+  onSelect,
+  defaultSelectedId,
+}) => {
+  const [selectedOption, setSelectedOption] = useState(defaultSelectedId || "")
 
-  const [selectedOption, setSelectedOption] = useState(defaultSelectedId || '');
-
-  const handleOptionChange = (event: { target: { value: any; }; }) => {
-    const value = event.target.value;
-    setSelectedOption(value);
-    onSelect(value);
-  };
+  const handleOptionChange = (event: { target: { value: any } }) => {
+    const value = event.target.value
+    setSelectedOption(value)
+    onSelect(value)
+  }
 
   return (
     <div className="flex flex-col w-full">
@@ -31,14 +37,16 @@ const RightRadioList: React.FC<RightRadioListProps> = ({title, lists, onSelect, 
         <div key={choice.id} className="flex w-full py-3 border-b">
           <label className="flex items-center w-full">
             <div>
-            <Typography className="text-gray-600">{choice.option}</Typography>
-            <div className="items-start">
-              {choice.description && (
-                  <Typography className="text-gray-400">{choice.description}</Typography>
+              <Typography className="text-gray-600">{choice.option}</Typography>
+              <div className="items-start">
+                {choice.description && (
+                  <Typography className="text-gray-400">
+                    {choice.description}
+                  </Typography>
                 )}
+              </div>
             </div>
-            </div>
-           
+
             <input
               name="helper-radio"
               type="radio"
@@ -47,7 +55,6 @@ const RightRadioList: React.FC<RightRadioListProps> = ({title, lists, onSelect, 
               onChange={handleOptionChange}
               className="ml-auto w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
             />
-             
           </label>
         </div>
       ))}
