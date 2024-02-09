@@ -43,39 +43,41 @@ const HostDummy = {
   responseTime: "Reply after 4 Hours",
 }
 
-const ImagesDummy =[
-{
-  fileKey:"1.jpg",
-  alt:"Image 1"
-},
-{
-  fileKey:"2.jpg",
-  alt:"Image 2"
-},
-{
-  fileKey:"3.jpg",
-  alt:"Image 3"
-},
-{
-  fileKey:"4.jpg",
-  alt:"Image 4"
-},
-{
-  fileKey:"5.jpg",
-  alt:"Image 5"
-},
+const ImagesDummy = [
+  {
+    fileKey: "1.jpg",
+    alt: "Image 1",
+  },
+  {
+    fileKey: "2.jpg",
+    alt: "Image 2",
+  },
+  {
+    fileKey: "3.jpg",
+    alt: "Image 3",
+  },
+  {
+    fileKey: "4.jpg",
+    alt: "Image 4",
+  },
+  {
+    fileKey: "5.jpg",
+    alt: "Image 5",
+  },
 ]
 
 export const SingleView = () => {
   const [galleryModalOpen, setGalleryModalOpen] = useState(false)
-  const openModal = () =>{
+  const openModal = () => {
     setGalleryModalOpen(true)
   }
   return (
     <WidthWrapper width={"medium"} className="my-24 lg:my-32 border-b">
       <div className="w-full pb-8">
-        <Typography variant={"h2"} className="py-4">{"Listing Title"}</Typography>
-        <ImageGallery imageKeys={ImagesDummy} openModal={openModal}/>
+        <Typography variant={"h2"} className="py-4">
+          {"Listing Title"}
+        </Typography>
+        <ImageGallery imageKeys={ImagesDummy} openModal={openModal} />
       </div>
 
       <div className="w-full border-b pb-8">
@@ -128,8 +130,11 @@ export const SingleView = () => {
           </div>
         </div>
       </div>
-    
-    <ImageGalleryModal isOpen={galleryModalOpen} onClose={()=>setGalleryModalOpen(false)}/>
+
+      <ImageGalleryModal
+        isOpen={galleryModalOpen}
+        onClose={() => setGalleryModalOpen(false)}
+      />
     </WidthWrapper>
   )
 }
