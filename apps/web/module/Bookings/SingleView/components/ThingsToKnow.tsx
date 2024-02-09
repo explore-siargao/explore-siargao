@@ -1,21 +1,24 @@
 import { Typography } from "@/common/components/ui/Typography"
 import React from "react"
-
-interface HouseRules {
+interface Rules{
+  id:number,
+  rule:string
+}
+interface ThingsToKnowProps {
   title: string
-  rules: any
+  rules: Rules[]
 }
 
-const HouseRule: React.FC<HouseRules> = ({ title, rules }) => {
+const ThingsToKnow = ({ title, rules }:ThingsToKnowProps) => {
   return (
     <div>
-      <Typography fontWeight={"semiBold"} className="px-10">
+      <Typography fontWeight={"semiBold"} className="px-1">
         {title}
       </Typography>
       <ul>
         {rules.map((rule: any) => (
           <li className="mt-2" key={rule.rule.id}>
-            <Typography className="px-10">{rule.rule}</Typography>
+            <Typography className="px-1">{rule.rule}</Typography>
           </li>
         ))}
       </ul>
@@ -23,4 +26,4 @@ const HouseRule: React.FC<HouseRules> = ({ title, rules }) => {
   )
 }
 
-export default HouseRule
+export default ThingsToKnow
