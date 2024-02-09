@@ -22,7 +22,7 @@ const SpecificMap = ({
   mapWidth,
 }: SpecificMapProps) => {
   return (
-    <div className="flex-1 hidden lg:block">
+    <div className="flex-1 block">
       <div className={`${mapHeight} ${mapWidth}`}>
         <MapContainer
           //@ts-ignore
@@ -43,8 +43,8 @@ const SpecificMap = ({
           <CircleMarker
             // @ts-ignore
             center={coordinates}
-            color="#fc2d46"
-            fillColor="#fc2d46"
+            color="#e4aa0b"
+            fillColor="#e4aa0b"
             fillOpacity={1}
             radius={30}
           ></CircleMarker>
