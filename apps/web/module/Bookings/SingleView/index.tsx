@@ -81,19 +81,11 @@ export const SingleView = () => {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 border-b pb-6">
         <div>
-          <div>
-            {/* Description */}
-          </div>
-          <div>
-            {/* What place offer */}
-          </div>
-          <div>
-            {/* Date range picker */}
-          </div>
+          <div>{/* Description */}</div>
+          <div>{/* What place offer */}</div>
+          <div>{/* Date range picker */}</div>
         </div>
-        <div>
-          {/* Only add the reservation panel here */}
-        </div>
+        <div>{/* Only add the reservation panel here */}</div>
       </div>
       <div className="border-b pb-6 pt-6">
         <HostInformation
