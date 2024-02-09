@@ -36,7 +36,6 @@ const ModalReporting = ({
   const selectedReport = reportListingArr.find(
     (report) => report.name === selectedOption
   )
- 
 
   return (
     <ModalContainer onClose={onClose} isOpen={isOpen}>
@@ -76,7 +75,7 @@ const ModalReporting = ({
                   option: choice.reason,
                   description: choice.description || "",
                 }))}
-                onSelect={()=>""}
+                onSelect={() => ""}
               />
             </form>
             <div className=""></div>
