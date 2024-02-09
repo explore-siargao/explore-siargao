@@ -10,14 +10,17 @@ const HouseRulesDummy = [
 ]
 
 const SafetyPropertiesDummy = [
-    { id: 1, rule: "Pool/hot tub without a gate or lock" },
-    { id: 2, rule: "Nearby lake, river, other body of water" },
-    { id: 3, rule: "Carbon monoxide alarm" },
-  ]
-  const CancellationPoliciesDummy = [
-    { id: 1, rule: "This reservation is non-refundable." },
-    { id: 2, rule: "Review the Host’s full cancellation policy which applies even if you cancel for illness or disruptions caused by COVID-19." },
-  ]
+  { id: 1, rule: "Pool/hot tub without a gate or lock" },
+  { id: 2, rule: "Nearby lake, river, other body of water" },
+  { id: 3, rule: "Carbon monoxide alarm" },
+]
+const CancellationPoliciesDummy = [
+  { id: 1, rule: "This reservation is non-refundable." },
+  {
+    id: 2,
+    rule: "Review the Host’s full cancellation policy which applies even if you cancel for illness or disruptions caused by COVID-19.",
+  },
+]
 
 export const SingleView = () => {
   return (
@@ -25,33 +28,39 @@ export const SingleView = () => {
       <div className="mt-6 w-full">
         <Typography variant={"h2"}>Things to know</Typography>
         <div className="flex w-full mt-4 mb-6">
-        <div className="w-full md:w-1/3">
-          <ThingsToKnow title="House Rules" rules={HouseRulesDummy} />
-          <Button
-        className="text-md p-1 font-semibold underline"
-        variant={"ghost"}
-      >
-        Show more &gt;
-      </Button>
-        </div>
-        <div className="w-full md:w-1/3">
-            <ThingsToKnow title="Safety & Property" rules={SafetyPropertiesDummy} />
+          <div className="w-full md:w-1/3">
+            <ThingsToKnow title="House Rules" rules={HouseRulesDummy} />
             <Button
-        className="text-md p-1 font-semibold underline"
-        variant={"ghost"}
-      >
-        Show more &gt;
-      </Button>
-        </div>
-        <div className="w-full md:w-1/3">
-            <ThingsToKnow title="Cancellation policy" rules={CancellationPoliciesDummy} />
-        <Button
-        className="text-md p-1 font-semibold underline"
-        variant={"ghost"}
-      >
-        Show more &gt;
-      </Button>
-        </div>
+              className="text-md p-1 font-semibold underline"
+              variant={"ghost"}
+            >
+              Show more &gt;
+            </Button>
+          </div>
+          <div className="w-full md:w-1/3">
+            <ThingsToKnow
+              title="Safety & Property"
+              rules={SafetyPropertiesDummy}
+            />
+            <Button
+              className="text-md p-1 font-semibold underline"
+              variant={"ghost"}
+            >
+              Show more &gt;
+            </Button>
+          </div>
+          <div className="w-full md:w-1/3">
+            <ThingsToKnow
+              title="Cancellation policy"
+              rules={CancellationPoliciesDummy}
+            />
+            <Button
+              className="text-md p-1 font-semibold underline"
+              variant={"ghost"}
+            >
+              Show more &gt;
+            </Button>
+          </div>
         </div>
       </div>
     </WidthWrapper>

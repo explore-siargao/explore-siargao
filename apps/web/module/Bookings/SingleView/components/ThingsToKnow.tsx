@@ -1,15 +1,15 @@
 import { Typography } from "@/common/components/ui/Typography"
 import React from "react"
-interface Rules{
-  id:number,
-  rule:string
+interface Rules {
+  id: number
+  rule: string
 }
 interface ThingsToKnowProps {
   title: string
   rules: Rules[]
 }
 
-const ThingsToKnow = ({ title, rules }:ThingsToKnowProps) => {
+const ThingsToKnow = ({ title, rules }: ThingsToKnowProps) => {
   return (
     <div>
       <Typography fontWeight={"semiBold"} className="px-1">
