@@ -14,21 +14,23 @@ interface HighlightsProps {
   highlights: IconTitleDescription[]
 }
 
+const ProfilePic = () => (
+  <Image
+    src={`/assets/1.jpg`}
+    alt="Profile picture"
+    width={20}
+    height={20}
+    className="rounded-full h-12 w-12 object-cover"
+  />
+)
+
 const HighlightsSection = ({
   highlights,
   hostProfilePic,
   hostDuration,
   hostName,
 }: HighlightsProps) => {
-  const ProfilePic = () => (
-    <Image
-      src={`/assets/${hostProfilePic}`}
-      alt="Profile picture"
-      width={20}
-      height={20}
-      className="rounded-full h-12 w-12 object-cover"
-    />
-  )
+
   return (
     <div className="w-full">
       <div className="w-full border-b pb-4">
