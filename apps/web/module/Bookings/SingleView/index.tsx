@@ -29,29 +29,32 @@ const HostDummy = {
   joinedIn: "July 20, 2020",
   countReviews: 100,
   rules: [
-    { id: 1, title: "During your stay", description: "Owner David is available by email and phone and Messenger and usually on-site, and managers Genny and Bert are available on-site and by phone and Messenger." },
-
-
+    {
+      id: 1,
+      title: "During your stay",
+      description:
+        "Owner David is available by email and phone and Messenger and usually on-site, and managers Genny and Bert are available on-site and by phone and Messenger.",
+    },
   ],
   responseRate: 70,
-  responseTime: "Reply after 4 Hours"
+  responseTime: "Reply after 4 Hours",
 }
 
 export const SingleView = () => {
   return (
     <WidthWrapper width={"medium"} className="my-24 lg:my-32 border-b">
       <div className="w-full border-b pb-8">
-      <HostInformation 
-      countReviews={HostDummy.countReviews} 
-      hostName={HostDummy.hostName}
-      hostProfilePic={HostDummy.hostProfilePic}
-       joinedIn={HostDummy.joinedIn}
-       responseRate={HostDummy.responseRate}
-       responseTime={HostDummy.responseTime}
-       rules={HostDummy.rules}
-       />
-       </div>
-    
+        <HostInformation
+          countReviews={HostDummy.countReviews}
+          hostName={HostDummy.hostName}
+          hostProfilePic={HostDummy.hostProfilePic}
+          joinedIn={HostDummy.joinedIn}
+          responseRate={HostDummy.responseRate}
+          responseTime={HostDummy.responseTime}
+          rules={HostDummy.rules}
+        />
+      </div>
+
       <div className="mt-6 w-full">
         <Typography variant={"h2"}>Things to know</Typography>
         <div className="flex w-full mt-4 mb-6">
