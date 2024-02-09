@@ -116,7 +116,6 @@ export const SingleView = () => {
             <div className="w-full border-b py-4">
               <HighlightsSection
                 hostName={HostDummy.hostName}
-                hostProfilePic={HostDummy.hostProfilePic}
                 hostDuration="Superhost  &#183; 11 months hosting"
                 highlights={highlightsDummy}
               />
