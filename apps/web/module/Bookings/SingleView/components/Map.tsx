@@ -25,7 +25,11 @@ const WhereYoullBeDescription = ({ whereYoullBeDesc }: WhereYoullBeProps) => {
       <div className="flex-1 w-full">
         <Title className="text-lg font-semibold">Where you'll be</Title>
         <div className="w-12/12 h-[450px] bg-primary-200 mb-5">
-          <SpecificMap coordinates={whereYoullBeDesc.coordinates} mapHeight="h-[450px]" mapWidth="w-full"/>
+          <SpecificMap
+            coordinates={whereYoullBeDesc.coordinates}
+            mapHeight="h-[450px]"
+            mapWidth="w-full"
+          />
         </div>
 
         {whereYoullBeDesc.location && (
