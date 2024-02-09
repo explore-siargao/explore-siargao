@@ -17,6 +17,7 @@ import { Z_UserRegister } from '@repo/contract'
 import { ResponseService } from '@/common/service/response'
 import randomNumber from '@/common/helpers/randomNumber'
 import CryptoJS from 'crypto-js'
+import { currencyByCountry } from '@/common/helpers/currencyByCountry'
 
 const prisma = new PrismaClient()
 const response = new ResponseService()
@@ -114,11 +115,7 @@ export const register = async (req: Request, res: Response) => {
       country,
       canReceiveEmail,
     } = req.body
-    const currencyByCountry = {
-      'United States': 'USD',
-      Philippines: 'PHP',
-      Australia: 'AUD',
-    }
+
     const currency: string =
       currencyByCountry[country as keyof typeof currencyByCountry]
     const selectedCurrency = currency ?? 'USD'
