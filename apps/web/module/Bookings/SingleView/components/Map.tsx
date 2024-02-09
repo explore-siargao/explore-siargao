@@ -1,9 +1,11 @@
+import SpecificMap from "@/common/components/SpecificMap"
 import { Button } from "@/common/components/ui/Button"
 import { Title } from "@/common/components/ui/Title"
 
 interface IDescription {
   id?: number
   location: string
+  coordinates: [Number, Number]
   desc: string
 }
 
@@ -22,7 +24,13 @@ const WhereYoullBeDescription = ({ whereYoullBeDesc }: WhereYoullBeProps) => {
     <div className="flex flex-col w-full">
       <div className="flex-1 w-full">
         <Title className="text-lg font-semibold">Where you'll be</Title>
-        <div className="w-12/12 h-[450px] bg-primary-200 mb-5"></div>
+        <div className="w-12/12 h-[450px] bg-primary-200 mb-5">
+          <SpecificMap
+            coordinates={whereYoullBeDesc.coordinates}
+            mapHeight="h-[450px]"
+            mapWidth="w-full"
+          />
+        </div>
 
         {whereYoullBeDesc.location && (
           <div className="text-md font-semibold mb-5">
