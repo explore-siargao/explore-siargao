@@ -87,6 +87,25 @@ const userReviews = [
     review: "Great experience overall! Maayos ang doormat",
     showMore: true
   },
+  {
+    imageSrc: "1.jpg",
+    name: "John Doe Junior",
+    origin: "Mandaluyong",
+    rate: 5,
+    date: "January 1, 1889",
+    review: "Owner David is available by email and phone and Messenger and usually on-site, and managers Genny and Bert are available on-site and by phone and Messenger.",
+    showMore: true
+  },
+  {
+    imageSrc: "2.jpg",
+    name: "Jane Villanueva",
+    origin: "Metro Mainla",
+    rate: 4,
+    date: "February 15, 1890",
+    review: "Great experience overall! Maayos ang doormat",
+    showMore: true
+  },
+  
   
 
 ];
@@ -143,10 +162,10 @@ export const SingleView = () => {
       </div>
 
       <div className="pt-10">
-        <div className="flex w-full mt-4 mb-6">
+        <div className="flex w-full mt-4 mb-6 flex-wrap">
           {userReviews.map((review, index) => (
             <div className="w-full md:w-1/2" key={index}>
-              <div className="mt-7">
+              <div className="mt-7 pr-5">
                 <UserReview
                   imageSrc={review.imageSrc}
                   name={review.name}
