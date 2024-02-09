@@ -58,7 +58,7 @@ const ReviewStarRating = ({
   return (
     <div className="flex">
       {[...Array(totalStars)].map((_, index) => (
-        <span key={`star_${index}`} className="cursor-pointer">
+        <span key={`star-${_}`} className="cursor-pointer">
           {renderStar(index)}
         </span>
       ))}
