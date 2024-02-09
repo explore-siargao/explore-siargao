@@ -28,7 +28,6 @@ const HighlightsSection = ({
   hostDuration,
   hostName,
 }: HighlightsProps) => {
-
   return (
     <div className="w-full">
       <div className="w-full border-b pb-4">
