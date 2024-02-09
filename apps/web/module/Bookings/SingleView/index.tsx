@@ -163,8 +163,8 @@ export const SingleView = () => {
 
       <div className="pt-10">
         <div className="flex w-full mt-4 mb-6 flex-wrap">
-          {userReviews.map((review, index) => (
-            <div className="w-full md:w-1/2" key={index}>
+          {userReviews.map((review, star) => (
+            <div className="w-full md:w-1/2" key={`star-${star}`}>
               <div className="mt-7 pr-5">
                 <UserReview
                   imageSrc={review.imageSrc}
