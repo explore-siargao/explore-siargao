@@ -25,10 +25,10 @@ const ReviewStarRating = ({
     }
   }
 
-  const renderStar = (starId: number) => {
-    if (starId < Math.floor(rating)) {
+  const renderStar = (index: number) => {
+    if (index < Math.floor(rating)) {
       return <StarIcon width={getStarWidth()} className="text-secondary-500" />
-    } else if (starId === Math.floor(rating) && rating % 1 !== 0.5) {
+    } else if (index === Math.floor(rating) && rating % 1 !== 0.5) {
       return (
         <div
           className="relative"
@@ -57,9 +57,9 @@ const ReviewStarRating = ({
 
   return (
     <div className="flex">
-      {[...Array(totalStars)].map((_, id) => (
-        <span key={`star_${id}`} className="cursor-pointer">
-          {renderStar(id)}
+      {[...Array(totalStars)].map((_, index) => (
+        <span key={`star-${index}`} className="cursor-pointer">
+          {renderStar(index)}
         </span>
       ))}
     </div>
