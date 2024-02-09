@@ -20,14 +20,9 @@ const ModalReporting = ({
 }: ModalReportingProps) => {
   const [currentPage, setCurrentPage] = useState(1)
   const [selectedOption, setSelectedOption] = useState("")
-  const [selectedReason, setSelectedReason] = useState("")
 
   const handleOptionSelect = (option: string) => {
     setSelectedOption(option)
-  }
-
-  const handleReasonSelect = (option: string) => {
-    setSelectedReason(option)
   }
 
   const nextPage = () => {
@@ -41,6 +36,7 @@ const ModalReporting = ({
   const selectedReport = reportListingArr.find(
     (report) => report.name === selectedOption
   )
+ 
 
   return (
     <ModalContainer onClose={onClose} isOpen={isOpen}>
@@ -80,7 +76,7 @@ const ModalReporting = ({
                   option: choice.reason,
                   description: choice.description || "",
                 }))}
-                onSelect={(option) => handleReasonSelect(option)}
+                onSelect={()=>""}
               />
             </form>
             <div className=""></div>
