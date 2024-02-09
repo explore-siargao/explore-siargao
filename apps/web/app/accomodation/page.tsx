@@ -1,4 +1,3 @@
-import AccountSettings from "@/module/AccountSettings"
 import AuthGuard from "@/common/components/AuthGuard"
 import React from "react"
 import { APP_NAME } from "@repo/constants"
