@@ -7,22 +7,34 @@ import { Typography } from "@/common/components/ui/Typography"
 import { Button } from "@/common/components/ui/Button"
 
 interface ListingDRProps {
-    title: string
+  title: string
 }
 
-const ListingDateRangePicker = ({title}: ListingDRProps) => {
-    const [date, setDate] = useState<DateRange | undefined>({
-        from: undefined,   
-        to: undefined,
-    })
-    return (
-        <div className="md:w-[477px]">
-            <Typography variant="h3" fontWeight="semiBold" className="mb-1">{title}</Typography>
-            <Typography variant="h6" className="mb-4">{date?.from != undefined ? format(date.from, "LLL dd, y") : "Date from"} - {date?.to != undefined ? format(date.to, "LLL dd, y") : "Date to"}</Typography>
-            <DateRangePicker date={date} setDate={setDate}/>
-            <Button variant="ghost" className="underline md:float-right" size="sm" onClick={() => setDate(undefined)}>Clear dates</Button>
-        </div>
-    )
+const ListingDateRangePicker = ({ title }: ListingDRProps) => {
+  const [date, setDate] = useState<DateRange | undefined>({
+    from: undefined,
+    to: undefined,
+  })
+  return (
+    <div className="md:w-[477px]">
+      <Typography variant="h3" fontWeight="semiBold" className="mb-1">
+        {title}
+      </Typography>
+      <Typography variant="h6" className="mb-4">
+        {date?.from != undefined ? format(date.from, "LLL dd, y") : "Date from"}{" "}
+        - {date?.to != undefined ? format(date.to, "LLL dd, y") : "Date to"}
+      </Typography>
+      <DateRangePicker date={date} setDate={setDate} />
+      <Button
+        variant="ghost"
+        className="underline md:float-right"
+        size="sm"
+        onClick={() => setDate(undefined)}
+      >
+        Clear dates
+      </Button>
+    </div>
+  )
 }
 
 export default ListingDateRangePicker

@@ -8,20 +8,19 @@ interface DateRangePickerProps {
   setDate: Dispatch<SetStateAction<DateRange | undefined>>
 }
 
-const DateRangePicker = ({date, setDate}: DateRangePickerProps) => {
-      
-    return (
-        <>
-         <Calendar
-            initialFocus
-            mode="range"
-            defaultMonth={date?.from}
-            selected={date}
-            onSelect={setDate}
-            numberOfMonths={2}
-          />
-        </>
-    )
+const DateRangePicker = ({ date, setDate }: DateRangePickerProps) => {
+  return (
+    <>
+      <Calendar
+        initialFocus
+        mode="range"
+        defaultMonth={date?.from}
+        selected={date}
+        onSelect={setDate}
+        numberOfMonths={2}
+      />
+    </>
+  )
 }
 
 export default DateRangePicker
