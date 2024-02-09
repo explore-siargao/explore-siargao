@@ -7,6 +7,9 @@ import HostInformation from "./components/HostInformation"
 import ImageGallery from "./components/ImageGallery"
 import ImageGalleryModal from "./components/modals/ImageGalleryModal"
 import { useState } from "react"
+import HeadReview from "./Review/HeadReview"
+import UserReview from "./Review/UserReview"
+import UserReviewModal from "./Review/UserReviewModal"
 const HouseRulesDummy = [
   { id: 1, rule: "Check-in: 12:00 PM - 7:00 PM" },
   { id: 2, rule: "Checkout before 10:00 AM" },
@@ -65,12 +68,48 @@ const ImagesDummy = [
     alt: "Image 5",
   },
 ]
+const userReviews = [
+  {
+    imageSrc: "1.jpg",
+    name: "John Doe Junior",
+    origin: "Mandaluyong",
+    rate: 5,
+    date: "January 1, 1889",
+    review: "Owner David is available by email and phone and Messenger and usually on-site, and managers Genny and Bert are available on-site and by phone and Messenger.",
+    showMore: true
+  },
+  {
+    imageSrc: "2.jpg",
+    name: "Jane Villanueva",
+    origin: "Metro Mainla",
+    rate: 4,
+    date: "February 15, 1890",
+    review: "Great experience overall! Maayos ang doormat",
+    showMore: true
+  },
+  
+
+];
+
+
 
 export const SingleView = () => {
   const [galleryModalOpen, setGalleryModalOpen] = useState(false)
   const openModal = () => {
     setGalleryModalOpen(true)
   }
+
+  const [showMoreModalOpen, setShowMoreModalOpen] = useState(false);
+
+  const openShowMoreModal = () => {
+    setShowMoreModalOpen(true);
+  };
+  const closeShowMoreModal = () => {
+    setShowMoreModalOpen(false);
+  };
+
+
+  
   return (
     <WidthWrapper width="medium" className="my-24 lg:my-32">
       <div className="w-full pb-8">
@@ -98,6 +137,34 @@ export const SingleView = () => {
           rules={HostDummy.rules}
         />
       </div>
+
+      <div >
+        <HeadReview/>
+      </div>
+
+      <div className="pt-10">
+        <div className="flex w-full mt-4 mb-6">
+          {userReviews.map((review, index) => (
+            <div className="w-full md:w-1/2" key={index}>
+              <div className="mt-7">
+                <UserReview
+                  imageSrc={review.imageSrc}
+                  name={review.name}
+                  origin={review.origin}
+                  rate={review.rate}
+                  date={review.date}
+                  review={review.review}
+                  showMore={true}
+                />
+              </div>
+            </div>
+          ))}
+        </div>  
+        <Button variant={"outline"} className="my-6"  onClick={openShowMoreModal}>
+            Show Reviews
+        </Button>
+        <UserReviewModal isOpen={showMoreModalOpen}  onClose={() => closeShowMoreModal()} />
+    </div>
       <div className="pt-10">
         <Typography variant={"h2"}>Things to know</Typography>
         <div className="flex w-full mt-4 mb-6">
