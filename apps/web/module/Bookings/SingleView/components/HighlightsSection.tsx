@@ -26,7 +26,6 @@ const ProfilePic = () => (
 
 const HighlightsSection = ({
   highlights,
-  hostProfilePic,
   hostDuration,
   hostName,
 }: HighlightsProps) => {
