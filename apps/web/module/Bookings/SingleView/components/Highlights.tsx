@@ -1,7 +1,5 @@
-import { LucideBook } from "lucide-react"
 import IconTitleDescription from "./IconTitleDescription"
 import Image from "next/image"
-import HostInformation from "./HostInformation"
 
 interface IconTitleDescription {
   id: number
