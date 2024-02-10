@@ -143,7 +143,7 @@ const AddReview = () => {
             <div className="flex w-full justify-between items-center p-8">
               <div>
                 {stepIndex > 0 && (
-                  <div
+                  <button
                     onKeyUp={() => {}}
                     onFocus={() => {}}
                     onClick={() => stepHandler("back")}
@@ -152,17 +152,14 @@ const AddReview = () => {
                   >
                     <ArrowLeft />
                     Back
-                  </div>
+                  </button>
                 )}
               </div>
               <div>
                 {stepIndex < 6 && (
-                  <div
+                  <button
                     onClick={
-                      form.watch(reviewSteps[stepIndex]?.fieldName as string) ==
-                      undefined
-                        ? undefined
-                        : () => stepHandler("next")
+                      () => !form.watch(reviewSteps[stepIndex]?.fieldName as string) ? null :stepHandler("next")
                     }
                     onKeyUp={() => {}}
                     onFocus={() => {}}
@@ -171,7 +168,7 @@ const AddReview = () => {
                   >
                     Next
                     <ArrowRight />
-                  </div>
+                  </button>
                 )}
                 {stepIndex === 6 && (
                   <Button type="submit" variant={"primary"} size="sm">

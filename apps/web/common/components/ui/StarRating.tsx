@@ -49,7 +49,7 @@ const StarRating = forwardRef<HTMLDivElement, StarRatingProps>(
     return (
       <div className="flex">
         {[...Array(totalStars)].map((_, index) => (
-          <span
+          <button
             key={`star-${_}`}
             className={`cursor-pointer ${
               index < hoverRating || index < rating
@@ -65,7 +65,7 @@ const StarRating = forwardRef<HTMLDivElement, StarRatingProps>(
             role="button"
           >
             <StarIcon width={getStarWidth()} />
-          </span>
+          </button>
         ))}
       </div>
     )
