@@ -7,6 +7,10 @@ import HostInformation from "./components/HostInformation"
 import ImageGallery from "./components/ImageGallery"
 import ImageGalleryModal from "./components/modals/ImageGalleryModal"
 import { useState } from "react"
+import { LucideBook, LucideMapPin } from "lucide-react"
+import HighlightsSection from "./components/HighlightsSection"
+import BookingDescription from "./components/BookingDescription"
+import ModalAboutTitleDescription from "./components/modals/ModalAboutTitleDescription"
 const HouseRulesDummy = [
   { id: 1, rule: "Check-in: 12:00 PM - 7:00 PM" },
   { id: 2, rule: "Checkout before 10:00 AM" },
@@ -66,8 +70,35 @@ const ImagesDummy = [
   },
 ]
 
+const highlightsDummy = [
+  {
+    id: 1,
+    icon: LucideBook,
+    title: "Self check-in",
+    desc: "You can check in with the building staff.",
+  },
+  {
+    id: 2,
+    icon: LucideMapPin,
+    title: "Great location",
+    desc: "94% of recent guests gave the location a 5-star rating.",
+  },
+]
+
+const DescriptionDummy = {
+  generalDes:
+    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi assumenda repellat placeat, quos aperiam amet obcaecati harum eum ipsum, ratione quam magnam sequi pariatur magni libero tempore odio numquam tenetur?",
+  aboutSpace:
+    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi assumenda repellat placeat, quos aperiam amet obcaecati harum eum ipsum, ratione quam magnam sequi pariatur magni libero tempore odio numquam tenetur?",
+  aboutGuestAccess:
+    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi assumenda repellat placeat, quos aperiam amet obcaecati harum eum ipsum, ratione quam magnam sequi pariatur magni libero tempore odio numquam tenetur?",
+  otherThingsNote:
+    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi assumenda repellat placeat, quos aperiam amet obcaecati harum eum ipsum, ratione quam magnam sequi pariatur magni libero tempore odio numquam tenetur?",
+}
+
 export const SingleView = () => {
   const [galleryModalOpen, setGalleryModalOpen] = useState(false)
+  const [descriptionModalOpen, setDescriptionModalOpen] = useState(false)
   const openModal = () => {
     setGalleryModalOpen(true)
   }
@@ -81,7 +112,21 @@ export const SingleView = () => {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 border-b pb-6">
         <div>
-          <div>{/* Description */}</div>
+          <div className="w-full">
+            <div className="w-full border-b py-4">
+              <HighlightsSection
+                hostName={HostDummy.hostName}
+                hostDuration="Superhost  &#183; 11 months hosting"
+                highlights={highlightsDummy}
+              />
+            </div>
+            <div className="w-full border-b py-4">
+              <BookingDescription
+                onClick={() => setDescriptionModalOpen(true)}
+                generalDescription={DescriptionDummy.generalDes}
+              />
+            </div>
+          </div>
           <div>{/* What place offer */}</div>
           <div>{/* Date range picker */}</div>
         </div>
@@ -140,6 +185,11 @@ export const SingleView = () => {
       <ImageGalleryModal
         isOpen={galleryModalOpen}
         onClose={() => setGalleryModalOpen(false)}
+      />
+      <ModalAboutTitleDescription
+        isOpen={descriptionModalOpen}
+        onClose={() => setDescriptionModalOpen(false)}
+        listingDesc={DescriptionDummy}
       />
     </WidthWrapper>
   )
