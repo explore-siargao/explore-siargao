@@ -7,6 +7,9 @@ import HostInformation from "./components/HostInformation"
 import ImageGallery from "./components/ImageGallery"
 import ImageGalleryModal from "./components/modals/ImageGalleryModal"
 import { useState } from "react"
+import HeadReview from "./Review/HeadReview"
+import UserReview from "./Review/UserReview"
+import UserReviewModal from "./Review/UserReviewModal"
 import { LucideBook, LucideMapPin } from "lucide-react"
 import HighlightsSection from "./components/HighlightsSection"
 import BookingDescription from "./components/BookingDescription"
@@ -69,6 +72,46 @@ const ImagesDummy = [
     alt: "Image 5",
   },
 ]
+const userReviews = [
+  {
+    imageSrc: "1.jpg",
+    name: "John Doe Junior",
+    origin: "Mandaluyong",
+    rate: 5,
+    date: "January 1, 1889",
+    review:
+      "Owner David is available by email and phone and Messenger and usually on-site, and managers Genny and Bert are available on-site and by phone and Messenger.",
+    showMore: true,
+  },
+  {
+    imageSrc: "2.jpg",
+    name: "Jane Villanueva",
+    origin: "Metro Mainla",
+    rate: 4,
+    date: "February 15, 1890",
+    review: "Great experience overall! Maayos ang doormat",
+    showMore: true,
+  },
+  {
+    imageSrc: "1.jpg",
+    name: "John Doe Junior",
+    origin: "Mandaluyong",
+    rate: 5,
+    date: "January 1, 1889",
+    review:
+      "Owner David is available by email and phone and Messenger and usually on-site, and managers Genny and Bert are available on-site and by phone and Messenger.",
+    showMore: true,
+  },
+  {
+    imageSrc: "2.jpg",
+    name: "Jane Villanueva",
+    origin: "Metro Mainla",
+    rate: 4,
+    date: "February 15, 1890",
+    review: "Great experience overall! Maayos ang doormat",
+    showMore: true,
+  },
+]
 
 const highlightsDummy = [
   {
@@ -102,6 +145,16 @@ export const SingleView = () => {
   const openModal = () => {
     setGalleryModalOpen(true)
   }
+
+  const [showMoreModalOpen, setShowMoreModalOpen] = useState(false)
+
+  const openShowMoreModal = () => {
+    setShowMoreModalOpen(true)
+  }
+  const closeShowMoreModal = () => {
+    setShowMoreModalOpen(false)
+  }
+
   return (
     <WidthWrapper width="medium" className="my-24 lg:my-32">
       <div className="w-full pb-8">
@@ -141,6 +194,41 @@ export const SingleView = () => {
           responseRate={HostDummy.responseRate}
           responseTime={HostDummy.responseTime}
           rules={HostDummy.rules}
+        />
+      </div>
+
+      <div>
+        <HeadReview />
+      </div>
+
+      <div className="pt-10">
+        <div className="flex w-full mt-4 mb-6 flex-wrap">
+          {userReviews.map((review, index) => (
+            <div className="w-full md:w-1/2" key={`review-${review.name}`}>
+              <div className="mt-7 pr-5">
+                <UserReview
+                  imageSrc={review.imageSrc}
+                  name={review.name}
+                  origin={review.origin}
+                  rate={review.rate}
+                  date={review.date}
+                  review={review.review}
+                  showMore={true}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+        <Button
+          variant={"outline"}
+          className="my-6"
+          onClick={openShowMoreModal}
+        >
+          Show Reviews
+        </Button>
+        <UserReviewModal
+          isOpen={showMoreModalOpen}
+          onClose={() => closeShowMoreModal()}
         />
       </div>
       <div className="pt-10">

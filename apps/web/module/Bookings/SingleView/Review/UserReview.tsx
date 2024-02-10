@@ -1,6 +1,9 @@
+import { Button } from "@/common/components/ui/Button"
 import { Typography } from "@/common/components/ui/Typography"
 import { StarIcon } from "@heroicons/react/20/solid"
 import Image from "next/image"
+import { useState } from "react"
+import UserReviewModal from "./UserReviewModal"
 
 interface UserReviewProps {
   imageSrc: string
@@ -30,11 +33,25 @@ const UserReview = ({
     return stars
   }
 
+  const [showMoreModalOpen, setShowMoreModalOpen] = useState(false)
+
+  const openShowMoreModal = () => {
+    setShowMoreModalOpen(true)
+  }
+
+  const closeShowMoreModal = () => {
+    setShowMoreModalOpen(false)
+  }
+
   return (
     <div>
       <div className="flex items-center">
-        <div className="profile-con h-14 w-14 relative rounded-full bg-primary-500">
-          <Image src={imageSrc} layout="fill" objectFit="contain" alt="" />
+        <div className="profile-con h-14 w-14 relative rounded-full bg-primary-500 overflow-hidden">
+          <img
+            src="/assets/1.jpg"
+            className="w-full h-full object-cover"
+            alt=""
+          />
         </div>
         <div className="ml-4">
           <Typography variant={"h4"} className="font-bold">
@@ -56,12 +73,20 @@ const UserReview = ({
         {review}
       </Typography>
       {showMore ? (
-        <button className="text-sm font-semibold underline mt-2">
-          Show more
-        </button>
+        <Button
+          className="text-md p-1 font-semibold underline"
+          variant={"ghost"}
+          onClick={openShowMoreModal}
+        >
+          Show more &gt;
+        </Button>
       ) : (
         ""
       )}
+      <UserReviewModal
+        isOpen={showMoreModalOpen}
+        onClose={() => closeShowMoreModal()}
+      />
     </div>
   )
 }
