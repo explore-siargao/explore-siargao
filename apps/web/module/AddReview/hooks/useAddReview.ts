@@ -1,6 +1,7 @@
+import { API_URL_BOOKINGS } from "@/common/constants"
 import { ApiService } from "@/common/service/api"
 import { IReview } from "@/common/types/global"
-import { API_URL_BOOKINGS } from "@repo/constants"
+
 import { useMutation } from "@tanstack/react-query"
 
 export async function addReview(userId: number | undefined, props: IReview) {

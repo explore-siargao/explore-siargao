@@ -25,16 +25,41 @@ const ReviewStarRating = ({
     }
   }
 
+  const renderStar = (index: number) => {
+    if (index < Math.floor(rating)) {
+      return <StarIcon width={getStarWidth()} className="text-secondary-500" />
+    } else if (index === Math.floor(rating) && rating % 1 !== 0.5) {
+      return (
+        <div
+          className="relative"
+          style={{
+            width: `${getStarWidth()}px`,
+            height: `${getStarWidth()}px`,
+          }}
+        >
+          <div className="relative">
+            <StarIcon
+              width={getStarWidth()}
+              className="absolute top-0 left-0 text-gray-400"
+            />
+            <StarIcon
+              width={getStarWidth()}
+              className="absolute top-0 left-0 text-secondary-500"
+              style={{ clipPath: "inset(0 50% 0 0)" }}
+            />
+          </div>
+        </div>
+      )
+    } else {
+      return <StarIcon width={getStarWidth()} className="text-gray-400" />
+    }
+  }
+
   return (
     <div className="flex">
       {[...Array(totalStars)].map((_, index) => (
-        <span
-          key={index}
-          className={`cursor-pointer ${
-            index < rating ? "text-secondary-500" : "text-gray-400"
-          }`}
-        >
-          <StarIcon width={getStarWidth()} />
+        <span key={`star-${_}`} className="cursor-pointer">
+          {renderStar(index)}
         </span>
       ))}
     </div>
