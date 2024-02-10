@@ -1,8 +1,7 @@
 "use client"
 import StarRating from "@/common/components/ui/StarRating"
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import RatingCategoryCard from "./RatingCategoryCard"
-import { Separator } from "@/common/components/ui/Separator"
 import { useForm, FormProvider } from "react-hook-form"
 import { Textarea } from "@/common/components/ui/Textarea"
 import { Button } from "@/common/components/ui/Button"
@@ -26,7 +25,6 @@ const AddReview = () => {
   const { mutate } = useAddReview(userId as number)
   const { data } = useGetListing(listingId)
   const form = useForm()
-  const watchedFields = form.watch()
   const stepHandler = (action: "back" | "next") => {
     if (action === "back") {
       setStepIndex(stepIndex - 1)
@@ -113,7 +111,7 @@ const AddReview = () => {
             <div className="flex gap-x-2 p-2">
               {[...Array(7)].map((_, index) => (
                 <div
-                  key={`form-${index}`}
+                  key={`form-${_}`}
                   className={`w-full h-1 ${index === stepIndex ? "bg-primary-600" : "bg-primary-300"}`}
                 ></div>
               ))}
@@ -150,6 +148,7 @@ const AddReview = () => {
                     onFocus={ () => {} }
                     onClick={() => stepHandler("back")}
                     className="flex w-max items-center gap-x-2 text-primary-600 hover:underline cursor-pointer"
+                    role="button"
                   >
                     <ArrowLeft />
                     Back
@@ -167,7 +166,8 @@ const AddReview = () => {
                     }
                     onKeyUp={ () => {} }
                     onFocus={ () => {} }
-                    className={`flex w-max items-center gap-x-2 text-primary-600 hover:underline cursor-pointer ${form.watch(reviewSteps[stepIndex]?.fieldName as string) == undefined ? "opacity-50 pointer-events-none" : ""}`}
+                    role="button"
+                    className={`flex w-max items-center gap-x-2 text-primary-600 hover:underline cursor-pointer ${!form.watch(reviewSteps[stepIndex]?.fieldName as string) ? "opacity-50 pointer-events-none" : ""}`}
                   >
                     Next
                     <ArrowRight />

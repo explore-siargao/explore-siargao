@@ -1,6 +1,6 @@
 "use client"
 import { StarIcon } from "@heroicons/react/20/solid"
-import React, { forwardRef, useEffect, useRef, useState } from "react"
+import React, { forwardRef, useState } from "react"
 import { useFormContext } from "react-hook-form"
 
 export interface StarRatingProps {
@@ -62,6 +62,7 @@ const StarRating = forwardRef<HTMLDivElement, StarRatingProps>(
             onMouseOver={() => {}}
             onMouseEnter={() => handleStarHover(index)}
             onMouseLeave={handleMouseLeave}
+            role="button"
           >
             <StarIcon width={getStarWidth()} />
           </span>

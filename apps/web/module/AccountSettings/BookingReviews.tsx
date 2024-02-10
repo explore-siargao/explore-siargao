@@ -128,7 +128,7 @@ const BookingReviews = () => {
     content = (
       <div className="flex flex-col">
         {listingData?.items?.map((item, index) => (
-          <div>
+          <div key={item.id}>
             <BookingReviewItemPending
               id={item.id}
               name={item.title}
