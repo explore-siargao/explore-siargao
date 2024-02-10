@@ -146,8 +146,8 @@ const AddReview = () => {
               <div>
                 {stepIndex > 0 && (
                   <div
-                    onKeyUp={ () => {} }
-                    onFocus={ () => {} }
+                    onKeyUp={() => {}}
+                    onFocus={() => {}}
                     onClick={() => stepHandler("back")}
                     className="flex w-max items-center gap-x-2 text-primary-600 hover:underline cursor-pointer"
                   >
@@ -165,8 +165,8 @@ const AddReview = () => {
                         ? undefined
                         : () => stepHandler("next")
                     }
-                    onKeyUp={ () => {} }
-                    onFocus={ () => {} }
+                    onKeyUp={() => {}}
+                    onFocus={() => {}}
                     className={`flex w-max items-center gap-x-2 text-primary-600 hover:underline cursor-pointer ${form.watch(reviewSteps[stepIndex]?.fieldName as string) == undefined ? "opacity-50 pointer-events-none" : ""}`}
                   >
                     Next
