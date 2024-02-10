@@ -57,7 +57,7 @@ const StarRating = forwardRef<HTMLDivElement, StarRatingProps>(
                 : "text-gray-400"
             }`}
             onClick={() => handleStarClick(index)}
-            onMouseOver={ () => {} }
+            onMouseOver={() => {}}
             onMouseEnter={() => handleStarHover(index)}
             onMouseLeave={handleMouseLeave}
           >
