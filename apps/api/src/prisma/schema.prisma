@@ -366,16 +366,21 @@ model WishGroup {
 }
 
 model Review {
-  id        Int       @id @default(autoincrement())
-  userId    Int
-  rates     Float
-  comment   String    @db.LongText
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  deletedAt DateTime?
-  listingId Int
-  user      User      @relation(fields: [userId], references: [id])
-  listing   Listing   @relation(fields: [listingId], references: [id])
+  id                 Int       @id @default(autoincrement())
+  userId             Int
+  cleanLinessRates   Int       @db.Int()
+  accuracyRates      Int       @db.Int()
+  checkInRates       Int       @db.Int()
+  communicationRates Int       @db.Int()
+  locationRates      Int       @db.Int()
+  valueRates         Int       @db.Int()
+  comment            String    @db.LongText
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+  deletedAt          DateTime?
+  listingId          Int
+  user               User      @relation(fields: [userId], references: [id])
+  listing            Listing   @relation(fields: [listingId], references: [id])
 
   @@index([listingId])
   @@index([userId])

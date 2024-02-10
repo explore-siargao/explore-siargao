@@ -12,18 +12,18 @@ const WhereYouWillBe: React.FC<WhereYouWillBe> = ({ title }) => {
   const firstDesc =
     "The property, given its close proximity to the refreshing hillside town of Tagaytay and clear blue beaches of Nasugbu, provides a quick escape. The property, given its close proximity to the refreshing hillside town of Tagaytay and clear blue beaches of Nasugbu, provides a quick escape"
   const secondDesc =
-    "The property, given its close proximity to the refreshing hillside town of Tagaytay and clear blue beaches of Nasugbu, provides a quick escape. The property, given its close proximity to the refreshing hillside town of Tagaytay and clear blue beaches of Nasugbu, provides a quick escape"
+    "The property, given its close proximity to the refreshing hillside town of Tagsaytay and clear blue beaches of Nasugbu, provides a quick escape. The property, given its close proximity to the refreshing hillside town of Tagaytay and clear blue beaches of Nasugbu, provides a quick escape"
 
   const maxLength = 100
 
-  const useToggle = (initialState) => {
+  const useToggle = (initialState: boolean) => {
     const [state, setState] = useState(initialState)
     const toggle = () => setState(!state)
     return [state, toggle]
   }
 
-  const [readMore, toggleReadMore] = useToggle(false)
-  const [secondReadMore, toggleSecondReadMore] = useToggle(false)
+  const [readMore, setToggleReadMore] = useToggle(false)
+  const [secondReadMore, setToggleSecondReadMore] = useToggle(false)
 
   return (
     <div>
@@ -44,7 +44,7 @@ const WhereYouWillBe: React.FC<WhereYouWillBe> = ({ title }) => {
       <Button
         className="text-sm font-semibold underline mb-4"
         variant={"ghost"}
-        onClick={toggleReadMore}
+        onClick={() => setToggleReadMore}
       >
         {/* Read more &gt; */}
         {readMore ? "Read Less" : "Read more >"}
@@ -65,7 +65,7 @@ const WhereYouWillBe: React.FC<WhereYouWillBe> = ({ title }) => {
       <Button
         className="text-sm font-semibold underline mb-4"
         variant={"ghost"}
-        onClick={toggleSecondReadMore}
+        onClick={() => setToggleSecondReadMore}
       >
         {/* Read more &gt; */}
         {secondReadMore ? "Read Less" : "Read more >"}
