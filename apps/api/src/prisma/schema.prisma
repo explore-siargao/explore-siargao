@@ -10,18 +10,18 @@ datasource db {
 }
 
 model User {
-  id               Int               @id @default(autoincrement())
-  email            String            @unique @db.VarChar(255)
-  password         String?           @db.VarChar(255)
+  id               Int                  @id @default(autoincrement())
+  email            String               @unique @db.VarChar(255)
+  password         String?              @db.VarChar(255)
   changePasswordAt DateTime?
-  createdAt        DateTime          @default(now())
-  updatedAt        DateTime          @updatedAt
+  createdAt        DateTime             @default(now())
+  updatedAt        DateTime             @updatedAt
   deletedAt        DateTime?
-  role             UserRole          @default(User)
+  role             UserRole             @default(User)
   registrationType RegistrationType?
-  deactivated      Boolean           @default(false)
-  profilePicture   String?           @db.LongText
-  canReceiveEmail  Boolean           @default(false)
+  deactivated      Boolean              @default(false)
+  profilePicture   String?              @db.LongText
+  canReceiveEmail  Boolean              @default(false)
   tax              Tax?
   listing          Listing[]
   reportListing    ReportListing[]
@@ -32,6 +32,7 @@ model User {
   MultiFactorAuth  MultiFactorAuth[]
   Coupons          Coupon[]
   taxId            Int?
+  reservations     ReservationListing[]
 }
 
 model PersonalInfo {
@@ -140,6 +141,7 @@ model Listing {
   cancellationPolicies CancellationPolicy[]
   reports              ReportListing[]
   wishes               WishGroup[]
+  reservation          ReservationListing[]
 
   @@index([basicAboutPlaceId])
   @@index([listingPriceId])
@@ -149,8 +151,8 @@ model Listing {
 
 model ListingDescription {
   id                 Int       @id @default(autoincrement())
-  listingId          Int?       @unique
-  listing           Listing?
+  listingId          Int?      @unique
+  listing            Listing?
   generalDescription String    @db.LongText()
   aboutSpace         String?   @db.LongText()
   aboutGuestAccess   String?   @db.LongText()
@@ -158,6 +160,7 @@ model ListingDescription {
   createdAt          DateTime  @default(now())
   updatedAt          DateTime  @updatedAt
   deletedAt          DateTime?
+
   @@index([listingId])
 }
 
@@ -174,20 +177,45 @@ model BasicAboutPlace {
 }
 
 model PaymentMethod {
-  id             Int       @id @default(autoincrement())
+  id             Int                  @id @default(autoincrement())
   userId         Int
-  cardNumber     String    @unique
-  expirationDate String    @db.VarChar(10)
+  cardNumber     String               @unique
+  expirationDate String               @db.VarChar(10)
   cvv            Int
   zipCode        Int
-  countryRegion  String    @db.VarChar(255)
-  createdAt      DateTime  @default(now())
-  updatedAt      DateTime  @updatedAt
+  countryRegion  String               @db.VarChar(255)
+  createdAt      DateTime             @default(now())
+  updatedAt      DateTime             @updatedAt
   deletedAt      DateTime?
-  isDefault      Boolean   @default(false)
-  user           User      @relation(fields: [userId], references: [id])
+  isDefault      Boolean              @default(false)
+  user           User                 @relation(fields: [userId], references: [id])
+  reservation    ReservationListing[]
 
   @@index([userId])
+}
+
+model ReservationListing {
+  id              Int               @id @default(autoincrement())
+  listingId       Int
+  listing         Listing           @relation(fields: [listingId], references: [id])
+  userId          Int
+  user            User              @relation(fields: [userId], references: [id])
+  reservationDate String            @db.VarChar(50)
+  guestCount      Int               @db.Int()
+  totalFee        Int               @db.Int()
+  currentFee      Int               @db.Int()
+  paymentMethodId Int
+  paymentMethod   PaymentMethod     @relation(fields: [paymentMethodId], references: [id])
+  isNight         Boolean           @default(false)
+  status          ReservationStatus @default(Pending)
+  messageToHost   String?           @db.LongText()
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  deletedAt       DateTime?
+
+  @@index([listingId])
+  @@index([userId])
+  @@index([paymentMethodId])
 }
 
 model ReportListing {
@@ -367,16 +395,21 @@ model WishGroup {
 }
 
 model Review {
-  id        Int       @id @default(autoincrement())
-  userId    Int
-  rates     Float
-  comment   String    @db.LongText
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  deletedAt DateTime?
-  listingId Int
-  user      User      @relation(fields: [userId], references: [id])
-  listing   Listing   @relation(fields: [listingId], references: [id])
+  id                 Int       @id @default(autoincrement())
+  userId             Int
+  cleanLinessRates   Int       @db.Int()
+  accuracyRates      Int       @db.Int()
+  checkInRates       Int       @db.Int()
+  communicationRates Int       @db.Int()
+  locationRates      Int       @db.Int()
+  valueRates         Int       @db.Int()
+  comment            String    @db.LongText
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+  deletedAt          DateTime?
+  listingId          Int
+  user               User      @relation(fields: [userId], references: [id])
+  listing            Listing   @relation(fields: [listingId], references: [id])
 
   @@index([listingId])
   @@index([userId])
@@ -395,14 +428,21 @@ model Tax {
   createdAt          DateTime  @default(now())
   updatedAt          DateTime  @updatedAt
   deletedAt          DateTime?
-  User               User?    @relation(fields: [userId], references: [id])
-  userId             Int?      @unique      
+  User               User?     @relation(fields: [userId], references: [id])
+  userId             Int?      @unique
 }
 
 enum UserRole {
   Admin
   Host
   User
+}
+
+enum ReservationStatus {
+  Approved
+  Pending
+  Declined
+  Refund
 }
 
 enum RegistrationType {
