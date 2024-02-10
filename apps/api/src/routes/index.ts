@@ -14,4 +14,5 @@ export default function (app: Application) {
   app.use(`${API_ROOT}/payments`, PaymentRoute)
   app.use(`${API_ROOT}/countries`, CountriesRoute)
   app.use(`${API_ROOT}/taxes`, taxesRoute)
+  app.use(`${API_ROOT}/listing`, ListingRoute)
 }
