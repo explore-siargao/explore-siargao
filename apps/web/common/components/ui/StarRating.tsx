@@ -50,14 +50,15 @@ const StarRating = forwardRef<HTMLDivElement, StarRatingProps>(
       <div className="flex">
         {[...Array(totalStars)].map((_, index) => (
           <span
-            key={index}
+            key={`star-${_}`}
             className={`cursor-pointer ${
               index < hoverRating || index < rating
                 ? "text-secondary-500"
                 : "text-gray-400"
             }`}
             onClick={() => handleStarClick(index)}
-            onMouseOver={ () => {} }
+            onKeyUp={ () => {} }
+            onFocus={ () => {} }
             onMouseEnter={() => handleStarHover(index)}
             onMouseLeave={handleMouseLeave}
           >

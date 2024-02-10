@@ -113,7 +113,7 @@ const AddReview = () => {
             <div className="flex gap-x-2 p-2">
               {[...Array(7)].map((_, index) => (
                 <div
-                  key={index}
+                  key={`form-${index}`}
                   className={`w-full h-1 ${index === stepIndex ? "bg-primary-600" : "bg-primary-300"}`}
                 ></div>
               ))}
@@ -146,6 +146,8 @@ const AddReview = () => {
               <div>
                 {stepIndex > 0 && (
                   <div
+                    onKeyUp={ () => {} }
+                    onFocus={ () => {} }
                     onClick={() => stepHandler("back")}
                     className="flex w-max items-center gap-x-2 text-primary-600 hover:underline cursor-pointer"
                   >
@@ -163,6 +165,8 @@ const AddReview = () => {
                         ? undefined
                         : () => stepHandler("next")
                     }
+                    onKeyUp={ () => {} }
+                    onFocus={ () => {} }
                     className={`flex w-max items-center gap-x-2 text-primary-600 hover:underline cursor-pointer ${form.watch(reviewSteps[stepIndex]?.fieldName as string) == undefined ? "opacity-50 pointer-events-none" : ""}`}
                   >
                     Next
