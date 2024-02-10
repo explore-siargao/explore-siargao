@@ -1,7 +1,7 @@
 import React from "react"
 
 interface RatingCategoryCardProps {
-  description: string
+  description?: string
 }
 
 const RatingCategoryCard = ({ description }: RatingCategoryCardProps) => {

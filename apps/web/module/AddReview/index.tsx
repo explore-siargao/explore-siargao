@@ -119,12 +119,12 @@ const AddReview = () => {
             {stepIndex <= 5 ? (
               <div className="flex flex-col items-center justify-center px-8">
                 <RatingCategoryCard
-                  description={reviewSteps[stepIndex]?.description as string}
+                  description={reviewSteps[stepIndex]?.description}
                 />
                 <StarRating
                   totalStars={5}
                   size="md"
-                  name={reviewSteps[stepIndex]?.fieldName as string}
+                  name={reviewSteps[stepIndex]?.fieldName}
                 />
               </div>
             ) : (
@@ -148,7 +148,6 @@ const AddReview = () => {
                     onFocus={() => {}}
                     onClick={() => stepHandler("back")}
                     className="flex w-max items-center gap-x-2 text-primary-600 hover:underline cursor-pointer"
-                    role="button"
                   >
                     <ArrowLeft />
                     Back
@@ -163,7 +162,6 @@ const AddReview = () => {
                     }
                     onKeyUp={() => {}}
                     onFocus={() => {}}
-                    role="button"
                     className={`flex w-max items-center gap-x-2 text-primary-600 hover:underline cursor-pointer ${!form.watch(reviewSteps[stepIndex]?.fieldName as string) ? "opacity-50 pointer-events-none" : ""}`}
                   >
                     Next

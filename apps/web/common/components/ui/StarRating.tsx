@@ -7,7 +7,7 @@ export interface StarRatingProps {
   totalStars: number
   className?: string
   size?: "sm" | "md" | "lg"
-  name: string
+  name?: string
   onChange?: () => void
 }
 
@@ -15,11 +15,11 @@ const StarRating = forwardRef<HTMLDivElement, StarRatingProps>(
   ({ totalStars, className, name, onChange, size = "md" }, ref) => {
     const { setValue, watch } = useFormContext()
     const [hoverRating, setHoverRating] = useState(0)
-    const rating = watch(name)
+    const rating = watch(name ?? "")
 
     const handleStarClick = (index: number) => {
       const newRating = index + 1
-      setValue(name, newRating)
+      setValue(name ?? "", newRating)
       if (onChange) {
         onChange()
       }
@@ -62,7 +62,6 @@ const StarRating = forwardRef<HTMLDivElement, StarRatingProps>(
             onMouseOver={() => {}}
             onMouseEnter={() => handleStarHover(index)}
             onMouseLeave={handleMouseLeave}
-            role="button"
           >
             <StarIcon width={getStarWidth()} />
           </button>
