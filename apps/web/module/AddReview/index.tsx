@@ -164,8 +164,8 @@ const AddReview = () => {
                         ? undefined
                         : () => stepHandler("next")
                     }
-                    onKeyUp={ () => {} }
-                    onFocus={ () => {} }
+                    onKeyUp={() => {}}
+                    onFocus={() => {}}
                     role="button"
                     className={`flex w-max items-center gap-x-2 text-primary-600 hover:underline cursor-pointer ${!form.watch(reviewSteps[stepIndex]?.fieldName as string) ? "opacity-50 pointer-events-none" : ""}`}
                   >
