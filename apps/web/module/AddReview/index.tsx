@@ -158,8 +158,10 @@ const AddReview = () => {
               <div>
                 {stepIndex < 6 && (
                   <button
-                    onClick={
-                      () => !form.watch(reviewSteps[stepIndex]?.fieldName as string) ? null :stepHandler("next")
+                    onClick={() =>
+                      !form.watch(reviewSteps[stepIndex]?.fieldName as string)
+                        ? null
+                        : stepHandler("next")
                     }
                     onKeyUp={() => {}}
                     onFocus={() => {}}
