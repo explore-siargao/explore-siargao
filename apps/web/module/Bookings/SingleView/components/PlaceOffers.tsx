@@ -34,7 +34,11 @@ const PlaceOffers = () => {
           />
           <IconDescription icon={LucideBug} desc="No bugs" />
         </div>
-        <Button className="mt-5" variant={"shaded"} onClick={() => setShowMoreModalOpen(!showMoreModalOpen)}>
+        <Button
+          className="mt-5"
+          variant={"shaded"}
+          onClick={() => setShowMoreModalOpen(!showMoreModalOpen)}
+        >
           Show all 56 amenities
         </Button>
       </TitleSection>

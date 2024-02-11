@@ -44,7 +44,7 @@ export const SingleView = () => {
               <BookingDescription />
             </div>
             <div className="py-6">
-              <PlaceOffers/>
+              <PlaceOffers />
             </div>
             <div className="py-6">{/* Date range picker */}</div>
           </div>
