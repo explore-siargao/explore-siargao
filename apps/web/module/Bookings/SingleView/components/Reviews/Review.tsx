@@ -26,7 +26,7 @@ const Review = ({
 }: UserReviewProps) => {
   const displayStars = () => {
     const stars = []
-    for (var i = 0; i < rate; i++) {
+    for (let i = 0; i < rate; i++) {
       stars.push(<StarIcon key={i} className="h-3 w-3" />)
     }
 

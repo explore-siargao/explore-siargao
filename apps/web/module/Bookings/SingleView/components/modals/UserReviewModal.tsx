@@ -9,11 +9,8 @@ import {
   Tag,
 } from "lucide-react"
 import { StarIcon } from "@heroicons/react/20/solid"
-import { Title } from "@/common/components/ui/Title"
 import Category from "../Reviews/Category"
 import { Typography } from "@/common/components/ui/Typography"
-import Image from "next/image"
-import { Select } from "@/common/components/ui/Select"
 import UserReview from "../Reviews/Review"
 
 interface UserReviewModalProps {

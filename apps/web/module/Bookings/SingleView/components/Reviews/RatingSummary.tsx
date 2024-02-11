@@ -30,37 +30,37 @@ const HeadReview = () => {
               title="Cleanliness"
               rating="4.8"
               isHorizontal={false}
-              icon={<SprayCan strokeWidth={1.5} />}
+              icon={<SprayCan strokeWidth={1.5} className="h-7 w-7" />}
             />
             <Category
               title="Accuracy"
               rating="4.8"
               isHorizontal={false}
-              icon={<CheckCircle2 strokeWidth={1.5} />}
+              icon={<CheckCircle2 strokeWidth={1.5} className="h-7 w-7" />}
             />
             <Category
               title="Check-in"
               rating="5.0"
               isHorizontal={false}
-              icon={<KeyRound strokeWidth={1.5} />}
+              icon={<KeyRound strokeWidth={1.5} className="h-7 w-7" />}
             />
             <Category
               title="Communication"
               rating="4.4"
               isHorizontal={false}
-              icon={<MessageSquare strokeWidth={1.5} />}
+              icon={<MessageSquare strokeWidth={1.5} className="h-7 w-7" />}
             />
             <Category
               title="Location"
               rating="5.0"
               isHorizontal={false}
-              icon={<Map strokeWidth={1.5} />}
+              icon={<Map strokeWidth={1.5} className="h-7 w-7" />}
             />
             <Category
               title="Value"
               rating="5.0"
               isHorizontal={false}
-              icon={<Tag strokeWidth={1.5} />}
+              icon={<Tag strokeWidth={1.5} className="h-7 w-7" />}
             />
           </div>
         </div>

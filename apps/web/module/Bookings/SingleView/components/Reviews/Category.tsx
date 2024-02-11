@@ -5,7 +5,7 @@ interface CategoryProps {
   title: string
   rating: string
   isHorizontal: boolean
-  icon: React.ReactElement
+  icon: React.ReactNode
 }
 
 const Category = ({
@@ -19,7 +19,7 @@ const Category = ({
       <div>
         <div className="flex justify-between items-center w-full py-4">
           <div className="flex space-x-3 items-center">
-            <Icon.type {...Icon.props} />
+            {Icon}
             <Typography variant={"h5"} fontWeight="semibold">
               {title}
             </Typography>
@@ -39,7 +39,7 @@ const Category = ({
         <Typography variant={"h4"} fontWeight="semibold" className="mb-5">
           {rating}
         </Typography>
-        <Icon.type {...Icon.props} className="h-7 w-7" />
+        {Icon}
       </div>
     )
   }

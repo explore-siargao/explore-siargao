@@ -59,6 +59,7 @@ const UserReviews = () => {
       <div className="grid grid-cols-2 gap-y-8 gap-x-16">
         {userReviews.map((review) => (
           <UserReview
+            key={review.date}
             avatarKey={review.imageSrc}
             name={review.name}
             origin={review.origin}
