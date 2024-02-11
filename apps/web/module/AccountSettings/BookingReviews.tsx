@@ -43,7 +43,6 @@ const BookingReviews = () => {
   const userId = useSessionStore().id
   const { data: reviewsByUserId } = useGetReviewsByUserId(userId as number)
   const { data: listingData } = useGetListings()
-  console.log(listingData)
 
   type ratingsSchema = {
     accuracyRates: number
@@ -132,7 +131,7 @@ const BookingReviews = () => {
             <BookingReviewItemPending
               id={item.id}
               name={item.title}
-              pic={JSON.stringify(item.imageUrls)}
+              pic={JSON.stringify(item.imageKeys)}
               key={item.id}
             />
             {index === listingData.items?.length! - 1 ? <></> : <hr />}

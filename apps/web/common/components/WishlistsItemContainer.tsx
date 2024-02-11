@@ -109,7 +109,7 @@ const WishlistsItemContainer = () => {
     setDetails({
       id: item?.id,
       link: item?.link,
-      img: JSON.parse(item?.listing?.imageUrls)[0].fileKey,
+      img: JSON.parse(item?.listing?.imageKeys)[0].fileKey,
       title: item?.listing?.title,
       address: item?.listing?.address,
       description: item?.listing?.description,
@@ -246,7 +246,7 @@ const WishlistsItemContainer = () => {
                     </div>
                     <Typography
                       variant={"p"}
-                      fontWeight={"semiBold"}
+                      fontWeight={"semibold"}
                       className="text-text-700 underline"
                     >
                       {"₱" +

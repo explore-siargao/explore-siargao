@@ -1,24 +1,25 @@
 import { Typography } from "@/common/components/ui/Typography"
 import React from "react"
+
 interface Rules {
   id: number
   rule: string
 }
-interface ThingsToKnowProps {
+interface TitleListsProps {
   title: string
   rules: Rules[]
 }
 
-const ThingsToKnow = ({ title, rules }: ThingsToKnowProps) => {
+const TitleLists = ({ title, rules }: TitleListsProps) => {
   return (
     <div>
-      <Typography fontWeight={"semiBold"} className="px-1">
+      <Typography variant="h4" fontWeight="semibold">
         {title}
       </Typography>
       <ul>
         {rules.map((rule: any) => (
           <li className="mt-2" key={rule.rule.id}>
-            <Typography className="px-1">{rule.rule}</Typography>
+            <Typography>{rule.rule}</Typography>
           </li>
         ))}
       </ul>
@@ -26,4 +27,4 @@ const ThingsToKnow = ({ title, rules }: ThingsToKnowProps) => {
   )
 }
 
-export default ThingsToKnow
+export default TitleLists

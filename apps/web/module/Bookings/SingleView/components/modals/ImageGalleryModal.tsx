@@ -2,6 +2,7 @@ import ModalContainer from "@/common/components/ModalContainer"
 import { Button } from "@/common/components/ui/Button"
 import Image from "next/image"
 import { Heart, Upload } from "lucide-react"
+import ShareSave from "../ShareSave"
 
 interface ImageGalleryModalProps {
   isOpen: boolean
@@ -20,15 +21,8 @@ const ImageGalleryModal = ({ isOpen, onClose }: ImageGalleryModalProps) => {
   return (
     <ModalContainer isOpen={isOpen} onClose={onClose} size="full">
       <div className="relative space-y-1 pt-2 pb-20 h-screen overflow-y-auto">
-        <div className="flex justify-center mb-2">
-          <Button variant="ghost">
-            <Upload className="h-4 w-4 mr-1" strokeWidth="1" />
-            <span className="underline">Share</span>
-          </Button>
-          <Button variant="ghost">
-            <Heart className="h-4 w-4 mr-1" strokeWidth="1" />
-            <span className="underline">Save</span>
-          </Button>
+        <div className="flex justify-center my-4">
+          <ShareSave/>
         </div>
         {imgSrc.map((data) => {
           return (

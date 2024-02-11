@@ -10,7 +10,7 @@ const TitleSection = React.forwardRef<HTMLDivElement, TitleSectionProps>(
   ({ className, children, title, size }) => {
     return (
       <div className={className}>
-        <Typography variant={size === "lg" ? "h2" : "h3"}>{title}</Typography>
+        <Typography variant={size === "lg" ? "h2" : "h3"} fontWeight="semibold">{title}</Typography>
         <div className="mt-2">{children}</div>
       </div>
     )
