@@ -101,7 +101,7 @@ const AddNoteModal = ({
               </Typography>
               <Typography
                 variant={"p"}
-                fontWeight={"semiBold"}
+                fontWeight={"semibold"}
                 className="text-text-700 flex items-start"
               >
                 ₱{price.fee}{" "}

@@ -1,12 +1,12 @@
 import { Button } from "@/common/components/ui/Button"
 import { Typography } from "@/common/components/ui/Typography"
 import { StarIcon } from "@heroicons/react/20/solid"
-import Image from "next/image"
 import { useState } from "react"
-import UserReviewModal from "./UserReviewModal"
+import UserReviewModal from "../modals/UserReviewModal"
+import AvatarTitleDescription from "../AvatarTitleDescription"
 
 interface UserReviewProps {
-  imageSrc: string
+  avatarKey: string
   name: string
   origin: string
   rate: number
@@ -15,8 +15,8 @@ interface UserReviewProps {
   showMore: boolean
 }
 
-const UserReview = ({
-  imageSrc,
+const Review = ({
+  avatarKey,
   name,
   origin,
   rate,
@@ -26,7 +26,7 @@ const UserReview = ({
 }: UserReviewProps) => {
   const displayStars = () => {
     const stars = []
-    for (var i = 0; i < rate; i++) {
+    for (let i = 0; i < rate; i++) {
       stars.push(<StarIcon key={i} className="h-3 w-3" />)
     }
 
@@ -46,36 +46,25 @@ const UserReview = ({
   return (
     <div>
       <div className="flex items-center">
-        <div className="profile-con h-14 w-14 relative rounded-full bg-primary-500 overflow-hidden">
-          <img
-            src="/assets/1.jpg"
-            className="w-full h-full object-cover"
-            alt=""
-          />
-        </div>
-        <div className="ml-4">
-          <Typography variant={"h4"} className="font-bold">
-            {name}
-          </Typography>
-          <Typography variant={"h5"} className="font-semibold">
-            {origin}
-          </Typography>
-        </div>
+        <AvatarTitleDescription
+          avatarKey={avatarKey}
+          title={name}
+          subTitle={origin}
+        />
       </div>
-      <div className="flex items-center mt-3">
-        {displayStars()}
-        <span className="text-[5px] text-gray-700 mx-1.5">■</span>
-        <Typography variant={"h5"} className="font-bold mt-0.5">
+      <div className="flex items-center gap-2 mt-3">
+        <div className="flex">{displayStars()}</div>
+        <span>&middot;</span>
+        <Typography variant={"h5"} fontWeight="semibold">
           {date}
         </Typography>
       </div>
-      <Typography variant={"h5"} className="font-semibold mt-2">
-        {review}
-      </Typography>
+      <Typography className="mt-2 w-full">{review}</Typography>
       {showMore ? (
         <Button
-          className="text-md p-1 font-semibold underline"
-          variant={"ghost"}
+          className="underline mt-2"
+          variant="link"
+          size="link"
           onClick={openShowMoreModal}
         >
           Show more &gt;
@@ -91,4 +80,4 @@ const UserReview = ({
   )
 }
 
-export default UserReview
+export default Review

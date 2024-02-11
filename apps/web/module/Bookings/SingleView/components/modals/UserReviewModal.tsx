@@ -1,5 +1,5 @@
 import ModalContainer from "@/common/components/ModalContainer"
-import OverallRating from "./OverallRating"
+import OverallRating from "../Reviews/OverallRating"
 import {
   KeyRound,
   SprayCan,
@@ -9,12 +9,9 @@ import {
   Tag,
 } from "lucide-react"
 import { StarIcon } from "@heroicons/react/20/solid"
-import { Title } from "@/common/components/ui/Title"
-import ReviewCategory from "./ReviewCategory"
+import Category from "../Reviews/Category"
 import { Typography } from "@/common/components/ui/Typography"
-import Image from "next/image"
-import { Select } from "@/common/components/ui/Select"
-import UserReview from "./UserReview"
+import UserReview from "../Reviews/Review"
 
 interface UserReviewModalProps {
   isOpen: boolean
@@ -23,53 +20,55 @@ interface UserReviewModalProps {
 
 const UserReviewModal = ({ isOpen, onClose }: UserReviewModalProps) => {
   return (
-    <ModalContainer isOpen={isOpen} onClose={onClose} size="lg">
-      <div className="md:flex px-7 md:px-14 py-5 md:space-x-14 h-[80vh] overflow-y-scroll">
+    <ModalContainer isOpen={isOpen} onClose={onClose} size="md">
+      <div className="md:flex px-7 md:px-8 py-6 md:space-x-14 h-[80vh] overflow-y-scroll">
         <div className="md:w-[30%]">
           <div className="flex items-center mb-5">
-            <StarIcon className="h-8 w-8 mb-1 mr-2" />
-            <Title>4.60</Title>
+            <StarIcon className="h-6 w-6 mb-1 mr-2" />
+            <Typography variant="h1" fontWeight="semibold">
+              4.60
+            </Typography>
           </div>
           <div className="mb-4">
             <OverallRating />
           </div>
           <div>
-            <ReviewCategory
+            <Category
               isHorizontal={true}
               title="Cleanliness"
               rating="4.8"
               icon={<SprayCan strokeWidth={1} />}
             />
             <hr />
-            <ReviewCategory
+            <Category
               isHorizontal={true}
               title="Accuracy"
               rating="4.8"
               icon={<CheckCircle2 strokeWidth={1} />}
             />
             <hr />
-            <ReviewCategory
+            <Category
               isHorizontal={true}
               title="Check-in"
               rating="5.0"
               icon={<KeyRound strokeWidth={1} />}
             />
             <hr />
-            <ReviewCategory
+            <Category
               isHorizontal={true}
               title="Communication"
               rating="4.4"
               icon={<MessageSquare strokeWidth={1} />}
             />
             <hr />
-            <ReviewCategory
+            <Category
               isHorizontal={true}
               title="Location"
               rating="5.0"
               icon={<Map strokeWidth={1} />}
             />
             <hr />
-            <ReviewCategory
+            <Category
               isHorizontal={true}
               title="Value"
               rating="5.0"
@@ -79,7 +78,7 @@ const UserReviewModal = ({ isOpen, onClose }: UserReviewModalProps) => {
         </div>
         <div className="md:w-[70%]">
           <div className="flex items-center justify-between mt-4">
-            <Typography variant="h2" fontWeight="bold">
+            <Typography variant="h2" fontWeight="semibold">
               5 reviews
             </Typography>
             <div className="rounded-full px-1 py-1 ring-1 ring-inset ring-text-200 focus-within:z-10 focus-within:ring-2 focus-within:ring-text-600">
@@ -92,7 +91,7 @@ const UserReviewModal = ({ isOpen, onClose }: UserReviewModalProps) => {
           </div>
           <div className="py-8 space-y-8">
             <UserReview
-              imageSrc="/logo-single.png"
+              avatarKey="1.jpg"
               name="Jonas"
               origin="Philippines"
               rate={5}
@@ -101,7 +100,7 @@ const UserReviewModal = ({ isOpen, onClose }: UserReviewModalProps) => {
               showMore={false}
             />
             <UserReview
-              imageSrc="/logo-single.png"
+              avatarKey="1.jpg"
               name="Jonas ng Pinas"
               origin="Philippines"
               rate={5}
@@ -110,7 +109,7 @@ const UserReviewModal = ({ isOpen, onClose }: UserReviewModalProps) => {
               showMore={false}
             />
             <UserReview
-              imageSrc="/logo-single.png"
+              avatarKey="1.jpg"
               name="Sung Jinwoo"
               origin="Solo Leveling"
               rate={3}

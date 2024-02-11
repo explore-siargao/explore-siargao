@@ -1,29 +1,42 @@
 import { Button } from "@/common/components/ui/Button"
-interface BookingDescriptionProps {
-  generalDescription: string
-  onClick: () => void
+import ModalAboutTitleDescription from "./modals/ModalAboutTitleDescription"
+import { useState } from "react"
+
+const DescriptionDummy = {
+  generalDes:
+    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi assumenda repellat placeat, quos aperiam amet obcaecati harum eum ipsum, ratione quam magnam sequi pariatur magni libero tempore odio numquam tenetur?",
+  aboutSpace:
+    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi assumenda repellat placeat, quos aperiam amet obcaecati harum eum ipsum, ratione quam magnam sequi pariatur magni libero tempore odio numquam tenetur?",
+  aboutGuestAccess:
+    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi assumenda repellat placeat, quos aperiam amet obcaecati harum eum ipsum, ratione quam magnam sequi pariatur magni libero tempore odio numquam tenetur?",
+  otherThingsNote:
+    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi assumenda repellat placeat, quos aperiam amet obcaecati harum eum ipsum, ratione quam magnam sequi pariatur magni libero tempore odio numquam tenetur?",
 }
 
-const BookingDescription: React.FC<BookingDescriptionProps> = ({
-  onClick,
-  generalDescription,
-}) => {
+const BookingDescription = () => {
+  const [descriptionModalOpen, setDescriptionModalOpen] = useState(false)
   const maximumLength = 600
   const slicedDescription =
-    generalDescription.length > maximumLength
-      ? generalDescription.slice(0, maximumLength) + "....."
-      : generalDescription
+    DescriptionDummy.generalDes.length > maximumLength
+      ? DescriptionDummy.generalDes.slice(0, maximumLength) + "....."
+      : DescriptionDummy.generalDes
   return (
-    <div>
-      <div className="flex text-md mb-2 ml-4">{slicedDescription}</div>
+    <>
+      <div className="flex text-md mb-2">{slicedDescription}</div>
       <Button
-        onClick={onClick}
-        className="justify-start flex text-sm font-semibold underline"
-        variant={"ghost"}
+        onClick={() => setDescriptionModalOpen(!descriptionModalOpen)}
+        className="underline"
+        variant="link"
+        size="link"
       >
         Show more &gt;
       </Button>
-    </div>
+      <ModalAboutTitleDescription
+        isOpen={descriptionModalOpen}
+        onClose={() => setDescriptionModalOpen(false)}
+        listingDesc={DescriptionDummy}
+      />
+    </>
   )
 }
 

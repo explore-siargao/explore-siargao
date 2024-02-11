@@ -39,10 +39,7 @@ export const getAllListing = async (req: Request, res: Response) => {
           customListing.price.fee +
           customListing.price.serviceFee +
           customListing.price.cleaningFee,
-        ratings:
-          customListing.review.length !== 0
-            ? customListing.review[0]?.rates
-            : '0.0',
+        ratings: '0.0',
         distance: '10 kilometer away',
         dayTime: customListing.price.isNight ? 'Night' : '',
         wishes: customListing.wishes,

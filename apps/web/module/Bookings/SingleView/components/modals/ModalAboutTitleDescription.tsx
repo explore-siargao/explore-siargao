@@ -20,8 +20,8 @@ const ModalAboutTitleDescription = ({
   listingDesc,
 }: AboutTitleDescriptionProps) => {
   return (
-    <ModalContainer onClose={onClose} isOpen={isOpen}>
-      <div className="p-6 flex flex-col divide-text-100 overflow-y-auto h-[600px]">
+    <ModalContainer onClose={onClose} isOpen={isOpen} size="md">
+      <div className="py-4 px-8 flex flex-col divide-text-100 overflow-y-auto h-[600px]">
         <Title className="flex text-xl font-semibold mb-5">
           About this place
         </Title>

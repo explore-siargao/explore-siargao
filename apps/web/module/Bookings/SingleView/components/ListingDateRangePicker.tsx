@@ -17,7 +17,7 @@ const ListingDateRangePicker = ({ title }: ListingDRProps) => {
   })
   return (
     <div className="md:w-[477px]">
-      <Typography variant="h3" fontWeight="semiBold" className="mb-1">
+      <Typography variant="h3" fontWeight="semibold" className="mb-1">
         {title}
       </Typography>
       <Typography variant="h6" className="mb-4">
