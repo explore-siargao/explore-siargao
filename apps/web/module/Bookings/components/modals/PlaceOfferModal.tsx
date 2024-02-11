@@ -3,7 +3,7 @@ import React from "react"
 import { TitleSection } from "../../SingleView/components/TitleSection"
 import IconDescription from "../../SingleView/components/IconDescription"
 
-interface IconDescription {
+interface IIconDescription {
   id: number
   icon: React.ElementType[]
   desc: string[]
@@ -11,7 +11,7 @@ interface IconDescription {
 interface PlaceOffersProps {
   id: number
   title: string
-  iconDesc: IconDescription[]
+  iconDesc: IIconDescription[]
 }
 interface PlaceOfferModalProps {
   isOpen: boolean

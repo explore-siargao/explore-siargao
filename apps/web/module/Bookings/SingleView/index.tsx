@@ -10,6 +10,7 @@ import RatingSummary from "./components/Reviews/RatingSummary"
 import UserReviews from "./components/Reviews/UserReviews"
 import Highlights from "./components/Highlights"
 import CheckoutProcess from "./components/CheckoutProcess"
+import PlaceOffers from "./components/PlaceOffers"
 
 export const SingleView = () => {
   return (
@@ -42,8 +43,10 @@ export const SingleView = () => {
             <div className="py-6">
               <BookingDescription />
             </div>
-            <div>{/* What place offer */}</div>
-            <div>{/* Date range picker */}</div>
+            <div className="py-6">
+              <PlaceOffers />
+            </div>
+            <div className="py-6">{/* Date range picker */}</div>
           </div>
         </div>
         <div className="md:w-96 md:relative">
