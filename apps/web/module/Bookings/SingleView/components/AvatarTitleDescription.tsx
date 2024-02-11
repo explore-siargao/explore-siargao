@@ -1,24 +1,24 @@
-import { Typography } from '@/common/components/ui/Typography'
-import { cn } from '@/common/helpers/cn'
-import Image from 'next/image'
-import React from 'react'
+import { Typography } from "@/common/components/ui/Typography"
+import { cn } from "@/common/helpers/cn"
+import Image from "next/image"
+import React from "react"
 
 const AvatarTitleDescription = ({
-  size = 'sm',
+  size = "sm",
   avatarKey,
   title,
   subTitle,
-  isSubTitleDark = false
+  isSubTitleDark = false,
 }: {
-  size?: 'sm' | 'md',
-  avatarKey: string,
-  title: string,
-  subTitle: string,
+  size?: "sm" | "md"
+  avatarKey: string
+  title: string
+  subTitle: string
   isSubTitleDark?: boolean
 }) => {
   return (
     <div className="flex gap-3 items-center">
-      <div 
+      <div
         className={cn(
           `rounded-full`,
           size === "md" ? "h-16 w-16" : "h-12 w-12"
@@ -39,7 +39,9 @@ const AvatarTitleDescription = ({
             size === "md" ? "" : "text-sm",
             !isSubTitleDark ? "text-text-300" : ""
           )}
-        >{subTitle}</Typography>
+        >
+          {subTitle}
+        </Typography>
       </div>
     </div>
   )

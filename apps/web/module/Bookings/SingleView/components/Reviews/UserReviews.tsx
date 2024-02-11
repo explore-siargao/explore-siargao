@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
-import UserReview from './Review'
-import { Button } from '@/common/components/ui/Button'
-import UserReviewModal from '../modals/UserReviewModal'
+import React, { useState } from "react"
+import UserReview from "./Review"
+import { Button } from "@/common/components/ui/Button"
+import UserReviewModal from "../modals/UserReviewModal"
 
 const userReviews = [
   {
@@ -70,11 +70,7 @@ const UserReviews = () => {
           />
         ))}
       </div>
-      <Button
-        variant={"outline"}
-        className="mt-8"
-        onClick={openShowMoreModal}
-      >
+      <Button variant={"outline"} className="mt-8" onClick={openShowMoreModal}>
         Show All Reviews
       </Button>
       <UserReviewModal

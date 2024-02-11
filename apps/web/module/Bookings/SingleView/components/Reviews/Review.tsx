@@ -59,9 +59,7 @@ const Review = ({
           {date}
         </Typography>
       </div>
-      <Typography className="mt-2 w-full">
-        {review}
-      </Typography>
+      <Typography className="mt-2 w-full">{review}</Typography>
       {showMore ? (
         <Button
           className="underline mt-2"

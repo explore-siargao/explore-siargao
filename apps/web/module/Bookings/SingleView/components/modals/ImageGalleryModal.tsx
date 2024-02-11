@@ -22,7 +22,7 @@ const ImageGalleryModal = ({ isOpen, onClose }: ImageGalleryModalProps) => {
     <ModalContainer isOpen={isOpen} onClose={onClose} size="full">
       <div className="relative space-y-1 pt-2 pb-20 h-screen overflow-y-auto">
         <div className="flex justify-center my-4">
-          <ShareSave/>
+          <ShareSave />
         </div>
         {imgSrc.map((data) => {
           return (
