@@ -55,7 +55,7 @@ const summary = [
     desc: "No bugs",
     isNotIncluded: false,
   },
-];
+]
 
 const PlaceOffers = () => {
   const [showMoreModalOpen, setShowMoreModalOpen] = useState(false)
