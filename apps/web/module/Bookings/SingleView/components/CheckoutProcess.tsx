@@ -30,11 +30,16 @@ const CheckoutProcess = ({ checkoutDesc }: CheckoutProcessProps) => {
         <Input id="checkOut" label="CHECK-OUT" required={true} />
         <Select id="guest" label="GUESTS" required={true} />
         <Button variant="primary">Reserve</Button>
-        <Typography className="text-center mb-5 text-sm">You won't be charge yet</Typography>
+        <Typography className="text-center mb-5 text-sm">
+          You won't be charge yet
+        </Typography>
       </div>
       <div>
         <div className="flex justify-between mb-5">
-          <button className="underline"><PesoSign />25,000 x 5 nights</button>
+          <button className="underline">
+            <PesoSign />
+            25,000 x 5 nights
+          </button>
           <div>{formatCurrency(checkoutDesc.durationCost, "Philippines")}</div>
         </div>
 
@@ -46,7 +51,9 @@ const CheckoutProcess = ({ checkoutDesc }: CheckoutProcessProps) => {
         <div className="border-b mt-5 mb-5"></div>
         <div className="flex justify-between font-semibold">
           <div>Total before taxes</div>
-          <div>{formatCurrency(checkoutDesc.totalBeforeTaxes, "Philippines")}</div>
+          <div>
+            {formatCurrency(checkoutDesc.totalBeforeTaxes, "Philippines")}
+          </div>
         </div>
       </div>
     </div>

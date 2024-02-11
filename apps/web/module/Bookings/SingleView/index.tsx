@@ -37,10 +37,10 @@ export const SingleView = () => {
               />
             </div>
             <div className="py-6">
-              <Highlights/>
+              <Highlights />
             </div>
             <div className="py-6">
-              <BookingDescription/>
+              <BookingDescription />
             </div>
             <div>{/* What place offer */}</div>
             <div>{/* Date range picker */}</div>
@@ -55,7 +55,7 @@ export const SingleView = () => {
                 durationCost: 2000,
                 descTotalBeforeTaxes: 3000,
                 totalBeforeTaxes: 4000,
-                titlePrice: 5000
+                titlePrice: 5000,
               }}
             />
           </div>
@@ -66,13 +66,13 @@ export const SingleView = () => {
           <RatingSummary />
         </div>
         <div className="py-8">
-          <UserReviews/>
+          <UserReviews />
         </div>
         <div className="py-8">
-          <HostInformation/>
+          <HostInformation />
         </div>
         <div className="pt-8">
-          <ThingsToKnow/>
+          <ThingsToKnow />
         </div>
       </div>
     </WidthWrapper>

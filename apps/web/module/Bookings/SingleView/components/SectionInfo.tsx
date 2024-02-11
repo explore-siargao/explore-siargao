@@ -10,9 +10,7 @@ interface SectionInfoProps {
   title: string
 }
 
-const SectionInfo = ({
-  title,
-}: SectionInfoProps) => {
+const SectionInfo = ({ title }: SectionInfoProps) => {
   const [isClicked, setIsClicked] = useState(false)
   const [galleryModalOpen, setGalleryModalOpen] = useState(false)
   const openModal = () => {
@@ -53,7 +51,7 @@ const SectionInfo = ({
             {title}
           </Typography>
         </div>
-        <ShareSave/>
+        <ShareSave />
       </div>
       <div className="my-6">
         <ImageGallery imageKeys={ImagesDummy} openModal={openModal} />

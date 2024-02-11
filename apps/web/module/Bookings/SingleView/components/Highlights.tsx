@@ -1,6 +1,6 @@
-import React from 'react'
-import IconTitleDescription from './IconTitleDescription'
-import { LucideBook, LucideMapPin } from 'lucide-react'
+import React from "react"
+import IconTitleDescription from "./IconTitleDescription"
+import { LucideBook, LucideMapPin } from "lucide-react"
 
 const highlightsDummy = [
   {

@@ -1,10 +1,5 @@
 import { Typography } from "@/common/components/ui/Typography"
-import {
-  LucideShield,
-  ShieldCheck,
-  Star,
-  Medal,
-} from "lucide-react"
+import { LucideShield, ShieldCheck, Star, Medal } from "lucide-react"
 import { TitleSection } from "./TitleSection"
 import { Button } from "@/common/components/ui/Button"
 import { APP_NAME } from "@repo/constants"
@@ -59,12 +54,8 @@ const HostInformation = () => {
         ))}
       </div>
       <div>
-        <Typography>
-          Response Rate: {HostDummy.responseRate}%
-        </Typography>
-        <Typography>
-          Response Time: {HostDummy.responseTime}
-        </Typography>
+        <Typography>Response Rate: {HostDummy.responseRate}%</Typography>
+        <Typography>Response Time: {HostDummy.responseTime}</Typography>
         <Button variant={"outline"} className="my-6">
           Contact Host
         </Button>

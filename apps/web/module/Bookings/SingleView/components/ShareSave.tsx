@@ -1,6 +1,6 @@
-import { Typography } from '@/common/components/ui/Typography'
-import { Heart, Share } from 'lucide-react'
-import React, { useState } from 'react'
+import { Typography } from "@/common/components/ui/Typography"
+import { Heart, Share } from "lucide-react"
+import React, { useState } from "react"
 
 const ShareSave = () => {
   const [isClicked, setIsClicked] = useState(false)
@@ -21,7 +21,9 @@ const ShareSave = () => {
       >
         <div className="flex gap-2 underline underline-offset-1 text-sm pt-1 md:flex items-center hover:bg-gray-100 rounded-md p-1">
           <Heart className="h-4 w-4 text-text-400" />
-          <Typography className="text-sm text-text-400">{isClicked ? "Saved" : "Save"}</Typography>
+          <Typography className="text-sm text-text-400">
+            {isClicked ? "Saved" : "Save"}
+          </Typography>
         </div>
       </button>
     </div>

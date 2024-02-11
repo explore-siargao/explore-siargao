@@ -3,7 +3,7 @@ const formatCurrency = (
   country?: "Philippines" | "United States" | "Australia"
 ) => {
   const countryFormat: Record<string, string> = {
-    "PH": "en-PH",
+    PH: "en-PH",
     "United States": "en-US",
     Australia: "en-AU",
   }

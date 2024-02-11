@@ -28,7 +28,9 @@ const UserReviewModal = ({ isOpen, onClose }: UserReviewModalProps) => {
         <div className="md:w-[30%]">
           <div className="flex items-center mb-5">
             <StarIcon className="h-6 w-6 mb-1 mr-2" />
-            <Typography variant="h1" fontWeight="semibold">4.60</Typography>
+            <Typography variant="h1" fontWeight="semibold">
+              4.60
+            </Typography>
           </div>
           <div className="mb-4">
             <OverallRating />
