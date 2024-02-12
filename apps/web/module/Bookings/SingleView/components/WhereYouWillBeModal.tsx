@@ -10,8 +10,8 @@ interface WhereYouWillBeModalProps {
 const WhereYouWillBeModal = ({ isOpen, onClose }: WhereYouWillBeModalProps) => {
   return (
     <ModalContainer isOpen={isOpen} onClose={onClose} size="full">
-      <div className="md:grid grid-cols-12 px-2 py-4 md:py-6 h-[95vh]">
-        <div className="md:col-span-4 lg:col-span-3">
+      <div className="md:grid grid-cols-12 h-[95vh]">
+        <div className="md:col-span-4 lg:col-span-3 py-4 md:py-6">
           <WhereYouWillBe title="Where you'll be" />
         </div>
         <div className="md:col-span-8 lg:col-span-9">

@@ -11,6 +11,7 @@ import UserReviews from "./components/Reviews/UserReviews"
 import Highlights from "./components/Highlights"
 import CheckoutProcess from "./components/CheckoutProcess"
 import PlaceOffers from "./components/PlaceOffers"
+import WhereYoullBeDescription from "./components/Map"
 import ListingDateRangePicker from "./components/ListingDateRangePicker"
 
 export const SingleView = () => {
@@ -73,6 +74,16 @@ export const SingleView = () => {
         </div>
         <div className="py-8">
           <UserReviews />
+        </div>
+        <div className="py-8">
+          <WhereYoullBeDescription
+            whereYoullBeDesc={{
+              id: 1,
+              location: "Santa Maria, Laguna",
+              coordinates: [14.5129, 21.4342],
+              desc: "Amazing place",
+            }}
+          />
         </div>
         <div className="py-8">
           <HostInformation />
