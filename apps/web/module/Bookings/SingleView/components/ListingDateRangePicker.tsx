@@ -24,8 +24,8 @@ const ListingDateRangePicker = ({ title }: ListingDRProps) => {
         {date?.from != undefined ? format(date.from, "LLL dd, y") : "Date from"}{" "}
         - {date?.to != undefined ? format(date.to, "LLL dd, y") : "Date to"}
       </Typography>
-      <div className="w-full">
-      <DateRangePicker date={date} setDate={setDate} />
+      <div className="py-4">
+        <DateRangePicker date={date} setDate={setDate} />
       </div>
       <Button
         variant="ghost"

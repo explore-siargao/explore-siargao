@@ -12,13 +12,12 @@ import Highlights from "./components/Highlights"
 import CheckoutProcess from "./components/CheckoutProcess"
 import PlaceOffers from "./components/PlaceOffers"
 import ListingDateRangePicker from "./components/ListingDateRangePicker"
-import { Typography } from "@/common/components/ui/Typography"
 
 export const SingleView = () => {
   return (
-    <WidthWrapper width="small" className="mt-24 lg:mt-28">
+    <WidthWrapper width="small" className="mt-32 lg:mt-36">
       <SectionInfo title="Test test" />
-      <div className="flex flex-col md:flex-row gap-8 md:gap-24 pb-6">
+      <div className="flex flex-col md:flex-row gap-8 md:gap-24 pb-12">
         <div className="flex-1">
           <div className="divide-y">
             <div className="pb-6">
@@ -68,8 +67,8 @@ export const SingleView = () => {
           </div>
         </div>
       </div>
-      <div className="divide-y">
-        <div className="pb-8">
+      <div className="divide-y border-t">
+        <div className="py-8">
           <RatingSummary />
         </div>
         <div className="py-8">
