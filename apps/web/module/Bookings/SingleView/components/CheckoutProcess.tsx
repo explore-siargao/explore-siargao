@@ -23,8 +23,8 @@ interface CheckoutProcessProps {
 }
 
 const CheckoutProcess = ({ checkoutDesc }: CheckoutProcessProps) => {
-  const [isBreakdownMoalOpen, setIsBreakdownModalOpen] = useState(false)
-  const [isMoreInfoModalOpen, setMoreInfoModalOpen] = useState(false)
+  const [isBreakdownModalOpen, setIsBreakdownModalOpen] = useState(false)
+  const [isMoreInfoModalOpen, setIsMoreInfoModalOpen] = useState(false)
   return (
     <div className="border rounded-xl shadow-lg px-6 pb-6 pt-5 flex flex-col divide-text-100 overflow-y-auto mb-5">
       <span className="text-xl font-semibold mb-4">
@@ -57,7 +57,7 @@ const CheckoutProcess = ({ checkoutDesc }: CheckoutProcessProps) => {
           <Button
             variant={"ghost"}
             className="underline pl-0"
-            onClick={() => setMoreInfoModalOpen(true)}
+            onClick={() => setIsMoreInfoModalOpen(true)}
           >
             ES service fee
           </Button>
@@ -73,12 +73,12 @@ const CheckoutProcess = ({ checkoutDesc }: CheckoutProcessProps) => {
         </div>
       </div>
       <CheckoutBreakdownModal
-        isOpen={isBreakdownMoalOpen}
+        isOpen={isBreakdownModalOpen}
         onClose={() => setIsBreakdownModalOpen(false)}
       />
       <CheckoutMoreInfoModal
         isOpen={isMoreInfoModalOpen}
-        onClose={() => setMoreInfoModalOpen(false)}
+        onClose={() => setIsMoreInfoModalOpen(false)}
       />
     </div>
   )
