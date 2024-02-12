@@ -11,6 +11,8 @@ import UserReviews from "./components/Reviews/UserReviews"
 import Highlights from "./components/Highlights"
 import CheckoutProcess from "./components/CheckoutProcess"
 import PlaceOffers from "./components/PlaceOffers"
+import ListingDateRangePicker from "./components/ListingDateRangePicker"
+import { Typography } from "@/common/components/ui/Typography"
 
 export const SingleView = () => {
   return (
@@ -43,10 +45,12 @@ export const SingleView = () => {
             <div className="py-6">
               <BookingDescription />
             </div>
-            <div className="py-6">
+            <div className="py-6 ">
               <PlaceOffers />
             </div>
-            <div className="py-6">{/* Date range picker */}</div>
+            <div className="py-6">
+              <ListingDateRangePicker title="5 Nights in Santa Maria" />
+            </div>
           </div>
         </div>
         <div className="md:w-96 md:relative">
