@@ -1,9 +1,13 @@
+"use client"
 import PesoSign from "@/common/components/PesoSign"
 import { Button } from "@/common/components/ui/Button"
 import { Input } from "@/common/components/ui/Input"
 import { Select } from "@/common/components/ui/Select"
 import { Typography } from "@/common/components/ui/Typography"
 import formatCurrency from "@/common/helpers/formatCurrency"
+import CheckoutBreakdownModal from "./modals/CheckoutBreakdownModal"
+import { useState } from "react"
+import CheckoutMoreInfoModal from "./modals/CheckoutMoreInfoModal"
 
 interface ICheckout {
   id?: number
@@ -19,6 +23,8 @@ interface CheckoutProcessProps {
 }
 
 const CheckoutProcess = ({ checkoutDesc }: CheckoutProcessProps) => {
+  const [isBreakdownModalOpen, setIsBreakdownModalOpen] = useState(false)
+  const [isMoreInfoModalOpen, setIsMoreInfoModalOpen] = useState(false)
   return (
     <div className="border rounded-xl shadow-lg px-6 pb-6 pt-5 flex flex-col divide-text-100 overflow-y-auto mb-5">
       <span className="text-xl font-semibold mb-4">
@@ -36,15 +42,25 @@ const CheckoutProcess = ({ checkoutDesc }: CheckoutProcessProps) => {
       </div>
       <div>
         <div className="flex justify-between mb-5">
-          <button className="underline">
+          <Button
+            variant={"ghost"}
+            className="underline pl-0"
+            onClick={() => setIsBreakdownModalOpen(true)}
+          >
             <PesoSign />
             25,000 x 5 nights
-          </button>
+          </Button>
           <div>{formatCurrency(checkoutDesc.durationCost, "Philippines")}</div>
         </div>
 
         <div className="flex justify-between">
-          <button className="underline">ES service fee</button>
+          <Button
+            variant={"ghost"}
+            className="underline pl-0"
+            onClick={() => setIsMoreInfoModalOpen(true)}
+          >
+            ES service fee
+          </Button>
           <div>{formatCurrency(checkoutDesc.serviceFee, "Philippines")}</div>
         </div>
 
@@ -56,6 +72,14 @@ const CheckoutProcess = ({ checkoutDesc }: CheckoutProcessProps) => {
           </div>
         </div>
       </div>
+      <CheckoutBreakdownModal
+        isOpen={isBreakdownModalOpen}
+        onClose={() => setIsBreakdownModalOpen(false)}
+      />
+      <CheckoutMoreInfoModal
+        isOpen={isMoreInfoModalOpen}
+        onClose={() => setIsMoreInfoModalOpen(false)}
+      />
     </div>
   )
 }
