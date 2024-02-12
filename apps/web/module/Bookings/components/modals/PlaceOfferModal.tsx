@@ -7,7 +7,7 @@ interface IIconDescription {
   id: number
   icon: React.ElementType
   desc: string
-  isNotIncluded?:boolean
+  isNotIncluded?: boolean
 }
 interface PlaceOffersProps {
   id: number
