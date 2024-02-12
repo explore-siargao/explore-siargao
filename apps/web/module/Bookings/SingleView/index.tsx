@@ -73,7 +73,14 @@ export const SingleView = () => {
           <UserReviews />
         </div>
         <div className="py-8">
-          <WhereYoullBeDescription whereYoullBeDesc={{id:1, location:"Santa Maria, Laguna", coordinates:[14.5129,21.4342], desc:"Amazing place"}} />
+          <WhereYoullBeDescription
+            whereYoullBeDesc={{
+              id: 1,
+              location: "Santa Maria, Laguna",
+              coordinates: [14.5129, 21.4342],
+              desc: "Amazing place",
+            }}
+          />
         </div>
         <div className="py-8">
           <HostInformation />

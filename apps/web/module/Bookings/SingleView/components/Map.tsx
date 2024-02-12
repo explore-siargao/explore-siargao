@@ -49,16 +49,16 @@ const WhereYoullBeDescription = ({ whereYoullBeDesc }: WhereYoullBeProps) => {
       </div>
       <div className="flex w-full">
         <Button
-        onClick={()=>setIsModalOpen(true)}
+          onClick={() => setIsModalOpen(true)}
           className="text-sm font-semibold underline mx-0 px-0"
           variant={"ghost"}
         >
           Show more &gt;
         </Button>
       </div>
-      <WhereYouWillBeModal 
-      isOpen={isModalOpen}
-      onClose={()=>setIsModalOpen(false)}
+      <WhereYouWillBeModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
       />
     </div>
   )
