@@ -4,6 +4,7 @@ import { TitleSection } from "./TitleSection"
 import { Button } from "@/common/components/ui/Button"
 import { APP_NAME } from "@repo/constants"
 import AvatarTitleDescription from "./AvatarTitleDescription"
+import { useRouter } from "next/navigation"
 
 const HostDummy = {
   hostName: "Jose Rizal",
@@ -23,6 +24,7 @@ const HostDummy = {
 }
 
 const HostInformation = () => {
+  const router = useRouter()
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-16 md:items-center">
       <div className="flex-1 flex flex-col">
@@ -56,7 +58,11 @@ const HostInformation = () => {
       <div>
         <Typography>Response Rate: {HostDummy.responseRate}%</Typography>
         <Typography>Response Time: {HostDummy.responseTime}</Typography>
-        <Button variant={"outline"} className="my-6">
+        <Button
+          variant={"outline"}
+          className="my-6"
+          onClick={() => router.push("/accommodation/1/message")}
+        >
           Contact Host
         </Button>
         <div>
