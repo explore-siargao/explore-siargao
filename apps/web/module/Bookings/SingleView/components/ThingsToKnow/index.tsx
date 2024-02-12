@@ -1,12 +1,14 @@
 import { Button } from "@/common/components/ui/Button"
 import { Typography } from "@/common/components/ui/Typography"
-import React from "react"
+import React, { useState } from "react"
 import TitleLists from "./TitleLists"
+import AddThingsToNoteModal from "@/module/AccountSettings/components/modals/AddThingsToNoteModal"
+import { LucideClock, LucidePawPrint } from "lucide-react"
 
 const HouseRulesDummy = [
-  { id: 1, rule: "Check-in: 12:00 PM - 7:00 PM" },
-  { id: 2, rule: "Checkout before 10:00 AM" },
-  { id: 3, rule: "8 guests maximum" },
+  { icon: LucideClock, id: 1, rule: "Check-in: 12:00 PM - 7:00 PM" },
+  { icon: LucideClock, id: 2, rule: "Checkout before 10:00 AM" },
+  { icon: LucidePawPrint, id: 3, rule: "8 guests maximum" },
 ]
 
 const SafetyPropertiesDummy = [
@@ -23,13 +25,28 @@ const CancellationPoliciesDummy = [
 ]
 
 const ThingsToKnow = () => {
+  const [isModalOpen, setModalOpen] = useState(false)
+
+  const openModal = () => {
+    setModalOpen(true)
+  }
+
+  const closeModal = () => {
+    setModalOpen(false)
+  }
+
   return (
     <>
       <Typography variant={"h2"}>Things to know</Typography>
       <div className="flex w-full mt-4 mb-6">
         <div className="w-full md:w-1/3">
           <TitleLists title="House Rules" rules={HouseRulesDummy} />
-          <Button className="underline mt-2" variant="link" size="link">
+          <Button
+            className="underline mt-2"
+            variant="link"
+            size="link"
+            onClick={openModal}
+          >
             Show more &gt;
           </Button>
         </div>
@@ -49,6 +66,12 @@ const ThingsToKnow = () => {
           </Button>
         </div>
       </div>
+      <AddThingsToNoteModal
+        onClose={closeModal}
+        isOpen={isModalOpen}
+        thingsToNote={{
+        }}
+      />
     </>
   )
 }
