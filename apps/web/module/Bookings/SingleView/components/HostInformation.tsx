@@ -58,8 +58,10 @@ const HostInformation = () => {
       <div>
         <Typography>Response Rate: {HostDummy.responseRate}%</Typography>
         <Typography>Response Time: {HostDummy.responseTime}</Typography>
-        <Button variant={"outline"} className="my-6"
-        onClick={()=>router.push('/accommodation/message')}
+        <Button
+          variant={"outline"}
+          className="my-6"
+          onClick={() => router.push("/accommodation/message")}
         >
           Contact Host
         </Button>
