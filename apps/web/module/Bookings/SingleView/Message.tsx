@@ -14,7 +14,10 @@ const Message = () => {
       </div>
       <div className="flex flex-col md:flex-row gap-8 md:gap-24 pb-6">
         <div className="flex-1">
-          <ContactHost hostName="Simon" listingName="Typically responds within an hour" />
+          <ContactHost
+            hostName="Simon"
+            listingName="Typically responds within an hour"
+          />
         </div>
         <div className="md:w-96 md:relative">
           <div className="md:sticky md:top-0">
