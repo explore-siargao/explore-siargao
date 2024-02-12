@@ -19,7 +19,7 @@ const ContactHost = ({
   return (
     <div className="w-full">
       <div className="py-8">
-        <Link href="">
+        <Link href="/accommodation">
           <LucideChevronLeft size={50} strokeWidth={1} />
         </Link>
       </div>
