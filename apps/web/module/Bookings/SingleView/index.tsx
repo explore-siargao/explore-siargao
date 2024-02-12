@@ -11,12 +11,13 @@ import UserReviews from "./components/Reviews/UserReviews"
 import Highlights from "./components/Highlights"
 import CheckoutProcess from "./components/CheckoutProcess"
 import PlaceOffers from "./components/PlaceOffers"
+import ListingDateRangePicker from "./components/ListingDateRangePicker"
 
 export const SingleView = () => {
   return (
-    <WidthWrapper width="small" className="mt-24 lg:mt-28">
+    <WidthWrapper width="small" className="mt-32 lg:mt-36">
       <SectionInfo title="Test test" />
-      <div className="flex flex-col md:flex-row gap-8 md:gap-24 pb-6">
+      <div className="flex flex-col md:flex-row gap-8 md:gap-24 pb-12">
         <div className="flex-1">
           <div className="divide-y">
             <div className="pb-6">
@@ -43,10 +44,12 @@ export const SingleView = () => {
             <div className="py-6">
               <BookingDescription />
             </div>
-            <div className="py-6">
+            <div className="py-6 ">
               <PlaceOffers />
             </div>
-            <div className="py-6">{/* Date range picker */}</div>
+            <div className="py-6">
+              <ListingDateRangePicker title="5 Nights in Santa Maria" />
+            </div>
           </div>
         </div>
         <div className="md:w-96 md:relative">
@@ -64,8 +67,8 @@ export const SingleView = () => {
           </div>
         </div>
       </div>
-      <div className="divide-y">
-        <div className="pb-8">
+      <div className="divide-y border-t">
+        <div className="py-8">
           <RatingSummary />
         </div>
         <div className="py-8">

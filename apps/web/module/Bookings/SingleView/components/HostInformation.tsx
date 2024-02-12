@@ -61,7 +61,7 @@ const HostInformation = () => {
         <Button
           variant={"outline"}
           className="my-6"
-          onClick={() => router.push("/accommodation/message")}
+          onClick={() => router.push("/accommodation/1/message")}
         >
           Contact Host
         </Button>

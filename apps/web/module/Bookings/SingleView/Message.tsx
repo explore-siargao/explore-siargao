@@ -6,8 +6,8 @@ import Link from "next/link"
 
 const Message = () => {
   return (
-    <WidthWrapper width="small" className="mt-24 lg:mt-28">
-      <div className="pb-10 pt-6">
+    <WidthWrapper width="small" className="mt-32 lg:mt-36">
+      <div className="pb-10">
         <Link href="/accommodation/1">
           <LucideChevronLeft size={20} />
         </Link>
