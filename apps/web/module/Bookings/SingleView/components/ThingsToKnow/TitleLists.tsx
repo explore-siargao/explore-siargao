@@ -1,21 +1,25 @@
 import { Typography } from "@/common/components/ui/Typography"
 import React from "react"
 
-interface HouseRules {
+interface Rules {
+  id: number
+  rule: string
+}
+interface TitleListsProps {
   title: string
-  rules: any
+  rules: Rules[]
 }
 
-const HouseRule: React.FC<HouseRules> = ({ title, rules }) => {
+const TitleLists = ({ title, rules }: TitleListsProps) => {
   return (
     <div>
-      <Typography fontWeight={"semiBold"} className="px-10">
+      <Typography variant="h4" fontWeight="semibold">
         {title}
       </Typography>
       <ul>
         {rules.map((rule: any) => (
           <li className="mt-2" key={rule.rule.id}>
-            <Typography className="px-10">{rule.rule}</Typography>
+            <Typography>{rule.rule}</Typography>
           </li>
         ))}
       </ul>
@@ -23,4 +27,4 @@ const HouseRule: React.FC<HouseRules> = ({ title, rules }) => {
   )
 }
 
-export default HouseRule
+export default TitleLists

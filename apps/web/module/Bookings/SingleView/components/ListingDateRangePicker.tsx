@@ -16,15 +16,17 @@ const ListingDateRangePicker = ({ title }: ListingDRProps) => {
     to: undefined,
   })
   return (
-    <div className="md:w-[477px]">
-      <Typography variant="h3" fontWeight="semiBold" className="mb-1">
+    <div className="w-full">
+      <Typography variant="h3" fontWeight="semibold" className="mb-1">
         {title}
       </Typography>
       <Typography variant="h6" className="mb-4">
         {date?.from != undefined ? format(date.from, "LLL dd, y") : "Date from"}{" "}
         - {date?.to != undefined ? format(date.to, "LLL dd, y") : "Date to"}
       </Typography>
-      <DateRangePicker date={date} setDate={setDate} />
+      <div className="py-4">
+        <DateRangePicker date={date} setDate={setDate} />
+      </div>
       <Button
         variant="ghost"
         className="underline md:float-right"

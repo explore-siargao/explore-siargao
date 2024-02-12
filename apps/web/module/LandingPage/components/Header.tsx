@@ -7,10 +7,10 @@ import LandingPageMenu from "@/common/components/ui/LandingPageMenu"
 import { APP_NAME } from "@repo/constants"
 import { useSession } from "next-auth/react"
 import { usePathname, useRouter } from "next/navigation"
-import { LINK_CREATE_ACCOUNT, LINK_LOGIN } from "@/common/constants/links"
-import { Typography } from "@/common/components/ui/Typography"
+import { LINK_LOGIN } from "@/common/constants/links"
 import Link from "next/link"
 import { WidthWrapper } from "@/common/components/WidthWrapper"
+import { Typography } from "@/common/components/ui/Typography"
 
 function Header({
   contentWidth = "wide",
@@ -33,51 +33,53 @@ function Header({
   const renderHeader = () => {
     if (!withoutHeader.includes(path as string)) {
       return (
-        <header className="fixed w-full inset-x-0 top-0 z-50 bg-white border-y-gray-200/50 border flex flex-col items-center">
-          <div className="min-w-full py-3 text-center bg-primary-50 sr-only md:not-sr-only">
-            <Typography fontWeight={"light"} className="py-2">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            </Typography>
-          </div>
-          <WidthWrapper width={contentWidth}>
-            <nav
-              className="flex items-center justify-between py-2 my-2 w-full"
-              aria-label="Global"
-            >
-              <Link
-                href="/"
-                className="-m-1.5 gap-2 flex lg:flex-1 items-center"
+        <>
+          <header className="fixed w-full inset-x-0 top-0 z-50 bg-white border-y-gray-200/50 border flex flex-col items-center">
+            <div className="min-w-full py-3 text-center bg-primary-50 sr-only md:not-sr-only">
+              <Typography fontWeight={"light"} className="py-2">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              </Typography>
+            </div>
+            <WidthWrapper width={contentWidth}>
+              <nav
+                className="flex items-center justify-between py-2 my-2 w-full"
+                aria-label="Global"
               >
-                <Image
-                  className="h-12 w-auto"
-                  src={Logo}
-                  width={500}
-                  height={700}
-                  alt={APP_NAME}
-                />
-              </Link>
-              <div className="hidden lg:flex lg:flex-1 lg:justify-end space-x-3 items-center relative">
-                {!session && (
-                  <div className="flex gap-1 rounded-full items-center px-2 py-1">
-                    <Button
-                      variant="link"
-                      size="sm"
-                      onClick={() => router.push(LINK_LOGIN)}
-                    >
-                      Login | Sign up
+                <Link
+                  href="/"
+                  className="-m-1.5 gap-2 flex lg:flex-1 items-center"
+                >
+                  <Image
+                    className="h-12 w-auto"
+                    src={Logo}
+                    width={500}
+                    height={700}
+                    alt={APP_NAME}
+                  />
+                </Link>
+                <div className="hidden lg:flex lg:flex-1 lg:justify-end space-x-3 items-center relative">
+                  {!session && (
+                    <div className="flex gap-1 rounded-full items-center px-2 py-1">
+                      <Button
+                        variant="link"
+                        size="sm"
+                        onClick={() => router.push(LINK_LOGIN)}
+                      >
+                        Login | Sign up
+                      </Button>
+                    </div>
+                  )}
+                  <div>
+                    <Button variant="primary" size="sm">
+                      Apply to Host
                     </Button>
                   </div>
-                )}
-                <div>
-                  <Button variant="primary" size="sm">
-                    Apply to Host
-                  </Button>
+                  {session && <LandingPageMenu />}
                 </div>
-                {session && <LandingPageMenu />}
-              </div>
-            </nav>
-          </WidthWrapper>
-        </header>
+              </nav>
+            </WidthWrapper>
+          </header>
+        </>
       )
     }
   }

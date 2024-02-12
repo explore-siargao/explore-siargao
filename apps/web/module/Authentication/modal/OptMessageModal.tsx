@@ -35,10 +35,10 @@ const OptMessageModal = () => {
     onError: callBackReq.onError,
   })
   return (
-    <ModalContainer onClose={() => closeModal()} isOpen={isOpen}>
+    <ModalContainer onClose={() => closeModal()} isOpen={isOpen} size="sm">
       <div className="p-6 text-center h-screen md:h-full">
         <CheckCircleIcon className="mx-auto w-12 h-12 text-success-700" />
-        <Typography variant={"h3"} fontWeight={"semiBold"}>
+        <Typography variant={"h3"} fontWeight={"semibold"}>
           You’re all signed up!
         </Typography>
 
