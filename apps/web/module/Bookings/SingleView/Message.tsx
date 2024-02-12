@@ -9,7 +9,7 @@ const Message = () => {
     <WidthWrapper width="small" className="mt-24 lg:mt-28">
       <div className="pb-10 pt-6">
         <Link href="/accommodation/1">
-          <LucideChevronLeft size={20}  />
+          <LucideChevronLeft size={20} />
         </Link>
       </div>
       <div className="flex flex-col md:flex-row gap-8 md:gap-24 pb-6">

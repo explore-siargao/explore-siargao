@@ -8,10 +8,7 @@ interface ContactHostProps {
   listingName: string
 }
 
-const ContactHost = ({
-  hostName,
-  listingName,
-}: ContactHostProps) => {
+const ContactHost = ({ hostName, listingName }: ContactHostProps) => {
   return (
     <div>
       <div className="flex pb-6 border-b justify-between">
@@ -20,9 +17,7 @@ const ContactHost = ({
           <Typography className="text-gray-400">{listingName}</Typography>
         </div>
         <div>
-          <div
-            className={`rounded-full h-16 w-16`}
-          >
+          <div className={`rounded-full h-16 w-16`}>
             <Image
               src={`/assets/1.jpg`}
               width={100}
