@@ -1,27 +1,32 @@
 import ModalContainer from "@/common/components/ModalContainer"
 import { Title } from "@/common/components/ui/Title"
+import { Typography } from "@/common/components/ui/Typography"
+import IconDescription from "@/module/Bookings/SingleView/components/IconDescription"
+import IconTitleDescription from "@/module/Bookings/SingleView/components/IconTitleDescription"
+import { LucideIcon } from "lucide-react"
 import React from "react"
 
 
 interface IThingsToNote {
-  id?: number
-  checkingInAndOut: {
-    title: string,
-    icon: React.ElementType
-  }
-
-  
+  id:number
+  title:string,
+  iconDesc:{
+    id:number,
+     icon:LucideIcon, 
+    rule:string
+  }[]
 }
+
 interface AddThingsToNoteModalProps {
   isOpen: boolean
   onClose: () => void
-  thingsToNote: IThingsToNote
+  groupRules: IThingsToNote[]
 }
 
 const AddThingsToNoteModal = ({
   isOpen,
   onClose,
-  thingsToNote,
+  groupRules,
 }: AddThingsToNoteModalProps) => {
   return (
     <ModalContainer onClose={onClose} isOpen={isOpen} size="sm">
@@ -30,18 +35,18 @@ const AddThingsToNoteModal = ({
         <h2 className="text-sm">
           You'll be staying in someone's home so treat it like a home
         </h2>
-        <div>
-          {thingsToNote.checkingInAndOut && (
-            <div>
-              <Title className="flex text-md font-semibold mb-5 my-4">
-                Checking in and out
-              </Title>
-              <div>{thingsToNote.checkingInAndOut.title}</div>
-              <div className="border-b mt-5 mb-5"></div>
-            
-            </div>
-          )}
-        </div>
+        {groupRules.map((gRule)=>(
+          <div key={gRule.id}>
+          <Typography variant={"h2"} >{gRule.title}</Typography>
+          
+            {gRule.iconDesc.map((item)=>(
+              <div key={item.id}>
+                <IconDescription icon={item.icon} desc={item.rule} />
+              </div>
+            ))}
+         
+          </div>
+        ))}
       </div>
     </ModalContainer>
   )

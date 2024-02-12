@@ -6,9 +6,31 @@ import AddThingsToNoteModal from "@/module/AccountSettings/components/modals/Add
 import { LucideClock, LucidePawPrint } from "lucide-react"
 
 const HouseRulesDummy = [
-  { icon: LucideClock, id: 1, rule: "Check-in: 12:00 PM - 7:00 PM" },
-  { icon: LucideClock, id: 2, rule: "Checkout before 10:00 AM" },
-  { icon: LucidePawPrint, id: 3, rule: "8 guests maximum" },
+  {id: 1, icon: LucideClock, rule: "Check-in: 12:00 PM - 7:00 PM" },
+  {id: 2, icon: LucideClock, rule: "Checkout before 10:00 AM" },
+  {id: 3, icon: LucidePawPrint, rule: "8 guests maximum" },
+  
+]
+
+const HouseRulesModalData = [
+  {
+    id:1,
+    title:"Check in and out",
+  iconDesc:[
+  {id: 1, icon: LucideClock, rule: "Check-in: 12:00 PM - 7:00 PM" },
+  {id: 2, icon: LucideClock, rule: "Checkout before 10:00 AM" },
+  {id: 3, icon: LucidePawPrint, rule: "8 guests maximum" },
+  ]
+  },
+  {
+    id:2,
+    title:"During your stay",
+  iconDesc:[
+  {id: 1, icon: LucideClock, rule: "Check-in: 12:00 PM - 7:00 PM" },
+  {id: 2, icon: LucideClock, rule: "Checkout before 10:00 AM" },
+  {id: 3, icon: LucidePawPrint, rule: "8 guests maximum" },
+  ]
+  }
 ]
 
 const SafetyPropertiesDummy = [
@@ -69,8 +91,7 @@ const ThingsToKnow = () => {
       <AddThingsToNoteModal
         onClose={closeModal}
         isOpen={isModalOpen}
-        thingsToNote={{
-        }}
+        groupRules={HouseRulesModalData}
       />
     </>
   )
