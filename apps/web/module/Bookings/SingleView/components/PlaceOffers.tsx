@@ -111,10 +111,10 @@ const PlaceOffers = () => {
         </div>
         <Button
           className="mt-5"
-          variant={"shaded"}
+          variant="outline"
           onClick={() => setShowMoreModalOpen(!showMoreModalOpen)}
         >
-          Show all 56 amenities
+          Show all 8 amenities
         </Button>
       </TitleSection>
       <PlaceOfferModal

@@ -19,7 +19,7 @@ const ContactHost = ({ hostName, listingName }: ContactHostProps) => {
         <div>
           <div className={`rounded-full h-16 w-16`}>
             <Image
-              src={`/assets/1.jpg`}
+              src={`/assets/2.jpg`}
               width={100}
               height={100}
               alt="Avatar"

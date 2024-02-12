@@ -10,13 +10,13 @@ const HostDummy = {
   hostName: "Jose Rizal",
   hostProfilePic: "1.jpg",
   joinedIn: "July 20, 2020",
-  countReviews: 100,
+  countReviews: 4,
   rules: [
     {
       id: 1,
       title: "During your stay",
       description:
-        "Owner David is available by email and phone and Messenger and usually on-site, and managers Genny and Bert are available on-site and by phone and Messenger.",
+        "For our Guests’ convenience, complimentary cleaning service and support of the management team is provided throughout the entire stay. The property offers also assistance in bike/car rental, island hoping and airport shuttle service bookings.",
     },
   ],
   responseRate: 70,
@@ -29,8 +29,8 @@ const HostInformation = () => {
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-16 md:items-center">
       <div className="flex-1 flex flex-col">
         <AvatarTitleDescription
-          avatarKey="1.jpg"
-          title="Hosted by Jose Rizal"
+          avatarKey="2.jpg"
+          title="Hosted by Simon"
           subTitle="Joined in July 20, 2020"
         />
         <div className="flex gap-3 mt-4">

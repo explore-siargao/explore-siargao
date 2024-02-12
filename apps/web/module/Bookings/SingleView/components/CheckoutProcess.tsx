@@ -41,7 +41,7 @@ const CheckoutProcess = ({ checkoutDesc }: CheckoutProcessProps) => {
         </Typography>
       </div>
       <div>
-        <div className="flex justify-between mb-5">
+        <div className="flex justify-between items-center mb-5">
           <Button
             variant={"ghost"}
             className="underline pl-0"
@@ -53,7 +53,7 @@ const CheckoutProcess = ({ checkoutDesc }: CheckoutProcessProps) => {
           <div>{formatCurrency(checkoutDesc.durationCost, "Philippines")}</div>
         </div>
 
-        <div className="flex justify-between">
+        <div className="flex justify-between items-center">
           <Button
             variant={"ghost"}
             className="underline pl-0"

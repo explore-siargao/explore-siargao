@@ -17,26 +17,26 @@ import ListingDateRangePicker from "./components/ListingDateRangePicker"
 export const SingleView = () => {
   return (
     <WidthWrapper width="small" className="mt-32 lg:mt-36">
-      <SectionInfo title="Test test" />
+      <SectionInfo title="Villa Manao · Private Pool | Bathtub | Sky shower" />
       <div className="flex flex-col md:flex-row gap-8 md:gap-24 pb-12">
-        <div className="flex-1">
+        <div className="flex-1 md:w-1/2 2xl:w-full">
           <div className="divide-y">
             <div className="pb-6">
               <SummaryInfo
-                address="Test test"
-                guest={3}
-                bedroom={3}
-                beds={3}
-                baths={3}
-                reviews={3}
-                stars={3}
+                address="Entire villa in General Luna, Philippines"
+                guest={2}
+                bedroom={1}
+                beds={1}
+                baths={1}
+                reviews={4}
+                stars={5}
               />
             </div>
             <div className="py-6">
               <AvatarTitleDescription
                 avatarKey="2.jpg"
-                title="Hosted by John Madrigal"
-                subTitle="11 months hosting"
+                title="Hosted by Simon"
+                subTitle="4 months hosting"
               />
             </div>
             <div className="py-6">
@@ -49,7 +49,7 @@ export const SingleView = () => {
               <PlaceOffers />
             </div>
             <div className="py-6">
-              <ListingDateRangePicker title="5 Nights in Santa Maria" />
+              <ListingDateRangePicker title="5 Nights in Villa Manao · Private Pool | Bathtub | Sky shower" />
             </div>
           </div>
         </div>
@@ -59,10 +59,10 @@ export const SingleView = () => {
               checkoutDesc={{
                 id: 1,
                 serviceFee: 1000,
-                durationCost: 2000,
+                durationCost: 125000,
                 descTotalBeforeTaxes: 3000,
-                totalBeforeTaxes: 4000,
-                titlePrice: 5000,
+                totalBeforeTaxes: 126000,
+                titlePrice: 25000,
               }}
             />
           </div>
@@ -79,9 +79,9 @@ export const SingleView = () => {
           <WhereYoullBeDescription
             whereYoullBeDesc={{
               id: 1,
-              location: "Santa Maria, Laguna",
+              location: "General Luna, Caraga, Philippines",
               coordinates: [14.5129, 21.4342],
-              desc: "Amazing place",
+              desc: "Mantaray Siargao is located in Purok 1, General Luna. A quiet residential area close to the heart of town. The property is nestled between the beach and the main road, allowing guests like you to easily drive or hail a tricycle to town.",
             }}
           />
         </div>

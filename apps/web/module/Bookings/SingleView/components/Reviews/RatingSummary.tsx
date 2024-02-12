@@ -17,7 +17,7 @@ const HeadReview = () => {
       <div className="flex mb-4 space-x-2">
         <StarIcon className="h-6 w-6" />
         <Typography variant={"h3"} fontWeight="semibold">
-          4.60 &middot; 5 reviews
+          4.60 &middot; 4 reviews
         </Typography>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-12 lg:gap-x-6 gap-y-5 lg:gap-y-0 lg:divide-x divide-y lg:divide-y-0">

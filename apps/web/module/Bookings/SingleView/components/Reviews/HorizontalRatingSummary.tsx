@@ -17,7 +17,7 @@ const HorizontalRatingSummary = () => {
       <div className="flex mb-4 space-x-2 mt-20">
         <StarIcon className="h-7 w-7" />
         <Typography variant={"h3"} className="font-bold mt-0.5">
-          4.60 • 5 reviews
+          4.60 • 4 reviews
         </Typography>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-12 lg:gap-x-6 lg:divide-x gap-y-4 lg:gap-y-0">

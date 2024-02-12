@@ -23,7 +23,7 @@ interface PlaceOfferModalProps {
 const PlaceOfferModal = ({ isOpen, onClose, datas }: PlaceOfferModalProps) => {
   return (
     <ModalContainer isOpen={isOpen} onClose={onClose} size="md">
-      <div className="px-5 pt-4  md:h-[700px] md:overflow-y-auto">
+      <div className="px-7 py-6 md:h-[700px] md:overflow-y-auto">
         <TitleSection title="What this place offers">
           {datas.map((data) => (
             <div className="py-2" key={data.id}>

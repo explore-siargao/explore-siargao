@@ -4,13 +4,13 @@ import { useState } from "react"
 
 const DescriptionDummy = {
   generalDes:
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi assumenda repellat placeat, quos aperiam amet obcaecati harum eum ipsum, ratione quam magnam sequi pariatur magni libero tempore odio numquam tenetur?",
+    "Welcome to this stunning private villa located just near one of the most beautiful  beaches of Siargao. Enjoy scenic private outdoor pool views & stylishly furnished spacious  indoor  with a touch of local art. All hidden in 800 m2 tropical garden.",
   aboutSpace:
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi assumenda repellat placeat, quos aperiam amet obcaecati harum eum ipsum, ratione quam magnam sequi pariatur magni libero tempore odio numquam tenetur?",
+    "Welcome to this stunning private villa located just near one of the most beautiful beaches of Siargao. Enjoy scenic private outdoor pool views & stylishly furnished spacious indoor with a touch of local art. All hidden in 800 m2 tropical garden. The unique mixture of modern design & tropical nature provides comfort and privacy whilst offering unique experience of luxurious getaway in a jungle paradise.",
   aboutGuestAccess:
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi assumenda repellat placeat, quos aperiam amet obcaecati harum eum ipsum, ratione quam magnam sequi pariatur magni libero tempore odio numquam tenetur?",
+    "This spacious 1-bedroom villa is for full and exclusive use of our guests, which have 24h access to the property provided during their stay. To keep our Guests' privacy and safety the building is fenced and can be locked from inside and outside. The guests have unlimited access to private outdoor pool and bath tube with hot water. Free access to WiFi connection is provided.",
   otherThingsNote:
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi assumenda repellat placeat, quos aperiam amet obcaecati harum eum ipsum, ratione quam magnam sequi pariatur magni libero tempore odio numquam tenetur?",
+    "We recommend to our guests to have a motorbike or scooter to reach the house or get there by van from the airport (we can arrange this for you). Please be aware that the last part of the road to the villa is through a dirt road, that usually gets muddy during heavy rains, which occur between December and February. Please make sure you are comfortable driving a scooter/motorbike on a dirt road or rent a trike from General Luna.",
 }
 
 const BookingDescription = () => {
