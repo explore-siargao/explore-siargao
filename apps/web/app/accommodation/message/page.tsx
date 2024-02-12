@@ -3,7 +3,6 @@ import React from "react"
 import { APP_NAME } from "@repo/constants"
 import { Metadata } from "next"
 import { ACCOMODATION } from "@/common/constants"
-import SingleView from "@/module/Bookings/SingleView"
 import Message from "@/module/Bookings/SingleView/Message"
 
 export const metadata: Metadata = {
