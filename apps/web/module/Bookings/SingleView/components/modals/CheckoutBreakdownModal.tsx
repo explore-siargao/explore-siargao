@@ -29,6 +29,7 @@ const CheckoutBreakdownModal = ({
       isOpen={isOpen}
       title="Basic Price Breakdown"
       onClose={onClose}
+      size="sm"
     >
       <div className="p-5">
         {breakdown.map((data) => {

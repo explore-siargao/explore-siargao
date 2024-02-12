@@ -1,6 +1,9 @@
+"use client"
 import SpecificMap from "@/common/components/SpecificMap"
 import { Button } from "@/common/components/ui/Button"
 import { Title } from "@/common/components/ui/Title"
+import WhereYouWillBeModal from "./WhereYouWillBeModal"
+import { useState } from "react"
 
 interface IDescription {
   id?: number
@@ -14,6 +17,7 @@ interface WhereYoullBeProps {
 }
 
 const WhereYoullBeDescription = ({ whereYoullBeDesc }: WhereYoullBeProps) => {
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const maxLength = 600
   const slicedDescription =
     whereYoullBeDesc.desc.length > maxLength
@@ -45,12 +49,17 @@ const WhereYoullBeDescription = ({ whereYoullBeDesc }: WhereYoullBeProps) => {
       </div>
       <div className="flex w-full">
         <Button
+          onClick={() => setIsModalOpen(true)}
           className="text-sm font-semibold underline mx-0 px-0"
           variant={"ghost"}
         >
           Show more &gt;
         </Button>
       </div>
+      <WhereYouWillBeModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </div>
   )
 }
