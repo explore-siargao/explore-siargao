@@ -35,7 +35,7 @@ const ListingDateRangePicker = ({ title }: ListingDRProps) => {
       >
         Clear dates
       </Button>
-      </div>
+    </div>
   )
 }
 
