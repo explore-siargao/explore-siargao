@@ -23,8 +23,8 @@ interface CheckoutProcessProps {
 }
 
 const CheckoutProcess = ({ checkoutDesc }: CheckoutProcessProps) => {
-    const [isBreakdownMoalOpen, setIsBreakdownModalOpen] = useState(false)
-    const [isMoreInfoModalOpen, setMoreInfoModalOpen] = useState(false)
+  const [isBreakdownMoalOpen, setIsBreakdownModalOpen] = useState(false)
+  const [isMoreInfoModalOpen, setMoreInfoModalOpen] = useState(false)
   return (
     <div className="border rounded-xl shadow-lg px-6 pb-6 pt-5 flex flex-col divide-text-100 overflow-y-auto mb-5">
       <span className="text-xl font-semibold mb-4">
@@ -42,7 +42,11 @@ const CheckoutProcess = ({ checkoutDesc }: CheckoutProcessProps) => {
       </div>
       <div>
         <div className="flex justify-between mb-5">
-          <Button variant={"ghost"} className="underline pl-0" onClick={()=>setIsBreakdownModalOpen(true)}>
+          <Button
+            variant={"ghost"}
+            className="underline pl-0"
+            onClick={() => setIsBreakdownModalOpen(true)}
+          >
             <PesoSign />
             25,000 x 5 nights
           </Button>
@@ -50,11 +54,13 @@ const CheckoutProcess = ({ checkoutDesc }: CheckoutProcessProps) => {
         </div>
 
         <div className="flex justify-between">
-          <Button 
-          variant={"ghost"}
-          className="underline pl-0" 
-          onClick={()=>setMoreInfoModalOpen(true)}
-          >ES service fee</Button>
+          <Button
+            variant={"ghost"}
+            className="underline pl-0"
+            onClick={() => setMoreInfoModalOpen(true)}
+          >
+            ES service fee
+          </Button>
           <div>{formatCurrency(checkoutDesc.serviceFee, "Philippines")}</div>
         </div>
 
@@ -67,13 +73,13 @@ const CheckoutProcess = ({ checkoutDesc }: CheckoutProcessProps) => {
         </div>
       </div>
       <CheckoutBreakdownModal
-       isOpen={isBreakdownMoalOpen}
-        onClose={()=>setIsBreakdownModalOpen(false)} 
-       />
-       <CheckoutMoreInfoModal 
-       isOpen={isMoreInfoModalOpen}
-       onClose={()=>setMoreInfoModalOpen(false)}
-       />
+        isOpen={isBreakdownMoalOpen}
+        onClose={() => setIsBreakdownModalOpen(false)}
+      />
+      <CheckoutMoreInfoModal
+        isOpen={isMoreInfoModalOpen}
+        onClose={() => setMoreInfoModalOpen(false)}
+      />
     </div>
   )
 }
