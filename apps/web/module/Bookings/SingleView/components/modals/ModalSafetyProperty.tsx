@@ -12,7 +12,7 @@ interface ISafetyProperty {
     id: number
     icon: LucideIcon
     safetyProperty: string
-    otherDescription?: string | undefined
+    otherDescription?: string 
   }[]
 }
 
