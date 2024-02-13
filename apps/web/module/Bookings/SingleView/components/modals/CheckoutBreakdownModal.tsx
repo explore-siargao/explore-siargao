@@ -11,11 +11,11 @@ const CheckoutBreakdownModal = ({
   onClose,
 }: CheckoutBreakdownModalProps) => {
   const breakdown = [
-    { date: "2/7/2024", price: 2522 },
-    { date: "2/8/2024", price: 2522 },
-    { date: "2/9/2024", price: 2522 },
-    { date: "2/10/2024", price: 2522 },
-    { date: "2/11/2024", price: 2522 },
+    { date: "2/12/2024", price: 25000 },
+    { date: "2/13/2024", price: 25000 },
+    { date: "2/14/2024", price: 25000 },
+    { date: "2/15/2024", price: 25000 },
+    { date: "2/16/2024", price: 25000 },
   ]
 
   const moneyFormatter = new Intl.NumberFormat("en-US", {
@@ -29,6 +29,7 @@ const CheckoutBreakdownModal = ({
       isOpen={isOpen}
       title="Basic Price Breakdown"
       onClose={onClose}
+      size="sm"
     >
       <div className="p-5">
         {breakdown.map((data) => {
@@ -47,7 +48,7 @@ const CheckoutBreakdownModal = ({
             Total Base Price
           </Typography>
           <Typography variant="h5" fontWeight="bold">
-            &#8369;12,610
+            &#8369;125,000
           </Typography>
         </div>
       </div>

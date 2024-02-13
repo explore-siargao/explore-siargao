@@ -4,7 +4,7 @@ import React from "react"
 const OverallRating = () => {
   return (
     <div className="w-100">
-      <Typography variant={"h5"} className="font-bold mb-2">
+      <Typography variant={"h5"} fontWeight="semibold" className="mb-2">
         Overall rating
       </Typography>
       <div className="grid grid-cols-11 items-center">

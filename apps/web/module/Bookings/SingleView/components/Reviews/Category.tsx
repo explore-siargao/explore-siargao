@@ -1,30 +1,30 @@
 import { Typography } from "@/common/components/ui/Typography"
 import React from "react"
 
-interface ReviewCategoryProps {
+interface CategoryProps {
   title: string
   rating: string
   isHorizontal: boolean
-  icon: React.ReactElement
+  icon: React.ReactNode
 }
 
-const ReviewCategory = ({
+const Category = ({
   title,
   rating,
   isHorizontal,
   icon: Icon,
-}: ReviewCategoryProps) => {
+}: CategoryProps) => {
   if (isHorizontal) {
     return (
       <div>
         <div className="flex justify-between items-center w-full py-4">
           <div className="flex space-x-3 items-center">
-            <Icon.type {...Icon.props} />
-            <Typography variant={"h5"} className="font-semibold">
+            {Icon}
+            <Typography variant={"h5"} fontWeight="semibold">
               {title}
             </Typography>
           </div>
-          <Typography variant={"h5"} className="font-semibold">
+          <Typography variant={"h5"} fontWeight="semibold">
             {rating}
           </Typography>
         </div>
@@ -33,16 +33,16 @@ const ReviewCategory = ({
   } else {
     return (
       <div className="flex flex-col lg:px-4 py-4">
-        <Typography variant={"h5"} className="font-bold">
+        <Typography variant={"h5"} fontWeight="semibold">
           {title}
         </Typography>
-        <Typography variant={"h4"} className="font-bold mb-5">
+        <Typography variant={"h4"} fontWeight="semibold" className="mb-5">
           {rating}
         </Typography>
-        <Icon.type {...Icon.props} className="h-7 w-7" />
+        {Icon}
       </div>
     )
   }
 }
 
-export default ReviewCategory
+export default Category

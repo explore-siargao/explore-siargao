@@ -1,15 +1,21 @@
+"use client"
+import PesoSign from "@/common/components/PesoSign"
 import { Button } from "@/common/components/ui/Button"
 import { Input } from "@/common/components/ui/Input"
 import { Select } from "@/common/components/ui/Select"
-import { Title } from "@/common/components/ui/Title"
+import { Typography } from "@/common/components/ui/Typography"
+import formatCurrency from "@/common/helpers/formatCurrency"
+import CheckoutBreakdownModal from "./modals/CheckoutBreakdownModal"
+import { useState } from "react"
+import CheckoutMoreInfoModal from "./modals/CheckoutMoreInfoModal"
 
 interface ICheckout {
   id?: number
   serviceFee: number
   durationCost: number
-  descTotalBeforeTaxes: string
+  descTotalBeforeTaxes: number
   totalBeforeTaxes: number
-  titlePrice: string
+  titlePrice: number
 }
 
 interface CheckoutProcessProps {
@@ -17,40 +23,63 @@ interface CheckoutProcessProps {
 }
 
 const CheckoutProcess = ({ checkoutDesc }: CheckoutProcessProps) => {
+  const [isBreakdownModalOpen, setIsBreakdownModalOpen] = useState(false)
+  const [isMoreInfoModalOpen, setIsMoreInfoModalOpen] = useState(false)
   return (
-    <div className="border rounded-xl shadow-lg p-8 flex flex-col divide-text-100 overflow-y-auto w-3/12 mb-5 py-8">
-      <Title className="text-lg font-semibold  mb-5">
-        &#8369;{checkoutDesc.titlePrice}
-        <small className="px-1 font-semibold">night</small>
-      </Title>
+    <div className="border rounded-xl shadow-lg px-6 pb-6 pt-5 flex flex-col divide-text-100 overflow-y-auto mb-5">
+      <span className="text-xl font-semibold mb-4">
+        {formatCurrency(checkoutDesc.titlePrice, "Philippines")}{" "}
+        <small className="font-light">night</small>
+      </span>
       <div className="font-semibold grid grid-cols-1 gap-5 w-full">
         <Input id="checkIn" label="CHECK-IN" required={true} />
-
         <Input id="checkOut" label="CHECK-OUT" required={true} />
-
         <Select id="guest" label="GUESTS" required={true} />
-
-        <Button variant={"primary"}>Reserve</Button>
-
-        <h1 className="justify-center flex mb-5">You won't charge yet</h1>
+        <Button variant="primary">Reserve</Button>
+        <Typography className="text-center mb-5 text-sm">
+          You won't be charge yet
+        </Typography>
       </div>
-      <div className="font-semibold w-full">
-        <div className="flex justify-between mb-5">
-          <button className="underline">&#8369;25,000 x 5 nights</button>
-          <div>&#8369;{checkoutDesc.durationCost}</div>
+      <div>
+        <div className="flex justify-between items-center mb-5">
+          <Button
+            variant={"ghost"}
+            className="underline pl-0"
+            onClick={() => setIsBreakdownModalOpen(true)}
+          >
+            <PesoSign />
+            25,000 x 5 nights
+          </Button>
+          <div>{formatCurrency(checkoutDesc.durationCost, "Philippines")}</div>
         </div>
 
-        <div className="flex justify-between">
-          <button className="underline">ES service fee</button>
-          <div>&#8369;{checkoutDesc.serviceFee}</div>
+        <div className="flex justify-between items-center">
+          <Button
+            variant={"ghost"}
+            className="underline pl-0"
+            onClick={() => setIsMoreInfoModalOpen(true)}
+          >
+            ES service fee
+          </Button>
+          <div>{formatCurrency(checkoutDesc.serviceFee, "Philippines")}</div>
         </div>
 
         <div className="border-b mt-5 mb-5"></div>
-        <div className="flex justify-between">
-          <div>{checkoutDesc.descTotalBeforeTaxes}</div>
-          <div>&#8369;{checkoutDesc.totalBeforeTaxes}</div>
+        <div className="flex justify-between font-semibold">
+          <div>Total before taxes</div>
+          <div>
+            {formatCurrency(checkoutDesc.totalBeforeTaxes, "Philippines")}
+          </div>
         </div>
       </div>
+      <CheckoutBreakdownModal
+        isOpen={isBreakdownModalOpen}
+        onClose={() => setIsBreakdownModalOpen(false)}
+      />
+      <CheckoutMoreInfoModal
+        isOpen={isMoreInfoModalOpen}
+        onClose={() => setIsMoreInfoModalOpen(false)}
+      />
     </div>
   )
 }

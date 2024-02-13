@@ -10,6 +10,7 @@ export const getAllListing = async (req: Request, res: Response) => {
   try {
     const listings = await prisma.listing.findMany({
       include: {
+        listingDescription: true,
         price: true,
         highLights: {
           include: {
@@ -30,10 +31,23 @@ export const getAllListing = async (req: Request, res: Response) => {
       },
     })
     if (listings.length > 0) {
+      const customListings = listings.map((customListing) => ({
+        id: customListing.id,
+        imageKey: JSON.parse(customListing.imageKeys),
+        address: customListing.address,
+        price:
+          customListing.price.fee +
+          customListing.price.serviceFee +
+          customListing.price.cleaningFee,
+        ratings: '0.0',
+        distance: '10 kilometer away',
+        dayTime: customListing.price.isNight ? 'Night' : '',
+        wishes: customListing.wishes,
+      }))
       res.json(
         response.success({
-          items: listings,
-          allItemCount: listings.length,
+          items: customListings,
+          allItemCount: customListings.length,
           message: '',
         })
       )
@@ -56,14 +70,27 @@ export const getListing = async (req: Request, res: Response) => {
     const listing = await prisma.listing.findFirst({
       where: { id: Number(req.params.id) },
       include: {
+        listingDescription: true,
         basicAboutPlace: true,
         price: true,
         highLights: true,
         hostedBy: true,
         placeOffers: true,
-        houseRules: true,
-        safetyProperties: true,
-        cancellationPolicies: true,
+        houseRules: {
+          include: {
+            rules: true,
+          },
+        },
+        safetyProperties: {
+          include: {
+            rules: true,
+          },
+        },
+        cancellationPolicies: {
+          include: {
+            rules: true,
+          },
+        },
         review: true,
       },
     })
@@ -93,7 +120,7 @@ export const addListing = async (req: Request, res: Response) => {
   const hostId = Number(req.params.hostId)
   const isValidInput = Z_Listing.safeParse(req.body)
   const {
-    imageUrls,
+    imageKeys,
     title,
     category,
     address,
@@ -116,12 +143,13 @@ export const addListing = async (req: Request, res: Response) => {
       const getHost = await prisma.user.findFirst({
         where: {
           id: hostId,
+          role: 'Host',
         },
       })
 
       if (getHost !== null) {
         if (
-          imageUrls &&
+          imageKeys &&
           title &&
           category &&
           address &&
@@ -158,7 +186,7 @@ export const addListing = async (req: Request, res: Response) => {
           })
           const newListing = await prisma.listing.create({
             data: {
-              imageUrls: JSON.stringify(imageUrls),
+              imageKeys: JSON.stringify(imageKeys),
               title: title,
               category: category,
               address: address,
@@ -198,7 +226,7 @@ export const addListing = async (req: Request, res: Response) => {
 export const updateListing = async (req: Request, res: Response) => {
   const userId = Number(req.params.userId)
   const id = Number(req.params.id)
-  const { imageUrls, title, category, address, latitude, longitude } = req.body
+  const { imageKeys, title, category, address, latitude, longitude } = req.body
   try {
     const getUser = await prisma.user.findUnique({
       where: {
@@ -223,7 +251,7 @@ export const updateListing = async (req: Request, res: Response) => {
         })
       )
     }
-    if (imageUrls || title || category || address || latitude || longitude) {
+    if (imageKeys || title || category || address || latitude || longitude) {
       const updateListing = await prisma.listing.update({
         where: {
           id: id,
@@ -231,7 +259,7 @@ export const updateListing = async (req: Request, res: Response) => {
         data: {
           title: title,
           category: category,
-          imageUrls: imageUrls,
+          imageKeys: imageKeys,
           address: address,
           longitude: longitude,
           latitude: latitude,

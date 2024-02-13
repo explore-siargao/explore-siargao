@@ -16,7 +16,7 @@ const IconTitleDescription: React.FC<IconTitleDescriptionProps> = ({
       {Icon && <Icon className="w-6 h-6" />}
       <div className="flex flex-col mt-4">
         <div className="flex font-semibold">{title}</div>
-        <div className="flex text-sm text-gray-500">{desc}</div>
+        <div className="flex text-sm text-text-300">{desc}</div>
       </div>
     </div>
   )

@@ -10,9 +10,9 @@ interface WhereYouWillBe {
 
 const WhereYouWillBe: React.FC<WhereYouWillBe> = ({ title }) => {
   const firstDesc =
-    "The property, given its close proximity to the refreshing hillside town of Tagaytay and clear blue beaches of Nasugbu, provides a quick escape. The property, given its close proximity to the refreshing hillside town of Tagaytay and clear blue beaches of Nasugbu, provides a quick escape"
+    "Mantaray Siargao is located in Purok 1, General Luna. A quiet residential area close to the heart of town. The property is nestled between the beach and the main road, allowing guests like you to easily drive or hail a tricycle to town."
   const secondDesc =
-    "The property, given its close proximity to the refreshing hillside town of Tagsaytay and clear blue beaches of Nasugbu, provides a quick escape. The property, given its close proximity to the refreshing hillside town of Tagaytay and clear blue beaches of Nasugbu, provides a quick escape"
+    "It's best to get around the neighborhood by renting a motorcycle. We have parking space that can accommodate both motorcycles and four wheels. If driving is not your thing during your vacation, tricycles/tuktuks ply the main road frequently, so you should be able to find a ride to town fairly easily."
 
   const maxLength = 100
 
