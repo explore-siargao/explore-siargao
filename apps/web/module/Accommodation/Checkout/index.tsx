@@ -12,12 +12,12 @@ const Checkout = () => {
   return (
     <WidthWrapper width={"small"} className="mt-24 md:mt-36 lg:mt-40">
       <div className="w-full flex items-center gap-x-4">
-        <ChevronLeft />
-        <Title className="pb-5 md:pb-0">Confirm and pay</Title>
+        <Link href="/accommodation/1"><ChevronLeft /></Link>
+        <Typography variant="h1" fontWeight="semibold" className="pb-5 md:pb-0">Confirm and pay</Typography>
       </div>
       <div className="w-full flex mt-8">
         <div className="w-1/2 flex flex-col gap-y-4">
-          <Typography variant={"h2"} fontWeight={"semiBold"}>
+          <Typography variant={"h2"} fontWeight="semibold">
             Your trip
           </Typography>
           <div className="flex w-full flex-col">
@@ -38,7 +38,7 @@ const Checkout = () => {
           <PaymentMethodForm />
           <hr className="my-4" />
           <div>
-            <Typography variant={"h2"} fontWeight={"semiBold"}>
+            <Typography variant={"h2"} fontWeight="semibold">
               Required for your trip
             </Typography>
           </div>
@@ -53,7 +53,7 @@ const Checkout = () => {
           </div>
           <hr className="my-4" />
           <div className="flex flex-col gap-y-4">
-            <Typography variant={"h2"} fontWeight={"semiBold"}>
+            <Typography variant={"h2"} fontWeight="semibold">
               Cancellation policy
             </Typography>
             <div>
@@ -68,7 +68,7 @@ const Checkout = () => {
           </div>
           <hr className="my-4" />
           <div className="flex flex-col gap-y-4">
-            <Typography variant={"h2"} fontWeight={"semiBold"}>
+            <Typography variant={"h2"} fontWeight="semibold">
               Ground rules
             </Typography>
             <div>
@@ -106,7 +106,7 @@ const Checkout = () => {
             <div className="flex gap-x-4 items-center">
               <div className="w-24 h-20 rounded-lg bg-primary-100"></div>
               <div className="flex flex-col gap-y-1">
-                <Typography fontWeight={"semiBold"}>
+                <Typography fontWeight="semibold">
                   The GOAT Barnyard - Lakeside
                 </Typography>
                 <Typography variant={"h5"}>Farm stay</Typography>
@@ -120,7 +120,7 @@ const Checkout = () => {
             </div>
             <hr className="my-6" />
             <div className="flex flex-col gap-y-4">
-              <Typography fontWeight={"semiBold"} variant={"h2"}>
+              <Typography fontWeight="semibold" variant={"h2"}>
                 Price details
               </Typography>
               <div className="flex w-full justify-between">
@@ -138,10 +138,10 @@ const Checkout = () => {
             </div>
             <hr className="my-6" />
             <div className="flex w-full justify-between">
-              <Typography variant={"h4"} fontWeight={"semiBold"}>
+              <Typography variant={"h4"} fontWeight="semibold">
                 Total
               </Typography>
-              <Typography variant={"h4"} fontWeight={"semiBold"}>
+              <Typography variant={"h4"} fontWeight="semibold">
                 ₱126,000.00
               </Typography>
             </div>
