@@ -3,7 +3,6 @@ import PesoSign from "@/common/components/PesoSign"
 import { Button } from "@/common/components/ui/Button"
 import { Input } from "@/common/components/ui/Input"
 import { Select } from "@/common/components/ui/Select"
-import { Typography } from "@/common/components/ui/Typography"
 import formatCurrency from "@/common/helpers/formatCurrency"
 import CheckoutBreakdownModal from "./modals/CheckoutBreakdownModal"
 import { useState } from "react"
@@ -35,10 +34,7 @@ const CheckoutProcess = ({ checkoutDesc }: CheckoutProcessProps) => {
         <Input id="checkIn" label="CHECK-IN" required={true} />
         <Input id="checkOut" label="CHECK-OUT" required={true} />
         <Select id="guest" label="GUESTS" required={true} />
-        <Button variant="primary">Reserve</Button>
-        <Typography className="text-center mb-5 text-sm">
-          You won't be charge yet
-        </Typography>
+        <Button className="mb-5" variant="primary">Book Now</Button>
       </div>
       <div>
         <div className="flex justify-between items-center mb-5">
