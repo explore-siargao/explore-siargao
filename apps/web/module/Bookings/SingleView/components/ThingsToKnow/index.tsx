@@ -123,16 +123,6 @@ const SafetyPropertiesModalData = [
 const CancellationPolicyModalData = [
   {
     id: 1,
-    title: "Cancel by",
-    desc: [
-      {
-        id: 1,
-        cancellationPolicy: "",
-      },
-    ],
-  },
-  {
-    id: 2,
     title: "Feb 17",
     desc: [
       {
@@ -151,6 +141,17 @@ const CancellationPolicyModalData = [
         cancellationPolicy: "12:00 PM (check-in)",
         otherDescription:
           "Partial refund: Get back every night but the first one. No refund of the first night or the service fee.",
+      },
+    ],
+  },
+  {
+    id: 3,
+    title: "March 12",
+    desc: [
+      {
+        id: 1,
+        cancellationPolicy: "2:00 PM (check-in)",
+        otherDescription: "No refund",
       },
     ],
   },

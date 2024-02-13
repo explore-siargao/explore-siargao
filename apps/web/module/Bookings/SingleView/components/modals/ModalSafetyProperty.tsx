@@ -28,9 +28,9 @@ const SafetyPropertyModal = ({
   groupSafetyProperty,
 }: SafetyPropertyProps) => {
   return (
-    <ModalContainer onClose={onClose} isOpen={isOpen} size="md">
+    <ModalContainer onClose={onClose} isOpen={isOpen} size="sm">
       <div className="py-4 px-8 flex flex-col divide-text-100 overflow-y-auto h-[600px]">
-        <Title className="flex text-xl font-semibold mb-1">
+        <Title size={"ContentTitle"} className="flex font-semibold mb-1">
           Safety & property
         </Title>
         <Typography className="mb-5" variant={"h5"}>
@@ -40,14 +40,14 @@ const SafetyPropertyModal = ({
 
         {groupSafetyProperty.map((gSafetyProperty) => (
           <div className="mt-5" key={gSafetyProperty.id}>
-            <Typography className="font-semibold mb-5" variant={"h3"}>
+            <Typography className="font-semibold mb-5" variant={"h4"}>
               {gSafetyProperty.title}
             </Typography>
 
             {gSafetyProperty.iconDesc.map((item) => (
-              <div key={item.id}>
+              <div className="border-b" key={item.id}>
                 <IconTitleDescription
-                  className="mb-8 mt-5 "
+                  className="mb-5 mt-5"
                   title={item.safetyProperty}
                   icon={item.icon}
                   desc={item.otherDescription}

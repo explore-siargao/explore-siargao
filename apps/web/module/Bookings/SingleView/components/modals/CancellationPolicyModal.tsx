@@ -26,8 +26,8 @@ const CancellationPolicyModal = ({
 }: CancellationPolicyProps) => {
   return (
     <ModalContainer onClose={onClose} isOpen={isOpen} size="sm">
-      <div className="py-4 px-8 flex flex-col divide-text-100 overflow-y-auto h-[600px]">
-        <Title className="flex text-xl font-semibold mb-1">
+      <div className="pb-0 mb-0 py-4 px-8 flex flex-col divide-text-100 overflow-y-auto h-[600px]">
+        <Title size={"ContentTitle"} className="flex font-semibold mb-5">
           Cancellation policy
         </Title>
         <Typography className="mb-5" variant={"h5"}>
@@ -40,18 +40,25 @@ const CancellationPolicyModal = ({
           caused by COVID-19.
         </Typography>
 
+        <Typography className="font-semibold" variant={"h4"}>
+          Cancel by
+        </Typography>
+
         {groupCancellationPolicy.map((gCancellationPolicy) => (
           <div className="mt-5" key={gCancellationPolicy.id}>
-            <Typography className="font-semibold mb-5" variant={"h3"}>
+            <Typography className="flex font-semibold" variant={"h4"}>
               {gCancellationPolicy.title}
             </Typography>
 
             {gCancellationPolicy.desc.map((item) => (
-              <div key={item.id}>
+              <div key={item.id} className="border-b flex justify-between">
                 <Typography variant="h5">{item.cancellationPolicy}</Typography>
 
                 {item.otherDescription && (
-                  <Typography className="flex" variant="h5">
+                  <Typography
+                    className="text-right justify-items-start mb-5"
+                    variant="h5"
+                  >
                     {item.otherDescription}
                   </Typography>
                 )}
@@ -59,10 +66,15 @@ const CancellationPolicyModal = ({
             ))}
           </div>
         ))}
+        <div className="flex mt-6 w-full">
+          <Button
+            className="text-sm font-semibold underline mx-0 px-0"
+            variant={"ghost"}
+          >
+            Learn more about cancellation policies
+          </Button>
+        </div>
       </div>
-      <Button className="underline font-semibold" variant={"ghost"}>
-        Learn more about cancellation policies
-      </Button>
     </ModalContainer>
   )
 }
