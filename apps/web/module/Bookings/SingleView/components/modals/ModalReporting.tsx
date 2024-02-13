@@ -19,26 +19,23 @@ const ModalReporting = ({
   reportListingArr,
 }: ModalReportingProps) => {
   const [currentPage, setCurrentPage] = useState(1)
-  const [selectedOption, setSelectedOption] = useState("")
+  const [selectedOption, setSelectedOption] = useState<string>("")
+  const isNextButtonDisabled = currentPage === 1 && !selectedOption;
 
   const handleOptionSelect = (option: string) => {
     setSelectedOption(option)
   }
-
   const nextPage = () => {
     setCurrentPage(currentPage + 1)
   }
-
   const prevPage = () => {
     setCurrentPage(currentPage - 1)
   }
-
   const selectedReport = reportListingArr.find(
     (report) => report.name === selectedOption
   )
-
   return (
-    <ModalContainer onClose={onClose} isOpen={isOpen}>
+    <ModalContainer size="sm" onClose={onClose} isOpen={isOpen}>
       <div className="p-6 flex flex-col divide-text-100 overflow-y-auto h-[500px]">
         <Title className="flex text-xl font-semibold mb-1">
           Why are you reporting this listing?
@@ -59,7 +56,7 @@ const ModalReporting = ({
               />
             </form>
             <div className="flex fixed bottom-0 right-0 pb-5 pr-5">
-              <Button variant="default" onClick={nextPage}>
+              <Button variant="default" onClick={nextPage} disabled={isNextButtonDisabled}>
                 Next
               </Button>
             </div>
