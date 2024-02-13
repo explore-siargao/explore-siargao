@@ -143,20 +143,22 @@ const AddReview = () => {
             <div className="flex w-full justify-between items-center p-8">
               <div>
                 {stepIndex > 0 && (
-                  <button
+                  <Button
                     onKeyUp={() => {}}
                     onFocus={() => {}}
                     onClick={() => stepHandler("back")}
-                    className="flex w-max items-center gap-x-2 text-primary-600 hover:underline cursor-pointer"
+                    variant="ghost"
                   >
-                    <ArrowLeft />
-                    Back
-                  </button>
+                    <div className="flex gap-2 items-center">
+                      <ArrowLeft />
+                      Back
+                    </div>
+                  </Button>
                 )}
               </div>
               <div>
                 {stepIndex < 6 && (
-                  <button
+                  <Button
                     onClick={() =>
                       !form.watch(reviewSteps[stepIndex]?.fieldName as string)
                         ? null
@@ -164,11 +166,14 @@ const AddReview = () => {
                     }
                     onKeyUp={() => {}}
                     onFocus={() => {}}
-                    className={`flex w-max items-center gap-x-2 text-primary-600 hover:underline cursor-pointer ${!form.watch(reviewSteps[stepIndex]?.fieldName as string) ? "opacity-50 pointer-events-none" : ""}`}
+                    variant="ghost"
+                    className={`${!form.watch(reviewSteps[stepIndex]?.fieldName as string) ? "opacity-50 pointer-events-none" : ""}`}
                   >
-                    Next
-                    <ArrowRight />
-                  </button>
+                    <div className="flex gap-2 items-center">
+                      Next
+                      <ArrowRight />
+                    </div>
+                  </Button>
                 )}
                 {stepIndex === 6 && (
                   <Button type="submit" variant={"primary"} size="sm">
