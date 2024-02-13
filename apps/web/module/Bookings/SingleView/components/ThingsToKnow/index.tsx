@@ -157,28 +157,29 @@ const CancellationPolicyModalData = [
 ]
 
 const ThingsToKnow = () => {
-  const [isHouseRulesModalOpen, setHouseRulesModalOpen] = useState(false)
-  const [isSafetyPropertyModalOpen, setSafetyPropertyModalOpen] =
+  const [isHouseRulesModalOpen, setIsHouseRulesModalOpen] = useState(false)
+  const [isSafetyPropertyModalOpen, setIsSafetyPropertyModalOpen] =
     useState(false)
-  const [isCancellationPolicyModalOpen, setCancellationPolicyModalOpen] =
+    
+  const [isCancellationPolicyModalOpen, setIsCancellationPolicyModalOpen] =
     useState(false)
 
   const openCancellationPolicyModal = () => {
-    setCancellationPolicyModalOpen(true)
+    setIsCancellationPolicyModalOpen(true)
   }
 
   const openHouseRulesModal = () => {
-    setHouseRulesModalOpen(true)
+    setIsHouseRulesModalOpen(true)
   }
 
   const openSafetyPropertyModal = () => {
-    setSafetyPropertyModalOpen(true)
+    setIsSafetyPropertyModalOpen(true)
   }
 
   const closeModal = () => {
-    setHouseRulesModalOpen(false)
-    setSafetyPropertyModalOpen(false)
-    setCancellationPolicyModalOpen(false)
+    setIsHouseRulesModalOpen(false)
+    setIsSafetyPropertyModalOpen(false)
+    setIsCancellationPolicyModalOpen(false)
   }
 
   return (
