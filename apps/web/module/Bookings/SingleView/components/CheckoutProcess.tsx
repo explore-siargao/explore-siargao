@@ -34,7 +34,9 @@ const CheckoutProcess = ({ checkoutDesc }: CheckoutProcessProps) => {
         <Input id="checkIn" label="CHECK-IN" required={true} />
         <Input id="checkOut" label="CHECK-OUT" required={true} />
         <Select id="guest" label="GUESTS" required={true} />
-        <Button className="mb-5" variant="primary">Book Now</Button>
+        <Button className="mb-5" variant="primary">
+          Book Now
+        </Button>
       </div>
       <div>
         <div className="flex justify-between items-center mb-5">
