@@ -1,19 +1,15 @@
 import ModalContainer from "@/common/components/ModalContainer"
 import { Title } from "@/common/components/ui/Title"
 import { Typography } from "@/common/components/ui/Typography"
-import { LucideIcon } from "lucide-react"
 import React from "react"
-import IconTitleDescription from "../IconTitleDescription"
 import { Button } from "@/common/components/ui/Button"
-
 interface ICancellationPolicy {
   id: number
   title: string
-  iconDesc: {
+  desc: {
     id: number
-    icon: LucideIcon
     cancellationPolicy: string
-    otherDescription?: string | undefined
+    otherDescription?: string
   }[]
 }
 
@@ -29,15 +25,19 @@ const CancellationPolicyModal = ({
   groupCancellationPolicy,
 }: CancellationPolicyProps) => {
   return (
-    <ModalContainer onClose={onClose} isOpen={isOpen} size="md">
+    <ModalContainer onClose={onClose} isOpen={isOpen} size="sm">
       <div className="py-4 px-8 flex flex-col divide-text-100 overflow-y-auto h-[600px]">
         <Title className="flex text-xl font-semibold mb-1">
           Cancellation policy
         </Title>
         <Typography className="mb-5" variant={"h5"}>
           Before you book, make sure you're comfortable with this Host's
-          cancellation policy. Keep in mind that Explore Siargao's
-          <Button variant={"ghost"} className="underline font-semibold">Extenuating Circumstances policy</Button>
+          cancellation policy. Keep in mind that Explore Siargao's{" "}
+          <button className="font-semibold underline">
+            Extenuating Circumstances policy{" "}
+          </button>{" "}
+          doesn't cover cancellations due to illness or travel disruptions
+          caused by COVID-19.
         </Typography>
 
         {groupCancellationPolicy.map((gCancellationPolicy) => (
@@ -46,19 +46,26 @@ const CancellationPolicyModal = ({
               {gCancellationPolicy.title}
             </Typography>
 
-            {gCancellationPolicy.iconDesc.map((item) => (
+            {gCancellationPolicy.desc.map((item) => (
               <div key={item.id}>
-                <IconTitleDescription
-                  className="mb-8 mt-5 "
-                  title={item.cancellationPolicy}
-                  icon={item.icon}
-                  desc={item.otherDescription}
-                />
+                <Typography variant="h5">{item.cancellationPolicy}</Typography>
+
+                {item.otherDescription && (
+                  <Typography className="flex" variant="h5">
+                    {item.otherDescription}
+                  </Typography>
+                )}
+                
               </div>
+              
             ))}
           </div>
+          
         ))}
       </div>
+      <Button className="underline font-semibold" variant={"ghost"}>
+                  Learn more about cancellation policies
+                </Button>
     </ModalContainer>
   )
 }
