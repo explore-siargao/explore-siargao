@@ -9,6 +9,7 @@ import CheckoutBreakdownModal from "./modals/CheckoutBreakdownModal"
 import { useState } from "react"
 import CheckoutMoreInfoModal from "./modals/CheckoutMoreInfoModal"
 import CheckInOutCalendarModal from "./modals/CheckInOutCalendarModal"
+import useCheckInOutDateStore from "@/common/store/useCheckInOutDateStore"
 
 interface ICheckout {
   id?: number
@@ -28,6 +29,8 @@ const CheckoutProcess = ({ checkoutDesc }: CheckoutProcessProps) => {
   const [isMoreInfoModalOpen, setIsMoreInfoModalOpen] = useState(false)
   const [checkInOutCalendarModalIsOpen, setCheckInOutCalendarModalIsOpen] =
     useState(false)
+    const checkInDate = useCheckInOutDateStore((state)=>state).fromDate
+    const checkOutDate = useCheckInOutDateStore((state)=>state).toDate
   return (
     <div className="border rounded-xl shadow-lg px-6 pb-6 pt-5 flex flex-col divide-text-100 overflow-y-auto mb-5">
       <span className="text-xl font-semibold mb-4">
@@ -39,12 +42,14 @@ const CheckoutProcess = ({ checkoutDesc }: CheckoutProcessProps) => {
           id="checkIn"
           label="CHECK-IN"
           required={true}
+          defaultValue={checkInDate}
           onClick={() => setCheckInOutCalendarModalIsOpen(true)}
         />
         <Input
           id="checkOut"
           label="CHECK-OUT"
           required={true}
+          defaultValue={checkOutDate}
           onClick={() => setCheckInOutCalendarModalIsOpen(true)}
         />
         <Select id="guest" label="GUESTS" required={true} />
