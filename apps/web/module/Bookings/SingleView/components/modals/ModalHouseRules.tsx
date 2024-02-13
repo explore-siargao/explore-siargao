@@ -12,7 +12,7 @@ interface IHouseRules {
     id: number
     icon: LucideIcon
     rule: string
-    otherDescription?: string 
+    otherDescription?: string
   }[]
 }
 
