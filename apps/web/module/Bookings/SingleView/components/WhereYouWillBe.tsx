@@ -17,10 +17,10 @@ const WhereYouWillBe: React.FC<WhereYouWillBe> = ({ title }) => {
   const maxLength = 100
 
   const useToggle = (initialState: boolean): [boolean, () => void] => {
-    const [state, setState] = useState<boolean>(initialState);
-    const toggle = () => setState(!state);
-    return [state, toggle];
-  };
+    const [state, setState] = useState<boolean>(initialState)
+    const toggle = () => setState(!state)
+    return [state, toggle]
+  }
 
   const [readMore, setToggleReadMore] = useToggle(false)
   const [secondReadMore, setToggleSecondReadMore] = useToggle(false)
