@@ -160,7 +160,7 @@ const ThingsToKnow = () => {
   const [isHouseRulesModalOpen, setIsHouseRulesModalOpen] = useState(false)
   const [isSafetyPropertyModalOpen, setIsSafetyPropertyModalOpen] =
     useState(false)
-    
+
   const [isCancellationPolicyModalOpen, setIsCancellationPolicyModalOpen] =
     useState(false)
 
