@@ -5,15 +5,18 @@ import { DateRange } from "react-day-picker"
 import format from "date-fns/format"
 import { Typography } from "@/common/components/ui/Typography"
 import { Button } from "@/common/components/ui/Button"
+import useCheckInOutDateStore from "@/common/store/useCheckInOutDateStore"
 
 interface ListingDRProps {
   title: string
 }
 
 const ListingDateRangePicker = ({ title }: ListingDRProps) => {
+  const fromDate = useCheckInOutDateStore((state)=>state).fromDate
+  const toDate = useCheckInOutDateStore((state)=>state).toDate
   const [date, setDate] = useState<DateRange | undefined>({
-    from: undefined,
-    to: undefined,
+    from: new Date(fromDate as string),
+    to: new Date(toDate as string),
   })
   return (
     <div className="w-full">
