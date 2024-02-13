@@ -55,17 +55,14 @@ const CancellationPolicyModal = ({
                     {item.otherDescription}
                   </Typography>
                 )}
-                
               </div>
-              
             ))}
           </div>
-          
         ))}
       </div>
       <Button className="underline font-semibold" variant={"ghost"}>
-                  Learn more about cancellation policies
-                </Button>
+        Learn more about cancellation policies
+      </Button>
     </ModalContainer>
   )
 }

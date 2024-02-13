@@ -137,7 +137,8 @@ const CancellationPolicyModalData = [
     desc: [
       {
         id: 1,
-        cancellationPolicy: "12:00 PM", otherDescription: "Full refund: Get back 100% of what you paid."
+        cancellationPolicy: "12:00 PM",
+        otherDescription: "Full refund: Get back 100% of what you paid.",
       },
     ],
   },
@@ -147,7 +148,9 @@ const CancellationPolicyModalData = [
     desc: [
       {
         id: 1,
-        cancellationPolicy: "12:00 PM (check-in)", otherDescription: "Partial refund: Get back every night but the first one. No refund of the first night or the service fee."
+        cancellationPolicy: "12:00 PM (check-in)",
+        otherDescription:
+          "Partial refund: Get back every night but the first one. No refund of the first night or the service fee.",
       },
     ],
   },
