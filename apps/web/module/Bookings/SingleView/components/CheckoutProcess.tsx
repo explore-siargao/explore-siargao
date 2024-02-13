@@ -8,6 +8,7 @@ import formatCurrency from "@/common/helpers/formatCurrency"
 import CheckoutBreakdownModal from "./modals/CheckoutBreakdownModal"
 import { useState } from "react"
 import CheckoutMoreInfoModal from "./modals/CheckoutMoreInfoModal"
+import CheckInOutCalendarModal from "./modals/CheckInOutCalendarModal"
 
 interface ICheckout {
   id?: number
@@ -25,6 +26,8 @@ interface CheckoutProcessProps {
 const CheckoutProcess = ({ checkoutDesc }: CheckoutProcessProps) => {
   const [isBreakdownModalOpen, setIsBreakdownModalOpen] = useState(false)
   const [isMoreInfoModalOpen, setIsMoreInfoModalOpen] = useState(false)
+  const [checkInOutCalendarModalIsOpen, setCheckInOutCalendarModalIsOpen] =
+    useState(false)
   return (
     <div className="border rounded-xl shadow-lg px-6 pb-6 pt-5 flex flex-col divide-text-100 overflow-y-auto mb-5">
       <span className="text-xl font-semibold mb-4">
@@ -32,8 +35,18 @@ const CheckoutProcess = ({ checkoutDesc }: CheckoutProcessProps) => {
         <small className="font-light">night</small>
       </span>
       <div className="font-semibold grid grid-cols-1 gap-5 w-full">
-        <Input id="checkIn" label="CHECK-IN" required={true} />
-        <Input id="checkOut" label="CHECK-OUT" required={true} />
+        <Input
+          id="checkIn"
+          label="CHECK-IN"
+          required={true}
+          onClick={() => setCheckInOutCalendarModalIsOpen(true)}
+        />
+        <Input
+          id="checkOut"
+          label="CHECK-OUT"
+          required={true}
+          onClick={() => setCheckInOutCalendarModalIsOpen(true)}
+        />
         <Select id="guest" label="GUESTS" required={true} />
         <Button variant="primary">Reserve</Button>
         <Typography className="text-center mb-5 text-sm">
@@ -79,6 +92,10 @@ const CheckoutProcess = ({ checkoutDesc }: CheckoutProcessProps) => {
       <CheckoutMoreInfoModal
         isOpen={isMoreInfoModalOpen}
         onClose={() => setIsMoreInfoModalOpen(false)}
+      />
+      <CheckInOutCalendarModal
+        isOpen={checkInOutCalendarModalIsOpen}
+        onClose={() => setCheckInOutCalendarModalIsOpen(false)}
       />
     </div>
   )
