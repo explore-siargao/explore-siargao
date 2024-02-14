@@ -12,7 +12,10 @@ const ShareSave = () => {
   }
   return (
     <div className="flex items-center gap-3">
-      <button className="hover:duration-300 cursor-pointer" onClick={()=>setisShareModalOpen(true)}>
+      <button
+        className="hover:duration-300 cursor-pointer"
+        onClick={() => setisShareModalOpen(true)}
+      >
         <div className="flex gap-2 underline underline-offset-1 text-sm pt-1 md:flex items-center hover:bg-gray-100 rounded-md p-1">
           <Share className="h-4 w-4 text-text-400" />
           <Typography className="text-sm text-text-400">Share</Typography>
@@ -29,9 +32,9 @@ const ShareSave = () => {
           </Typography>
         </div>
       </button>
-      <SharePlaceModal 
+      <SharePlaceModal
         isOpen={isShareModalOpen}
-        onClose={()=>setisShareModalOpen(false)}
+        onClose={() => setisShareModalOpen(false)}
       />
     </div>
   )
