@@ -1,22 +1,21 @@
-import create from 'zustand';
+import { create } from "zustand";
+import { DateRange } from "react-day-picker"
 
-type T_FromTo ={
-    fromDate?:string,
-    toDate?:string
+type T_DateRange = { dateRange: DateRange }
+
+type T_DateRange_Action = {
+  updateDateRange: (dateRange: DateRange) => void
 }
-type T_FromTo_Action = {
-    update: (fromTo: T_FromTo) => void
-  }
-  const today = new Date();
-  const futureDate = new Date(today.setDate(today.getDate() + 5));
-  const formattedFutureDate = futureDate.toLocaleDateString();
 
-  const useCheckInOutDateStore = create<T_FromTo & T_FromTo_Action>((set) => ({
- fromDate:String((new Date).toLocaleDateString()),
- toDate:formattedFutureDate,
-    update: (fromTo: T_FromTo) => set(() => ({ ...fromTo })),
-    
-  }))
+const today = new Date();
+const futureDate = new Date(today.setDate(today.getDate() + 5));
 
+const useCheckInOutDateStore = create<T_DateRange & T_DateRange_Action>((set) => ({
+  dateRange: {
+    from: new Date,
+    to: futureDate
+  },
+  updateDateRange: (dateRange: DateRange) => set((state: T_DateRange & T_DateRange_Action) => ({ ...state, dateRange: { ...dateRange } })),
+}))
 
 export default useCheckInOutDateStore;
