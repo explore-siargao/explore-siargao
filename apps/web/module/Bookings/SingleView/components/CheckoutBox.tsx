@@ -49,10 +49,10 @@ const CheckoutBox = ({ checkoutDesc }: CheckoutProcessProps) => {
             >
               Check-in <Asterisk />
             </label>
-            <span
-              className="block w-full border-0 p-0 text-text-900 placeholder:text-text-400 focus:ring-0 sm:text-sm sm:leading-6 bg-transparent disabled:opacity-50"
-            >
-              {dateRange.from ? format(dateRange.from, "MM/dd/yyyy") : 'Add date'}
+            <span className="block w-full border-0 p-0 text-text-900 placeholder:text-text-400 focus:ring-0 sm:text-sm sm:leading-6 bg-transparent disabled:opacity-50">
+              {dateRange.from
+                ? format(dateRange.from, "MM/dd/yyyy")
+                : "Add date"}
             </span>
           </div>
           <div
@@ -65,10 +65,8 @@ const CheckoutBox = ({ checkoutDesc }: CheckoutProcessProps) => {
             >
               Checkout <Asterisk />
             </label>
-            <span
-              className="block w-full border-0 p-0 text-text-900 placeholder:text-text-400 focus:ring-0 sm:text-sm sm:leading-6 bg-transparent disabled:opacity-50"
-            >
-              {dateRange.to ? format(dateRange.to, "MM/dd/yyyy") : 'Add date'}
+            <span className="block w-full border-0 p-0 text-text-900 placeholder:text-text-400 focus:ring-0 sm:text-sm sm:leading-6 bg-transparent disabled:opacity-50">
+              {dateRange.to ? format(dateRange.to, "MM/dd/yyyy") : "Add date"}
             </span>
           </div>
         </div>

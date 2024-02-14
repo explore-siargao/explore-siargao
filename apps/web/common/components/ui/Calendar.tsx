@@ -7,13 +7,15 @@ import { DayPicker } from "react-day-picker"
 import { cn } from "@/common/helpers/cn"
 import { buttonVariants } from "./Button"
 
-export type CalendarProps = React.ComponentProps<typeof DayPicker> & { size: 'lg' | 'md' }
+export type CalendarProps = React.ComponentProps<typeof DayPicker> & {
+  size: "lg" | "md"
+}
 
 function Calendar({
   className,
   classNames,
   showOutsideDays = true,
-  size = 'md',
+  size = "md",
   ...props
 }: CalendarProps) {
   return (
@@ -36,8 +38,8 @@ function Calendar({
         table: "w-full border-collapse space-y-1",
         head_row: "flex",
         head_cell: cn(
-          size === 'md' ? "w-6 xl:w-8 2xl:w-10" : "w-8 2xl:w-12",
-          "text-center text-muted-foreground rounded-md font-normal text-[0.8rem]",
+          size === "md" ? "w-6 xl:w-8 2xl:w-10" : "w-8 2xl:w-12",
+          "text-center text-muted-foreground rounded-md font-normal text-[0.8rem]"
         ),
         row: "flex w-full mt-2",
         cell: cn(
@@ -48,7 +50,9 @@ function Calendar({
         ),
         day: cn(
           buttonVariants({ variant: "ghost" }),
-          size === 'md' ? "h-6 md:h-8 w-6 xl:w-8 2xl:w-10" : "h-8 md:h-10 w-8 2xl:w-12",
+          size === "md"
+            ? "h-6 md:h-8 w-6 xl:w-8 2xl:w-10"
+            : "h-8 md:h-10 w-8 2xl:w-12",
           "p-0 font-normal aria-selected:opacity-100"
         ),
         day_range_start: "day-range-start bg-primary-600 text-white",

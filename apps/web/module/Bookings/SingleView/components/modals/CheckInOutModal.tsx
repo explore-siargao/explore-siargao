@@ -12,13 +12,15 @@ interface CheckInOutModalProps {
   onClose: () => void
 }
 
-const CheckInOutModal = ({
-  isOpen,
-  onClose,
-}: CheckInOutModalProps) => {
-  const dateRange = useCheckInOutDateStore((state)=> state.dateRange)
-  const updateDateRange = useCheckInOutDateStore((state) => state.updateDateRange)
-  const nights = differenceInDays(dateRange.to ?? new Date(), dateRange.from ?? new Date())
+const CheckInOutModal = ({ isOpen, onClose }: CheckInOutModalProps) => {
+  const dateRange = useCheckInOutDateStore((state) => state.dateRange)
+  const updateDateRange = useCheckInOutDateStore(
+    (state) => state.updateDateRange
+  )
+  const nights = differenceInDays(
+    dateRange.to ?? new Date(),
+    dateRange.from ?? new Date()
+  )
   return (
     <ModalContainer size="auto" isOpen={isOpen} onClose={onClose}>
       <div className="pt-6 pb-14 px-5">
@@ -26,8 +28,13 @@ const CheckInOutModal = ({
           {nights} night{nights > 1 && `s`}
         </Typography>
         <Typography variant="h6" className="mb-4">
-          {dateRange?.from != undefined ? format(dateRange.from, "LLL dd, y") : "Date from"}{" "}
-          - {dateRange?.to != undefined ? format(dateRange.to, "LLL dd, y") : "Date to"}
+          {dateRange?.from != undefined
+            ? format(dateRange.from, "LLL dd, y")
+            : "Date from"}{" "}
+          -{" "}
+          {dateRange?.to != undefined
+            ? format(dateRange.to, "LLL dd, y")
+            : "Date to"}
         </Typography>
         <div className="mt-6">
           <Calendar
