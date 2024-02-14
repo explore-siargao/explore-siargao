@@ -95,9 +95,13 @@ export const getListing = async (req: Request, res: Response) => {
       },
     })
     if (listing !== null) {
+      const newResult = {...listing}
+      newResult.imageKeys = JSON.parse(listing.imageKeys)
+      newResult.whereYoullBe = JSON.parse(listing.whereYoullBe)
+      newResult.whereYoullSleep = JSON.parse(listing.whereYoullSleep)
       res.json(
         response.success({
-          item: listing,
+          item: newResult,
           allItemCount: 1,
           message: '',
         })
@@ -137,6 +141,8 @@ export const addListing = async (req: Request, res: Response) => {
     bedRooms,
     beds,
     bathRooms,
+    whereYoullBe,
+    whereYoullSleep
   } = req.body
   if (isValidInput.success) {
     try {
@@ -148,7 +154,7 @@ export const addListing = async (req: Request, res: Response) => {
       })
 
       if (getHost !== null) {
-        if (
+        if ((
           imageKeys &&
           title &&
           category &&
@@ -162,7 +168,7 @@ export const addListing = async (req: Request, res: Response) => {
           guests &&
           bedRooms &&
           beds &&
-          bathRooms
+          bathRooms) || (whereYoullBe || whereYoullSleep)
         ) {
           const newPrice = await prisma.listingPrice.create({
             data: {
@@ -195,6 +201,8 @@ export const addListing = async (req: Request, res: Response) => {
               hostedById: hostId,
               listingPriceId: Number(newPrice.id),
               basicAboutPlaceId: Number(newBasicAboutPlace.id),
+              whereYoullBe:JSON.stringify(whereYoullBe),
+              whereYoullSleep: JSON.stringify(whereYoullSleep)
             },
           })
 
