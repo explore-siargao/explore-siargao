@@ -55,6 +55,7 @@ export const updatePersonalInfo = async (req: Request, res: Response) => {
       birthDate,
       governmentId,
       phoneNumber,
+      confirm,
     } = req.body
     const userId = Number(req.params.userId)
     const editPersonalInfo = await prisma.personalInfo.update({
@@ -68,6 +69,7 @@ export const updatePersonalInfo = async (req: Request, res: Response) => {
         birthDate: birthDate,
         governmentId: governmentId,
         phoneNumber: phoneNumber,
+        confirm: JSON.stringify(confirm),
       },
     })
     res.json({

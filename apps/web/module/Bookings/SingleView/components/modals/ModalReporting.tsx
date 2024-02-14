@@ -20,7 +20,7 @@ const ModalReporting = ({
 }: ModalReportingProps) => {
   const [currentPage, setCurrentPage] = useState(1)
   const [selectedOption, setSelectedOption] = useState<string>("")
-  const isNextButtonDisabled = currentPage === 1 && !selectedOption;
+  const isNextButtonDisabled = currentPage === 1 && !selectedOption
 
   const handleOptionSelect = (option: string) => {
     setSelectedOption(option)
@@ -56,7 +56,11 @@ const ModalReporting = ({
               />
             </form>
             <div className="flex fixed bottom-0 right-0 pb-5 pr-5">
-              <Button variant="default" onClick={nextPage} disabled={isNextButtonDisabled}>
+              <Button
+                variant="default"
+                onClick={nextPage}
+                disabled={isNextButtonDisabled}
+              >
                 Next
               </Button>
             </div>
