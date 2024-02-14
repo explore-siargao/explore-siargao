@@ -105,10 +105,7 @@ router.post(
   isUserLoggedIn,
   addEmergencyContact
 )
-router.post(
-  '/:personalInfoId/address/add/',
-  addAddress
-)
+router.post('/:personalInfoId/address/add/', addAddress)
 router.patch(
   '/address/:userId',
   isUserLoggedIn,

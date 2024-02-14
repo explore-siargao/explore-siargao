@@ -69,7 +69,7 @@ export const updatePersonalInfo = async (req: Request, res: Response) => {
         birthDate: birthDate,
         governmentId: governmentId,
         phoneNumber: phoneNumber,
-        confirm:JSON.stringify(confirm)
+        confirm: JSON.stringify(confirm),
       },
     })
     res.json({

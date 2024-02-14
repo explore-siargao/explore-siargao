@@ -155,11 +155,11 @@ export const register = async (req: Request, res: Response) => {
             country: country,
             language: 'English',
             currency: selectedCurrency,
-            confirm:JSON.stringify({
-              identity:false,
-              email:false,
-              phone:false
-            })
+            confirm: JSON.stringify({
+              identity: false,
+              email: false,
+              phone: false,
+            }),
           },
         })
         res.json(

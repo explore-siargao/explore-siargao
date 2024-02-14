@@ -79,11 +79,11 @@ export const addUser = async (req: Request, res: Response) => {
         country: req.body.country,
         language: 'English',
         currency: finalCurrency,
-        confirm:JSON.stringify({
-          identity:false,
-          email:false,
-          phone:false
-        })
+        confirm: JSON.stringify({
+          identity: false,
+          email: false,
+          phone: false,
+        }),
       },
     })
 
@@ -197,86 +197,98 @@ export const updatePassword = async (req: Request, res: Response) => {
   }
 }
 
-export const getUserProfile = async(req:Request, res:Response)=>{
+export const getUserProfile = async (req: Request, res: Response) => {
   const id = Number(req.params.id)
   const getUser = await prisma.user.findFirst({
-    where:{
-      id:id
+    where: {
+      id: id,
     },
-    select:{
-      profilePicture:true,
-      role:true,
-      hostInfo:{
-        select:{
-          work:true,
-          hostedSince:true
-        }
+    select: {
+      profilePicture: true,
+      role: true,
+      hostInfo: {
+        select: {
+          work: true,
+          hostedSince: true,
+        },
       },
-      listing:{
-        include:{
-          review:{
-            include:{
-              user:{
-                select:{
-                  personalInfo:{
-                    select:{
-                      firstName:true,
-                      lastName:true,
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
+      listing: {
+        include: {
+          review: {
+            include: {
+              user: {
+                select: {
+                  personalInfo: {
+                    select: {
+                      firstName: true,
+                      lastName: true,
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
       },
-      personalInfo:{
-        select:{
-          firstName:true,
-          lastName:true,
-          confirm:true,
-          address:{
-            select:{
-              city:true,
-              country:true
-            }
-          }
-        }
-      }
+      personalInfo: {
+        select: {
+          firstName: true,
+          lastName: true,
+          confirm: true,
+          address: {
+            select: {
+              city: true,
+              country: true,
+            },
+          },
+        },
+      },
     },
   })
-  if(!getUser){
-    return res.json(response.error({message:USER_NOT_EXIST}))
+  if (!getUser) {
+    return res.json(response.error({ message: USER_NOT_EXIST }))
   }
   let countReviews = 0
-  let listingReviewRating:number[] = []
+  let listingReviewRating: number[] = []
   let totalRatings = 0
   let individualRating = 0
-  getUser.listing.forEach((data)=>{
+  getUser.listing.forEach((data) => {
     countReviews = countReviews + data.review.length
-    data.review.forEach((reviewData)=>{
-      individualRating = (reviewData.accuracyRates+reviewData.checkInRates+reviewData.cleanLinessRates+reviewData.communicationRates+reviewData.locationRates+reviewData.valueRates)/6 
+    data.review.forEach((reviewData) => {
+      individualRating =
+        (reviewData.accuracyRates +
+          reviewData.checkInRates +
+          reviewData.cleanLinessRates +
+          reviewData.communicationRates +
+          reviewData.locationRates +
+          reviewData.valueRates) /
+        6
       listingReviewRating.push(individualRating)
     })
   })
-  listingReviewRating.forEach((reviewRate)=>(
-    totalRatings = totalRatings+reviewRate
-  ))
-  let rating = totalRatings/listingReviewRating.length
+  listingReviewRating.forEach(
+    (reviewRate) => (totalRatings = totalRatings + reviewRate)
+  )
+  let rating = totalRatings / listingReviewRating.length
   const newData = {
-    profilePicture:getUser.profilePicture,
-    userName: getUser.personalInfo?.firstName +" "+ getUser.personalInfo?.lastName,
-    role:getUser.role,
-    countReviews:countReviews,
-    ratings:Number.isNaN(rating) ? 0 : rating.toFixed(2),
-    listingWithReviews:getUser.listing,
-    work:getUser.hostInfo?.work? getUser.hostInfo.work : null,
-    hostedSince:getUser.hostInfo?.hostedSince? getUser.hostInfo.hostedSince : null,
-    confirmInfo:JSON.parse(String(getUser.personalInfo?.confirm))
+    profilePicture: getUser.profilePicture,
+    userName:
+      getUser.personalInfo?.firstName + ' ' + getUser.personalInfo?.lastName,
+    role: getUser.role,
+    countReviews: countReviews,
+    ratings: Number.isNaN(rating) ? 0 : rating.toFixed(2),
+    listingWithReviews: getUser.listing,
+    work: getUser.hostInfo?.work ? getUser.hostInfo.work : null,
+    hostedSince: getUser.hostInfo?.hostedSince
+      ? getUser.hostInfo.hostedSince
+      : null,
+    confirmInfo: JSON.parse(String(getUser.personalInfo?.confirm)),
   }
-  res.json(response.success({
-    item:newData,
-    allItemCount:1,
-    message:""
-  }))
+  res.json(
+    response.success({
+      item: newData,
+      allItemCount: 1,
+      message: '',
+    })
+  )
 }
