@@ -1,13 +1,13 @@
 import { Button } from "@/common/components/ui/Button"
 import { Input } from "@/common/components/ui/Input"
 import useGetCountries from "@/common/hooks/useGetCounties"
-import { IAddress } from "@/common/types/global"
 import React, { useState } from "react"
 import { useForm } from "react-hook-form"
 import useAddAddress from "../hooks/useAddAddress"
 import { useQueryClient } from "@tanstack/react-query"
 import toast from "react-hot-toast"
 import { Typography } from "@/common/components/ui/Typography"
+import { T_Address } from "@repo/contract"
 
 type PersonalInfoProps = {
   isButtonClicked: boolean
@@ -17,20 +17,20 @@ const Address = ({
   streetAddress,
   country,
   city,
-  province,
+  stateProvince,
   zipCode,
   id,
-}: IAddress) => {
+}: T_Address) => {
   const { data: countries, isPending: countriesIsPending } = useGetCountries()
   const [contentState, setContentState] = useState<PersonalInfoProps>({
     isButtonClicked: false,
     contentId: "",
   })
-  const { register, reset, handleSubmit, getValues } = useForm<IAddress>()
+  const { register, reset, handleSubmit, getValues } = useForm<T_Address>()
   const { mutate, isPending } = useAddAddress(id as number)
   const queryClient = useQueryClient()
 
-  const onSubmit = (formData: IAddress) => {
+  const onSubmit = (formData: T_Address) => {
     const callBackReq = {
       onSuccess: (data: any) => {
         if (!data.error) {
@@ -58,7 +58,7 @@ const Address = ({
             <Typography variant={"p"}>Address</Typography>
             <Typography className="font-light">
               {zipCode
-                ? `${streetAddress} ${city}, ${province}, ${country}`
+                ? `${streetAddress} ${city}, ${stateProvince}, ${country}`
                 : "Enter an Address"}
             </Typography>
           </div>
@@ -128,8 +128,8 @@ const Address = ({
                   id="stateProvice"
                   disabled={isPending}
                   label="State/Province"
-                  defaultValue={province}
-                  {...register("province")}
+                  defaultValue={stateProvince}
+                  {...register("stateProvince")}
                 />
                 <Input
                   id="zipCode"

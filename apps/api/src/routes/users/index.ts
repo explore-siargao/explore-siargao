@@ -3,6 +3,7 @@ import {
   addUser,
   deactivateAccount,
   getAllUsers,
+  getUserProfile,
   updatePassword,
 } from './service/default'
 import {
@@ -106,9 +107,6 @@ router.post(
 )
 router.post(
   '/:personalInfoId/address/add/',
-  isCsrfTokenValid,
-  isOriginValid,
-  isUserLoggedIn,
   addAddress
 )
 router.patch(
@@ -150,3 +148,5 @@ export default router
 
 //Host Details
 router.get('/:hostId/host-details-listing/:listingId', getHostDetailsInListing)
+//user profile
+router.get('/:id', getUserProfile)
