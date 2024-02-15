@@ -86,16 +86,16 @@ const GovernmentId = ({ governmentId }: IPersonalInfo) => {
               <h3 className="text-xl font-semibold">Your IDs</h3>
               <div className="mt-4">
                 {GovernmentIdList.map((id, index) => (
-                  <p className="text-lg" key={index}>
+                  <p className="text-lg" key={id.type}>
                     {index + 1}. {id.type}{" "}
                     <span
+                      role="button"
                       onClick={() => openModal(id)}
                       onKeyDown={(e) => {
                         if (e.key === "Enter") {
                           openModal(id)
                         }
                       }}
-                      tabIndex={0} 
                       className="text-primary-500 underline cursor-pointer hover:text-primary-700"
                     >
                       View File
