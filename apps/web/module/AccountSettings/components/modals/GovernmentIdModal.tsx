@@ -21,9 +21,12 @@ const GovernmentIdModal = ({
         <Typography variant={"h2"} className="flex justify-center">
           {title}
         </Typography>{" "}
-        {fileKey.map((data) => {
+        {fileKey.map((data, index) => {
           return (
-            <div className="relative h-[204px] w-[324px] mx-auto bg-gray-200">
+            <div
+              key={`${data}-${index}`}
+              className="relative h-[204px] w-[324px] mx-auto bg-gray-200"
+            >
               <Image src={data} layout="fill" objectFit="cover" alt="" />
             </div>
           )
