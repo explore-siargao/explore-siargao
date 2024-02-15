@@ -16,6 +16,8 @@ import { Title } from "@/common/components/ui/Title"
 import Link from "next/link"
 
 const AddReview = () => {
+  const listingName = "booking"
+
   const router = useRouter()
   const params = useParams()
   const [stepIndex, setStepIndex] = useState<number>(0)
@@ -130,7 +132,7 @@ const AddReview = () => {
             ) : (
               <div className="flex flex-col items-center px-8">
                 <div className="text-left w-full">
-                  Let us know below what you think about your booking
+                How was your overall experience with {listingName}?
                 </div>
                 <Textarea
                   placeholder="Leave your comment here..."
