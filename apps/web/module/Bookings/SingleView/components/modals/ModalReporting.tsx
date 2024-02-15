@@ -31,12 +31,7 @@ const ModalReporting = ({
   const [isOffensive, setIsOffensive] = useState(false); 
   const [isSomethingElse, setIsSomethingElse] = useState(false);
 
-  //third page ko to (Para sa title to ng 3rd page)
-  const [isBankorWire, setBankorWire] = useState(false);
-  const [isCash, setCash] = useState(false); 
-  const [isPaypal, setPaypal] = useState(false); 
-  const [isMoneyGram, setMoneyGram] = useState(false); 
-  const [isWestUnion, setWestUnion] = useState(false);
+
 
   const isNextButtonDisabled = currentPage === 1 && !selectedOption;
 
@@ -64,31 +59,10 @@ const ModalReporting = ({
       setIsSomethingElse(true);
     }
   }
-  const [selectedThirdPageOption, setSelectedThirdPageOption] = useState<string>("");
-
-  const handleThirdPageOptionSelect = (option: string) => {
-    setSelectedThirdPageOption(option);
-  };
-
-  //ito yung gingawa ko 
-  const handleReportSelect = (report: string) => {
-    setSelectedReportRes(report);
-    setBankorWire(report === "Bank or wire");
-  
-    if (report === "The host asked me to pay outside of Airbnb") {
-      setBankorWire(true);
-     
-    } else {
-      setBankorWire(report === "Bank or wire transfer");
-      setCash(report === "Credit or debit card");
-      setPaypal(report === "Paypal");
-      setMoneyGram(report === "MoneyGram");
-      setWestUnion(report === "Western Union");
-      setIsSomethingElse(report === "Something else");
-    }
 
 
-  };
+
+
   const nextPage = () => {
     setCurrentPage(currentPage + 1);
     setIsInaccurateSelected(selectedOption === "It's inaccurate or incorrect");
@@ -97,12 +71,7 @@ const ModalReporting = ({
     setIsOffensive(selectedOption === "It's offensive");
     setIsSomethingElse(selectedOption === "It's something else");
 
-    //for third page (working)
-    setBankorWire(selectedReportRes === "Bank or wire transfer");
-    setCash(selectedReportRes === "Credit or debit card");
-    setPaypal(selectedReportRes === "Cash");
-    setMoneyGram(selectedReportRes === "Paypal");
-    setWestUnion(selectedReportRes === "MoneyGram");
+
   }
   const prevPage = () => {
     setCurrentPage(currentPage - 1)
@@ -207,7 +176,7 @@ const ModalReporting = ({
                   description: choice.description || "",
                   report: choice.reason || ""
                 }))}
-                onSelect={(report) => {handleReportSelect(report); console.log(selectedReport)}
+                onSelect={(report) => {(report); console.log(selectedReport)}
                 }
               />
               
@@ -228,7 +197,7 @@ const ModalReporting = ({
                   description: choice.reportRes || "",
                 }))}
                 onSelect={(report) => {
-                  handleThirdPageOptionSelect(report);
+                  handleOptionSelect(report); //temporary changed lang para mawala error.
                   console.log(selectedReportReason);
                 }}
               />
