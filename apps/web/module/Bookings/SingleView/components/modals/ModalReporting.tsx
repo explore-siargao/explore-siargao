@@ -9,7 +9,6 @@ interface ModalReportingProps {
   isOpen: boolean
   onClose: () => void
   reportListingArr: {
-    reason: string
     name: string
     report?: { reportRes: string;  }[]
     choices?: {
