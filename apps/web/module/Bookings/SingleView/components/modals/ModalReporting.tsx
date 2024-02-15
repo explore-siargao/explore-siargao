@@ -171,8 +171,7 @@ const ModalReporting = ({
                   description: choice.description || "",
                   report: choice.reason || ""
                 }))}
-                onSelect={(report) => {(report);}
-                }
+                onSelect={(report) => (report)}
               />
               
             )}
@@ -188,10 +187,7 @@ const ModalReporting = ({
                   option: choice.reportRes,
                   description: choice.reportRes || "",
                 }))}
-                onSelect={(report) => {
-                  console.log(selectedReport);
-                  handleOptionSelect(report); // name temporary changed para mawala error
-                }}
+                onSelect={(report) => {}}
               />
             )}
       </>
