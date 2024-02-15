@@ -21,40 +21,105 @@ import { useState } from "react"
 
 const reportListingArr = [
   { 
-    name: "It's a scam",
+    name: "It's inaccurate or incorrect",
+  },
+  { 
+    name: "It’s not a real place to stay",
+  },
+  { 
+    name: "It’s a scam",
     choices: [{
       reason: "The host asked me to pay outside of Airbnb",
-      description: "Ex: Wire transfer, cash, bank transfer" 
-    }] 
-    
-  },
-  { 
-    name: "It's inaccurate",
-    choices: [{
-      reason: "This is for second item",
-      description: "Ex: this is for second item" 
+      description: "Ex: Wire transfer, cash, bank transfer",
     },
     {
-      reason: "This is for the description for second item",
-      description: "Ex: this is for second item" 
-    }
-   ] 
-    
-  },
-  { 
-    name: "It's not a real place to stay",
-    choices: [{
-      reason: "This is for third item",
-      description: "Ex: This is for the third item" 
+      reason: "The host shared their contact information",
+      description: "Ex: Personal email or phone number" 
     },
-   ] 
+    {
+      reason: "The host is advertising other services",
+      description: "Ex: Links to non-Airbnb websites" 
+    },
+    {
+      reason: "It’s a duplicate listing",
+      description: "Ex: Copies all or part of another listing" 
+    },
+    {
+      reason: "It’s misleading",
+      description: "Ex: Photos don’t match description, stock photos" 
+    },
+    {
+      reason: "It’s something else",
+      description: "" 
+    },
+   ],
+   report: [{
+    reportRes: "Bank or wire transfer",
+  },
+  {
+    reportRes: "Credit or debit card",
+  },
+  {
+    reportRes: "Cash",
+  },
+  {
+    reportRes: "Paypal",
+  },
+  {
+    reportRes: "MoneyGram",
+  },
+  {
+    reportRes: "Western Union",
+  },
+  {
+    reportRes: "Something else",
+  },
+]
+
     
   },
   { 
     name: "It's offensive",
     choices: [{
-      reason: "This is for fourth item",
-      description: "Ex: for fourth item" 
+      reason: "It’s discriminatory",
+      description: "Ex: Racist, homophobic, sexist" 
+    },
+    {
+      reason: "It’s inappropriate",
+      description: "Ex: Sexually explicit, violent, graphic" 
+    },
+    {
+      reason: "It’s abusive or hostile",
+      description: "Ex: Bullying, threats, verbal assaults" 
+    },
+   ] 
+    
+  },
+  { 
+    name: "It’s something else",
+    choices: [{
+      reason: "Something on this page is broken",
+      description: "" 
+    },
+    {
+      reason: "The host is asking for more money",
+      description: "" 
+    },
+    {
+      reason: "It doesn’t look clean or safe",
+      description: "" 
+    },
+    {
+      reason: "It’s a duplicate listing",
+      description: "" 
+    },
+    {
+      reason: "I don’t think it’s allowed in my neighborhood",
+      description: "" 
+    },
+    {
+      reason: "It’s disturbing my neighborhood",
+      description: "" 
     },
    ] 
     
@@ -140,7 +205,7 @@ export const SingleView = () => {
               <ModalReporting 
               isOpen={showModal} 
               onClose={handleCloseModal} 
-              reportListingArr={reportListingArr} 
+              reportListingArr={reportListingArr}
               />
             </div>
           </div>
