@@ -90,6 +90,12 @@ const GovernmentId = ({ governmentId }: IPersonalInfo) => {
                     {index + 1}. {id.type}{" "}
                     <span
                       onClick={() => openModal(id)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          openModal(id)
+                        }
+                      }}
+                      tabIndex={0} 
                       className="text-primary-500 underline cursor-pointer hover:text-primary-700"
                     >
                       View File
