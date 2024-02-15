@@ -23,7 +23,6 @@ const ModalReporting = ({
   reportListingArr}: ModalReportingProps) => {
   const [currentPage, setCurrentPage] = useState(1)
   const [selectedOption, setSelectedOption] = useState<string>("")
-  const [selectedReportRes, setSelectedReportRes] = useState<string>("")
   const [selectedDescription, setSelectedDescription] = useState<string>("");
   const [isInaccurateSelected, setIsInaccurateSelected] = useState(false);
   const [isReport, setIsReport] = useState(false); 
@@ -79,9 +78,7 @@ const ModalReporting = ({
   const selectedReport = reportListingArr.find(
     (report) => report.name === selectedOption
   )
-  const selectedReportReason = reportListingArr.find(
-    (reportReason) => reportReason.name === selectedReportRes
-  )
+  
  const handleDescriptionChange = (event: ChangeEvent<HTMLTextAreaElement>): void => {
   setSelectedDescription(event.target.value);
 };
@@ -112,28 +109,32 @@ const ModalReporting = ({
         )}
       {currentPage === 2 && (
       <>
-          {isInaccurateSelected?
+         {isInaccurateSelected && (
             <Title className="flex text-xl font-semibold mb-1">
-                  Describe how it's inaccurate or incorrect
+              Describe how it's inaccurate or incorrect
             </Title>
-              : isReport?
-              <Title className="flex text-xl font-semibold mb-1 border-none">
-                  We got your report
-              </Title>
-              : isScam?
-              <Title className="flex text-xl font-semibold mb-1 border-none">
-                  Why do you think it's a scam?
-              </Title>
-              : isOffensive?
-              <Title className="flex text-xl font-semibold mb-1 border-none">
-                 Why do you think it's offensive
-              </Title>
-              : isSomethingElse?
-              <Title className="flex text-xl font-semibold mb-1 border-none">
-                  Why are you reporting this listing?
-              </Title>
-              : ""
-              }
+          )}
+          {isReport && (
+            <Title className="flex text-xl font-semibold mb-1 border-none">
+              We got your report
+            </Title>
+          )}
+          {isScam && (
+            <Title className="flex text-xl font-semibold mb-1 border-none">
+              Why do you think it's a scam?
+            </Title>
+          )}
+          {isOffensive && (
+            <Title className="flex text-xl font-semibold mb-1 border-none">
+              Why do you think it's offensive
+            </Title>
+          )}
+          {isSomethingElse && (
+            <Title className="flex text-xl font-semibold mb-1 border-none">
+              Why are you reporting this listing?
+            </Title>
+          )}
+
           <form>
           {selectedOption === "It's inaccurate or incorrect" && (
               <textarea
@@ -191,14 +192,14 @@ const ModalReporting = ({
             {selectedReport?.choices && selectedReport.choices.length > 0 && (
               <RightRadioList
                 title=""
-                lists={(selectedReportReason?.report || []).map((choice) => ({
+                lists={(selectedReport?.report || []).map((choice: { reportRes: any }) => ({
                   id: choice.reportRes,
                   option: choice.reportRes,
                   description: choice.reportRes || "",
                 }))}
                 onSelect={(report) => {
                   handleOptionSelect(report); //temporary changed lang para mawala error.
-                  console.log(selectedReportReason);
+                  console.log(selectedReport);
                 }}
               />
             )}
