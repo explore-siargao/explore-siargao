@@ -95,7 +95,7 @@ const GovernmentId = ({ governmentId }: IPersonalInfo) => {
                           openModal(id)
                         }
                       }}
-                      tabIndex={0} 
+                      tabIndex={0}
                       className="text-primary-500 underline cursor-pointer hover:text-primary-700"
                     >
                       View File
