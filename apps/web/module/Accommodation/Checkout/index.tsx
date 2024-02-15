@@ -12,8 +12,12 @@ const Checkout = () => {
   return (
     <WidthWrapper width={"small"} className="mt-24 md:mt-36 lg:mt-40">
       <div className="w-full flex items-center gap-x-4">
-        <Link href="/accommodation/1"><ChevronLeft /></Link>
-        <Typography variant="h1" fontWeight="semibold" className="pb-5 md:pb-0">Confirm and pay</Typography>
+        <Link href="/accommodation/1">
+          <ChevronLeft />
+        </Link>
+        <Typography variant="h1" fontWeight="semibold" className="pb-5 md:pb-0">
+          Confirm and pay
+        </Typography>
       </div>
       <div className="w-full flex mt-8">
         <div className="w-1/2 flex flex-col gap-y-4">
