@@ -96,7 +96,6 @@ const ModalReporting = ({
               {(currentPage === 1 || !isScam) ? "This won't be shared with the Host." : ""}
             </Title>
             <div>
-              <form className="">
                 <RightRadioList
                   title={""}
                   lists={reportListingArr.map((reportReason) => ({
@@ -104,7 +103,6 @@ const ModalReporting = ({
                     option: reportReason.name,
                   }))}
                   onSelect={(option) => handleOptionSelect(option)} />
-              </form>
             </div></>
         )}
       {currentPage === 2 && (
@@ -135,7 +133,6 @@ const ModalReporting = ({
             </Title>
           )}
 
-          <form>
           {selectedOption === "It's inaccurate or incorrect" && (
               <textarea
                 className=" p-2 border border-gray-300 rounded-md w-full h-32 mt-7"
@@ -182,13 +179,10 @@ const ModalReporting = ({
               />
               
             )}
-          </form>
       </>
     )}
       {currentPage === 3 && (
       <>
-           <form>
-            page 3
             {selectedReport?.choices && selectedReport.choices.length > 0 && (
               <RightRadioList
                 title=""
@@ -203,7 +197,6 @@ const ModalReporting = ({
                 }}
               />
             )}
-          </form>
       </>
        )}
     </div>
