@@ -109,7 +109,7 @@ const WishlistsItemContainer = () => {
     setDetails({
       id: item?.id,
       link: item?.link,
-      img: JSON.parse(item?.listing?.imageKeys)[0].fileKey,
+      img: JSON.parse(item?.listing?.images)[0].fileKey,
       title: item?.listing?.title,
       address: item?.listing?.address,
       description: item?.listing?.description,
@@ -218,10 +218,10 @@ const WishlistsItemContainer = () => {
                       onClick={() => handleClick(index, item?.id as number)}
                     />
                     <Image
-                      src={`/assets/${JSON.parse(item.listing.imageKeys)[0].fileKey}`}
+                      src={`/assets/${JSON.parse(item.listing.images)[0].fileKey}`}
                       width={300}
                       height={300}
-                      alt={item.listing.imageKeys[0].fileKey}
+                      alt={item.listing.images[0].fileKey}
                       className="object-cover h-full w-full rounded-xl"
                     />
                   </div>

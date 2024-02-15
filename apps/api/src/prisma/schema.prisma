@@ -116,7 +116,7 @@ model MultiFactorAuth {
 model Listing {
   id                   Int                  @id @default(autoincrement())
   hostedById           Int
-  imageKeys            String               @db.LongText
+  images               String               @db.LongText
   title                String               @db.VarChar(100)
   descriptionId        Int?                 @unique
   listingDescription   ListingDescription?  @relation(fields: [descriptionId], references: [id])

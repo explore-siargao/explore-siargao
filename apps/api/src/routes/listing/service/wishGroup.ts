@@ -124,7 +124,7 @@ export const wishGroupByTitle = async (req: Request, res: Response) => {
       // Map through the groupWishGroup array and add the new entity to each item
       const modifiedGroup = await Promise.all(
         groupWishGroup.map(async (item) => {
-          const imageKeys = await prisma.wishGroup.findFirst({
+          const images = await prisma.wishGroup.findFirst({
             where: {
               title: item.title,
               userId: userId,
@@ -135,7 +135,7 @@ export const wishGroupByTitle = async (req: Request, res: Response) => {
           })
           return {
             ...item,
-            imageKeys: JSON.parse(imageKeys?.listing?.imageKeys as string),
+            images: JSON.parse(images?.listing?.images as string),
           }
         })
       )
