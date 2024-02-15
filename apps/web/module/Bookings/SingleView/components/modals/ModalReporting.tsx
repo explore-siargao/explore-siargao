@@ -171,7 +171,7 @@ const ModalReporting = ({
                   description: choice.description || "",
                   report: choice.reason || ""
                 }))}
-                onSelect={(report) => (report)}
+                onSelect={(report) => report}
               />
               
             )}
