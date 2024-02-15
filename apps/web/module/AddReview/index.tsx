@@ -132,7 +132,7 @@ const AddReview = () => {
             ) : (
               <div className="flex flex-col items-center px-8">
                 <div className="text-left w-full">
-                How was your overall experience with {listingName}?
+                  How was your overall experience with {listingName}?
                 </div>
                 <Textarea
                   placeholder="Leave your comment here..."
