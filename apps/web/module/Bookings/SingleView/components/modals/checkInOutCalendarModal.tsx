@@ -4,7 +4,7 @@ import ModalContainer from "@/common/components/ModalContainer"
 
 const checkInOutCalendarModal = () => {
   return (
-    <ModalContainer onClose={() => void ""} isOpen={true}>
+    <ModalContainer onClose={() => ""} isOpen={true}>
       <ListingDateRangePicker title={""} />
     </ModalContainer>
   )
