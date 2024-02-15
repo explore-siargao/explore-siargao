@@ -1,31 +1,14 @@
 import React from "react"
 import IconTitleDescription from "./IconTitleDescription"
-import { LucideBook, LucideMapPin } from "lucide-react"
+import { T_HighlightsProps } from "../types/Highlights"
 
-const highlightsDummy = [
-  {
-    id: 1,
-    icon: LucideBook,
-    title: "Self check-in",
-    desc: "You can check in with the building staff.",
-  },
-  {
-    id: 2,
-    icon: LucideMapPin,
-    title: "Great location",
-    desc: "94% of recent guests gave the location a 5-star rating.",
-  },
-]
-
-const Highlights = () => {
+const Highlights = ({ highlights }: { highlights: T_HighlightsProps[] }) => {
   return (
     <>
-      {highlightsDummy.map((highlight) => (
+      {highlights.map((highlight) => (
         <IconTitleDescription
-          key={highlight.id}
-          icon={highlight.icon}
-          title={highlight.title}
-          desc={highlight.desc}
+          key={highlight.title}
+          {...highlight}
         />
       ))}
     </>

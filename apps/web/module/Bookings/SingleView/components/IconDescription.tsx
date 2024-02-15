@@ -1,14 +1,19 @@
 import React from "react"
+import { LucideProps, LucideWifi } from "lucide-react"
 
-interface IconDescriptionProps {
-  icon: React.ElementType
-  desc: React.ReactNode
-  isNotIncluded?: boolean
+type T_IconDescriptionProps = {
+  icon: string,
+  description: string,
+  isNotIncluded: boolean,
 }
 
-const IconDescription: React.FC<IconDescriptionProps> = ({
-  icon: Icon,
-  desc,
+const iconMap = {
+  wifi: (props?: LucideProps) => <LucideWifi {...props} />
+}
+
+const IconDescription: React.FC<T_IconDescriptionProps> = ({
+  icon,
+  description,
   isNotIncluded = false,
 }) => {
   const IconDescriptionStyle = isNotIncluded
@@ -17,9 +22,9 @@ const IconDescription: React.FC<IconDescriptionProps> = ({
 
   return (
     <div className="flex items-center mb-5 gap-5">
-      {Icon && <Icon className="w-6 h-6" />}
+      {icon && iconMap["wifi"]()}
       <div className="flex" style={IconDescriptionStyle}>
-        {desc}
+        {description}
       </div>
     </div>
   )
