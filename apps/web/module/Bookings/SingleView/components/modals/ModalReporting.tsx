@@ -59,9 +59,6 @@ const ModalReporting = ({
     }
   }
 
-
-
-
   const nextPage = () => {
     setCurrentPage(currentPage + 1);
     setIsInaccurateSelected(selectedOption === "It's inaccurate or incorrect");
@@ -174,7 +171,7 @@ const ModalReporting = ({
                   description: choice.description || "",
                   report: choice.reason || ""
                 }))}
-                onSelect={(report) => {(report); console.log(selectedReport)}
+                onSelect={(report) => {(report);}
                 }
               />
               
@@ -192,8 +189,8 @@ const ModalReporting = ({
                   description: choice.reportRes || "",
                 }))}
                 onSelect={(report) => {
-                  handleOptionSelect(report); //temporary changed lang para mawala error.
                   console.log(selectedReport);
+                  handleOptionSelect(report); // name temporary changed para mawala error
                 }}
               />
             )}
