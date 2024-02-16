@@ -3,9 +3,8 @@ import { MapContainer, TileLayer, CircleMarker, Marker } from "react-leaflet"
 import "leaflet/dist/leaflet.css"
 import { Icon } from "leaflet"
 import { Spinner } from "./ui/Spinner"
-
 interface SpecificMapProps {
-  coordinates: [Number, Number]
+  coordinates: [number, number]
   mapHeight: string
   mapWidth: string
 }
@@ -26,9 +25,6 @@ const SpecificMap = ({
   const [showMap, setShowMap] = useState(false)
   const HandleResize = () => {
     setShowMap(false)
-    const timer = setTimeout(() => {
-      setShowMap(true)
-    }, 2000)
   }
 
   useEffect(() => {

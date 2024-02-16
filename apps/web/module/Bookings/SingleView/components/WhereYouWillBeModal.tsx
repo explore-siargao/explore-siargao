@@ -1,14 +1,17 @@
 import ModalContainer from "@/common/components/ModalContainer"
 import WhereYouWillBe from "./WhereYouWillBe"
 import SpecificMap from "@/common/components/SpecificMap"
-
 interface WhereYouWillBeModalProps {
   isOpen: boolean
   onClose: () => void
-  coordinates: [Number, Number]
+  coordinates: [number, number]
 }
 
-const WhereYouWillBeModal = ({ isOpen, onClose, coordinates }: WhereYouWillBeModalProps) => {
+const WhereYouWillBeModal = ({
+  isOpen,
+  onClose,
+  coordinates,
+}: WhereYouWillBeModalProps) => {
   return (
     <ModalContainer isOpen={isOpen} onClose={onClose} size="full">
       <div className="md:grid grid-cols-12 h-[95vh]">
