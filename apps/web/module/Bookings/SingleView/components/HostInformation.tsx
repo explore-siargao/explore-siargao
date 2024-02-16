@@ -5,38 +5,24 @@ import { Button } from "@/common/components/ui/Button"
 import { APP_NAME } from "@repo/constants"
 import AvatarTitleDescription from "./AvatarTitleDescription"
 import { useRouter } from "next/navigation"
+import { T_HostInformationProps } from "../types/HostInformation"
 
-const HostDummy = {
-  hostName: "Jose Rizal",
-  hostProfilePic: "1.jpg",
-  joinedIn: "July 20, 2020",
-  countReviews: 4,
-  rules: [
-    {
-      id: 1,
-      title: "During your stay",
-      description:
-        "For our Guests’ convenience, complimentary cleaning service and support of the management team is provided throughout the entire stay. The property offers also assistance in bike/car rental, island hoping and airport shuttle service bookings.",
-    },
-  ],
-  responseRate: 70,
-  responseTime: "Reply after 4 Hours",
-}
 
-const HostInformation = () => {
+const HostInformation = ({hostName, hostProfilePic, joinedIn, countReviews, rules, responseRate, responseTime}: T_HostInformationProps) => {
   const router = useRouter()
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-16 md:items-center">
       <div className="flex-1 flex flex-col">
         <AvatarTitleDescription
-          avatarKey="2.jpg"
-          title="Hosted by Simon"
-          subTitle="Joined in July 20, 2020"
+          avatarKey={hostProfilePic}
+          title={`Hosted by ${hostName}`}
+          subTitle={`Joined in ${joinedIn}`}
         />
         <div className="flex gap-3 mt-4">
           <div className="flex items-center gap-2">
             <Star className="h-4 w-4" />
-            <span className="text-sm">{HostDummy.countReviews} Reviews</span>
+            <span className="text-sm">{countReviews} Reviews</span>
           </div>
           <div className="flex items-center gap-2">
             <ShieldCheck className="h-4 w-4" />
@@ -47,7 +33,7 @@ const HostInformation = () => {
             <span className="text-sm">Superhost</span>
           </div>
         </div>
-        {HostDummy.rules.map((info) => (
+        {rules.map((info) => (
           <div className="flex mt-6" key={info.id}>
             <TitleSection title={info.title}>
               <Typography variant="p">{info.description}</Typography>
@@ -56,8 +42,8 @@ const HostInformation = () => {
         ))}
       </div>
       <div>
-        <Typography>Response Rate: {HostDummy.responseRate}%</Typography>
-        <Typography>Response Time: {HostDummy.responseTime}</Typography>
+        <Typography>Response Rate: {responseRate}%</Typography>
+        <Typography>Response Time: {responseTime}</Typography>
         <Button
           variant={"outline"}
           className="my-6"

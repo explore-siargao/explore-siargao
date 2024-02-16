@@ -17,6 +17,21 @@ import { Button } from "@/common/components/ui/Button"
 import { Flag } from "lucide-react"
 import ModalReporting from "./components/modals/ModalReporting"
 import { useState } from "react"
+import {
+  LucideAlarmSmoke,
+  LucideBeer,
+  LucideBuilding,
+  LucideCamera,
+  LucideCctv,
+  LucideCigaretteOff,
+  LucideClock,
+  LucideFireExtinguisher,
+  LucideFishOff,
+  LucideMoon,
+  LucidePawPrint,
+  LucidePersonStanding,
+  LucideSpeaker,
+} from "lucide-react"
 
 const reportListingArr = [
   {
@@ -188,6 +203,245 @@ const group = [
   },
 ]
 
+const ratingSummary = {
+    ratings: 5,
+    reviews: 3,
+    categories: [
+      {
+        title: "Cleanliness",
+        rating: "4.8",
+        isHorizontal: false,
+      },
+      {
+        title: "Accuracy",
+        rating: "4.8",
+        isHorizontal: false,
+      },
+      {
+        title: "Check-in",
+        rating: "5.0",
+        isHorizontal: false,
+      },
+      {
+        title: "Communication",
+        rating: "4.0",
+        isHorizontal: false,
+      },
+      {
+        title: "Location",
+        rating: "4.0",
+        isHorizontal: false,
+      },
+      {
+        title: "Value",
+        rating: "4.0",
+        isHorizontal: false,
+      },
+    ],
+}
+
+const whereYouWillBeDesc = {
+  location: "General Luna, Caraga, Philippines",
+  coordinates: [14.5129, 21.4342] as [number, number],
+  desc: "Mantaray Siargao is located in Purok 1, General Luna. A quiet residential area close to the heart of town. The property is nestled between the beach and the main road, allowing guests like you to easily drive or hail a tricycle to town.",
+}
+
+const hostDummy = {
+  hostName: "Jose Rizal",
+  hostProfilePic: "1.jpg",
+  joinedIn: "July 20, 2020",
+  countReviews: 4,
+  rules: [
+    {
+      id: 1,
+      title: "During your stay",
+      description:
+        "For our Guests’ convenience, complimentary cleaning service and support of the management team is provided throughout the entire stay. The property offers also assistance in bike/car rental, island hoping and airport shuttle service bookings.",
+    },
+  ],
+  responseRate: 70,
+  responseTime: "Reply after 4 Hours",
+}
+
+const userReviews = [
+  {
+    imageSrc: "1.jpg",
+    name: "Bradford",
+    origin: "Canada",
+    rate: 5,
+    date: "January 1, 1889",
+    review:
+      "Beautiful, quiet and private! This place offers solitude to everyone who wants to disappear from chaotic crowd once in a while. Place is romantic and cozy. It is the same as the pictures. We love the comfortable king size bed, outdoor shower, pool and kitchen! It is complete of amenities. Host are friendly and give us recommendations. Highly recommended. Will definitely come back again. Thank you!",
+    showMore: false,
+  },
+  {
+    imageSrc: "2.jpg",
+    name: "Maygan",
+    origin: "California, United States",
+    rate: 4,
+    date: "February 15, 1890",
+    review:
+      "The villa is exactly as seen in the photos, such an absolute dream to stay in! We were there during rainy season, so it’s a bit of an adventure to leave the villa on the beaten path. If it’s rainy, there are massive puddles to get through and only certain drivers will go through it (which the host help to arrange!).",
+    showMore: true,
+  },
+  {
+    imageSrc: "1.jpg",
+    name: "Sami",
+    origin: "Helsinki, Finland",
+    rate: 5,
+    date: "January 1, 1889",
+    review:
+      "The villa is extremely clean, cozy, beautiful, and right next to a quite and one of the most beautiful beaches on the island! We had an amazing stay all in all. Claire the caretaker was super responsive and took care of every need that we had during our 7 day stay.",
+    showMore: true,
+  },
+  {
+    imageSrc: "2.jpg",
+    name: "Anna",
+    origin: "Toronto, Canada",
+    rate: 4,
+    date: "February 15, 1890",
+    review:
+      "We loved our stay at Simon’s place. Beautifully designed and with lots of amenities (bathrobes were a nice touch!). We made full use of the beautiful outdoor shower, bathtub and pool! And I just loved having a chance to play a little on the electric piano! The villa was peaceful and secluded and the caretaker was lovely. We also really enjoyed walking out onto a pristine empty beach.",
+    showMore: false,
+  },
+]
+
+const houseRulesDummy = [
+  { id: 1, icon: LucideClock, rule: "Check-in: 12:00 PM - 7:00 PM" },
+  { id: 2, icon: LucideClock, rule: "Checkout before 10:00 AM" },
+  { id: 3, icon: LucidePawPrint, rule: "8 guests maximum" },
+]
+
+const safetyPropertiesDummy = [
+  { id: 1, rule: "Pool/hot tub without a gate or lock" },
+  { id: 2, rule: "Nearby lake, river, other body of water" },
+  { id: 3, rule: "Carbon monoxide alarm" },
+]
+
+const cancellationPoliciesDummy = [
+  { id: 1, rule: "This reservation is non-refundable." },
+  {
+    id: 2,
+    rule: "Review the Host’s full cancellation policy which applies even if you cancel for illness or disruptions caused by COVID-19.",
+  },
+]
+
+const houseRulesModalData = [
+  {
+    id: 1,
+    title: "Checking in and out",
+    iconDesc: [
+      { id: 1, icon: LucideClock, rule: "Check-in: 12:00 PM - 7:00 PM" },
+      { id: 2, icon: LucideClock, rule: "Checkout before 10:00 AM" },
+      { id: 3, icon: LucidePersonStanding, rule: "8 guests maximum" },
+    ],
+  },
+  {
+    id: 2,
+    title: "During your stay",
+    iconDesc: [
+      { id: 1, icon: LucidePawPrint, rule: "Pets allowed" },
+      {
+        id: 2,
+        icon: LucideMoon,
+        rule: "Quiet hours",
+        otherDescription: "11:00 PM - 6:00 AM",
+      },
+      { id: 3, icon: LucidePawPrint, rule: "8 guests maximum" },
+      { id: 4, icon: LucideCamera, rule: "Commercial photography is allowed" },
+      { id: 5, icon: LucideCigaretteOff, rule: "No smoking" },
+    ],
+  },
+]
+
+const safetyPropertiesModalData = [
+  {
+    id: 1,
+    title: "Safety considerations",
+    iconDesc: [
+      {
+        id: 1,
+        icon: LucideFishOff,
+        safetyProperty: "Not suitable for fishing",
+      },
+    ],
+  },
+  {
+    id: 2,
+    title: "Safety devices",
+    iconDesc: [
+      {
+        id: 1,
+        icon: LucideCctv,
+        safetyProperty: "Security camera/recording device",
+        otherDescription:
+          "CCTV cameras around the building and within the shared common areas like lobby, corridors, and elevator area.",
+      },
+      {
+        id: 2,
+        icon: LucideAlarmSmoke,
+        safetyProperty: "Smoke alarm installed",
+      },
+      {
+        id: 3,
+        icon: LucideFireExtinguisher,
+        safetyProperty: "Fire extinguisher available",
+      },
+    ],
+  },
+  {
+    id: 3,
+    title: "Property info",
+    iconDesc: [
+      {
+        id: 1,
+        icon: LucideBuilding,
+        safetyProperty: "10 story building",
+        otherDescription: "The building itself have 100th floor",
+      },
+      { id: 2, icon: LucideSpeaker, safetyProperty: "Potential noise" },
+      { id: 3, icon: LucideBeer, safetyProperty: "Free beer" },
+    ],
+  },
+]
+
+const cancellationPolicyModalData = [
+  {
+    id: 1,
+    title: "Feb 17",
+    desc: [
+      {
+        id: 1,
+        cancellationPolicy: "12:00 PM",
+        otherDescription: "Full refund: Get back 100% of what you paid.",
+      },
+    ],
+  },
+  {
+    id: 3,
+    title: "Feb 18",
+    desc: [
+      {
+        id: 1,
+        cancellationPolicy: "12:00 PM (check-in)",
+        otherDescription:
+          "Partial refund: Get back every night but the first one. No refund of the first night or the service fee.",
+      },
+    ],
+  },
+  {
+    id: 3,
+    title: "March 12",
+    desc: [
+      {
+        id: 1,
+        cancellationPolicy: "2:00 PM (check-in)",
+        otherDescription: "No refund",
+      },
+    ],
+  },
+]
+
 export const SingleView = () => {
   const [showModal, setShowModal] = useState(false)
   const handleOpenModal = () => {
@@ -264,25 +518,28 @@ export const SingleView = () => {
       </div>
       <div className="divide-y border-t">
         <div className="py-8">
-          <RatingSummary />
+          <RatingSummary ratings={ratingSummary.ratings} reviews={ratingSummary.reviews} categories={ratingSummary.categories}/>
         </div>
         <div className="py-8">
-          <UserReviews />
+          <UserReviews reviews={userReviews} />
         </div>
         <div className="py-8">
           <WhereYoullBeDescription
-            whereYoullBeDesc={{
-              location: "General Luna, Caraga, Philippines",
-              coordinates: [14.5129, 21.4342],
-              desc: "Mantaray Siargao is located in Purok 1, General Luna. A quiet residential area close to the heart of town. The property is nestled between the beach and the main road, allowing guests like you to easily drive or hail a tricycle to town.",
-            }}
+            {...whereYouWillBeDesc}
           />
         </div>
         <div className="py-8">
-          <HostInformation />
+          <HostInformation {...hostDummy} />
         </div>
         <div className="pt-8">
-          <ThingsToKnow />
+          <ThingsToKnow 
+            houseRules={houseRulesDummy} 
+            houseRulesModalData={houseRulesModalData}
+            safetyProperties={safetyPropertiesDummy}
+            safetyModalData={safetyPropertiesModalData}
+            cancellationPolicies={cancellationPoliciesDummy}
+            cancellationModalData={cancellationPolicyModalData}
+          />
         </div>
       </div>
       <ModalReporting
