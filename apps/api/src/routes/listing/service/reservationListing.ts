@@ -74,7 +74,7 @@ export const getAllReservationByUser = async (req: Request, res: Response) => {
       },
       listing: {
         title: newDataEntry.listing.title,
-        image: JSON.parse(newDataEntry.listing.imageKeys)[0],
+        image: JSON.parse(newDataEntry.listing.images)[0],
 
         hostedBy:
           newDataEntry.listing.hostedBy.personalInfo?.firstName +
@@ -178,7 +178,7 @@ export const getReservationByListing = async (req: Request, res: Response) => {
       },
       listing: {
         title: newData.listing.title,
-        image: JSON.parse(newData.listing.imageKeys)[0],
+        image: JSON.parse(newData.listing.images)[0],
 
         hostedBy:
           newData.listing.hostedBy.personalInfo?.firstName +
@@ -265,7 +265,7 @@ export const getReservation = async (req: Request, res: Response) => {
         },
         listing: {
           title: getReservation.listing.title,
-          image: JSON.parse(getReservation.listing.imageKeys)[0],
+          image: JSON.parse(getReservation.listing.images)[0],
 
           hostedBy:
             getReservation.listing.hostedBy.personalInfo?.firstName +

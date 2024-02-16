@@ -33,7 +33,7 @@ export const getAllListing = async (req: Request, res: Response) => {
     if (listings.length > 0) {
       const customListings = listings.map((customListing) => ({
         id: customListing.id,
-        imageKey: JSON.parse(customListing.imageKeys),
+        images: JSON.parse(customListing.images),
         address: customListing.address,
         price:
           customListing.price.fee +
@@ -96,7 +96,7 @@ export const getListing = async (req: Request, res: Response) => {
     })
     if (listing !== null) {
       const newResult = { ...listing }
-      newResult.imageKeys = JSON.parse(listing.imageKeys)
+      newResult.images = JSON.parse(listing.images)
       newResult.whereYoullBe = JSON.parse(listing.whereYoullBe)
       newResult.whereYoullSleep = JSON.parse(listing.whereYoullSleep)
       res.json(
@@ -124,7 +124,7 @@ export const addListing = async (req: Request, res: Response) => {
   const hostId = Number(req.params.hostId)
   const isValidInput = Z_Listing.safeParse(req.body)
   const {
-    imageKeys,
+    images,
     title,
     category,
     address,
@@ -155,7 +155,7 @@ export const addListing = async (req: Request, res: Response) => {
 
       if (getHost !== null) {
         if (
-          (imageKeys &&
+          (images &&
             title &&
             category &&
             address &&
@@ -194,7 +194,7 @@ export const addListing = async (req: Request, res: Response) => {
           })
           const newListing = await prisma.listing.create({
             data: {
-              imageKeys: JSON.stringify(imageKeys),
+              images: JSON.stringify(images),
               title: title,
               category: category,
               address: address,
@@ -236,7 +236,7 @@ export const addListing = async (req: Request, res: Response) => {
 export const updateListing = async (req: Request, res: Response) => {
   const userId = Number(req.params.userId)
   const id = Number(req.params.id)
-  const { imageKeys, title, category, address, latitude, longitude } = req.body
+  const { images, title, category, address, latitude, longitude } = req.body
   try {
     const getUser = await prisma.user.findUnique({
       where: {
@@ -261,7 +261,7 @@ export const updateListing = async (req: Request, res: Response) => {
         })
       )
     }
-    if (imageKeys || title || category || address || latitude || longitude) {
+    if (images || title || category || address || latitude || longitude) {
       const updateListing = await prisma.listing.update({
         where: {
           id: id,
@@ -269,7 +269,7 @@ export const updateListing = async (req: Request, res: Response) => {
         data: {
           title: title,
           category: category,
-          imageKeys: imageKeys,
+          images: images,
           address: address,
           longitude: longitude,
           latitude: latitude,
