@@ -8,7 +8,11 @@ interface WhereYouWillBeModalProps {
   coordinates: [Number, Number]
 }
 
-const WhereYouWillBeModal = ({ isOpen, onClose, coordinates }: WhereYouWillBeModalProps) => {
+const WhereYouWillBeModal = ({
+  isOpen,
+  onClose,
+  coordinates,
+}: WhereYouWillBeModalProps) => {
   return (
     <ModalContainer isOpen={isOpen} onClose={onClose} size="full">
       <div className="md:grid grid-cols-12 h-[95vh]">
