@@ -57,6 +57,7 @@ const WhereYoullBeDescription = ({ whereYoullBeDesc }: WhereYoullBeProps) => {
         </Button>
       </div>
       <WhereYouWillBeModal
+        coordinates={whereYoullBeDesc.coordinates}
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
       />
