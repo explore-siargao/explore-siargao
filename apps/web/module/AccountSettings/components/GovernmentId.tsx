@@ -89,13 +89,7 @@ const GovernmentId = ({ governmentId }: IPersonalInfo) => {
                   <p className="text-lg" key={id.type}>
                     {index + 1}. {id.type}{" "}
                     <span
-                      role="button"
                       onClick={() => openModal(id)}
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter") {
-                          openModal(id)
-                        }
-                      }}
                       className="text-primary-500 underline cursor-pointer hover:text-primary-700"
                     >
                       View File
