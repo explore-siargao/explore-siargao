@@ -3,11 +3,11 @@ import ModalAboutTitleDescription from "./modals/ModalAboutTitleDescription"
 import { useState } from "react"
 import { T_BookingDescriptionProps } from "../types/BookingDescription"
 
-const BookingDescription = ({ 
+const BookingDescription = ({
   generalDescription,
   aboutSpace,
   aboutGuestAccess,
-  otherThingsNote
+  otherThingsNote,
 }: T_BookingDescriptionProps) => {
   const [descriptionModalOpen, setDescriptionModalOpen] = useState(false)
   const maximumLength = 600
@@ -29,11 +29,11 @@ const BookingDescription = ({
       <ModalAboutTitleDescription
         isOpen={descriptionModalOpen}
         onClose={() => setDescriptionModalOpen(false)}
-        listingDescription={{ 
+        listingDescription={{
           generalDescription,
           aboutSpace,
           aboutGuestAccess,
-          otherThingsNote
+          otherThingsNote,
         }}
       />
     </>

@@ -7,8 +7,15 @@ import AvatarTitleDescription from "./AvatarTitleDescription"
 import { useRouter } from "next/navigation"
 import { T_HostInformationProps } from "../types/HostInformation"
 
-
-const HostInformation = ({hostName, hostProfilePic, joinedIn, countReviews, rules, responseRate, responseTime}: T_HostInformationProps) => {
+const HostInformation = ({
+  hostName,
+  hostProfilePic,
+  joinedIn,
+  countReviews,
+  rules,
+  responseRate,
+  responseTime,
+}: T_HostInformationProps) => {
   const router = useRouter()
 
   return (

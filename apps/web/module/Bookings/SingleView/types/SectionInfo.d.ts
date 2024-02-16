@@ -1,6 +1,6 @@
 export type T_Image = {
-  fileKey: string,
-  alt: string,
+  fileKey: string
+  alt: string
 }
 
 export type T_SectionInfoProps = {

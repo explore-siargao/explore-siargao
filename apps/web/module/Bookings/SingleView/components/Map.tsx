@@ -10,9 +10,7 @@ const WhereYoullBeDescription = ({ location, coordinates, desc }: MapProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const maxLength = 600
   const slicedDescription =
-    desc.length > maxLength
-      ? desc.slice(0, maxLength) + "...."
-      : desc
+    desc.length > maxLength ? desc.slice(0, maxLength) + "...." : desc
 
   return (
     <div className="flex flex-col w-full">
@@ -27,9 +25,7 @@ const WhereYoullBeDescription = ({ location, coordinates, desc }: MapProps) => {
         </div>
 
         {location && (
-          <div className="text-md font-semibold mb-5">
-            {location}
-          </div>
+          <div className="text-md font-semibold mb-5">{location}</div>
         )}
         {desc && (
           <div className="flex text-sm mb-4">

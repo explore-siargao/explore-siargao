@@ -3,7 +3,6 @@ import Image from "next/image"
 import { Grip } from "lucide-react"
 import { T_ImagesProps } from "../types/SectionInfo"
 
-
 const ImageGallery = ({ images, openModal }: T_ImagesProps) => {
   return (
     <div className="relative">

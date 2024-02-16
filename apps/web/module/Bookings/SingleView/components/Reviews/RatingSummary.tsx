@@ -18,7 +18,7 @@ const HeadReview = ({ ratings, reviews, categories }: T_RatingSummaryProps) => {
       <div className="flex mb-4 space-x-2">
         <StarIcon className="h-6 w-6" />
         <Typography variant={"h3"} fontWeight="semibold">
-          { ratings } &middot; { reviews } reviews
+          {ratings} &middot; {reviews} reviews
         </Typography>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-12 lg:gap-x-6 gap-y-5 lg:gap-y-0 lg:divide-x divide-y lg:divide-y-0">
@@ -34,13 +34,21 @@ const HeadReview = ({ ratings, reviews, categories }: T_RatingSummaryProps) => {
                   rating={category.rating}
                   isHorizontal={category.isHorizontal}
                   icon={
-                    category.title === "Cleanliness" ? <SprayCan strokeWidth={1.5} className="h-7 w-7" /> : 
-                    category.title === "Accuracy" ? <CheckCircle2 strokeWidth={1.5} className="h-7 w-7" /> :
-                    category.title === "Check-in" ? <KeyRound strokeWidth={1.5} className="h-7 w-7" /> : 
-                    category.title === "Communication" ? <MessageSquare strokeWidth={1.5} className="h-7 w-7" /> : 
-                    category.title === "Location" ? <Map strokeWidth={1.5} className="h-7 w-7" /> : 
-                    category.title === "Value" ? <Tag strokeWidth={1.5} className="h-7 w-7" /> : 
-                    ""
+                    category.title === "Cleanliness" ? (
+                      <SprayCan strokeWidth={1.5} className="h-7 w-7" />
+                    ) : category.title === "Accuracy" ? (
+                      <CheckCircle2 strokeWidth={1.5} className="h-7 w-7" />
+                    ) : category.title === "Check-in" ? (
+                      <KeyRound strokeWidth={1.5} className="h-7 w-7" />
+                    ) : category.title === "Communication" ? (
+                      <MessageSquare strokeWidth={1.5} className="h-7 w-7" />
+                    ) : category.title === "Location" ? (
+                      <Map strokeWidth={1.5} className="h-7 w-7" />
+                    ) : category.title === "Value" ? (
+                      <Tag strokeWidth={1.5} className="h-7 w-7" />
+                    ) : (
+                      ""
+                    )
                   }
                 />
               )

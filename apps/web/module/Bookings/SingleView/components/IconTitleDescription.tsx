@@ -2,14 +2,14 @@ import { LucideProps, LucideWifi } from "lucide-react"
 import React from "react"
 
 interface IconTitleDescriptionProps {
-  icon: string,
+  icon: string
   title: string
   description?: string
   className?: string
 }
 
 const iconMap = {
-  wifi: (props?: LucideProps) => <LucideWifi {...props} />
+  wifi: (props?: LucideProps) => <LucideWifi {...props} />,
 }
 
 const IconTitleDescription: React.FC<IconTitleDescriptionProps> = ({

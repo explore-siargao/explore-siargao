@@ -7,7 +7,14 @@ import CancellationPolicyModal from "../modals/CancellationPolicyModal"
 import HouseRulesModal from "../modals/ModalHouseRules"
 import { T_ThingsToKnowProps } from "../../types/ThingsToKnow"
 
-const ThingsToKnow = ({houseRules, houseRulesModalData, safetyProperties, safetyModalData, cancellationPolicies, cancellationModalData}: T_ThingsToKnowProps) => {
+const ThingsToKnow = ({
+  houseRules,
+  houseRulesModalData,
+  safetyProperties,
+  safetyModalData,
+  cancellationPolicies,
+  cancellationModalData,
+}: T_ThingsToKnowProps) => {
   const [isHouseRulesModalOpen, setIsHouseRulesModalOpen] = useState(false)
   const [isSafetyPropertyModalOpen, setIsSafetyPropertyModalOpen] =
     useState(false)

@@ -6,10 +6,7 @@ const Highlights = ({ highlights }: { highlights: T_HighlightsProps[] }) => {
   return (
     <>
       {highlights.map((highlight) => (
-        <IconTitleDescription
-          key={highlight.title}
-          {...highlight}
-        />
+        <IconTitleDescription key={highlight.title} {...highlight} />
       ))}
     </>
   )

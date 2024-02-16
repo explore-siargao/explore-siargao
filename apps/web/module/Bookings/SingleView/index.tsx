@@ -101,7 +101,6 @@ const imageGallery = [
 
 const highlights = [
   {
-
     icon: "wifi",
     title: "Self check-in",
     description: "You can check in with the building staff.",
@@ -173,7 +172,11 @@ const group = [
     title: "Entertainment",
     offers: [
       { description: "WiFi", icon: "wifi", isNotIncluded: false },
-      { description: "Free street parking", icon: "wifi", isNotIncluded: false },
+      {
+        description: "Free street parking",
+        icon: "wifi",
+        isNotIncluded: false,
+      },
     ],
   },
   {
@@ -204,40 +207,40 @@ const group = [
 ]
 
 const ratingSummary = {
-    ratings: 5,
-    reviews: 3,
-    categories: [
-      {
-        title: "Cleanliness",
-        rating: "4.8",
-        isHorizontal: false,
-      },
-      {
-        title: "Accuracy",
-        rating: "4.8",
-        isHorizontal: false,
-      },
-      {
-        title: "Check-in",
-        rating: "5.0",
-        isHorizontal: false,
-      },
-      {
-        title: "Communication",
-        rating: "4.0",
-        isHorizontal: false,
-      },
-      {
-        title: "Location",
-        rating: "4.0",
-        isHorizontal: false,
-      },
-      {
-        title: "Value",
-        rating: "4.0",
-        isHorizontal: false,
-      },
-    ],
+  ratings: 5,
+  reviews: 3,
+  categories: [
+    {
+      title: "Cleanliness",
+      rating: "4.8",
+      isHorizontal: false,
+    },
+    {
+      title: "Accuracy",
+      rating: "4.8",
+      isHorizontal: false,
+    },
+    {
+      title: "Check-in",
+      rating: "5.0",
+      isHorizontal: false,
+    },
+    {
+      title: "Communication",
+      rating: "4.0",
+      isHorizontal: false,
+    },
+    {
+      title: "Location",
+      rating: "4.0",
+      isHorizontal: false,
+    },
+    {
+      title: "Value",
+      rating: "4.0",
+      isHorizontal: false,
+    },
+  ],
 }
 
 const whereYouWillBeDesc = {
@@ -453,7 +456,10 @@ export const SingleView = () => {
 
   return (
     <WidthWrapper width="small" className="mt-32 lg:mt-36">
-      <SectionInfo images={imageGallery} title="Villa Manao · Private Pool | Bathtub | Sky shower" />
+      <SectionInfo
+        images={imageGallery}
+        title="Villa Manao · Private Pool | Bathtub | Sky shower"
+      />
       <div className="flex flex-col md:flex-row gap-8 md:gap-24 pb-12">
         <div className="flex-1 md:w-1/2 2xl:w-full">
           <div className="divide-y">
@@ -518,22 +524,24 @@ export const SingleView = () => {
       </div>
       <div className="divide-y border-t">
         <div className="py-8">
-          <RatingSummary ratings={ratingSummary.ratings} reviews={ratingSummary.reviews} categories={ratingSummary.categories}/>
+          <RatingSummary
+            ratings={ratingSummary.ratings}
+            reviews={ratingSummary.reviews}
+            categories={ratingSummary.categories}
+          />
         </div>
         <div className="py-8">
           <UserReviews reviews={userReviews} />
         </div>
         <div className="py-8">
-          <WhereYoullBeDescription
-            {...whereYouWillBeDesc}
-          />
+          <WhereYoullBeDescription {...whereYouWillBeDesc} />
         </div>
         <div className="py-8">
           <HostInformation {...hostDummy} />
         </div>
         <div className="pt-8">
-          <ThingsToKnow 
-            houseRules={houseRulesDummy} 
+          <ThingsToKnow
+            houseRules={houseRulesDummy}
             houseRulesModalData={houseRulesModalData}
             safetyProperties={safetyPropertiesDummy}
             safetyModalData={safetyPropertiesModalData}
