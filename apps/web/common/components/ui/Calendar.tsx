@@ -9,6 +9,8 @@ import { buttonVariants } from "./Button"
 
 export type CalendarProps = React.ComponentProps<typeof DayPicker> & {
   size: "lg" | "md"
+  disabledDays?: Date[] | ((date: Date) => boolean) | { [date: string]: boolean };
+  disabled?: boolean;
 }
 
 function Calendar({
