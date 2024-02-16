@@ -91,6 +91,7 @@ const GovernmentId = ({ governmentId }: IPersonalInfo) => {
                     <span
                       onClick={() => openModal(id)}
                       className="text-primary-500 underline cursor-pointer hover:text-primary-700"
+                      onKeyDown={() => {}}
                     >
                       View File
                     </span>
