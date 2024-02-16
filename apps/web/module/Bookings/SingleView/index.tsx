@@ -29,12 +29,51 @@ const reportListingArr = [
   { 
     name: "It’s a scam",
     choices: [{
-      reason: "The host asked me to pay outside of Airbnb",
+      reason: "The host asked me to pay outside of Explore-Siargao",
       description: "Ex: Wire transfer, cash, bank transfer",
+      report: [{
+        reportRes: "Bank or wire transfer",
+      },
+      {
+        reportRes: "Credit or debit card",
+      },
+      {
+        reportRes: "Cash",
+      },
+      {
+        reportRes: "Paypal",
+      },
+      {
+        reportRes: "MoneyGram",
+      },
+      {
+        reportRes: "Western Union",
+      },
+      {
+        reportRes: "Something else",
+      },]
+        
     },
+    
     {
       reason: "The host shared their contact information",
-      description: "Ex: Personal email or phone number" 
+      description: "Ex: Personal email or phone number" ,
+      report: [{
+        reportRes: "Photos",
+      },
+      {
+        reportRes: "Description",
+      },
+      {
+        reportRes: "House Rules",
+      },
+      {
+        reportRes: "Explore-Siargao message",
+      },
+      {
+        reportRes: "Somewhere else",
+      },
+    ]
     },
     {
       reason: "The host is advertising other services",
@@ -53,30 +92,6 @@ const reportListingArr = [
       description: "" 
     },
    ],
-   report: [{
-    reportRes: "Bank or wire transfer",
-  },
-  {
-    reportRes: "Credit or debit card",
-  },
-  {
-    reportRes: "Cash",
-  },
-  {
-    reportRes: "Paypal",
-  },
-  {
-    reportRes: "MoneyGram",
-  },
-  {
-    reportRes: "Western Union",
-  },
-  {
-    reportRes: "Something else",
-  },
-]
-
-    
   },
   { 
     name: "It's offensive",
@@ -122,9 +137,10 @@ const reportListingArr = [
       description: "" 
     },
    ] 
-    
   }
 ];
+
+
 
 export const SingleView = () => {
 

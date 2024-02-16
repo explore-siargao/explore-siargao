@@ -3,18 +3,32 @@ import RightRadioList from "@/common/components/RightRadioList"
 import { Button } from "@/common/components/ui/Button"
 import { Title } from "@/common/components/ui/Title"
 import { Typography } from "@/common/components/ui/Typography"
-import { ChangeEvent, useState } from "react"
+import { ChangeEvent, useEffect, useState } from "react"
 
 interface ModalReportingProps {
   isOpen: boolean
   onClose: () => void
   reportListingArr: {
     name: string
-    report?: { reportRes: string;  }[]
     choices?: {
       description: string; reason?: string; 
+      report?: { reportRes: string; }[]
 }[]
   }[]
+}
+
+var selection = {
+  mainProblem: null as string | null,
+  report: null as string | null,
+  reportDetails: null as string | null,
+  otherDetails: null as string | null,
+};
+
+{
+  mainProblem: "It's a scam"
+  report: "The host asked me to pay outside of Explore Siargao"
+  reportDetails: "Credit card or debit"
+  otherDetails: "Ex. listing says its an entire"
 }
 
 const ModalReporting = ({
@@ -30,6 +44,11 @@ const ModalReporting = ({
   const [isOffensive, setIsOffensive] = useState(false); 
   const [isSomethingElse, setIsSomethingElse] = useState(false);
 
+const [selectedReportRes, setSelectedReportRes] = useState<string>("");
+const [isReportSelected, setIsReportSelected] = useState(false);
+  //for third page
+  const [isBankorWire, setBankorWire] = useState(false);
+  const [isCreditOrDebit, setCreditOrDebit] = useState(false);
 
 
   const isNextButtonDisabled = currentPage === 1 && !selectedOption;
@@ -39,26 +58,34 @@ const ModalReporting = ({
     setIsInaccurateSelected(option === "It's inaccurate or incorrect");
     setIsReport(option === "We got your report");
     setIsScam(option === "Why do you think it’s a scam?");
-    setIsScam(option === "Why do you think it’s offensive?");
+    setIsOffensive(option === "Why do you think it’s offensive?");
     setIsSomethingElse(option === "Why are you reporting this listing?");
-
+  
     if (option === "It's inaccurate or incorrect") {
       setIsInaccurateSelected(true);
-    }
-     else if (option === "It’s not a real place to stay") {
+    } else if (option === "It’s not a real place to stay") {
       setIsReport(true);
-    }
-      else if (option === "It’s a scam") {
+      storeSelection(); 
+    } else if (option === "It’s a scam") {
       setIsScam(true);
-    }
-    else if (option === "It’s offensive") {
+    } else if (option === "It’s offensive") {
       setIsOffensive(true);
-    }
-    else if (option === "It's something else") {
+    } else if (option === "It's something else") {
       setIsSomethingElse(true);
     }
-  }
+  };
 
+  const handleReportSelect = (report: string) => {
+    console.log("Selected Report:", report);
+    setSelectedReportRes(report);
+    setIsReportSelected(true); 
+  };
+
+  const handleReportReasonSelect = (report: string) => {
+    //this is for page 3
+  };
+  
+  
   const nextPage = () => {
     setCurrentPage(currentPage + 1);
     setIsInaccurateSelected(selectedOption === "It's inaccurate or incorrect");
@@ -67,7 +94,9 @@ const ModalReporting = ({
     setIsOffensive(selectedOption === "It's offensive");
     setIsSomethingElse(selectedOption === "It's something else");
 
-
+    //sa third page to
+    setBankorWire(selectedReportRes === "The host asked me to pay outside of Explore-Siargao");
+    setCreditOrDebit(selectedReportRes === "The host shared their contact information");
   }
   const prevPage = () => {
     setCurrentPage(currentPage - 1)
@@ -75,10 +104,34 @@ const ModalReporting = ({
   const selectedReport = reportListingArr.find(
     (report) => report.name === selectedOption
   )
+  const selectedReportReason = reportListingArr.find(report => {
+    return report.choices?.some(choice => choice.reason === selectedReportRes);
+  });
   
+console.log("selectedReportReason:", selectedReportReason);
+
  const handleDescriptionChange = (event: ChangeEvent<HTMLTextAreaElement>): void => {
   setSelectedDescription(event.target.value);
 };
+
+const handleButtonClick = () => {
+  if (selectedOption === "It's not a real place to stay") {
+    storeSelection(); 
+}
+  nextPage(); 
+  storeSelection(); 
+ 
+};
+
+const storeSelection = () => {
+  selection.mainProblem = selectedOption;
+  selection.report = selectedReportRes;
+  selection.otherDetails = selectedDescription;
+  console.log(selection); 
+  //iaadd pa thirpage
+};
+
+
 
   return (
     <ModalContainer size="sm" onClose={onClose} isOpen={isOpen}>
@@ -166,12 +219,18 @@ const ModalReporting = ({
               <RightRadioList
                 title=""
                 lists={(selectedReport?.choices || []).map((choice, num) => ({
+                  
                   id: choice.reason || num.toString(),
                   option: choice.reason || "",
                   description: choice.description || "",
                   report: choice.reason || ""
                 }))}
-                onSelect={(report) => report}
+                onSelect={(report) => {
+                  handleReportSelect(report);
+                  console.log(report); 
+                  console.log(selectedReport);
+                }}
+              
               />
               
             )}
@@ -179,17 +238,24 @@ const ModalReporting = ({
     )}
       {currentPage === 3 && (
       <>
-            {selectedReport?.choices && selectedReport.choices.length > 0 && (
-              <RightRadioList
-                title=""
-                lists={(selectedReport?.report || []).map((choice: { reportRes: any }) => ({
-                  id: choice.reportRes,
-                  option: choice.reportRes,
-                  description: choice.reportRes || "",
-                }))}
-                onSelect={(report) => {}}
-              />
-            )}
+       {console.log("selectedReportReason:", selectedReportReason)}
+       {console.log("selectedReportReason?.choices:", selectedReportReason?.choices)}
+       {selectedReport?.choices && selectedReport.choices.length > 0 &&(
+   
+        <RightRadioList
+          title=""
+          lists={(selectedReportReason?.choices || []).flatMap((choice: { report?: { reportRes: string }[] }) =>
+            (choice.report || []).map((reportItem: { reportRes: string }) => ({
+              id: reportItem.reportRes,
+              option: reportItem.reportRes,
+              description: undefined, 
+              report: reportItem.reportRes || ""
+            }))
+          )}
+          onSelect={(report) => { handleReportReasonSelect(report); console.log("Selected Report Reason" ,selectedReportReason) }}
+        />
+       )}
+       
       </>
        )}
     </div>
@@ -197,7 +263,9 @@ const ModalReporting = ({
     <div className="flex items-center p-4 md:p-5 bottom-0 border-t border-gray-200 rounded-b dark:border-gray-600">
       <div className="flex justify-between w-full">
       {currentPage === 1 && (
-       <Button variant="default" onClick={nextPage} className="ml-auto">
+       <Button variant="default" 
+       onClick={nextPage}  
+       className="ml-auto">
        Next
      </Button>
       )}
@@ -205,7 +273,7 @@ const ModalReporting = ({
          <><Button variant="ghost" onClick={prevPage} className=" mr-2">
               Back
             </Button>
-            <Button variant="default" onClick={nextPage} disabled={isNextButtonDisabled} className=" ml-2">
+            <Button variant="default" onClick={handleButtonClick} disabled={isNextButtonDisabled} className=" ml-2">
                 Next
             </Button>
         </>
@@ -214,7 +282,7 @@ const ModalReporting = ({
          <><Button variant="ghost" onClick={prevPage} className=" mr-2">
               Back
             </Button>
-            <Button variant="default" onClick={nextPage} disabled={isNextButtonDisabled} className=" ml-2">
+            <Button variant="default" onClick={handleButtonClick} disabled={isNextButtonDisabled} className=" ml-2">
                 Next
             </Button>
         </>
