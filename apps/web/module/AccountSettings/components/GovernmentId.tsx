@@ -2,6 +2,7 @@ import { Button } from "@/common/components/ui/Button"
 import { Typography } from "@/common/components/ui/Typography"
 import { IPersonalInfo } from "@/common/types/global"
 import React, { useState } from "react"
+import GovernmentIdModal from "./modals/GovernmentIdModal"
 
 type PersonalInfoProps = {
   isButtonClicked: boolean
@@ -12,6 +13,32 @@ const GovernmentId = ({ governmentId }: IPersonalInfo) => {
     isButtonClicked: false,
     contentId: "",
   })
+
+  type GovernmentIdItem = {
+    type: string
+    fileKey: string
+  }
+
+  const [isModalOpen, setModalOpen] = useState(false)
+  const [selectedGovernmentId, setSelectedGovernmentId] =
+    useState<GovernmentIdItem | null>(null)
+
+  const openModal = (item: GovernmentIdItem) => {
+    setSelectedGovernmentId(item)
+    setModalOpen(true)
+  }
+
+  const closeModal = () => {
+    setModalOpen(false)
+  }
+
+  const GovernmentIdList: GovernmentIdItem[] = [
+    { type: "Passport", fileKey: "1.jpg" },
+    { type: "Driver's License", fileKey: "2.jpg" },
+    { type: "National ID", fileKey: "3.jpg" },
+    { type: "Postal ID", fileKey: "4.jpg" },
+  ]
+
   return (
     <div className="text-sm">
       {!contentState.isButtonClicked ? (
@@ -58,18 +85,18 @@ const GovernmentId = ({ governmentId }: IPersonalInfo) => {
             <div className="w-full my-4">
               <h3 className="text-xl font-semibold">Your IDs</h3>
               <div className="mt-4">
-                <p className="text-lg">
-                  1. Passport{" "}
-                  <span className="text-primary-500 underline cursor-pointer hover:text-primary-700">
-                    View File
-                  </span>
-                </p>
-                <p className="text-lg">
-                  2. Driver's License{" "}
-                  <span className="text-primary-500 underline cursor-pointer hover:text-primary-700">
-                    View File
-                  </span>
-                </p>
+                {GovernmentIdList.map((id, index) => (
+                  <p className="text-lg" key={id.type}>
+                    {index + 1}. {id.type}{" "}
+                    <span
+                      onClick={() => openModal(id)}
+                      className="text-primary-500 underline cursor-pointer hover:text-primary-700"
+                      onKeyDown={() => {}}
+                    >
+                      View File
+                    </span>
+                  </p>
+                ))}
               </div>
             </div>
             <div className="w-full my-4">
@@ -127,6 +154,14 @@ const GovernmentId = ({ governmentId }: IPersonalInfo) => {
             </div>
           </div>
         </div>
+      )}
+      {isModalOpen && selectedGovernmentId && (
+        <GovernmentIdModal
+          isOpen={isModalOpen}
+          onClose={closeModal}
+          title={selectedGovernmentId.type}
+          fileKey={[`/assets/${selectedGovernmentId.fileKey}`]}
+        />
       )}
     </div>
   )
