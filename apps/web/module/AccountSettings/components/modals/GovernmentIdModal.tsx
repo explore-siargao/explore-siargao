@@ -1,31 +1,29 @@
 import ModalContainer from "@/common/components/ModalContainer"
+import { T_GovernmentId } from "@repo/contract"
 import Image from "next/image"
 interface GovernmentIdModalProps {
   isOpen: boolean
   onClose: () => void
-  fileKey: string[]
-  title: string
+  governmentId: T_GovernmentId
 }
 
 const GovernmentIdModal = ({
   isOpen,
   onClose,
-  fileKey,
-  title,
+  governmentId
 }: GovernmentIdModalProps) => {
   return (
-    <ModalContainer title={title} isOpen={isOpen} onClose={onClose} size="sm">
-      <div className="relative space-y-3 pt-5 pb-2 h-[250px] overflow-y-auto">
-        {fileKey.map((data, index) => {
-          return (
-            <div
-              key={`${data}-${index}`}
-              className="relative h-[204px] w-[324px] mx-auto bg-gray-200"
-            >
-              <Image src={data} layout="fill" objectFit="cover" alt="" />
-            </div>
-          )
-        })}
+    <ModalContainer title={governmentId?.type} isOpen={isOpen} onClose={onClose} size="md">
+      <div className="flex justify-center bg-primary-50 border border-primary-200">
+        <div className="relative h-96">
+          <Image
+            src={`/assets/${governmentId?.fileKey}`}
+            alt={governmentId?.type}
+            width={300}
+            height={300}
+            className="object-cover h-full w-full rounded-lg"
+          />
+        </div>
       </div>
     </ModalContainer>
   )

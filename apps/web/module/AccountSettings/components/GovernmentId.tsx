@@ -11,8 +11,7 @@ import toast from "react-hot-toast"
 import useAddGovernmentId from "../hooks/useAddGovernmentId"
 import useSessionStore from "@/common/store/useSessionStore"
 import { E_GovernmentId } from "@repo/contract/build/GovernmentId/enum"
-import { T_BackendResponse } from "@repo/contract"
-import { API_URL_USERS } from "@/common/constants"
+import { T_BackendResponse, T_GovernmentId } from "@repo/contract"
 import GovernmentIdModal from "./modals/GovernmentIdModal"
 
 type PersonalInfoProps = {
@@ -44,7 +43,7 @@ const GovernmentId = ({ governmentId }: IPersonalInfo) => {
   )
   const [isModalOpen, setModalOpen] = useState(false)
   const [selectedGovernmentId, setSelectedGovernmentId] =
-    useState<GovernmentIdItem | null>(null)
+    useState<T_GovernmentId | null>(null)
   const { mutate, isPending } = useAddGovernmentId(session.id as number)
   const { getRootProps, getInputProps, isFocused } = useDropzone({
     multiple: false,
@@ -89,7 +88,7 @@ const GovernmentId = ({ governmentId }: IPersonalInfo) => {
     }
   }
 
-  const openModal = (item: GovernmentIdItem) => {
+  const openGovernmentIdModal = (item: T_GovernmentId) => {
     setSelectedGovernmentId(item)
     setModalOpen(true)
   }
@@ -106,13 +105,13 @@ const GovernmentId = ({ governmentId }: IPersonalInfo) => {
   ]
 
   return (
-    <div className="text-sm">
+    <div>
       {!contentState.isButtonClicked ? (
         <div className="flex justify-between py-5">
           <div>
             <Typography variant={"p"}>Goverment ID</Typography>
             <Typography fontWeight={"light"}>
-              {governmentId ? `${governmentId.length} ID${governmentId.length > 0 && "s"} provided` : "Not Provided"}
+              {governmentId ? `${governmentId.length} ID${governmentId.length > 1 ? "s" : ""} provided` : "Not Provided"}
             </Typography>
           </div>
           <button
@@ -147,15 +146,15 @@ const GovernmentId = ({ governmentId }: IPersonalInfo) => {
             We’ll need you to add an official government ID. This step helps
             make sure you’re really you.
           </Typography>
-          <div className="grid grid-cols-2">
+          <div className="grid md:grid-cols-2">
             <div className="w-full my-4">
               <h3 className="text-xl font-semibold">Your IDs</h3>
               <div className="mt-4">
-                {GovernmentIdList.map((id, index) => (
+                {governmentId?.map((id, index) => (
                   <p className="text-lg" key={id.type}>
                     {index + 1}. {id.type}{" "}
                     <span
-                      onClick={() => openModal(id)}
+                      onClick={() => openGovernmentIdModal(id)}
                       className="text-primary-500 underline cursor-pointer hover:text-primary-700"
                       onKeyDown={() => {}}
                     >
@@ -190,7 +189,7 @@ const GovernmentId = ({ governmentId }: IPersonalInfo) => {
                   <div className="relative h-96">
                     <Image
                       src={file?.preview ?? '/assets/1.jpg'}
-                      alt="Profile image"
+                      alt={`preview-${idType}`}
                       width={300}
                       height={300}
                       className="object-cover h-full w-full rounded-lg"
@@ -254,8 +253,7 @@ const GovernmentId = ({ governmentId }: IPersonalInfo) => {
       <GovernmentIdModal
         isOpen={isModalOpen}
         onClose={closeModal}
-        title={selectedGovernmentId?.type as string}
-        fileKey={[`/assets/${selectedGovernmentId?.fileKey}`]}
+        governmentId={selectedGovernmentId as T_GovernmentId}
       />
     </div>
   )
