@@ -10,10 +10,15 @@ interface GovernmentIdModalProps {
 const GovernmentIdModal = ({
   isOpen,
   onClose,
-  governmentId
+  governmentId,
 }: GovernmentIdModalProps) => {
   return (
-    <ModalContainer title={governmentId?.type} isOpen={isOpen} onClose={onClose} size="md">
+    <ModalContainer
+      title={governmentId?.type}
+      isOpen={isOpen}
+      onClose={onClose}
+      size="md"
+    >
       <div className="flex justify-center bg-primary-50 border border-primary-200">
         <div className="relative h-96">
           <Image
