@@ -1,3 +1,5 @@
+import { T_GovernmentId } from "@repo/contract"
+
 export interface IUser {
   id?: number
   role?: UserRole
@@ -19,7 +21,7 @@ export interface IPersonalInfo {
   lastName?: string
   middleName?: string
   birthDate?: string
-  governmentId?: string
+  governmentId?: T_GovernmentId[]
   phoneNumber?: string
   country?: string
   address?: IAddress

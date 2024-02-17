@@ -1,29 +1,94 @@
 import { Button } from "@/common/components/ui/Button"
+import { Option, Select } from "@/common/components/ui/Select"
 import { Typography } from "@/common/components/ui/Typography"
+import { cn } from "@/common/helpers/cn"
 import { IPersonalInfo } from "@/common/types/global"
+import { LucideUndo2 } from "lucide-react"
+import Image from "next/image"
 import React, { useState } from "react"
+import { FileWithPath, useDropzone } from "react-dropzone"
+import toast from "react-hot-toast"
+import useAddGovernmentId from "../hooks/useAddGovernmentId"
+import useSessionStore from "@/common/store/useSessionStore"
+import { E_GovernmentId } from "@repo/contract/build/GovernmentId/enum"
+import { T_BackendResponse, T_GovernmentId } from "@repo/contract"
 import GovernmentIdModal from "./modals/GovernmentIdModal"
 
 type PersonalInfoProps = {
   isButtonClicked: boolean
   contentId: string
 }
+
+type GovernmentIdItem = {
+  type: string
+  fileKey: string
+}
+
+const ID_TYPES = [
+  { name: "Driver's License", value: E_GovernmentId.DriversLicense },
+  { name: "Passport", value: E_GovernmentId.Passport },
+  { name: "National ID", value: E_GovernmentId.NationalID },
+  { name: "Postal ID", value: E_GovernmentId.PostalID },
+]
+
 const GovernmentId = ({ governmentId }: IPersonalInfo) => {
+  const session = useSessionStore((state) => state)
+  const [idType, setIdType] = useState<E_GovernmentId | null>(null)
   const [contentState, setContentState] = useState<PersonalInfoProps>({
     isButtonClicked: false,
     contentId: "",
   })
-
-  type GovernmentIdItem = {
-    type: string
-    fileKey: string
-  }
-
+  const [file, setFile] = useState<(FileWithPath & { preview: string }) | null>(
+    null
+  )
   const [isModalOpen, setModalOpen] = useState(false)
   const [selectedGovernmentId, setSelectedGovernmentId] =
-    useState<GovernmentIdItem | null>(null)
+    useState<T_GovernmentId | null>(null)
+  const { mutate, isPending } = useAddGovernmentId(session.id as number)
+  const { getRootProps, getInputProps, isFocused } = useDropzone({
+    multiple: false,
+    accept: {
+      "image/jpeg": [],
+      "image/jpg": [],
+      "image/png": [],
+    },
+    onDrop: (acceptedFiles: FileWithPath[]) => {
+      setFile(
+        // @ts-ignore
+        Object.assign(acceptedFiles[0], {
+          // @ts-ignore
+          preview: URL.createObjectURL(acceptedFiles[0]),
+        })
+      )
+    },
+    onDropRejected: () => {
+      toast.error("Only images and videos are allowed")
+    },
+    disabled: isPending,
+  })
+  const saveUpload = () => {
+    if (!idType || !file) {
+      toast.error("Please add the Identification Type and an image")
+    } else {
+      const callBackReq = {
+        onSuccess: (data: T_BackendResponse) => {
+          if (!data.error) {
+            setIdType(null)
+            setFile(null)
+            toast.success("Successfully uploaded Government ID")
+          } else {
+            toast.error(String(data.message))
+          }
+        },
+        onError: (err: any) => {
+          toast.error(String(err))
+        },
+      }
+      mutate({ type: idType, file }, callBackReq)
+    }
+  }
 
-  const openModal = (item: GovernmentIdItem) => {
+  const openGovernmentIdModal = (item: T_GovernmentId) => {
     setSelectedGovernmentId(item)
     setModalOpen(true)
   }
@@ -40,13 +105,15 @@ const GovernmentId = ({ governmentId }: IPersonalInfo) => {
   ]
 
   return (
-    <div className="text-sm">
+    <div>
       {!contentState.isButtonClicked ? (
         <div className="flex justify-between py-5">
           <div>
             <Typography variant={"p"}>Goverment ID</Typography>
             <Typography fontWeight={"light"}>
-              {governmentId ? governmentId.toString() : "Not Provided"}
+              {governmentId
+                ? `${governmentId.length} ID${governmentId.length > 1 ? "s" : ""} provided`
+                : "Not Provided"}
             </Typography>
           </div>
           <button
@@ -81,15 +148,15 @@ const GovernmentId = ({ governmentId }: IPersonalInfo) => {
             We’ll need you to add an official government ID. This step helps
             make sure you’re really you.
           </Typography>
-          <div className="grid grid-cols-2">
+          <div className="grid md:grid-cols-2">
             <div className="w-full my-4">
               <h3 className="text-xl font-semibold">Your IDs</h3>
               <div className="mt-4">
-                {GovernmentIdList.map((id, index) => (
+                {governmentId?.map((id, index) => (
                   <p className="text-lg" key={id.type}>
                     {index + 1}. {id.type}{" "}
                     <span
-                      onClick={() => openModal(id)}
+                      onClick={() => openGovernmentIdModal(id)}
                       className="text-primary-500 underline cursor-pointer hover:text-primary-700"
                       onKeyDown={() => {}}
                     >
@@ -102,19 +169,44 @@ const GovernmentId = ({ governmentId }: IPersonalInfo) => {
             <div className="w-full my-4">
               <h3 className="text-xl font-semibold">Upload your ID here</h3>
               <div className="mt-4">
-                <select
-                  id="stars"
-                  className="pr-10 text-text-900 focus-within:z-10 focus-within:ring-2 focus-within:ring-text-600 text-sm rounded-md block"
+                <Select
+                  label="Identification Type"
+                  onChange={(e) => setIdType(e.target.value as E_GovernmentId)}
+                  value={idType ? idType : ""}
+                  disabled={isPending}
+                  required
                 >
-                  <option value="">ID Type</option>
-                  <option>Driver's License</option>
-                  <option>Passport</option>
-                  <option>National ID</option>
-                  <option>Postal ID</option>
-                </select>
+                  <Option value={""}>Select</Option>
+                  {ID_TYPES.map((idType) => {
+                    return (
+                      <Option key={idType.name} value={idType.value}>
+                        {idType.name}
+                      </Option>
+                    )
+                  })}
+                </Select>
+              </div>
+              {file ? (
+                <div className="flex justify-center my-6 bg-primary-50 rounded-lg border border-primary-200">
+                  <div className="relative h-96">
+                    <Image
+                      src={file?.preview ?? "/assets/1.jpg"}
+                      alt={`preview-${idType}`}
+                      width={300}
+                      height={300}
+                      className="object-cover h-full w-full rounded-lg"
+                    />
+                  </div>
+                </div>
+              ) : (
                 <label
+                  {...getRootProps()}
                   htmlFor="dropzone-file"
-                  className="flex flex-col items-center justify-center w-full h-64 border-2 border-primary-300 border-dashed rounded-lg cursor-pointer bg-primary-50 hover:bg-primary-100 mt-4"
+                  className={cn(
+                    isPending && "opacity-50",
+                    isFocused && "opacity-80",
+                    "flex flex-col items-center justify-center w-full h-64 border-2 border-primary-300 border-dashed rounded-lg cursor-pointer bg-primary-50 hover:bg-primary-100 mt-4"
+                  )}
                 >
                   <div className="flex flex-col items-center justify-center pt-5 pb-6">
                     <svg
@@ -140,29 +232,30 @@ const GovernmentId = ({ governmentId }: IPersonalInfo) => {
                       PNG, JPG or GIF (MAX. 800x400px)
                     </Typography>
                   </div>
-                  <input
-                    id="dropzone-file"
-                    type="file"
-                    className="hidden"
-                    accept="image/png, image/gif, image/jpeg"
-                  />
+                  <input {...getInputProps()} />
                 </label>
-              </div>
-              <Button className="w-20 mt-4" size="sm">
-                Upload
-              </Button>
+              )}
+              {file && (
+                <div className="flex justify-between items-center">
+                  <button
+                    className="flex items-center gap-1 mt-1 group hover:text-text-600"
+                    onClick={() => setFile(null)}
+                  >
+                    <LucideUndo2 className="h-4 w-4 text-text-700 group-hover:text-text-600" />
+                    Undo Image
+                  </button>
+                  <Button onClick={() => saveUpload()}>Upload and Save</Button>
+                </div>
+              )}
             </div>
           </div>
         </div>
       )}
-      {isModalOpen && selectedGovernmentId && (
-        <GovernmentIdModal
-          isOpen={isModalOpen}
-          onClose={closeModal}
-          title={selectedGovernmentId.type}
-          fileKey={[`/assets/${selectedGovernmentId.fileKey}`]}
-        />
-      )}
+      <GovernmentIdModal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        governmentId={selectedGovernmentId as T_GovernmentId}
+      />
     </div>
   )
 }
