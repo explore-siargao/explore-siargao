@@ -66,7 +66,12 @@ const isUserLoggedIn = async (
         canReceiveEmail: user?.canReceiveEmail as boolean,
         changePasswordAt: String(user?.changePasswordAt),
         // TODO: FIX THE ANY FOR THIS VALUE
-        personalInfo: user?.personalInfo as any,
+        personalInfo: {
+          ...user?.personalInfo,
+          governmentId: user?.personalInfo?.governmentId
+            ? JSON.parse(user?.personalInfo?.governmentId)
+            : null,
+        } as any,
       }
       res.locals.user = authUser
       next()

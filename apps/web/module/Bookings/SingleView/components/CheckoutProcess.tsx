@@ -8,6 +8,7 @@ import formatCurrency from "@/common/helpers/formatCurrency"
 import CheckoutBreakdownModal from "./modals/CheckoutBreakdownModal"
 import { useState } from "react"
 import CheckoutMoreInfoModal from "./modals/CheckoutMoreInfoModal"
+import Link from "next/link"
 
 interface ICheckout {
   id?: number
@@ -35,7 +36,9 @@ const CheckoutProcess = ({ checkoutDesc }: CheckoutProcessProps) => {
         <Input id="checkIn" label="CHECK-IN" required={true} />
         <Input id="checkOut" label="CHECK-OUT" required={true} />
         <Select id="guest" label="GUESTS" required={true} />
-        <Button variant="primary">Reserve</Button>
+        <Button variant="primary">
+          <Link href="/accommodation/1/checkout">Reserve</Link>
+        </Button>
         <Typography className="text-center mb-5 text-sm">
           You won't be charge yet
         </Typography>
