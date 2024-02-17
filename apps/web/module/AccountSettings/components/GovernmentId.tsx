@@ -111,7 +111,9 @@ const GovernmentId = ({ governmentId }: IPersonalInfo) => {
           <div>
             <Typography variant={"p"}>Goverment ID</Typography>
             <Typography fontWeight={"light"}>
-              {governmentId ? `${governmentId.length} ID${governmentId.length > 1 ? "s" : ""} provided` : "Not Provided"}
+              {governmentId
+                ? `${governmentId.length} ID${governmentId.length > 1 ? "s" : ""} provided`
+                : "Not Provided"}
             </Typography>
           </div>
           <button
@@ -188,7 +190,7 @@ const GovernmentId = ({ governmentId }: IPersonalInfo) => {
                 <div className="flex justify-center my-6 bg-primary-50 rounded-lg border border-primary-200">
                   <div className="relative h-96">
                     <Image
-                      src={file?.preview ?? '/assets/1.jpg'}
+                      src={file?.preview ?? "/assets/1.jpg"}
                       alt={`preview-${idType}`}
                       width={300}
                       height={300}
