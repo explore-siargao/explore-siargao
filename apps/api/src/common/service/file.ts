@@ -46,7 +46,10 @@ export class FileService {
   async upload(uploadFileParams: T_UploadFileParams) {
     const { files, key, multiple = false } = uploadFileParams
     const randomId = randomUUID()
-    const fileContent = Buffer.from(multiple ? files?.files?.data : files?.file?.data, 'binary')
+    const fileContent = Buffer.from(
+      multiple ? files?.files?.data : files?.file?.data,
+      'binary'
+    )
     const params: PutObjectCommandInput = {
       Bucket: this.BUCKET_NAME,
       Key: key ? key : randomId,

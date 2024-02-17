@@ -22,7 +22,8 @@ export async function addGovernmentId(
 
 function useAddGovernmentId(personId: number) {
   const query = useMutation({
-    mutationFn: (props: T_AddGovernmentId & { file: FileWithPath }) => addGovernmentId(personId, props),
+    mutationFn: (props: T_AddGovernmentId & { file: FileWithPath }) =>
+      addGovernmentId(personId, props),
   })
   return query
 }
