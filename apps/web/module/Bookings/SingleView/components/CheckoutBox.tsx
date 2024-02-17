@@ -1,16 +1,16 @@
 "use client"
 import PesoSign from "@/common/components/PesoSign"
 import { Button } from "@/common/components/ui/Button"
-import { Input } from "@/common/components/ui/Input"
 import { Select } from "@/common/components/ui/Select"
 import formatCurrency from "@/common/helpers/formatCurrency"
 import CheckoutBreakdownModal from "./modals/CheckoutBreakdownModal"
-import { useRef, useState } from "react"
+import { useState } from "react"
 import CheckoutMoreInfoModal from "./modals/CheckoutMoreInfoModal"
 import CheckInOutModal from "./modals/CheckInOutModal"
 import useCheckInOutDateStore from "@/common/store/useCheckInOutDateStore"
 import Asterisk from "@/common/components/ui/Asterisk"
 import { format } from "date-fns"
+import Link from "next/link"
 
 interface ICheckout {
   id?: number
@@ -71,8 +71,8 @@ const CheckoutBox = ({ checkoutDesc }: CheckoutProcessProps) => {
           </div>
         </div>
         <Select id="guest" label="GUESTS" required={true} />
-        <Button className="mb-5" variant="primary">
-          Book Now
+        <Button variant="primary">
+          <Link href="/accommodation/1/checkout">Book Now</Link>
         </Button>
       </div>
       <div>
