@@ -30,10 +30,10 @@ const ID_TYPES = [
   { name: "Passport", value: E_GovernmentId.Passport },
   { name: "National ID", value: E_GovernmentId.NationalID },
   { name: "Postal ID", value: E_GovernmentId.PostalID },
-];
+]
 
 const GovernmentId = ({ governmentId }: IPersonalInfo) => {
-  const session = useSessionStore((state) => state);
+  const session = useSessionStore((state) => state)
   const [idType, setIdType] = useState<E_GovernmentId | null>(null)
   const [contentState, setContentState] = useState<PersonalInfoProps>({
     isButtonClicked: false,
@@ -112,7 +112,9 @@ const GovernmentId = ({ governmentId }: IPersonalInfo) => {
           <div>
             <Typography variant={"p"}>Goverment ID</Typography>
             <Typography fontWeight={"light"}>
-              {governmentId ? `${governmentId.length} ID${governmentId.length > 0 && "s"} provided` : "Not Provided"}
+              {governmentId
+                ? `${governmentId.length} ID${governmentId.length > 0 && "s"} provided`
+                : "Not Provided"}
             </Typography>
           </div>
           <button
@@ -181,7 +183,7 @@ const GovernmentId = ({ governmentId }: IPersonalInfo) => {
                       <Option key={idType.name} value={idType.value}>
                         {idType.name}
                       </Option>
-                    );
+                    )
                   })}
                 </Select>
               </div>
@@ -189,7 +191,7 @@ const GovernmentId = ({ governmentId }: IPersonalInfo) => {
                 <div className="flex justify-center my-6 bg-primary-50 rounded-lg border border-primary-200">
                   <div className="relative h-96">
                     <Image
-                      src={file?.preview ?? '/assets/1.jpg'}
+                      src={file?.preview ?? "/assets/1.jpg"}
                       alt="Profile image"
                       width={300}
                       height={300}
@@ -197,44 +199,43 @@ const GovernmentId = ({ governmentId }: IPersonalInfo) => {
                     />
                   </div>
                 </div>
-              ) :
-                (
-                  <label
-                    {...getRootProps()}
-                    htmlFor="dropzone-file"
-                    className={cn(
-                      isPending && "opacity-50",
-                      isFocused && "opacity-80",
-                      "flex flex-col items-center justify-center w-full h-64 border-2 border-primary-300 border-dashed rounded-lg cursor-pointer bg-primary-50 hover:bg-primary-100 mt-4"
-                    )}
-                  >
-                    <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                      <svg
-                        className="w-8 h-8 mb-4 text-primary-500"
-                        aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 20 16"
-                      >
-                        <path
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
-                        />
-                      </svg>
-                      <Typography className="mb-2 text-text-500 d">
-                        <span className="font-semibold">Click to upload</span> or
-                        drag and drop
-                      </Typography>
-                      <Typography className="text-xs text-text-500">
-                        PNG, JPG or GIF (MAX. 800x400px)
-                      </Typography>
-                    </div>
-                    <input {...getInputProps()} />
-                  </label>
-                )}
+              ) : (
+                <label
+                  {...getRootProps()}
+                  htmlFor="dropzone-file"
+                  className={cn(
+                    isPending && "opacity-50",
+                    isFocused && "opacity-80",
+                    "flex flex-col items-center justify-center w-full h-64 border-2 border-primary-300 border-dashed rounded-lg cursor-pointer bg-primary-50 hover:bg-primary-100 mt-4"
+                  )}
+                >
+                  <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                    <svg
+                      className="w-8 h-8 mb-4 text-primary-500"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 20 16"
+                    >
+                      <path
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+                      />
+                    </svg>
+                    <Typography className="mb-2 text-text-500 d">
+                      <span className="font-semibold">Click to upload</span> or
+                      drag and drop
+                    </Typography>
+                    <Typography className="text-xs text-text-500">
+                      PNG, JPG or GIF (MAX. 800x400px)
+                    </Typography>
+                  </div>
+                  <input {...getInputProps()} />
+                </label>
+              )}
               {file && (
                 <div className="flex justify-between items-center">
                   <button

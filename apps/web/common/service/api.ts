@@ -43,7 +43,12 @@ export class ApiService {
     return (await res).json()
   }
 
-  async post<T = T_BackendResponse>(endpoint: string, body: any, raw?: boolean, removeContentType?: boolean): Promise<T> {
+  async post<T = T_BackendResponse>(
+    endpoint: string,
+    body: any,
+    raw?: boolean,
+    removeContentType?: boolean
+  ): Promise<T> {
     const otherOptions = this.constructOptions(removeContentType)
     const res = fetch(`${this.BASE_URL}${endpoint}`, {
       method: "POST",
@@ -53,7 +58,12 @@ export class ApiService {
     return (await res).json()
   }
 
-  async patch<T = T_BackendResponse>(endpoint: string, body?: any, raw?: boolean, removeContentType?: boolean): Promise<T> {
+  async patch<T = T_BackendResponse>(
+    endpoint: string,
+    body?: any,
+    raw?: boolean,
+    removeContentType?: boolean
+  ): Promise<T> {
     const otherOptions = this.constructOptions(removeContentType)
     const res = fetch(`${this.BASE_URL}${endpoint}`, {
       method: "PATCH",
@@ -63,7 +73,12 @@ export class ApiService {
     return (await res).json()
   }
 
-  async delete<T = T_BackendResponse>(endpoint: string, body?: any, raw?: boolean, removeContentType?: boolean): Promise<T> {
+  async delete<T = T_BackendResponse>(
+    endpoint: string,
+    body?: any,
+    raw?: boolean,
+    removeContentType?: boolean
+  ): Promise<T> {
     const otherOptions = this.constructOptions(removeContentType)
     const res = fetch(`${this.BASE_URL}${endpoint}`, {
       method: "DELETE",

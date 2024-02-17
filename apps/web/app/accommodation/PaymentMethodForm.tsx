@@ -71,8 +71,7 @@ const PaymentMethodForm = () => {
     }
   }
 
-  const onSubmit = (data: any) => {
-  }
+  const onSubmit = (data: any) => {}
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
