@@ -1,6 +1,6 @@
 import { ResponseService } from '@/common/service/response'
 import { PrismaClient } from '@prisma/client'
-import { REQUIRED_VALUE_EMPTY, USER_NOT_EXIST } from '@repo/constants'
+import { REQUIRED_VALUE_EMPTY, USER_NOT_EXIST } from '@/common/constants'
 import { Z_Review } from '@repo/contract'
 import { Request, Response } from 'express'
 
@@ -20,20 +20,96 @@ export const getReviewByListing = async (req: Request, res: Response) => {
         where: {
           listingId: listingId,
         },
+        include: {
+          user: {
+            select: {
+              personalInfo: {
+                select: {
+                  firstName: true,
+                  middleName: true,
+                  lastName: true,
+                  address: true,
+                },
+              },
+            },
+          },
+        },
+      })
+      let overallRating = 0
+      let cleanlinessAverage = 0
+      let accuracyAverage = 0
+      let checkInAverage = 0
+      let communicationAverage = 0
+      let locationAverage = 0
+      let valueAverage = 0
+      let totalCleanliness = 0
+      let totalAccuracy = 0
+      let totalCheckIn = 0
+      let totalCommunication = 0
+      let totalLocation = 0
+      let totalValue = 0
+      let totalRating = 0
+      const transformedReviews = reviews.map((review) => {
+        totalCleanliness = totalCleanliness + review.cleanLinessRates
+        totalAccuracy = totalAccuracy + review.accuracyRates
+        totalCheckIn = totalCheckIn + review.checkInRates
+        totalCommunication = totalCommunication + review.communicationRates
+        totalLocation = totalLocation + review.locationRates
+        totalValue = totalValue + review.valueRates
+        cleanlinessAverage = totalCleanliness / reviews.length
+        accuracyAverage = totalAccuracy / reviews.length
+        checkInAverage = totalCheckIn / reviews.length
+        communicationAverage = totalCommunication / reviews.length
+        locationAverage = totalLocation / reviews.length
+        valueAverage = totalValue / reviews.length
+        return {
+          name: `${review?.user?.personalInfo?.firstName} ${review?.user?.personalInfo?.lastName}`,
+          rating:
+            (review.cleanLinessRates +
+              review.accuracyRates +
+              review.checkInRates +
+              review.communicationRates +
+              review.locationRates +
+              review.valueRates) /
+            6,
+          description: review.comment,
+          reviewDate: review.createdAt,
+          country: review.user.personalInfo?.address?.country,
+        }
       })
       if (reviews.length !== 0) {
         res.json(
           response.success({
-            items: reviews,
-            allItemCount: reviews.length,
+            item: {
+              reviews: transformedReviews,
+              average: {
+                cleanliness: cleanlinessAverage,
+                accuracy: accuracyAverage,
+                checkIn: checkInAverage,
+                communication: communicationAverage,
+                location: locationAverage,
+                value: valueAverage,
+              },
+              overallRating:
+                (cleanlinessAverage +
+                  accuracyAverage +
+                  checkInAverage +
+                  communicationAverage +
+                  locationAverage +
+                  valueAverage) /
+                6,
+              allItemCount: reviews.length,
+            },
             message: '',
           })
         )
       } else {
         res.json(
           response.success({
-            items: reviews,
-            allItemCount: reviews.length,
+            item: {
+              items: transformedReviews,
+              allItemCount: reviews.length,
+            },
             message: 'No reviews found on this listing item.',
           })
         )
@@ -71,9 +147,46 @@ export const getReviewById = async (req: Request, res: Response) => {
   }
 }
 
+export const getReviewsByUserId = async (req: Request, res: Response) => {
+  const userId = Number(req.params.userId)
+  try {
+    const getReviewByUserId = await prisma.review.findMany({
+      include: {
+        listing: true,
+      },
+      where: {
+        userId,
+        deletedAt: null,
+      },
+    })
+    if (getReviewByUserId) {
+      res.json(
+        response.success({
+          items: getReviewByUserId,
+          allItemCount: getReviewByUserId.length,
+          message: '',
+        })
+      )
+    } else {
+      res.json(response.error({ message: 'User has no reviews' }))
+    }
+  } catch (err: any) {
+    res.json(response.error({ message: err.message }))
+  }
+}
+
 export const addReview = async (req: Request, res: Response) => {
   const userId = Number(req.params.userId)
-  const { listingId, rates, comment } = req.body
+  const {
+    listingId,
+    cleanLinessRates,
+    accuracyRates,
+    checkInRates,
+    communicationRates,
+    locationRates,
+    valueRates,
+    comment,
+  } = req.body
   const inputIsValid = Z_Review.safeParse(req.body)
   if (!inputIsValid.success) {
     return res.json(
@@ -86,14 +199,27 @@ export const addReview = async (req: Request, res: Response) => {
         id: userId,
       },
     })
+    const getListing = await prisma.listing.findUnique({
+      where: {
+        id: listingId,
+      },
+    })
     if (!getUser) {
       return res.json(response.error({ message: USER_NOT_EXIST }))
+    }
+    if (!getListing) {
+      return res.json(response.error({ message: 'Listing not found' }))
     }
     const newReview = await prisma.review.create({
       data: {
         userId: userId,
         listingId: listingId,
-        rates: rates,
+        cleanLinessRates: cleanLinessRates,
+        accuracyRates: accuracyRates,
+        checkInRates: checkInRates,
+        communicationRates: communicationRates,
+        locationRates: locationRates,
+        valueRates: valueRates,
         comment: comment,
       },
     })
@@ -112,8 +238,24 @@ export const addReview = async (req: Request, res: Response) => {
 export const updateReview = async (req: Request, res: Response) => {
   const userId = Number(req.params.userId)
   const reviewId = Number(req.params.reviewId)
-  const { rates, comment } = req.body
-  if (rates || comment) {
+  const {
+    cleanLinessRates,
+    accuracyRates,
+    checkInRates,
+    communicationRates,
+    locationRates,
+    valueRates,
+    comment,
+  } = req.body
+  if (
+    cleanLinessRates ||
+    accuracyRates ||
+    checkInRates ||
+    communicationRates ||
+    locationRates ||
+    valueRates ||
+    comment
+  ) {
     try {
       const getUser = await prisma.user.findUnique({
         where: {
@@ -136,7 +278,12 @@ export const updateReview = async (req: Request, res: Response) => {
           id: reviewId,
         },
         data: {
-          rates: rates,
+          cleanLinessRates: cleanLinessRates,
+          accuracyRates: accuracyRates,
+          checkInRates: checkInRates,
+          communicationRates: communicationRates,
+          locationRates: locationRates,
+          valueRates: valueRates,
           comment: comment,
         },
       })

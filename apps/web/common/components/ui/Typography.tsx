@@ -5,20 +5,20 @@ const typographyVariants = cva("", {
   variants: {
     variant: {
       p: "text-base",
-      h1: "text-3xl font-semibold",
-      h2: "text-2xl font-semibold",
-      h3: "text-xl font-semibold",
-      h4: "text-lg font-semibold",
-      h5: "text-sm font-semibold",
-      h6: "text-xs font-semibold",
+      h1: "text-2xl",
+      h2: "text-xl",
+      h3: "text-lg",
+      h4: "text-base",
+      h5: "text-sm",
+      h6: "text-xs",
     },
     fontWeight: {
       normal: "font-normal",
+      semibold: "font-semibold",
       bold: "font-bold",
       thin: "font-thin",
       light: "font-light",
       extralight: "font-extralight",
-      semiBold: "font-semibold",
     },
   },
   defaultVariants: {
@@ -34,13 +34,14 @@ export interface TypographyProps
 
 const Typography = React.forwardRef<HTMLDivElement, TypographyProps>(
   ({ variant, fontWeight, className, children }, ref) => {
+    const Comp = variant ?? "p"
     return (
-      <p
+      <Comp
         ref={ref}
         className={cn(typographyVariants({ variant, fontWeight, className }))}
       >
         {children}
-      </p>
+      </Comp>
     )
   }
 )

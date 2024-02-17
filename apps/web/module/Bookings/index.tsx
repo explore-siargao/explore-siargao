@@ -1,3 +1,4 @@
+"use client"
 import React from "react"
 import { Title } from "@/common/components/ui/Title"
 import BookingBoxContainer from "@/common/components/BookingBoxContainer"
@@ -9,7 +10,6 @@ import useSessionStore from "@/common/store/useSessionStore"
 const Bookings = () => {
   const userId = useSessionStore((state) => state).id
   const { data, isPending } = useGetAllBookings()
-
   return (
     <WidthWrapper className="my-24 lg:my-32">
       {isPending ? (
@@ -25,15 +25,10 @@ const Bookings = () => {
                 location={item.address}
                 date={item.description}
                 distance={"100 kilometers away"}
-                price={
-                  "₱" +
-                  (item?.price?.fee +
-                    item.price.cleaningFee +
-                    item.price.serviceFee)
-                }
-                imageKey={JSON.parse(item.imageUrls)[0].fileKey as string}
+                price={"₱" + item.price}
+                imageKey={item.imageKey[0].fileKey as string}
                 dayTime={item.price.isNight ? "Night" : ""}
-                ratings={item.review.length !== 0 ? item.review.rate : "0.0"}
+                ratings={item.ratings}
                 isHearted={
                   item.wishes.filter((value: any) => value.userId === userId)
                     .length !== 0

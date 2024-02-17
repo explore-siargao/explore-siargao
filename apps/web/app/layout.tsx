@@ -12,6 +12,7 @@ import authOptions from "@/common/helpers/authOptions"
 import { APP_NAME } from "@repo/constants"
 import BottomNavBar from "@/module/Authentication/components/BottomNavBar"
 import Header from "@/module/LandingPage/components/Header"
+import Footer from "@/common/components/Footer"
 
 const nunito = Nunito({ subsets: ["latin"] })
 
@@ -35,7 +36,8 @@ export default async function RootLayout({
           <QueryClientWrapper>
             <GlobalModalWrapper>
               <Header />
-              {children}
+              <div className="min-h-screen">{children}</div>
+              <Footer />
             </GlobalModalWrapper>
             <BottomNavBar />
           </QueryClientWrapper>

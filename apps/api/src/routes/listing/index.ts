@@ -52,6 +52,7 @@ import {
   deleteReview,
   getReviewById,
   getReviewByListing,
+  getReviewsByUserId,
   updateReview,
 } from './service/reviews'
 import {
@@ -99,6 +100,21 @@ import {
   getReportsByListing,
   updateReport,
 } from './service/reportListings'
+import {
+  addDescription,
+  deleteDescription,
+  getDescription,
+  getDescriptionByListing,
+  updateDescription,
+} from './service/listingDescription'
+import {
+  addReservation,
+  deleteReservation,
+  getAllReservationByUser,
+  getReservation,
+  getReservationByListing,
+  updateReservation,
+} from './service/reservationListing'
 
 const router = express.Router()
 
@@ -214,9 +230,34 @@ router.delete(
 )
 
 //reviews
-router.get('/reviews/:listingId', getReviewByListing)
-router.get('/reviews/view/:reviewId', getReviewById)
-router.post('/:userId/reviews/post', addReview)
+router.get(
+  '/reviews/user/:userId',
+  isOriginValid,
+  isCsrfTokenValid,
+  isUserLoggedIn,
+  getReviewsByUserId
+)
+router.get(
+  '/reviews/:listingId',
+  isOriginValid,
+  isCsrfTokenValid,
+  isUserLoggedIn,
+  getReviewByListing
+)
+router.get(
+  '/reviews/view/:reviewId',
+  isOriginValid,
+  isCsrfTokenValid,
+  isUserLoggedIn,
+  getReviewById
+)
+router.post(
+  '/:userId/reviews/post',
+  isOriginValid,
+  isCsrfTokenValid,
+  isUserLoggedIn,
+  addReview
+)
 router.patch('/:userId/reviews/update/:reviewId', updateReview)
 router.delete('/:userId/reviews/delete/:reviewId', deleteReview)
 
@@ -271,4 +312,18 @@ router.post('/:userId/reports', addReport)
 router.patch('/:userId/reports/:id', updateReport)
 router.delete('/:userId/reports/:id', deleteReport)
 
+//listing description
+router.get('/listing-description/:id', getDescription)
+router.get('/listing-description/listing/:listingId', getDescriptionByListing)
+router.post('/:userId/listing-description/:listingId', addDescription)
+router.patch('/:userId/listing-description/:id', updateDescription)
+router.delete('/:userId/listing-description/:id', deleteDescription)
+
+//listing reservation
+router.get('/reservation-listing/user/:userId', getAllReservationByUser)
+router.get('/reservation-listing/:id', getReservation)
+router.get('/reservation-listing/listing/:listingId', getReservationByListing)
+router.post('/:userId/reservation-listing', addReservation)
+router.patch('/:userId/reservation-listing/:id', updateReservation)
+router.delete('/:userId/reservation-listing/:id', deleteReservation)
 export default router

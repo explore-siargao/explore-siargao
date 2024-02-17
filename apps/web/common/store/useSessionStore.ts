@@ -1,5 +1,5 @@
 import { create } from "zustand"
-import { T_Session } from "@repo/contract"
+import { E_UserRole, T_Session } from "@repo/contract"
 
 type T_Session_Action = {
   update: (session: T_Session) => void
@@ -12,7 +12,9 @@ const useSessionStore = create<T_Session & T_Session_Action>((set) => ({
   profilePicture: null,
   registrationType: null,
   deactivated: null,
-  role: null,
+  changePasswordAt: null,
+  canReceiveEmail: false,
+  role: E_UserRole.User,
   personalInfo: null,
   update: (session: T_Session) => set(() => ({ ...session })),
   remove: () =>
@@ -22,7 +24,9 @@ const useSessionStore = create<T_Session & T_Session_Action>((set) => ({
       profilePicture: null,
       registrationType: null,
       deactivated: null,
-      role: null,
+      changePasswordAt: null,
+      canReceiveEmail: false,
+      role: E_UserRole.User,
       personalInfo: null,
     }),
 }))

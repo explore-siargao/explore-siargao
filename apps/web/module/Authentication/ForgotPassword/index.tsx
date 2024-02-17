@@ -1,7 +1,6 @@
 "use client"
 import React, { useRef, useState } from "react"
 import { Button } from "@/common/components/ui/Button"
-import { SEND_EMAIL_BUTTON_TEXT } from "@/common/constants"
 import AuthContainer from "@/common/components/AuthContainer"
 import { Input } from "@/common/components/ui/Input"
 import { useForm } from "react-hook-form"
@@ -57,12 +56,13 @@ const ForgotPassword = () => {
         <div className="p-6 space-y-4">
           <div>
             <Input
-              inputLabel="Email"
-              inputId="email"
+              label="Email"
+              id="email"
               type="email"
               placeholder="you@example.com"
               {...register("email", { required: true })}
               disabled={isForgotPasswordPending}
+              required
             />
             <Typography variant={"p"} className="text-sm mt-2 text-text-300">
               Please enter your email in the box above. We will send you link to
@@ -85,7 +85,7 @@ const ForgotPassword = () => {
                 <span className="sr-only">Loading...</span>
               </div>
             ) : (
-              SEND_EMAIL_BUTTON_TEXT
+              "Send email"
             )}
           </Button>
         </div>

@@ -12,7 +12,7 @@ export const Z_Listing = z.object({
     .optional(),
   title: z.string(),
   category: z.enum(["Accomodation", "Rentals", "Activity"]),
-  description: z.string(),
+  descriptionId: z.number().optional(),
   address: z.string(),
   longitude: z.number().optional(),
   latitude: z.number().optional(),

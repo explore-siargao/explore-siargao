@@ -1,6 +1,6 @@
 import { ResponseService } from '@/common/service/response'
 import { PrismaClient } from '@prisma/client'
-import { REQUIRED_VALUE_EMPTY, USER_NOT_EXIST } from '@repo/constants'
+import { REQUIRED_VALUE_EMPTY, USER_NOT_EXIST } from '@/common/constants'
 import { Z_ReportListing } from '@repo/contract'
 import { Request, Response } from 'express'
 
@@ -121,7 +121,7 @@ export const getReport = async (req: Request, res: Response) => {
 
 export const addReport = async (req: Request, res: Response) => {
   const userId = Number(req.params.userId)
-  const { reason, otherdetails, listingId } = req.body
+  const { name, reason, description, listingId } = req.body
   const isInputValid = Z_ReportListing.safeParse(req.body)
   try {
     const getUser = await prisma.user.findUnique({
@@ -151,8 +151,9 @@ export const addReport = async (req: Request, res: Response) => {
     }
     const newReport = await prisma.reportListing.create({
       data: {
+        name: name,
         reason: reason,
-        otherdetails: otherdetails,
+        description: description,
         listingId: listingId,
         reportedBy: userId,
       },
@@ -172,7 +173,7 @@ export const addReport = async (req: Request, res: Response) => {
 export const updateReport = async (req: Request, res: Response) => {
   const userId = Number(req.params.userId)
   const id = Number(req.params.id)
-  const { reason, otherdetails } = req.body
+  const { name, reason, description } = req.body
   try {
     const getUser = await prisma.user.findUnique({
       where: {
@@ -194,14 +195,15 @@ export const updateReport = async (req: Request, res: Response) => {
         })
       )
     }
-    if (reason || otherdetails) {
+    if (reason || description) {
       const updateReportById = await prisma.reportListing.update({
         where: {
           id: id,
         },
         data: {
+          name: name,
           reason: reason,
-          otherdetails: otherdetails,
+          description: description,
         },
       })
       res.json(

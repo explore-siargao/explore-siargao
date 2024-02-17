@@ -1,5 +1,5 @@
 import { ApiService } from "@/common/service/api"
-import { API_URL_COUNTRIES } from "@repo/constants"
+import { API_URL_COUNTRIES } from "@/common/constants"
 import { useQuery } from "@tanstack/react-query"
 
 export async function getCounties() {

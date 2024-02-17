@@ -1,6 +1,11 @@
 import { Response, Request } from 'express'
 import { PrismaClient, RegistrationType } from '@prisma/client'
-import { REQUIRED_VALUE_EMPTY } from '@repo/constants'
+import {
+  REQUIRED_VALUE_EMPTY,
+  USER_NOT_AUTHORIZED,
+  USER_NOT_EXIST,
+} from '@/common/constants'
+import { APP_NAME } from '@repo/constants'
 import { encryptKey, nextAuthSecret, webUrl } from '@/common/config'
 import dayjs from 'dayjs'
 import { AuthEmail } from './authEmail'
@@ -12,6 +17,7 @@ import { Z_UserRegister } from '@repo/contract'
 import { ResponseService } from '@/common/service/response'
 import randomNumber from '@/common/helpers/randomNumber'
 import CryptoJS from 'crypto-js'
+import { currencyByCountry } from '@/common/helpers/currencyByCountry'
 
 const prisma = new PrismaClient()
 const response = new ResponseService()
@@ -106,7 +112,13 @@ export const register = async (req: Request, res: Response) => {
       lastName,
       birthDate,
       registrationType,
+      country,
+      canReceiveEmail,
     } = req.body
+
+    const currency: string =
+      currencyByCountry[country as keyof typeof currencyByCountry]
+    const selectedCurrency = currency ?? 'USD'
     try {
       const user = await prisma.user.findFirst({
         where: {
@@ -128,6 +140,7 @@ export const register = async (req: Request, res: Response) => {
             registrationType: registrationType,
             role: 'User',
             password: password ? String(encryptPassword) : null,
+            canReceiveEmail,
           },
         })
 
@@ -139,6 +152,9 @@ export const register = async (req: Request, res: Response) => {
             lastName: lastName,
             birthDate: dayjs(birthDate).format(),
             phoneNumber: '',
+            country: country,
+            language: 'English',
+            currency: selectedCurrency,
           },
         })
         res.json(
@@ -249,7 +265,7 @@ export const info = async (req: Request, res: Response) => {
   } else {
     res.json({
       error: true,
-      message: 'You are not authorized to perform this action',
+      message: USER_NOT_AUTHORIZED,
     })
   }
 }
@@ -568,7 +584,7 @@ export const updateUserEmail = async (req: Request, res: Response) => {
         error: true,
         items: null,
         itemCount: 0,
-        message: 'User not exist to our system',
+        message: USER_NOT_EXIST,
       })
     }
   } catch (err: any) {
@@ -599,7 +615,7 @@ export const userDetails = async (req: Request, res: Response) => {
           personalInfo: {
             include: {
               address: true,
-              emergrncyContacts: true,
+              emergencyContacts: true,
             },
           },
         },
@@ -630,49 +646,58 @@ export const userDetails = async (req: Request, res: Response) => {
       error: true,
       item: null,
       itemCount: 0,
-      message: `You are not authorized to perform this action`,
+      message: USER_NOT_AUTHORIZED,
     })
   }
 }
 
-export const setCanReceivedEmail = async (req: Request, res: Response) => {
+export const setCanReceiveEmail = async (req: Request, res: Response) => {
   const prisma = new PrismaClient()
   const userId = Number(req.params.userId)
-  try {
-    const user = await prisma.user.findUnique({
-      where: {
-        id: userId,
-      },
-    })
-    if (user !== null) {
-      const setCanRecievedEmail = await prisma.user.update({
+  const canReceive = req.body.canReceive
+  if (typeof canReceive === 'boolean') {
+    try {
+      const user = await prisma.user.findUnique({
         where: {
           id: userId,
         },
-        data: {
-          canReceiveEmail: true,
-        },
       })
-      res.json({
-        error: false,
-        item: setCanRecievedEmail,
-        itemCount: 1,
-        message: 'You will now received an email from exploreSiargao',
-      })
-    } else {
-      res.json({
-        error: true,
-        item: null,
-        itemCount: 0,
-        message: `You are not authorized to perform this action`,
-      })
+      if (user !== null) {
+        const setCanReceiveEmail = await prisma.user.update({
+          where: {
+            id: userId,
+          },
+          data: {
+            canReceiveEmail: canReceive,
+          },
+        })
+        res.json(
+          response.success({
+            item: setCanReceiveEmail,
+            message: canReceive
+              ? `You will now received an email from ${APP_NAME}`
+              : `You are now removed from ${APP_NAME} email notification`,
+          })
+        )
+      } else {
+        res.json(
+          response.error({
+            message: USER_NOT_AUTHORIZED,
+          })
+        )
+      }
+    } catch (err: any) {
+      res.json(
+        response.error({
+          message: err.message,
+        })
+      )
     }
-  } catch (err: any) {
-    res.json({
-      error: true,
-      item: null,
-      itemCount: 0,
-      message: err.message,
-    })
+  } else {
+    res.json(
+      response.error({
+        message: REQUIRED_VALUE_EMPTY,
+      })
+    )
   }
 }

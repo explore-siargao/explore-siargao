@@ -1,6 +1,6 @@
 import { ResponseService } from '@/common/service/response'
 import { PrismaClient } from '@prisma/client'
-import { REQUIRED_VALUE_EMPTY, USER_NOT_EXIST } from '@repo/constants'
+import { REQUIRED_VALUE_EMPTY, USER_NOT_EXIST } from '@/common/constants'
 import { Z_WishGroup } from '@repo/contract'
 import { Request, Response } from 'express'
 
@@ -124,7 +124,7 @@ export const wishGroupByTitle = async (req: Request, res: Response) => {
       // Map through the groupWishGroup array and add the new entity to each item
       const modifiedGroup = await Promise.all(
         groupWishGroup.map(async (item) => {
-          const imageUrl = await prisma.wishGroup.findFirst({
+          const imageKeys = await prisma.wishGroup.findFirst({
             where: {
               title: item.title,
               userId: userId,
@@ -135,7 +135,7 @@ export const wishGroupByTitle = async (req: Request, res: Response) => {
           })
           return {
             ...item,
-            imageUrl: imageUrl?.listing.imageUrls,
+            imageKeys: JSON.parse(imageKeys?.listing?.imageKeys as string),
           }
         })
       )
