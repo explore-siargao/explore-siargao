@@ -13,10 +13,16 @@ import useSessionStore from "@/common/store/useSessionStore"
 import { E_GovernmentId } from "@repo/contract/build/GovernmentId/enum"
 import { T_BackendResponse } from "@repo/contract"
 import { API_URL_USERS } from "@/common/constants"
+import GovernmentIdModal from "./modals/GovernmentIdModal"
 
 type PersonalInfoProps = {
   isButtonClicked: boolean
   contentId: string
+}
+
+type GovernmentIdItem = {
+  type: string
+  fileKey: string
 }
 
 const ID_TYPES = [
@@ -36,6 +42,9 @@ const GovernmentId = ({ governmentId }: IPersonalInfo) => {
   const [file, setFile] = useState<(FileWithPath & { preview: string }) | null>(
     null
   )
+  const [isModalOpen, setModalOpen] = useState(false)
+  const [selectedGovernmentId, setSelectedGovernmentId] =
+    useState<GovernmentIdItem | null>(null)
   const { mutate, isPending } = useAddGovernmentId(session.id as number)
   const { getRootProps, getInputProps, isFocused } = useDropzone({
     multiple: false,
@@ -79,6 +88,23 @@ const GovernmentId = ({ governmentId }: IPersonalInfo) => {
       mutate({ type: idType, file }, callBackReq)
     }
   }
+
+  const openModal = (item: GovernmentIdItem) => {
+    setSelectedGovernmentId(item)
+    setModalOpen(true)
+  }
+
+  const closeModal = () => {
+    setModalOpen(false)
+  }
+
+  const GovernmentIdList: GovernmentIdItem[] = [
+    { type: "Passport", fileKey: "1.jpg" },
+    { type: "Driver's License", fileKey: "2.jpg" },
+    { type: "National ID", fileKey: "3.jpg" },
+    { type: "Postal ID", fileKey: "4.jpg" },
+  ]
+
   return (
     <div className="text-sm">
       {!contentState.isButtonClicked ? (
@@ -125,18 +151,18 @@ const GovernmentId = ({ governmentId }: IPersonalInfo) => {
             <div className="w-full my-4">
               <h3 className="text-xl font-semibold">Your IDs</h3>
               <div className="mt-4">
-                <p className="text-lg">
-                  1. Passport{" "}
-                  <span className="text-primary-500 underline cursor-pointer hover:text-primary-700">
-                    View File
-                  </span>
-                </p>
-                <p className="text-lg">
-                  2. Driver's License{" "}
-                  <span className="text-primary-500 underline cursor-pointer hover:text-primary-700">
-                    View File
-                  </span>
-                </p>
+                {GovernmentIdList.map((id, index) => (
+                  <p className="text-lg" key={id.type}>
+                    {index + 1}. {id.type}{" "}
+                    <span
+                      onClick={() => openModal(id)}
+                      className="text-primary-500 underline cursor-pointer hover:text-primary-700"
+                      onKeyDown={() => {}}
+                    >
+                      View File
+                    </span>
+                  </p>
+                ))}
               </div>
             </div>
             <div className="w-full my-4">
@@ -225,6 +251,12 @@ const GovernmentId = ({ governmentId }: IPersonalInfo) => {
           </div>
         </div>
       )}
+      <GovernmentIdModal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        title={selectedGovernmentId?.type as string}
+        fileKey={[`/assets/${selectedGovernmentId?.fileKey}`]}
+      />
     </div>
   )
 }

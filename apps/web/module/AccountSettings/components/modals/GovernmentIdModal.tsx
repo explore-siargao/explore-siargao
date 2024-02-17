@@ -1,7 +1,5 @@
 import ModalContainer from "@/common/components/ModalContainer"
-import { Typography } from "@/common/components/ui/Typography"
 import Image from "next/image"
-
 interface GovernmentIdModalProps {
   isOpen: boolean
   onClose: () => void
@@ -16,11 +14,8 @@ const GovernmentIdModal = ({
   title,
 }: GovernmentIdModalProps) => {
   return (
-    <ModalContainer isOpen={isOpen} onClose={onClose} size="sm">
-      <div className="relative space-y-3 pt-3 pb-3 h-[250px] overflow-y-auto">
-        <Typography variant={"h2"} className="flex justify-center">
-          {title}
-        </Typography>{" "}
+    <ModalContainer title={title} isOpen={isOpen} onClose={onClose} size="sm">
+      <div className="relative space-y-3 pt-5 pb-2 h-[250px] overflow-y-auto">
         {fileKey.map((data, index) => {
           return (
             <div
