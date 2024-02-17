@@ -42,7 +42,7 @@ model PersonalInfo {
   middleName        String?             @db.VarChar(255)
   lastName          String              @db.VarChar(255)
   birthDate         DateTime?
-  governmentId      String?             @db.VarChar(255)
+  governmentId      String?             @db.LongText
   phoneNumber       String              @db.VarChar(20)
   country           String              @db.VarChar(100)
   language          String              @db.VarChar(50)
