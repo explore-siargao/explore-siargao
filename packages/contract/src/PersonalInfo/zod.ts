@@ -1,6 +1,7 @@
 import { z } from "zod"
 import { Z_Address } from "../Address"
 import { Z_EmergencyContact } from "../EmergencyContact"
+import { Z_GovernmentId } from ".."
 
 export const Z_PersonalInfo = z.object({
   id: z.number(),
@@ -9,7 +10,7 @@ export const Z_PersonalInfo = z.object({
   middleName: z.string(),
   lastName: z.string(),
   birthDate: z.string(),
-  governmentId: z.string(),
+  governmentId: z.array(Z_GovernmentId),
   address: Z_Address,
   currency: z.string(),
   language: z.string(),
