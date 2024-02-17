@@ -42,6 +42,7 @@ const ListingDateRangePicker = ({ title }: ListingDRProps) => {
           onSelect={(data) => updateDateRange(data as DateRange)}
           numberOfMonths={2}
           size="lg"
+          disabled={true}
         />
       </div>
       <Button
