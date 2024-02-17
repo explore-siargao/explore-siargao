@@ -1,11 +1,12 @@
 import { z } from "zod"
+import { E_GovernmentId } from "./enum"
 
 export const Z_GovernmentId = z.object({
-  imageKey: z.string(),
-  type: z.enum(["DriversLicense", "Passport", "NationalID", "PostalID"]),
+  fileKey: z.string(),
+  type: z.nativeEnum(E_GovernmentId),
   createdAt: z.date(),
 })
 
-export const Z_Add_GovernmentId = Z_GovernmentId.pick({
-  type: true,
+export const Z_AddGovernmentId = z.object({
+  type: z.nativeEnum(E_GovernmentId),
 })

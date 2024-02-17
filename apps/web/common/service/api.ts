@@ -1,10 +1,5 @@
 import { T_BackendResponse } from "@repo/contract"
 
-enum EContentType {
-  JSON = "application/json",
-  formData = "multipart/form-data",
-}
-
 export class ApiService {
   private BASE_URL: string | undefined
 
@@ -18,10 +13,10 @@ export class ApiService {
     }
   }
 
-  private constructOtherOptions(isFormData = false, removeContentType = false) {
+  private constructOptions(removeContentType = false) {
     const headers = {
       ...(!removeContentType && {
-        "Content-Type": isFormData ? EContentType.formData : EContentType.JSON,
+        "Content-Type": "application/json",
       }),
     } as Record<string, any>
     const options = {
@@ -37,8 +32,7 @@ export class ApiService {
     signal?: AbortSignal
   ): Promise<T> {
     const reqParams = new URLSearchParams(params).toString()
-    const otherOptions = this.constructOtherOptions()
-
+    const otherOptions = this.constructOptions()
     const res = fetch(
       `${this.BASE_URL}${endpoint}${params ? `?${reqParams}` : ""}`,
       {
@@ -46,36 +40,34 @@ export class ApiService {
         ...(signal ? { signal } : {}),
       }
     )
-
     return (await res).json()
   }
 
-  async post<T = T_BackendResponse>(endpoint: string, body: any): Promise<T> {
-    const otherOptions = this.constructOtherOptions()
+  async post<T = T_BackendResponse>(endpoint: string, body: any, raw?: boolean, removeContentType?: boolean): Promise<T> {
+    const otherOptions = this.constructOptions(removeContentType)
     const res = fetch(`${this.BASE_URL}${endpoint}`, {
       method: "POST",
-      body: JSON.stringify(body),
+      body: !raw ? JSON.stringify(body) : body,
       ...otherOptions,
     })
     return (await res).json()
   }
 
-  async patch<T = T_BackendResponse>(endpoint: string, body?: any): Promise<T> {
-    const otherOptions = this.constructOtherOptions()
-
+  async patch<T = T_BackendResponse>(endpoint: string, body?: any, raw?: boolean, removeContentType?: boolean): Promise<T> {
+    const otherOptions = this.constructOptions(removeContentType)
     const res = fetch(`${this.BASE_URL}${endpoint}`, {
       method: "PATCH",
-      body: JSON.stringify(body),
+      body: !raw ? JSON.stringify(body) : body,
       ...otherOptions,
     })
     return (await res).json()
   }
 
-  async delete<T = T_BackendResponse>(endpoint: string): Promise<T> {
-    const otherOptions = this.constructOtherOptions()
-
+  async delete<T = T_BackendResponse>(endpoint: string, body?: any, raw?: boolean, removeContentType?: boolean): Promise<T> {
+    const otherOptions = this.constructOptions(removeContentType)
     const res = fetch(`${this.BASE_URL}${endpoint}`, {
       method: "DELETE",
+      body: !raw ? JSON.stringify(body) : body,
       ...otherOptions,
     })
     return (await res).json()
