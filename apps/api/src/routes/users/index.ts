@@ -1,5 +1,10 @@
 import express from 'express'
-import { addUser, getAllUsers } from './service/default'
+import {
+  addUser,
+  deactivateAccount,
+  getAllUsers,
+  updatePassword,
+} from './service/default'
 import {
   verifySignIn,
   verifySession,
@@ -12,7 +17,7 @@ import {
   mfaVerify,
   updateUserEmail,
   userDetails,
-  setCanReceivedEmail,
+  setCanReceiveEmail,
 } from './service/auth'
 import {
   addAddress,
@@ -22,17 +27,20 @@ import {
   getAllGovernmentIdByPersonInfoId,
   getPersonalInfo,
   removeEmergencyContact,
+  updateCurrency,
+  updateLanguage,
   updatePersonalInfo,
 } from './service/personalInfo'
 import isUserLoggedIn from '@/common/middleware/auth/isUserLoggedIn'
 import isOriginValid from '@/common/middleware/auth/isOriginValid'
 import isCsrfTokenValid from '@/common/middleware/auth/isCsrfTokenValid'
+import { getHostDetailsInListing } from './service/hostDetails'
 
 const router = express.Router()
 
 // DEFAULT
 router.get('/', getAllUsers)
-router.post('/', isOriginValid, isCsrfTokenValid, isUserLoggedIn, addUser)
+router.post('/', addUser)
 
 // AUTH
 router.post('/auth/info', info) // Use for Manual log in for Next-Auth
@@ -68,16 +76,27 @@ router.get(
   isUserLoggedIn,
   userDetails
 )
-
-// PERSONAL INFO
+router.patch(
+  '/deactivate/:userId',
+  isCsrfTokenValid,
+  isOriginValid,
+  isUserLoggedIn,
+  deactivateAccount
+)
+router.patch(
+  '/change-password/:userId',
+  isCsrfTokenValid,
+  isOriginValid,
+  isUserLoggedIn,
+  updatePassword
+)
 router.get(
   '/personal-info/:userId',
-  // isCsrfTokenValid,
-  // isOriginValid,
-  // isUserLoggedIn,
+  isCsrfTokenValid,
+  isOriginValid,
+  isUserLoggedIn,
   getPersonalInfo
 )
-
 router.post(
   '/:personalInfoId/emergency-contact/add/',
   isCsrfTokenValid,
@@ -111,7 +130,7 @@ router.patch(
   isCsrfTokenValid,
   isOriginValid,
   isUserLoggedIn,
-  setCanReceivedEmail
+  setCanReceiveEmail
 )
 router.delete(
   '/:peronalInfoId/emergency-contact/:emergencyContactId',
@@ -121,7 +140,13 @@ router.delete(
   removeEmergencyContact
 )
 
+router.patch('/personal-info/language/:personalInfoId', updateLanguage)
+router.patch('/personal-info/currency/:personalInfoId', updateCurrency)
+
 //Government Id
 router.get('/:peronalInfoId/government-id', getAllGovernmentIdByPersonInfoId)
 router.post('/:peronalInfoId/government-id', addGovernmentId)
 export default router
+
+//Host Details
+router.get('/:hostId/host-details-listing/:listingId', getHostDetailsInListing)

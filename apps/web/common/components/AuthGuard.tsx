@@ -5,7 +5,8 @@ import { useRouter, usePathname } from "next/navigation"
 import useSessionStore from "../store/useSessionStore"
 import { T_Session } from "@repo/contract"
 import { Spinner } from "./ui/Spinner"
-import { AUTH_GUARDED_ROUTES } from "@repo/constants"
+
+const AUTH_GUARDED_ROUTES = ["/account-settings"]
 
 const AuthGuard = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter()

@@ -1,6 +1,6 @@
 import { ApiService } from "@/common/service/api"
 import { IEmergencyContact } from "@/common/types/global"
-import { API_URL_USERS } from "@repo/constants"
+import { API_URL_USERS } from "@/common/constants"
 import { useMutation } from "@tanstack/react-query"
 
 export async function removeEmergencyContact(

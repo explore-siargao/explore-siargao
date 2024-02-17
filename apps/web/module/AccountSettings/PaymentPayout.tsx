@@ -2,12 +2,13 @@
 import React, { useState } from "react"
 import AccountSettingWrapper from "@/common/components/AccountSettingWrapper"
 import { Title } from "@/common/components/ui/Title"
-import { LINK_ACCOUNT_SETTINGS } from "@/common/constants/links"
+import { LINK_ACCOUNT } from "@/common/constants/links"
 import combineClasses from "@/common/helpers/combineClasses"
 import Payments from "./components/Payments"
 import Payouts from "./components/Payouts"
 import GuestContribution from "./components/GuestContribution"
 import { Breadcrumb } from "@/common/components/ui/Breadcrumb"
+import { ACCOUNT, PAYMENTS_PAYOUTS } from "@/common/constants"
 
 const renderPayments = () => {
   return <Payments />
@@ -34,11 +35,11 @@ const PaymentPayout = () => {
     <AccountSettingWrapper>
       <div>
         <Breadcrumb
-          home="Account"
-          page="Payments & payouts"
-          link={LINK_ACCOUNT_SETTINGS}
+          home={ACCOUNT}
+          page={PAYMENTS_PAYOUTS}
+          link={LINK_ACCOUNT}
         />
-        <Title>Payments & payouts</Title>
+        <Title>{PAYMENTS_PAYOUTS}</Title>
       </div>
       <div className="hidden sm:block">
         <div className="flex border-b border-b-text-50">

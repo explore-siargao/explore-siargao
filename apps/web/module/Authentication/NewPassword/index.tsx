@@ -1,7 +1,7 @@
 "use client"
 import React from "react"
 import { Button } from "@/common/components/ui/Button"
-import { SUBMIT_BUTTON_TEXT } from "@/common/constants"
+import { SUBMIT } from "@/common/constants"
 import AuthContainer from "@/common/components/AuthContainer"
 import { Input } from "@/common/components/ui/Input"
 import { useRouter, useSearchParams } from "next/navigation"
@@ -64,15 +64,15 @@ const NewPassword = () => {
         <div className="p-6 space-y-4">
           <div>
             <Input
-              inputLabel="Enter New Password"
-              inputId="newPassword"
+              label="Enter New Password"
+              id="newPassword"
               type="password"
               {...register("newPassword")}
               disabled={isPendingNewPassword}
             />
             <Input
-              inputLabel="Confirm password"
-              inputId="confirmPassword"
+              label="Confirm password"
+              id="confirmPassword"
               type="password"
               className="mt-2"
               {...register("confirmPassword")}
@@ -90,7 +90,7 @@ const NewPassword = () => {
                 <span className="sr-only">Loading...</span>
               </div>
             ) : (
-              SUBMIT_BUTTON_TEXT
+              SUBMIT
             )}
           </Button>
         </div>

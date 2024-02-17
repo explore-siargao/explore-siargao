@@ -1,7 +1,7 @@
 "use client"
 import React from "react"
 import { WidthWrapper } from "./WidthWrapper"
-import { cn } from "@/utils/utils"
+import { cn } from "@/common/helpers/cn"
 
 type Props = {
   children: React.ReactNode

@@ -10,25 +10,29 @@ datasource db {
 }
 
 model User {
-  id               Int               @id @default(autoincrement())
-  email            String            @unique @db.VarChar(255)
-  password         String?           @db.VarChar(255)
-  createdAt        DateTime          @default(now())
-  updatedAt        DateTime          @updatedAt
+  id               Int                  @id @default(autoincrement())
+  email            String               @unique @db.VarChar(255)
+  password         String?              @db.VarChar(255)
+  changePasswordAt DateTime?
+  createdAt        DateTime             @default(now())
+  updatedAt        DateTime             @updatedAt
   deletedAt        DateTime?
-  role             UserRole          @default(User)
+  role             UserRole             @default(User)
   registrationType RegistrationType?
-  deactivated      Boolean           @default(false)
-  profilePicture   String?           @db.LongText
-  canReceiveEmail  Boolean           @default(false)
+  deactivated      Boolean              @default(false)
+  profilePicture   String?              @db.LongText
+  canReceiveEmail  Boolean              @default(false)
+  tax              Tax?
   listing          Listing[]
-  reportListing   ReportListing[]
+  reportListing    ReportListing[]
   paymentMethod    PaymentMethod[]
   wishes           WishGroup[]
   review           Review[]
   personalInfo     PersonalInfo?
   MultiFactorAuth  MultiFactorAuth[]
   Coupons          Coupon[]
+  taxId            Int?
+  reservations     ReservationListing[]
 }
 
 model PersonalInfo {
@@ -38,14 +42,17 @@ model PersonalInfo {
   middleName        String?             @db.VarChar(255)
   lastName          String              @db.VarChar(255)
   birthDate         DateTime?
-  governMentId      String?             @db.VarChar(255)
+  governmentId      String?             @db.LongText
   phoneNumber       String              @db.VarChar(20)
+  country           String              @db.VarChar(100)
+  language          String              @db.VarChar(50)
+  currency          String              @db.VarChar(10)
   createdAt         DateTime            @default(now())
   updatedAt         DateTime            @updatedAt
   deletedAt         DateTime?
   user              User                @relation(fields: [userId], references: [id])
   address           Addresses?
-  emergrncyContacts EmergencyContacts[]
+  emergencyContacts EmergencyContacts[]
 
   @@index([userId])
 }
@@ -72,8 +79,9 @@ model Addresses {
   updatedAt     DateTime     @updatedAt
   deletedAt     DateTime?
   city          String?      @db.LongText
-  province      String?      @db.LongText
+  stateProvince String?      @db.LongText
   streetAddress String?      @db.LongText
+  aptSuite      String?      @db.LongText
   zipCode       Int?
   country       String?      @db.VarChar(255)
   personalInfo  PersonalInfo @relation(fields: [peronalInfoId], references: [id])
@@ -108,9 +116,10 @@ model MultiFactorAuth {
 model Listing {
   id                   Int                  @id @default(autoincrement())
   hostedById           Int
-  imageUrls            String               @db.LongText
+  imageKeys            String               @db.LongText
   title                String               @db.VarChar(100)
-  description          String               @db.LongText
+  descriptionId        Int?                 @unique
+  listingDescription   ListingDescription?  @relation(fields: [descriptionId], references: [id])
   address              String               @db.LongText
   listingPriceId       Int                  @unique
   category             ListingCategory
@@ -132,10 +141,27 @@ model Listing {
   cancellationPolicies CancellationPolicy[]
   reports              ReportListing[]
   wishes               WishGroup[]
+  reservation          ReservationListing[]
 
   @@index([basicAboutPlaceId])
   @@index([listingPriceId])
   @@index([hostedById])
+  @@index([descriptionId])
+}
+
+model ListingDescription {
+  id                 Int       @id @default(autoincrement())
+  listingId          Int?      @unique
+  listing            Listing?
+  generalDescription String    @db.LongText()
+  aboutSpace         String?   @db.LongText()
+  aboutGuestAccess   String?   @db.LongText()
+  otherThingsNote    String?   @db.LongText()
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+  deletedAt          DateTime?
+
+  @@index([listingId])
 }
 
 model BasicAboutPlace {
@@ -151,34 +177,61 @@ model BasicAboutPlace {
 }
 
 model PaymentMethod {
-  id             Int       @id @default(autoincrement())
+  id             Int                  @id @default(autoincrement())
   userId         Int
-  cardNumber     String    @unique
-  expirationDate String    @db.VarChar(10)
+  cardNumber     String               @unique
+  expirationDate String               @db.VarChar(10)
   cvv            Int
   zipCode        Int
-  countryRegion  String    @db.VarChar(255)
-  createdAt      DateTime  @default(now())
-  updatedAt      DateTime  @updatedAt
+  countryRegion  String               @db.VarChar(255)
+  createdAt      DateTime             @default(now())
+  updatedAt      DateTime             @updatedAt
   deletedAt      DateTime?
-  isDefault      Boolean   @default(false)
-  user           User      @relation(fields: [userId], references: [id])
+  isDefault      Boolean              @default(false)
+  user           User                 @relation(fields: [userId], references: [id])
+  reservation    ReservationListing[]
 
   @@index([userId])
 }
 
+model ReservationListing {
+  id              Int               @id @default(autoincrement())
+  listingId       Int
+  listing         Listing           @relation(fields: [listingId], references: [id])
+  userId          Int
+  user            User              @relation(fields: [userId], references: [id])
+  reservationDate String            @db.VarChar(50)
+  guestCount      Int               @db.Int()
+  totalFee        Int               @db.Int()
+  currentFee      Int               @db.Int()
+  paymentMethodId Int
+  paymentMethod   PaymentMethod     @relation(fields: [paymentMethodId], references: [id])
+  isNight         Boolean           @default(false)
+  status          ReservationStatus @default(Pending)
+  messageToHost   String?           @db.LongText()
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  deletedAt       DateTime?
+
+  @@index([listingId])
+  @@index([userId])
+  @@index([paymentMethodId])
+}
+
 model ReportListing {
-  id           Int     @id @default(autoincrement())
-  reason       String  @db.Text
-  otherdetails String  @db.Text
+  id           Int       @id @default(autoincrement())
+  name         String   @db.VarChar(200)
+  reason       String    @db.Text()
+  description String?    @db.LongText()
   reportedBy   Int
-  user        User     @relation(fields: [reportedBy], references: [id])
+  user         User      @relation(fields: [reportedBy], references: [id])
   listingId    Int
-  listing      Listing @relation(fields: [listingId], references: [id])
-  createdAt      DateTime  @default(now())
-  updatedAt      DateTime  @updatedAt
-  deletedAt      DateTime?
-@@index([reportedBy])
+  listing      Listing   @relation(fields: [listingId], references: [id])
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  deletedAt    DateTime?
+
+  @@index([reportedBy])
   @@index([listingId])
 }
 
@@ -342,25 +395,54 @@ model WishGroup {
 }
 
 model Review {
-  id        Int       @id @default(autoincrement())
-  userId    Int
-  rates     Float
-  comment   String    @db.LongText
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  deletedAt DateTime?
-  listingId Int
-  user      User      @relation(fields: [userId], references: [id])
-  listing   Listing   @relation(fields: [listingId], references: [id])
+  id                 Int       @id @default(autoincrement())
+  userId             Int
+  cleanLinessRates   Int       @db.Int()
+  accuracyRates      Int       @db.Int()
+  checkInRates       Int       @db.Int()
+  communicationRates Int       @db.Int()
+  locationRates      Int       @db.Int()
+  valueRates         Int       @db.Int()
+  comment            String    @db.LongText
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+  deletedAt          DateTime?
+  listingId          Int
+  user               User      @relation(fields: [userId], references: [id])
+  listing            Listing   @relation(fields: [listingId], references: [id])
 
   @@index([listingId])
   @@index([userId])
+}
+
+model Tax {
+  id                 Int       @id @default(autoincrement())
+  countryRegion      String    @db.VarChar(255)
+  vatId              String    @db.VarChar(255)
+  nameOnRegistration String    @db.VarChar(255)
+  addressLine1       String    @db.VarChar(255)
+  addressLine2       String    @db.VarChar(255)
+  city               String    @db.VarChar(255)
+  provinceRegion     String    @db.VarChar(255)
+  zipPostalCode      String    @db.VarChar(255)
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+  deletedAt          DateTime?
+  User               User?     @relation(fields: [userId], references: [id])
+  userId             Int?      @unique
 }
 
 enum UserRole {
   Admin
   Host
   User
+}
+
+enum ReservationStatus {
+  Approved
+  Pending
+  Declined
+  Refund
 }
 
 enum RegistrationType {

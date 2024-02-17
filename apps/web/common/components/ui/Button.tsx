@@ -19,11 +19,11 @@ const buttonVariants = cva(
         success:
           "bg-success-700 text-white hover:bg-success-600 focus:ring-2 focus:ring-offset-2 focus:ring-success-300",
         outline:
-          "border border-primary-600 bg-transparent hover:bg-primary-600 hover:text-white",
+          "border border-text-700 bg-transparent hover:bg-text-700 hover:text-white",
         secondary:
           "bg-secondary-500 text-white hover:bg-secondary-600 focus:ring-2 focus:ring-offset-2 focus:ring-secondary-300",
-        ghost: "text-black",
-        link: "text-text-500 underline-offset-4 hover:underline",
+        ghost: "text-text-600 hover:text-text-400",
+        link: "text-text-500 hover:text-text-950 underline-offset-4 hover:underline",
         shaded:
           "border border-text-200 text-text-500 bg-transparent hover:bg-text-50 hover:bg-opacity-50",
       },
@@ -32,6 +32,7 @@ const buttonVariants = cva(
         sm: "h-9 rounded-md px-3",
         lg: "h-11 rounded-md px-8",
         icon: "h-10 w-10",
+        link: "px-0 py-2",
       },
     },
     defaultVariants: {

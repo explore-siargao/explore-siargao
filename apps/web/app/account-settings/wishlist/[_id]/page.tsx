@@ -1,7 +1,7 @@
 import WishlistsItem from "@/module/AccountSettings/components/WishlistsItem"
 import React from "react"
 
-const page = () => {
+const WishListItemPage = () => {
   return (
     <div className="h-screen overflow-hidden">
       <WishlistsItem />
@@ -9,4 +9,4 @@ const page = () => {
   )
 }
 
-export default page
+export default WishListItemPage

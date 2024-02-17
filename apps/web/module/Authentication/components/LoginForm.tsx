@@ -6,15 +6,13 @@ import { EnvelopeIcon } from "@heroicons/react/20/solid"
 import toast from "react-hot-toast"
 import { IUser } from "@/common/types/global"
 import { useForm } from "react-hook-form"
+import { APP_NAME } from "@repo/constants"
 import useLogin from "@/module/Authentication/hooks/useLogin"
 import { useRouter, useSearchParams } from "next/navigation"
 import { Button } from "@/common/components/ui/Button"
 import Link from "next/link"
 import { LINK_CREATE_ACCOUNT } from "@/common/constants/links"
-import {
-  CONTINUE_BUTTON_TEXT,
-  LOGIN_CONTENT_TITTLE_TEXT,
-} from "@/common/constants"
+import { CONTINUE } from "@/common/constants"
 import Image from "next/image"
 import { Input } from "@/common/components/ui/Input"
 import { signIn } from "next-auth/react"
@@ -64,19 +62,19 @@ const LoginForm = () => {
     <div className="p-8 md:p-6 ">
       <form onSubmit={handleSubmit(onSubmit)}>
         <h1 className="font-semibold text-xl mt-1 mb-4">
-          {LOGIN_CONTENT_TITTLE_TEXT}
+          Welcome to {APP_NAME}
         </h1>
         <div>
           <Input
-            inputLabel="Email"
-            inputId="email"
+            label="Email"
+            id="email"
             type="email"
             {...register("email", { required: true })}
             disabled={isLoginPending}
           />
           <Input
-            inputLabel="Password"
-            inputId="password"
+            label="Password"
+            id="password"
             type="password"
             className="mt-2"
             {...register("password", { required: true })}
@@ -110,7 +108,7 @@ const LoginForm = () => {
               <span className="sr-only">Loading...</span>
             </div>
           ) : (
-            CONTINUE_BUTTON_TEXT
+            CONTINUE
           )}
         </Button>
         <div className="flex justify-end mb-2">

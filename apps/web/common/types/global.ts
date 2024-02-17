@@ -1,3 +1,5 @@
+import { T_GovernmentId } from "@repo/contract"
+
 export interface IUser {
   id?: number
   role?: UserRole
@@ -19,8 +21,9 @@ export interface IPersonalInfo {
   lastName?: string
   middleName?: string
   birthDate?: string
-  governmentId?: string
+  governmentId?: T_GovernmentId[]
   phoneNumber?: string
+  country?: string
   address?: IAddress
   emergencyContact?: IEmergencyContact[]
   createdAt?: string
@@ -106,6 +109,18 @@ export interface IWishGroup {
   deletedAt?: string
 }
 
+export interface IReview {
+  userId?: number
+  listingId?: number
+  cleanLinessRates?: number
+  accuracyRates?: number
+  checkInRates?: number
+  communicationRates?: number
+  locationRates?: number
+  valueRates?: number
+  comment?: string
+}
+
 export interface ComponentProps {
   onClick: () => void
   icon?: React.ReactNode
@@ -145,4 +160,19 @@ export enum RegistrationType {
   "Manual",
   "Facebook",
   "Google",
+}
+
+export interface ITaxes {
+  id?: number
+  countryRegion: string
+  vatId: string
+  nameOnRegistration: string
+  addressLine1: string
+  addressLine2: string
+  city: string
+  provinceRegion: string
+  zipPostalCode: string
+  createdAt?: string
+  updateAt?: string
+  deleteAt?: string
 }
