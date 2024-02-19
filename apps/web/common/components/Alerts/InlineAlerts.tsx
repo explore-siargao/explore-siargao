@@ -37,33 +37,32 @@ const InlineAlerts: React.FC<AlertProps> = ({
 
   const Icon = iconMap[type]
 
+  const colorClasses = {
+    success: { bg: "bg-green-50", text: "text-green-800" },
+    danger: { bg: "bg-red-50", text: "text-red-800" },
+    info: { bg: "bg-blue-50", text: "text-blue-800" },
+    warning: { bg: "bg-yellow-50", text: "text-yellow-800" },
+  };
+  
   const alertClasses = cn(
     "pt-1",
     "relative",
     "rounded-md",
-    type === "success" && "bg-green-50",
-    type === "danger" && "bg-red-50",
-    type === "info" && "bg-blue-50",
-    type === "warning" && "bg-yellow-50"
-  )
-
+    colorClasses[type]?.bg
+  );
+  
   const textClasses = cn(
     "text-sm",
     "font-semibold",
-    type === "success" && "text-green-800",
-    type === "danger" && "text-red-800",
-    type === "info" && "text-blue-800",
-    type === "warning" && "text-yellow-800"
-  )
-
+    colorClasses[type]?.text
+  );
+  
   const descClasses = cn(
     "pt-2",
     "text-sm",
-    type === "success" && "text-green-800",
-    type === "danger" && "text-red-800",
-    type === "info" && "text-blue-800",
-    type === "warning" && "text-yellow-800"
-  )
+    colorClasses[type]?.text
+  );
+  
   return (
     <div className={alertClasses}>
       <div className="rounded-md p-3">
