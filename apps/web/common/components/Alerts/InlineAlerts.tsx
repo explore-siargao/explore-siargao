@@ -34,33 +34,31 @@ const InlineAlerts: React.FC<AlertProps> = ({
   return (
     <div className={`relative ${alertClasses}`}>
       {type === "success" && (
-        
-          <div className="rounded-md bg-green-50 p-4">
-            <div className="flex">
-              <div className="flex-shrink-0">
-                <CheckCircleIcon
-                  className="h-5 w-5 text-green-400"
-                  aria-hidden="true"
-                />
-              </div>
-              <div className="ml-3">
-                <h3 className="text-sm font-semibold text-green-800">
-                  {title}
-                  <button
-                    type="button"
-                    className=" inline-flex items-center justify-center text-green-400 hover:text-green-600 absolute right-7 "
-                    onClick={handleClose}
-                  >
-                    <XIcon className="h-4 w-4" aria-hidden="true" size={"md"} />
-                  </button>
-                </h3>
-                <div className="mt-2 text-sm text-green-700">
-                  <p>{children}</p>
-                </div>
+        <div className="rounded-md bg-green-50 p-4">
+          <div className="flex">
+            <div className="flex-shrink-0">
+              <CheckCircleIcon
+                className="h-5 w-5 text-green-400"
+                aria-hidden="true"
+              />
+            </div>
+            <div className="ml-3">
+              <h3 className="text-sm font-semibold text-green-800">
+                {title}
+                <button
+                  type="button"
+                  className=" inline-flex items-center justify-center text-green-400 hover:text-green-600 absolute right-7 "
+                  onClick={handleClose}
+                >
+                  <XIcon className="h-4 w-4" aria-hidden="true" size={"md"} />
+                </button>
+              </h3>
+              <div className="mt-2 text-sm text-green-700">
+                <p>{children}</p>
               </div>
             </div>
           </div>
-        
+        </div>
       )}
       {type === "danger" && (
         <div className="rounded-md bg-red-50 p-4">
