@@ -1,7 +1,6 @@
-import PaymentMethodForm from "@/app/accommodation/PaymentMethodForm"
+import PaymentMethodForm from "@/module/Accommodation/PaymentMethodForm"
 import { WidthWrapper } from "@/common/components/WidthWrapper"
 import { Button } from "@/common/components/ui/Button"
-import { Title } from "@/common/components/ui/Title"
 import { Typography } from "@/common/components/ui/Typography"
 import { StarIcon } from "@heroicons/react/20/solid"
 import { ChevronLeft, MedalIcon } from "lucide-react"
