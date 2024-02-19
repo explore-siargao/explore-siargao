@@ -1,3 +1,3 @@
 export type HostGuideBooksProps = {
-    name: string
+  name: string
 }

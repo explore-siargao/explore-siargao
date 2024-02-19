@@ -1,6 +1,6 @@
 export type ListingCardProps = {
-    image: string,
-    title: string,
-    rating: number,
-    description: string,
+  image: string
+  title: string
+  rating: number
+  description: string
 }

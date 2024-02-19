@@ -1,3 +1,3 @@
 export type GuideBookProps = {
-    name: string
+  name: string
 }
