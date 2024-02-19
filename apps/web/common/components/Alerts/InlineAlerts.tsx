@@ -42,27 +42,19 @@ const InlineAlerts: React.FC<AlertProps> = ({
     danger: { bg: "bg-red-50", text: "text-red-800" },
     info: { bg: "bg-blue-50", text: "text-blue-800" },
     warning: { bg: "bg-yellow-50", text: "text-yellow-800" },
-  };
-  
+  }
+
   const alertClasses = cn(
     "pt-1",
     "relative",
     "rounded-md",
     colorClasses[type]?.bg
-  );
-  
-  const textClasses = cn(
-    "text-sm",
-    "font-semibold",
-    colorClasses[type]?.text
-  );
-  
-  const descClasses = cn(
-    "pt-2",
-    "text-sm",
-    colorClasses[type]?.text
-  );
-  
+  )
+
+  const textClasses = cn("text-sm", "font-semibold", colorClasses[type]?.text)
+
+  const descClasses = cn("pt-2", "text-sm", colorClasses[type]?.text)
+
   return (
     <div className={alertClasses}>
       <div className="rounded-md p-3">
