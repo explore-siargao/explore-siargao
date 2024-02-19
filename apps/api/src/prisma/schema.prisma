@@ -9,6 +9,7 @@ datasource db {
   relationMode      = "prisma"
 }
 
+
 model User {
   id               Int                  @id @default(autoincrement())
   email            String               @unique @db.VarChar(255)
@@ -420,7 +421,7 @@ model Review {
 model Tax {
   id                 Int       @id @default(autoincrement())
   countryRegion      String    @db.VarChar(255)
-  vatId              String    @db.VarChar(255)
+  vatId              String    @unique @db.VarChar(255)
   nameOnRegistration String    @db.VarChar(255)
   addressLine1       String    @db.VarChar(255)
   addressLine2       String    @db.VarChar(255)
