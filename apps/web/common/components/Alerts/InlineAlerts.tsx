@@ -34,7 +34,7 @@ const InlineAlerts: React.FC<AlertProps> = ({
   return (
     <div className={`relative ${alertClasses}`}>
       {type === "success" && (
-        <>
+        
           <div className="rounded-md bg-green-50 p-4">
             <div className="flex">
               <div className="flex-shrink-0">
@@ -60,7 +60,7 @@ const InlineAlerts: React.FC<AlertProps> = ({
               </div>
             </div>
           </div>
-        </>
+        
       )}
       {type === "danger" && (
         <div className="rounded-md bg-red-50 p-4">
