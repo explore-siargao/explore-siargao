@@ -12,7 +12,7 @@ interface TabsProps {
   tabs: Tab[]
 }
 
-export default function Tabs({ tabs }: TabsProps) {
+const Tabs = ({ tabs }: TabsProps) => {
   const currentPath = usePathname()
 
   return (
@@ -55,3 +55,5 @@ export default function Tabs({ tabs }: TabsProps) {
     </div>
   )
 }
+
+export default Tabs
