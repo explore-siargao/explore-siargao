@@ -1,5 +1,5 @@
 import { ApiService } from "@/common/service/api"
-import { API_URL_BOOKINGS } from "@/common/constants"
+import { API_URL_LISTINGS } from "@/common/constants"
 import { T_ReportListing } from "@repo/contract"
 import { useMutation } from "@tanstack/react-query"
 
@@ -8,7 +8,7 @@ export async function addReport(
   props: T_ReportListing
 ) {
   const apiService = new ApiService()
-  return await apiService.post(`${API_URL_BOOKINGS}/${userId}/reports`, props)
+  return await apiService.post(`${API_URL_LISTINGS}/${userId}/reports`, props)
 }
 
 function useAddReport(userId: number) {

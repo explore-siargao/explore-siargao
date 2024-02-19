@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 }
 
 const AccommodationPage = async () => {
-  const booking = await getRequest(`/bookings/1`);
+  const booking = await getRequest(`/listings/1`);
   console.log('booking server', booking)
   return (
     <AuthGuard>

@@ -1,5 +1,5 @@
 import { ApiService } from "@/common/service/api"
-import { API_URL_BOOKINGS } from "@/common/constants"
+import { API_URL_LISTINGS } from "@/common/constants"
 import { useQuery } from "@tanstack/react-query"
 
 export async function getRulesBySafetyPropertyId(
@@ -7,7 +7,7 @@ export async function getRulesBySafetyPropertyId(
 ) {
   const apiService = new ApiService()
   return await apiService.get(
-    `${API_URL_BOOKINGS}/rules/safety-property/${safetyPropertyId}`
+    `${API_URL_LISTINGS}/rules/safety-property/${safetyPropertyId}`
   )
 }
 

@@ -1,11 +1,11 @@
 import { ApiService } from "@/common/service/api"
-import { API_URL_BOOKINGS } from "@/common/constants"
+import { API_URL_LISTINGS } from "@/common/constants"
 import { useMutation } from "@tanstack/react-query"
 
 export async function removePlaceOffer(userId: number, id: number) {
   const apiService = new ApiService()
   return await apiService.delete(
-    `${API_URL_BOOKINGS}/${userId}/place-offers/delete/${id}`
+    `${API_URL_LISTINGS}/${userId}/place-offers/delete/${id}`
   )
 }
 

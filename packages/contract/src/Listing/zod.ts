@@ -1,4 +1,6 @@
 import { z } from "zod"
+import { E_ListingCategory } from "./enum"
+
 export const Z_Listing = z.object({
   id: z.number().optional(),
   imageUrls: z
@@ -11,7 +13,7 @@ export const Z_Listing = z.object({
     )
     .optional(),
   title: z.string(),
-  category: z.enum(["Accomodation", "Rentals", "Activity"]),
+  category: z.nativeEnum(E_ListingCategory),
   descriptionId: z.number().optional(),
   address: z.string(),
   longitude: z.number().optional(),

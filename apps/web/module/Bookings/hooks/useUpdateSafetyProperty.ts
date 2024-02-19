@@ -1,5 +1,5 @@
 import { ApiService } from "@/common/service/api"
-import { API_URL_BOOKINGS } from "@/common/constants"
+import { API_URL_LISTINGS } from "@/common/constants"
 import { T_SafetyProperty } from "@repo/contract"
 import { useMutation } from "@tanstack/react-query"
 
@@ -9,7 +9,7 @@ export async function updateSafetyProperty(
 ) {
   const apiService = new ApiService()
   return await apiService.patch(
-    `${API_URL_BOOKINGS}/${userId}/safety-properties/${props.id}`,
+    `${API_URL_LISTINGS}/${userId}/safety-properties/${props.id}`,
     props
   )
 }

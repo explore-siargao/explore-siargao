@@ -1,10 +1,10 @@
 import { ApiService } from "@/common/service/api"
-import { API_URL_BOOKINGS } from "@/common/constants"
+import { API_URL_LISTINGS } from "@/common/constants"
 import { useQuery } from "@tanstack/react-query"
 
 export async function getAllCancellationPolicies() {
   const apiService = new ApiService()
-  return await apiService.get(`${API_URL_BOOKINGS}/all/cancellation-policies`)
+  return await apiService.get(`${API_URL_LISTINGS}/all/cancellation-policies`)
 }
 
 function useGetAllCancellationPolicies() {

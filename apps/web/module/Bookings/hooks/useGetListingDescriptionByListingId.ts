@@ -1,5 +1,5 @@
 import { ApiService } from "@/common/service/api"
-import { API_URL_BOOKINGS } from "@/common/constants"
+import { API_URL_LISTINGS } from "@/common/constants"
 import { useQuery } from "@tanstack/react-query"
 
 export async function getListingDescriptionByListingId(
@@ -7,7 +7,7 @@ export async function getListingDescriptionByListingId(
 ) {
   const apiService = new ApiService()
   return await apiService.get(
-    `${API_URL_BOOKINGS}/listing-description/listing/${listingId}`
+    `${API_URL_LISTINGS}/listing-description/listing/${listingId}`
   )
 }
 

@@ -1,5 +1,5 @@
 import { ApiService } from "@/common/service/api"
-import { API_URL_BOOKINGS } from "@/common/constants"
+import { API_URL_LISTINGS } from "@/common/constants"
 import { T_PlaceOffers } from "@repo/contract"
 import { useMutation } from "@tanstack/react-query"
 
@@ -9,7 +9,7 @@ export async function addPlaceOffer(
 ) {
   const apiService = new ApiService()
   return await apiService.post(
-    `${API_URL_BOOKINGS}/${userId}/place-offers`,
+    `${API_URL_LISTINGS}/${userId}/place-offers`,
     props
   )
 }

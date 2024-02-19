@@ -1,5 +1,5 @@
 import { ApiService } from "@/common/service/api"
-import { API_URL_BOOKINGS } from "@/common/constants"
+import { API_URL_LISTINGS } from "@/common/constants"
 import { T_ListingDescription } from "@repo/contract"
 import { useMutation } from "@tanstack/react-query"
 
@@ -10,7 +10,7 @@ export async function addDescription(
 ) {
   const apiService = new ApiService()
   return await apiService.post(
-    `${API_URL_BOOKINGS}/${userID}/listing-description/${listingId}`,
+    `${API_URL_LISTINGS}/${userID}/listing-description/${listingId}`,
     props
   )
 }
