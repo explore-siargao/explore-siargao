@@ -2,23 +2,16 @@ import Image from "next/image"
 import { ShieldCheckIcon, StarIcon } from "@heroicons/react/20/solid"
 import { MedalIcon } from "lucide-react"
 import { Typography } from "@/common/components/ui/Typography"
-
-type ProfileCardProps = {
-    name: string,
-    profileImage: string,
-    hostStatus: string,
-    reviewsCount: number,
-    rating: number,
-    hostingMonthAge: number
-}
+import { ASSET_ROOT } from "@/common/constants/index"
+import { ProfileCardProps } from "../types/ProfileCard"
 
 const ProfileCard = ({name, profileImage, hostStatus, reviewsCount, rating, hostingMonthAge}: ProfileCardProps) => {
     return (
-        <div className="border bg-white p-8 rounded-md shadow-lg w-full">
+        <div className="border bg-white p-8 rounded-xl shadow-lg w-full">
             <div className="grid grid-cols-5 gap-x-6">
                 <div className="col-span-3 mx-auto">
                     <div className="relative h-24 w-24 rounded-full bg-gray-200">
-                        <Image src={`/${profileImage}`} layout="fill" objectFit="cover" alt="Profile" className="rounded-full"/>
+                        <Image src={`${ASSET_ROOT}/${profileImage}`} layout="fill" objectFit="cover" alt="Profile" className="rounded-full"/>
                         <div className="bg-primary-600 h-8 w-8 rounded-full absolute bottom-1 right-[-5px] flex items-center">
                             <ShieldCheckIcon className="h-5 w-5 mx-auto text-white"/>
                         </div>
