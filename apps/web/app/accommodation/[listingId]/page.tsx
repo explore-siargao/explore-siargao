@@ -12,8 +12,8 @@ export const metadata: Metadata = {
 }
 
 const AccomodationPage = async () => {
-  const booking = await getRequest(`/bookings/1`);
-  console.log('booking server', booking)
+  const booking = await getRequest(`/bookings/1`)
+  console.log("booking server", booking)
   return (
     <AuthGuard>
       <SingleView />
