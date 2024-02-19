@@ -23,7 +23,7 @@ const InlineAlerts: React.FC<AlertProps> = ({
 
   const handleClose = () => {
     setShowAlert(false)
-    onClose && onClose()
+    onClose?.();
   }
 
   if (!showAlert) return null
