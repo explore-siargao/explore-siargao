@@ -98,15 +98,12 @@ export const getListing = async (req: Request, res: Response) => {
       res.json(
         response.success({
           item: listing,
-          allItemCount: 1,
-          message: '',
         })
       )
     } else {
       res.json(
         response.success({
           item: listing,
-          allItemCount: 0,
           message: 'No data found',
         })
       )

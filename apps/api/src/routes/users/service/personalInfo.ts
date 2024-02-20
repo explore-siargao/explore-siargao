@@ -5,7 +5,7 @@ import {
   UNKNOWN_ERROR_OCCURRED,
 } from '@/common/constants'
 import { FileService } from '@/common/service/file'
-import { T_GovernmentId, Z_Add_GovernmentId } from '@repo/contract'
+import { T_GovernmentId, Z_AddGovernmentId } from '@repo/contract'
 import { ResponseService } from '@/common/service/response'
 
 const response = new ResponseService()
@@ -386,7 +386,7 @@ export const getAllGovernmentIdByPersonInfoId = async (
 export const addGovernmentId = async (req: Request, res: Response) => {
   const peronalInfoId = Number(req.params.peronalInfoId)
   const files = req.files
-  const isValidInput = Z_Add_GovernmentId.safeParse(req.body)
+  const isValidInput = Z_AddGovernmentId.safeParse(req.body)
   if (isValidInput.success && files) {
     const { type } = req.body
     try {
@@ -396,15 +396,15 @@ export const addGovernmentId = async (req: Request, res: Response) => {
         },
       })
       if (getPersonIfo) {
-        const upload = await fileService.upload({ files })
         if (getPersonIfo.governmentId === null) {
+          const upload = await fileService.upload({ files })
           const addNewGovernmentId = await prisma.personalInfo.update({
             where: {
               id: peronalInfoId,
             },
             data: {
               governmentId: JSON.stringify([
-                { imageKey: upload.key, type: type, createdAt: new Date() },
+                { fileKey: upload.key, type: type, createdAt: new Date() },
               ] as T_GovernmentId[]),
             },
           })
@@ -424,8 +424,9 @@ export const addGovernmentId = async (req: Request, res: Response) => {
             (govId: T_GovernmentId) => govId.type === type
           )
           if (!typeAlreadyExists) {
+            const upload = await fileService.upload({ files })
             updatedGovernmentId.push({
-              imageKey: upload.key,
+              fileKey: upload.key,
               type: type,
               createdAt: new Date(),
             })
