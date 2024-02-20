@@ -2,8 +2,8 @@ import { prisma } from '@/common/helpers/prismaClient'
 import { encryptKey } from '@/common/config'
 import CryptoJS from 'crypto-js'
 
-export const users = async()=>{
-     const createUsers = await prisma.user.createMany({
+export const users = async () => {
+  const createUsers = await prisma.user.createMany({
     data: [
       {
         email: 'test@test.com',
@@ -33,5 +33,5 @@ export const users = async()=>{
       },
     ],
   })
-  console.log({createUsers})
+  console.log({ createUsers })
 }
