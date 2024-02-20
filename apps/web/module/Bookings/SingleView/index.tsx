@@ -123,7 +123,7 @@ export const SingleView = () => {
             />
             <div>
               <ListingMark
-                icon={Tag}
+                icon={<Tag />}
                 title="Lower Price"
                 desc="Your dates are ₱1,494 less than the avg. nightly rate of the last 60 days."
               />
