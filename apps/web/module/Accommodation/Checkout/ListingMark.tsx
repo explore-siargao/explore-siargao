@@ -1,13 +1,13 @@
 import React from "react"
 import { Typography } from "@/common/components/ui/Typography"
 
-interface listingMarkProps {
+interface ListingMarkProps {
   icon: React.ElementType
   title: string
   desc?: string
 }
 
-const ListingMark: React.FC<listingMarkProps> = ({
+const ListingMark: React.FC<ListingMarkProps> = ({
   icon: Icon,
   title,
   desc,
