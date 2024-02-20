@@ -6,6 +6,9 @@ import {
   updatePassword,
 } from './service/default'
 import {
+  xendit,
+} from './service/xendit'
+import {
   verifySignIn,
   verifySession,
   register,
@@ -146,7 +149,10 @@ router.patch('/personal-info/currency/:personalInfoId', updateCurrency)
 //Government Id
 router.get('/:peronalInfoId/government-id', getAllGovernmentIdByPersonInfoId)
 router.post('/:peronalInfoId/government-id', addGovernmentId)
-export default router
 
 //Host Details
 router.get('/:hostId/host-details-listing/:listingId', getHostDetailsInListing)
+
+router.post('/xendit', xendit)
+
+export default router

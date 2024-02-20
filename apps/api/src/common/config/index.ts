@@ -18,3 +18,4 @@ export const nextAuthSecret = process.env.NEXTAUTH_SECRET || ''
 export const awsAccessKey = process.env.AWS_ACCESS_KEY || ''
 export const awsAccessSecret = process.env.AWS_SECRET_ACCESS_KEY || ''
 export const awsRegion = process.env.AWS_REGION
+export const xenditSecret = process.env.XENDIT_SECRET
