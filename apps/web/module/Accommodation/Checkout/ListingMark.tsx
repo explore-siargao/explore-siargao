@@ -8,14 +8,14 @@ interface ListingMarkProps {
 }
 
 const ListingMark: React.FC<ListingMarkProps> = ({
-  icon: icon,
+  icon: iconSymbol,
   title,
   desc,
 }) => {
   return (
     <div className="border border-gray-300 rounded-md p-4 mb-2">
-      <div className="flex items-center gap-2">
-        <div className="pt-2">{icon}</div>
+      <div className="flex items-center gap-4">
+        <div className="pt-2">{iconSymbol}</div>
         <h3 className="font-semibold">{title}</h3>
       </div>
       <div className="pl-10 pr-3">
