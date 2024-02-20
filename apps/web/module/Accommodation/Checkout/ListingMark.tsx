@@ -1,15 +1,14 @@
-import React from "react";
-import { Typography } from "@/common/components/ui/Typography";
-
+import React from "react"
+import { Typography } from "@/common/components/ui/Typography"
 
 interface listingMarkProps {
-  icon: React.ElementType;
+  icon: React.ElementType
   title: string
   desc?: string
 }
 
-const ListingMark: React.FC<listingMarkProps> = ({ 
-  icon: Icon, 
+const ListingMark: React.FC<listingMarkProps> = ({
+  icon: Icon,
   title,
   desc,
 }) => {
@@ -25,7 +24,7 @@ const ListingMark: React.FC<listingMarkProps> = ({
         </Typography>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ListingMark;
+export default ListingMark

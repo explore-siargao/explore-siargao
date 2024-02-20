@@ -96,7 +96,7 @@ export const SingleView = () => {
               />
             </div>
             <div className="py-6">
-              <Highlights/>
+              <Highlights />
             </div>
             <div className="py-6">
               <BookingDescription />
@@ -122,10 +122,10 @@ export const SingleView = () => {
               }}
             />
             <div>
-              <ListingMark 
-              icon={Tag} 
-              title="Lower Price"
-              desc="Your dates are ₱1,494 less than the avg. nightly rate of the last 60 days."
+              <ListingMark
+                icon={Tag}
+                title="Lower Price"
+                desc="Your dates are ₱1,494 less than the avg. nightly rate of the last 60 days."
               />
             </div>
 
@@ -176,7 +176,6 @@ export const SingleView = () => {
           <ThingsToKnow />
         </div>
       </div>
-
     </WidthWrapper>
   )
 }
