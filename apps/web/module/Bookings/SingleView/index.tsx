@@ -13,8 +13,63 @@ import CheckoutProcess from "./components/CheckoutProcess"
 import PlaceOffers from "./components/PlaceOffers"
 import WhereYoullBeDescription from "./components/Map"
 import ListingDateRangePicker from "./components/ListingDateRangePicker"
+import { Button } from "@/common/components/ui/Button"
+import { Flag } from "lucide-react"
+import ModalReporting from "./components/modals/ModalReporting"
+import { useState } from "react"
+
+const reportListingArr = [
+  {
+    name: "It's a scam",
+    choices: [
+      {
+        reason: "The host asked me to pay outside of Airbnb",
+        description: "Ex: Wire transfer, cash, bank transfer",
+      },
+    ],
+  },
+  {
+    name: "It's inaccurate",
+    choices: [
+      {
+        reason: "This is for second item",
+        description: "Ex: this is for second item",
+      },
+      {
+        reason: "This is for the description for second item",
+        description: "Ex: this is for second item",
+      },
+    ],
+  },
+  {
+    name: "It's not a real place to stay",
+    choices: [
+      {
+        reason: "This is for third item",
+        description: "Ex: This is for the third item",
+      },
+    ],
+  },
+  {
+    name: "It's offensive",
+    choices: [
+      {
+        reason: "This is for fourth item",
+        description: "Ex: for fourth item",
+      },
+    ],
+  },
+]
 
 export const SingleView = () => {
+  const [showModal, setShowModal] = useState(false)
+  const handleOpenModal = () => {
+    setShowModal(true)
+  }
+  const handleCloseModal = () => {
+    setShowModal(false)
+  }
+
   return (
     <WidthWrapper width="small" className="mt-32 lg:mt-36">
       <SectionInfo title="Villa Manao · Private Pool | Bathtub | Sky shower" />
@@ -65,6 +120,26 @@ export const SingleView = () => {
                 titlePrice: 25000,
               }}
             />
+            <div className="flex justify-center">
+              <div className="justify-items-center">
+                <Button
+                  variant="ghost"
+                  className="underline md:float-right"
+                  size="sm"
+                  onClick={handleOpenModal}
+                >
+                  <Flag fill="black" />
+                  Report this listing
+                </Button>
+              </div>
+            </div>
+            <div className="w-4/5 md:w-2/3 lg:w-1/2">
+              <ModalReporting
+                isOpen={showModal}
+                onClose={handleCloseModal}
+                reportListingArr={reportListingArr}
+              />
+            </div>
           </div>
         </div>
       </div>
