@@ -42,8 +42,8 @@ const Slider = ({ images }: SliderProps) => {
         }
       `}</style>
 
-      {images.map((image, _sliderIndex) => (
-        <SwiperSlide key={`slider-${_sliderIndex}`}>
+      {images.map((image, _) => (
+        <SwiperSlide key={`slider-${_}`}>
           <div className="flex h-full w-full items-center justify-center">
             <Image
               width={300}
