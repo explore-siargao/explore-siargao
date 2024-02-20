@@ -363,12 +363,12 @@ model CancellationPolicy {
 model Rule {
   id                   Int                 @id @default(autoincrement())
   icon                 String
-  rule                 String
+  rule                 String              
   createdAt            DateTime            @default(now())
   updatedAt            DateTime            @updatedAt
   deletedAt            DateTime?
   cancellationPolicyId Int?
-  description          String
+  description          String             @db.LongText()
   houseRuleId          Int?
   safePropertyId       Int?
   safetyProperty       SafetyProperty?     @relation(fields: [safePropertyId], references: [id])

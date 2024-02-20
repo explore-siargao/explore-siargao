@@ -978,6 +978,336 @@ const main = async()=>{
         ]
     })
 
+    const getHighlights = await prisma.highLights.findMany({
+        where:{
+            deletedAt:null
+        }
+    })
+    const createListinghighlights = await prisma.listingHighLights.createMany({
+        data:[
+            {
+                highLightsId:getHighlights[0]?.id || 0,
+                listingId:getListings[0]?.id || 0,
+            },
+            {
+                highLightsId:getHighlights[1]?.id || 0,
+                listingId:getListings[0]?.id || 0,
+            },
+            {
+                highLightsId:getHighlights[2]?.id || 0,
+                listingId:getListings[0]?.id || 0,
+            },
+            {
+                highLightsId:getHighlights[3]?.id || 0,
+                listingId:getListings[1]?.id || 0,
+            },
+            {
+                highLightsId:getHighlights[4]?.id || 0,
+                listingId:getListings[1]?.id || 0,
+            }
+        ]
+    })
+
+    const getPlaceOffers = await prisma.placeOffers.findMany({
+        where:{
+            deletedAt:null
+        }
+    })
+
+    const createListingPlaceOffers = await prisma.listingPlaceOffers.createMany({
+        data:[
+            {
+                listingId:getListings[2]?.id || 0,
+                placeOfferId: getPlaceOffers[0]?.id || 0,
+            },
+            {
+                listingId:getListings[2]?.id || 0,
+                placeOfferId: getPlaceOffers[1]?.id || 0,
+            },
+            {
+                listingId:getListings[3]?.id || 0,
+                placeOfferId: getPlaceOffers[2]?.id || 0,
+            },
+            {
+                listingId:getListings[3]?.id || 0,
+                placeOfferId: getPlaceOffers[3]?.id || 0,
+            },
+            {
+                listingId:getListings[4]?.id || 0,
+                placeOfferId: getPlaceOffers[4]?.id || 0,
+            },
+        ]
+    })
+
+    const createHouseRules = await prisma.houseRule.createMany({
+        data:[
+            {
+                listingId:getListings[0]?.id || 0,
+                title:"Checking in and out"
+            },
+            {
+                listingId:getListings[0]?.id || 0,
+                title:"During your stay"
+            },
+            {
+                listingId:getListings[0]?.id || 0,
+                title:"Before you leave"
+            },
+            {
+                listingId:getListings[1]?.id || 0,
+                title:"Checking in and out"
+            },
+            {
+                listingId:getListings[1]?.id || 0,
+                title:"During your stay"
+            }
+        ]
+    })
+
+    const getHouseRules = await prisma.houseRule.findMany({
+        where:{
+            deletedAt:null
+        }
+    })
+
+    const createSafetyProperties = await prisma.safetyProperty.createMany({
+        data:[
+            {
+                listingId:getListings[2]?.id || 0,
+                title:"Safety considerations"
+            },
+            {
+                listingId:getListings[2]?.id || 0,
+                title:"Safety devices"
+            },
+            {
+                listingId:getListings[2]?.id || 0,
+                title:"Property info"
+            },
+            {
+                listingId:getListings[3]?.id || 0,
+                title:"Safety considerations"
+            },
+            {
+                listingId:getListings[3]?.id || 0,
+                title:"Safety devices"
+            }
+        ]
+    })
+
+    const getSafetyProperties = await prisma.safetyProperty.findMany({
+        where:{
+            deletedAt:null
+        }
+    })
+
+    const createCancellationpolicies = await prisma.cancellationPolicy.createMany({
+        data:[
+            {
+                listingId:getListings[3]?.id || 0,
+                cancelationDueDate:"2000-10-31T01:30:00.000-05:00",
+                title:"March 18"
+            },
+            {
+                listingId:getListings[1]?.id || 0,
+                cancelationDueDate:"2000-10-31T01:30:00.000-05:00",
+                title:"March 18"
+            },
+            {
+                listingId:getListings[2]?.id || 0,
+                cancelationDueDate:"2000-10-31T01:30:00.000-05:00",
+                title:"March 18"
+            },
+            {
+                listingId:getListings[4]?.id || 0,
+                cancelationDueDate:"2000-10-31T01:30:00.000-05:00",
+                title:"March 18"
+            },
+            {
+                listingId:getListings[0]?.id || 0,
+                cancelationDueDate:"2000-10-31T01:30:00.000-05:00",
+                title:"March 18"
+            }
+        ]
+    })
+
+    const getCancellationPolicies = await prisma.cancellationPolicy.findMany({
+        where:{
+            deletedAt:null
+        }
+    })
+
+    const createRules = await prisma.rule.createMany({
+        data:[
+            {
+                icon:"Clock",
+                rule:"Check-in after 3:00 PM",
+                description:"",
+                houseRuleId:getHouseRules[0]?.id
+            },
+            {
+                icon:"Clock",
+                rule:"Checkout before 11:00 AM",
+                description:"",
+                houseRuleId:getHouseRules[0]?.id
+            },
+            {
+                icon:"People",
+                rule:"4 guests maximum",
+                description:"",
+                houseRuleId:getHouseRules[1]?.id
+            },
+            {
+                icon:"Moon",
+                rule:"Quiet hours",
+                description:"",
+                houseRuleId:getHouseRules[1]?.id
+            },
+            {
+                icon:"Camera",
+                rule:"Commercial photography allowed",
+                description:"",
+                houseRuleId:getHouseRules[1]?.id
+            },
+
+            {
+                icon:"Sea",
+                rule:"Pool/hot tub without a gate or lock",
+                description:"",
+                safePropertyId:getSafetyProperties[0]?.id
+            },
+            {
+                icon:"Warning",
+                rule:"Climbing or play structure",
+                description:"The Legaspi park is 2mins walk from my building and has a playground for children.",
+                safePropertyId:getSafetyProperties[0]?.id
+            },
+            {
+                icon:"CCTV",
+                rule:"Security camera/recording device",
+                description:"For security purposes, we have one CCTV facing the entrance of the main door. ",
+                safePropertyId:getSafetyProperties[1]?.id
+            },
+            {
+                icon:"Stair",
+                rule:"Must climb stairs",
+                description:"1 level",
+                safePropertyId:getSafetyProperties[3]?.id
+            },
+            {
+                icon:"Car",
+                rule:"No parking on property",
+                description:"1) FREE PARKING (BACK STREETS) - Monday to Saturday (5pm to 7am) - Sunday (whole day) - Holidays (whole day) 2) PAID PARKING - Monday to Saturday (back streets. 7am to 5pm) - Establishments paid parking: tinyurl(dot)com/makatiparking",
+                safePropertyId:getSafetyProperties[3]?.id
+            },
+
+            {
+                icon:"",
+                rule:"No refund",
+                description:"",
+                cancellationPolicyId:getCancellationPolicies[0]?.id
+            },
+            {
+                icon:"",
+                rule:"No refund",
+                description:"",
+                cancellationPolicyId:getCancellationPolicies[1]?.id
+            },
+            {
+                icon:"",
+                rule:"No refund",
+                description:"",
+                cancellationPolicyId:getCancellationPolicies[2]?.id
+            },
+            {
+                icon:"",
+                rule:"No refund",
+                description:"",
+                cancellationPolicyId:getCancellationPolicies[3]?.id
+            },
+            {
+                icon:"",
+                rule:"No refund",
+                description:"",
+                cancellationPolicyId:getCancellationPolicies[4]?.id
+            }
+        ]
+    })
+    const createForgotPassword = await prisma.forgotPassword.createMany({
+        data:[
+            {
+                email:"ramilkaharian25@gmail.com",
+                code:"999111",
+                expiredAt:new Date(),
+                used:true
+            },
+            {
+                email:"ramilkaharian25@gmail.com",
+                code:"909057",
+                expiredAt:new Date(),
+                used:true
+            },
+            {
+                email:"ramilkaharian25@gmail.com",
+                code:"981203",
+                expiredAt:new Date(),
+                used:true
+            },
+            {
+                email:"ramilkaharian25@gmail.com",
+                code:"665111",
+                expiredAt:new Date(),
+                used:true
+            },
+            {
+                email:"ramilkaharian25@gmail.com",
+                code:"432100",
+                expiredAt:new Date(),
+                used:false
+            }
+        ]
+    })
+
+    const createMultiAuths = await prisma.multiFactorAuth.createMany({
+        data:[
+            {
+                userId:getUsers[0]?.id || 0,
+                code:"222111",
+                expiredAt: new Date(),
+                type:"Google",
+                used:true
+            },
+            {
+                userId:getUsers[0]?.id || 0,
+                code:"881122",
+                expiredAt: new Date(),
+                type:"Facebook",
+                used:true
+            },
+            {
+                userId:getUsers[1]?.id || 0,
+                code:"765432",
+                expiredAt: new Date(),
+                type:"Google",
+                used:true
+            },
+            {
+                userId:getUsers[2]?.id || 0,
+                code:"870123",
+                expiredAt: new Date(),
+                type:"Google",
+                used:true
+            },
+            {
+                userId:getUsers[3]?.id || 0,
+                code:"470356",
+                expiredAt: new Date(),
+                type:"Google",
+                used:true
+            }
+        ]
+    })
+
     console.log({
         createUsers,
         createPersonalInfos,
@@ -995,7 +1325,15 @@ const main = async()=>{
         createWishgroups,
         createReviews,
         createReportListings,
-        createReservationListings
+        createReservationListings,
+        createListinghighlights,
+        createListingPlaceOffers,
+        createRules,
+        createHouseRules,
+        createSafetyProperties,
+        createCancellationpolicies,
+        createForgotPassword,
+        createMultiAuths
     })
 }
 
