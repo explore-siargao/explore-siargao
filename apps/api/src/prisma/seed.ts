@@ -1,7 +1,6 @@
 import { prisma } from '@/common/helpers/prismaClient'
 import { encryptKey } from '@/common/config'
 import CryptoJS from 'crypto-js'
-import { getPaymentMethods } from '@/routes/payments/service/paymentMethod'
 
 const main = async () => {
   const createUsers = await prisma.user.createMany({
