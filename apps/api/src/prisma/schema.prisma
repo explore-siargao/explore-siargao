@@ -33,6 +33,8 @@ model User {
   Coupons          Coupon[]
   taxId            Int?
   reservations     ReservationListing[]
+  hostInfoId       Int?
+  hostInfo         HostInfo?
 }
 
 model PersonalInfo {
@@ -53,6 +55,17 @@ model PersonalInfo {
   user              User                @relation(fields: [userId], references: [id])
   address           Addresses?
   emergencyContacts EmergencyContacts[]
+  confirm           String              @db.VarChar(250)
+
+  @@index([userId])
+}
+
+model HostInfo {
+  id          Int      @id @default(autoincrement())
+  userId      Int?     @unique
+  user        User?    @relation(fields: [userId], references: [id])
+  work        String   @db.VarChar(100)
+  hostedSince DateTime @default(now())
 
   @@index([userId])
 }
