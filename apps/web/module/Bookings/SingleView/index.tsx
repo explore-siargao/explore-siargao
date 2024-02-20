@@ -9,7 +9,7 @@ import AvatarTitleDescription from "./components/AvatarTitleDescription"
 import RatingSummary from "./components/Reviews/RatingSummary"
 import UserReviews from "./components/Reviews/UserReviews"
 import Highlights from "./components/Highlights"
-import CheckoutProcess from "./components/CheckoutProcess"
+import CheckoutProcess from "./components/CheckoutBox"
 import PlaceOffers from "./components/PlaceOffers"
 import WhereYoullBeDescription from "./components/Map"
 import ListingDateRangePicker from "./components/ListingDateRangePicker"
@@ -104,7 +104,7 @@ export const SingleView = () => {
               <PlaceOffers />
             </div>
             <div className="py-6">
-              <ListingDateRangePicker title="5 Nights in Villa Manao · Private Pool | Bathtub | Sky shower" />
+              <ListingDateRangePicker title="Villa Manao · Private Pool | Bathtub | Sky shower" />
             </div>
           </div>
         </div>
