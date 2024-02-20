@@ -26,19 +26,21 @@ export const getUsedCoupons = async (req: Request, res: Response) => {
           },
         },
       })
-      const modifyResult = getUsedCoupons.map((coupon)=>(
-        {
-          ...coupon,
-          user:{
-            ...coupon.user,
-            personalInfo:{
-              ...coupon.user?.personalInfo,
-              confirm:coupon.user?.personalInfo?.confirm ? JSON.parse(coupon.user?.personalInfo?.confirm):null,
-              governmentId:coupon.user?.personalInfo?.governmentId ? JSON.parse(coupon.user.personalInfo.governmentId):null
-            }
-          }
-        }
-      ))
+      const modifyResult = getUsedCoupons.map((coupon) => ({
+        ...coupon,
+        user: {
+          ...coupon.user,
+          personalInfo: {
+            ...coupon.user?.personalInfo,
+            confirm: coupon.user?.personalInfo?.confirm
+              ? JSON.parse(coupon.user?.personalInfo?.confirm)
+              : null,
+            governmentId: coupon.user?.personalInfo?.governmentId
+              ? JSON.parse(coupon.user.personalInfo.governmentId)
+              : null,
+          },
+        },
+      }))
       res.json({
         error: false,
         items: modifyResult,

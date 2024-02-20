@@ -85,19 +85,21 @@ export const getPaymentMethods = async (req: Request, res: Response) => {
           },
         },
       })
-      const modifyResult = getPaymentsMethod.map((paymentMethod)=>(
-        {
-          ...paymentMethod,
-          user:{
-            ...paymentMethod.user,
-            personalInfo:{
-              ...paymentMethod.user.personalInfo,
-              confirm:paymentMethod.user.personalInfo?.confirm ? JSON.parse(paymentMethod.user.personalInfo?.confirm):null,
-              governmentId: paymentMethod.user.personalInfo?.governmentId ? JSON.parse(paymentMethod.user.personalInfo.governmentId):null
-            }
-          }
-        }
-      ))
+      const modifyResult = getPaymentsMethod.map((paymentMethod) => ({
+        ...paymentMethod,
+        user: {
+          ...paymentMethod.user,
+          personalInfo: {
+            ...paymentMethod.user.personalInfo,
+            confirm: paymentMethod.user.personalInfo?.confirm
+              ? JSON.parse(paymentMethod.user.personalInfo?.confirm)
+              : null,
+            governmentId: paymentMethod.user.personalInfo?.governmentId
+              ? JSON.parse(paymentMethod.user.personalInfo.governmentId)
+              : null,
+          },
+        },
+      }))
       res.json({
         error: false,
         items: modifyResult,

@@ -23,17 +23,15 @@ export const getAllReports = async (req: Request, res: Response) => {
         listing: true,
       },
     })
-    const modifyResult = getAllReportsListing.map((reportListing)=>(
-      {
-        ...reportListing,
-        listing:{
-          ...reportListing.listing,
-          images:JSON.parse(reportListing.listing.images),
-          whereYoullBe:JSON.parse(reportListing.listing.whereYoullBe),
-          whereYoullSleep:JSON.parse(reportListing.listing.whereYoullSleep)
-        }
-      }
-    ))
+    const modifyResult = getAllReportsListing.map((reportListing) => ({
+      ...reportListing,
+      listing: {
+        ...reportListing.listing,
+        images: JSON.parse(reportListing.listing.images),
+        whereYoullBe: JSON.parse(reportListing.listing.whereYoullBe),
+        whereYoullSleep: JSON.parse(reportListing.listing.whereYoullSleep),
+      },
+    }))
     if (getAllReportsListing.length !== 0) {
       res.json(
         response.success({
@@ -76,17 +74,15 @@ export const getReportsByListing = async (req: Request, res: Response) => {
         listing: true,
       },
     })
-    const modifyResult = reportsByListingId.map((reportListing)=>(
-      {
-        ...reportListing,
-        listing:{
-          ...reportListing.listing,
-          images:JSON.parse(reportListing.listing.images),
-          whereYoullBe:JSON.parse(reportListing.listing.whereYoullBe),
-          whereYoullSleep:JSON.parse(reportListing.listing.whereYoullSleep)
-        }
-      }
-    ))
+    const modifyResult = reportsByListingId.map((reportListing) => ({
+      ...reportListing,
+      listing: {
+        ...reportListing.listing,
+        images: JSON.parse(reportListing.listing.images),
+        whereYoullBe: JSON.parse(reportListing.listing.whereYoullBe),
+        whereYoullSleep: JSON.parse(reportListing.listing.whereYoullSleep),
+      },
+    }))
     if (reportsByListingId.length !== 0) {
       res.json(
         response.success({
@@ -123,12 +119,14 @@ export const getReport = async (req: Request, res: Response) => {
     })
     const modifyResult = {
       ...getReportById,
-      listing:{
+      listing: {
         ...getReportById?.listing,
-        images:JSON.parse(getReportById?.listing.images as string),
-        whereYoullBe:JSON.parse(getReportById?.listing.whereYoullBe as string),
-        whereYoullSleep:JSON.parse(getReportById?.listing.whereYoullSleep as string)
-      }
+        images: JSON.parse(getReportById?.listing.images as string),
+        whereYoullBe: JSON.parse(getReportById?.listing.whereYoullBe as string),
+        whereYoullSleep: JSON.parse(
+          getReportById?.listing.whereYoullSleep as string
+        ),
+      },
     }
     if (getReportById) {
       res.json(

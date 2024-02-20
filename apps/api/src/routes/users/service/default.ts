@@ -25,16 +25,18 @@ export const getAllUsers = async (req: Request, res: Response) => {
         },
       },
     })
-    const modifyUsers = users.map((user)=>(
-      {
-        ...user,
-        personalInfo:{
-          ...user.personalInfo,
-          confirm:user.personalInfo?.confirm ? JSON.parse(user.personalInfo?.confirm):null,
-          governmentId:user.personalInfo?.governmentId ? JSON.parse(user.personalInfo.governmentId) : null
-        }
-      }
-    ))
+    const modifyUsers = users.map((user) => ({
+      ...user,
+      personalInfo: {
+        ...user.personalInfo,
+        confirm: user.personalInfo?.confirm
+          ? JSON.parse(user.personalInfo?.confirm)
+          : null,
+        governmentId: user.personalInfo?.governmentId
+          ? JSON.parse(user.personalInfo.governmentId)
+          : null,
+      },
+    }))
     const addresses = await prisma.addresses.findMany({})
     if (users.length > 0) {
       res.json({
@@ -287,14 +289,12 @@ export const getUserProfile = async (req: Request, res: Response) => {
     role: getUser.role,
     countReviews: countReviews,
     ratings: Number.isNaN(rating) ? 0 : rating.toFixed(2),
-    listingWithReviews: getUser.listing.map((listing)=>(
-      {
-          ...listing,
-          images:JSON.parse(listing.images),
-          whereYoullBe:JSON.parse(listing.whereYoullBe),
-          whereYoullSleep:JSON.parse(listing.whereYoullSleep)
-      }
-    )),
+    listingWithReviews: getUser.listing.map((listing) => ({
+      ...listing,
+      images: JSON.parse(listing.images),
+      whereYoullBe: JSON.parse(listing.whereYoullBe),
+      whereYoullSleep: JSON.parse(listing.whereYoullSleep),
+    })),
     work: getUser.hostInfo?.work ? getUser.hostInfo.work : null,
     hostedSince: getUser.hostInfo?.hostedSince
       ? getUser.hostInfo.hostedSince

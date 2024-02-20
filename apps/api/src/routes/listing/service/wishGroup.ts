@@ -179,17 +179,17 @@ export const wishGroupByUserAndTitle = async (req: Request, res: Response) => {
           },
         },
       })
-      const modifiedResult = getWishGroupByuserAndTitle.map(wishGroup => {
+      const modifiedResult = getWishGroupByuserAndTitle.map((wishGroup) => {
         return {
           ...wishGroup,
-          listing:{
+          listing: {
             ...wishGroup.listing,
             images: JSON.parse(wishGroup.listing.images),
-            whereYoullBe:JSON.parse(wishGroup.listing.whereYoullBe),
-            whereYoullSleep:JSON.parse(wishGroup.listing.whereYoullSleep)
-          }
-        };
-      });
+            whereYoullBe: JSON.parse(wishGroup.listing.whereYoullBe),
+            whereYoullSleep: JSON.parse(wishGroup.listing.whereYoullSleep),
+          },
+        }
+      })
       res.json(
         response.success({
           items: modifiedResult,

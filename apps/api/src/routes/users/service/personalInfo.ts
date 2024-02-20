@@ -23,8 +23,12 @@ export const getPersonalInfo = async (req: Request, res: Response) => {
     })
     const modifyPersonInfo = {
       ...getPersonalInfo,
-      confirm:getPersonalInfo?.confirm ? JSON.parse(getPersonalInfo?.confirm) : null,
-      governmentId:getPersonalInfo?.governmentId ? JSON.parse(getPersonalInfo.governmentId) : null
+      confirm: getPersonalInfo?.confirm
+        ? JSON.parse(getPersonalInfo?.confirm)
+        : null,
+      governmentId: getPersonalInfo?.governmentId
+        ? JSON.parse(getPersonalInfo.governmentId)
+        : null,
     }
     if (getPersonalInfo !== null) {
       res.json({
