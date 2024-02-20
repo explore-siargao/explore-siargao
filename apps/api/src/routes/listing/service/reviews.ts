@@ -64,14 +64,14 @@ export const getReviewByListing = async (req: Request, res: Response) => {
         valueAverage = totalValue / reviews.length
         return {
           name: `${review?.user?.personalInfo?.firstName} ${review?.user?.personalInfo?.lastName}`,
-          rating:
+          rating:Number((
             (review.cleanLinessRates +
               review.accuracyRates +
               review.checkInRates +
               review.communicationRates +
               review.locationRates +
               review.valueRates) /
-            6,
+            6).toFixed(2)),
           description: review.comment,
           reviewDate: review.createdAt,
           country: review.user.personalInfo?.address?.country,
@@ -90,14 +90,14 @@ export const getReviewByListing = async (req: Request, res: Response) => {
                 location: locationAverage,
                 value: valueAverage,
               },
-              overallRating:
+              overallRating:Number((
                 (cleanlinessAverage +
                   accuracyAverage +
                   checkInAverage +
                   communicationAverage +
                   locationAverage +
                   valueAverage) /
-                6,
+                6).toFixed(2)),
               allItemCount: reviews.length,
             },
             message: '',
@@ -160,9 +160,20 @@ export const getReviewsByUserId = async (req: Request, res: Response) => {
       },
     })
     if (getReviewByUserId) {
+      const modifyResult = getReviewByUserId.map((review)=>(
+        {
+          ...review,
+          listing:{
+            ...review.listing,
+            images:JSON.parse(review.listing.images),
+            whereYoullBe:JSON.parse(review.listing.whereYoullBe),
+            whereYoullSleep:JSON.parse(review.listing.whereYoullSleep)
+          }
+        }
+      ))
       res.json(
         response.success({
-          items: getReviewByUserId,
+          items: modifyResult,
           allItemCount: getReviewByUserId.length,
           message: '',
         })

@@ -18,6 +18,11 @@ export const personalInfo = async () => {
         country: 'PH',
         currency: 'PHP',
         language: 'English',
+        confirm:JSON.stringify({
+          identity:true,
+          emailAddress:true,
+          phoneNumber:true
+        })
       },
       {
         firstName: 'Ramil',
@@ -28,6 +33,11 @@ export const personalInfo = async () => {
         country: 'PH',
         currency: 'PHP',
         language: 'English',
+        confirm:JSON.stringify({
+          identity:true,
+          emailAddress:true,
+          phoneNumber:true
+        })
       },
       {
         firstName: 'John',
@@ -38,6 +48,11 @@ export const personalInfo = async () => {
         country: 'PH',
         currency: 'PHP',
         language: 'English',
+        confirm:JSON.stringify({
+          identity:true,
+          emailAddress:true,
+          phoneNumber:true
+        })
       },
       {
         firstName: 'Richard',
@@ -48,6 +63,11 @@ export const personalInfo = async () => {
         country: 'PH',
         currency: 'PHP',
         language: 'English',
+        confirm:JSON.stringify({
+          identity:true,
+          emailAddress:true,
+          phoneNumber:true
+        })
       },
       {
         firstName: 'Arjhay',
@@ -58,6 +78,11 @@ export const personalInfo = async () => {
         country: 'PH',
         currency: 'PHP',
         language: 'English',
+        confirm:JSON.stringify({
+          identity:true,
+          emailAddress:true,
+          phoneNumber:true
+        })
       },
     ],
   })
