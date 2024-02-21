@@ -49,8 +49,9 @@ const OvalTab = ({ tabs }: OvalTabProps) => {
                   }`}
                 >
                   {tab.description && <span>{tab.description}</span>}
-                  {(tab.value !== undefined && tab.value !== null) && <span>({tab.value})</span>}
-
+                  {tab.value !== undefined && tab.value !== null && (
+                    <span>({tab.value})</span>
+                  )}
                 </div>
               </Link>
             ))}
