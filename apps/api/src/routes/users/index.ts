@@ -6,9 +6,6 @@ import {
   updatePassword,
 } from './service/default'
 import {
-  xendit,
-} from './service/xendit'
-import {
   verifySignIn,
   verifySession,
   register,
@@ -152,7 +149,5 @@ router.post('/:peronalInfoId/government-id', addGovernmentId)
 
 //Host Details
 router.get('/:hostId/host-details-listing/:listingId', getHostDetailsInListing)
-
-router.post('/xendit', xendit)
 
 export default router

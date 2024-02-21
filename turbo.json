@@ -25,7 +25,9 @@
         "WEB_URL",
         "RECAPTCHA_KEY",
         "RECAPTCHA_KEY_SECRET",
-        "NODE_ENV"
+        "NODE_ENV",
+        "XENDIT_URL",
+        "XENDIT_SECRET"
       ]
     },
     "lint": {
