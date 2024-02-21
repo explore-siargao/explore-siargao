@@ -1,33 +1,36 @@
-import { T_BackendResponse } from "@repo/contract"
-import { apiUrl, mockUrl, xenditSecret, xenditUrl } from "../config"
+import { T_BackendResponse } from '@repo/contract'
+import { apiUrl, mockUrl, xenditSecret, xenditUrl } from '../config'
 
 export class ApiService {
   private BASE_URL: string | undefined
 
-  constructor(source: "main" | "xendit" | "mock" = "main") {
-    if (source === "main") {
+  constructor(source: 'main' | 'xendit' | 'mock' = 'main') {
+    if (source === 'main') {
       this.BASE_URL = apiUrl
-    } else if (source === "xendit") {
+    } else if (source === 'xendit') {
       this.BASE_URL = xenditUrl
     } else {
       this.BASE_URL = mockUrl
     }
   }
 
-  private constructOptions(includeXenditAuth = false, removeContentType = false) {
+  private constructOptions(
+    includeXenditAuth = false,
+    removeContentType = false
+  ) {
     const username = xenditSecret
-    const password = ""
+    const password = ''
     const headers = {
       ...(!removeContentType && {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       }),
       ...(includeXenditAuth && {
-        "Authorization": `Basic ${Buffer.from(username + ":" + password).toString('base64')}`,
+        Authorization: `Basic ${Buffer.from(username + ':' + password).toString('base64')}`,
       }),
     } as Record<string, any>
     const options = {
       headers,
-      credentials: "include" as RequestCredentials,
+      credentials: 'include' as RequestCredentials,
     }
     return options
   }
@@ -40,7 +43,7 @@ export class ApiService {
     const reqParams = new URLSearchParams(params).toString()
     const otherOptions = this.constructOptions()
     const res = fetch(
-      `${this.BASE_URL}${endpoint}${params ? `?${reqParams}` : ""}`,
+      `${this.BASE_URL}${endpoint}${params ? `?${reqParams}` : ''}`,
       {
         ...otherOptions,
         ...(signal ? { signal } : {}),
@@ -56,9 +59,12 @@ export class ApiService {
     includeXenditAuth?: boolean,
     removeContentType?: boolean
   ): Promise<T> {
-    const otherOptions = this.constructOptions(includeXenditAuth, removeContentType)
+    const otherOptions = this.constructOptions(
+      includeXenditAuth,
+      removeContentType
+    )
     const res = fetch(`${this.BASE_URL}${endpoint}`, {
-      method: "POST",
+      method: 'POST',
       body: !raw ? JSON.stringify(body) : body,
       ...otherOptions,
     })
@@ -72,9 +78,12 @@ export class ApiService {
     includeXenditAuth?: boolean,
     removeContentType?: boolean
   ): Promise<T> {
-    const otherOptions = this.constructOptions(includeXenditAuth, removeContentType)
+    const otherOptions = this.constructOptions(
+      includeXenditAuth,
+      removeContentType
+    )
     const res = fetch(`${this.BASE_URL}${endpoint}`, {
-      method: "PATCH",
+      method: 'PATCH',
       body: !raw ? JSON.stringify(body) : body,
       ...otherOptions,
     })
@@ -88,9 +97,12 @@ export class ApiService {
     includeXenditAuth?: boolean,
     removeContentType?: boolean
   ): Promise<T> {
-    const otherOptions = this.constructOptions(includeXenditAuth, removeContentType)
+    const otherOptions = this.constructOptions(
+      includeXenditAuth,
+      removeContentType
+    )
     const res = fetch(`${this.BASE_URL}${endpoint}`, {
-      method: "DELETE",
+      method: 'DELETE',
       body: !raw ? JSON.stringify(body) : body,
       ...otherOptions,
     })
