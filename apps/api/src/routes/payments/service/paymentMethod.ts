@@ -167,8 +167,7 @@ export const removePaymentmethod = async (req: Request, res: Response) => {
 
 export const updatePaymentMethod = async (req: Request, res: Response) => {
   let successDefault = null
-  const { cardInfo, isDefault } =
-    req.body
+  const { cardInfo, isDefault } = req.body
   const userId = Number(req.params.userId)
   const paymentMethodId = Number(req.params.paymentMethodId)
   try {
@@ -193,11 +192,7 @@ export const updatePaymentMethod = async (req: Request, res: Response) => {
         },
       })
       if (getPaymentMethod) {
-        if (
-          cardInfo ||
-          isDefault ||
-          !isDefault
-        ) {
+        if (cardInfo || isDefault || !isDefault) {
           if (isDefault) {
             const updateCurrentDefault = await prisma.paymentMethod.updateMany({
               where: {
@@ -216,7 +211,7 @@ export const updatePaymentMethod = async (req: Request, res: Response) => {
               userId: userId,
             },
             data: {
-              cardInfo:cardInfo,
+              cardInfo: cardInfo,
               isDefault: isDefault,
             },
           })

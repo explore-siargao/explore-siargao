@@ -1,9 +1,9 @@
 import { ApiService } from "@/common/service/api"
 import { API_URL_PAYMENTS } from "@/common/constants"
 import { useMutation } from "@tanstack/react-query"
-interface CardInfoProps{
-  cardInfo:string,
-  userId:number
+interface CardInfoProps {
+  cardInfo: string
+  userId: number
 }
 export async function addPaymentMethod(
   userId: number | undefined,

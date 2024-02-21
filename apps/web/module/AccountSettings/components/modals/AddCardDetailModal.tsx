@@ -16,7 +16,7 @@ import ErrorMessage from "../ui/ErrorMessage"
 import ModalContainerFooter from "@/common/components/ModalContainer/ModalContainerFooter"
 import { Option, Select } from "@/common/components/ui/Select"
 import { COUNTRIES } from "@repo/constants"
-import {EncryptionService} from "@repo/services"
+import { EncryptionService } from "@repo/services"
 
 interface CardDetailModal {
   isOpen: boolean
@@ -58,12 +58,12 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
     }
     mutate(
       {
-        cardInfo:encryptCard.encrypt({
+        cardInfo: encryptCard.encrypt({
           cardNumber: String(getValues("cardNumber")).replace(/\s/g, ""),
           cvv: Number(getValues("cvv")),
-          expirationDate:String(getValues("expirationDate")),
+          expirationDate: String(getValues("expirationDate")),
           zipCode: Number(getValues("zipCode")),
-          countryRegion:(getValues("countryRegion"))
+          countryRegion: getValues("countryRegion"),
         }),
         userId: Number(userId),
       },
