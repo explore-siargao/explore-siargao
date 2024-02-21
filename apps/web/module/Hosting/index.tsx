@@ -49,47 +49,43 @@ const HostingPage: React.FC<HostingPageProps> = ({ hostName }) => {
     description = "You don't have any guests checking out today or tomorrow"
   }
   return (
-    <>
-      <div>
-        <div className="">
-          <Title size={"default"} className="flex font-semibold mb-10">
-            Welcome, {hostName}
-            <div className="flex-grow" />
-            <Button variant={"outline"} className="flex items-end ">
-              Complete your listing
-            </Button>
-          </Title>
-        </div>
-        <div className="">
-          <Typography variant={"h1"} className="flex font-semibold mb-5">
-            Your reservations
-            <div className="flex-grow" />
-            <Button
-              variant={"ghost"}
-              className="flex items-end font-semibold text-[17px] underline"
-            >
-              All reservations (0)
-            </Button>
-          </Typography>
-        </div>
+    <div>
+      <div className="">
+        <Title size={"default"} className="flex font-semibold mb-10">
+          Welcome, {hostName}
+          <div className="flex-grow" />
+          <Button variant={"outline"} className="flex items-end ">
+            Complete your listing
+          </Button>
+        </Title>
+      </div>
+      <div className="">
+        <Typography variant={"h1"} className="flex font-semibold mb-5">
+          Your reservations
+          <div className="flex-grow" />
+          <Button
+            variant={"ghost"}
+            className="flex items-end font-semibold text-[17px] underline"
+          >
+            All reservations (0)
+          </Button>
+        </Typography>
+      </div>
 
-        <div>
-          <OvalTab tabs={tabs} />
-          <div className="flex bg-gray-100 h-[300px] w-full mt-5 items-center justify-center">
-            <div className="text-gray-500">
-              <div className="flex items-center justify-center mb-5">
-                {icon}
-              </div>
-              <div className="w-[200px]">
-                <Typography variant={"p"} className="font-semibold">
-                  {description}
-                </Typography>
-              </div>
+      <div>
+        <OvalTab tabs={tabs} />
+        <div className="flex bg-gray-100 h-[300px] w-full mt-5 items-center justify-center">
+          <div className="text-gray-500">
+            <div className="flex items-center justify-center mb-5">{icon}</div>
+            <div className="w-[200px]">
+              <Typography variant={"p"} className="font-semibold">
+                {description}
+              </Typography>
             </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 
