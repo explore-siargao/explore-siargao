@@ -7,17 +7,19 @@ const ReviewCard = ({
   reviewerImage,
   reviewerName,
   reviewDate,
-  forModal
+  forModal,
 }: ReviewsCardProps) => {
   const date = new Date(reviewDate)
 
   return (
-    <div className={`${forModal ? "flex flex-col-reverse py-5" : "border rounded-md p-5"}`}>
-      {forModal ? 
-        <p>{reviewMessage}</p> 
-        : 
+    <div
+      className={`${forModal ? "flex flex-col-reverse py-5" : "border rounded-md p-5"}`}
+    >
+      {forModal ? (
+        <p>{reviewMessage}</p>
+      ) : (
         <p>“...{reviewMessage.substring(0, 180)}...</p>
-      }
+      )}
       <div className={`${forModal ? "mb-5" : "mt-5"} flex items-center`}>
         <div className="relative h-14 w-14 bg-gray-200 rounded-full">
           <Image

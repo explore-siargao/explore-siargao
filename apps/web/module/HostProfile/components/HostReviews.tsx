@@ -59,7 +59,11 @@ const HostReviews = ({ name, reviewsCount, reviews }: HostReviewsProps) => {
           </Link>
         </Typography>
       </div>
-      <AllReviewsModal reviews={reviews} isOpen={openReviewsModal} onClose={() => setOpenReviewsMoal(false)}/>
+      <AllReviewsModal
+        reviews={reviews}
+        isOpen={openReviewsModal}
+        onClose={() => setOpenReviewsMoal(false)}
+      />
     </div>
   )
 }
