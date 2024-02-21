@@ -1,8 +1,8 @@
-import { ApiService } from '@/common/service/api';
-import { ResponseService } from '@/common/service/response';
+import { ApiService } from '@/common/service/api'
+import { ResponseService } from '@/common/service/response'
 import { Response, Request } from 'express'
 import { randomUUID } from 'crypto'
-import { REQUIRED_VALUE_EMPTY } from '@/common/constants';
+import { REQUIRED_VALUE_EMPTY } from '@/common/constants'
 
 const response = new ResponseService()
 const apiXendit = new ApiService('xendit')
@@ -53,7 +53,7 @@ export const cardMultiUse = async (req: Request, res: Response) => {
           cardholder_name: 'John Doe',
         },
       },
-      "reusability": "MULTIPLE_USE",
+      reusability: 'MULTIPLE_USE',
     }
     const req = await apiXendit.post(`/v2/payment_methods`, data, false, true)
     return res.json(response.success({ item: req }))
@@ -67,12 +67,12 @@ export const cardCreatePayment = async (req: Request, res: Response) => {
   if (paymentMethodId && amount) {
     try {
       const data = {
-        "amount": amount,
-        "currency": "PHP",
-        "payment_method_id": paymentMethodId,
-        "capture_method": "MANUAL"
+        amount: amount,
+        currency: 'PHP',
+        payment_method_id: paymentMethodId,
+        capture_method: 'MANUAL',
       }
-      const req = await apiXendit.post(`/payment_requests`, data, false, true);
+      const req = await apiXendit.post(`/payment_requests`, data, false, true)
       return res.json(response.success({ item: req }))
     } catch (err: any) {
       return res.json(response.error({ message: err.message }))
@@ -87,10 +87,15 @@ export const cardInitiatePayment = async (req: Request, res: Response) => {
   if (paymentRequestId) {
     try {
       const data = {
-        "capture_amount": 1500,
-        "reference_id": `capture-reference-${randomUUID}`
+        capture_amount: 1500,
+        reference_id: `capture-reference-${randomUUID}`,
       }
-      const req = await apiXendit.post(`/payment_requests/${paymentRequestId}/captures`, data, false, true);
+      const req = await apiXendit.post(
+        `/payment_requests/${paymentRequestId}/captures`,
+        data,
+        false,
+        true
+      )
       return res.json(response.success({ item: req }))
     } catch (err: any) {
       return res.json(response.error({ message: err.message }))
@@ -105,22 +110,22 @@ export const gcashCreatePayment = async (req: Request, res: Response) => {
   if (amount) {
     try {
       const data = {
-        "amount": amount,
-        "currency": "PHP",
-        "country": "PH",
-        "payment_method": {
-          "type": "EWALLET",
-          "ewallet": {
-            "channel_code": "GCASH",
-            "channel_properties": {
-              "success_return_url": "https://redirect.me/goodstuff",
-              "failure_return_url": "https://redirect.me/goodstuff"
-            }
+        amount: amount,
+        currency: 'PHP',
+        country: 'PH',
+        payment_method: {
+          type: 'EWALLET',
+          ewallet: {
+            channel_code: 'GCASH',
+            channel_properties: {
+              success_return_url: 'https://redirect.me/goodstuff',
+              failure_return_url: 'https://redirect.me/goodstuff',
+            },
           },
-          "reusability": "ONE_TIME_USE"
-        }
+          reusability: 'ONE_TIME_USE',
+        },
       }
-      const req = await apiXendit.post(`/payment_requests`, data, false, true);
+      const req = await apiXendit.post(`/payment_requests`, data, false, true)
       return res.json(response.success({ item: req }))
     } catch (err: any) {
       return res.json(response.error({ message: err.message }))
