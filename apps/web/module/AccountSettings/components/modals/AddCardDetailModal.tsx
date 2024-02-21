@@ -16,6 +16,7 @@ import ErrorMessage from "../ui/ErrorMessage"
 import ModalContainerFooter from "@/common/components/ModalContainer/ModalContainerFooter"
 import { Option, Select } from "@/common/components/ui/Select"
 import { COUNTRIES } from "@repo/constants"
+import {EncryptionService} from "@repo/services"
 
 interface CardDetailModal {
   isOpen: boolean
@@ -36,6 +37,7 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
     formState: { errors },
   } = useForm<IPaymentMethod>()
   const queryClient = useQueryClient()
+  const encryptCard = new EncryptionService()
   const onSubmit = (formData: IPaymentMethod) => {
     const callBackReq = {
       onSuccess: (data: any) => {
@@ -56,10 +58,13 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
     }
     mutate(
       {
-        ...formData,
-        cardNumber: String(getValues("cardNumber")).replace(/\s/g, ""),
-        cvv: Number(getValues("cvv")),
-        zipCode: Number(getValues("zipCode")),
+        cardInfo:encryptCard.encrypt({
+          cardNumber: String(getValues("cardNumber")).replace(/\s/g, ""),
+          cvv: Number(getValues("cvv")),
+          expirationDate:String(getValues("expirationDate")),
+          zipCode: Number(getValues("zipCode")),
+          countryRegion:(getValues("countryRegion"))
+        }),
         userId: Number(userId),
       },
       callBackReq
