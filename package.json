@@ -11,7 +11,7 @@
     "dev": "turbo dev",
     "start": "turbo start",
     "start:api": "turbo start --filter=api",
-    "build:api": "turbo run build --filter=@repo/constants && turbo run build --filter=@repo/contract && turbo run build --filter=api",
+    "build:api": "turbo run build --filter=@repo/constants && turbo run build --filter=@repo/contract && turbo run build --filter=@repo/helpers && turbo run build  --filter=api",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
