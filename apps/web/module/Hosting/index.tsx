@@ -37,7 +37,7 @@ interface HostingPageProps {
   hostName: string
   icon?: JSX.Element
   description?: string
-  allReservationCounts: number
+  allReservationCounts?: number
 }
 
 const HostingPage: React.FC<HostingPageProps> = ({ hostName }) => {
