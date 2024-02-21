@@ -27,7 +27,8 @@
         "RECAPTCHA_KEY_SECRET",
         "NODE_ENV",
         "XENDIT_URL",
-        "XENDIT_SECRET"
+        "XENDIT_SECRET",
+        "CARD_ENCRYPT_KEY"
       ]
     },
     "lint": {
