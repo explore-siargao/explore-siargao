@@ -3,8 +3,13 @@ import { ChevronLeft, ChevronRight } from "lucide-react"
 import ReviewCard from "./ReviewCard"
 import { Button } from "@/common/components/ui/Button"
 import { HostReviewsProps } from "../types/HostReviews"
+import { useState } from "react"
+import AllReviewsModal from "../components/modals/AllReviewsModal"
+import Link from "next/link"
 
 const HostReviews = ({ name, reviewsCount, reviews }: HostReviewsProps) => {
+  const [openReviewsModal, setOpenReviewsMoal] = useState(false)
+
   return (
     <div>
       <div className="flex justify-between items-center">
@@ -36,22 +41,25 @@ const HostReviews = ({ name, reviewsCount, reviews }: HostReviewsProps) => {
               reviewMessage={data.comment}
               reviewerImage={data.user.profilePicture}
               reviewDate={data.createdAt}
+              forModal={false}
             />
           ))}
         </div>
         <Button
           variant="outline"
           className="font-bold text-[16px] w-full md:w-auto mt-7"
+          onClick={() => setOpenReviewsMoal(true)}
         >
           Show all {reviewsCount} reviews
         </Button>
         <Typography variant="h6" className="mt-7">
           Some info has been automatically translated.
-          <a href="#" className="underline ml-1 font-semibold">
+          <Link href="#" className="underline ml-1 font-semibold">
             Show original
-          </a>
+          </Link>
         </Typography>
       </div>
+      <AllReviewsModal reviews={reviews} isOpen={openReviewsModal} onClose={() => setOpenReviewsMoal(false)}/>
     </div>
   )
 }
