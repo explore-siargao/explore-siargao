@@ -22,17 +22,18 @@ import {
 import useGlobalInputEmail from "../store/useGlobalInputEmail"
 import { Typography } from "@/common/components/ui/Typography"
 import useOptMessageStore from "@/common/store/useOptMessageStore"
+import CryptoJS from 'crypto-js'
+import {EncryptionService} from "@repo/services/"
 import {
   E_RegistrationType,
   T_BackendResponse,
   T_UserRegister,
 } from "@repo/contract"
 import { useQueryClient } from "@tanstack/react-query"
-
 type Props = {
   isSocial?: boolean
 }
-
+const encryptionService = new EncryptionService("password")
 const SignUpForm = ({ isSocial = false }: Props) => {
   const router = useRouter()
   const { data: session } = useSession()
@@ -101,13 +102,14 @@ const SignUpForm = ({ isSocial = false }: Props) => {
       canReceiveEmail,
     } = formData
     const birthDate = dayjs(`${month}-${day}-${year}`, "MM-DD-YYYY")
+    const strPassword = encryptionService.encrypt(password as string)
     addUser(
       {
         email,
         firstName,
         lastName,
         birthDate: birthDate.format(),
-        password,
+        password: strPassword,
         registrationType: signUpType as E_RegistrationType,
         country,
         canReceiveEmail: Boolean(canReceiveEmail),
