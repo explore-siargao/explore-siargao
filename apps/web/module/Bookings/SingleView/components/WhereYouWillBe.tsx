@@ -16,8 +16,8 @@ const WhereYouWillBe: React.FC<WhereYouWillBe> = ({ title }) => {
 
   const maxLength = 100
 
-  const useToggle = (initialState: boolean) => {
-    const [state, setState] = useState(initialState)
+  const useToggle = (initialState: boolean): [boolean, () => void] => {
+    const [state, setState] = useState<boolean>(initialState)
     const toggle = () => setState(!state)
     return [state, toggle]
   }
@@ -44,7 +44,7 @@ const WhereYouWillBe: React.FC<WhereYouWillBe> = ({ title }) => {
       <Button
         className="text-sm font-semibold underline mb-4"
         variant={"ghost"}
-        onClick={() => setToggleReadMore}
+        onClick={setToggleReadMore}
       >
         {/* Read more &gt; */}
         {readMore ? "Read Less" : "Read more >"}
@@ -65,7 +65,7 @@ const WhereYouWillBe: React.FC<WhereYouWillBe> = ({ title }) => {
       <Button
         className="text-sm font-semibold underline mb-4"
         variant={"ghost"}
-        onClick={() => setToggleSecondReadMore}
+        onClick={setToggleSecondReadMore}
       >
         {/* Read more &gt; */}
         {secondReadMore ? "Read Less" : "Read more >"}

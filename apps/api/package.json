@@ -4,13 +4,15 @@
   "main": "src/index.ts",
   "license": "MIT",
   "prisma": {
-    "schema": "src/prisma/schema.prisma"
+    "schema": "src/prisma/schema.prisma",
+    "seed": "ts-node src/prisma/seed/"
   },
   "scripts": {
     "build": "npx tsc && tsc-alias -p tsconfig.json",
     "start": "cross-env NODE_ENV=production node build/index.js",
     "dev": "cross-env NODE_ENV=development nodemon --watch ../../packages/constants --watch ../../packages/contract --watch src src/index.ts",
-    "postinstall": "npx prisma generate"
+    "postinstall": "npx prisma generate",
+    "seed":"npx prisma db seed"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.490.0",

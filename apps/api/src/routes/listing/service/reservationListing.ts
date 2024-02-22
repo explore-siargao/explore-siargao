@@ -74,7 +74,7 @@ export const getAllReservationByUser = async (req: Request, res: Response) => {
       },
       listing: {
         title: newDataEntry.listing.title,
-        image: JSON.parse(newDataEntry.listing.imageKeys)[0],
+        image: JSON.parse(newDataEntry.listing.images)[0],
 
         hostedBy:
           newDataEntry.listing.hostedBy.personalInfo?.firstName +
@@ -91,7 +91,7 @@ export const getAllReservationByUser = async (req: Request, res: Response) => {
       },
       isNight: newDataEntry.isNight,
       reservationDates: newDataEntry.reservationDate,
-      guestCount: newDataEntry.guestCount,
+      guestCount: JSON.parse(newDataEntry.guestCount),
       messageToHost: newDataEntry.messageToHost
         ? newDataEntry.messageToHost
         : 'No message!',
@@ -178,7 +178,7 @@ export const getReservationByListing = async (req: Request, res: Response) => {
       },
       listing: {
         title: newData.listing.title,
-        image: JSON.parse(newData.listing.imageKeys)[0],
+        image: JSON.parse(newData.listing.images)[0],
 
         hostedBy:
           newData.listing.hostedBy.personalInfo?.firstName +
@@ -195,7 +195,7 @@ export const getReservationByListing = async (req: Request, res: Response) => {
       },
       isNight: newData.isNight,
       reservationDates: newData.reservationDate,
-      guestCount: newData.guestCount,
+      guestCount: JSON.parse(newData.guestCount),
       messageToHost: newData.messageToHost
         ? newData.messageToHost
         : 'No message',
@@ -265,7 +265,7 @@ export const getReservation = async (req: Request, res: Response) => {
         },
         listing: {
           title: getReservation.listing.title,
-          image: JSON.parse(getReservation.listing.imageKeys)[0],
+          image: JSON.parse(getReservation.listing.images)[0],
 
           hostedBy:
             getReservation.listing.hostedBy.personalInfo?.firstName +
@@ -283,7 +283,7 @@ export const getReservation = async (req: Request, res: Response) => {
         },
         isNight: getReservation.isNight,
         reservationDates: getReservation.reservationDate,
-        guestCount: getReservation.guestCount,
+        guestCount: JSON.parse(getReservation.guestCount),
         messageToHost: getReservation.messageToHost
           ? getReservation.messageToHost
           : 'No message',
@@ -409,7 +409,7 @@ export const addReservation = async (req: Request, res: Response) => {
         reservationDate: reservationDate,
         currentFee: currentFee,
         totalFee: totalFee,
-        guestCount: guestCount,
+        guestCount: JSON.stringify(guestCount),
         status: 'Pending',
         isNight: isNight,
         messageToHost: messageToHost,

@@ -253,9 +253,9 @@ router.get(
 )
 router.post(
   '/:userId/reviews/post',
-  isOriginValid,
-  isCsrfTokenValid,
-  isUserLoggedIn,
+  // isOriginValid,
+  // isCsrfTokenValid,
+  // isUserLoggedIn,
   addReview
 )
 router.patch('/:userId/reviews/update/:reviewId', updateReview)

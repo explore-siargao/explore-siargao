@@ -21,10 +21,19 @@ export const getPersonalInfo = async (req: Request, res: Response) => {
         address: true,
       },
     })
+    const modifyPersonInfo = {
+      ...getPersonalInfo,
+      confirm: getPersonalInfo?.confirm
+        ? JSON.parse(getPersonalInfo?.confirm)
+        : null,
+      governmentId: getPersonalInfo?.governmentId
+        ? JSON.parse(getPersonalInfo.governmentId)
+        : null,
+    }
     if (getPersonalInfo !== null) {
       res.json({
         error: false,
-        items: getPersonalInfo,
+        items: modifyPersonInfo,
         itemCount: 1,
         message: '',
       })
@@ -55,6 +64,7 @@ export const updatePersonalInfo = async (req: Request, res: Response) => {
       birthDate,
       governmentId,
       phoneNumber,
+      confirm,
     } = req.body
     const userId = Number(req.params.userId)
     const editPersonalInfo = await prisma.personalInfo.update({
@@ -68,6 +78,7 @@ export const updatePersonalInfo = async (req: Request, res: Response) => {
         birthDate: birthDate,
         governmentId: governmentId,
         phoneNumber: phoneNumber,
+        confirm: JSON.stringify(confirm),
       },
     })
     res.json({
@@ -346,7 +357,7 @@ export const getAllGovernmentIdByPersonInfoId = async (
   req: Request,
   res: Response
 ) => {
-  const personId = Number(req.params.personId)
+  const personId = Number(req.params.peronalInfoId)
   try {
     const getPersonInfoId = await prisma.personalInfo.findUnique({
       where: {
