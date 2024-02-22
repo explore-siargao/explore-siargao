@@ -30,7 +30,7 @@ const Wishlist = () => {
                 {data?.item?.map((data: any) => (
                   <WishlistBoxContainer
                     key={data?.id as number}
-                    photo={data?.imageKeys[0].fileKey}
+                    photo={data?.images[0].fileKey}
                     title={data?.title}
                     link={data?.title}
                     text={data?._count + " saved"}

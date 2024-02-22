@@ -120,7 +120,7 @@ const router = express.Router()
 
 // DEFAULT
 router.get('/', getAllListing)
-router.get('/:id', isCsrfTokenValid, isOriginValid, getListing)
+router.get('/:id', getListing)
 router.post('/:hostId', addListing)
 router.patch('/:userId/listing/:id', updateListing)
 router.delete('/:userId/listing/:id', deleteListing)
@@ -253,9 +253,9 @@ router.get(
 )
 router.post(
   '/:userId/reviews/post',
-  isOriginValid,
-  isCsrfTokenValid,
-  isUserLoggedIn,
+  // isOriginValid,
+  // isCsrfTokenValid,
+  // isUserLoggedIn,
   addReview
 )
 router.patch('/:userId/reviews/update/:reviewId', updateReview)

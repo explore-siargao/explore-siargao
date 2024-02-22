@@ -1,57 +1,66 @@
 import { Button } from "@/common/components/ui/Button"
 import Image from "next/image"
 import { Grip } from "lucide-react"
+import { T_ImagesProps } from "../types/SectionInfo"
 
-interface Imagesprops {
-  openModal: () => void
-  imageKeys: {
-    fileKey: string
-    alt: string
-  }[]
-}
-const ImageGallery = ({ imageKeys, openModal }: Imagesprops) => {
+const ImageGallery = ({ images, openModal }: T_ImagesProps) => {
   return (
     <div className="relative">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-2 gap-y-2 md:gap-y-0 h-96">
-        <div className="relative bg-gray-200">
+        <div
+          className="relative bg-gray-200 
+                     lg:rounded-tl-xl lg:rounded-bl-xl 
+                     md:rounded-tl-xl md:rounded-bl-xl md:rounded-tr-none
+                     sm:rounded-tl-xl sm:rounded-tr-xl sm:rounded-bl-none
+                     rounded-tl-xl rounded-tr-xl"
+        >
           <Image
-            src={`/assets/${imageKeys[0]?.fileKey}`}
+            src={`/assets/${images[0]?.fileKey}`}
             layout="fill"
             objectFit="cover"
-            alt={String(imageKeys[0]?.alt)}
+            alt={String(images[0]?.alt)}
           />
         </div>
         <div className="grid grid-cols-2 gap-2">
           <div className="relative bg-gray-200">
             <Image
-              src={`/assets/${imageKeys[1]?.fileKey}`}
+              src={`/assets/${images[1]?.fileKey}`}
               layout="fill"
               objectFit="cover"
-              alt={String(imageKeys[1]?.alt)}
+              alt={String(images[1]?.alt)}
             />
           </div>
-          <div className="relative bg-gray-200">
+          <div className="relative bg-gray-200 rounded-tr-xl">
             <Image
-              src={`/assets/${imageKeys[2]?.fileKey}`}
+              src={`/assets/${images[2]?.fileKey}`}
               layout="fill"
               objectFit="cover"
-              alt={String(imageKeys[2]?.alt)}
+              alt={String(images[2]?.alt)}
             />
           </div>
-          <div className="relative bg-gray-200">
+          <div
+            className="relative bg-gray-200
+                          sm:rounded-bl-xl
+                          rounded-bl-xl"
+          >
             <Image
-              src={`/assets/${imageKeys[3]?.fileKey}`}
+              src={`/assets/${images[3]?.fileKey}`}
               layout="fill"
               objectFit="cover"
-              alt={String(imageKeys[3]?.alt)}
+              alt={String(images[3]?.alt)}
             />
           </div>
-          <div className="relative bg-gray-200">
+          <div
+            className="relative bg-gray-200 
+                          2xl:rounded-br-xl
+                          lg:rounded-br-xl
+                          rounded-br-xl"
+          >
             <Image
-              src={`/assets/${imageKeys[4]?.fileKey}`}
+              src={`/assets/${images[4]?.fileKey}`}
               layout="fill"
               objectFit="cover"
-              alt={String(imageKeys[4]?.alt)}
+              alt={String(images[4]?.alt)}
             />
           </div>
         </div>

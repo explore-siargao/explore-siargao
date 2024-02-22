@@ -33,6 +33,8 @@ model User {
   Coupons          Coupon[]
   taxId            Int?
   reservations     ReservationListing[]
+  hostInfoId       Int?
+  hostInfo         HostInfo?
 }
 
 model PersonalInfo {
@@ -53,6 +55,17 @@ model PersonalInfo {
   user              User                @relation(fields: [userId], references: [id])
   address           Addresses?
   emergencyContacts EmergencyContacts[]
+  confirm           String              @db.VarChar(250)
+
+  @@index([userId])
+}
+
+model HostInfo {
+  id          Int      @id @default(autoincrement())
+  userId      Int?     @unique
+  user        User?    @relation(fields: [userId], references: [id])
+  work        String   @db.VarChar(100)
+  hostedSince DateTime @default(now())
 
   @@index([userId])
 }
@@ -116,7 +129,7 @@ model MultiFactorAuth {
 model Listing {
   id                   Int                  @id @default(autoincrement())
   hostedById           Int
-  imageKeys            String               @db.LongText
+  images               String               @db.LongText
   title                String               @db.VarChar(100)
   descriptionId        Int?                 @unique
   listingDescription   ListingDescription?  @relation(fields: [descriptionId], references: [id])
@@ -124,6 +137,8 @@ model Listing {
   listingPriceId       Int                  @unique
   category             ListingCategory
   favoriteBy           String?
+  whereYoullBe         String               @db.LongText()
+  whereYoullSleep      String               @db.LongText()
   createdAt            DateTime             @default(now())
   updatedAt            DateTime             @updatedAt
   deletedAt            DateTime?
@@ -202,7 +217,7 @@ model ReservationListing {
   userId          Int
   user            User              @relation(fields: [userId], references: [id])
   reservationDate String            @db.VarChar(50)
-  guestCount      Int               @db.Int()
+  guestCount      String            @db.LongText()
   totalFee        Int               @db.Int()
   currentFee      Int               @db.Int()
   paymentMethodId Int
@@ -220,17 +235,17 @@ model ReservationListing {
 }
 
 model ReportListing {
-  id           Int       @id @default(autoincrement())
-  name         String   @db.VarChar(200)
-  reason       String    @db.Text()
-  description String?    @db.LongText()
-  reportedBy   Int
-  user         User      @relation(fields: [reportedBy], references: [id])
-  listingId    Int
-  listing      Listing   @relation(fields: [listingId], references: [id])
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
-  deletedAt    DateTime?
+  id          Int       @id @default(autoincrement())
+  name        String    @db.VarChar(200)
+  reason      String    @db.Text()
+  description String?   @db.LongText()
+  reportedBy  Int
+  user        User      @relation(fields: [reportedBy], references: [id])
+  listingId   Int
+  listing     Listing   @relation(fields: [listingId], references: [id])
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  deletedAt   DateTime?
 
   @@index([reportedBy])
   @@index([listingId])
@@ -362,12 +377,12 @@ model CancellationPolicy {
 model Rule {
   id                   Int                 @id @default(autoincrement())
   icon                 String
-  rule                 String
+  rule                 String              
   createdAt            DateTime            @default(now())
   updatedAt            DateTime            @updatedAt
   deletedAt            DateTime?
   cancellationPolicyId Int?
-  description          String
+  description          String             @db.LongText()
   houseRuleId          Int?
   safePropertyId       Int?
   safetyProperty       SafetyProperty?     @relation(fields: [safePropertyId], references: [id])

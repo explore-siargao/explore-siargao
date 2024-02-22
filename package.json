@@ -13,7 +13,8 @@
     "start:api": "turbo start --filter=api",
     "build:api": "turbo run build --filter=@repo/constants && turbo run build --filter=@repo/contract && turbo run build --filter=@repo/helpers && turbo run build  --filter=api",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "seed": "npx prisma db push --force-reset && npm run seed --workspace=api"
   },
   "devDependencies": {
     "@repo/eslint-config": "*",

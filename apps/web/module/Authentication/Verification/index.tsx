@@ -106,7 +106,7 @@ const Verification = () => {
                   <input
                     ref={num === activeOTPIndex ? inputRef : null}
                     type="number"
-                    className="w-12 h-16 text-xl font-bold text-center text-text-400 rounded-lg bg-primary-200/40 focus:bg-white border-0 focus:ring-primary-700 disabled:opacity-50"
+                    className="w-12 h-16 text-xl font-semibold text-center text-text-400 rounded-lg bg-primary-200/40 focus:bg-white border-0 focus:ring-primary-700 disabled:opacity-50"
                     onChange={handleOnChange}
                     value={otp[num]}
                     //@ts-ignore
@@ -135,7 +135,7 @@ const Verification = () => {
               <Button
                 type="button"
                 variant="link"
-                className="font-bold underline px-0"
+                className="font-semibold underline px-0"
                 onClick={() => sendMultiFactorCode()}
                 disabled={isMultiFactorPending}
               >

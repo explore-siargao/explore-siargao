@@ -1,24 +1,12 @@
 import ModalContainer from "@/common/components/ModalContainer"
 import { Title } from "@/common/components/ui/Title"
-
-interface IDescription {
-  id?: number
-  generalDes: string
-  aboutSpace?: string
-  aboutGuestAccess?: string
-  otherThingsNote?: string
-}
-interface AboutTitleDescriptionProps {
-  isOpen: boolean
-  onClose: () => void
-  listingDesc: IDescription
-}
+import { T_BookingDescriptionModalProps } from "../../types/BookingDescription"
 
 const ModalAboutTitleDescription = ({
   isOpen,
   onClose,
-  listingDesc,
-}: AboutTitleDescriptionProps) => {
+  listingDescription,
+}: T_BookingDescriptionModalProps) => {
   return (
     <ModalContainer onClose={onClose} isOpen={isOpen} size="md">
       <div className="py-4 px-8 flex flex-col divide-text-100 overflow-y-auto h-[600px]">
@@ -26,29 +14,29 @@ const ModalAboutTitleDescription = ({
           About this place
         </Title>
         <div>
-          <div>{listingDesc.generalDes}</div>
-          {listingDesc.aboutSpace && (
+          <div>{listingDescription.generalDescription}</div>
+          {listingDescription.aboutSpace && (
             <div>
               <Title className="flex text-md font-semibold mb-5 my-4">
                 About space
               </Title>
-              <div>{listingDesc.aboutSpace}</div>
+              <div>{listingDescription.aboutSpace}</div>
             </div>
           )}
-          {listingDesc.aboutGuestAccess && (
+          {listingDescription.aboutGuestAccess && (
             <div>
               <Title className="flex text-md font-semibold mb-5 my-4">
                 About guest access
               </Title>
-              <div>{listingDesc.aboutGuestAccess}</div>
+              <div>{listingDescription.aboutGuestAccess}</div>
             </div>
           )}
-          {listingDesc.otherThingsNote && (
+          {listingDescription.otherThingsNote && (
             <div>
               <Title className="flex text-md font-semibold mb-5 my-4">
                 Other things to note
               </Title>
-              <div>{listingDesc.otherThingsNote}</div>
+              <div>{listingDescription.otherThingsNote}</div>
             </div>
           )}
         </div>
