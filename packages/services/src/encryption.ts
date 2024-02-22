@@ -1,4 +1,4 @@
-import { encryptKey } from "./config"
+import { cardEncyptkey } from "./config"
 import CryptoJS from "crypto-js"
 
 export class EncryptionService {
@@ -6,11 +6,11 @@ export class EncryptionService {
     let encyptValue = ""
     if (typeof val === "object" || Array.isArray(val)) {
       encyptValue = String(
-        CryptoJS.AES.encrypt(JSON.stringify(val), encryptKey)
+        CryptoJS.AES.encrypt(JSON.stringify(val), cardEncyptkey)
       )
     }
     if (typeof val === "string") {
-      encyptValue = String(CryptoJS.AES.encrypt(val, encryptKey))
+      encyptValue = String(CryptoJS.AES.encrypt(val, cardEncyptkey))
     }
     return encyptValue
   }
@@ -18,7 +18,7 @@ export class EncryptionService {
   decrypt(encryptedValue: string): object | any[] | string {
     let decryptedValue = ""
     try {
-      const bytes = CryptoJS.AES.decrypt(encryptedValue, encryptKey)
+      const bytes = CryptoJS.AES.decrypt(encryptedValue, cardEncyptkey)
       const originalValue = bytes.toString(CryptoJS.enc.Utf8)
       const parsedValue = JSON.parse(originalValue)
 
@@ -29,7 +29,7 @@ export class EncryptionService {
       }
     } catch (error: any) {
       try {
-        const bytes = CryptoJS.AES.decrypt(encryptedValue, encryptKey)
+        const bytes = CryptoJS.AES.decrypt(encryptedValue, cardEncyptkey)
         decryptedValue = bytes.toString(CryptoJS.enc.Utf8)
       } catch (error: any) {
         console.error("Decryption failed:", error.message)
