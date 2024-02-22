@@ -14,9 +14,10 @@ import PlaceOffers from "./components/PlaceOffers"
 import WhereYoullBeDescription from "./components/Map"
 import ListingDateRangePicker from "./components/ListingDateRangePicker"
 import { Button } from "@/common/components/ui/Button"
-import { Flag } from "lucide-react"
+import { Flag, Tag } from "lucide-react"
 import ModalReporting from "./components/modals/ModalReporting"
 import { useState } from "react"
+import ListingMark from "@/module/Accommodation/Checkout/ListingMark"
 import {
   LucideAlarmSmoke,
   LucideBeer,
@@ -506,6 +507,14 @@ export const SingleView = () => {
                 titlePrice: 25000,
               }}
             />
+            <div>
+              <ListingMark
+                icon={<Tag />}
+                title="Lower Price"
+                desc="Your dates are ₱1,494 less than the avg. nightly rate of the last 60 days."
+              />
+            </div>
+
             <div className="flex justify-center">
               <div className="justify-items-center">
                 <Button

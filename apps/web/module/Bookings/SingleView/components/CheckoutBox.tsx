@@ -27,7 +27,7 @@ interface CheckoutProcessProps {
 }
 
 const CheckoutBox = ({ checkoutDesc }: CheckoutProcessProps) => {
-  const router = useRouter();
+  const router = useRouter()
   const [isBreakdownModalOpen, setIsBreakdownModalOpen] = useState(false)
   const [isMoreInfoModalOpen, setIsMoreInfoModalOpen] = useState(false)
   const [checkInOutCalendarModalIsOpen, setCheckInOutCalendarModalIsOpen] =
@@ -73,7 +73,10 @@ const CheckoutBox = ({ checkoutDesc }: CheckoutProcessProps) => {
           </div>
         </div>
         <Select id="guest" label="GUESTS" required={true} />
-        <Button variant="primary" onClick={() => router.push("/accommodation/1/checkout")}>
+        <Button
+          variant="primary"
+          onClick={() => router.push("/accommodation/1/checkout")}
+        >
           Book Now
         </Button>
       </div>
