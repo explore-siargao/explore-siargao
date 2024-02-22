@@ -131,7 +131,7 @@ const BookingReviews = () => {
             <BookingReviewItemPending
               id={item.id}
               name={item.title}
-              pic={JSON.stringify(item.imageKeys)}
+              pic={JSON.stringify(item.images)}
               key={item.id}
             />
             {index === listingData.items?.length! - 1 ? <></> : <hr />}
