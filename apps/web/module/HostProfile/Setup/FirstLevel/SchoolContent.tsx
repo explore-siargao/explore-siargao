@@ -1,18 +1,24 @@
-import ModalContainer from "@/common/components/ModalContainer"
 import { Button } from "@/common/components/ui/Button"
 import { Input } from "@/common/components/ui/Input"
 import { Title } from "@/common/components/ui/Title"
 import { Typography } from "@/common/components/ui/Typography"
+import useFirstLevelStore from "../store/useFirstLevelStore"
+import { Dispatch, useState } from "react"
+import toast from "react-hot-toast"
 
-interface ModalSchoolProps {
-  isOpen: boolean
-  onClose: () => void
-}
-
-const ModalSchool = ({ isOpen, onClose }: ModalSchoolProps) => {
+const SchoolContent = ({ setIsOpen }: { setIsOpen: Dispatch<boolean> }) => {
+  const [schoolName, setSchoolName] = useState("");
+  const setSchoolNameStore = useFirstLevelStore((state) => state.setSchoolName)
+  const save = () => {
+    if(schoolName) {
+      setSchoolNameStore(schoolName)
+      toast.success("Saved")
+    } else {
+      toast.error("Please fill out the form")
+    }
+  }
   return (
-    <div>
-      <ModalContainer size="sm" isOpen={isOpen} onClose={onClose}>
+    <>
         <div className="p-5">
           <Title size={"default"}>Where did you go to school?</Title>
           <Typography variant={"h3"}>
@@ -20,7 +26,7 @@ const ModalSchool = ({ isOpen, onClose }: ModalSchoolProps) => {
             school that made you who you are.
           </Typography>
           <div className="mt-10 mb-10">
-            <Input label="Where I went to school:" />
+            <Input label="Where I went to school:" onChange={(e) => setSchoolName(e.target.value)} />
             <Typography
               variant={"p"}
               className="flex items-end justify-end font-semibold"
@@ -29,14 +35,13 @@ const ModalSchool = ({ isOpen, onClose }: ModalSchoolProps) => {
             </Typography>
           </div>
           <div className="flex items-end justify-end">
-            <Button size={"lg"} variant={"primary"}>
+            <Button size={"lg"} variant={"primary"} onClick={() => save()}>
               Save
             </Button>
           </div>
         </div>
-      </ModalContainer>
-    </div>
+    </>
   )
 }
 
-export default ModalSchool
+export default SchoolContent
