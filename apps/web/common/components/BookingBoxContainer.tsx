@@ -1,5 +1,4 @@
 "use client"
-import Image from "next/image"
 import React, { useState } from "react"
 import { Title } from "./ui/Title"
 import { HeartIcon } from "@heroicons/react/24/outline"
@@ -7,10 +6,14 @@ import { StarIcon } from "@heroicons/react/20/solid"
 import { Typography } from "./ui/Typography"
 import AddWishlistModal from "@/module/AccountSettings/components/modals/AddWishlistModal"
 import useSessionStore from "../store/useSessionStore"
+import Slider from "./Slider"
 
 type BookingProps = {
   listingId: number
-  imageKey: string
+  imageKey: {
+    fileKey: string
+    alt: string
+  }[]
   distance: string
   location: string
   date: string
@@ -43,7 +46,7 @@ const BookingBoxContainer = ({
         <div className="h-80 w-auto 2xl:h-72 2xl:w-auto rounded-2xl relative select-none">
           <button
             onClick={() => setAddWIshlistModal(true)}
-            className="absolute top-3 right-3"
+            className="absolute top-3 right-3 z-40"
           >
             {userId ? (
               <HeartIcon
@@ -58,13 +61,7 @@ const BookingBoxContainer = ({
               ""
             )}
           </button>
-          <Image
-            src={`/assets/${imageKey}`}
-            width={300}
-            height={300}
-            alt={date}
-            className="object-cover h-full w-full rounded-xl"
-          />
+          <Slider images={imageKey} />
         </div>
         <div className="flex-1 -space-y-1 w-auto">
           <div className="flex justify-between">
