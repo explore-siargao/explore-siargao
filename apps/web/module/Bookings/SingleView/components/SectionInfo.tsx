@@ -54,7 +54,7 @@ const SectionInfo = ({ title }: SectionInfoProps) => {
         <ShareSave />
       </div>
       <div className="my-6">
-        <ImageGallery imageKeys={ImagesDummy} openModal={openModal} />
+        <ImageGallery images={ImagesDummy} openModal={openModal} />
       </div>
       <ImageGalleryModal
         isOpen={galleryModalOpen}

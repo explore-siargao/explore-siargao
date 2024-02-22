@@ -9,7 +9,7 @@ import AvatarTitleDescription from "./components/AvatarTitleDescription"
 import RatingSummary from "./components/Reviews/RatingSummary"
 import UserReviews from "./components/Reviews/UserReviews"
 import Highlights from "./components/Highlights"
-import CheckoutProcess from "./components/CheckoutProcess"
+import CheckoutProcess from "./components/CheckoutBox"
 import PlaceOffers from "./components/PlaceOffers"
 import WhereYoullBeDescription from "./components/Map"
 import ListingDateRangePicker from "./components/ListingDateRangePicker"
@@ -18,140 +18,8 @@ import { Flag } from "lucide-react"
 import ModalReporting from "./components/modals/ModalReporting"
 import { useState } from "react"
 
-
-const reportListingArr = [
-  { 
-    name: "It's inaccurate or incorrect",
-  },
-  { 
-    name: "It’s not a real place to stay",
-  },
-  { 
-    name: "It’s a scam",
-    choices: [{
-      reason: "The host asked me to pay outside of Explore-Siargao",
-      description: "Ex: Wire transfer, cash, bank transfer",
-      report: [{
-        reportRes: "Bank or wire transfer",
-      },
-      {
-        reportRes: "Credit or debit card",
-      },
-      {
-        reportRes: "Cash",
-      },
-      {
-        reportRes: "Paypal",
-      },
-      {
-        reportRes: "MoneyGram",
-      },
-      {
-        reportRes: "Western Union",
-      },
-      {
-        reportRes: "Something else",
-      },]
-        
-    },
-    
-    {
-      reason: "The host shared their contact information",
-      description: "Ex: Personal email or phone number" ,
-      report: [{
-        reportRes: "Photos",
-      },
-      {
-        reportRes: "Description",
-      },
-      {
-        reportRes: "House Rules",
-      },
-      {
-        reportRes: "Explore-Siargao message",
-      },
-      {
-        reportRes: "Somewhere else",
-      },
-    ]
-    },
-    {
-      reason: "The host is advertising other services",
-      description: "Ex: Links to non-Airbnb websites" 
-    },
-    {
-      reason: "It’s a duplicate listing",
-      description: "Ex: Copies all or part of another listing" 
-    },
-    {
-      reason: "It’s misleading",
-      description: "Ex: Photos don’t match description, stock photos" 
-    },
-    {
-      reason: "It’s something else",
-      description: "" 
-    },
-   ],
-  },
-  { 
-    name: "It's offensive",
-    choices: [{
-      reason: "It’s discriminatory",
-      description: "Ex: Racist, homophobic, sexist" 
-    },
-    {
-      reason: "It’s inappropriate",
-      description: "Ex: Sexually explicit, violent, graphic" 
-    },
-    {
-      reason: "It’s abusive or hostile",
-      description: "Ex: Bullying, threats, verbal assaults" 
-    },
-   ] 
-    
-  },
-  { 
-    name: "It’s something else",
-    choices: [{
-      reason: "Something on this page is broken",
-      description: "" 
-    },
-    {
-      reason: "The host is asking for more money",
-      description: "" 
-    },
-    {
-      reason: "It doesn’t look clean or safe",
-      description: "" 
-    },
-    {
-      reason: "It’s a duplicate listing",
-      description: "" 
-    },
-    {
-      reason: "I don’t think it’s allowed in my neighborhood",
-      description: "" 
-    },
-    {
-      reason: "It’s disturbing my neighborhood",
-      description: "" 
-    },
-   ] 
-  }
-];
-
-
-
 export const SingleView = () => {
-
-  const [showModal, setShowModal] = useState(false);
-  const handleOpenModal = () => {
-    setShowModal(true);
-  };
-  const handleCloseModal = () => {
-    setShowModal(false);
-  };
-
+  const [showModal, setShowModal] = useState(false)
 
   return (
     <WidthWrapper width="small" className="mt-32 lg:mt-36">
@@ -187,7 +55,7 @@ export const SingleView = () => {
               <PlaceOffers />
             </div>
             <div className="py-6">
-              <ListingDateRangePicker title="5 Nights in Villa Manao · Private Pool | Bathtub | Sky shower" />
+              <ListingDateRangePicker title="Villa Manao · Private Pool | Bathtub | Sky shower" />
             </div>
           </div>
         </div>
@@ -203,31 +71,21 @@ export const SingleView = () => {
                 titlePrice: 25000,
               }}
             />
-           <div className="flex justify-center">
-            <div className="justify-items-center">
-              <Button
-                variant="ghost"
-                className="underline md:float-right"
-                size="sm"
-                onClick={handleOpenModal}
-              >
-                <Flag fill="black"/>
-                Report this listing
-              </Button>
-            </div>
-          
-          </div>
-          <div className="w-4/5 md:w-2/3 lg:w-1/2">
-              <ModalReporting 
-              isOpen={showModal} 
-              onClose={handleCloseModal} 
-              reportListingArr={reportListingArr}
-              />
+            <div className="flex justify-center">
+              <div className="justify-items-center">
+                <Button
+                  variant="ghost"
+                  className="underline md:float-right"
+                  size="sm"
+                  onClick={() => setShowModal(!showModal)}
+                >
+                  <Flag fill="black" />
+                  Report this listing
+                </Button>
+              </div>
             </div>
           </div>
-          
         </div>
-    
       </div>
       <div className="divide-y border-t">
         <div className="py-8">

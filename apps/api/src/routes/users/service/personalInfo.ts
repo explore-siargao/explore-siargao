@@ -5,7 +5,7 @@ import {
   UNKNOWN_ERROR_OCCURRED,
 } from '@/common/constants'
 import { FileService } from '@/common/service/file'
-import { T_GovernmentId, Z_Add_GovernmentId } from '@repo/contract'
+import { T_GovernmentId, Z_AddGovernmentId } from '@repo/contract'
 import { ResponseService } from '@/common/service/response'
 
 const response = new ResponseService()
@@ -21,10 +21,19 @@ export const getPersonalInfo = async (req: Request, res: Response) => {
         address: true,
       },
     })
+    const modifyPersonInfo = {
+      ...getPersonalInfo,
+      confirm: getPersonalInfo?.confirm
+        ? JSON.parse(getPersonalInfo?.confirm)
+        : null,
+      governmentId: getPersonalInfo?.governmentId
+        ? JSON.parse(getPersonalInfo.governmentId)
+        : null,
+    }
     if (getPersonalInfo !== null) {
       res.json({
         error: false,
-        items: getPersonalInfo,
+        items: modifyPersonInfo,
         itemCount: 1,
         message: '',
       })
@@ -55,6 +64,7 @@ export const updatePersonalInfo = async (req: Request, res: Response) => {
       birthDate,
       governmentId,
       phoneNumber,
+      confirm,
     } = req.body
     const userId = Number(req.params.userId)
     const editPersonalInfo = await prisma.personalInfo.update({
@@ -68,6 +78,7 @@ export const updatePersonalInfo = async (req: Request, res: Response) => {
         birthDate: birthDate,
         governmentId: governmentId,
         phoneNumber: phoneNumber,
+        confirm: JSON.stringify(confirm),
       },
     })
     res.json({
@@ -346,7 +357,7 @@ export const getAllGovernmentIdByPersonInfoId = async (
   req: Request,
   res: Response
 ) => {
-  const personId = Number(req.params.personId)
+  const personId = Number(req.params.peronalInfoId)
   try {
     const getPersonInfoId = await prisma.personalInfo.findUnique({
       where: {
@@ -384,7 +395,7 @@ export const getAllGovernmentIdByPersonInfoId = async (
 export const addGovernmentId = async (req: Request, res: Response) => {
   const peronalInfoId = Number(req.params.peronalInfoId)
   const files = req.files
-  const isValidInput = Z_Add_GovernmentId.safeParse(req.body)
+  const isValidInput = Z_AddGovernmentId.safeParse(req.body)
   if (isValidInput.success && files) {
     const { type } = req.body
     try {
@@ -394,15 +405,15 @@ export const addGovernmentId = async (req: Request, res: Response) => {
         },
       })
       if (getPersonIfo) {
-        const upload = await fileService.upload({ files })
         if (getPersonIfo.governmentId === null) {
+          const upload = await fileService.upload({ files })
           const addNewGovernmentId = await prisma.personalInfo.update({
             where: {
               id: peronalInfoId,
             },
             data: {
               governmentId: JSON.stringify([
-                { imageKey: upload.key, type: type, createdAt: new Date() },
+                { fileKey: upload.key, type: type, createdAt: new Date() },
               ] as T_GovernmentId[]),
             },
           })
@@ -422,8 +433,9 @@ export const addGovernmentId = async (req: Request, res: Response) => {
             (govId: T_GovernmentId) => govId.type === type
           )
           if (!typeAlreadyExists) {
+            const upload = await fileService.upload({ files })
             updatedGovernmentId.push({
-              imageKey: upload.key,
+              fileKey: upload.key,
               type: type,
               createdAt: new Date(),
             })

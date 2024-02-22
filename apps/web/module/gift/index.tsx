@@ -15,7 +15,7 @@ const Gift = () => {
         </div>
       </div>
       <div className="grid self-center justify-center align-middle">
-        <Typography className="text-5xl font-bold mb-10" variant={"p"}>
+        <Typography className="text-5xl font-semibold mb-10" variant={"p"}>
           Let's redeem your gift <br /> card
         </Typography>
         <div className="space-y-5">

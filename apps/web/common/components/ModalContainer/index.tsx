@@ -9,7 +9,7 @@ type Props = {
   title?: string
   isOpen: boolean
   onClose: () => void
-  size?: "sm" | "md" | "lg" | "full"
+  size?: "sm" | "md" | "lg" | "full" | "calendar" | "auto"
 }
 
 const ModalContainer = ({
@@ -58,6 +58,7 @@ const ModalContainer = ({
                     "m-5 w-full h-auto md:w-4/12": size === "sm",
                     "m-5 w-full h-auto md:w-8/12": size === "md",
                     "m-5 w-full h-auto md:w-10/12": size === "lg",
+                    "m-5 w-full h-auto md:w-auto": size === "auto",
                     "w-screen h-screen": size === "full",
                   }
                 )}
