@@ -6,7 +6,7 @@ import { AboutHostProps } from "../types/AboutHost"
 const AboutHost = ({ name, work, livesIn, desc }: AboutHostProps) => {
   return (
     <div>
-      <Title className="font-bold hidden lg:block">About {name}</Title>
+      <Title className="font-semibold hidden lg:block">About {name}</Title>
       <div className="lg:grid grid-cols-2 mt-2 lg:mt-9 mb-7">
         <div className="flex items-center">
           <BriefcaseIcon className="h-6 w-6 mr-3 mb-0.5" strokeWidth={1.2} />

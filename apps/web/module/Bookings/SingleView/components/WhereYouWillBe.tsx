@@ -27,7 +27,7 @@ const WhereYouWillBe: React.FC<WhereYouWillBe> = ({ title }) => {
 
   return (
     <div>
-      <h1 className="font-bold text-3xl px-4 mb-5">Where You'll be</h1>
+      <h1 className="font-semibold text-3xl px-4 mb-5">Where You'll be</h1>
       <div className="container px-4">
         <TitleSection
           title={title}

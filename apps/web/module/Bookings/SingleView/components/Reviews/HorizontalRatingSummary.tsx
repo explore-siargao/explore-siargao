@@ -16,7 +16,7 @@ const HorizontalRatingSummary = () => {
     <>
       <div className="flex mb-4 space-x-2 mt-20">
         <StarIcon className="h-7 w-7" />
-        <Typography variant={"h3"} className="font-bold mt-0.5">
+        <Typography variant={"h3"} className="font-semibold mt-0.5">
           4.60 • 4 reviews
         </Typography>
       </div>

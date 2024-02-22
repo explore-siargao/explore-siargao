@@ -31,7 +31,7 @@ const ReviewCard = ({
           />
         </div>
         <div className="ml-4 leading-5 mt-0.5">
-          <h4 className="font-bold">{reviewerName}</h4>
+          <h4 className="font-semibold">{reviewerName}</h4>
           <h4 className="text-gray-500 text-[15px]">
             {date.toLocaleString("en-US", { month: "long" }) +
               " " +

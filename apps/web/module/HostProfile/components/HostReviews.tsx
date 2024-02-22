@@ -8,7 +8,7 @@ import AllReviewsModal from "../components/modals/AllReviewsModal"
 import Link from "next/link"
 
 const HostReviews = ({ name, reviewsCount, reviews }: HostReviewsProps) => {
-  const [openReviewsModal, setOpenReviewsMoal] = useState(false)
+  const [openReviewsModal, setOpenReviewsModal] = useState(false)
 
   return (
     <div>
@@ -47,8 +47,8 @@ const HostReviews = ({ name, reviewsCount, reviews }: HostReviewsProps) => {
         </div>
         <Button
           variant="outline"
-          className="font-bold text-[16px] w-full md:w-auto mt-7"
-          onClick={() => setOpenReviewsMoal(true)}
+          onClick={() => setOpenReviewsModal(true)}
+          className="font-semibold text-[16px] w-full md:w-auto mt-7"
         >
           Show all {reviewsCount} reviews
         </Button>
@@ -62,7 +62,7 @@ const HostReviews = ({ name, reviewsCount, reviews }: HostReviewsProps) => {
       <AllReviewsModal
         reviews={reviews}
         isOpen={openReviewsModal}
-        onClose={() => setOpenReviewsMoal(false)}
+        onClose={() => setOpenReviewsModal(false)}
       />
     </div>
   )

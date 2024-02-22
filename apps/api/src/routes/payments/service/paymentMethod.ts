@@ -4,7 +4,7 @@ import { Request, Response } from 'express'
 
 export const addpaymentMethod = async (req: Request, res: Response) => {
   const prisma = new PrismaClient()
-  const { cardNumber, countryRegion, cvv, expirationDate, zipCode } = req.body
+  const { cardInfo } = req.body
   const userId = Number(req.params.userId)
   try {
     const isUserExist =
@@ -15,14 +15,10 @@ export const addpaymentMethod = async (req: Request, res: Response) => {
         },
       })) !== null
     if (isUserExist) {
-      if (cardNumber && countryRegion && cvv && expirationDate && zipCode) {
+      if (cardInfo) {
         const newPaymentMethod = await prisma.paymentMethod.create({
           data: {
-            cardNumber: cardNumber,
-            countryRegion: countryRegion,
-            cvv: cvv,
-            expirationDate: expirationDate,
-            zipCode: zipCode,
+            cardInfo: cardInfo,
             userId: userId,
           },
           include: {
@@ -31,14 +27,14 @@ export const addpaymentMethod = async (req: Request, res: Response) => {
         })
         res.json({
           error: false,
-          items: newPaymentMethod,
+          item: newPaymentMethod,
           itemCount: 1,
           message: 'Payment method successfully added',
         })
       } else {
         res.json({
           error: true,
-          items: null,
+          item: null,
           itemCount: 0,
           message: REQUIRED_VALUE_EMPTY,
         })
@@ -46,7 +42,7 @@ export const addpaymentMethod = async (req: Request, res: Response) => {
     } else {
       res.json({
         error: true,
-        items: null,
+        item: null,
         itemCount: 0,
         message: 'User is not exist from our system',
       })
@@ -54,7 +50,7 @@ export const addpaymentMethod = async (req: Request, res: Response) => {
   } catch (err: any) {
     res.json({
       error: true,
-      items: null,
+      item: null,
       itemCount: 0,
       message: err.message,
     })
@@ -85,9 +81,24 @@ export const getPaymentMethods = async (req: Request, res: Response) => {
           },
         },
       })
+      const modifyResult = getPaymentsMethod.map((paymentMethod) => ({
+        ...paymentMethod,
+        user: {
+          ...paymentMethod.user,
+          personalInfo: {
+            ...paymentMethod.user.personalInfo,
+            confirm: paymentMethod.user.personalInfo?.confirm
+              ? JSON.parse(paymentMethod.user.personalInfo?.confirm)
+              : null,
+            governmentId: paymentMethod.user.personalInfo?.governmentId
+              ? JSON.parse(paymentMethod.user.personalInfo.governmentId)
+              : null,
+          },
+        },
+      }))
       res.json({
         error: false,
-        items: getPaymentsMethod,
+        items: modifyResult,
         itemCount: getPaymentsMethod.length,
         message: '',
       })
@@ -171,8 +182,7 @@ export const removePaymentmethod = async (req: Request, res: Response) => {
 
 export const updatePaymentMethod = async (req: Request, res: Response) => {
   let successDefault = null
-  const { cardNumber, countryRegion, cvv, expirationDate, zipCode, isDefault } =
-    req.body
+  const { cardInfo, isDefault } = req.body
   const userId = Number(req.params.userId)
   const paymentMethodId = Number(req.params.paymentMethodId)
   try {
@@ -197,15 +207,7 @@ export const updatePaymentMethod = async (req: Request, res: Response) => {
         },
       })
       if (getPaymentMethod) {
-        if (
-          cardNumber ||
-          cvv ||
-          expirationDate ||
-          countryRegion ||
-          zipCode ||
-          isDefault ||
-          !isDefault
-        ) {
+        if (cardInfo || isDefault || !isDefault) {
           if (isDefault) {
             const updateCurrentDefault = await prisma.paymentMethod.updateMany({
               where: {
@@ -224,11 +226,7 @@ export const updatePaymentMethod = async (req: Request, res: Response) => {
               userId: userId,
             },
             data: {
-              cardNumber: cardNumber,
-              cvv: cvv,
-              expirationDate: expirationDate,
-              countryRegion: countryRegion,
-              zipCode: zipCode,
+              cardInfo: cardInfo,
               isDefault: isDefault,
             },
           })

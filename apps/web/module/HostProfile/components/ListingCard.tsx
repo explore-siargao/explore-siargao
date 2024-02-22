@@ -22,7 +22,7 @@ const ListingCard = ({
         />
       </div>
       <div className="flex mt-3 justify-between items-center">
-        <h4 className="font-bold">{title}</h4>
+        <h4 className="font-semibold">{title}</h4>
         <div className="flex items-center space-x-1">
           <StarIcon className="h-4 w-4" />
           <h4>
