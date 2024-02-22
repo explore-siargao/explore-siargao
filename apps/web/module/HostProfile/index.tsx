@@ -126,7 +126,10 @@ const HostProfile = () => {
             </div>
             <div className="items-center mt-6 hidden lg:flex">
               <FlagIcon className="h-5 w-5 mr-3" />
-              <button className="underline font-bold" onClick={() => setOpenReportModal(true)}>
+              <button
+                className="underline font-bold"
+                onClick={() => setOpenReportModal(true)}
+              >
                 Report this profile
               </button>
             </div>
@@ -164,13 +167,19 @@ const HostProfile = () => {
           <hr className="lg:hidden" />
           <div className="items-center flex lg:hidden">
             <FlagIcon className="h-5 w-5 mr-3" />
-            <button className="underline font-semibold" onClick={() => setOpenReportModal(true)}>
+            <button
+              className="underline font-semibold"
+              onClick={() => setOpenReportModal(true)}
+            >
               Report this profile
             </button>
           </div>
         </div>
       </div>
-      <ReportHostModal isOpen={openReportModal} onClose={() => setOpenReportModal(false)} />
+      <ReportHostModal
+        isOpen={openReportModal}
+        onClose={() => setOpenReportModal(false)}
+      />
     </WidthWrapper>
   )
 }
