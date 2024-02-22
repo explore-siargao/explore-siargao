@@ -10,7 +10,7 @@ interface ISafetyProperty {
   title: string
   iconDesc: {
     id: number
-    icon: LucideIcon
+    icon: string
     safetyProperty: string
     otherDescription?: string
   }[]
@@ -50,7 +50,7 @@ const SafetyPropertyModal = ({
                   className="mb-5 mt-5"
                   title={item.safetyProperty}
                   icon={item.icon}
-                  desc={item.otherDescription}
+                  description={item.otherDescription}
                 />
               </div>
             ))}

@@ -1,14 +1,10 @@
+import { iconMap } from "@/common/helpers/iconMap"
 import React from "react"
-import { LucideProps, LucideWifi } from "lucide-react"
 
 type T_IconDescriptionProps = {
   icon: string
   description: string
   isNotIncluded: boolean
-}
-
-const iconMap = {
-  wifi: (props?: LucideProps) => <LucideWifi {...props} />,
 }
 
 const IconDescription: React.FC<T_IconDescriptionProps> = ({
@@ -22,7 +18,8 @@ const IconDescription: React.FC<T_IconDescriptionProps> = ({
 
   return (
     <div className="flex items-center mb-5 gap-5">
-      {icon && iconMap["wifi"]()}
+      {/* @ts-expect-error */}
+      {icon && iconMap[icon]()}
       <div className="flex" style={IconDescriptionStyle}>
         {description}
       </div>

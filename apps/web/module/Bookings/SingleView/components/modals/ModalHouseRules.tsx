@@ -1,7 +1,6 @@
 import ModalContainer from "@/common/components/ModalContainer"
 import { Title } from "@/common/components/ui/Title"
 import { Typography } from "@/common/components/ui/Typography"
-import { LucideIcon } from "lucide-react"
 import React from "react"
 import IconTitleDescription from "../IconTitleDescription"
 
@@ -10,7 +9,7 @@ interface IHouseRules {
   title: string
   iconDesc: {
     id: number
-    icon: LucideIcon
+    icon: string
     rule: string
     otherDescription?: string
   }[]
@@ -50,7 +49,7 @@ const HouseRulesModal = ({
                 <IconTitleDescription
                   title={item.rule}
                   icon={item.icon}
-                  desc={item.otherDescription}
+                  description={item.otherDescription}
                 />
               </div>
             ))}

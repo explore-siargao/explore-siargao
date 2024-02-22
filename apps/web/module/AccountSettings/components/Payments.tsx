@@ -40,7 +40,7 @@ const Payments = () => {
   const { mutate, isPending } = useUpdatePaymentMethod(session.id)
   const { mutate: redeemCoupon, isPending: isPendingRedeemCoupon } =
     useUpdateCoupon(session.id)
-  const decryptCard = new EncryptionService()
+  const decryptCard = new EncryptionService("card")
   const callBackReqDefaultPaymentMethod = {
     onSuccess: (data: any) => {
       if (!data.error) {

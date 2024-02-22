@@ -1,8 +1,6 @@
-import { LucideIcon } from "lucide-react"
-
 export type T_HouseRules = {
   id: number
-  icon: LucideIcon
+  icon: string
   rule: string
 }
 
@@ -24,7 +22,7 @@ export type T_HouseRulesModalData = {
 
 export type T_RawSafetyModalData = {
   id: number
-  icon: LucideIcon
+  icon: string
   safetyProperty: string
   otherDescription?: string
 }

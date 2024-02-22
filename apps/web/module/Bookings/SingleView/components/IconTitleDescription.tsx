@@ -1,4 +1,4 @@
-import { LucideProps, LucideWifi } from "lucide-react"
+import { iconMap } from "@/common/helpers/iconMap"
 import React from "react"
 
 interface IconTitleDescriptionProps {
@@ -6,10 +6,6 @@ interface IconTitleDescriptionProps {
   title: string
   description?: string
   className?: string
-}
-
-const iconMap = {
-  wifi: (props?: LucideProps) => <LucideWifi {...props} />,
 }
 
 const IconTitleDescription: React.FC<IconTitleDescriptionProps> = ({
@@ -20,7 +16,8 @@ const IconTitleDescription: React.FC<IconTitleDescriptionProps> = ({
 }) => {
   return (
     <div className={`flex items-center mb-2 gap-5 ${className}`}>
-      {icon && iconMap["wifi"]()}
+      {/* @ts-expect-error */}
+      {icon && iconMap[icon]()}
       <div className="flex flex-col mt-1">
         <div className="flex">{title}</div>
         <div className="flex text-sm text-text-300">{description}</div>

@@ -37,7 +37,7 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
     formState: { errors },
   } = useForm<IPaymentMethod>()
   const queryClient = useQueryClient()
-  const encryptCard = new EncryptionService()
+  const encryptCard = new EncryptionService("card");
   const onSubmit = (formData: IPaymentMethod) => {
     const callBackReq = {
       onSuccess: (data: any) => {
@@ -59,11 +59,11 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
     mutate(
       {
         cardInfo: encryptCard.encrypt({
-          cardNumber: String(getValues("cardNumber")).replace(/\s/g, ""),
-          cvv: Number(getValues("cvv")),
-          expirationDate: String(getValues("expirationDate")),
-          zipCode: Number(getValues("zipCode")),
-          countryRegion: getValues("countryRegion"),
+          cardNumber: String(formData.cardNumber)?.replace(/\s/g, ""),
+          cvv: Number(formData.cvv),
+          expirationDate: String(formData.expirationDate),
+          zipCode: Number(formData.zipCode),
+          countryRegion: formData.countryRegion,
         }),
         userId: Number(userId),
       },

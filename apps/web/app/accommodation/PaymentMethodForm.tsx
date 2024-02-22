@@ -16,7 +16,6 @@ import ErrorMessage from "@/module/AccountSettings/components/ui/ErrorMessage"
 const PaymentMethodForm = () => {
   const {
     register,
-    reset,
     handleSubmit,
     getValues,
     setValue,
@@ -71,7 +70,7 @@ const PaymentMethodForm = () => {
     }
   }
 
-  const onSubmit = (data: any) => {}
+  const onSubmit = () => {}
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

@@ -18,21 +18,6 @@ import { Flag, Tag } from "lucide-react"
 import ModalReporting from "./components/modals/ModalReporting"
 import { useState } from "react"
 import ListingMark from "@/module/Accommodation/Checkout/ListingMark"
-import {
-  LucideAlarmSmoke,
-  LucideBeer,
-  LucideBuilding,
-  LucideCamera,
-  LucideCctv,
-  LucideCigaretteOff,
-  LucideClock,
-  LucideFireExtinguisher,
-  LucideFishOff,
-  LucideMoon,
-  LucidePawPrint,
-  LucidePersonStanding,
-  LucideSpeaker,
-} from "lucide-react"
 
 const reportListingArr = [
   {
@@ -311,9 +296,9 @@ const userReviews = [
 ]
 
 const houseRulesDummy = [
-  { id: 1, icon: LucideClock, rule: "Check-in: 12:00 PM - 7:00 PM" },
-  { id: 2, icon: LucideClock, rule: "Checkout before 10:00 AM" },
-  { id: 3, icon: LucidePawPrint, rule: "8 guests maximum" },
+  { id: 1, icon: "wifi", rule: "Check-in: 12:00 PM - 7:00 PM" },
+  { id: 2, icon: "wifi", rule: "Checkout before 10:00 AM" },
+  { id: 3, icon: "wifi", rule: "8 guests maximum" },
 ]
 
 const safetyPropertiesDummy = [
@@ -335,25 +320,25 @@ const houseRulesModalData = [
     id: 1,
     title: "Checking in and out",
     iconDesc: [
-      { id: 1, icon: LucideClock, rule: "Check-in: 12:00 PM - 7:00 PM" },
-      { id: 2, icon: LucideClock, rule: "Checkout before 10:00 AM" },
-      { id: 3, icon: LucidePersonStanding, rule: "8 guests maximum" },
+      { id: 1, icon: "wifi", rule: "Check-in: 12:00 PM - 7:00 PM" },
+      { id: 2, icon: "wifi", rule: "Checkout before 10:00 AM" },
+      { id: 3, icon: "wifi", rule: "8 guests maximum" },
     ],
   },
   {
     id: 2,
     title: "During your stay",
     iconDesc: [
-      { id: 1, icon: LucidePawPrint, rule: "Pets allowed" },
+      { id: 1, icon: "wifi", rule: "Pets allowed" },
       {
         id: 2,
-        icon: LucideMoon,
+        icon: "wifi",
         rule: "Quiet hours",
         otherDescription: "11:00 PM - 6:00 AM",
       },
-      { id: 3, icon: LucidePawPrint, rule: "8 guests maximum" },
-      { id: 4, icon: LucideCamera, rule: "Commercial photography is allowed" },
-      { id: 5, icon: LucideCigaretteOff, rule: "No smoking" },
+      { id: 3, icon: "wifi", rule: "8 guests maximum" },
+      { id: 4, icon: "wifi", rule: "Commercial photography is allowed" },
+      { id: 5, icon: "wifi", rule: "No smoking" },
     ],
   },
 ]
@@ -365,7 +350,7 @@ const safetyPropertiesModalData = [
     iconDesc: [
       {
         id: 1,
-        icon: LucideFishOff,
+        icon: "wifi",
         safetyProperty: "Not suitable for fishing",
       },
     ],
@@ -376,19 +361,19 @@ const safetyPropertiesModalData = [
     iconDesc: [
       {
         id: 1,
-        icon: LucideCctv,
+        icon: "wifi",
         safetyProperty: "Security camera/recording device",
         otherDescription:
           "CCTV cameras around the building and within the shared common areas like lobby, corridors, and elevator area.",
       },
       {
         id: 2,
-        icon: LucideAlarmSmoke,
+        icon: "wifi",
         safetyProperty: "Smoke alarm installed",
       },
       {
         id: 3,
-        icon: LucideFireExtinguisher,
+        icon: "wifi",
         safetyProperty: "Fire extinguisher available",
       },
     ],
@@ -399,12 +384,12 @@ const safetyPropertiesModalData = [
     iconDesc: [
       {
         id: 1,
-        icon: LucideBuilding,
+        icon: "wifi",
         safetyProperty: "10 story building",
         otherDescription: "The building itself have 100th floor",
       },
-      { id: 2, icon: LucideSpeaker, safetyProperty: "Potential noise" },
-      { id: 3, icon: LucideBeer, safetyProperty: "Free beer" },
+      { id: 2, icon: "wifi", safetyProperty: "Potential noise" },
+      { id: 3, icon: "wifi", safetyProperty: "Free beer" },
     ],
   },
 ]
