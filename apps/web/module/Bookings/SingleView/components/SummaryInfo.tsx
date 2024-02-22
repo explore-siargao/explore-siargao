@@ -1,16 +1,7 @@
 import React from "react"
 import { Typography } from "@/common/components/ui/Typography"
 import { Star } from "lucide-react"
-
-interface SectionInfoProps {
-  address: string
-  guest: number
-  bedroom: number
-  beds: number
-  baths: number
-  reviews: number
-  stars: number
-}
+import { T_SummaryInfoProps } from "../types/SummaryInfo"
 
 const SummaryInfo = ({
   address,
@@ -20,7 +11,7 @@ const SummaryInfo = ({
   baths,
   reviews,
   stars,
-}: SectionInfoProps) => {
+}: T_SummaryInfoProps) => {
   return (
     <>
       <Typography variant="h3" fontWeight="semibold">

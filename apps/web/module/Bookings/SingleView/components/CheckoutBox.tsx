@@ -11,6 +11,7 @@ import useCheckInOutDateStore from "@/common/store/useCheckInOutDateStore"
 import Asterisk from "@/common/components/ui/Asterisk"
 import { format } from "date-fns"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 
 interface ICheckout {
   id?: number
@@ -26,6 +27,7 @@ interface CheckoutProcessProps {
 }
 
 const CheckoutBox = ({ checkoutDesc }: CheckoutProcessProps) => {
+  const router = useRouter();
   const [isBreakdownModalOpen, setIsBreakdownModalOpen] = useState(false)
   const [isMoreInfoModalOpen, setIsMoreInfoModalOpen] = useState(false)
   const [checkInOutCalendarModalIsOpen, setCheckInOutCalendarModalIsOpen] =
@@ -71,12 +73,12 @@ const CheckoutBox = ({ checkoutDesc }: CheckoutProcessProps) => {
           </div>
         </div>
         <Select id="guest" label="GUESTS" required={true} />
-        <Button variant="primary">
-          <Link href="/accommodation/1/checkout">Book Now</Link>
+        <Button variant="primary" onClick={() => router.push("/accommodation/1/checkout")}>
+          Book Now
         </Button>
       </div>
       <div>
-        <div className="flex justify-between items-center mb-5">
+        <div className="flex justify-between items-center mb-5 mt-4">
           <Button
             variant={"ghost"}
             className="underline pl-0"

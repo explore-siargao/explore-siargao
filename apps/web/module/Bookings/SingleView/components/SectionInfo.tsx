@@ -1,48 +1,16 @@
 "use client"
 import React, { useState } from "react"
 import { Typography } from "@/common/components/ui/Typography"
-import { Heart, Share, Star } from "lucide-react"
 import ImageGallery from "./ImageGallery"
 import ImageGalleryModal from "./modals/ImageGalleryModal"
 import ShareSave from "./ShareSave"
+import { T_SectionInfoProps } from "../types/SectionInfo"
 
-interface SectionInfoProps {
-  title: string
-}
-
-const SectionInfo = ({ title }: SectionInfoProps) => {
-  const [isClicked, setIsClicked] = useState(false)
+const SectionInfo = ({ title, images }: T_SectionInfoProps) => {
   const [galleryModalOpen, setGalleryModalOpen] = useState(false)
   const openModal = () => {
     setGalleryModalOpen(true)
   }
-  const handleClick = () => {
-    setIsClicked(!isClicked)
-  }
-
-  const ImagesDummy = [
-    {
-      fileKey: "1.jpg",
-      alt: "Image 1",
-    },
-    {
-      fileKey: "2.jpg",
-      alt: "Image 2",
-    },
-    {
-      fileKey: "3.jpg",
-      alt: "Image 3",
-    },
-    {
-      fileKey: "4.jpg",
-      alt: "Image 4",
-    },
-    {
-      fileKey: "5.jpg",
-      alt: "Image 5",
-    },
-  ]
-
   return (
     <>
       <div className="justify-between md:flex text-start items-center">
@@ -54,9 +22,10 @@ const SectionInfo = ({ title }: SectionInfoProps) => {
         <ShareSave />
       </div>
       <div className="my-6">
-        <ImageGallery images={ImagesDummy} openModal={openModal} />
+        <ImageGallery images={images} openModal={openModal} />
       </div>
       <ImageGalleryModal
+        images={images}
         isOpen={galleryModalOpen}
         onClose={() => setGalleryModalOpen(false)}
       />
