@@ -5,7 +5,7 @@ import { useState } from "react"
 interface IProfileFourthLevel {
   year: string
   destination: string
-}
+}[]
 
 interface ProfileFourthLevelProps {
   description: IProfileFourthLevel[]
