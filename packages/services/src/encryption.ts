@@ -14,11 +14,11 @@ export class EncryptionService {
     let encyptValue = ""
     if (typeof val === "object" || Array.isArray(val)) {
       encyptValue = String(
-        CryptoJS.AES.encrypt(JSON.stringify(val), this.KEY as string)
+        CryptoJS.AES.encrypt(JSON.stringify(val), String(this.KEY))
       )
     }
     if (typeof val === "string") {
-      encyptValue = String(CryptoJS.AES.encrypt(val, this.KEY as string))
+      encyptValue = String(CryptoJS.AES.encrypt(val, String(this.KEY)))
     }
     return encyptValue
   }
@@ -26,7 +26,7 @@ export class EncryptionService {
   decrypt(encryptedValue: string): object | any[] | string {
     let decryptedValue = ""
     try {
-      const bytes = CryptoJS.AES.decrypt(encryptedValue, this.KEY as string)
+      const bytes = CryptoJS.AES.decrypt(encryptedValue, String(this.KEY))
       const originalValue = bytes.toString(CryptoJS.enc.Utf8)
       const parsedValue = JSON.parse(originalValue)
 
@@ -37,7 +37,7 @@ export class EncryptionService {
       }
     } catch (error: any) {
       try {
-        const bytes = CryptoJS.AES.decrypt(encryptedValue, this.KEY as string)
+        const bytes = CryptoJS.AES.decrypt(encryptedValue, String(this.KEY))
         decryptedValue = bytes.toString(CryptoJS.enc.Utf8)
       } catch (error: any) {
         console.error("Decryption failed:", error.message)
