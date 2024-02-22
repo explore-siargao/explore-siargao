@@ -6,7 +6,7 @@ import {
   USER_NOT_EXIST,
 } from '@/common/constants'
 import { APP_NAME } from '@repo/constants'
-import {passwordEncryptKey, nextAuthSecret, webUrl } from '@/common/config'
+import { passwordEncryptKey, nextAuthSecret, webUrl } from '@/common/config'
 import dayjs from 'dayjs'
 import { AuthEmail } from './authEmail'
 import verifyCaptcha from '@/common/helpers/verifyCaptcha'
@@ -20,10 +20,10 @@ import CryptoJS from 'crypto-js'
 import { currencyByCountry } from '@/common/helpers/currencyByCountry'
 const prisma = new PrismaClient()
 const response = new ResponseService()
-import {EncryptionService} from "@repo/services/"
+import { EncryptionService } from '@repo/services/'
 
-const decryptionService = new EncryptionService("password")
-const encryptionService = new EncryptionService("password")
+const decryptionService = new EncryptionService('password')
+const encryptionService = new EncryptionService('password')
 export const verifySignIn = async (req: Request, res: Response) => {
   const { type, email } = req.query
   if (type && email) {
@@ -190,7 +190,7 @@ export const manual = async (req: Request, res: Response) => {
         throw new Error('Email or password is invalid')
       }
       const decryptedPassword = decryptionService.decrypt(
-        user?.password as string,
+        user?.password as string
       )
       const originalPassword = decryptedPassword.toString()
       const decryptInputPassword = decryptionService.decrypt(password)

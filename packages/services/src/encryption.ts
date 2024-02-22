@@ -1,12 +1,12 @@
 import CryptoJS from "crypto-js"
-import { passwordEncryptKey , cardEncryptKey} from "./config"
+import { passwordEncryptKey, cardEncryptKey } from "./config"
 
 export class EncryptionService {
-  private KEY:string | undefined = ""
-  constructor(source: 'password' | 'card') {
-    if (source === 'password') {
+  private KEY: string | undefined = ""
+  constructor(source: "password" | "card") {
+    if (source === "password") {
       this.KEY = passwordEncryptKey
-    } else if (source === 'card') {
+    } else if (source === "card") {
       this.KEY = cardEncryptKey
     }
   }

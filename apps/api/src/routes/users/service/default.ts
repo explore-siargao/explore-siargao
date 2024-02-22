@@ -7,7 +7,7 @@ import {
   USER_NOT_EXIST,
 } from '@/common/constants'
 import { ResponseService } from '@/common/service/response'
-import {passwordEncryptKey } from '@/common/config'
+import { passwordEncryptKey } from '@/common/config'
 import { currencyByCountry } from '@/common/helpers/currencyByCountry'
 export const getAllUsers = async (req: Request, res: Response) => {
   try {
@@ -47,7 +47,6 @@ export const getAllUsers = async (req: Request, res: Response) => {
     })
   }
 }
-
 
 export const deactivateAccount = async (req: Request, res: Response) => {
   const response = new ResponseService()
@@ -118,7 +117,10 @@ export const updatePassword = async (req: Request, res: Response) => {
     if (decryptCurrentPassword.toString() !== decryptPassword.toString()) {
       return res.json(response.error({ message: 'Wrong old password' }))
     }
-    const encryptNewPassword = CryptoJS.AES.encrypt(newPassword, passwordEncryptKey)
+    const encryptNewPassword = CryptoJS.AES.encrypt(
+      newPassword,
+      passwordEncryptKey
+    )
     const updateUserPassword = await prisma.user.update({
       where: {
         id: userId,

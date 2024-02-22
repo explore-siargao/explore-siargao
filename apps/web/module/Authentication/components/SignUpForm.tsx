@@ -22,8 +22,8 @@ import {
 import useGlobalInputEmail from "../store/useGlobalInputEmail"
 import { Typography } from "@/common/components/ui/Typography"
 import useOptMessageStore from "@/common/store/useOptMessageStore"
-import CryptoJS from 'crypto-js'
-import {EncryptionService} from "@repo/services/"
+import CryptoJS from "crypto-js"
+import { EncryptionService } from "@repo/services/"
 import {
   E_RegistrationType,
   T_BackendResponse,

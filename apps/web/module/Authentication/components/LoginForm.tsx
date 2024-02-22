@@ -19,7 +19,7 @@ import { signIn } from "next-auth/react"
 import { LINK_FORGOT_PASSWORD } from "../constants/links"
 import useGlobalInputEmail from "../store/useGlobalInputEmail"
 import { Typography } from "@/common/components/ui/Typography"
-import {EncryptionService} from "@repo/services/"
+import { EncryptionService } from "@repo/services/"
 
 enum Position {
   "end",
@@ -57,7 +57,13 @@ const LoginForm = () => {
         toast.error(String(err))
       },
     }
-    loginUser({ ...formData, password:encryptionService.encrypt(getValues("password") as string) }, callBackReq)
+    loginUser(
+      {
+        ...formData,
+        password: encryptionService.encrypt(getValues("password") as string),
+      },
+      callBackReq
+    )
   }
 
   return (
