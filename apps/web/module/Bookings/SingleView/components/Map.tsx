@@ -4,25 +4,13 @@ import { Button } from "@/common/components/ui/Button"
 import { Title } from "@/common/components/ui/Title"
 import WhereYouWillBeModal from "./WhereYouWillBeModal"
 import { useState } from "react"
+import { MapProps } from "../types/Map"
 
-interface IDescription {
-  id?: number
-  location: string
-  coordinates: [Number, Number]
-  desc: string
-}
-
-interface WhereYoullBeProps {
-  whereYoullBeDesc: IDescription
-}
-
-const WhereYoullBeDescription = ({ whereYoullBeDesc }: WhereYoullBeProps) => {
+const WhereYoullBeDescription = ({ location, coordinates, desc }: MapProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const maxLength = 600
   const slicedDescription =
-    whereYoullBeDesc.desc.length > maxLength
-      ? whereYoullBeDesc.desc.slice(0, maxLength) + "...."
-      : whereYoullBeDesc.desc
+    desc.length > maxLength ? desc.slice(0, maxLength) + "...." : desc
 
   return (
     <div className="flex flex-col w-full">
@@ -30,18 +18,16 @@ const WhereYoullBeDescription = ({ whereYoullBeDesc }: WhereYoullBeProps) => {
         <Title className="text-lg font-semibold">Where you'll be</Title>
         <div className="w-12/12 h-[450px] bg-primary-200 mb-5">
           <SpecificMap
-            coordinates={whereYoullBeDesc.coordinates}
+            coordinates={coordinates as [number, number]}
             mapHeight="h-[450px]"
             mapWidth="w-full"
           />
         </div>
 
-        {whereYoullBeDesc.location && (
-          <div className="text-md font-semibold mb-5">
-            {whereYoullBeDesc.location}
-          </div>
+        {location && (
+          <div className="text-md font-semibold mb-5">{location}</div>
         )}
-        {whereYoullBeDesc.desc && (
+        {desc && (
           <div className="flex text-sm mb-4">
             <p>{slicedDescription}</p>
           </div>
@@ -57,7 +43,7 @@ const WhereYoullBeDescription = ({ whereYoullBeDesc }: WhereYoullBeProps) => {
         </Button>
       </div>
       <WhereYouWillBeModal
-        coordinates={whereYoullBeDesc.coordinates}
+        coordinates={coordinates as [number, number]}
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
       />
