@@ -13,12 +13,12 @@ const ListingMark: React.FC<ListingMarkProps> = ({
   desc,
 }) => {
   return (
-    <div className="border border-gray-300 rounded-md p-4 mb-2">
-      <div className="flex items-center gap-4">
-        <div className="pt-2">{iconSymbol}</div>
-        <h3 className="font-semibold">{title}</h3>
+    <div className="border border-gray-300 rounded-md p-4 mb-2 flex gap-4">
+      <div className="mt-1">
+        {iconSymbol}
       </div>
-      <div className="pl-10 pr-3">
+      <div>
+        <h3 className="font-semibold">{title}</h3>
         <Typography variant={"h5"} className="text-justify">
           {desc}
         </Typography>

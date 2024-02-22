@@ -18,7 +18,7 @@ const WhereYoullBeDescription = ({ location, coordinates, desc }: MapProps) => {
         <Title className="text-lg font-semibold">Where you'll be</Title>
         <div className="w-12/12 h-[450px] bg-primary-200 mb-5">
           <SpecificMap
-            coordinates={coordinates}
+            coordinates={coordinates as [number, number]}
             mapHeight="h-[450px]"
             mapWidth="w-full"
           />
@@ -43,7 +43,7 @@ const WhereYoullBeDescription = ({ location, coordinates, desc }: MapProps) => {
         </Button>
       </div>
       <WhereYouWillBeModal
-        coordinates={whereYoullBeDesc.coordinates}
+        coordinates={coordinates as [number, number]}
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
       />
