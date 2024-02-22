@@ -100,7 +100,7 @@ const hostProfileData = {
 
 const HostProfile = () => {
   return (
-    <WidthWrapper className="my-24 lg:my-32">
+    <WidthWrapper width="small" className="my-24 lg:my-32">
       <div className="mt-5 mx-3 md:mx-40 lg:mx-5 grid lg:grid-cols-12 gap-x-20 gap-y-4">
         <div className=" lg:col-span-4 lg:relative">
           <div className="lg:sticky lg:top-40">
@@ -122,7 +122,7 @@ const HostProfile = () => {
             </div>
             <div className="items-center mt-6 hidden lg:flex">
               <FlagIcon className="h-5 w-5 mr-3" />
-              <button className="underline font-bold">
+              <button className="underline font-semibold">
                 Report this profile
               </button>
             </div>

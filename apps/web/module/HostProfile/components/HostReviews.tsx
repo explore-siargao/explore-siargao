@@ -41,7 +41,7 @@ const HostReviews = ({ name, reviewsCount, reviews }: HostReviewsProps) => {
         </div>
         <Button
           variant="outline"
-          className="font-bold text-[16px] w-full md:w-auto mt-7"
+          className="font-semibold text-[16px] w-full md:w-auto mt-7"
         >
           Show all {reviewsCount} reviews
         </Button>
