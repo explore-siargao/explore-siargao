@@ -8,6 +8,8 @@ import AboutHost from "./components/AboutHost"
 import HostReviews from "./components/HostReviews"
 import HostListings from "./components/HostListings"
 import HostGuideBooks from "./components/HostGuideBooks"
+import { useState } from "react"
+import ReportHostModal from "./components/modals/ReportHostModal"
 
 const hostProfileData = {
   profilePicture: "1.jpg",
@@ -99,6 +101,8 @@ const hostProfileData = {
 }
 
 const HostProfile = () => {
+  const [openReportModal, setOpenReportModal] = useState(false)
+
   return (
     <WidthWrapper className="my-24 lg:my-32">
       <div className="mt-5 mx-3 md:mx-40 lg:mx-5 grid lg:grid-cols-12 gap-x-20 gap-y-4">
@@ -122,7 +126,7 @@ const HostProfile = () => {
             </div>
             <div className="items-center mt-6 hidden lg:flex">
               <FlagIcon className="h-5 w-5 mr-3" />
-              <button className="underline font-bold">
+              <button className="underline font-bold" onClick={() => setOpenReportModal(true)}>
                 Report this profile
               </button>
             </div>
@@ -160,12 +164,13 @@ const HostProfile = () => {
           <hr className="lg:hidden" />
           <div className="items-center flex lg:hidden">
             <FlagIcon className="h-5 w-5 mr-3" />
-            <button className="underline font-semibold">
+            <button className="underline font-semibold" onClick={() => setOpenReportModal(true)}>
               Report this profile
             </button>
           </div>
         </div>
       </div>
+      <ReportHostModal isOpen={openReportModal} onClose={() => setOpenReportModal(false)} />
     </WidthWrapper>
   )
 }
