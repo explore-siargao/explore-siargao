@@ -3,7 +3,7 @@ import { WidthWrapper } from "@/common/components/WidthWrapper"
 import ThingsToKnow from "./components/ThingsToKnow"
 import HostInformation from "./components/HostInformation"
 import BookingDescription from "./components/BookingDescription"
-import SectionInfo from "./components/SectionInfo"
+import SectionInfo, { ListingImage } from "./components/SectionInfo"
 import SummaryInfo from "./components/SummaryInfo"
 import AvatarTitleDescription from "./components/AvatarTitleDescription"
 import RatingSummary from "./components/Reviews/RatingSummary"
@@ -17,6 +17,7 @@ import { Button } from "@/common/components/ui/Button"
 import { Flag } from "lucide-react"
 import ModalReporting from "./components/modals/ModalReporting"
 import { useState } from "react"
+import { T_Listing } from "@repo/contract"
 
 const reportListingArr = [
   {
@@ -61,7 +62,7 @@ const reportListingArr = [
   },
 ]
 
-export const SingleView = () => {
+export const SingleView = ({ listing }: { listing: T_Listing }) => {
   const [showModal, setShowModal] = useState(false)
   const handleOpenModal = () => {
     setShowModal(true)
@@ -72,7 +73,7 @@ export const SingleView = () => {
 
   return (
     <WidthWrapper width="small" className="mt-32 lg:mt-36">
-      <SectionInfo title="Villa Manao · Private Pool | Bathtub | Sky shower" />
+      <SectionInfo title={listing.title} images={listing.images as ListingImage[]} />
       <div className="flex flex-col md:flex-row gap-8 md:gap-24 pb-12">
         <div className="flex-1 md:w-1/2 2xl:w-full">
           <div className="divide-y">

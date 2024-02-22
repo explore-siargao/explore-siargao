@@ -5,6 +5,7 @@ import { Metadata } from "next"
 import SingleView from "@/module/Bookings/SingleView"
 import { getRequest } from "@/common/helpers/getRequest"
 import { ACCOMMODATION } from "@/common/constants"
+import { T_Listing, Z_Listing } from "@repo/contract"
 
 export const metadata: Metadata = {
   title: `${ACCOMMODATION} - ${APP_NAME}`,
@@ -12,11 +13,13 @@ export const metadata: Metadata = {
 }
 
 const AccommodationPage = async () => {
-  const booking = await getRequest(`/listings/1`)
-  console.log("listings server", booking)
+  const listing = await getRequest(`/listings/1`)
+  // console.log("listings server", listing)
+  const validateData = Z_Listing.safeParse(listing);
+  console.log("validateData", validateData.error)
   return (
     <AuthGuard>
-      <SingleView />
+      <SingleView listing={listing.item as T_Listing} />
     </AuthGuard>
   )
 }

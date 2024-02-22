@@ -6,42 +6,21 @@ import ImageGallery from "./ImageGallery"
 import ImageGalleryModal from "./modals/ImageGalleryModal"
 import ShareSave from "./ShareSave"
 
-interface SectionInfoProps {
-  title: string
+export type ListingImage = {
+  fileKey: string,
+  alt: string
 }
 
-const SectionInfo = ({ title }: SectionInfoProps) => {
-  const [isClicked, setIsClicked] = useState(false)
+interface SectionInfoProps {
+  title: string
+  images: ListingImage[]
+}
+
+const SectionInfo = ({ title, images }: SectionInfoProps) => {
   const [galleryModalOpen, setGalleryModalOpen] = useState(false)
   const openModal = () => {
     setGalleryModalOpen(true)
   }
-  const handleClick = () => {
-    setIsClicked(!isClicked)
-  }
-
-  const ImagesDummy = [
-    {
-      fileKey: "1.jpg",
-      alt: "Image 1",
-    },
-    {
-      fileKey: "2.jpg",
-      alt: "Image 2",
-    },
-    {
-      fileKey: "3.jpg",
-      alt: "Image 3",
-    },
-    {
-      fileKey: "4.jpg",
-      alt: "Image 4",
-    },
-    {
-      fileKey: "5.jpg",
-      alt: "Image 5",
-    },
-  ]
 
   return (
     <>
@@ -54,7 +33,7 @@ const SectionInfo = ({ title }: SectionInfoProps) => {
         <ShareSave />
       </div>
       <div className="my-6">
-        <ImageGallery images={ImagesDummy} openModal={openModal} />
+        <ImageGallery images={images} openModal={openModal} />
       </div>
       <ImageGalleryModal
         isOpen={galleryModalOpen}
