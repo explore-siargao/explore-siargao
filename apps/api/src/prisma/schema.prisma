@@ -194,11 +194,7 @@ model BasicAboutPlace {
 model PaymentMethod {
   id             Int                  @id @default(autoincrement())
   userId         Int
-  cardNumber     String               @unique
-  expirationDate String               @db.VarChar(10)
-  cvv            Int
-  zipCode        Int
-  countryRegion  String               @db.VarChar(255)
+  cardInfo       String               @db.VarChar(255)
   createdAt      DateTime             @default(now())
   updatedAt      DateTime             @updatedAt
   deletedAt      DateTime?
@@ -209,6 +205,11 @@ model PaymentMethod {
   @@index([userId])
 }
 
+// cardNumber     String               @unique
+//   expirationDate String               @db.VarChar(10)
+//   cvv            Int
+//   zipCode        Int
+//   countryRegion  String               @db.VarChar(255)
 model ReservationListing {
   id              Int               @id @default(autoincrement())
   listingId       Int
