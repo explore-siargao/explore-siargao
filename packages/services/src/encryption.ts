@@ -2,7 +2,7 @@ import CryptoJS from "crypto-js"
 import { passwordEncryptKey, cardEncryptKey } from "./config"
 
 export class EncryptionService {
-  private KEY: string | undefined = ""
+  private KEY: string | undefined
   constructor(source: "password" | "card") {
     if (source === "password") {
       this.KEY = passwordEncryptKey
@@ -11,16 +11,16 @@ export class EncryptionService {
     }
   }
   encrypt(val: object | any[] | string) {
-    let encyptValue = ""
+    let encryptValue = ""
     if (typeof val === "object" || Array.isArray(val)) {
-      encyptValue = String(
+      encryptValue = String(
         CryptoJS.AES.encrypt(JSON.stringify(val), String(this.KEY))
       )
     }
     if (typeof val === "string") {
-      encyptValue = String(CryptoJS.AES.encrypt(val, String(this.KEY)))
+      encryptValue = String(CryptoJS.AES.encrypt(val, String(this.KEY)))
     }
-    return encyptValue
+    return encryptValue
   }
 
   decrypt(encryptedValue: string): object | any[] | string {

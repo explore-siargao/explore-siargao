@@ -20,6 +20,7 @@ import { Typography } from "@/common/components/ui/Typography"
 import useSessionStore from "@/common/store/useSessionStore"
 import { Spinner } from "@/common/components/ui/Spinner"
 import { APP_NAME } from "@repo/constants"
+import { EncryptionService } from "@repo/services"
 
 const Payments = () => {
   const router = useRouter()
@@ -39,7 +40,7 @@ const Payments = () => {
   const { mutate, isPending } = useUpdatePaymentMethod(session.id)
   const { mutate: redeemCoupon, isPending: isPendingRedeemCoupon } =
     useUpdateCoupon(session.id)
-
+  const decryptCard = new EncryptionService()
   const callBackReqDefaultPaymentMethod = {
     onSuccess: (data: any) => {
       if (!data.error) {
@@ -92,7 +93,7 @@ const Payments = () => {
               planning your next trip.
             </Typography>
             {paymentMethods?.items?.length !== 0 ? (
-              paymentMethods?.items?.map((paymentMethod: IPaymentMethod) => (
+              paymentMethods?.items?.map((paymentMethod) => (
                 <div
                   key={paymentMethod.id}
                   className="flex my-4 py-5 border-y border-y-text-100 justify-between"
@@ -109,7 +110,11 @@ const Payments = () => {
                       <Typography>
                         MasterCard {""}
                         <span className="font-medium">
-                          **** {paymentMethod?.cardNumber?.slice(-3)}{" "}
+                          ****{" "}
+                          {decryptCard
+                            .decrypt(paymentMethod?.cardInfo)
+                            //@ts-ignore
+                            ?.cardNumber.slice(-3)}{" "}
                         </span>{" "}
                         {paymentMethod.isDefault ? (
                           <span className="bg-text-50 font-semibold ml-2 px-2 py-1">
@@ -122,7 +127,10 @@ const Payments = () => {
                       <Typography>
                         Expiration:
                         <span className="font-medium">
-                          {paymentMethod.expirationDate}
+                          {
+                            decryptCard.decrypt(paymentMethod.cardInfo) //@ts-ignore
+                              .expirationDate
+                          }
                         </span>{" "}
                       </Typography>
                     </div>
