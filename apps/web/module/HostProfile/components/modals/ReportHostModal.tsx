@@ -167,11 +167,13 @@ const ReportHostModal = ({ isOpen, onClose }: ReportHostModalProps) => {
                 "help keep the " +
                 APP_NAME +
                 " community safe and secure."
-              : // @ts-ignore
+              :
                 pageLevel === 3 &&
                   reportArr[firstLevelIndex]?.descriptions[secondLevelIndex]
+                    // @ts-ignore
                     ?.subtitle
                 ? reportArr[firstLevelIndex]?.descriptions[secondLevelIndex]
+                    // @ts-ignore
                     ?.subtitle
                 : "This will only be shared with " + APP_NAME + "."}
           </Typography>
@@ -193,9 +195,9 @@ const ReportHostModal = ({ isOpen, onClose }: ReportHostModalProps) => {
                 // third level
                 pageLevel === 3 ? (
                   firstLevelIndex === 0 && secondLevelIndex <= 2 ? (
-                    // @ts-ignore
                     reportArr[firstLevelIndex]?.descriptions[
                       secondLevelIndex
+                    // @ts-ignore
                     ]?.descList.map((report, index) => (
                       <label
                         key={`third-level-con-${index}`}
@@ -326,9 +328,10 @@ const ReportHostModal = ({ isOpen, onClose }: ReportHostModalProps) => {
           onClick={() => {
             isReported
               ? onClose()
-              : // @ts-ignore
+              : 
                 (pageLevel === 2 &&
                     reportArr[firstLevelIndex]?.descriptions[secondLevelIndex]
+                      // @ts-ignore
                       ?.readyToSubmit) ||
                   pageLevel === 3
                 ? setIsReported()
