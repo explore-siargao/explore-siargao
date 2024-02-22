@@ -40,6 +40,7 @@ const ProfileFourthLevel = ({
       <div className="flex grid-cols-1 gap-5">
         {description.map((item) => (
           <div
+            key={item.destination}
             className={`border p-5 pb-12 rounded-xl w-[200px] ${
               checked ? "bg-primary-400" : "bg-primary-200 text-gray-300"
             }`}
@@ -47,14 +48,10 @@ const ProfileFourthLevel = ({
               transition: "background-color 0.2s ease-in-out",
             }}
           >
-            <Typography key={item.year} variant="p" className="font-semibold">
+            <Typography variant="p" className="font-semibold">
               {item.year}
             </Typography>
-            <Typography
-              key={item.destination}
-              variant="h2"
-              className="font-semibold"
-            >
+            <Typography variant="h2" className="font-semibold">
               {item.destination}
             </Typography>
           </div>
