@@ -23,8 +23,8 @@ const RightRadioList: React.FC<RightRadioListProps> = ({
 }) => {
   const [selectedOption, setSelectedOption] = useState(defaultSelectedId || "")
   useEffect(() => {
-    setSelectedOption(defaultSelectedId || "");
-  }, [defaultSelectedId]);
+    setSelectedOption(defaultSelectedId || "")
+  }, [defaultSelectedId])
 
   const handleOptionChange = (event: { target: { value: any } }) => {
     const value = event.target.value
@@ -55,7 +55,10 @@ const RightRadioList: React.FC<RightRadioListProps> = ({
               name="helper-radio"
               type="radio"
               value={choice.option}
-              checked={selectedOption === choice.option || selectedOption === defaultSelectedId}
+              checked={
+                selectedOption === choice.option ||
+                selectedOption === defaultSelectedId
+              }
               onChange={handleOptionChange}
               className="ml-auto w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
             />
