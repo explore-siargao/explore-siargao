@@ -14,9 +14,6 @@ export const metadata: Metadata = {
 
 const AccommodationPage = async () => {
   const listing = await getRequest(`/listings/1`)
-  // console.log("listings server", listing)
-  const validateData = Z_Listing.safeParse(listing);
-  console.log("validateData", validateData.error)
   return (
     <AuthGuard>
       <SingleView listing={listing.item as T_Listing} />

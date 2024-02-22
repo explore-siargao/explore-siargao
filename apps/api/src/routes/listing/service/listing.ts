@@ -3,6 +3,7 @@ import { PrismaClient } from '@prisma/client'
 import { REQUIRED_VALUE_EMPTY, USER_NOT_EXIST } from '@/common/constants'
 import { ResponseService } from '@/common/service/response'
 import { Z_Listing } from '@repo/contract'
+import { Decimal } from '@prisma/client/runtime/library'
 
 const prisma = new PrismaClient()
 const response = new ResponseService()

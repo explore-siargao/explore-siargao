@@ -142,8 +142,8 @@ model Listing {
   createdAt            DateTime             @default(now())
   updatedAt            DateTime             @updatedAt
   deletedAt            DateTime?
-  latitude             Decimal?             @db.Decimal(10, 0)
-  longitude            Decimal?             @db.Decimal(10, 0)
+  latitude             Decimal?             @db.Decimal(10, 2)
+  longitude            Decimal?             @db.Decimal(10, 2)
   basicAboutPlaceId    Int?                 @unique
   hostedBy             User                 @relation(fields: [hostedById], references: [id])
   basicAboutPlace      BasicAboutPlace?     @relation(fields: [basicAboutPlaceId], references: [id], onDelete: Cascade)
@@ -467,7 +467,7 @@ enum RegistrationType {
 }
 
 enum ListingCategory {
-  Accomodation
+  Accommodation
   Rentals
   Activity
 }
