@@ -104,7 +104,7 @@ const HostProfile = () => {
   const [openReportModal, setOpenReportModal] = useState(false)
 
   return (
-    <WidthWrapper className="my-24 lg:my-32">
+    <WidthWrapper width="small" className="my-24 lg:my-32">
       <div className="mt-5 mx-3 md:mx-40 lg:mx-5 grid lg:grid-cols-12 gap-x-20 gap-y-4">
         <div className=" lg:col-span-4 lg:relative">
           <div className="lg:sticky lg:top-40">

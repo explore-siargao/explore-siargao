@@ -29,7 +29,7 @@ const ProfileCard = ({
               <ShieldCheckIcon className="h-5 w-5 mx-auto text-white" />
             </div>
           </div>
-          <h1 className="text-3xl font-bold text-center mt-2">{name}</h1>
+          <h1 className="text-3xl font-semibold text-center mt-2">{name}</h1>
           <Typography
             variant="h5"
             className="flex justify-center items-center font-semibold"
@@ -39,7 +39,7 @@ const ProfileCard = ({
           </Typography>
         </div>
         <div className="col-span-2">
-          <Typography variant="h1" fontWeight="bold">
+          <Typography variant="h1" fontWeight="semibold">
             {reviewsCount}
           </Typography>
           <Typography variant="h6" fontWeight="semibold">
