@@ -6,7 +6,6 @@ import {
   USER_NOT_EXIST,
 } from '@/common/constants'
 import { APP_NAME } from '@repo/constants'
-import { encryptKey, nextAuthSecret, webUrl } from '@/common/config'
 import dayjs from 'dayjs'
 import { AuthEmail } from './authEmail'
 import verifyCaptcha from '@/common/helpers/verifyCaptcha'
@@ -18,10 +17,13 @@ import { ResponseService } from '@/common/service/response'
 import randomNumber from '@/common/helpers/randomNumber'
 import CryptoJS from 'crypto-js'
 import { currencyByCountry } from '@/common/helpers/currencyByCountry'
-
 const prisma = new PrismaClient()
 const response = new ResponseService()
+import { EncryptionService } from '@repo/services/'
+import { nextAuthSecret, webUrl } from '@/common/config'
 
+const decryptionService = new EncryptionService('password')
+const encryptionService = new EncryptionService('password')
 export const verifySignIn = async (req: Request, res: Response) => {
   const { type, email } = req.query
   if (type && email) {
@@ -129,17 +131,12 @@ export const register = async (req: Request, res: Response) => {
         },
       })
       if (!user) {
-        const encryptPassword = CryptoJS.AES.encrypt(
-          req.body.password,
-          encryptKey
-        )
-
         const newUser = await prisma.user.create({
           data: {
             email: email,
             registrationType: registrationType,
             role: 'User',
-            password: password ? String(encryptPassword) : null,
+            password: password,
             canReceiveEmail,
           },
         })
@@ -192,12 +189,12 @@ export const manual = async (req: Request, res: Response) => {
       if (!user) {
         throw new Error('Email or password is invalid')
       }
-      const decryptedPassword = CryptoJS.AES.decrypt(
-        user?.password as string,
-        encryptKey as string
+      const decryptedPassword = decryptionService.decrypt(
+        user?.password as string
       )
-      const originalPassword = decryptedPassword.toString(CryptoJS.enc.Utf8)
-      if (user && originalPassword === password) {
+      const originalPassword = decryptedPassword.toString()
+      const decryptInputPassword = decryptionService.decrypt(password)
+      if (user && originalPassword === decryptInputPassword) {
         res.json({
           error: false,
           item: null,
@@ -371,7 +368,8 @@ export const forgotVerify = async (req: Request, res: Response) => {
             used: true,
           },
         })
-        const encryptPassword = CryptoJS.AES.encrypt(newPassword, encryptKey)
+        const decryptNewPassword = decryptionService.decrypt(newPassword)
+        const encryptPassword = encryptionService.encrypt(decryptNewPassword)
         await prisma.user.update({
           where: {
             email: email,

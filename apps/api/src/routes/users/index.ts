@@ -1,6 +1,5 @@
 import express from 'express'
 import {
-  addUser,
   deactivateAccount,
   getAllUsers,
   updatePassword,
@@ -40,7 +39,6 @@ const router = express.Router()
 
 // DEFAULT
 router.get('/', getAllUsers)
-router.post('/', addUser)
 
 // AUTH
 router.post('/auth/info', info) // Use for Manual log in for Next-Auth
