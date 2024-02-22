@@ -147,4 +147,3 @@ router.get('/:hostId/host-details-listing/:listingId', getHostDetailsInListing)
 router.get('/:id', getUserProfile)
 
 export default router
-
