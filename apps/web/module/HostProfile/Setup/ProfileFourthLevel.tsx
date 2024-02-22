@@ -6,7 +6,6 @@ interface IProfileFourthLevel {
   year: string
   destination: string
 }
-;[]
 
 interface ProfileFourthLevelProps {
   description: IProfileFourthLevel[]
