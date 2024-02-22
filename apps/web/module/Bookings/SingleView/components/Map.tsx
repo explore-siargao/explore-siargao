@@ -30,7 +30,7 @@ const WhereYoullBeDescription = ({ whereYoullBeDesc }: WhereYoullBeProps) => {
         <Title className="text-lg font-semibold">Where you'll be</Title>
         <div className="w-12/12 h-[450px] bg-primary-200 mb-5">
           <SpecificMap
-            coordinates={whereYoullBeDesc.coordinates}
+            coordinates={whereYoullBeDesc.coordinates as [number, number]}
             mapHeight="h-[450px]"
             mapWidth="w-full"
           />
@@ -57,7 +57,7 @@ const WhereYoullBeDescription = ({ whereYoullBeDesc }: WhereYoullBeProps) => {
         </Button>
       </div>
       <WhereYouWillBeModal
-        coordinates={whereYoullBeDesc.coordinates}
+        coordinates={whereYoullBeDesc.coordinates as [number, number]}
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
       />

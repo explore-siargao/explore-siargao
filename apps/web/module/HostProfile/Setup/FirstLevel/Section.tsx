@@ -28,7 +28,7 @@ const Section = ({ modalContent, icon, title }: T_Section) => {
         onClose={() => setModalOpen(false)}
         size="sm"
       >
-        {modalContent()}
+        {modalContent({ setIsOpen: setModalOpen })}
       </ModalContainer>
     </>
   )
