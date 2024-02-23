@@ -15,6 +15,7 @@ const SetUpProfileAboutYouModal = ({
   isModalOpen,
   onClose,
 }: ISetUpProfileAboutYouModalProps) => {
+  const currentValue = useInputSetupProfileAboutYouStore((state)=>state.inputValue)
   const setInputValue = useInputSetupProfileAboutYouStore(state => state.setInputValue);
   const [value, setValue] = useState('');
 
@@ -26,6 +27,11 @@ const SetUpProfileAboutYouModal = ({
       setValue(inputValue);
     }
   };
+
+  const saveInputValue = ()=>{
+    setInputValue(value)
+    console.log(value)
+  }
 
  
 
@@ -39,6 +45,7 @@ const SetUpProfileAboutYouModal = ({
         <textarea
           className="p-2 border border-gray-300 rounded-md w-full h-32 mt-7"
           onChange={(e) => setValue(e.target.value)}
+          defaultValue={currentValue}
         />
         <div className="flex justify-end pt-1">
           <Typography variant={"h6"} fontWeight={"semibold"}>
@@ -48,7 +55,7 @@ const SetUpProfileAboutYouModal = ({
       </div>
       <div className="flex items-center p-4 md:p-5 bottom-0 border-t border-gray-200 rounded-b dark:border-gray-600">
         <div className="flex justify-between w-full">
-          <Button variant="default" className="ml-auto" >
+          <Button variant="default" className="ml-auto" onClick={()=>saveInputValue()}>
             Save
           </Button>
         </div>
