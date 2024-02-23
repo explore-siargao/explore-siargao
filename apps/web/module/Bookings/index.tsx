@@ -6,6 +6,7 @@ import { WidthWrapper } from "@/common/components/WidthWrapper"
 import useGetAllBookings from "../LandingPage/hooks/useGetAllBookings"
 import { Spinner } from "@/common/components/ui/Spinner"
 import useSessionStore from "@/common/store/useSessionStore"
+import SetUpProfileAboutYou from "../HostProfile/Setup/SetUpProfileAboutYou"
 
 const Bookings = () => {
   const userId = useSessionStore((state) => state).id
@@ -17,6 +18,8 @@ const Bookings = () => {
       ) : (
         <>
           <Title>Bookings</Title>
+        <SetUpProfileAboutYou/>
+
           <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 mx-auto w-full max-w-[2520px] justify-center">
             {data?.items?.map((item: any) => (
               <BookingBoxContainer
