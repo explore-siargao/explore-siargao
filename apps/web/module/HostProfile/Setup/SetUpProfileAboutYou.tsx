@@ -28,10 +28,10 @@ const SetUpProfileAboutYou = () => {
               {introText ? introText : "Write something fun and punchy."}
             </Typography>
           </div>
-          <div  className="pt-10 bottom-2 left-2 underline cursor-pointer">
+          <div className="pt-10 bottom-2 left-2 underline cursor-pointer">
             <Link href="#" onClick={openModal}>
-            {introText ? "Edit intro" : "Add intro"}
-          </Link>
+              {introText ? "Edit intro" : "Add intro"}
+            </Link>
           </div>
         </div>
       </div>
