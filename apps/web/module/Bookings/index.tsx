@@ -6,7 +6,6 @@ import { WidthWrapper } from "@/common/components/WidthWrapper"
 import useGetAllBookings from "../LandingPage/hooks/useGetAllBookings"
 import { Spinner } from "@/common/components/ui/Spinner"
 import useSessionStore from "@/common/store/useSessionStore"
-import SetUpProfileAboutYou from "../HostProfile/Setup/SetUpProfileAboutYou"
 
 const Bookings = () => {
   const userId = useSessionStore((state) => state).id

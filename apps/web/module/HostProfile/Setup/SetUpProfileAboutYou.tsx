@@ -40,7 +40,6 @@ const SetUpProfileAboutYou = () => {
       <SetUpProfileModal
         isModalOpen={isModalOpen}
         onClose={closeModal}
-        onSave={closeAfterSave}
       />
     </div>
   )
