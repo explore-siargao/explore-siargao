@@ -17,11 +17,13 @@ const closeAfterSave = () => setIsModalOpen(false);
 
   return (
     <div>
-        <Typography variant='h2' fontWeight='semibold'>About You</Typography>
+        <Typography variant='h1' fontWeight='semibold'>About You</Typography>
         <div className="relative">
-        <div className="border border-gray-300 rounded-md p-5 w-full h-25 mt-10 border-dotted">
+        <div className="border border-gray-300 rounded-md p-5 mt-5 w-full h-25 border-dotted">
             <div className="absolute pl-3 left-2 text-gray-400">
+            <Typography>
             {introText ? introText : "Write something fun and punchy."}
+            </Typography>
             </div>
             <div className="pt-10 bottom-2 left-2 underline cursor-pointer" onClick={openModal}>
             {introText ? "Edit intro" : "Add intro"}

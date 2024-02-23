@@ -19,34 +19,33 @@ const SetUpProfileAboutYouModal = ({
   const setInputValue = useInputSetupProfileAboutYouStore(state => state.setInputValue);
   const [value, setValue] = useState('');
 
-
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const inputValue = e.target.value;
     if (inputValue.length <= 450) {
-      // setInputValue(inputValue);
       setValue(inputValue);
     }
   };
 
   const saveInputValue = ()=>{
     setInputValue(value)
-    console.log(value)
+    onClose();
   }
-
- 
 
   return (
     <ModalContainer onClose={onClose} isOpen={isModalOpen} size="sm">
       <div className="py-4 px-6 flex flex-col divide-text-100 overflow-y-auto">
-        <Typography variant='h2' fontWeight='semibold'>About you</Typography>
-        <Typography variant='h5'>
+        <Typography variant='h1' fontWeight='semibold'>About you</Typography>
+        <Typography variant='h5' className="mt-4">
           Tell us a little bit about yourself, so your future hosts or guests can get to know you.
         </Typography>
-        <textarea
-          className="p-2 border border-gray-300 rounded-md w-full h-32 mt-7"
-          onChange={(e) => setValue(e.target.value)}
-          defaultValue={currentValue}
-        />
+        <Typography>
+           <textarea
+              className="p-2 border border-gray-300 rounded-md w-full h-32 mt-7"
+              onChange={(e) => setValue(e.target.value)}
+              defaultValue={currentValue}
+            />
+        </Typography>
+       
         <div className="flex justify-end pt-1">
           <Typography variant={"h6"} fontWeight={"semibold"}>
             {value.length}/450 Characters
