@@ -37,10 +37,7 @@ const SetUpProfileAboutYou = () => {
         </div>
       </div>
 
-      <SetUpProfileModal
-        isModalOpen={isModalOpen}
-        onClose={closeModal}
-      />
+      <SetUpProfileModal isModalOpen={isModalOpen} onClose={closeModal} />
     </div>
   )
 }
