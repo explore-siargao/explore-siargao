@@ -3,7 +3,7 @@ import Image from "next/image"
 
 interface IconTitleDescription {
   id: number
-  icon: React.ElementType
+  icon: string
   title: string
   desc: string
 }
@@ -32,9 +32,9 @@ const HighlightsSection = ({
     <div className="w-full">
       <div className="w-full border-b pb-4">
         <IconTitleDescription
-          icon={ProfilePic}
+          icon="wifi"
           title={"Hosted by " + hostName}
-          desc={hostDuration}
+          description={hostDuration}
         />
       </div>
       <div className="w-full">
@@ -43,7 +43,7 @@ const HighlightsSection = ({
             key={highlight.id}
             icon={highlight.icon}
             title={highlight.title}
-            desc={highlight.desc}
+            description={highlight.desc}
           />
         ))}
       </div>

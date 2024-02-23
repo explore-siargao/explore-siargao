@@ -1,27 +1,16 @@
 "use client"
 import React, { useState } from "react"
 import { Typography } from "@/common/components/ui/Typography"
-import { Heart, Share, Star } from "lucide-react"
 import ImageGallery from "./ImageGallery"
 import ImageGalleryModal from "./modals/ImageGalleryModal"
 import ShareSave from "./ShareSave"
+import { T_SectionInfoProps } from "../types/SectionInfo"
 
-export type ListingImage = {
-  fileKey: string,
-  alt: string
-}
-
-interface SectionInfoProps {
-  title: string
-  images: ListingImage[]
-}
-
-const SectionInfo = ({ title, images }: SectionInfoProps) => {
+const SectionInfo = ({ title, images }: T_SectionInfoProps) => {
   const [galleryModalOpen, setGalleryModalOpen] = useState(false)
   const openModal = () => {
     setGalleryModalOpen(true)
   }
-
   return (
     <>
       <div className="justify-between md:flex text-start items-center">
@@ -36,6 +25,7 @@ const SectionInfo = ({ title, images }: SectionInfoProps) => {
         <ImageGallery images={images} openModal={openModal} />
       </div>
       <ImageGalleryModal
+        images={images}
         isOpen={galleryModalOpen}
         onClose={() => setGalleryModalOpen(false)}
       />

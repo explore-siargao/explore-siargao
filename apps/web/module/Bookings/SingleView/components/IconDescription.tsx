@@ -1,14 +1,15 @@
+import { iconMap } from "@/common/helpers/iconMap"
 import React from "react"
 
-interface IconDescriptionProps {
-  icon: React.ElementType
-  desc: React.ReactNode
-  isNotIncluded?: boolean
+type T_IconDescriptionProps = {
+  icon: string
+  description: string
+  isNotIncluded: boolean
 }
 
-const IconDescription: React.FC<IconDescriptionProps> = ({
-  icon: Icon,
-  desc,
+const IconDescription: React.FC<T_IconDescriptionProps> = ({
+  icon,
+  description,
   isNotIncluded = false,
 }) => {
   const IconDescriptionStyle = isNotIncluded
@@ -17,9 +18,10 @@ const IconDescription: React.FC<IconDescriptionProps> = ({
 
   return (
     <div className="flex items-center mb-5 gap-5">
-      {Icon && <Icon className="w-6 h-6" />}
+      {/* @ts-expect-error */}
+      {icon && iconMap[icon]()}
       <div className="flex" style={IconDescriptionStyle}>
-        {desc}
+        {description}
       </div>
     </div>
   )
