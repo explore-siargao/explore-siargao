@@ -18,6 +18,8 @@ import { Flag, Tag } from "lucide-react"
 import ModalReporting from "./components/modals/ModalReporting"
 import { useState } from "react"
 import ListingMark from "@/module/Accommodation/Checkout/ListingMark"
+import { T_Listing } from "@repo/contract"
+import { T_HighlightsProps } from "./types/Highlights"
 
 const reportListingArr = [
   {
@@ -431,7 +433,7 @@ const cancellationPolicyModalData = [
   },
 ]
 
-export const SingleView = () => {
+export const SingleView = ({listing}:{listing:T_Listing}) => {
   const [showModal, setShowModal] = useState(false)
   const handleOpenModal = () => {
     setShowModal(true)
@@ -443,41 +445,44 @@ export const SingleView = () => {
   return (
     <WidthWrapper width="small" className="mt-32 lg:mt-36">
       <SectionInfo
-        images={imageGallery}
-        title="Villa Manao · Private Pool | Bathtub | Sky shower"
+      // @ts-ignore
+        images={listing.images}
+        title={listing.title}
       />
       <div className="flex flex-col md:flex-row gap-8 md:gap-24 pb-12">
         <div className="flex-1 md:w-1/2 2xl:w-full">
           <div className="divide-y">
             <div className="pb-6">
               <SummaryInfo
-                address="Entire villa in General Luna, Philippines"
-                guest={2}
-                bedroom={1}
-                beds={1}
-                baths={1}
-                reviews={4}
-                stars={5}
+                address={listing.address}
+                guest={listing.basicAboutPlace?.guests}
+                bedroom={listing.basicAboutPlace?.bathRooms}
+                beds={listing.basicAboutPlace?.beds}
+                baths={listing.basicAboutPlace?.bathRooms}
+                reviews={listing.review?.length}
+                stars={Number(listing.totalRates.rates)}
               />
             </div>
             <div className="py-6">
               <AvatarTitleDescription
                 avatarKey="2.jpg"
-                title="Hosted by Simon"
-                subTitle="4 months hosting"
+                title={`Hosted by ${listing.hostedBy?.personalInfo?.firstName}`}
+                subTitle="4 months hosting" // to compute
               />
             </div>
             <div className="py-6">
-              <Highlights highlights={highlights} />
+              {/* @ts-ignore */}
+              <Highlights highlights={listing.highLights} />
             </div>
             <div className="py-6">
-              <BookingDescription {...description} />
+              {/* @ts-ignore */}
+              <BookingDescription {...listing.listingDescription} />
             </div>
             <div className="py-6 ">
               <PlaceOffers offers={offers} group={group} />
             </div>
             <div className="py-6">
-              <ListingDateRangePicker title="Villa Manao · Private Pool | Bathtub | Sky shower" />
+              <ListingDateRangePicker title={listing.title} />
             </div>
           </div>
         </div>
@@ -485,7 +490,7 @@ export const SingleView = () => {
           <div className="md:sticky md:top-0">
             <CheckoutProcess
               checkoutDesc={{
-                serviceFee: 1000,
+                serviceFee: Number(listing.price?.serviceFee),
                 durationCost: 125000,
                 descTotalBeforeTaxes: 3000,
                 totalBeforeTaxes: 126000,
@@ -519,8 +524,8 @@ export const SingleView = () => {
       <div className="divide-y border-t">
         <div className="py-8">
           <RatingSummary
-            ratings={ratingSummary.ratings}
-            reviews={ratingSummary.reviews}
+            ratings={Number(listing.totalRates.rates?.toFixed(2))}
+            reviews={Number(listing.review?.length)}
             categories={ratingSummary.categories}
           />
         </div>

@@ -40,7 +40,7 @@ const SummaryInfo = ({
         <button className="hover:underline hover:duration-300 cursor-pointer">
           <div className="flex gap-2 md:flex items-center">
             <Star className="h-4 w-4 fill-black" />
-            <Typography>{stars}</Typography>
+            <Typography>{stars?.toFixed(1)}</Typography>
           </div>
         </button>{" "}
         <Typography>&middot;</Typography>

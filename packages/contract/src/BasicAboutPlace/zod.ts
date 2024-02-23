@@ -6,7 +6,7 @@ export const Z_BasicAboutPlace = z.object({
   bedRooms: z.number(),
   beds: z.number(),
   bathRooms: z.number(),
-  createdAt: z.date().optional(),
-  updatedAt: z.date().nullable().optional(),
-  deletedAt: z.date().nullable().optional(),
+  createdAt: z.string().optional(),
+  updatedAt: z.string().nullable().optional(),
+  deletedAt: z.string().nullable().optional(),
 })

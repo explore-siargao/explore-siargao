@@ -1,18 +1,20 @@
 import { string, z } from "zod"
 import { E_RegistrationType, E_UserRole } from "./enum"
+import { Z_PersonalInfo } from ".."
 
 export const Z_User = z.object({
   id: z.number(),
-  profilePicture: z.string(),
+  profilePicture: z.string().nullable(),
   role: z.nativeEnum(E_UserRole),
   email: z.string().email(),
   password: z.string().min(8).optional(),
   changePasswordAt: string().optional().nullable(),
   canReceiveEmail: z.boolean(),
   registrationType: z.nativeEnum(E_RegistrationType),
-  createdAt: z.date().optional(),
-  updatedAt: z.date().nullable().optional(),
-  deletedAt: z.date().nullable().optional(),
+  personalInfo:z.lazy(()=>Z_PersonalInfo).nullable(),
+  createdAt: z.string().optional(),
+  updatedAt: z.string().nullable().optional(),
+  deletedAt: z.string().nullable().optional(),
 })
 
 export const Z_UserRegister = z.object({

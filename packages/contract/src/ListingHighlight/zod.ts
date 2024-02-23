@@ -1,10 +1,12 @@
 import { z } from "zod"
+import { Z_Highlights } from ".."
 
 export const Z_ListingHighlight = z.object({
   id: z.number().optional(),
-  listingId: z.number(),
-  highlightId: z.number(),
-  createdAt: z.date().optional(),
-  updatedAt: z.date().nullable().optional(),
-  deletedAt: z.date().nullable().optional(),
+  listingId: z.number().optional(),
+  highlightId: z.number().optional(),
+  highLights:z.lazy(()=>Z_Highlights).nullable().optional(),
+  createdAt: z.string().optional(),
+  updatedAt: z.string().nullable().optional(),
+  deletedAt: z.string().nullable().optional(),
 })

@@ -74,8 +74,23 @@ export const getListing = async (req: Request, res: Response) => {
         listingDescription: true,
         basicAboutPlace: true,
         price: true,
-        highLights: true,
-        hostedBy: true,
+        highLights: {
+          include:{
+            highlights:true
+          }
+        },
+        hostedBy: {
+          include:{
+            personalInfo:{
+              select:{
+                firstName:true,
+                language:true,
+                address:true,
+                phoneNumber:true
+              }
+            }
+          }
+        },
         placeOffers: true,
         houseRules: {
           include: {
@@ -95,14 +110,68 @@ export const getListing = async (req: Request, res: Response) => {
         review: true,
       },
     })
+
     if (listing !== null) {
+      let cleanlinessAverage = 0
+      let accuracyAverage = 0
+      let checkInAverage = 0
+      let communicationAverage = 0
+      let locationAverage = 0
+      let valueAverage = 0
+      let totalCleanliness = 0
+      let totalAccuracy = 0
+      let totalCheckIn = 0
+      let totalCommunication = 0
+      let totalLocation = 0
+      let totalValue = 0
+      let totalRating = 0.0
+
+      const transformedReviews = listing.review.map((review) => {
+        totalCleanliness = totalCleanliness + review.cleanLinessRates
+        totalAccuracy = totalAccuracy + review.accuracyRates
+        totalCheckIn = totalCheckIn + review.checkInRates
+        totalCommunication = totalCommunication + review.communicationRates
+        totalLocation = totalLocation + review.locationRates
+        totalValue = totalValue + review.valueRates
+        cleanlinessAverage = totalCleanliness / listing.review.length
+        accuracyAverage = totalAccuracy / listing.review.length
+        checkInAverage = totalCheckIn / listing.review.length
+        communicationAverage = totalCommunication / listing.review.length
+        locationAverage = totalLocation / listing.review.length
+        valueAverage = totalValue / listing.review.length
+        totalRating = 
+            Number((
+              (review.cleanLinessRates +
+                review.accuracyRates +
+                review.checkInRates +
+                review.communicationRates +
+                review.locationRates +
+                review.valueRates) /
+              6
+            ))
+        return totalRating
+      })
+      const averageRating = transformedReviews.reduce((accumulator, currentValue) => accumulator + currentValue)/listing.review.length
+
+      const newHighLights = listing.highLights.map(({ highlights }) => ( highlights )); 
+
       const newResult = { ...listing }
       newResult.images = JSON.parse(listing.images)
       newResult.whereYoullBe = JSON.parse(listing.whereYoullBe)
-      newResult.whereYoullSleep = JSON.parse(listing.whereYoullSleep)
+      newResult.whereYoullSleep = JSON.parse(listing.whereYoullSleep),
+      //@ts-ignore
+      newResult.highLights = newHighLights
       res.json(
         response.success({
-          item: newResult,
+          item: {...newResult, totalRates:{
+            rates:averageRating,
+            cleanlinessAverage:cleanlinessAverage,
+            accuracyAverage:accuracyAverage,
+            checkInAverage:checkInAverage,
+            communicationAverage:communicationAverage,
+            locationAverage:locationAverage,
+            valueAverage:valueAverage
+          }},
         })
       )
     } else {

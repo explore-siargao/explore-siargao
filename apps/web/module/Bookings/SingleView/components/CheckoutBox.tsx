@@ -101,14 +101,14 @@ const CheckoutBox = ({ checkoutDesc }: CheckoutProcessProps) => {
           >
             ES service fee
           </Button>
-          <div>{formatCurrency(checkoutDesc.serviceFee, "Philippines")}</div>
+          <div>{formatCurrency(checkoutDesc.serviceFee, "Philippines")+".00"}</div>
         </div>
 
         <div className="border-b mt-5 mb-5"></div>
         <div className="flex justify-between font-semibold">
           <div>Total before taxes</div>
           <div>
-            {formatCurrency(checkoutDesc.totalBeforeTaxes, "Philippines")}
+            {formatCurrency(checkoutDesc.totalBeforeTaxes, "Philippines")+".00"}
           </div>
         </div>
       </div>

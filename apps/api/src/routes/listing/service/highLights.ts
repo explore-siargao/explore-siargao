@@ -82,7 +82,7 @@ export const addHighLight = async (req: Request, res: Response) => {
           const newHighLight = await prisma.highLights.create({
             data: {
               title: title,
-              details: detail,
+              description: detail,
               icon: icon,
             },
           })
@@ -139,7 +139,7 @@ export const updateHighLight = async (req: Request, res: Response) => {
             },
             data: {
               title: title,
-              details: detail,
+              description: detail,
               icon: icon,
             },
           })

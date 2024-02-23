@@ -13,11 +13,25 @@ export const listing = async () => {
     },
   })
 
+  const getBasicAboutPlace = await prisma.basicAboutPlace.findMany({
+    where: {
+      deletedAt: null,
+    },
+  })
+
+  const getListingDescription = await prisma.listingDescription.findMany({
+    where: {
+      deletedAt: null,
+    },
+  })
+
   const createListings = await prisma.listing.createMany({
     data: [
       {
         hostedById: getUsers[0]?.id || 0,
         listingPriceId: getListingPrices[0]?.id || 0,
+        basicAboutPlaceId: getBasicAboutPlace[0]?.id || 0,
+        descriptionId: getListingDescription[0]?.id || 0,
         images: JSON.stringify([
           {
             fileKey: '1.jpg',
@@ -60,6 +74,8 @@ export const listing = async () => {
       {
         hostedById: getUsers[1]?.id || 0,
         listingPriceId: getListingPrices[1]?.id || 0,
+        basicAboutPlaceId: getBasicAboutPlace[1]?.id || 0,
+        descriptionId: getListingDescription[1]?.id || 0,
         images: JSON.stringify([
           {
             fileKey: '5.jpg',
@@ -102,6 +118,8 @@ export const listing = async () => {
       {
         hostedById: getUsers[1]?.id || 0,
         listingPriceId: getListingPrices[2]?.id || 0,
+        basicAboutPlaceId: getBasicAboutPlace[2]?.id || 0,
+        descriptionId: getListingDescription[2]?.id || 0,
         images: JSON.stringify([
           {
             fileKey: '2.jpg',
@@ -144,6 +162,8 @@ export const listing = async () => {
       {
         hostedById: getUsers[0]?.id || 0,
         listingPriceId: getListingPrices[3]?.id || 0,
+        basicAboutPlaceId: getBasicAboutPlace[3]?.id || 0,
+        descriptionId: getListingDescription[3]?.id || 0,
         images: JSON.stringify([
           {
             fileKey: '4.jpg',
@@ -186,6 +206,8 @@ export const listing = async () => {
       {
         hostedById: getUsers[2]?.id || 0,
         listingPriceId: getListingPrices[4]?.id || 0,
+        basicAboutPlaceId: getBasicAboutPlace[4]?.id || 0,
+        descriptionId: getListingDescription[4]?.id || 0,
         images: JSON.stringify([
           {
             fileKey: '3.jpg',

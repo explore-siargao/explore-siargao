@@ -192,15 +192,15 @@ model BasicAboutPlace {
 }
 
 model PaymentMethod {
-  id             Int                  @id @default(autoincrement())
-  userId         Int
-  cardInfo       String               @db.VarChar(255)
-  createdAt      DateTime             @default(now())
-  updatedAt      DateTime             @updatedAt
-  deletedAt      DateTime?
-  isDefault      Boolean              @default(false)
-  user           User                 @relation(fields: [userId], references: [id])
-  reservation    ReservationListing[]
+  id          Int                  @id @default(autoincrement())
+  userId      Int
+  cardInfo    String               @db.VarChar(255)
+  createdAt   DateTime             @default(now())
+  updatedAt   DateTime             @updatedAt
+  deletedAt   DateTime?
+  isDefault   Boolean              @default(false)
+  user        User                 @relation(fields: [userId], references: [id])
+  reservation ReservationListing[]
 
   @@index([userId])
 }
@@ -283,14 +283,14 @@ model ListingPrice {
 }
 
 model HighLights {
-  id        Int                 @id @default(autoincrement())
-  title     String
-  details   String
-  icon      String
-  createdAt DateTime            @default(now())
-  updatedAt DateTime            @updatedAt
-  deletedAt DateTime?
-  listings  ListingHighLights[]
+  id          Int                 @id @default(autoincrement())
+  title       String
+  description String
+  icon        String
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
+  deletedAt   DateTime?
+  listings    ListingHighLights[]
 }
 
 model ListingHighLights {
@@ -377,12 +377,12 @@ model CancellationPolicy {
 model Rule {
   id                   Int                 @id @default(autoincrement())
   icon                 String
-  rule                 String              
+  rule                 String
   createdAt            DateTime            @default(now())
   updatedAt            DateTime            @updatedAt
   deletedAt            DateTime?
   cancellationPolicyId Int?
-  description          String             @db.LongText()
+  description          String              @db.LongText()
   houseRuleId          Int?
   safePropertyId       Int?
   safetyProperty       SafetyProperty?     @relation(fields: [safePropertyId], references: [id])

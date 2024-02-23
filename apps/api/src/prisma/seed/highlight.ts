@@ -4,30 +4,30 @@ export const highlight = async () => {
   const createHighlights = await prisma.highLights.createMany({
     data: [
       {
-        icon: 'Wifi',
+        icon: 'wifi',
         title: 'Great for remote work',
-        details: 'Fast wifi at 165 Mbps, plus a dedicated workspace.',
+        description: 'Fast wifi at 165 Mbps, plus a dedicated workspace.',
       },
       {
-        icon: 'Clock',
+        icon: 'clock',
         title: 'Self check-in',
-        details: 'You can check in with the building staff.',
+        description: 'You can check in with the building staff.',
       },
       {
-        icon: 'MapPin',
+        icon: 'wifi',
         title: 'Great location',
-        details: '95% of recent guests gave the location a 5-star rating',
+        description: '95% of recent guests gave the location a 5-star rating',
       },
       {
-        icon: 'Clock',
+        icon: 'clock',
         title: 'Great check-in experience',
-        details:
+        description:
           '100% of recent guests gave the check-in process a 5-star rating.',
       },
       {
-        icon: 'calendar',
+        icon: 'wifi',
         title: 'Free cancellation before March 24',
-        details: '',
+        description: '',
       },
     ],
   })
