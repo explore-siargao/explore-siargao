@@ -14,7 +14,6 @@ const SetUpProfileAboutYou = () => {
 
   const openModal = () => setIsModalOpen(true)
   const closeModal = () => setIsModalOpen(false)
-  const closeAfterSave = () => setIsModalOpen(false)
 
   return (
     <div>
@@ -29,11 +28,18 @@ const SetUpProfileAboutYou = () => {
             </Typography>
           </div>
           <div
-            className="pt-10 bottom-2 left-2 underline cursor-pointer"
-            onClick={openModal}
-          >
-            {introText ? "Edit intro" : "Add intro"}
-          </div>
+          className="pt-10 bottom-2 left-2 underline cursor-pointer"
+          onClick={openModal}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              openModal();
+            }
+          }}
+          tabIndex={0} 
+        >
+          {introText ? "Edit intro" : "Add intro"}
+        </div>
+
         </div>
       </div>
 
