@@ -10,7 +10,7 @@ import { Input } from "@/common/components/ui/Input"
 import { Popover, Transition } from "@headlessui/react"
 import RemovePaymentModal from "./modals/RemovePaymentModal"
 import useGetPaymentMethods from "../hooks/useGetPaymentMethods"
-import { ICoupon, IPaymentMethod } from "@/common/types/global"
+import { ICoupon } from "@/common/types/global"
 import useUpdatePaymentMethod from "../hooks/useUpdatePaymentMethod"
 import toast from "react-hot-toast"
 import { useQueryClient } from "@tanstack/react-query"
@@ -21,6 +21,7 @@ import useSessionStore from "@/common/store/useSessionStore"
 import { Spinner } from "@/common/components/ui/Spinner"
 import { APP_NAME } from "@repo/constants"
 import { EncryptionService } from "@repo/services"
+import valid from "card-validator"
 
 const Payments = () => {
   const router = useRouter()
@@ -70,6 +71,11 @@ const Payments = () => {
       toast.error(String(err))
     },
   }
+  const card = paymentMethods?.items ? paymentMethods?.items[0]?.cardInfo : "";
+  const validateCard = decryptCard.decrypt(card);
+  // @ts-expect-error
+  const numberValidation = valid.number(validateCard?.cardNumber);
+  console.log('validate', numberValidation)
 
   return (
     <>
@@ -110,7 +116,7 @@ const Payments = () => {
                       <Typography>
                         MasterCard {""}
                         <span className="font-medium">
-                          ****{" "}
+                          *********
                           {decryptCard
                             .decrypt(paymentMethod?.cardInfo)
                             //@ts-ignore
@@ -125,7 +131,7 @@ const Payments = () => {
                         )}
                       </Typography>
                       <Typography>
-                        Expiration:
+                        Expiration:{" "}
                         <span className="font-medium">
                           {
                             decryptCard.decrypt(paymentMethod.cardInfo) //@ts-ignore

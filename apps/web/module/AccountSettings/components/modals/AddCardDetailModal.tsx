@@ -117,7 +117,7 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
   }
 
   return (
-    <ModalContainer title="Add card details" isOpen={isOpen} onClose={onClose}>
+    <ModalContainer title="Add card details" size="sm" isOpen={isOpen} onClose={onClose}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="p-6 space-y-2">
           <div className="flex gap-2">
