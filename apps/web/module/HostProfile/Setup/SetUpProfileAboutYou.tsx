@@ -24,18 +24,15 @@ const SetUpProfileAboutYou = () => {
       <div className="relative">
         <div className="border border-gray-300 rounded-md p-5 mt-5 w-full h-25 border-dotted">
           <div className="absolute pl-3 left-2 text-gray-400">
-            <Link href={''}>
+            <Link href={""}>
               <Typography>
                 {introText ? introText : "Write something fun and punchy."}
               </Typography>
             </Link>
-           
           </div>
           <div className="pt-10 bottom-2 left-2 underline cursor-pointer">
             <Link href="#" onClick={openModal}>
-              <Typography>
-              {introText ? "Edit intro" : "Add intro"}
-              </Typography>
+              <Typography>{introText ? "Edit intro" : "Add intro"}</Typography>
             </Link>
           </div>
         </div>
