@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import SetUpProfileModal from "../components/modal/SetupProfileAboutYouModal"
 import { useInputSetupProfileAboutYouStore } from "@/module/HostProfile/store/useSetupProfileAboutYouStore"
 import { Typography } from "@/common/components/ui/Typography"
+import Link from "next/link"
 
 const SetUpProfileAboutYou = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -27,17 +28,10 @@ const SetUpProfileAboutYou = () => {
               {introText ? introText : "Write something fun and punchy."}
             </Typography>
           </div>
-          <div
-            className="pt-10 bottom-2 left-2 underline cursor-pointer"
-            onClick={openModal}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") {
-                openModal()
-              }
-            }}
-            tabIndex={0}
-          >
+          <div  className="pt-10 bottom-2 left-2 underline cursor-pointer">
+            <Link href="#" onClick={openModal}>
             {introText ? "Edit intro" : "Add intro"}
+          </Link>
           </div>
         </div>
       </div>

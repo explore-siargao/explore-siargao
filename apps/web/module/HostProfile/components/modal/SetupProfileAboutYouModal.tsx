@@ -21,12 +21,7 @@ const SetUpProfileAboutYouModal = ({
   )
   const [value, setValue] = useState("")
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const inputValue = e.target.value
-    if (inputValue.length <= 450) {
-      setValue(inputValue)
-    }
-  }
+
 
   const saveInputValue = () => {
     setInputValue(value)
@@ -44,11 +39,17 @@ const SetUpProfileAboutYouModal = ({
           can get to know you.
         </Typography>
         <Typography>
-          <textarea
-            className="p-2 border border-gray-300 rounded-md w-full h-32 mt-7"
-            onChange={(e) => setValue(e.target.value)}
-            defaultValue={currentValue}
-          />
+          
+          <textarea 
+          className="p-2 border border-gray-300 rounded-md w-full h-32 mt-7"
+          defaultValue={currentValue}
+          onChange={(e) => {
+            const inputValue = e.target.value;
+            if (inputValue.length <= 450) {
+              setValue(inputValue);
+            }
+          }}
+        />
         </Typography>
 
         <div className="flex justify-end pt-1">
