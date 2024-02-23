@@ -16,6 +16,7 @@ import ListingDateRangePicker from "./components/ListingDateRangePicker"
 import { Button } from "@/common/components/ui/Button"
 import { Flag } from "lucide-react"
 import ModalReporting from "./components/modals/ModalReporting"
+import ReportListingModal from "./components/modals/ReportListingModal"
 import { useState } from "react"
 
 export const SingleView = () => {
@@ -77,7 +78,7 @@ export const SingleView = () => {
                   variant="ghost"
                   className="underline md:float-right"
                   size="sm"
-                  onClick={() => setShowModal(!showModal)}
+                  onClick={() => setShowModal(true)}
                 >
                   <Flag fill="black" />
                   Report this listing
@@ -111,6 +112,7 @@ export const SingleView = () => {
           <ThingsToKnow />
         </div>
       </div>
+      <ReportListingModal isOpen={showModal} onClose={() => setShowModal(false)}/>
     </WidthWrapper>
   )
 }
