@@ -10,27 +10,37 @@ export const paymentMethod = async () => {
     data: [
       {
         userId: getUsers[0]?.id || 0,
-        cardInfo: "U2FsdGVkX1/VKPIbFKcWCLiktNsq9BMAUVaMQgfqzAMXMy/WJLjiDt31jVy0ZagnNOLfXNQmBYqqPFufLNYjHDvmipNWhflO85QLl+eCpg75UAE1HZDVyOekdzARYdMr64rT8buFnq6xXsLnwxSVV9bmYfOXlMg4CDMAh5etfpk=", // change this
+        cardInfo: "U2FsdGVkX1/VKPIbFKcWCLiktNsq9BMAUVaMQgfqzAMXMy/WJLjiDt31jVy0ZagnNOLfXNQmBYqqPFufLNYjHDvmipNWhflO85QLl+eCpg75UAE1HZDVyOekdzARYdMr64rT8buFnq6xXsLnwxSVV9bmYfOXlMg4CDMAh5etfpk=",
+        cardType: "visa",
+        hiddenCardNumber: "************4242",
         isDefault: true,
       },
       {
         userId: getUsers[1]?.id || 0,
-        cardInfo: "U2FsdGVkX1/VKPIbFKcWCLiktNsq9BMAUVaMQgfqzAMXMy/WJLjiDt31jVy0ZagnNOLfXNQmBYqqPFufLNYjHDvmipNWhflO85QLl+eCpg75UAE1HZDVyOekdzARYdMr64rT8buFnq6xXsLnwxSVV9bmYfOXlMg4CDMAh5etfpk=", // change this
+        cardInfo: "U2FsdGVkX1/VKPIbFKcWCLiktNsq9BMAUVaMQgfqzAMXMy/WJLjiDt31jVy0ZagnNOLfXNQmBYqqPFufLNYjHDvmipNWhflO85QLl+eCpg75UAE1HZDVyOekdzARYdMr64rT8buFnq6xXsLnwxSVV9bmYfOXlMg4CDMAh5etfpk=",
+        cardType: "visa",
+        hiddenCardNumber: "************4242",
         isDefault: false,
       },
       {
         userId: getUsers[2]?.id || 0,
-        cardInfo: "U2FsdGVkX1/VKPIbFKcWCLiktNsq9BMAUVaMQgfqzAMXMy/WJLjiDt31jVy0ZagnNOLfXNQmBYqqPFufLNYjHDvmipNWhflO85QLl+eCpg75UAE1HZDVyOekdzARYdMr64rT8buFnq6xXsLnwxSVV9bmYfOXlMg4CDMAh5etfpk=", // change this
+        cardInfo: "U2FsdGVkX1/VKPIbFKcWCLiktNsq9BMAUVaMQgfqzAMXMy/WJLjiDt31jVy0ZagnNOLfXNQmBYqqPFufLNYjHDvmipNWhflO85QLl+eCpg75UAE1HZDVyOekdzARYdMr64rT8buFnq6xXsLnwxSVV9bmYfOXlMg4CDMAh5etfpk=",
+        cardType: "visa",
+        hiddenCardNumber: "************4242",
         isDefault: false,
       },
       {
         userId: getUsers[3]?.id || 0,
-        cardInfo: "U2FsdGVkX1/VKPIbFKcWCLiktNsq9BMAUVaMQgfqzAMXMy/WJLjiDt31jVy0ZagnNOLfXNQmBYqqPFufLNYjHDvmipNWhflO85QLl+eCpg75UAE1HZDVyOekdzARYdMr64rT8buFnq6xXsLnwxSVV9bmYfOXlMg4CDMAh5etfpk=", // change this
+        cardInfo: "U2FsdGVkX1/VKPIbFKcWCLiktNsq9BMAUVaMQgfqzAMXMy/WJLjiDt31jVy0ZagnNOLfXNQmBYqqPFufLNYjHDvmipNWhflO85QLl+eCpg75UAE1HZDVyOekdzARYdMr64rT8buFnq6xXsLnwxSVV9bmYfOXlMg4CDMAh5etfpk=",
+        cardType: "visa",
+        hiddenCardNumber: "************4242",
         isDefault: true,
       },
       {
         userId: getUsers[4]?.id || 0,
-        cardInfo: "U2FsdGVkX1/VKPIbFKcWCLiktNsq9BMAUVaMQgfqzAMXMy/WJLjiDt31jVy0ZagnNOLfXNQmBYqqPFufLNYjHDvmipNWhflO85QLl+eCpg75UAE1HZDVyOekdzARYdMr64rT8buFnq6xXsLnwxSVV9bmYfOXlMg4CDMAh5etfpk=", // change this
+        cardInfo: "U2FsdGVkX1/VKPIbFKcWCLiktNsq9BMAUVaMQgfqzAMXMy/WJLjiDt31jVy0ZagnNOLfXNQmBYqqPFufLNYjHDvmipNWhflO85QLl+eCpg75UAE1HZDVyOekdzARYdMr64rT8buFnq6xXsLnwxSVV9bmYfOXlMg4CDMAh5etfpk=",
+        cardType: "visa",
+        hiddenCardNumber: "************4242",
         isDefault: true,
       },
     ],
