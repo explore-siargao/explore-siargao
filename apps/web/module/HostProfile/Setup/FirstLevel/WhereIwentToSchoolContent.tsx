@@ -1,17 +1,20 @@
-import { Dispatch, useState } from "react"
 import { Button } from "@/common/components/ui/Button"
 import { Input } from "@/common/components/ui/Input"
-
 import { Typography } from "@/common/components/ui/Typography"
 import useFirstLevelStore from "../store/useFirstLevelStore"
+import { Dispatch, useState } from "react"
 import toast from "react-hot-toast"
 
-const PetsContent = ({ setIsOpen }: { setIsOpen: Dispatch<boolean> }) => {
-  const [pets, setPets] = useState("")
-  const setPetsStore = useFirstLevelStore((state) => state.setPets)
+const WhereIWentToSchoolContent = ({
+  setIsOpen,
+}: {
+  setIsOpen: Dispatch<boolean>
+}) => {
+  const [schoolName, setSchoolName] = useState("")
+  const setSchoolNameStore = useFirstLevelStore((state) => state.setSchoolName)
   const save = () => {
-    if (pets) {
-      setPetsStore(pets)
+    if (schoolName) {
+      setSchoolNameStore(schoolName)
       toast.success("Saved")
     } else {
       toast.error("Please fill out the form")
@@ -21,16 +24,17 @@ const PetsContent = ({ setIsOpen }: { setIsOpen: Dispatch<boolean> }) => {
     <>
       <div className="p-5">
         <Typography variant="h1" className="font-semibold mb-5">
-          Do you have any pets in your life?
+          Where did you go to school?
         </Typography>
         <Typography variant="h3">
-          Share any pets you have and their names. Example: My calico cat
-          Whiskers, or Leonardo my speedy turtle.
+          Whether it’s home school, high school, or trade school, name the
+          school that made you who you are.
         </Typography>
-
         <div className="mt-10 mb-10">
-          <Input label="Pets:" 
-          onChange={(e) => setPets(e.target.value)}/>
+          <Input
+            label="Where I went to school:"
+            onChange={(e) => setSchoolName(e.target.value)}
+          />
           <Typography
             variant="p"
             className="flex items-end justify-end font-semibold"
@@ -48,4 +52,4 @@ const PetsContent = ({ setIsOpen }: { setIsOpen: Dispatch<boolean> }) => {
   )
 }
 
-export default PetsContent
+export default WhereIWentToSchoolContent

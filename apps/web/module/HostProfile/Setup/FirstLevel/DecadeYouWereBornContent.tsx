@@ -1,30 +1,36 @@
-import ModalContainer from "@/common/components/ModalContainer"
 import { Button } from "@/common/components/ui/Button"
 import { Title } from "@/common/components/ui/Title"
 import ToggleSwitch from "@/common/components/ui/Toggle"
 import { Typography } from "@/common/components/ui/Typography"
-import { useState } from "react"
+import { Dispatch, useState } from "react"
+import useFirstLevelStore from "../store/useFirstLevelStore"
+import toast from "react-hot-toast"
 
 interface ModalDecadeYouWereBornProps {
-  isOpen: boolean
-  onClose: () => void
   checked: boolean
   onChange: () => void
-  initializeCheck: boolean
+  initializeCheck?: boolean
+  setIsOpen: Dispatch<boolean>
 }
 
-const ModalDecadeYouWereBorn = ({
-  isOpen,
-  onClose,
-  initializeCheck,
-}: ModalDecadeYouWereBornProps) => {
+const ModalDecadeYouWereBorn = ({initializeCheck = false,setIsOpen}: ModalDecadeYouWereBornProps) => {
   const [checked, setChecked] = useState(initializeCheck)
   const handleToggleChange = () => {
     setChecked(!checked)
   }
+
+  const [decadeWereBorn, setDecadeWereBorn] = useState("")
+  const setDecadeWereBornStore = useFirstLevelStore((state) => state.setWorkName)
+  const save = () => {
+    if (decadeWereBorn) {
+      setDecadeWereBornStore(decadeWereBorn)
+      toast.success("Saved")
+    } else {
+      toast.error("Please fill out the form")
+    }
+  }
   return (
     <div>
-      <ModalContainer size="sm" isOpen={isOpen} onClose={onClose}>
         <div className="p-5">
           <Title size={"default"}>Decade you were born</Title>
           <div className="">
@@ -42,12 +48,11 @@ const ModalDecadeYouWereBorn = ({
           </div>
 
           <div className="flex items-end justify-end">
-            <Button size={"lg"} variant={"primary"}>
+            <Button size={"lg"} variant={"primary"} onClick={() => save()}>
               Save
             </Button>
           </div>
         </div>
-      </ModalContainer>
     </div>
   )
 }

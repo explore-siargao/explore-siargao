@@ -9,6 +9,7 @@ import {
   LucideCamera,
   LucideCarFront,
   LucideCctv,
+  LucideCheck,
   LucideChevronLeft,
   LucideCigaretteOff,
   LucideClock,
@@ -77,4 +78,5 @@ export const iconsMap = {
   instagram: (props?: LucideProps) => <LucideInstagram {...props} />,
   copyRight: (props?: LucideProps) => <LucideCopyright {...props} />,
   search: (props?: LucideProps) => <LucideSearch {...props} />,
+  check: (props?: LucideProps) => <LucideCheck {...props} />,
 }

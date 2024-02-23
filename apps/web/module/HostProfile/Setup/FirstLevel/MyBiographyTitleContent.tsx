@@ -1,36 +1,39 @@
-import { Dispatch, useState } from "react"
 import { Button } from "@/common/components/ui/Button"
 import { Input } from "@/common/components/ui/Input"
-
 import { Typography } from "@/common/components/ui/Typography"
+import { Dispatch, useState } from "react"
 import useFirstLevelStore from "../store/useFirstLevelStore"
 import toast from "react-hot-toast"
 
-const PetsContent = ({ setIsOpen }: { setIsOpen: Dispatch<boolean> }) => {
-  const [pets, setPets] = useState("")
-  const setPetsStore = useFirstLevelStore((state) => state.setPets)
+const MyBiographyTitleContent = ({
+  setIsOpen,
+}: {
+  setIsOpen: Dispatch<boolean>
+}) => {
+  const [biography, setBiography] = useState("")
+  const setBiographyStore = useFirstLevelStore((state) => state.setBiography)
   const save = () => {
-    if (pets) {
-      setPetsStore(pets)
+    if (biography) {
+      setBiographyStore(biography)
       toast.success("Saved")
     } else {
       toast.error("Please fill out the form")
     }
   }
   return (
-    <>
+    <div>
       <div className="p-5">
         <Typography variant="h1" className="font-semibold mb-5">
-          Do you have any pets in your life?
+          What would your biography title be?
         </Typography>
         <Typography variant="h3">
-          Share any pets you have and their names. Example: My calico cat
-          Whiskers, or Leonardo my speedy turtle.
+          If someone wrote a book about your life, what would they call it?
+          Example: Born to Roam or Chronicles of a Dog Mom.
         </Typography>
 
         <div className="mt-10 mb-10">
-          <Input label="Pets:" 
-          onChange={(e) => setPets(e.target.value)}/>
+          <Input label="My biography title would be:" 
+          onChange={(e) => setBiography(e.target.value)}/>
           <Typography
             variant="p"
             className="flex items-end justify-end font-semibold"
@@ -44,8 +47,8 @@ const PetsContent = ({ setIsOpen }: { setIsOpen: Dispatch<boolean> }) => {
           </Button>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 
-export default PetsContent
+export default MyBiographyTitleContent

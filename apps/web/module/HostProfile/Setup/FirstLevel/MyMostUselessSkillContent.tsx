@@ -1,17 +1,20 @@
-import { Dispatch, useState } from "react"
 import { Button } from "@/common/components/ui/Button"
 import { Input } from "@/common/components/ui/Input"
-
 import { Typography } from "@/common/components/ui/Typography"
+import { Dispatch, useState } from "react"
 import useFirstLevelStore from "../store/useFirstLevelStore"
 import toast from "react-hot-toast"
 
-const PetsContent = ({ setIsOpen }: { setIsOpen: Dispatch<boolean> }) => {
-  const [pets, setPets] = useState("")
-  const setPetsStore = useFirstLevelStore((state) => state.setPets)
+const MyMostUselessSkillContent = ({
+  setIsOpen,
+}: {
+  setIsOpen: Dispatch<boolean>
+}) => {
+  const [uselessSkill, setUselessSkill] = useState("")
+  const setUselessSkillStore = useFirstLevelStore((state) => state.setWorkName)
   const save = () => {
-    if (pets) {
-      setPetsStore(pets)
+    if (uselessSkill) {
+      setUselessSkillStore(uselessSkill)
       toast.success("Saved")
     } else {
       toast.error("Please fill out the form")
@@ -19,18 +22,19 @@ const PetsContent = ({ setIsOpen }: { setIsOpen: Dispatch<boolean> }) => {
   }
   return (
     <>
+    <div>
       <div className="p-5">
         <Typography variant="h1" className="font-semibold mb-5">
-          Do you have any pets in your life?
+          What’s your most useless skill?
         </Typography>
         <Typography variant="h3">
-          Share any pets you have and their names. Example: My calico cat
-          Whiskers, or Leonardo my speedy turtle.
+          Share a surprising but pointless talent you have. Example: Shuffling
+          cards with one hand.
         </Typography>
 
         <div className="mt-10 mb-10">
-          <Input label="Pets:" 
-          onChange={(e) => setPets(e.target.value)}/>
+          <Input label="My most useless skill:" 
+          onChange={(e) => setUselessSkill(e.target.value)}/>
           <Typography
             variant="p"
             className="flex items-end justify-end font-semibold"
@@ -44,8 +48,9 @@ const PetsContent = ({ setIsOpen }: { setIsOpen: Dispatch<boolean> }) => {
           </Button>
         </div>
       </div>
+    </div>
     </>
   )
 }
 
-export default PetsContent
+export default MyMostUselessSkillContent
