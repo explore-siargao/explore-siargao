@@ -29,9 +29,9 @@ const CheckoutBreakdownModal = ({
       isOpen={isOpen}
       title="Basic Price Breakdown"
       onClose={onClose}
-      size="sm"
+      size="auto"
     >
-      <div className="p-5">
+      <div className="p-5 md:w-80">
         {breakdown.map((data) => {
           return (
             <div className="flex justify-between mb-4">

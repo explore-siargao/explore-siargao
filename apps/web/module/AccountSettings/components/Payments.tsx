@@ -22,6 +22,9 @@ import { APP_NAME } from "@repo/constants"
 import { EncryptionService } from "@repo/services"
 import cardIconMap from "@/common/helpers/cardIconMap"
 import { LucideCreditCard, LucideMoreHorizontal } from "lucide-react"
+import { T_CardInfo } from "@repo/contract"
+
+const encryptionService = new EncryptionService("card")
 
 const Payments = () => {
   const router = useRouter()
@@ -30,18 +33,16 @@ const Payments = () => {
   const [removePaymentModal, setRemovePaymentModal] = useState<boolean>(false)
   const [paymentMethodId, setPaymentMethodId] = useState(0)
   const [showHide, setShowHide] = useState(false)
-  const [popPanelIsVisible, setPopPanelIsVisible] = useState(false)
   const { register, reset, getValues } = useForm<ICoupon>()
   const toggleVisibility = () => {
     setShowHide(!showHide)
   }
   const session = useSessionStore((state) => state)
-  const { data: paymentMethods, isPending: isPendingPaymentmethods } =
+  const { data: paymentMethods, isPending: isPendingPaymentMethods } =
     useGetPaymentMethods(session.id)
   const { mutate, isPending } = useUpdatePaymentMethod(session.id)
   const { mutate: redeemCoupon, isPending: isPendingRedeemCoupon } =
     useUpdateCoupon(session.id)
-  const decryptCard = new EncryptionService("card")
   const callBackReqDefaultPaymentMethod = {
     onSuccess: (data: any) => {
       if (!data.error) {
@@ -74,7 +75,7 @@ const Payments = () => {
 
   return (
     <>
-      {isPendingPaymentmethods ? (
+      {isPendingPaymentMethods ? (
         <Spinner className="mt-5" />
       ) : (
         <div className="space-y-10 my-5">
@@ -94,59 +95,59 @@ const Payments = () => {
               planning your next trip.
             </Typography>
             {paymentMethods?.items?.length !== 0 ? (
-              paymentMethods?.items?.map((paymentMethod) => (
-                <div
-                  key={paymentMethod.id}
-                  className="flex my-4 py-5 border-y border-y-text-100 justify-between"
-                >
-                  <div className="flex gap-4">
-                    {cardIconMap.hasOwnProperty(paymentMethod.cardType) ? (
-                      <Image
-                        // @ts-expect-error
-                        src={cardIconMap[paymentMethod.cardType]}
-                        width={500}
-                        height={500}
-                        className="h-8 w-auto"
-                        alt="mastercard"
-                      />
-                    ) : <LucideCreditCard className="h-7 w-7" strokeWidth={1.5} />}
-                    <div className="text-sm">
-                      <Typography>
-                        <span className="font-medium">
-                          ************{paymentMethod.lastFour}
-                        </span>{" "}
-                        {paymentMethod.isDefault ? (
-                          <span className="bg-primary-100 text-primary-800 ml-2 px-2 py-1 rounded-md text-sm font-semibold">
-                            Default
-                          </span>
-                        ) : (
-                          ""
-                        )}
-                      </Typography>
-                      <Typography className="text-text-200">
-                        Expiration:{" "}
-                        <span className="font-medium">
-                          {
-                            decryptCard.decrypt(paymentMethod.cardInfo) //@ts-ignore
-                              .expirationDate
-                          }
-                        </span>{" "}
-                      </Typography>
+              paymentMethods?.items?.map((paymentMethod) => {
+                const cardInfo = encryptionService.decrypt(paymentMethod.cardInfo) as T_CardInfo
+                return (
+                  <div
+                    key={paymentMethod.id}
+                    className="flex my-4 py-5 border-y border-y-text-100 justify-between"
+                  >
+                    <div className="flex gap-4">
+                      {cardIconMap.hasOwnProperty(paymentMethod.cardType) ? (
+                        <Image
+                          // @ts-expect-error
+                          src={cardIconMap[paymentMethod.cardType]}
+                          width={500}
+                          height={500}
+                          className="h-8 w-auto"
+                          alt="mastercard"
+                        />
+                      ) : <LucideCreditCard className="h-7 w-7" strokeWidth={1.5} />}
+                      <div className="text-sm">
+                        <Typography>
+                          <span className="font-medium">
+                            ************{paymentMethod.lastFour}
+                          </span>{" "}
+                          {paymentMethod.isDefault ? (
+                            <span className="bg-primary-100 text-primary-800 ml-2 px-2 py-1 rounded-md text-sm font-semibold">
+                              Default
+                            </span>
+                          ) : (
+                            ""
+                          )}
+                        </Typography>
+                        <Typography className="text-text-200">
+                          Expiration:{" "}
+                          <span className="font-medium">
+                            {
+                              `${cardInfo.expirationMonth}/${cardInfo.expirationYear}`
+                            }
+                          </span>{" "}
+                        </Typography>
+                      </div>
                     </div>
-                  </div>
-                  <Popover className="relative">
-                    <Popover.Button
-                      className="items-center focus:outline-none px-2 py-1"
-                      onClick={() => setPopPanelIsVisible(true)}
-                    >
-                      {isPending ? (
-                        <div className="animate-spin w-4 h-4 border-2 border-current border-t-transparent text-primary-200 rounded-full">
-                          <span className="sr-only">Loading...</span>
-                        </div>
-                      ) : (
-                        <LucideMoreHorizontal className="place-self-center select-none text-xs"/>
-                      )}
-                    </Popover.Button>
+                    <Popover className="relative">
+                      <Popover.Button
+                        className="items-center focus:outline-none px-2 py-1"
+                      >
+                        {isPending ? (
+                          <div className="animate-spin w-4 h-4 border-2 border-current border-t-transparent text-primary-200 rounded-full">
+                            <span className="sr-only">Loading...</span>
+                          </div>
+                        ) : (
+                          <LucideMoreHorizontal className="place-self-center select-none text-xs" />
+                        )}
+                      </Popover.Button>
 
                       <Transition
                         as={Fragment}
@@ -182,9 +183,10 @@ const Payments = () => {
                           </div>
                         </Popover.Panel>
                       </Transition>
-                  </Popover>
-                </div>
-              ))
+                    </Popover>
+                  </div>
+                )
+              })
             ) : (
               <div className="pt-5 border-t border-t-text-100"></div>
             )}

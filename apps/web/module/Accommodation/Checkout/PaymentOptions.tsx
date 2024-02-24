@@ -2,28 +2,32 @@
 import { useEffect, useState } from 'react'
 import { RadioGroup } from '@headlessui/react'
 import { cn } from '@/common/helpers/cn'
-import PaymentMethodForm from "@/app/accommodation/PaymentMethodForm"
+import PaymentMethodForm from "@/module/Accommodation/Checkout/PaymentMethodForm"
 import useGetPaymentMethods from '@/module/AccountSettings/hooks/useGetPaymentMethods'
 import useSessionStore from '@/common/store/useSessionStore'
 import Loading from '@/common/components/Loading'
+import usePaymentInfoStore from './store/usePaymentInfoStore'
+import { E_PaymentType } from '@repo/contract'
 
 export default function PaymentOptions() {
+  const updatePaymentInfo = usePaymentInfoStore((state) => state.updatePaymentInfo);
   const session = useSessionStore((state) => state);
   const [selected, setSelected] = useState<number | null>(null);
   const { data: paymentMethods, isPending: isPendingPaymentMethods } =
     useGetPaymentMethods(session.id)
   const savedCreditDebitOptions = paymentMethods?.items?.map((paymentMethod) => {
     return {
-      type: "saved-credit-debit",
+      type: E_PaymentType.SavedCreditDebit,
       name: `${paymentMethod.cardType} ending with ${paymentMethod.lastFour}`,
       description: "Pay using your saved card information.",
       content: null,
       selected: paymentMethod.isDefault,
+      paymentMethodId: paymentMethod.id
     }
   }) ?? []
   const options = [
-    { type: 'credit-debit', name: 'Pay using Credit or Debit card', description: 'Pay manually using your credit or debit card.', content: <PaymentMethodForm />, selected: false },
-    { type: 'gcash', name: 'Pay using GCash', description: 'Pay using E-Wallet called GCash.', content: null, selected: false },
+    { type: E_PaymentType.CreditDebit, name: 'Pay using Credit or Debit card', description: 'Pay manually using your credit or debit card.', content: <PaymentMethodForm />, paymentMethodId: null, selected: false },
+    { type: E_PaymentType.GCASH, name: 'Pay using GCash', description: 'Pay using E-Wallet called GCash.', content: null, paymentMethodId: null, selected: false },
   ]
   const combinedOptions = [...options, ...savedCreditDebitOptions].map((option, index) => {
     return {
@@ -35,6 +39,8 @@ export default function PaymentOptions() {
   useEffect(() => {
     if(!selected && defaultSelectedOption) {
       setSelected(defaultSelectedOption.id)
+      updatePaymentInfo({ key: "paymentType", value: E_PaymentType.SavedCreditDebit })
+      updatePaymentInfo({ key: "paymentMethodId", value: defaultSelectedOption.paymentMethodId })
     }
   }, [defaultSelectedOption])
   return (
@@ -42,7 +48,15 @@ export default function PaymentOptions() {
       {isPendingPaymentMethods ? (
         <Loading />
       ) : (
-        <RadioGroup value={selected ? selected : 1} onChange={setSelected}>
+        <RadioGroup 
+          value={selected ? selected : 1}
+          onChange={(e) => {
+            const option = combinedOptions.find((option) => option.id === e)
+            updatePaymentInfo({ key: "paymentType", value: option?.type ?? "" })
+            updatePaymentInfo({ key: "paymentMethodId", value: option?.paymentMethodId })
+            setSelected(e)
+          }}
+        >
           <RadioGroup.Label className="sr-only">Payment Options</RadioGroup.Label>
           <div className="-space-y-px rounded-md bg-white">
             {combinedOptions.map((setting, settingIdx) => (

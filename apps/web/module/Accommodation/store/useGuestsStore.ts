@@ -13,7 +13,7 @@ type T_GuestState = {
   decrementGuest: (type: keyof T_Guest) => void
 }
 
-const useGuestAdd = create<T_GuestState>((set) => ({
+const useGuestsStore = create<T_GuestState>((set) => ({
   guest: {
     adults: 1,
     children: 0,
@@ -39,4 +39,4 @@ const useGuestAdd = create<T_GuestState>((set) => ({
     })),
 }))
 
-export default useGuestAdd
+export default useGuestsStore

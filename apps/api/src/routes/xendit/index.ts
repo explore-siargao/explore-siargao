@@ -8,10 +8,14 @@ import {
   cardCreatePayment,
   cardInitiatePayment,
   gcashCreatePayment,
+  getPaymentRequest,
+  getPaymentMethod
 } from './services/default'
 
 const router = express.Router()
 
+router.get('/payment-request', getPaymentRequest)
+router.get('/payment-method', getPaymentMethod)
 router.post('/card-single-use', cardSingleUse)
 router.post('/card-multi-use', cardMultiUse)
 router.post('/card-create-payment', cardCreatePayment)

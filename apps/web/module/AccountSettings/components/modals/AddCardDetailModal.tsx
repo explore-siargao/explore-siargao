@@ -7,7 +7,6 @@ import mastercard from "@/common/assets/mastercard.png"
 import visa from "@/common/assets/visa.png"
 import Image from "next/image"
 import useAddPaymentMethod from "../../hooks/useAddPaymentMethod"
-import { IPaymentMethod } from "@/common/types/global"
 import { useForm } from "react-hook-form"
 import { useQueryClient } from "@tanstack/react-query"
 import toast from "react-hot-toast"
@@ -19,6 +18,7 @@ import { COUNTRIES } from "@repo/constants"
 import { EncryptionService } from "@repo/services"
 import { Typography } from "@/common/components/ui/Typography"
 import Link from "next/link"
+import { T_CardInfo } from "@repo/contract"
 
 interface CardDetailModal {
   isOpen: boolean
@@ -37,10 +37,10 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
     setError,
     clearErrors,
     formState: { errors },
-  } = useForm<IPaymentMethod>()
+  } = useForm<T_CardInfo & { expirationDate: string }>()
   const queryClient = useQueryClient()
   const encryptCard = new EncryptionService("card");
-  const onSubmit = (formData: IPaymentMethod) => {
+  const onSubmit = (formData: T_CardInfo & { expirationDate: string }) => {
     const callBackReq = {
       onSuccess: (data: any) => {
         if (!data.error) {
@@ -59,14 +59,17 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
       },
     }
     const cardValid = valid.number(formData.cardNumber);
+    const splitExpiration = formData.expirationDate.split("/");
     mutate(
       {
         cardInfo: encryptCard.encrypt({
-          cardNumber: String(formData.cardNumber)?.replace(/\s/g, ""),
-          cvv: Number(formData.cvv),
-          expirationDate: String(formData.expirationDate),
-          zipCode: Number(formData.zipCode),
-          countryRegion: formData.countryRegion,
+          cardNumber: formData.cardNumber?.replace(/\s/g, ""),
+          cvv: formData.cvv,
+          expirationMonth: splitExpiration[0],
+          expirationYear: `20${splitExpiration[1]}`,
+          cardholderName: formData.cardholderName,
+          country: formData.country,
+          zipCode: formData.zipCode,
         }),
         cardType: cardValid?.card?.niceType ?? 'Visa',
         lastFour: `${formData.cardNumber?.slice(-4)}`,
@@ -241,6 +244,16 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
             </div>
           </div>
           <Input
+            label="Cardholder Name"
+            id="cardholderName"
+            type="text"
+            disabled={isPending}
+            {...register("cardholderName", {
+              required: "This field is required",
+            })}
+            required
+          />
+          <Input
             label="Zip code"
             id="zipCode"
             type="number"
@@ -253,7 +266,7 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
           />
           <div>
             <Select
-              {...register("countryRegion", {
+              {...register("country", {
                 required: "This field is required",
               })}
               label="Country"
@@ -268,7 +281,7 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
             </Select>
           </div>
           <div>
-            <Typography className="text-sm text-text-300">Your card information will be securely stored using the standard procedure stated by PCI Security Standards Council. If you want to know more about how we do it, you can go to this <Link href="https://listings.pcisecuritystandards.org/pdfs/pci_fs_data_storage.pdf" className="underline text-primary-700 hover:text-text-500" target="_blank">link</Link>.</Typography>
+            <Typography className="text-sm text-text-300">Your card information will be encrypted while in transit to our server and will be stored securely. If you want to know more about how we do it, you can go to this <Link href="https://listings.pcisecuritystandards.org/pdfs/pci_fs_data_storage.pdf" className="underline text-primary-700 hover:text-text-500" target="_blank">link</Link>.</Typography>
           </div>
         </div>
         <ModalContainerFooter

@@ -1,7 +1,7 @@
 "use client"
 import { Typography } from "@/common/components/ui/Typography"
 import { Button } from "@/common/components/ui/Button"
-import useCheckInOutDateStore from "@/common/store/useCheckInOutDateStore"
+import useCheckInOutDateStore from "@/module/Accommodation/store/useCheckInOutDateStore"
 import { Calendar } from "@/common/components/ui/Calendar"
 import { DateRange } from "react-day-picker"
 import { differenceInDays, format } from "date-fns"

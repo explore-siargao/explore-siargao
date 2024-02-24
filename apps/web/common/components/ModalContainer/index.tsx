@@ -8,7 +8,7 @@ type Props = {
   children: React.ReactNode
   title?: string
   isOpen: boolean
-  onClose: () => void
+  onClose?: () => void
   size?: "sm" | "md" | "lg" | "full" | "calendar" | "auto"
 }
 
@@ -26,7 +26,7 @@ const ModalContainer = ({
         as="div"
         className="relative z-50"
         initialFocus={cancelButtonRef}
-        onClose={onClose}
+        onClose={() => onClose ? onClose() : null}
       >
         <Transition.Child
           as={Fragment}
@@ -65,12 +65,14 @@ const ModalContainer = ({
               >
                 <div className="bg-white shadow rounded-2xl">
                   <div className="flex border-b-gray-200 border-b p-4">
-                    <div>
-                      <XMarkIcon
-                        className="h-6 w-6 cursor-pointer rounded-full hover:bg-gray-300/30"
-                        onClick={() => onClose()}
-                      />
-                    </div>
+                    {onClose && (
+                      <div>
+                        <XMarkIcon
+                          className="h-6 w-6 cursor-pointer rounded-full hover:bg-gray-300/30"
+                          onClick={onClose}
+                        />
+                      </div>
+                    )}
                     <div className="flex-1">
                       <h1
                         className={`w-full text-center place-self-center font-semibold`}

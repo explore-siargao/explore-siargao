@@ -2,35 +2,88 @@ import { ApiService } from '@/common/service/api'
 import { ResponseService } from '@/common/service/response'
 import { Response, Request } from 'express'
 import { randomUUID } from 'crypto'
-import { REQUIRED_VALUE_EMPTY } from '@/common/constants'
+import { REQUIRED_VALUE_EMPTY, UNKNOWN_ERROR_OCCURRED } from '@/common/constants'
+import { webUrl } from '@/common/config'
+import { EncryptionService } from "@repo/services"
+import { T_CardInfo } from '@repo/contract'
 
 const response = new ResponseService()
 const apiXendit = new ApiService('xendit')
 
-export const cardSingleUse = async (req: Request, res: Response) => {
-  try {
-    const data = {
-      type: 'CARD',
-      card: {
-        currency: 'PHP',
-        channel_properties: {
-          success_return_url: 'https://redirect.me/goodstuff',
-          failure_return_url: 'https://redirect.me/badstuff',
-        },
-        card_information: {
-          card_number: '4000000000001091',
-          expiry_month: '12',
-          expiry_year: '2027',
-          cvv: '123',
-          cardholder_name: 'John Doe',
-        },
-      },
-      reusability: 'ONE_TIME_USE',
+const encryptionService = new EncryptionService("card");
+
+export const getPaymentRequest = async (req: Request, res: Response) => {
+  const id = req.query.id;
+  if (id) {
+    try {
+      const pr = await apiXendit.get(`/payment_requests/${id}`, {}, false, true)
+      res.json(response.success({
+        item: pr,
+      }))
+    } catch (err: any) {
+      const message = err.message ? err.message : UNKNOWN_ERROR_OCCURRED
+      res.json(response.error({ message }))
     }
-    const req = await apiXendit.post(`/v2/payment_methods`, data, false, true)
-    return res.json(response.success({ item: req }))
-  } catch (err: any) {
-    return res.json(response.error({ message: err.message }))
+  } else {
+    res.json(
+      response.error({
+        message: REQUIRED_VALUE_EMPTY,
+      })
+    )
+  }
+}
+
+export const getPaymentMethod = async (req: Request, res: Response) => {
+  const id = req.query.id;
+  if (id) {
+    try {
+      const pm = await apiXendit.get(`/payment_methods/${id}`, {}, false, true)
+      res.json(response.success({
+        item: pm,
+      }))
+    } catch (err: any) {
+      const message = err.message ? err.message : UNKNOWN_ERROR_OCCURRED
+      res.json(response.error({ message }))
+    }
+  } else {
+    res.json(
+      response.error({
+        message: REQUIRED_VALUE_EMPTY,
+      })
+    )
+  }
+}
+
+export const cardSingleUse = async (req: Request, res: Response) => {
+  const { cardInfo, bookingId } = req.body
+  if (cardInfo && bookingId) {
+    const { cardNumber, expirationMonth, expirationYear, cvv, cardholderName } = encryptionService.decrypt(cardInfo) as T_CardInfo;
+    try {
+      const data = {
+        type: 'CARD',
+        card: {
+          currency: 'PHP',
+          channel_properties: {
+            success_return_url: `${webUrl}/capture-payment/${bookingId}`,
+            failure_return_url: `${webUrl}/error-payment/${bookingId}`,
+          },
+          card_information: {
+            card_number: cardNumber,
+            expiry_month: expirationMonth,
+            expiry_year: expirationYear,
+            cvv: cvv,
+            cardholder_name: cardholderName,
+          },
+        },
+        reusability: 'ONE_TIME_USE',
+      }
+      const req = await apiXendit.post(`/v2/payment_methods`, data, false, true)
+      return res.json(response.success({ item: req }))
+    } catch (err: any) {
+      return res.json(response.error({ message: err.message }))
+    }
+  } else {
+    return res.json(response.error({ message: REQUIRED_VALUE_EMPTY }))
   }
 }
 
@@ -42,8 +95,8 @@ export const cardMultiUse = async (req: Request, res: Response) => {
         currency: 'PHP',
         channel_properties: {
           skip_three_d_secure: true,
-          success_return_url: 'https://redirect.me/goodstuff',
-          failure_return_url: 'https://redirect.me/badstuff',
+          success_return_url: webUrl,
+          failure_return_url: webUrl,
         },
         card_information: {
           card_number: '4000000000001091',
@@ -106,8 +159,8 @@ export const cardInitiatePayment = async (req: Request, res: Response) => {
 }
 
 export const gcashCreatePayment = async (req: Request, res: Response) => {
-  const { amount } = req.body
-  if (amount) {
+  const { amount, bookingId } = req.body
+  if (amount && bookingId) {
     try {
       const data = {
         amount: amount,
@@ -118,8 +171,8 @@ export const gcashCreatePayment = async (req: Request, res: Response) => {
           ewallet: {
             channel_code: 'GCASH',
             channel_properties: {
-              success_return_url: 'https://redirect.me/goodstuff',
-              failure_return_url: 'https://redirect.me/goodstuff',
+              success_return_url: `${webUrl}/success-payment/${bookingId}`,
+              failure_return_url: `${webUrl}/error-payment/${bookingId}`,
             },
           },
           reusability: 'ONE_TIME_USE',

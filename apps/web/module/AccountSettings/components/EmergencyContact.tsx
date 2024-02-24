@@ -66,7 +66,7 @@ const EmergencyContact = ({
         queryClient.invalidateQueries({
           queryKey: ["session"],
         })
-        toast.success("Contact Successfully added")
+        toast.success("Contact successfully removed")
         reset()
       } else {
         toast.error(String(data.message))

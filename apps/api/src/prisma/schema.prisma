@@ -35,6 +35,7 @@ model User {
   reservations     ReservationListing[]
   hostInfoId       Int?
   hostInfo         HostInfo?
+  Booking          Booking?
 }
 
 model PersonalInfo {
@@ -157,6 +158,7 @@ model Listing {
   reports              ReportListing[]
   wishes               WishGroup[]
   reservation          ReservationListing[]
+  Booking              Booking?
 
   @@index([basicAboutPlaceId])
   @@index([listingPriceId])
@@ -192,26 +194,22 @@ model BasicAboutPlace {
 }
 
 model PaymentMethod {
-  id               Int                  @id @default(autoincrement())
-  userId           Int
-  cardInfo         String               @db.VarChar(255)
-  cardType         String               @db.VarChar(255)
-  lastFour         String               @db.VarChar(255)
-  createdAt        DateTime             @default(now())
-  updatedAt        DateTime             @updatedAt
-  deletedAt        DateTime?
-  isDefault        Boolean              @default(false)
-  user             User                 @relation(fields: [userId], references: [id])
-  reservation      ReservationListing[]
+  id          Int                  @id @default(autoincrement())
+  userId      Int
+  cardInfo    String               @db.LongText
+  cardType    String               @db.VarChar(255)
+  lastFour    String               @db.VarChar(255)
+  createdAt   DateTime             @default(now())
+  updatedAt   DateTime             @updatedAt
+  deletedAt   DateTime?
+  isDefault   Boolean              @default(false)
+  user        User                 @relation(fields: [userId], references: [id])
+  reservation ReservationListing[]
+  Booking     Booking?
 
   @@index([userId])
 }
 
-// cardNumber     String               @unique
-//   expirationDate String               @db.VarChar(10)
-//   cvv            Int
-//   zipCode        Int
-//   countryRegion  String               @db.VarChar(255)
 model ReservationListing {
   id              Int               @id @default(autoincrement())
   listingId       Int
@@ -450,6 +448,31 @@ model Tax {
   userId             Int?      @unique
 }
 
+model Booking {
+  id                       Int            @id @default(autoincrement())
+  listingId                Int?           @unique
+  userId                   Int?           @unique
+  fromDate                 DateTime
+  toDate                   DateTime
+  adultCount               Int
+  childrenCount            Int
+  infantCount              Int
+  paymentType              PaymentType
+  cardInfo                 String?        @db.LongText
+  cardType                 String?        @db.VarChar(255)
+  lastFour                 String?        @db.VarChar(255)
+  PaymentMethod            PaymentMethod? @relation(fields: [paymentMethodId], references: [id])
+  paymentMethodId          Int?           @unique
+  xenditPaymentMethodId    String?        @unique @db.VarChar(255)
+  xenditPaymentRequestId   String?        @unique @db.VarChar(255)
+  xenditPaymentReferenceId String?        @unique @db.VarChar(255)
+  createdAt                DateTime       @default(now())
+  updatedAt                DateTime       @updatedAt
+  deletedAt                DateTime?
+  Listing                  Listing?       @relation(fields: [listingId], references: [id])
+  User                     User?          @relation(fields: [userId], references: [id])
+}
+
 enum UserRole {
   Admin
   Host
@@ -473,4 +496,10 @@ enum ListingCategory {
   Accomodation
   Rentals
   Activity
+}
+
+enum PaymentType {
+  GCASH
+  CreditDebit
+  SavedCreditDebit
 }
