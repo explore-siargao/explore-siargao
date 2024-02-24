@@ -28,7 +28,7 @@ const Reservation = ({ tabs }: ReservationPagesTabProps) => {
           <ul className="flex space-x-2">
             <li>
               <Link href="">
-                <Button variant={"outline"}>
+                <Button variant="outlineDark">
                   <div className="flex gap-2">
                     <SlidersHorizontal className="w-4 h-4" />
                     Filter
@@ -38,7 +38,7 @@ const Reservation = ({ tabs }: ReservationPagesTabProps) => {
             </li>
             <li>
               <Link href="">
-                <Button variant={"outline"}>
+                <Button variant="outlineDark">
                   <div className="flex gap-2">
                     Export
                     <ChevronDown className="w-4 h-4" />
@@ -48,7 +48,7 @@ const Reservation = ({ tabs }: ReservationPagesTabProps) => {
             </li>
             <li>
               <Link href="">
-                <Button variant={"outline"}>Print</Button>
+                <Button variant="outlineDark">Print</Button>
               </Link>
             </li>
           </ul>

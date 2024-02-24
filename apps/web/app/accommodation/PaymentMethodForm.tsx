@@ -12,6 +12,8 @@ import valid from "card-validator"
 import { Option, Select } from "@/common/components/ui/Select"
 import { COUNTRIES } from "@repo/constants"
 import ErrorMessage from "@/module/AccountSettings/components/ui/ErrorMessage"
+import { Typography } from "@/common/components/ui/Typography"
+import Link from "next/link"
 
 const PaymentMethodForm = () => {
   const {
@@ -216,6 +218,9 @@ const PaymentMethodForm = () => {
               </Option>
             ))}
           </Select>
+        </div>
+        <div>
+          <Typography className="text-text-300 text-sm">We will not store the information you put above.</Typography>
         </div>
       </div>
     </form>

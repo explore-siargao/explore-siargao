@@ -99,7 +99,7 @@ const AllReviewsModal = ({
             <hr />
           </div>
         ))}
-        <Button variant="outline" className="text-base font-semibold">
+        <Button variant="outlineDark" className="text-base font-semibold">
           Show more reviews
         </Button>
       </div>

@@ -1,14 +1,29 @@
-import PaymentMethodForm from "@/app/accommodation/PaymentMethodForm"
+"use client"
 import { WidthWrapper } from "@/common/components/WidthWrapper"
 import { Button } from "@/common/components/ui/Button"
-import { Title } from "@/common/components/ui/Title"
 import { Typography } from "@/common/components/ui/Typography"
 import { StarIcon } from "@heroicons/react/20/solid"
 import { ChevronLeft, MedalIcon } from "lucide-react"
 import Link from "next/link"
-import React from "react"
+import React, { useState } from "react"
+import PaymentOptions from "./PaymentOptions"
+import useCheckInOutDateStore from "@/common/store/useCheckInOutDateStore"
+import useGuestAdd from "@/common/store/useGuestAdd"
+import CheckInOutModal from "@/module/Bookings/SingleView/components/modals/CheckInOutModal"
+import GuestAddModal from "@/module/Bookings/SingleView/components/modals/GuestAddModal"
+import { format } from "date-fns"
+import { APP_NAME } from "@repo/constants"
+import Image from "next/image"
+import CheckoutMoreInfoModal from "@/module/Bookings/SingleView/components/modals/CheckoutMoreInfoModal"
 
 const Checkout = () => {
+  const [isGuestsModalOpen, setIsGuestsModalOpen] = useState(false)
+  const [isMoreInfoModalOpen, setIsMoreInfoModalOpen] = useState(false)
+  const [checkInOutCalendarModalIsOpen, setCheckInOutCalendarModalIsOpen] =
+    useState(false)
+  const dateRange = useCheckInOutDateStore((state) => state.dateRange)
+  const { adults, children, infants } = useGuestAdd((state) => state.guest);
+  const totalGuest = adults + children + infants;
   return (
     <WidthWrapper width={"small"} className="mt-24 md:mt-36 lg:mt-40">
       <div className="w-full flex items-center gap-x-4">
@@ -27,34 +42,27 @@ const Checkout = () => {
           <div className="flex w-full flex-col">
             <div className="flex justify-between w-full">
               <div className="font-semibold">Dates</div>
-              <div className="font-semibold underline">Edit</div>
+              <button type="button" className="underline hover:text-text-400" onClick={() => setCheckInOutCalendarModalIsOpen(true)}>Edit</button>
             </div>
-            <div>Feb 18 – 23</div>
-          </div>
-          <div className="flex w-full flex-col">
-            <div className="flex justify-between w-full">
-              <div className="font-semibold">Guests</div>
-              <div className="font-semibold underline">Edit</div>
-            </div>
-            <div>1 guest</div>
-          </div>
-          <hr className="my-4" />
-          <PaymentMethodForm />
-          <hr className="my-4" />
-          <div>
-            <Typography variant={"h2"} fontWeight="semibold">
-              Required for your trip
+            <Typography className="text-sm">
+              {dateRange?.from != undefined
+                ? format(dateRange.from, "LLL dd, y")
+                : "Date from"}{" "}
+              -{" "}
+              {dateRange?.to != undefined
+                ? format(dateRange.to, "LLL dd, y")
+                : "Date to"}
             </Typography>
           </div>
           <div className="flex w-full flex-col">
             <div className="flex justify-between w-full">
-              <div className="font-semibold">Dates</div>
-              <Button size={"sm"} variant={"outline"}>
-                Add
-              </Button>
+              <div className="font-semibold">Guests</div>
+              <button type="button" className="underline hover:text-text-400" onClick={() => setIsGuestsModalOpen(true)}>Edit</button>
             </div>
-            <div>Feb 18 – 23</div>
+            <Typography className="text-sm">{`${totalGuest} guest${totalGuest > 1 ? "s" : ""}`}</Typography>
           </div>
+          <hr className="my-4" />
+          <PaymentOptions />
           <hr className="my-4" />
           <div className="flex flex-col gap-y-4">
             <Typography variant={"h2"} fontWeight="semibold">
@@ -96,9 +104,9 @@ const Checkout = () => {
             </Link>
             ,{" "}
             <Link className="font-semibold underline" href="#">
-              Airbnb's Rebooking and Refund Policy
+              {APP_NAME}'s Rebooking and Refund Policy
             </Link>
-            , and that Airbnb can{" "}
+            , and that {APP_NAME} can{" "}
             <Link className="font-semibold underline" href="#">
               charge my payment method
             </Link>{" "}
@@ -108,7 +116,15 @@ const Checkout = () => {
         <div className="flex w-1/2 h-max justify-end">
           <div className="border w-4/5 p-6 rounded-lg flex flex-col">
             <div className="flex gap-x-4 items-center">
-              <div className="w-24 h-20 rounded-lg bg-primary-100"></div>
+              <div className="flex h-20 w-24 items-center justify-center rounded-md">
+                <Image
+                  width={300}
+                  height={300}
+                  src={`/assets/1.jpg`}
+                  alt="Listing"
+                  className="block h-full w-full object-cover rounded-md"
+                />
+              </div>
               <div className="flex flex-col gap-y-1">
                 <Typography fontWeight="semibold">
                   The GOAT Barnyard - Lakeside
@@ -123,35 +139,53 @@ const Checkout = () => {
               </div>
             </div>
             <hr className="my-6" />
-            <div className="flex flex-col gap-y-4">
+            <div className="flex flex-col">
               <Typography fontWeight="semibold" variant={"h2"}>
                 Price details
               </Typography>
-              <div className="flex w-full justify-between">
-                <Typography variant={"h4"}>₱25,000.00 x 5 nights</Typography>
-                <Typography variant={"h4"}>₱125,000.00</Typography>
-              </div>
-              <div className="flex w-full justify-between">
-                <Typography variant={"h4"}>
-                  <Link href={""} className="underline">
-                    Airbnb service fee
-                  </Link>
+              <div className="flex w-full justify-between items-center mt-4">
+                <Typography
+                  className="text-sm"
+                >
+                  ₱25,000.00 x 5 nights
                 </Typography>
-                <Typography variant={"h4"}>₱1,000.00</Typography>
+                <Typography className="text-sm">₱125,000.00</Typography>
+              </div>
+              <div className="flex w-full justify-between items-center">
+                <Button
+                  variant={"ghost"}
+                  className="underline pl-0"
+                  onClick={() => setIsMoreInfoModalOpen(true)}
+                >
+                  {APP_NAME} service fee
+                </Button>
+                <Typography className="text-sm">₱1,000.00</Typography>
               </div>
             </div>
             <hr className="my-6" />
             <div className="flex w-full justify-between">
-              <Typography variant={"h4"} fontWeight="semibold">
+              <Typography fontWeight="semibold">
                 Total
               </Typography>
-              <Typography variant={"h4"} fontWeight="semibold">
+              <Typography fontWeight="semibold">
                 ₱126,000.00
               </Typography>
             </div>
           </div>
         </div>
       </div>
+      <CheckoutMoreInfoModal
+        isOpen={isMoreInfoModalOpen}
+        onClose={() => setIsMoreInfoModalOpen(false)}
+      />
+      <CheckInOutModal
+        isOpen={checkInOutCalendarModalIsOpen}
+        onClose={() => setCheckInOutCalendarModalIsOpen(false)}
+      />
+      <GuestAddModal
+        isOpen={isGuestsModalOpen}
+        onClose={() => setIsGuestsModalOpen(false)}
+      />
     </WidthWrapper>
   )
 }

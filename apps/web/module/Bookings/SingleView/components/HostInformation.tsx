@@ -52,7 +52,7 @@ const HostInformation = ({
         <Typography>Response Rate: {responseRate}%</Typography>
         <Typography>Response Time: {responseTime}</Typography>
         <Button
-          variant={"outline"}
+          variant="outlineDark"
           className="my-6"
           onClick={() => router.push("/accommodation/1/message")}
         >

@@ -1,7 +1,8 @@
 import ModalContainer from "@/common/components/ModalContainer"
 import { Typography } from "@/common/components/ui/Typography"
+import { cn } from "@/common/helpers/cn"
 import useGuestAdd from "@/common/store/useGuestAdd"
-import { PlusCircle } from "lucide-react"
+import { MinusCircle, PlusCircle } from "lucide-react"
 
 interface GuestAddModalProps {
   isOpen: boolean
@@ -11,20 +12,29 @@ interface GuestAddModalProps {
 const GuestAddModal = ({ isOpen, onClose }: GuestAddModalProps) => {
   const guest = useGuestAdd((state) => state.guest)
   const incrementGuest = useGuestAdd((state) => state.incrementGuest)
-
+  const decrementGuest = useGuestAdd((state) => state.decrementGuest)
+  const { adults, children, infants } = useGuestAdd((state) => state.guest);
   return (
-    <ModalContainer isOpen={isOpen} onClose={onClose} size="sm">
+    <ModalContainer isOpen={isOpen} onClose={onClose} size="auto">
       <div className="py-2">
         <div className="flex justify-between items-center px-4 py-2">
           <div className="space-y-0.5">
-            <Typography variant="h4" fontWeight="bold">
+            <Typography variant="h4" fontWeight="semibold">
               Adults
             </Typography>
-            <Typography variant="h5" fontWeight="semibold">
+            <Typography variant="h5">
               Age 13+
             </Typography>
           </div>
           <div className="flex items-center space-x-3">
+            <button
+              onClick={() => {
+                if(adults > 1)
+                decrementGuest("adults")
+              }}
+            >
+              <MinusCircle className={cn(`h-8 w-8`, adults < 2 && "opacity-50 cursor-not-allowed")} strokeWidth={0.5} />
+            </button>
             <Typography variant="h5" fontWeight="semibold" className="mt-1">
               {guest.adults}
             </Typography>
@@ -39,14 +49,22 @@ const GuestAddModal = ({ isOpen, onClose }: GuestAddModalProps) => {
         </div>
         <div className="flex justify-between items-center px-4 py-2">
           <div className="space-y-0.5">
-            <Typography variant="h4" fontWeight="bold">
+            <Typography variant="h4" fontWeight="semibold">
               Children
             </Typography>
-            <Typography variant="h5" fontWeight="semibold">
+            <Typography variant="h5">
               Ages 2-12
             </Typography>
           </div>
           <div className="flex items-center space-x-3">
+            <button
+              onClick={() => {
+                if(children > 0)
+                decrementGuest("children")
+              }}
+            >
+              <MinusCircle className={cn(`h-8 w-8`, children < 1 && "opacity-50 cursor-not-allowed")} strokeWidth={0.5} />
+            </button>
             <Typography variant="h5" fontWeight="semibold" className="mt-1">
               {guest.children}
             </Typography>
@@ -61,14 +79,22 @@ const GuestAddModal = ({ isOpen, onClose }: GuestAddModalProps) => {
         </div>
         <div className="flex justify-between items-center px-4 py-2">
           <div className="space-y-0.5">
-            <Typography variant="h4" fontWeight="bold">
+            <Typography variant="h4" fontWeight="semibold">
               Infants
             </Typography>
-            <Typography variant="h5" fontWeight="semibold">
+            <Typography variant="h5">
               Under 2
             </Typography>
           </div>
           <div className="flex items-center space-x-3">
+            <button
+              onClick={() => {
+                if(infants > 0)
+                decrementGuest("infants")
+              }}
+            >
+              <MinusCircle className={cn(`h-8 w-8`, infants < 1 && "opacity-50 cursor-not-allowed")} strokeWidth={0.5} />
+            </button>
             <Typography variant="h5" fontWeight="semibold" className="mt-1">
               {guest.infants}
             </Typography>

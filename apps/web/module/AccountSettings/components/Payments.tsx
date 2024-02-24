@@ -4,7 +4,6 @@ import { LINK_ACCOUNT_YOUR_PAYMENT, LINK_GIFT } from "@/common/constants/links"
 import { useRouter } from "next/navigation"
 import React, { Fragment, useState } from "react"
 import AddCardDetailModal from "./modals/AddCardDetailModal"
-import mastercard from "@/common/assets/mastercard.png"
 import Image from "next/image"
 import { Input } from "@/common/components/ui/Input"
 import { Popover, Transition } from "@headlessui/react"
@@ -21,7 +20,8 @@ import useSessionStore from "@/common/store/useSessionStore"
 import { Spinner } from "@/common/components/ui/Spinner"
 import { APP_NAME } from "@repo/constants"
 import { EncryptionService } from "@repo/services"
-import valid from "card-validator"
+import cardIconMap from "@/common/helpers/cardIconMap"
+import { LucideCreditCard, LucideMoreHorizontal } from "lucide-react"
 
 const Payments = () => {
   const router = useRouter()
@@ -71,11 +71,6 @@ const Payments = () => {
       toast.error(String(err))
     },
   }
-  const card = paymentMethods?.items ? paymentMethods?.items[0]?.cardInfo : "";
-  const validateCard = decryptCard.decrypt(card);
-  // @ts-expect-error
-  const numberValidation = valid.number(validateCard?.cardNumber);
-  console.log('validate', numberValidation)
 
   return (
     <>
@@ -105,32 +100,30 @@ const Payments = () => {
                   className="flex my-4 py-5 border-y border-y-text-100 justify-between"
                 >
                   <div className="flex gap-4">
-                    <Image
-                      src={mastercard}
-                      width={500}
-                      height={500}
-                      className="h-8 w-auto"
-                      alt="mastercard"
-                    />
+                    {cardIconMap.hasOwnProperty(paymentMethod.cardType) ? (
+                      <Image
+                        // @ts-expect-error
+                        src={cardIconMap[paymentMethod.cardType]}
+                        width={500}
+                        height={500}
+                        className="h-8 w-auto"
+                        alt="mastercard"
+                      />
+                    ) : <LucideCreditCard className="h-7 w-7" strokeWidth={1.5} />}
                     <div className="text-sm">
                       <Typography>
-                        MasterCard {""}
                         <span className="font-medium">
-                          *********
-                          {decryptCard
-                            .decrypt(paymentMethod?.cardInfo)
-                            //@ts-ignore
-                            ?.cardNumber.slice(-3)}{" "}
+                          ************{paymentMethod.lastFour}
                         </span>{" "}
                         {paymentMethod.isDefault ? (
-                          <span className="bg-text-50 font-semibold ml-2 px-2 py-1">
+                          <span className="bg-primary-100 text-primary-800 ml-2 px-2 py-1 rounded-md text-sm font-semibold">
                             Default
                           </span>
                         ) : (
                           ""
                         )}
                       </Typography>
-                      <Typography>
+                      <Typography className="text-text-200">
                         Expiration:{" "}
                         <span className="font-medium">
                           {
@@ -151,12 +144,10 @@ const Payments = () => {
                           <span className="sr-only">Loading...</span>
                         </div>
                       ) : (
-                        <span className="place-self-center select-none text-xs">
-                          •••
-                        </span>
+                        <LucideMoreHorizontal className="place-self-center select-none text-xs"/>
                       )}
                     </Popover.Button>
-                    {popPanelIsVisible && (
+
                       <Transition
                         as={Fragment}
                         enter="transition ease-out duration-200"
@@ -166,33 +157,31 @@ const Payments = () => {
                         leaveFrom="opacity-100 translate-y-0"
                         leaveTo="opacity-0 translate-y-1"
                       >
-                        <Popover.Panel className="absolute right-0 top-5 z-10 mt-5 flex w-screen max-w-max shadow-md">
-                          <div className="w-screen max-w-[200px] flex-auto bg-white text-sm leading-6 border border-gray-200 shadow-sm ring-transparent rounded-md cursor-pointer">
+                        <Popover.Panel className="absolute right-0 top-5 z-10 mt-5 flex w-screen max-w-max">
+                          <div className="flex flex-col bg-white text-sm leading-6 border border-gray-200 ring-transparent rounded-md cursor-pointer">
                             <button
-                              className="relative rounded hover:bg-gray-50 px-5 py-2"
+                              className="relative rounded hover:bg-gray-50 px-5 py-2 text-left"
                               onClick={() => {
-                                setPopPanelIsVisible(false)
                                 mutate(
                                   { id: paymentMethod.id, isDefault: true },
                                   callBackReqDefaultPaymentMethod
                                 )
                               }}
                             >
-                              Set default
+                              Set as default
                             </button>
                             <button
                               onClick={() => {
                                 setPaymentMethodId(paymentMethod.id as number)
                                 setRemovePaymentModal(true)
                               }}
-                              className="relative rounded hover:bg-gray-50 px-5 py-2"
+                              className="relative rounded hover:bg-gray-50 px-5 py-2 text-left"
                             >
                               Remove
                             </button>
                           </div>
                         </Popover.Panel>
                       </Transition>
-                    )}
                   </Popover>
                 </div>
               ))
@@ -257,7 +246,7 @@ const Payments = () => {
                   </Button>
                   <Button
                     onClick={toggleVisibility}
-                    variant={"outline"}
+                    variant="outlineDark"
                     type="button"
                   >
                     Cancel

@@ -30,7 +30,7 @@ const UserReviews = ({ reviews }: T_UserReviewsProps) => {
           />
         ))}
       </div>
-      <Button variant={"outline"} className="mt-8" onClick={openShowMoreModal}>
+      <Button variant="outlineDark" className="mt-8" onClick={openShowMoreModal}>
         Show All Reviews
       </Button>
       <UserReviewModal

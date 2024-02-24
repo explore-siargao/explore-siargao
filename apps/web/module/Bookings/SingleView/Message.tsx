@@ -25,10 +25,10 @@ const Message = () => {
               checkoutDesc={{
                 id: 1,
                 serviceFee: 1000,
-                durationCost: 2000,
+                durationCost: 125000,
                 descTotalBeforeTaxes: 3000,
-                totalBeforeTaxes: 4000,
-                titlePrice: 5000,
+                totalBeforeTaxes: 126000,
+                titlePrice: 126000,
               }}
             />
           </div>

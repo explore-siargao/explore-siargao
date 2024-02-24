@@ -17,6 +17,8 @@ import ModalContainerFooter from "@/common/components/ModalContainer/ModalContai
 import { Option, Select } from "@/common/components/ui/Select"
 import { COUNTRIES } from "@repo/constants"
 import { EncryptionService } from "@repo/services"
+import { Typography } from "@/common/components/ui/Typography"
+import Link from "next/link"
 
 interface CardDetailModal {
   isOpen: boolean
@@ -56,6 +58,7 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
         toast.error(String(err))
       },
     }
+    const cardValid = valid.number(formData.cardNumber);
     mutate(
       {
         cardInfo: encryptCard.encrypt({
@@ -65,6 +68,8 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
           zipCode: Number(formData.zipCode),
           countryRegion: formData.countryRegion,
         }),
+        cardType: cardValid?.card?.niceType ?? 'Visa',
+        lastFour: `${formData.cardNumber?.slice(-4)}`,
         userId: Number(userId),
       },
       callBackReq
@@ -119,7 +124,7 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
   return (
     <ModalContainer title="Add card details" size="sm" isOpen={isOpen} onClose={onClose}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="p-6 space-y-2">
+        <div className="px-6 pt-4 pb-6 space-y-2">
           <div className="flex gap-2">
             <Image
               src={mastercard}
@@ -261,6 +266,9 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
                 </Option>
               ))}
             </Select>
+          </div>
+          <div>
+            <Typography className="text-sm text-text-300">Your card information will be securely stored using the standard procedure stated by PCI Security Standards Council. If you want to know more about how we do it, you can go to this <Link href="https://listings.pcisecuritystandards.org/pdfs/pci_fs_data_storage.pdf" className="underline text-primary-700 hover:text-text-500" target="_blank">link</Link>.</Typography>
           </div>
         </div>
         <ModalContainerFooter

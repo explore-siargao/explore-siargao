@@ -46,7 +46,7 @@ const HostReviews = ({ name, reviewsCount, reviews }: HostReviewsProps) => {
           ))}
         </div>
         <Button
-          variant="outline"
+          variant="outlineDark"
           onClick={() => setOpenReviewsModal(true)}
           className="font-semibold text-[16px] w-full md:w-auto mt-7"
         >

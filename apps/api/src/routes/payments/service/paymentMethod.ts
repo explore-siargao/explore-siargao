@@ -4,7 +4,7 @@ import { Request, Response } from 'express'
 
 export const addPaymentMethod = async (req: Request, res: Response) => {
   const prisma = new PrismaClient()
-  const { cardInfo, cardType, hiddenCardNumber } = req.body
+  const { cardInfo, cardType, lastFour } = req.body
   const userId = Number(req.params.userId)
   try {
     const isUserExist =
@@ -21,7 +21,7 @@ export const addPaymentMethod = async (req: Request, res: Response) => {
             cardInfo,
             userId,
             cardType,
-            hiddenCardNumber
+            lastFour
           },
           include: {
             user: true,

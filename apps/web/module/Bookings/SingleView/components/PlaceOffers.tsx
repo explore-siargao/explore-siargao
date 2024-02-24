@@ -18,7 +18,7 @@ const PlaceOffers = ({ offers, group }: T_PlaceOfferProps) => {
         </div>
         <Button
           className="mt-5"
-          variant="outline"
+          variant="outlineDark"
           onClick={() => setShowMoreModalOpen(!showMoreModalOpen)}
         >
           Show all 8 amenities

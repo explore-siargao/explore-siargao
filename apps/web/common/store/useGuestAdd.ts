@@ -10,11 +10,12 @@ type T_GuestState = {
   guest: T_Guest
   updateGuest: (updatedGuest: Partial<T_Guest>) => void
   incrementGuest: (type: keyof T_Guest) => void
+  decrementGuest: (type: keyof T_Guest) => void
 }
 
 const useGuestAdd = create<T_GuestState>((set) => ({
   guest: {
-    adults: 0,
+    adults: 1,
     children: 0,
     infants: 0,
   },
@@ -27,6 +28,13 @@ const useGuestAdd = create<T_GuestState>((set) => ({
       guest: {
         ...state.guest,
         [type]: state.guest[type] + 1,
+      },
+    })),
+  decrementGuest: (type) =>
+    set((state) => ({
+      guest: {
+        ...state.guest,
+        [type]: state.guest[type] - 1,
       },
     })),
 }))

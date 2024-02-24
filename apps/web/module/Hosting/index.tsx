@@ -54,7 +54,7 @@ const HostingPage: React.FC<HostingPageProps> = ({ hostName }) => {
         <Title size={"default"} className="flex font-semibold mb-10">
           Welcome, {hostName}
           <div className="flex-grow" />
-          <Button variant={"outline"} className="flex items-end ">
+          <Button variant="outlineDark" className="flex items-end ">
             Complete your listing
           </Button>
         </Title>
