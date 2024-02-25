@@ -3,8 +3,8 @@ import React from "react"
 import { APP_NAME } from "@repo/constants"
 import { Metadata } from "next"
 import { ACCOMODATION } from "@/common/constants"
-import SingleView from "@/module/Bookings/SingleView"
-import { getRequest } from "@/common/helpers/getRequest"
+import Accommodation from "@/module/Accommodation"
+// import { getRequest } from "@/common/helpers/getRequest"
 
 export const metadata: Metadata = {
   title: `${ACCOMODATION} - ${APP_NAME}`,
@@ -15,7 +15,7 @@ const AccommodationPage = async () => {
   // const booking = await getRequest(`/bookings/1`)
   return (
     <AuthGuard>
-      <SingleView />
+      <Accommodation />
     </AuthGuard>
   )
 }

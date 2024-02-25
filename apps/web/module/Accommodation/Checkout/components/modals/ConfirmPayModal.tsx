@@ -1,4 +1,3 @@
-import Loading from "@/common/components/Loading"
 import ModalContainer from "@/common/components/ModalContainer"
 import React, { useEffect } from "react"
 import useAddBooking from "../../hooks/useAddBooking"
@@ -8,6 +7,7 @@ import useGuestsStore from "../../../store/useGuestsStore"
 import useCheckInOutDateStore from "../../../store/useCheckInOutDateStore"
 import { T_AddBooking } from "@repo/contract"
 import { useParams } from 'next/navigation'
+import { Spinner } from "@/common/components/ui/Spinner"
 
 interface ConfirmPayModalProps {
   isOpen: boolean
@@ -75,8 +75,8 @@ const ConfirmPayModal = ({
   }, [isOpen])
   return (
     <ModalContainer isOpen={isOpen} size="auto" title="Completing Booking...">
-      <div className="pb-20 pt-16 w-96">
-        <Loading/>
+      <div className={`flex h-full flex-1 flex-col justify-center items-center py-20 px-36`}>
+        <Spinner variant="primary" />
       </div>
     </ModalContainer>
   )

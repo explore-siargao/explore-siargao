@@ -22,7 +22,7 @@ const Wishlist = () => {
       </div>
       <div className="mt-4">
         {isPending ? (
-          <Spinner size={"md"}>Loading...</Spinner>
+          <Spinner variant="primary" size={"md"}>Loading...</Spinner>
         ) : (
           <>
             {data?.item?.length !== 0 ? (

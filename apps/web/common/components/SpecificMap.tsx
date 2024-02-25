@@ -3,6 +3,7 @@ import { MapContainer, TileLayer, CircleMarker, Marker } from "react-leaflet"
 import "leaflet/dist/leaflet.css"
 import { Icon } from "leaflet"
 import { Spinner } from "./ui/Spinner"
+
 interface SpecificMapProps {
   coordinates: [number, number]
   mapHeight: string
@@ -30,14 +31,14 @@ const SpecificMap = ({
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowMap(true)
-    }, 2000)
+    }, 1500)
     window.addEventListener("resize", HandleResize)
     return () => clearTimeout(timer)
   }, [HandleResize])
 
   return (
-    <div className="flex-1 block">
-      <div className={`${mapHeight} ${mapWidth}`}>
+    <div className="flex-1 block bg-primary-200">
+      <div className={`${mapHeight} ${mapWidth} relative`}>
         {showMap ? (
           <MapContainer
             //@ts-ignore
@@ -70,8 +71,8 @@ const SpecificMap = ({
             ></Marker>
           </MapContainer>
         ) : (
-          <div className="flex h-screen ">
-            <Spinner className="m-auto" variant={"primary"} size={"lg"} />
+          <div className={`flex h-full flex-1 flex-col justify-center items-center`}>
+            <Spinner variant="primary" />
           </div>
         )}
       </div>

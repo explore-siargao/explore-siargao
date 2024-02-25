@@ -76,7 +76,7 @@ const Payments = () => {
   return (
     <>
       {isPendingPaymentMethods ? (
-        <Spinner className="mt-5" />
+        <Spinner variant="primary" className="mt-5" />
       ) : (
         <div className="space-y-10 my-5">
           <div>
@@ -248,7 +248,7 @@ const Payments = () => {
                   </Button>
                   <Button
                     onClick={toggleVisibility}
-                    variant="outlineDark"
+                    variant="outline"
                     type="button"
                   >
                     Cancel

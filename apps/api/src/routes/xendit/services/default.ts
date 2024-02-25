@@ -16,7 +16,7 @@ export const getPaymentRequest = async (req: Request, res: Response) => {
   const id = req.query.id;
   if (id) {
     try {
-      const pr = await apiXendit.get(`/payment_requests/${id}`, {}, false, true)
+      const pr = await apiXendit.get(`/payment_requests/${id}`, undefined, true)
       res.json(response.success({
         item: pr,
       }))
@@ -37,7 +37,7 @@ export const getPaymentMethod = async (req: Request, res: Response) => {
   const id = req.query.id;
   if (id) {
     try {
-      const pm = await apiXendit.get(`/payment_methods/${id}`, {}, false, true)
+      const pm = await apiXendit.get(`/payment_methods/${id}`, undefined, true)
       res.json(response.success({
         item: pm,
       }))
@@ -64,15 +64,15 @@ export const cardSingleUse = async (req: Request, res: Response) => {
         card: {
           currency: 'PHP',
           channel_properties: {
-            success_return_url: `${webUrl}/capture-payment/${bookingId}`,
-            failure_return_url: `${webUrl}/error-payment/${bookingId}`,
+            success_return_url: `${webUrl}/bookings/${bookingId}/success-payment`,
+            failure_return_url: `${webUrl}/bookings/${bookingId}/error-payment`,
           },
           card_information: {
             card_number: cardNumber,
             expiry_month: expirationMonth,
             expiry_year: expirationYear,
             cvv: cvv,
-            cardholder_name: cardholderName,
+            cardholder_name: cardholderName
           },
         },
         reusability: 'ONE_TIME_USE',
@@ -87,43 +87,14 @@ export const cardSingleUse = async (req: Request, res: Response) => {
   }
 }
 
-export const cardMultiUse = async (req: Request, res: Response) => {
-  try {
-    const data = {
-      type: 'CARD',
-      card: {
-        currency: 'PHP',
-        channel_properties: {
-          skip_three_d_secure: true,
-          success_return_url: webUrl,
-          failure_return_url: webUrl,
-        },
-        card_information: {
-          card_number: '4000000000001091',
-          expiry_month: '12',
-          expiry_year: '2027',
-          cvv: '123',
-          cardholder_name: 'John Doe',
-        },
-      },
-      reusability: 'MULTIPLE_USE',
-    }
-    const req = await apiXendit.post(`/v2/payment_methods`, data, false, true)
-    return res.json(response.success({ item: req }))
-  } catch (err: any) {
-    return res.json(response.error({ message: err.message }))
-  }
-}
-
 export const cardCreatePayment = async (req: Request, res: Response) => {
   const { paymentMethodId, amount } = req.body
   if (paymentMethodId && amount) {
     try {
       const data = {
-        amount: amount,
+        amount: Number(amount),
         currency: 'PHP',
         payment_method_id: paymentMethodId,
-        capture_method: 'MANUAL',
       }
       const req = await apiXendit.post(`/payment_requests`, data, false, true)
       return res.json(response.success({ item: req }))
@@ -171,8 +142,8 @@ export const gcashCreatePayment = async (req: Request, res: Response) => {
           ewallet: {
             channel_code: 'GCASH',
             channel_properties: {
-              success_return_url: `${webUrl}/success-payment/${bookingId}`,
-              failure_return_url: `${webUrl}/error-payment/${bookingId}`,
+              success_return_url: `${webUrl}/bookings/${bookingId}/success-payment`,
+              failure_return_url: `${webUrl}/bookings/${bookingId}/error-payment`,
             },
           },
           reusability: 'ONE_TIME_USE',

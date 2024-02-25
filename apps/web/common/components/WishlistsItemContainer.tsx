@@ -176,7 +176,7 @@ const WishlistsItemContainer = () => {
     <>
       {isPending ? (
         <div className="p-6">
-          <Spinner size="sm">Loading...</Spinner>
+          <Spinner variant="primary" size="sm">Loading...</Spinner>
         </div>
       ) : (
         <div className="w-full">

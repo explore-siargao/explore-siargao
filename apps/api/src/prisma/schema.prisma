@@ -35,7 +35,8 @@ model User {
   reservations     ReservationListing[]
   hostInfoId       Int?
   hostInfo         HostInfo?
-  Booking          Booking?
+  Booking          Booking[]
+  Transaction      Transaction[]
 }
 
 model PersonalInfo {
@@ -158,7 +159,7 @@ model Listing {
   reports              ReportListing[]
   wishes               WishGroup[]
   reservation          ReservationListing[]
-  Booking              Booking?
+  Booking              Booking[]
 
   @@index([basicAboutPlaceId])
   @@index([listingPriceId])
@@ -205,7 +206,7 @@ model PaymentMethod {
   isDefault   Boolean              @default(false)
   user        User                 @relation(fields: [userId], references: [id])
   reservation ReservationListing[]
-  Booking     Booking?
+  Booking     Booking[]
 
   @@index([userId])
 }
@@ -450,8 +451,12 @@ model Tax {
 
 model Booking {
   id                       Int            @id @default(autoincrement())
-  listingId                Int?           @unique
-  userId                   Int?           @unique
+  listingId                Int
+  Listing                  Listing?       @relation(fields: [listingId], references: [id])
+  transactionId            Int?           @unique
+  Transaction              Transaction?   @relation(fields: [transactionId], references: [id])
+  userId                   Int
+  User                     User?          @relation(fields: [userId], references: [id])
   fromDate                 DateTime
   toDate                   DateTime
   adultCount               Int
@@ -462,15 +467,32 @@ model Booking {
   cardType                 String?        @db.VarChar(255)
   lastFour                 String?        @db.VarChar(255)
   PaymentMethod            PaymentMethod? @relation(fields: [paymentMethodId], references: [id])
-  paymentMethodId          Int?           @unique
+  paymentMethodId          Int?
   xenditPaymentMethodId    String?        @unique @db.VarChar(255)
   xenditPaymentRequestId   String?        @unique @db.VarChar(255)
   xenditPaymentReferenceId String?        @unique @db.VarChar(255)
   createdAt                DateTime       @default(now())
   updatedAt                DateTime       @updatedAt
   deletedAt                DateTime?
-  Listing                  Listing?       @relation(fields: [listingId], references: [id])
-  User                     User?          @relation(fields: [userId], references: [id])
+
+  @@index([listingId])
+  @@index([userId])
+  @@index([transactionId])
+}
+
+model Transaction {
+  id                     Int               @id @default(autoincrement())
+  earnings               Float?            @db.Float
+  xenditPaymentRequestId String?           @unique @db.VarChar(255)
+  status                 TransactionStatus @default(Pending)
+  createdAt              DateTime          @default(now())
+  updatedAt              DateTime          @updatedAt
+  deletedAt              DateTime?
+  User                   User?             @relation(fields: [userId], references: [id])
+  userId                 Int?
+  Booking                Booking?
+
+  @@index([userId])
 }
 
 enum UserRole {
@@ -502,4 +524,10 @@ enum PaymentType {
   GCASH
   CreditDebit
   SavedCreditDebit
+}
+
+enum TransactionStatus {
+  Succeed
+  Failed
+  Pending
 }

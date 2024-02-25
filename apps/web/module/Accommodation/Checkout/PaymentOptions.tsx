@@ -5,9 +5,9 @@ import { cn } from '@/common/helpers/cn'
 import PaymentMethodForm from "@/module/Accommodation/Checkout/PaymentMethodForm"
 import useGetPaymentMethods from '@/module/AccountSettings/hooks/useGetPaymentMethods'
 import useSessionStore from '@/common/store/useSessionStore'
-import Loading from '@/common/components/Loading'
 import usePaymentInfoStore from './store/usePaymentInfoStore'
 import { E_PaymentType } from '@repo/contract'
+import { Spinner } from '@/common/components/ui/Spinner'
 
 export default function PaymentOptions() {
   const updatePaymentInfo = usePaymentInfoStore((state) => state.updatePaymentInfo);
@@ -46,7 +46,7 @@ export default function PaymentOptions() {
   return (
     <>
       {isPendingPaymentMethods ? (
-        <Loading />
+        <Spinner variant="primary" />
       ) : (
         <RadioGroup 
           value={selected ? selected : 1}
