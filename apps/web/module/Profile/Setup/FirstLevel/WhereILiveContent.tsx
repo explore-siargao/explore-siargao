@@ -95,7 +95,7 @@ const WhereILiveContent = ({ setIsOpen }: { setIsOpen: Dispatch<boolean> }) => {
                     onMouseEnter={() => handleLocationHover(location.loc)}
                     onMouseLeave={() => handleLocationHover(null)}
                     style={{ cursor: "pointer", position: "relative" }}
-                    tabIndex={0} 
+                    tabIndex={0}
                   >
                     {highlightMatch(location.loc)}
 
