@@ -11,9 +11,11 @@ import useVerifyForgotPassword, {
 } from "../hooks/useVerifyForgotPassword"
 import { signIn } from "next-auth/react"
 import toast from "react-hot-toast"
+import { EncryptionService } from "@repo/services/"
 
 type TForm = TVerifyForgotPassword & { confirmPassword: string }
 
+const encryptionService = new EncryptionService("password")
 const NewPassword = () => {
   const params = useSearchParams()
   const code = params.get("code")
@@ -45,7 +47,7 @@ const NewPassword = () => {
         {
           code: Number(code),
           email: email as string,
-          newPassword: newPassword,
+          newPassword: encryptionService.encrypt(newPassword),
         },
         callBackReq
       )

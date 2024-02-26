@@ -41,7 +41,7 @@ type LucideProps = {
   size?: string
 }
 
-export const iconsMap = {
+export const iconMap = {
   book: (props?: LucideProps) => <LucideBook {...props} />,
   mapPin: (props?: LucideProps) => <LucideMapPin {...props} />,
   alarmClock: (props?: LucideProps) => <LucideAlarmClock {...props} />,
@@ -79,4 +79,5 @@ export const iconsMap = {
   copyRight: (props?: LucideProps) => <LucideCopyright {...props} />,
   search: (props?: LucideProps) => <LucideSearch {...props} />,
   check: (props?: LucideProps) => <LucideCheck {...props} />,
+  wifi: (props?: LucideProps) => <LucideWifi {...props} />,
 }

@@ -46,6 +46,7 @@ const PersonalInfo = () => {
             streetAddress={personalInfo?.address?.streetAddress as string}
             zipCode={personalInfo?.address?.zipCode as number}
             peronalInfoId={personalInfo?.id as number}
+            aptSuite={personalInfo?.address?.aptSuite}
             id={personalInfo?.address.id as number}
           />
           <EmergencyContact

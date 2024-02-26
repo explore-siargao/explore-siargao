@@ -3,7 +3,7 @@ import React, { useState } from "react"
 import AccountSettingWrapper from "@/common/components/AccountSettingWrapper"
 import { Title } from "@/common/components/ui/Title"
 import { LINK_ACCOUNT } from "@/common/constants/links"
-import combineClasses from "@/common/helpers/combineClasses"
+import { cn } from "@/common/helpers/cn"
 import Payments from "./components/Payments"
 import Payouts from "./components/Payouts"
 import GuestContribution from "./components/GuestContribution"
@@ -44,7 +44,7 @@ const PaymentPayout = () => {
       <div className="hidden sm:block">
         <div className="flex border-b border-b-text-50">
           <button
-            className={combineClasses(
+            className={cn(
               tableState === 0
                 ? "border-text-900 text-text-900"
                 : "border-transparent text-text-500 hover:border-text-300 hover:text-text-700",
@@ -55,7 +55,7 @@ const PaymentPayout = () => {
             Payments
           </button>
           <button
-            className={combineClasses(
+            className={cn(
               tableState === 1
                 ? "border-text-900 text-text-900"
                 : "border-transparent text-text-500 hover:border-text-300 hover:text-text-700",
@@ -66,7 +66,7 @@ const PaymentPayout = () => {
             Payouts
           </button>
           <button
-            className={combineClasses(
+            className={cn(
               tableState === 2
                 ? "border-text-900 text-text-900"
                 : "border-transparent text-text-500 hover:border-text-300 hover:text-text-700",

@@ -105,11 +105,11 @@ const GovernmentId = ({ governmentId }: IPersonalInfo) => {
   ]
 
   return (
-    <div>
+    <div className="text-sm">
       {!contentState.isButtonClicked ? (
         <div className="flex justify-between py-5">
           <div>
-            <Typography variant={"p"}>Goverment ID</Typography>
+            <Typography variant={"p"}>Government ID</Typography>
             <Typography fontWeight={"light"}>
               {governmentId
                 ? `${governmentId.length} ID${governmentId.length > 1 ? "s" : ""} provided`
@@ -131,7 +131,7 @@ const GovernmentId = ({ governmentId }: IPersonalInfo) => {
       ) : (
         <div className="grid py-5">
           <div className="flex justify-between">
-            <Typography variant={"p"}>Goverment ID</Typography>
+            <Typography variant={"p"}>Government ID</Typography>
             <button
               className="underline self-start select-none"
               onClick={() =>

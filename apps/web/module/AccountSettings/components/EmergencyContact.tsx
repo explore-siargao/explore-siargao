@@ -1,6 +1,5 @@
 import { Button } from "@/common/components/ui/Button"
 import { Input } from "@/common/components/ui/Input"
-import { IEmergencyContact } from "@/common/types/global"
 import React, { useState } from "react"
 import { useForm } from "react-hook-form"
 import useAddEmergencyContact from "../hooks/useAddEmergencyContact"
@@ -8,7 +7,8 @@ import toast from "react-hot-toast"
 import { useQueryClient } from "@tanstack/react-query"
 import useRemoveEmergencyContact from "../hooks/useRemoveEmergencyContact"
 import { Typography } from "@/common/components/ui/Typography"
-import { T_EmergencyContact } from "@repo/contract"
+import { T_AddEmergencyContact, T_EmergencyContact } from "@repo/contract"
+import { Option, Select } from "@/common/components/ui/Select"
 
 type PersonalInfoProps = {
   isButtonClicked: boolean
@@ -31,7 +31,7 @@ const EmergencyContact = ({
     reset,
     handleSubmit,
     formState: { errors },
-  } = useForm<IEmergencyContact>()
+  } = useForm<T_AddEmergencyContact>()
   const { mutate, isPending } = useAddEmergencyContact(id)
   const {
     mutate: removeEmergencyContact,
@@ -40,7 +40,7 @@ const EmergencyContact = ({
   const queryClient = useQueryClient()
   const [emergencyContactFormIsVisible, setEmergencyContactFormIsVisible] =
     useState(false)
-  const onSubmit = (formData: IEmergencyContact) => {
+  const onSubmit = (formData: T_AddEmergencyContact) => {
     const callBackReq = {
       onSuccess: (data: any) => {
         if (!data.error) {
@@ -66,7 +66,7 @@ const EmergencyContact = ({
         queryClient.invalidateQueries({
           queryKey: ["session"],
         })
-        toast.success("Contact Successfully added")
+        toast.success("Contact successfully removed")
         reset()
       } else {
         toast.error(String(data.message))
@@ -160,6 +160,7 @@ const EmergencyContact = ({
                       {...register("name", {
                         required: "This field is required",
                       })}
+                      required
                       errorMessage={
                         errors.name?.type === "required"
                           ? errors?.name?.message
@@ -174,6 +175,7 @@ const EmergencyContact = ({
                       {...register("relationship", {
                         required: "This field is required",
                       })}
+                      required
                       disabled={isPending}
                       errorMessage={
                         errors.relationship?.type === "required"
@@ -182,17 +184,18 @@ const EmergencyContact = ({
                       }
                     />
                   </div>
-                  <select
-                    id="countries"
+                  <Select
+                    {...register("preferredLanguage", {
+                      required: "This field is required",
+                    })}
+                    label="Preferred Language"
                     disabled={isPending}
-                    className="pr-10 text-text-900 focus-within:z-10 focus-within:ring-2 focus-within:ring-text-600 text-sm rounded-lg block h-14 w-[490px] p-2.5 "
+                    required
                   >
-                    <option selected>Preferred language</option>
-                    <option value="ENG">English</option>
-                    <option value="TAG">Tagalog</option>
-                    <option value="CHINESE">中文 (繁體)</option>
-                    <option value="ITALIAN">Italian</option>
-                  </select>
+                    <Option value={""}>Select Language</Option>
+                    <Option value="English">English</Option>
+                    <Option value="Filipino">Filipino</Option>
+                  </Select>
                   <div className="grid grid-cols-2 gap-4">
                     <Input
                       id="email"
@@ -201,6 +204,7 @@ const EmergencyContact = ({
                         required: "This field ia required",
                       })}
                       disabled={isPending}
+                      required
                       errorMessage={
                         errors.email?.type === "required" ||
                         errors.phoneNumber?.type === "required"
@@ -214,6 +218,7 @@ const EmergencyContact = ({
                       {...register("phoneNumber", {
                         required: "This field ia required",
                       })}
+                      required
                       disabled={isPending}
                     />
                   </div>
@@ -232,9 +237,9 @@ const EmergencyContact = ({
               <div>
                 {!emergencyContactFormIsVisible && (
                   <Button
-                    variant={"secondary"}
+                    variant="secondary"
                     type="button"
-                    className="text-lg font-semibold p-6"
+                    className="font-semibold"
                     onClick={() => setEmergencyContactFormIsVisible(true)}
                   >
                     Add new emergency contact

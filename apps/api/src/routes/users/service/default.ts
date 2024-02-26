@@ -7,7 +7,7 @@ import {
   USER_NOT_EXIST,
 } from '@/common/constants'
 import { ResponseService } from '@/common/service/response'
-import { encryptKey } from '@/common/config'
+import { passwordEncryptKey } from '@/common/config'
 import { currencyByCountry } from '@/common/helpers/currencyByCountry'
 import { prisma } from '@/common/helpers/prismaClient'
 
@@ -25,11 +25,23 @@ export const getAllUsers = async (req: Request, res: Response) => {
         },
       },
     })
+    const modifyUsers = users.map((user) => ({
+      ...user,
+      personalInfo: {
+        ...user.personalInfo,
+        confirm: user.personalInfo?.confirm
+          ? JSON.parse(user.personalInfo?.confirm)
+          : null,
+        governmentId: user.personalInfo?.governmentId
+          ? JSON.parse(user.personalInfo.governmentId)
+          : null,
+      },
+    }))
     const addresses = await prisma.addresses.findMany({})
     if (users.length > 0) {
       res.json({
         error: false,
-        items: [users, addresses],
+        items: [modifyUsers, addresses],
         itemCount: users.length,
         message: '',
       })
@@ -45,62 +57,6 @@ export const getAllUsers = async (req: Request, res: Response) => {
     res.json({
       error: true,
       items: null,
-      itemCount: 0,
-      message: err.message,
-    })
-  }
-}
-
-export const addUser = async (req: Request, res: Response) => {
-  try {
-    const prisma = new PrismaClient()
-    const encryptPassword = CryptoJS.AES.encrypt(req.body.password, encryptKey)
-    const newUser = await prisma.user.create({
-      data: {
-        email: req.body.email,
-        registrationType: req.body.registrationType,
-        role: 'User',
-        password: req.body.password ? String(encryptPassword) : null,
-      },
-    })
-
-    const currency: string =
-      currencyByCountry[req.body.country as keyof typeof currencyByCountry]
-    const finalCurrency = currency ?? 'USD'
-    const newPersonalInfo = await prisma.personalInfo.create({
-      data: {
-        firstName: req.body.firstName,
-        middleName: '',
-        lastName: req.body.lastName,
-        birthDate: req.body.birthDate,
-        phoneNumber: '',
-        governmentId: '',
-        userId: newUser.id,
-        country: req.body.country,
-        language: 'English',
-        currency: finalCurrency,
-        confirm: JSON.stringify({
-          identity: false,
-          email: false,
-          phone: false,
-        }),
-      },
-    })
-
-    const [createUser, createpersonalInfo] = await Promise.all([
-      newUser,
-      newPersonalInfo,
-    ])
-    res.json({
-      error: false,
-      item: [createUser, createpersonalInfo],
-      itemCount: 1,
-      message: 'User Successfully Created',
-    })
-  } catch (err: any) {
-    res.json({
-      error: true,
-      item: 0,
       itemCount: 0,
       message: err.message,
     })
@@ -161,20 +117,23 @@ export const updatePassword = async (req: Request, res: Response) => {
     }
     const decryptPassword = CryptoJS.AES.decrypt(
       getUser.password as string,
-      encryptKey
+      passwordEncryptKey
     )
     const encryptCurrentPassword = CryptoJS.AES.encrypt(
       currentPassword,
-      encryptKey
+      passwordEncryptKey
     )
     const decryptCurrentPassword = CryptoJS.AES.decrypt(
       encryptCurrentPassword.toString(),
-      encryptKey
+      passwordEncryptKey
     )
     if (decryptCurrentPassword.toString() !== decryptPassword.toString()) {
       return res.json(response.error({ message: 'Wrong old password' }))
     }
-    const encryptNewPassword = CryptoJS.AES.encrypt(newPassword, encryptKey)
+    const encryptNewPassword = CryptoJS.AES.encrypt(
+      newPassword,
+      passwordEncryptKey
+    )
     const updateUserPassword = await prisma.user.update({
       where: {
         id: userId,
@@ -277,7 +236,12 @@ export const getUserProfile = async (req: Request, res: Response) => {
     role: getUser.role,
     countReviews: countReviews,
     ratings: Number.isNaN(rating) ? 0 : rating.toFixed(2),
-    listingWithReviews: getUser.listing,
+    listingWithReviews: getUser.listing.map((listing) => ({
+      ...listing,
+      images: JSON.parse(listing.images),
+      whereYoullBe: JSON.parse(listing.whereYoullBe),
+      whereYoullSleep: JSON.parse(listing.whereYoullSleep),
+    })),
     work: getUser.hostInfo?.work ? getUser.hostInfo.work : null,
     hostedSince: getUser.hostInfo?.hostedSince
       ? getUser.hostInfo.hostedSince
