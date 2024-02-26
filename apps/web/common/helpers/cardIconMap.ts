@@ -7,9 +7,9 @@ import JCB from "@/common/assets/jcb.png"
 const cardIconMap = {
   "Master Card": Mastercard,
   "American Express": Amex,
-  "Discover": Discover,
-  "Visa": Visa,
-  "JCB": JCB
+  Discover: Discover,
+  Visa: Visa,
+  JCB: JCB,
 }
 
-export default cardIconMap;
+export default cardIconMap

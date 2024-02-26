@@ -96,7 +96,9 @@ const Payments = () => {
             </Typography>
             {paymentMethods?.items?.length !== 0 ? (
               paymentMethods?.items?.map((paymentMethod) => {
-                const cardInfo = encryptionService.decrypt(paymentMethod.cardInfo) as T_CardInfo
+                const cardInfo = encryptionService.decrypt(
+                  paymentMethod.cardInfo
+                ) as T_CardInfo
                 return (
                   <div
                     key={paymentMethod.id}
@@ -112,7 +114,12 @@ const Payments = () => {
                           className="h-8 w-auto"
                           alt="mastercard"
                         />
-                      ) : <LucideCreditCard className="h-7 w-7" strokeWidth={1.5} />}
+                      ) : (
+                        <LucideCreditCard
+                          className="h-7 w-7"
+                          strokeWidth={1.5}
+                        />
+                      )}
                       <div className="text-sm">
                         <Typography>
                           <span className="font-medium">
@@ -129,17 +136,13 @@ const Payments = () => {
                         <Typography className="text-text-200">
                           Expiration:{" "}
                           <span className="font-medium">
-                            {
-                              `${cardInfo.expirationMonth}/${cardInfo.expirationYear}`
-                            }
+                            {`${cardInfo.expirationMonth}/${cardInfo.expirationYear}`}
                           </span>{" "}
                         </Typography>
                       </div>
                     </div>
                     <Popover className="relative">
-                      <Popover.Button
-                        className="items-center focus:outline-none px-2 py-1"
-                      >
+                      <Popover.Button className="items-center focus:outline-none px-2 py-1">
                         {isPending ? (
                           <div className="animate-spin w-4 h-4 border-2 border-current border-t-transparent text-primary-200 rounded-full">
                             <span className="sr-only">Loading...</span>

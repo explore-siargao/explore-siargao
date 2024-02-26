@@ -2,24 +2,29 @@ import { ApiService } from '@/common/service/api'
 import { ResponseService } from '@/common/service/response'
 import { Response, Request } from 'express'
 import { randomUUID } from 'crypto'
-import { REQUIRED_VALUE_EMPTY, UNKNOWN_ERROR_OCCURRED } from '@/common/constants'
+import {
+  REQUIRED_VALUE_EMPTY,
+  UNKNOWN_ERROR_OCCURRED,
+} from '@/common/constants'
 import { webUrl } from '@/common/config'
-import { EncryptionService } from "@repo/services"
+import { EncryptionService } from '@repo/services'
 import { T_CardInfo } from '@repo/contract'
 
 const response = new ResponseService()
 const apiXendit = new ApiService('xendit')
 
-const encryptionService = new EncryptionService("card");
+const encryptionService = new EncryptionService('card')
 
 export const getPaymentRequest = async (req: Request, res: Response) => {
-  const id = req.query.id;
+  const id = req.query.id
   if (id) {
     try {
       const pr = await apiXendit.get(`/payment_requests/${id}`, undefined, true)
-      res.json(response.success({
-        item: pr,
-      }))
+      res.json(
+        response.success({
+          item: pr,
+        })
+      )
     } catch (err: any) {
       const message = err.message ? err.message : UNKNOWN_ERROR_OCCURRED
       res.json(response.error({ message }))
@@ -34,13 +39,15 @@ export const getPaymentRequest = async (req: Request, res: Response) => {
 }
 
 export const getPaymentMethod = async (req: Request, res: Response) => {
-  const id = req.query.id;
+  const id = req.query.id
   if (id) {
     try {
       const pm = await apiXendit.get(`/payment_methods/${id}`, undefined, true)
-      res.json(response.success({
-        item: pm,
-      }))
+      res.json(
+        response.success({
+          item: pm,
+        })
+      )
     } catch (err: any) {
       const message = err.message ? err.message : UNKNOWN_ERROR_OCCURRED
       res.json(response.error({ message }))
@@ -57,7 +64,8 @@ export const getPaymentMethod = async (req: Request, res: Response) => {
 export const cardSingleUse = async (req: Request, res: Response) => {
   const { cardInfo, bookingId } = req.body
   if (cardInfo && bookingId) {
-    const { cardNumber, expirationMonth, expirationYear, cvv, cardholderName } = encryptionService.decrypt(cardInfo) as T_CardInfo;
+    const { cardNumber, expirationMonth, expirationYear, cvv, cardholderName } =
+      encryptionService.decrypt(cardInfo) as T_CardInfo
     try {
       const data = {
         type: 'CARD',
@@ -72,7 +80,7 @@ export const cardSingleUse = async (req: Request, res: Response) => {
             expiry_month: expirationMonth,
             expiry_year: expirationYear,
             cvv: cvv,
-            cardholder_name: cardholderName
+            cardholder_name: cardholderName,
           },
         },
         reusability: 'ONE_TIME_USE',

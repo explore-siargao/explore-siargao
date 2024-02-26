@@ -26,7 +26,7 @@ const ModalContainer = ({
         as="div"
         className="relative z-50"
         initialFocus={cancelButtonRef}
-        onClose={() => onClose ? onClose() : null}
+        onClose={() => (onClose ? onClose() : null)}
       >
         <Transition.Child
           as={Fragment}

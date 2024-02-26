@@ -21,7 +21,7 @@ export const addPaymentMethod = async (req: Request, res: Response) => {
             cardInfo,
             userId,
             cardType,
-            lastFour
+            lastFour,
           },
           include: {
             user: true,

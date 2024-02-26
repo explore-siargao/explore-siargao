@@ -8,8 +8,8 @@ import { prisma } from '@/common/helpers/prismaClient'
 import { T_AddBooking, Z_AddBooking, Z_Booking } from '@repo/contract'
 import { ApiService } from '@/common/service/api'
 
-const apiService = new ApiService();
-const XENDIT_ROOT_URL = "/api/xendit"
+const apiService = new ApiService()
+const XENDIT_ROOT_URL = '/api/xendit'
 
 const response = new ResponseService()
 export const getBookings = async (req: Request, res: Response) => {
@@ -18,12 +18,14 @@ export const getBookings = async (req: Request, res: Response) => {
       where: {
         userId: res.locals.user.id,
         deletedAt: null,
-      }
+      },
     })
-    res.json(response.success({
-      item: bookings,
-      allItemCount: bookings.length,
-    }))
+    res.json(
+      response.success({
+        item: bookings,
+        allItemCount: bookings.length,
+      })
+    )
   } catch (err: any) {
     const message = err.message ? err.message : UNKNOWN_ERROR_OCCURRED
     res.json(response.error({ message }))
@@ -33,16 +35,19 @@ export const getBookings = async (req: Request, res: Response) => {
 export const addBooking = async (req: Request, res: Response) => {
   const inputIsValid = Z_AddBooking.safeParse(req.body)
   if (inputIsValid.success) {
-    const { paymentType, cardInfo } = req.body as T_AddBooking;
+    const { paymentType, cardInfo } = req.body as T_AddBooking
     try {
-      if(paymentType === "GCASH") {
+      if (paymentType === 'GCASH') {
         const newBooking = await prisma.booking.create({
           data: {
             ...req.body,
             userId: res.locals.user.id,
           },
         })
-        const paymentRequest = await apiService.post(`${XENDIT_ROOT_URL}/gcash-create-payment`, { amount: 1500, bookingId: newBooking.id });
+        const paymentRequest = await apiService.post(
+          `${XENDIT_ROOT_URL}/gcash-create-payment`,
+          { amount: 1500, bookingId: newBooking.id }
+        )
         const newTransaction = await prisma.transaction.create({
           data: {
             userId: res.locals.user.id,
@@ -53,7 +58,7 @@ export const addBooking = async (req: Request, res: Response) => {
           where: {
             id: newBooking.id,
           },
-          data: { 
+          data: {
             ...req.body,
             transactionId: newTransaction.id,
             xenditPaymentRequestId: paymentRequest.item?.id,
@@ -68,19 +73,28 @@ export const addBooking = async (req: Request, res: Response) => {
             action: {
               type: 'GCASH_PAYMENT',
               description: paymentType,
-              link: paymentRequest.item?.actions[0].url
+              link: paymentRequest.item?.actions[0].url,
             },
           })
         )
-      } else if(paymentType === "CreditDebit" || paymentType === "SavedCreditDebit") {
+      } else if (
+        paymentType === 'CreditDebit' ||
+        paymentType === 'SavedCreditDebit'
+      ) {
         const newBooking = await prisma.booking.create({
           data: {
             ...req.body,
             userId: res.locals.user.id,
           },
         })
-        const paymentMethod = await apiService.post(`${XENDIT_ROOT_URL}/card-single-use`, { cardInfo, bookingId: newBooking.id });
-        const paymentRequest = await apiService.post(`${XENDIT_ROOT_URL}/card-create-payment`, { paymentMethodId: paymentMethod.item?.id, amount: 126000 });
+        const paymentMethod = await apiService.post(
+          `${XENDIT_ROOT_URL}/card-single-use`,
+          { cardInfo, bookingId: newBooking.id }
+        )
+        const paymentRequest = await apiService.post(
+          `${XENDIT_ROOT_URL}/card-create-payment`,
+          { paymentMethodId: paymentMethod.item?.id, amount: 126000 }
+        )
         const newTransaction = await prisma.transaction.create({
           data: {
             userId: res.locals.user.id,
@@ -91,12 +105,12 @@ export const addBooking = async (req: Request, res: Response) => {
           where: {
             id: newBooking.id,
           },
-          data: { 
+          data: {
             ...req.body,
             transactionId: newTransaction.id,
             xenditPaymentMethodId: paymentMethod.item?.id,
             xenditPaymentRequestId: paymentRequest.item?.id,
-            xenditPaymentReferenceId: paymentRequest.item?.reference_id
+            xenditPaymentReferenceId: paymentRequest.item?.reference_id,
           },
         })
         res.json(
@@ -106,7 +120,7 @@ export const addBooking = async (req: Request, res: Response) => {
             action: {
               type: 'CARD_PAYMENT',
               description: paymentType,
-              link: paymentRequest.item?.actions[0].url
+              link: paymentRequest.item?.actions[0].url,
             },
           })
         )
@@ -139,7 +153,7 @@ export const updateBooking = async (req: Request, res: Response) => {
         res.json(
           response.success({
             item: updatedBooking,
-            message: 'Successfully updated booking'
+            message: 'Successfully updated booking',
           })
         )
       } catch (err: any) {
@@ -171,13 +185,13 @@ export const deleteBooking = async (req: Request, res: Response) => {
           id: id,
         },
         data: {
-          deletedAt: new Date()
+          deletedAt: new Date(),
         },
       })
       res.json(
         response.success({
           item: deletedBooking,
-          message: 'Successfully updated booking'
+          message: 'Successfully updated booking',
         })
       )
     } catch (err: any) {

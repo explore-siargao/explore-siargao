@@ -17,7 +17,9 @@ import { T_CardInfo } from "@repo/contract"
 import usePaymentInfoStore from "./store/usePaymentInfoStore"
 
 const PaymentMethodForm = () => {
-  const updatePaymentInfo = usePaymentInfoStore((state) => state.updatePaymentInfo);
+  const updatePaymentInfo = usePaymentInfoStore(
+    (state) => state.updatePaymentInfo
+  )
   const {
     register,
     handleSubmit,
@@ -112,9 +114,7 @@ const PaymentMethodForm = () => {
             ...(errors.cardNumber === undefined
               ? []
               : [errors.cardNumber.message as string]),
-            ...(errors.cvv === undefined
-              ? []
-              : [errors.cvv.message as string]),
+            ...(errors.cvv === undefined ? [] : [errors.cvv.message as string]),
             ...(errors.expirationDate === undefined
               ? []
               : [errors.expirationDate.message as string]),
@@ -156,7 +156,10 @@ const PaymentMethodForm = () => {
               required: "This field is required",
               onChange: (e) => {
                 let value = e.target.value
-                updatePaymentInfo({ key: "expirationDate", value: e.target.value })
+                updatePaymentInfo({
+                  key: "expirationDate",
+                  value: e.target.value,
+                })
                 if (e.nativeEvent.inputType === "deleteContentBackward") {
                   value = value.slice(0, -2)
                   setValue("expirationDate", value)
@@ -202,7 +205,8 @@ const PaymentMethodForm = () => {
         // disabled= {isPending}
         {...register("cardholderName", {
           required: "This field is required",
-          onChange: (e) => updatePaymentInfo({ key: "cardholderName", value: e.target.value })
+          onChange: (e) =>
+            updatePaymentInfo({ key: "cardholderName", value: e.target.value }),
         })}
         required
       />
@@ -214,7 +218,8 @@ const PaymentMethodForm = () => {
         {...register("zipCode", {
           minLength: 4,
           required: "This field is required",
-          onChange: (e) => updatePaymentInfo({ key: "zipCode", value: e.target.value })
+          onChange: (e) =>
+            updatePaymentInfo({ key: "zipCode", value: e.target.value }),
         })}
         required
       />
@@ -222,7 +227,8 @@ const PaymentMethodForm = () => {
         <Select
           {...register("country", {
             required: "This field is required",
-            onChange: (e) => updatePaymentInfo({ key: "country", value: e.target.value })
+            onChange: (e) =>
+              updatePaymentInfo({ key: "country", value: e.target.value }),
           })}
           label="Country"
           required
@@ -236,7 +242,19 @@ const PaymentMethodForm = () => {
         </Select>
       </div>
       <div>
-        <Typography className="text-sm text-text-300">Your card information will be encrypted while in transit to our server and will be stored securely. If you want to know more about how we do it, you can go to this <Link href="https://listings.pcisecuritystandards.org/pdfs/pci_fs_data_storage.pdf" className="underline text-primary-700 hover:text-text-500" target="_blank">link</Link>.</Typography>
+        <Typography className="text-sm text-text-300">
+          Your card information will be encrypted while in transit to our server
+          and will be stored securely. If you want to know more about how we do
+          it, you can go to this{" "}
+          <Link
+            href="https://listings.pcisecuritystandards.org/pdfs/pci_fs_data_storage.pdf"
+            className="underline text-primary-700 hover:text-text-500"
+            target="_blank"
+          >
+            link
+          </Link>
+          .
+        </Typography>
       </div>
     </div>
   )

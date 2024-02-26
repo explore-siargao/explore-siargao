@@ -37,8 +37,8 @@ const CheckoutBox = ({ checkoutDesc }: CheckoutProcessProps) => {
   const [checkInOutCalendarModalIsOpen, setCheckInOutCalendarModalIsOpen] =
     useState(false)
   const dateRange = useCheckInOutDateStore((state) => state.dateRange)
-  const { adults, children, infants } = useGuestAdd((state) => state.guest);
-  const totalGuest = adults+children+infants;
+  const { adults, children, infants } = useGuestAdd((state) => state.guest)
+  const totalGuest = adults + children + infants
   return (
     <div className="border rounded-xl shadow-lg px-6 pb-6 pt-5 flex flex-col divide-text-100 overflow-y-auto mb-5">
       <span className="text-xl font-semibold mb-4">
@@ -79,19 +79,19 @@ const CheckoutBox = ({ checkoutDesc }: CheckoutProcessProps) => {
           </div>
         </div>
         <div
-            className="relative rounded-md px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-text-200 focus-within:z-10 focus-within:ring-2 focus-within:ring-text-600 hover:cursor-pointer"
-            onClick={() => setIsGuestsModalOpen(true)}
+          className="relative rounded-md px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-text-200 focus-within:z-10 focus-within:ring-2 focus-within:ring-text-600 hover:cursor-pointer"
+          onClick={() => setIsGuestsModalOpen(true)}
+        >
+          <label
+            htmlFor="checkout"
+            className="block text-xs font-medium text-text-900 hover:cursor-pointer"
           >
-            <label
-              htmlFor="checkout"
-              className="block text-xs font-medium text-text-900 hover:cursor-pointer"
-            >
-              Guests <Asterisk />
-            </label>
-            <span className="block w-full border-0 p-0 text-text-900 placeholder:text-text-400 focus:ring-0 sm:text-sm sm:leading-6 bg-transparent disabled:opacity-50">
-              {`${totalGuest} guest${totalGuest > 1 ? "s" : ""}`}
-            </span>
-          </div>
+            Guests <Asterisk />
+          </label>
+          <span className="block w-full border-0 p-0 text-text-900 placeholder:text-text-400 focus:ring-0 sm:text-sm sm:leading-6 bg-transparent disabled:opacity-50">
+            {`${totalGuest} guest${totalGuest > 1 ? "s" : ""}`}
+          </span>
+        </div>
         <Button
           variant="primary"
           onClick={() => router.push("/accommodation/1/checkout")}

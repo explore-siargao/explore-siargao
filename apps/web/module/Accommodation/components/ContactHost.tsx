@@ -31,9 +31,7 @@ const ContactHost = ({ hostName, listingName }: ContactHostProps) => {
       <div className="py-6">
         <Typography variant={"h2"}>Message the Host</Typography>
         <Textarea className="h-40 my-6 focus:border-primary-700 focus:border-3 focus:ring-primary-700 " />
-        <Button variant="outline">
-          Send Message
-        </Button>
+        <Button variant="outline">Send Message</Button>
       </div>
     </div>
   )

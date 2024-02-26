@@ -13,7 +13,7 @@ const CheckoutPage = () => {
     <AuthGuard>
       <Checkout />
     </AuthGuard>
-  );
+  )
 }
 
 export default CheckoutPage

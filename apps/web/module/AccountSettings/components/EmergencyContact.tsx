@@ -207,7 +207,7 @@ const EmergencyContact = ({
                       required
                       errorMessage={
                         errors.email?.type === "required" ||
-                          errors.phoneNumber?.type === "required"
+                        errors.phoneNumber?.type === "required"
                           ? "Email and Phone number is required"
                           : ""
                       }

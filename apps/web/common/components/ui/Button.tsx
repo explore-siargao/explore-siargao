@@ -18,8 +18,7 @@ const buttonVariants = cva(
           "bg-warning-500 text-white hover:bg-warning-600 focus:ring-2 focus:ring-offset-2 focus:ring-warning-300",
         success:
           "bg-success-700 text-white hover:bg-success-600 focus:ring-2 focus:ring-offset-2 focus:ring-success-300",
-        outline:
-          "border border-text-300 bg-transparent hover:bg-text-50",
+        outline: "border border-text-300 bg-transparent hover:bg-text-50",
         secondary:
           "bg-secondary-500 text-white hover:bg-secondary-600 focus:ring-2 focus:ring-offset-2 focus:ring-secondary-300",
         ghost: "text-text-600 hover:text-text-400",

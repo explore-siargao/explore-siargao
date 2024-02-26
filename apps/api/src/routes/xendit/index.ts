@@ -8,7 +8,7 @@ import {
   cardInitiatePayment,
   gcashCreatePayment,
   getPaymentRequest,
-  getPaymentMethod
+  getPaymentMethod,
 } from './services/default'
 
 const router = express.Router()

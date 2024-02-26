@@ -27,16 +27,17 @@ const Address = ({
     isButtonClicked: false,
     contentId: "",
   })
-  const { register, reset, handleSubmit, getValues } = useForm<T_AddUpdateAddress>({
-    values: {
-      streetAddress,
-      country,
-      city,
-      stateProvince,
-      zipCode,
-      aptSuite
-    }
-  })
+  const { register, reset, handleSubmit, getValues } =
+    useForm<T_AddUpdateAddress>({
+      values: {
+        streetAddress,
+        country,
+        city,
+        stateProvince,
+        zipCode,
+        aptSuite,
+      },
+    })
   const { mutate, isPending } = useAddAddress(id as number)
   const queryClient = useQueryClient()
 
@@ -106,23 +107,23 @@ const Address = ({
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="my-4 space-y-4">
               <div className="grid grid-cols-2 gap-4">
-              <Select
-                {...register("country", {
-                  required: "This field is required",
-                })}
-                label="Country"
-                disabled={isPending}
-                required
-                className="col-span-1"
-              >
-                <Option value={""}>Select Country</Option>
-                {COUNTRIES.map((country) => (
-                  <Option key={country.code} value={country.code}>
-                    {country.name}
-                  </Option>
-                ))}
-              </Select>
-              <Input
+                <Select
+                  {...register("country", {
+                    required: "This field is required",
+                  })}
+                  label="Country"
+                  disabled={isPending}
+                  required
+                  className="col-span-1"
+                >
+                  <Option value={""}>Select Country</Option>
+                  {COUNTRIES.map((country) => (
+                    <Option key={country.code} value={country.code}>
+                      {country.name}
+                    </Option>
+                  ))}
+                </Select>
+                <Input
                   id="streetAddress"
                   label="Street address"
                   disabled={isPending}

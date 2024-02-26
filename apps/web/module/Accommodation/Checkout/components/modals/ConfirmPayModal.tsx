@@ -6,25 +6,24 @@ import usePaymentInfoStore from "../../store/usePaymentInfoStore"
 import useGuestsStore from "../../../store/useGuestsStore"
 import useCheckInOutDateStore from "../../../store/useCheckInOutDateStore"
 import { T_AddBooking } from "@repo/contract"
-import { useParams } from 'next/navigation'
+import { useParams } from "next/navigation"
 import { Spinner } from "@/common/components/ui/Spinner"
 
 interface ConfirmPayModalProps {
   isOpen: boolean
 }
 
-const ConfirmPayModal = ({
-  isOpen,
-}: ConfirmPayModalProps) => {
-  const params = useParams<{ listingId: string; }>();
-  const checkInCheckOut = useCheckInOutDateStore((state) => state);
-  const guests = useGuestsStore((state) => state);
-  const paymentInfo = usePaymentInfoStore((state) => state);
-  const { mutate } = useAddBooking();
+const ConfirmPayModal = ({ isOpen }: ConfirmPayModalProps) => {
+  const params = useParams<{ listingId: string }>()
+  const checkInCheckOut = useCheckInOutDateStore((state) => state)
+  const guests = useGuestsStore((state) => state)
+  const paymentInfo = usePaymentInfoStore((state) => state)
+  const { mutate } = useAddBooking()
   useEffect(() => {
-    if(isOpen) {
-      const { cardInfo, lastFour, cardType, paymentType, paymentMethodId } = paymentInfo;
-      let payload = null;
+    if (isOpen) {
+      const { cardInfo, lastFour, cardType, paymentType, paymentMethodId } =
+        paymentInfo
+      let payload = null
       const defaultPayload = {
         listingId: Number(params.listingId),
         paymentType: paymentType,
@@ -32,15 +31,15 @@ const ConfirmPayModal = ({
         childrenCount: guests.guest.children,
         infantCount: guests.guest.infants,
         fromDate: checkInCheckOut.dateRange.from,
-        toDate: checkInCheckOut.dateRange.to
-      };
+        toDate: checkInCheckOut.dateRange.to,
+      }
       if (paymentType === "CreditDebit") {
         payload = {
           ...defaultPayload,
           cardInfo,
           lastFour,
-          cardType
-        };
+          cardType,
+        }
       } else if (paymentType === "SavedCreditDebit") {
         payload = {
           ...defaultPayload,
@@ -48,16 +47,16 @@ const ConfirmPayModal = ({
           cardInfo,
           lastFour,
           cardType,
-        };
+        }
       } else {
         payload = {
           ...defaultPayload,
-        };
+        }
       }
       const callBackReq = {
         onSuccess: (data: any) => {
           if (!data.error) {
-            if(data.action && data.action.link) {
+            if (data.action && data.action.link) {
               window.location.replace(data.action.link)
             } else {
               toast.success(data.message)
@@ -75,7 +74,9 @@ const ConfirmPayModal = ({
   }, [isOpen])
   return (
     <ModalContainer isOpen={isOpen} size="auto" title="Completing Booking...">
-      <div className={`flex h-full flex-1 flex-col justify-center items-center py-20 px-36`}>
+      <div
+        className={`flex h-full flex-1 flex-col justify-center items-center py-20 px-36`}
+      >
         <Spinner variant="primary" />
       </div>
     </ModalContainer>

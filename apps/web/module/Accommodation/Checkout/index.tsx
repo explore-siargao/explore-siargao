@@ -24,26 +24,44 @@ import toast from "react-hot-toast"
 const encryptionService = new EncryptionService("card")
 
 const Checkout = () => {
-  const paymentInfo = usePaymentInfoStore((state) => state);
+  const paymentInfo = usePaymentInfoStore((state) => state)
   const session = useSessionStore((state) => state)
-  const { data: paymentMethods, isPending: isPendingPaymentMethods } = useGetPaymentMethods(session.id);
-  const updatePaymentInfo = usePaymentInfoStore((state) => state.updatePaymentInfo);
+  const { data: paymentMethods, isPending: isPendingPaymentMethods } =
+    useGetPaymentMethods(session.id)
+  const updatePaymentInfo = usePaymentInfoStore(
+    (state) => state.updatePaymentInfo
+  )
   const [isGuestsModalOpen, setIsGuestsModalOpen] = useState(false)
   const [isConfirmPayModalOpen, setIsConfirmPayModalOpen] = useState(false)
   const [checkInOutCalendarModalIsOpen, setCheckInOutCalendarModalIsOpen] =
     useState(false)
   const dateRange = useCheckInOutDateStore((state) => state.dateRange)
-  const { adults, children, infants } = useGuestAdd((state) => state.guest);
-  const totalGuest = adults + children + infants;
+  const { adults, children, infants } = useGuestAdd((state) => state.guest)
+  const totalGuest = adults + children + infants
   const validatePayment = () => {
-    let isValid = false;
-    const { expirationDate, cardNumber, cardholderName, cvv, country, zipCode, paymentMethodId } = paymentInfo;
+    let isValid = false
+    const {
+      expirationDate,
+      cardNumber,
+      cardholderName,
+      cvv,
+      country,
+      zipCode,
+      paymentMethodId,
+    } = paymentInfo
     if (paymentInfo.paymentType === "GCASH") {
-      isValid = true;
+      isValid = true
     } else if (paymentInfo.paymentType === "CreditDebit") {
-      if(expirationDate && cardNumber && cardholderName && cvv && country && zipCode) {
-        const cardValid = valid.number(cardNumber);
-        const splitExpiration = expirationDate.split("/");
+      if (
+        expirationDate &&
+        cardNumber &&
+        cardholderName &&
+        cvv &&
+        country &&
+        zipCode
+      ) {
+        const cardValid = valid.number(cardNumber)
+        const splitExpiration = expirationDate.split("/")
         const encryptedCard = encryptionService.encrypt({
           cardNumber: cardNumber?.replace(/\s/g, ""),
           cvv: cvv,
@@ -55,15 +73,29 @@ const Checkout = () => {
         })
         updatePaymentInfo({ key: "cardInfo", value: encryptedCard })
         updatePaymentInfo({ key: "lastFour", value: cardNumber?.slice(-4) })
-        updatePaymentInfo({ key: "cardType", value: cardValid?.card?.niceType ?? 'Visa' })
+        updatePaymentInfo({
+          key: "cardType",
+          value: cardValid?.card?.niceType ?? "Visa",
+        })
         isValid = true
       }
     } else if (paymentInfo.paymentType === "SavedCreditDebit") {
-      const selectedPaymentMethod = paymentMethods?.items?.find((item) => item.id === paymentMethodId);
-      if(selectedPaymentMethod) {
-        updatePaymentInfo({ key: "cardInfo", value: selectedPaymentMethod?.cardInfo })
-        updatePaymentInfo({ key: "lastFour", value: selectedPaymentMethod?.lastFour })
-        updatePaymentInfo({ key: "cardType", value: selectedPaymentMethod?.cardType })
+      const selectedPaymentMethod = paymentMethods?.items?.find(
+        (item) => item.id === paymentMethodId
+      )
+      if (selectedPaymentMethod) {
+        updatePaymentInfo({
+          key: "cardInfo",
+          value: selectedPaymentMethod?.cardInfo,
+        })
+        updatePaymentInfo({
+          key: "lastFour",
+          value: selectedPaymentMethod?.lastFour,
+        })
+        updatePaymentInfo({
+          key: "cardType",
+          value: selectedPaymentMethod?.cardType,
+        })
         isValid = true
       }
     }
@@ -81,7 +113,7 @@ const Checkout = () => {
       </div>
       <div className="flex flex-col xl:flex-row gap-8 xl:gap-16 mt-8">
         <div className="block xl:hidden">
-          <ListingPriceDetailsBox/>
+          <ListingPriceDetailsBox />
         </div>
         <div className="flex-1 flex flex-col gap-y-4">
           <Typography variant={"h2"} fontWeight="semibold">
@@ -90,7 +122,13 @@ const Checkout = () => {
           <div className="flex w-full flex-col">
             <div className="flex justify-between w-full">
               <div className="font-semibold">Dates</div>
-              <button type="button" className="underline hover:text-text-400 text-sm" onClick={() => setCheckInOutCalendarModalIsOpen(true)}>Edit</button>
+              <button
+                type="button"
+                className="underline hover:text-text-400 text-sm"
+                onClick={() => setCheckInOutCalendarModalIsOpen(true)}
+              >
+                Edit
+              </button>
             </div>
             <Typography className="text-sm">
               {dateRange?.from != undefined
@@ -105,7 +143,13 @@ const Checkout = () => {
           <div className="flex w-full flex-col">
             <div className="flex justify-between w-full">
               <div className="font-semibold">Guests</div>
-              <button type="button" className="underline hover:text-text-400 text-sm" onClick={() => setIsGuestsModalOpen(true)}>Edit</button>
+              <button
+                type="button"
+                className="underline hover:text-text-400 text-sm"
+                onClick={() => setIsGuestsModalOpen(true)}
+              >
+                Edit
+              </button>
             </div>
             <Typography className="text-sm">{`${totalGuest} guest${totalGuest > 1 ? "s" : ""}`}</Typography>
           </div>
@@ -165,8 +209,8 @@ const Checkout = () => {
               variant="primary"
               size="lg"
               onClick={() => {
-                const isPaymentValid = validatePayment();
-                if(isPaymentValid) {
+                const isPaymentValid = validatePayment()
+                if (isPaymentValid) {
                   setIsConfirmPayModalOpen(true)
                 } else {
                   toast.error("Make sure your payment is complete and valid")
@@ -179,7 +223,7 @@ const Checkout = () => {
         </div>
         <div className="hidden xl:block flex-1 xl:flex-none xl:w-1/3 md:relative">
           <div className="md:sticky md:top-0">
-            <ListingPriceDetailsBox/>
+            <ListingPriceDetailsBox />
           </div>
         </div>
       </div>
@@ -191,9 +235,7 @@ const Checkout = () => {
         isOpen={isGuestsModalOpen}
         onClose={() => setIsGuestsModalOpen(false)}
       />
-      <ConfirmPayModal
-        isOpen={isConfirmPayModalOpen}
-      />
+      <ConfirmPayModal isOpen={isConfirmPayModalOpen} />
     </WidthWrapper>
   )
 }

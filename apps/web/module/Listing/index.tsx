@@ -17,9 +17,7 @@ export type BookingProps = {
 }
 
 const Listing = (props: BookingProps) => {
-  return (
-    <BoxContainer {...props} />
-  )
+  return <BoxContainer {...props} />
 }
 
 export default Listing

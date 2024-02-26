@@ -39,7 +39,7 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
     formState: { errors },
   } = useForm<T_CardInfo & { expirationDate: string }>()
   const queryClient = useQueryClient()
-  const encryptCard = new EncryptionService("card");
+  const encryptCard = new EncryptionService("card")
   const onSubmit = (formData: T_CardInfo & { expirationDate: string }) => {
     const callBackReq = {
       onSuccess: (data: any) => {
@@ -58,8 +58,8 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
         toast.error(String(err))
       },
     }
-    const cardValid = valid.number(formData.cardNumber);
-    const splitExpiration = formData.expirationDate.split("/");
+    const cardValid = valid.number(formData.cardNumber)
+    const splitExpiration = formData.expirationDate.split("/")
     mutate(
       {
         cardInfo: encryptCard.encrypt({
@@ -71,7 +71,7 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
           country: formData.country,
           zipCode: formData.zipCode,
         }),
-        cardType: cardValid?.card?.niceType ?? 'Visa',
+        cardType: cardValid?.card?.niceType ?? "Visa",
         lastFour: `${formData.cardNumber?.slice(-4)}`,
         userId: Number(userId),
       },
@@ -125,7 +125,12 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
   }
 
   return (
-    <ModalContainer title="Add card details" size="sm" isOpen={isOpen} onClose={onClose}>
+    <ModalContainer
+      title="Add card details"
+      size="sm"
+      isOpen={isOpen}
+      onClose={onClose}
+    >
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="px-6 pt-4 pb-6 space-y-2">
           <div className="flex gap-2">
@@ -281,7 +286,19 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
             </Select>
           </div>
           <div>
-            <Typography className="text-sm text-text-300">Your card information will be encrypted while in transit to our server and will be stored securely. If you want to know more about how we do it, you can go to this <Link href="https://listings.pcisecuritystandards.org/pdfs/pci_fs_data_storage.pdf" className="underline text-primary-700 hover:text-text-500" target="_blank">link</Link>.</Typography>
+            <Typography className="text-sm text-text-300">
+              Your card information will be encrypted while in transit to our
+              server and will be stored securely. If you want to know more about
+              how we do it, you can go to this{" "}
+              <Link
+                href="https://listings.pcisecuritystandards.org/pdfs/pci_fs_data_storage.pdf"
+                className="underline text-primary-700 hover:text-text-500"
+                target="_blank"
+              >
+                link
+              </Link>
+              .
+            </Typography>
           </div>
         </div>
         <ModalContainerFooter
