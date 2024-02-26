@@ -107,11 +107,11 @@ export const cardCreatePayment = async (req: Request, res: Response) => {
 }
 
 export const cardInitiatePayment = async (req: Request, res: Response) => {
-  const { paymentRequestId } = req.body
-  if (paymentRequestId) {
+  const { paymentRequestId, amount } = req.body
+  if (paymentRequestId && amount) {
     try {
       const data = {
-        capture_amount: 1500,
+        capture_amount: amount,
         reference_id: `capture-reference-${randomUUID}`,
       }
       const req = await apiXendit.post(

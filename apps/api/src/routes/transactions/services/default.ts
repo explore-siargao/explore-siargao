@@ -46,8 +46,9 @@ export const updateTransaction = async (req: Request, res: Response) => {
         "AWAITING_CAPTURE": E_TransactionStatus.Pending,
         "FAILED": E_TransactionStatus.Failed,
         "SUCCEEDED": E_TransactionStatus.Succeed,
+        "REFUNDED": E_TransactionStatus.Refunded,
       }
-      const prStatus = paymentRequest.item?.status as 'AWAITING_CAPTURE' | 'FAILED' | 'SUCCEEDED'
+      const prStatus = paymentRequest.item?.status as 'AWAITING_CAPTURE' | 'FAILED' | 'SUCCEEDED' | 'REFUNDED'
       const status = statusOption[prStatus ?? "AWAITING_CAPTURE"]
       const updatedTransaction = await prisma.transaction.update({
         where: {

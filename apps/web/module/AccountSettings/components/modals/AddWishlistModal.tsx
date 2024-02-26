@@ -73,8 +73,8 @@ const AddWishlistModal = ({
         isOpen={showModal}
       >
         {wishGroupIsPending ? (
-          <Spinner variant="primary"
-            variant={"primary"}
+          <Spinner
+            variant="primary"
             size={"lg"}
             className="mx-auto my-auto d-blockr"
           >

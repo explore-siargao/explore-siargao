@@ -32,7 +32,6 @@ model User {
   MultiFactorAuth  MultiFactorAuth[]
   Coupons          Coupon[]
   taxId            Int?
-  reservations     ReservationListing[]
   hostInfoId       Int?
   hostInfo         HostInfo?
   Booking          Booking[]
@@ -158,7 +157,6 @@ model Listing {
   cancellationPolicies CancellationPolicy[]
   reports              ReportListing[]
   wishes               WishGroup[]
-  reservation          ReservationListing[]
   Booking              Booking[]
 
   @@index([basicAboutPlaceId])
@@ -205,34 +203,9 @@ model PaymentMethod {
   deletedAt   DateTime?
   isDefault   Boolean              @default(false)
   user        User                 @relation(fields: [userId], references: [id])
-  reservation ReservationListing[]
   Booking     Booking[]
 
   @@index([userId])
-}
-
-model ReservationListing {
-  id              Int               @id @default(autoincrement())
-  listingId       Int
-  listing         Listing           @relation(fields: [listingId], references: [id])
-  userId          Int
-  user            User              @relation(fields: [userId], references: [id])
-  reservationDate String            @db.VarChar(50)
-  guestCount      String            @db.LongText()
-  totalFee        Int               @db.Int()
-  currentFee      Int               @db.Int()
-  paymentMethodId Int
-  paymentMethod   PaymentMethod     @relation(fields: [paymentMethodId], references: [id])
-  isNight         Boolean           @default(false)
-  status          ReservationStatus @default(Pending)
-  messageToHost   String?           @db.LongText()
-  createdAt       DateTime          @default(now())
-  updatedAt       DateTime          @updatedAt
-  deletedAt       DateTime?
-
-  @@index([listingId])
-  @@index([userId])
-  @@index([paymentMethodId])
 }
 
 model ReportListing {
@@ -478,6 +451,7 @@ model Booking {
   @@index([listingId])
   @@index([userId])
   @@index([transactionId])
+  @@index([paymentMethodId])
 }
 
 model Transaction {
@@ -499,13 +473,6 @@ enum UserRole {
   Admin
   Host
   User
-}
-
-enum ReservationStatus {
-  Approved
-  Pending
-  Declined
-  Refund
 }
 
 enum RegistrationType {
@@ -530,4 +497,5 @@ enum TransactionStatus {
   Succeed
   Failed
   Pending
+  Refunded
 }

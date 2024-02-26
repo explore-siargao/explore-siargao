@@ -80,7 +80,7 @@ export const addBooking = async (req: Request, res: Response) => {
           },
         })
         const paymentMethod = await apiService.post(`${XENDIT_ROOT_URL}/card-single-use`, { cardInfo, bookingId: newBooking.id });
-        const paymentRequest = await apiService.post(`${XENDIT_ROOT_URL}/card-create-payment`, { paymentMethodId: paymentMethod.item?.id, amount: 15000 });
+        const paymentRequest = await apiService.post(`${XENDIT_ROOT_URL}/card-create-payment`, { paymentMethodId: paymentMethod.item?.id, amount: 126000 });
         const newTransaction = await prisma.transaction.create({
           data: {
             userId: res.locals.user.id,
