@@ -1,9 +1,8 @@
 import { useState } from "react"
 import { Button } from "@/common/components/ui/Button"
 import { Input } from "@/common/components/ui/Input"
-import { Title } from "@/common/components/ui/Title"
 import { Dispatch } from "react"
-import useFirstLevelStore from "../store/useFirstLevelStore" 
+import useFirstLevelStore from "../store/useFirstLevelStore"
 import toast from "react-hot-toast"
 import { iconsMap } from "@/common/helpers/iconMap"
 import { Typography } from "@/common/components/ui/Typography"
@@ -73,9 +72,11 @@ const WhereILiveContent = ({ setIsOpen }: { setIsOpen: Dispatch<boolean> }) => {
   }
 
   return (
-    <div>
+    <>
       <div className="p-5">
-        <Title size={"default"}>Where you live</Title>
+        <Typography variant="h1" className="font-semibold mt-5">
+          Where you live
+        </Typography>
         <div className="mt-10 mb-10">
           <Input
             type="search"
@@ -89,6 +90,7 @@ const WhereILiveContent = ({ setIsOpen }: { setIsOpen: Dispatch<boolean> }) => {
             <ul>
               {filteredLocations.map((location, index) => (
                 <Typography variant="h3">
+                 
                   <li
                     className="m-5"
                     key={index}
@@ -97,27 +99,30 @@ const WhereILiveContent = ({ setIsOpen }: { setIsOpen: Dispatch<boolean> }) => {
                     onMouseLeave={() => handleLocationHover(null)}
                     style={{ cursor: "pointer", position: "relative" }}
                   >
+                    
                     {highlightMatch(location.loc)}
+                    
                     {(selectedLocation === location.loc ||
                       hoveredLocation === location.loc) && (
-                      <span className="absolute right-0 top-1/2 transform -translate-y-1/2">
+                      <span className="absolute right-0 top-1/3 transform -translate-y-1/2">
                         {iconsMap.check()}
                       </span>
                     )}
-                    <div className="border-b mt-5 bm-5"></div>
                   </li>
+                  
                 </Typography>
               ))}
             </ul>
           </div>
         )}
-        <div className="flex items-end justify-end">
-          <Button size="lg" variant="primary" onClick={save}>
-            Save
-          </Button>
-        </div>
       </div>
-    </div>
+      <div className="border-t" />
+      <div className="flex items-end justify-end p-5">
+        <Button size="lg" variant="primary" onClick={() => save()}>
+          Save
+        </Button>
+      </div>
+    </>
   )
 }
 

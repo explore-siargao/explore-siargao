@@ -1,16 +1,17 @@
 import { Button } from "@/common/components/ui/Button"
 import { Input } from "@/common/components/ui/Input"
 import { Typography } from "@/common/components/ui/Typography"
-import { Dispatch, useState } from "react"
+import { Dispatch } from "react"
 import useFirstLevelStore from "../store/useFirstLevelStore"
 import toast from "react-hot-toast"
+import InputMaxLength from "@/common/helpers/InputMaxLength"
 
 const MyMostUselessSkillContent = ({
   setIsOpen,
 }: {
   setIsOpen: Dispatch<boolean>
 }) => {
-  const [uselessSkill, setUselessSkill] = useState("")
+  const { value: uselessSkill, onChange: handleInputChange } =InputMaxLength("", 40)
   const setUselessSkillStore = useFirstLevelStore((state) => state.setWorkName)
   const save = () => {
     if (uselessSkill) {
@@ -34,12 +35,13 @@ const MyMostUselessSkillContent = ({
 
         <div className="mt-10 mb-10">
           <Input label="My most useless skill:" 
-          onChange={(e) => setUselessSkill(e.target.value)}/>
+          onChange={handleInputChange}
+          maxLength={40}/>
           <Typography
             variant="p"
             className="flex items-end justify-end font-semibold"
           >
-            0/40 characters
+            {uselessSkill.length}/40 characters
           </Typography>
         </div>
         <div className="flex items-end justify-end">

@@ -26,6 +26,7 @@ import FavoriteSongInHighSchoolContent from "./FavoriteSongInHighSchoolContent"
 import WhereIWentToSchoolContent from "./WhereIwentToSchoolContent"
 import LanguageISpeakContent from "./LanguagesISpeakContent"
 import WhereILiveContent from "./WhereILiveContent"
+import DecadeYouWereBornContent from "./DecadeYouWereBornContent"
 
 export type T_ModalContent = { setIsOpen: Dispatch<boolean> }
 
@@ -53,7 +54,7 @@ const menu = [
   {
     icon: <LucidePlus />,
     title: "Decade you were born",
-    modalContent: (props: T_ModalContent) => <PetsContent setIsOpen={props.setIsOpen} />,
+    modalContent: (props: T_ModalContent) => <DecadeYouWereBornContent setIsOpen={props.setIsOpen} />,
   },
   {
     icon: <LucideMusic />,
@@ -94,7 +95,7 @@ const menu = [
 
 const FirstLevel = () => {
   return (
-    <div className="lg:grid grid-cols-2 md:grid grid-cols">
+    <div className="lg:grid grid-cols-2 gap-x-10 md:grid grid-cols">
       {menu.map((item) => (
         <Section {...item} />
       ))}

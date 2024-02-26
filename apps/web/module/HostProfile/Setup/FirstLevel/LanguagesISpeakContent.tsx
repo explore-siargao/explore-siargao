@@ -114,41 +114,50 @@ const LanguageISpeakContent = ({
 
   return (
     <>
-      <div className="py-4 px-8 flex flex-col divide-text-100 overflow-y-auto h-[600px]">
+      <div className="flex flex-col divide-text-100 overflow-y-auto h-[600px]">
         <div className="p-5">
-          <Typography variant="h2" className="font-semibold mb-5">Languages you speak</Typography>
+          <Typography variant="h1" className="font-semibold mb-2">
+            Languages you speak
+          </Typography>
           <div className="mt-10 mb-10">
-            <Input type="search" label="Search for a language" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
+            <Input
+              type="search"
+              label="Search for a language"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
           </div>
           <div>
             <ul>
               {filteredLanguages.map((language) => (
-                <Typography variant="h4" className="font-semibold">
-                <li className="m-5" key={language.lang}>
-                  <div className="flex items-end justify-end"> 
-                    <Input
-                      className="w-10"
-                      label=""
-                      type="checkbox"
-                      checked={selectedLanguages.includes(language.lang)}
-                      onChange={() => toggleLanguage(language.lang)}
-                    />
-                  </div>     
-                  {highlightMatch(language.lang)} 
-                  <div className="border-b mt-5 bm-5">
-                    
-                  </div>
-                </li>
+                <Typography
+                  variant="h4"
+                  className="font-semibold text-text-400"
+                >
+                  <li key={language.lang}>
+                    <div className="flex items-end justify-end">
+                      <Input
+                        className="w-10"
+                        label=""
+                        type="checkbox"
+                        checked={selectedLanguages.includes(language.lang)}
+                        onChange={() => toggleLanguage(language.lang)}
+                      />
+                    </div>
+                    {highlightMatch(language.lang)}
+                    <div className="border-b mt-5 mb-5" />
+                  </li>
                 </Typography>
               ))}
             </ul>
           </div>
-          <div className="flex items-end justify-end">
-            <Button size="lg" variant="primary" onClick={() => save()}>
-              Save
-            </Button>
-          </div>
         </div>
+      </div>
+      <div className="border-t" />
+      <div className="flex items-end justify-end p-5">
+        <Button size="lg" variant="primary" onClick={() => save()}>
+          Save
+        </Button>
       </div>
     </>
   )
