@@ -1,43 +1,41 @@
 import { Button } from "@/common/components/ui/Button"
 import { Typography } from "@/common/components/ui/Typography"
-import useReportListingStore from "@/common/store/useReportListingStore"
+import useReportHostStore from "@/common/store/useReportHostStore"
 import { useState } from "react"
 
 const options = [
   {
-    text: "Something on this page is broken",
+    text: "In a message the user sent to me",
   },
   {
-    text: "The host is asking for more money",
+    text: "On the user’s profile",
   },
   {
-    text: "It doesn’t look clean or safe",
+    text: "On a listing page",
   },
   {
-    text: "It’s a duplicate listing",
+    text: "In person, during a trip",
   },
   {
-    text: "I don’t think it’s allowed in my neighborhood",
-  },
-  {
-    text: "It’s disturbing my neighborhood",
+    text: "Somewhere else",
   },
 ]
 
-const SomethingElse = () => {
+const OffensiveContent = () => {
   const [selectedValue, setSelectedValue] = useState("")
 
-  const setOutput = useReportListingStore((state) => state.setOutput)
-  const setCurrentContent = useReportListingStore(
+  const setOutput = useReportHostStore((state) => state.setOutput)
+  const setCurrentContent = useReportHostStore(
     (state) => state.setCurrentContent
   )
+  const removeLastValue = useReportHostStore((state) => state.removeLastValue)
 
   return (
     <>
       <div className="max-h-[50vh] overflow-y-auto">
         <div className="pt-5 pb-3 px-5">
           <Typography variant="h2" fontWeight="semibold">
-            Why are you reporting this listing?
+            Where is the offensive content?
           </Typography>
         </div>
         <fieldset className="px-5">
@@ -66,13 +64,23 @@ const SomethingElse = () => {
           </div>
         </fieldset>
       </div>
-      <div className="justify-end border-t border-gray-300 flex items-center">
+      <div className="justify-between border-t border-gray-300 flex items-center">
+        <Button
+          variant="ghost"
+          className="ml-1 underline font-medium"
+          onClick={() => {
+            setCurrentContent("offensive")
+            removeLastValue()
+          }}
+        >
+          Back
+        </Button>
         <Button
           variant="default"
           className="mx-5 my-4 px-8  disabled:opacity-40"
           disabled={selectedValue === ""}
           onClick={() => {
-            setCurrentContent("submit")
+            setCurrentContent("offensiveTextArea1")
             setOutput([selectedValue])
           }}
         >
@@ -83,4 +91,4 @@ const SomethingElse = () => {
   )
 }
 
-export default SomethingElse
+export default OffensiveContent

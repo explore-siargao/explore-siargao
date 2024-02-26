@@ -1,105 +1,54 @@
 import { Button } from "@/common/components/ui/Button"
 import { Typography } from "@/common/components/ui/Typography"
-import useReportListingStore from "@/common/store/useReportListingStore"
+import useReportHostStore from "@/common/store/useReportHostStore"
 import { APP_NAME } from "@repo/constants"
 import { useState } from "react"
 
 const options = [
   {
-    to: "scamSelectables",
-    text: "The host asked me to pay outside of " + APP_NAME,
-    exampleText: "Ex: Wire transfer, cash, bank transfer",
-    subTitle: "How did they ask you to pay?",
-    selectables: [
-      "Bank or wire transfer",
-      "Credit or debit card",
-      "Cash",
-      "Paypal",
-      "MoneyGram",
-      "Western Union",
-      "Something else",
-    ],
+    to: "offensiveContent",
+    text: "They’re being discriminatory",
+    exampleText: "Ex: Racist, homophobic, sexist",
+    subTitle: "Describe how they’re being discriminatory",
+    placeholderText: "Ex: They’re being discriminatory because...",
   },
   {
-    to: "scamSelectables",
-    text: "The host shared their contact information",
-    exampleText: "Ex: Personal email or phone number",
-    subTitle: "Where did they share their contact information?",
-    selectables: [
-      "Photos",
-      "Description",
-      "House rules",
-      APP_NAME + " message",
-      "Somewhere else",
-    ],
+    to: "offensiveTextArea",
+    text: "They’re being inappropriate",
+    exampleText: "Ex: Sexually suggestive, graphic",
+    subTitle: "Describe how they’re being inappropriate",
+    placeholderText: "Ex: They’re being inappropriate because...",
   },
   {
-    to: "scamSelectables",
-    text: "The host is advertising other services",
-    exampleText: "Ex: Links to non-" + APP_NAME + " websites",
-    subTitle: "Where did they advertise?",
-    selectables: [
-      "Photos",
-      "Description",
-      "House rules",
-      APP_NAME + " message",
-      "Somewhere else",
-    ],
-  },
-  {
-    to: "submit",
-    text: "It’s a duplicate listing",
-    exampleText: "Ex: Copies all or part of another listing",
-    subTitle: "",
-    selectables: [],
-  },
-  {
-    to: "scamSelectables",
-    text: "It’s misleading",
-    exampleText: "Ex: Photos don’t match description, stock photos",
-    subTitle: "What is misleading?",
-    selectables: [
-      "Photos",
-      "Description",
-      "House rules",
-      "Title",
-      "Location",
-      "Price",
-      "Amenities",
-      "Bedrooms",
-      "Bathrooms",
-      "Something else",
-    ],
-  },
-  {
-    to: "submitWithFeedback",
-    text: "It’s something else",
-    exampleText: "",
-    subtitle: "",
-    selectables: [],
+    to: "offensiveTextArea",
+    text: "They’re being abusive or hostile",
+    exampleText: "Ex: Bullying, threats, verbal assaults",
+    subTitle: "Describe how they’re being abusive or hostile",
+    placeholderText: "They’re being abusive because...",
   },
 ]
 
-const Scam = () => {
+const Offensive = () => {
   const [selectedName, setSelectedName] = useState("")
   const [selectedValue, setSelectedValue] = useState("")
 
-  const setOutput = useReportListingStore((state) => state.setOutput)
-  const setCurrentContent = useReportListingStore(
+  const setOutput = useReportHostStore((state) => state.setOutput)
+  const setCurrentContent = useReportHostStore(
     (state) => state.setCurrentContent
   )
-  const removeLastValue = useReportListingStore(
-    (state) => state.removeLastValue
-  )
-  const setSubTitle = useReportListingStore((state) => state.setSubTitle)
-  const setSelectables = useReportListingStore((state) => state.setSelectables)
+  const removeLastValue = useReportHostStore((state) => state.removeLastValue)
+  const setSubTitle = useReportHostStore((state) => state.setSubTitle)
+  const setPlaceHolder = useReportHostStore((state) => state.setPlaceHolder)
 
   return (
     <>
       <div className="max-h-[50vh] overflow-y-auto">
         <div className="pt-5 pb-3 px-5">
           <Typography variant="h2" fontWeight="semibold">
-            Why do you think it’s a scam?
+            What’s happening?
+          </Typography>
+          <Typography variant="h4">
+            This will only be shared with {APP_NAME}.
           </Typography>
         </div>
         <fieldset className="px-5">
@@ -122,9 +71,8 @@ const Scam = () => {
                     onChange={() => {
                       setSelectedName(option.to)
                       setSelectedValue(option.text)
-                      // @ts-ignore
                       setSubTitle(option.subTitle)
-                      setSelectables(option.selectables)
+                      setPlaceHolder(option.placeholderText)
                     }}
                   />
                 </div>
@@ -160,4 +108,4 @@ const Scam = () => {
   )
 }
 
-export default Scam
+export default Offensive

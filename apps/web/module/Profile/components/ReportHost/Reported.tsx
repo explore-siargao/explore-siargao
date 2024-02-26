@@ -2,7 +2,7 @@ import { Button } from "@/common/components/ui/Button"
 import { Typography } from "@/common/components/ui/Typography"
 import TextArea from "./TextArea"
 import { useState } from "react"
-import useReportListingStore from "@/common/store/useReportListingStore"
+import useReportHostStore from "@/common/store/useReportHostStore"
 
 type ReportedProps = {
   withFeedback: boolean
@@ -16,8 +16,8 @@ const Reported = ({ withFeedback, closeModal }: ReportedProps) => {
     setValue(text)
   }
 
-  const setOutput = useReportListingStore((state) => state.setOutput)
-  const setCurrentContent = useReportListingStore(
+  const setOutput = useReportHostStore((state) => state.setOutput)
+  const setCurrentContent = useReportHostStore(
     (state) => state.setCurrentContent
   )
 

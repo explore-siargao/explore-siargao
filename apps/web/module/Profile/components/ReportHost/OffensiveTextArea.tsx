@@ -1,33 +1,40 @@
-import { Button } from "@/common/components/ui/Button"
 import { Typography } from "@/common/components/ui/Typography"
 import TextArea from "./TextArea"
 import { useState } from "react"
-import useReportListingStore from "@/common/store/useReportListingStore"
+import { Button } from "@/common/components/ui/Button"
+import useReportHostStore from "@/common/store/useReportHostStore"
 
-const Inaccurate = () => {
+type OffensiveTextAreaProps = {
+  isSecondLevel: boolean
+}
+
+const OffensiveTextArea = ({ isSecondLevel }: OffensiveTextAreaProps) => {
   const [value, setValue] = useState("")
 
   const handleSetValue = (text: string) => {
     setValue(text)
   }
 
-  const setOutput = useReportListingStore((state) => state.setOutput)
-  const setCurrentContent = useReportListingStore(
+  const subTitle = useReportHostStore((state) => state.subTitle)
+  const placeholderText = useReportHostStore((state) => state.placeholder)
+  const setOutput = useReportHostStore((state) => state.setOutput)
+  const setCurrentContent = useReportHostStore(
     (state) => state.setCurrentContent
   )
-  const removeLastValue = useReportListingStore(
-    (state) => state.removeLastValue
-  )
+  const removeLastValue = useReportHostStore((state) => state.removeLastValue)
 
   return (
     <>
       <div className="max-h-[50vh] overflow-y-auto">
         <div className="pt-5 pb-10 px-5">
-          <Typography variant="h2" fontWeight="semibold" className="mb-7">
-            Describe how it’s inaccurate or incorrect?
+          <Typography variant="h2" fontWeight="semibold">
+            {subTitle}
+          </Typography>
+          <Typography variant="h4" className="mb-7">
+            Please provide specific details.
           </Typography>
           <TextArea
-            placeholderText="Ex: This listing says it’s an entire home but it’s actually a private room."
+            placeholderText={placeholderText}
             setValue={handleSetValue}
           />
         </div>
@@ -37,7 +44,12 @@ const Inaccurate = () => {
           variant="ghost"
           className="ml-1 underline font-medium"
           onClick={() => {
-            setCurrentContent(null)
+            if (isSecondLevel) {
+              setCurrentContent("offensiveContent")
+            } else {
+              setCurrentContent("offensive")
+            }
+
             removeLastValue()
           }}
         >
@@ -52,11 +64,11 @@ const Inaccurate = () => {
             setOutput([value])
           }}
         >
-          Next
+          Submit
         </Button>
       </div>
     </>
   )
 }
 
-export default Inaccurate
+export default OffensiveTextArea

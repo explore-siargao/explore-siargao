@@ -1,34 +1,32 @@
 import { Button } from "@/common/components/ui/Button"
 import { Typography } from "@/common/components/ui/Typography"
-import useReportListingStore from "@/common/store/useReportListingStore"
+import useReportHostStore from "@/common/store/useReportHostStore"
+import { APP_NAME } from "@repo/constants"
 import { useState } from "react"
 
 const options = [
   {
+    text: "The host is unresponsive",
+  },
+  {
+    text: "They collect fees or deposits outside of Airbnb",
+  },
+  {
+    text: "My host is asking me to cancel",
+  },
+  {
+    text: "I’m concerned they’re hosting in my neighborhood",
+  },
+  {
     text: "Something on this page is broken",
-  },
-  {
-    text: "The host is asking for more money",
-  },
-  {
-    text: "It doesn’t look clean or safe",
-  },
-  {
-    text: "It’s a duplicate listing",
-  },
-  {
-    text: "I don’t think it’s allowed in my neighborhood",
-  },
-  {
-    text: "It’s disturbing my neighborhood",
   },
 ]
 
 const SomethingElse = () => {
   const [selectedValue, setSelectedValue] = useState("")
 
-  const setOutput = useReportListingStore((state) => state.setOutput)
-  const setCurrentContent = useReportListingStore(
+  const setOutput = useReportHostStore((state) => state.setOutput)
+  const setCurrentContent = useReportHostStore(
     (state) => state.setCurrentContent
   )
 
@@ -37,7 +35,10 @@ const SomethingElse = () => {
       <div className="max-h-[50vh] overflow-y-auto">
         <div className="pt-5 pb-3 px-5">
           <Typography variant="h2" fontWeight="semibold">
-            Why are you reporting this listing?
+            What’s happening?
+          </Typography>
+          <Typography variant="h4">
+            This will only be shared with {APP_NAME}.
           </Typography>
         </div>
         <fieldset className="px-5">

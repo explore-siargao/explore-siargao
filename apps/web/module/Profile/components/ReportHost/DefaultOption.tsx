@@ -1,34 +1,30 @@
 import { Button } from "@/common/components/ui/Button"
 import { Typography } from "@/common/components/ui/Typography"
-import useReportListingStore from "@/common/store/useReportListingStore"
+import useReportHostStore from "@/common/store/useReportHostStore"
+import { APP_NAME } from "@repo/constants"
 import { useState } from "react"
 
 const options = [
   {
-    text: "Something on this page is broken",
+    to: "scam",
+    text: "I think they’re scamming or spamming me",
   },
   {
-    text: "The host is asking for more money",
+    to: "offensive",
+    text: "They’re being offensive",
   },
   {
-    text: "It doesn’t look clean or safe",
-  },
-  {
-    text: "It’s a duplicate listing",
-  },
-  {
-    text: "I don’t think it’s allowed in my neighborhood",
-  },
-  {
-    text: "It’s disturbing my neighborhood",
+    to: "somethingElse",
+    text: "Something else",
   },
 ]
 
-const SomethingElse = () => {
+const DefaultOption = () => {
+  const [selectedName, setSelectedName] = useState("")
   const [selectedValue, setSelectedValue] = useState("")
 
-  const setOutput = useReportListingStore((state) => state.setOutput)
-  const setCurrentContent = useReportListingStore(
+  const setOutput = useReportHostStore((state) => state.setOutput)
+  const setCurrentContent = useReportHostStore(
     (state) => state.setCurrentContent
   )
 
@@ -37,7 +33,10 @@ const SomethingElse = () => {
       <div className="max-h-[50vh] overflow-y-auto">
         <div className="pt-5 pb-3 px-5">
           <Typography variant="h2" fontWeight="semibold">
-            Why are you reporting this listing?
+            What’s happening?
+          </Typography>
+          <Typography variant="h4">
+            This will only be shared with {APP_NAME}.
           </Typography>
         </div>
         <fieldset className="px-5">
@@ -57,6 +56,7 @@ const SomethingElse = () => {
                     defaultChecked={undefined}
                     className="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600"
                     onChange={() => {
+                      setSelectedName(option.to)
                       setSelectedValue(option.text)
                     }}
                   />
@@ -72,15 +72,15 @@ const SomethingElse = () => {
           className="mx-5 my-4 px-8  disabled:opacity-40"
           disabled={selectedValue === ""}
           onClick={() => {
-            setCurrentContent("submit")
+            setCurrentContent(selectedName)
             setOutput([selectedValue])
           }}
         >
-          Next
+          Ok
         </Button>
       </div>
     </>
   )
 }
 
-export default SomethingElse
+export default DefaultOption

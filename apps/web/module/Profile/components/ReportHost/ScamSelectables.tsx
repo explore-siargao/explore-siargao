@@ -1,27 +1,29 @@
 import { Button } from "@/common/components/ui/Button"
 import { Typography } from "@/common/components/ui/Typography"
-import useReportListingStore from "@/common/store/useReportListingStore"
+import useReportHostStore from "@/common/store/useReportHostStore"
+import { APP_NAME } from "@repo/constants"
 import { useState } from "react"
 
 const ScamSelectables = () => {
   const [selectedOptions, setSelectedOptions] = useState<string[]>([])
 
-  const selectables = useReportListingStore((state) => state.selectables)
-  const subTitle = useReportListingStore((state) => state.subTitle)
-  const setOutput = useReportListingStore((state) => state.setOutput)
-  const setCurrentContent = useReportListingStore(
+  const selectables = useReportHostStore((state) => state.selectables)
+  const subTitle = useReportHostStore((state) => state.subTitle)
+  const setOutput = useReportHostStore((state) => state.setOutput)
+  const setCurrentContent = useReportHostStore(
     (state) => state.setCurrentContent
   )
-  const removeLastValue = useReportListingStore(
-    (state) => state.removeLastValue
-  )
+  const removeLastValue = useReportHostStore((state) => state.removeLastValue)
 
   return (
     <>
       <div className="max-h-[50vh] overflow-y-auto">
         <div className="pt-5 pb-3 px-5">
-          <Typography variant="h2" fontWeight="semibold" className="mb-7">
+          <Typography variant="h2" fontWeight="semibold">
             {subTitle}
+          </Typography>
+          <Typography variant="h4" className="mb-7">
+            This will only be shared with {APP_NAME}.
           </Typography>
           {selectables.map((selectable, index) => (
             <div className="inline-block mb-6 mr-2">
@@ -67,18 +69,11 @@ const ScamSelectables = () => {
           className="mx-5 my-4 px-8  disabled:opacity-40"
           disabled={selectedOptions.length < 1}
           onClick={() => {
-            if (
-              selectedOptions.includes("Something else") ||
-              selectedOptions.includes("Somewhere else")
-            ) {
-              setCurrentContent("submitWithFeedback")
-            } else {
-              setCurrentContent("submit")
-            }
+            setCurrentContent("submit")
             setOutput([...selectedOptions])
           }}
         >
-          Next
+          Submit
         </Button>
       </div>
     </>
