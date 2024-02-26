@@ -156,39 +156,39 @@ const ReportHostModal = ({ isOpen, onClose }: ReportHostModalProps) => {
             {isReported
               ? "We got your report"
               : // @ts-ignore
-              pageLevel === 3
+                pageLevel === 3
                 ? reportArr[firstLevelIndex]?.descriptions[secondLevelIndex]
-                  ?.displayTitle
+                    ?.displayTitle
                 : "What's happening?"}
           </Typography>
           <Typography variant="h4" className={`${isReported && "mt-7"}`}>
             {isReported
               ? "Thanks for taking the time to let us know what's going on. Reports like yours " +
-              "help keep the " +
-              APP_NAME +
-              " community safe and secure."
+                "help keep the " +
+                APP_NAME +
+                " community safe and secure."
               : pageLevel === 3 &&
-                reportArr[firstLevelIndex]?.descriptions[secondLevelIndex]
                   // @ts-ignore
-                  ?.subtitle
-                ?
-                reportArr[firstLevelIndex]?.descriptions[secondLevelIndex]
-                  // @ts-ignore
-                  ?.subtitle
+                  reportArr[firstLevelIndex]?.descriptions[secondLevelIndex]
+                    ?.subtitle
+                ? // @ts-ignore
+                  reportArr[firstLevelIndex]?.descriptions[secondLevelIndex]
+                    ?.subtitle
                 : "This will only be shared with " + APP_NAME + "."}
           </Typography>
         </div>
         {!isReported && (
           <fieldset className="px-5">
             <div
-              className={`${pageLevel != 3
+              className={`${
+                pageLevel != 3
                   ? "divide-y divide-gray-200 border-gray-200"
                   : pageLevel === 3 &&
-                    firstLevelIndex === 0 &&
-                    secondLevelIndex <= 2
+                      firstLevelIndex === 0 &&
+                      secondLevelIndex <= 2
                     ? "grid grid-cols-2 gap-3"
                     : "mt-4"
-                }`}
+              }`}
             >
               {
                 // third level
@@ -231,76 +231,76 @@ const ReportHostModal = ({ isOpen, onClose }: ReportHostModalProps) => {
                     </div>
                   )
                 ) : // second level
-                  pageLevel === 2 ? (
-                    reportArr[firstLevelIndex]?.descriptions.map(
-                      (report, index) => (
-                        <div
-                          key={`second-level-con-${index}`}
-                          className="relative flex items-start py-5"
-                        >
-                          <div className="min-w-0 flex-1 leading-6">
-                            <label
-                              htmlFor={`second-level-${index}`}
-                              className="select-none"
-                            >
-                              {report.reason}
-                            </label>
-                            <Typography variant="h4" className="text-gray-500">
-                              {
-                                // @ts-ignore
-                                report.descSample
-                              }
-                            </Typography>
-                          </div>
-                          <div className="ml-3 flex h-6 items-center">
-                            <input
-                              id={`second-level-${index}`}
-                              name="plan"
-                              type="radio"
-                              defaultChecked={undefined}
-                              checked={reportReason === report.reason}
-                              className="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600"
-                              onChange={() => {
-                                setSecondLevelIndex(index)
-                                setSecondLevel(report.reason)
-                              }}
-                            />
-                          </div>
-                        </div>
-                      )
-                    )
-                  ) : (
-                    // first level
-                    reportArr.map((report, index) => (
+                pageLevel === 2 ? (
+                  reportArr[firstLevelIndex]?.descriptions.map(
+                    (report, index) => (
                       <div
-                        key={`first-level-con-${index}`}
+                        key={`second-level-con-${index}`}
                         className="relative flex items-start py-5"
                       >
                         <div className="min-w-0 flex-1 leading-6">
                           <label
-                            htmlFor={`first-level-${index}`}
+                            htmlFor={`second-level-${index}`}
                             className="select-none"
                           >
-                            {report.name}
+                            {report.reason}
                           </label>
+                          <Typography variant="h4" className="text-gray-500">
+                            {
+                              // @ts-ignore
+                              report.descSample
+                            }
+                          </Typography>
                         </div>
                         <div className="ml-3 flex h-6 items-center">
                           <input
-                            id={`first-level-${index}`}
+                            id={`second-level-${index}`}
                             name="plan"
                             type="radio"
                             defaultChecked={undefined}
-                            checked={reportName === report.name}
+                            checked={reportReason === report.reason}
                             className="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600"
                             onChange={() => {
-                              setFirstLevelIndex(index)
-                              setFirstLevel(report.name)
+                              setSecondLevelIndex(index)
+                              setSecondLevel(report.reason)
                             }}
                           />
                         </div>
                       </div>
-                    ))
+                    )
                   )
+                ) : (
+                  // first level
+                  reportArr.map((report, index) => (
+                    <div
+                      key={`first-level-con-${index}`}
+                      className="relative flex items-start py-5"
+                    >
+                      <div className="min-w-0 flex-1 leading-6">
+                        <label
+                          htmlFor={`first-level-${index}`}
+                          className="select-none"
+                        >
+                          {report.name}
+                        </label>
+                      </div>
+                      <div className="ml-3 flex h-6 items-center">
+                        <input
+                          id={`first-level-${index}`}
+                          name="plan"
+                          type="radio"
+                          defaultChecked={undefined}
+                          checked={reportName === report.name}
+                          className="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-600"
+                          onChange={() => {
+                            setFirstLevelIndex(index)
+                            setFirstLevel(report.name)
+                          }}
+                        />
+                      </div>
+                    </div>
+                  ))
+                )
               }
             </div>
           </fieldset>
@@ -328,10 +328,10 @@ const ReportHostModal = ({ isOpen, onClose }: ReportHostModalProps) => {
             isReported
               ? onClose()
               : (pageLevel === 2 &&
-                reportArr[firstLevelIndex]?.descriptions[secondLevelIndex]
-                  // @ts-ignore
-                  ?.readyToSubmit) ||
-                pageLevel === 3
+                    // @ts-ignore
+                    reportArr[firstLevelIndex]?.descriptions[secondLevelIndex]
+                      ?.readyToSubmit) ||
+                  pageLevel === 3
                 ? setIsReported()
                 : increasePageLevel()
           }}

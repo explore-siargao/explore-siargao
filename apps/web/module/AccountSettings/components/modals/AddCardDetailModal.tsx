@@ -37,7 +37,7 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
     formState: { errors },
   } = useForm<IPaymentMethod>()
   const queryClient = useQueryClient()
-  const encryptCard = new EncryptionService("card");
+  const encryptCard = new EncryptionService("card")
   const onSubmit = (formData: IPaymentMethod) => {
     const callBackReq = {
       onSuccess: (data: any) => {

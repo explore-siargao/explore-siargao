@@ -10,27 +10,27 @@ export const paymentMethod = async () => {
     data: [
       {
         userId: getUsers[0]?.id || 0,
-        cardInfo: "test", // change this
+        cardInfo: 'test', // change this
         isDefault: true,
       },
       {
         userId: getUsers[1]?.id || 0,
-        cardInfo: "test", // change this
+        cardInfo: 'test', // change this
         isDefault: false,
       },
       {
         userId: getUsers[2]?.id || 0,
-        cardInfo: "test", // change this
+        cardInfo: 'test', // change this
         isDefault: false,
       },
       {
         userId: getUsers[3]?.id || 0,
-        cardInfo: "test", // change this
+        cardInfo: 'test', // change this
         isDefault: true,
       },
       {
         userId: getUsers[4]?.id || 0,
-        cardInfo: "test", // change this
+        cardInfo: 'test', // change this
         isDefault: true,
       },
     ],
