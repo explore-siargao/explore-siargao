@@ -1,7 +1,8 @@
+import { T_PlaceOffers } from "@repo/contract"
+
 export type T_Offer = {
-  icon: string
-  description: string
-  isNotIncluded: boolean
+  id?:number
+  placeOffer:T_PlaceOffers
 }
 
 export type T_OfferModal = {

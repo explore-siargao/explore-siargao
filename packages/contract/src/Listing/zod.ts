@@ -1,6 +1,6 @@
 import { z } from "zod"
 import { E_ListingCategory } from "./enum"
-import { Z_Address, Z_BasicAboutPlace, Z_Highlights, Z_ListingDescription, Z_ListingHighlight, Z_ListingPrice, Z_Review, Z_User } from ".."
+import { Z_Address, Z_BasicAboutPlace, Z_CancellationPolicy, Z_Highlights, Z_HouseRule, Z_ListingDescription, Z_ListingHighlight, Z_ListingPrice, Z_PlaceOffers, Z_Review, Z_SafetyProperty, Z_User } from ".."
 
 export const Z_Listing = z.object({
   id: z.number().optional(),
@@ -41,6 +41,13 @@ whereYoullSleep:z.union([z.string(),z.object({
   location:z.string(),
   coordinates:z.array(z.number())
 })]).optional(),
+placeOffers:z.array(z.object({
+  id:z.number().optional(),
+  placeOffer:z.lazy(()=>Z_PlaceOffers).optional().nullable()
+})).optional().nullable(),
+houseRules:z.array(z.lazy(()=>Z_HouseRule)).optional().nullable(),
+safetyProperties:z.array(z.lazy(()=>Z_SafetyProperty)).optional().nullable(),
+cancellationPolicies:z.array(z.lazy(()=>Z_CancellationPolicy)).optional().nullable(),
   createdAt: z.string().optional(),
   updatedAt: z.string().nullable().optional(),
   deletedAt: z.string().nullable().optional(),

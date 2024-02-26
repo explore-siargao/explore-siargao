@@ -4,32 +4,32 @@ export const placeOffer = async () => {
   const createPlaceOffers = await prisma.placeOffers.createMany({
     data: [
       {
-        icon: 'Cloud',
+        icon: 'cloud',
         category: 'Scenic views',
         title: 'City skyline view',
       },
       {
-        icon: 'Hand',
+        icon: 'hair',
         category: 'Bathroom',
         title: 'Hair dryer',
       },
       {
-        icon: 'Soup',
+        icon: 'shower',
         category: 'Bathroom',
         title: 'Cleaning products',
       },
       {
-        icon: 'Tools',
+        icon: 'washing',
         category: 'Bedroom and laundry',
         title: 'Essentials',
       },
       {
-        icon: 'Hangers',
+        icon: 'bed',
         category: 'Bedroom and laundry',
-        title: 'Hangers',
+        title: 'Beds',
       },
       {
-        icon: 'Book',
+        icon: 'books',
         category: 'Entertainment',
         title: 'Books and reading material',
       },

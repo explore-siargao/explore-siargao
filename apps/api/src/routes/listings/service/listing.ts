@@ -2,7 +2,7 @@ import { Response, Request } from 'express'
 import { PrismaClient } from '@prisma/client'
 import { REQUIRED_VALUE_EMPTY, USER_NOT_EXIST } from '@/common/constants'
 import { ResponseService } from '@/common/service/response'
-import { Z_Listing } from '@repo/contract'
+import { T_PlaceOffers, Z_Listing } from '@repo/contract'
 import { Decimal } from '@prisma/client/runtime/library'
 
 const prisma = new PrismaClient()
@@ -91,7 +91,12 @@ export const getListing = async (req: Request, res: Response) => {
             }
           }
         },
-        placeOffers: true,
+        placeOffers: {
+          select:{
+            id:true,
+            placeOffer:true
+          }
+        },
         houseRules: {
           include: {
             rules: true,
@@ -173,7 +178,6 @@ export const getListing = async (req: Request, res: Response) => {
         }
       ))
       const newHighLights = listing.highLights.map(({ highlights }) => ( highlights )); 
-
       const newResult = { ...listing }
       newResult.images = JSON.parse(listing.images)
       newResult.whereYoullBe = JSON.parse(listing.whereYoullBe)

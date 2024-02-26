@@ -4,7 +4,7 @@ import React from "react"
 type T_IconDescriptionProps = {
   icon: string
   description: string
-  isNotIncluded: boolean
+  isNotIncluded?: boolean
 }
 
 const IconDescription: React.FC<T_IconDescriptionProps> = ({

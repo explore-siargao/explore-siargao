@@ -1,6 +1,6 @@
 export type T_HouseRules = {
   id: number
-  icon: string
+  icon: string 
   rule: string
 }
 
@@ -46,7 +46,7 @@ export type T_CancellationModalData = {
 }
 
 export type T_ThingsToKnowProps = {
-  houseRules: T_HouseRules[]
+  houseRules: T_HouseRule[]
   safetyProperties: T_SafetyProperties[]
   cancellationPolicies: T_CancellationPolicies[]
   houseRulesModalData: T_HouseRulesModalData[]

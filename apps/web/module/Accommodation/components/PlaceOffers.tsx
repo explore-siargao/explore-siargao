@@ -7,13 +7,14 @@ import { T_PlaceOfferProps } from "../types/PlaceOffer"
 
 const PlaceOffers = ({ offers, group }: T_PlaceOfferProps) => {
   const [showMoreModalOpen, setShowMoreModalOpen] = useState(false)
+  console.log(offers)
   return (
     <>
       <TitleSection size="lg" title="What this place offers">
         <div className="mb-5"></div>
         <div className="grid grid-cols-2">
           {offers.map((item) => (
-            <IconDescription {...item} />
+            <IconDescription icon={item.placeOffer.icon} description={item.placeOffer.title}  />
           ))}
         </div>
         <Button

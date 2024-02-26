@@ -18,8 +18,9 @@ import { Flag, Tag } from "lucide-react"
 import ModalReporting from "./components/modals/ModalReporting"
 import { useState } from "react"
 import ListingMark from "@/module/Accommodation/Checkout/ListingMark"
-import { T_Listing } from "@repo/contract"
+import { T_HouseRule, T_Listing } from "@repo/contract"
 import { T_HighlightsProps } from "./types/Highlights"
+import { T_HouseRules } from "./types/ThingsToKnow"
 
 const reportListingArr = [
   {
@@ -442,6 +443,43 @@ export const SingleView = ({listing}:{listing:T_Listing}) => {
     setShowModal(false)
   }
 
+  const newHouseRules = listing.houseRules?.map((houseRule)=>{
+    
+    if (!houseRule || !houseRule.rules || !houseRule.rules[0]) {
+      return null;
+    }
+    return {
+      id:houseRule.id,
+      icon:houseRule.rules[0].icon,
+      rule:houseRule.rules[0]?.rule,
+    }
+  }).filter((rule)=>rule!==null)
+
+
+  const newSafetyProperties = listing.safetyProperties?.map((safetyProperty)=>{
+    
+    if (!safetyProperty || !safetyProperty.rules || !safetyProperty.rules[0]) {
+      return null;
+    }
+    return {
+      id:safetyProperty.id,
+      icon:safetyProperty.rules[0].icon,
+      rule:safetyProperty.rules[0]?.rule,
+    }
+  }).filter((rule)=>rule!==null)
+
+  const newCancellationPolicies = listing.cancellationPolicies?.map((safecancellationPolicy)=>{
+    
+    if (!safecancellationPolicy || !safecancellationPolicy.rules || !safecancellationPolicy.rules[0]) {
+      return null;
+    }
+    return {
+      id:safecancellationPolicy.id,
+      rule:safecancellationPolicy.rules[0]?.rule,
+    }
+  }).filter((rule)=>rule!==null)
+
+
   return (
     <WidthWrapper width="small" className="mt-32 lg:mt-36">
       <SectionInfo
@@ -479,7 +517,8 @@ export const SingleView = ({listing}:{listing:T_Listing}) => {
               <BookingDescription {...listing.listingDescription} />
             </div>
             <div className="py-6 ">
-              <PlaceOffers offers={offers} group={group} />
+              {/* @ts-ignore */}
+              <PlaceOffers offers={listing.placeOffers} group={group} />
             </div>
             <div className="py-6">
               <ListingDateRangePicker title={listing.title} />
@@ -541,11 +580,14 @@ export const SingleView = ({listing}:{listing:T_Listing}) => {
         </div>
         <div className="pt-8">
           <ThingsToKnow
-            houseRules={houseRulesDummy}
+          //@ts-ignore
+            houseRules={newHouseRules}
             houseRulesModalData={houseRulesModalData}
-            safetyProperties={safetyPropertiesDummy}
+            //@ts-ignore
+            safetyProperties={newSafetyProperties}
             safetyModalData={safetyPropertiesModalData}
-            cancellationPolicies={cancellationPoliciesDummy}
+            //@ts-ignore
+            cancellationPolicies={newCancellationPolicies}
             cancellationModalData={cancellationPolicyModalData}
           />
         </div>

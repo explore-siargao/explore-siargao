@@ -12,7 +12,9 @@ import {
   LucideChevronLeft,
   LucideCigaretteOff,
   LucideClock,
+  LucideCloud,
   LucideCopyright,
+  LucideCrosshair,
   LucideFacebook,
   LucideFireExtinguisher,
   LucideFlag,
@@ -28,10 +30,12 @@ import {
   LucideSearch,
   LucideShield,
   LucideShieldCheck,
+  LucideShowerHead,
   LucideSpeaker,
   LucideStar,
   LucideTwitter,
   LucideUpload,
+  LucideWashingMachine,
   LucideWifi,
 } from "lucide-react"
 
@@ -42,6 +46,10 @@ type LucideProps = {
 
 export const iconMap = {
   book: (props?: LucideProps) => <LucideBook {...props} />,
+  cloud:(props?: LucideProps) => <LucideCloud {...props} />,
+  hair:(props?: LucideProps)=> <LucideCrosshair {...props} />,
+  shower:(props?:LucideProps) =><LucideShowerHead {...props} />,
+  washing:(props?:LucideProps) => <LucideWashingMachine {...props} />,
   mapPin: (props?: LucideProps) => <LucideMapPin {...props} />,
   alarmClock: (props?: LucideProps) => <LucideAlarmClock {...props} />,
   alarmSmoke: (props?: LucideProps) => <LucideAlarmSmoke {...props} />,

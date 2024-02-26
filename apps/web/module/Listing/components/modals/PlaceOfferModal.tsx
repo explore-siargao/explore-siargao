@@ -15,7 +15,7 @@ const PlaceOfferModal = ({ isOpen, onClose, group }: PlaceOfferModalProps) => {
     <ModalContainer isOpen={isOpen} onClose={onClose} size="md">
       <div className="px-7 py-6 md:h-[700px] md:overflow-y-auto">
         <TitleSection title="What this place offers">
-          {group.map((item) => (
+          {/* {group.map((item) => (
             <div className="py-2" key={item.title}>
               <TitleSection title={item.title}>
                 {item.offers.map((offer) => (
@@ -25,7 +25,7 @@ const PlaceOfferModal = ({ isOpen, onClose, group }: PlaceOfferModalProps) => {
                 ))}
               </TitleSection>
             </div>
-          ))}
+          ))} */}
         </TitleSection>
       </div>
     </ModalContainer>
