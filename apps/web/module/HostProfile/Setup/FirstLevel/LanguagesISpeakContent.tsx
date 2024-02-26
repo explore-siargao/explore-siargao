@@ -74,13 +74,14 @@ const LanguageISpeakContent = ({
   )
 
   const toggleLanguage = (lang: string) => {
-    const isSelected = selectedLanguages.includes(lang)
+    const isSelected = selectedLanguages.includes(lang);
     if (isSelected) {
-      setSelectedLanguages(selectedLanguages.filter((l) => l !== lang))
+      setSelectedLanguages(selectedLanguages.map(l => l !== lang ? l : ""));
     } else {
-      setSelectedLanguages([...selectedLanguages, lang])
+      setSelectedLanguages([...selectedLanguages, lang]);
     }
-  }
+  };
+  
 
   const save = () => {
     if (selectedLanguages.length > 0) {
