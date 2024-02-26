@@ -76,7 +76,7 @@ const DecadeYouWereBornContent = ({
           </Typography>
         </div>
         <div className="flex mt-5 cursor-pointer">
-        <div onMouseOver={ () => {} } onFocus={ () => {} } />
+          <div onMouseOver={() => {}} onFocus={() => {}} />
           <div
             className="clickable-typography cursor-pointer"
             onClick={handleDecadeTypographyClick}

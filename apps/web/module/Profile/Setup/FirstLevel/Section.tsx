@@ -14,7 +14,7 @@ const Section = ({ modalContent, icon, title }: T_Section) => {
   return (
     <>
       <div className="border-b-2 relative">
-      <div onMouseOver={ () => {} } onFocus={ () => {} } />
+        <div onMouseOver={() => {}} onFocus={() => {}} />
         <div
           key={title}
           className="flex items-center p-5 rounded-xl hover:bg-primary-100 h-full cursor-pointer"
