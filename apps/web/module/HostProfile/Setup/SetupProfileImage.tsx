@@ -12,7 +12,7 @@ import { Camera } from "lucide-react"
 
 const SetupProfileImage = () => {
   const session = useSessionStore((state) => state)
-  const [idType] = useState<E_GovernmentId | null>(null)
+  const [idType, setIdType] = useState<E_GovernmentId | null>(null)
   const [file, setFile] = useState<(FileWithPath & { preview: string }) | null>(
     null
   )
@@ -35,7 +35,7 @@ const SetupProfileImage = () => {
     input.click()
 
     if (!idType || !file) {
-      toast.error("Please add image")
+      // toast.error("Please add image")
     } else {
       const callBackReq = {
         onSuccess: (data: T_BackendResponse) => {
