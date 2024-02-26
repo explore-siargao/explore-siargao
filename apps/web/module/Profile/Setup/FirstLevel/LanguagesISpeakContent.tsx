@@ -1,9 +1,9 @@
-import { Input } from "@/common/components/ui/Input";
-import { Typography } from "@/common/components/ui/Typography";
-import { Dispatch, useState } from "react";
-import useFirstLevelStore from "../store/useFirstLevelStore";
-import toast from "react-hot-toast";
-import { Button } from "@/common/components/ui/Button";
+import { Input } from "@/common/components/ui/Input"
+import { Typography } from "@/common/components/ui/Typography"
+import { Dispatch, useState } from "react"
+import useFirstLevelStore from "../store/useFirstLevelStore"
+import toast from "react-hot-toast"
+import { Button } from "@/common/components/ui/Button"
 
 const languagesObj = [
   {
@@ -115,7 +115,7 @@ const LanguageISpeakContent = ({
   return (
     <>
       <div className="flex flex-col divide-text-100 overflow-y-auto h-[600px]">
-      <div className="p-5">
+        <div className="p-5">
           <Typography variant="h1" className="font-semibold mb-2">
             Languages you speak
           </Typography>
@@ -155,14 +155,14 @@ const LanguageISpeakContent = ({
       </div>
       <div className="border-t" />
       <div className="flex items-end justify-end p-5">
-      <div className="flex items-end justify-end p-5">
-        <Button size="lg" variant="primary" onClick={() => save()}>
-          Save
-        </Button>
-      </div>
+        <div className="flex items-end justify-end p-5">
+          <Button size="lg" variant="primary" onClick={() => save()}>
+            Save
+          </Button>
+        </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default LanguageISpeakContent;
+export default LanguageISpeakContent
