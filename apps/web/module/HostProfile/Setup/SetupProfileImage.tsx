@@ -9,9 +9,8 @@ import { T_BackendResponse } from "@repo/contract"
 import useAddGovernmentId from "@/module/AccountSettings/hooks/useAddGovernmentId"
 import useSessionStore from "@/common/store/useSessionStore"
 import { Camera } from "lucide-react"
-import { IPersonalInfo } from "@/common/types/global"
 
-const SetupProfileImage = ({ governmentId }: IPersonalInfo) => {
+const SetupProfileImage = () => {
   const session = useSessionStore((state) => state)
   const [idType] = useState<E_GovernmentId | null>(null)
   const [file, setFile] = useState<(FileWithPath & { preview: string }) | null>(null)
@@ -32,9 +31,7 @@ const SetupProfileImage = ({ governmentId }: IPersonalInfo) => {
       }
     }
     input.click()
-  }
 
-  const saveUpload = () => {
     if (!idType || !file) {
       toast.error('Please add image')
     } else {
@@ -55,6 +52,10 @@ const SetupProfileImage = ({ governmentId }: IPersonalInfo) => {
     }
   }
 
+  console.log("ID type:", idType);
+  console.log("File:", file);
+  console.log("isPending:", isPending);
+  
   return (
     <div className="grid py-5 justify-start">
       <div className="w-full my-4 flex flex-col items-center relative">
@@ -76,7 +77,6 @@ const SetupProfileImage = ({ governmentId }: IPersonalInfo) => {
               {file ? 'Edit' : 'Add'}
             </Typography>
           </Button>
-          {/* <button onClick={saveUpload}>Save</button> */}
         </div>
       </div>
     </div>
