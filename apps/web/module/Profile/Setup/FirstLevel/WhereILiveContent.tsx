@@ -88,14 +88,14 @@ const WhereILiveContent = ({ setIsOpen }: { setIsOpen: Dispatch<boolean> }) => {
           <div>
             <ul>
               {filteredLocations.map((location) => (
-                <Typography variant="h3">
+                <Typography variant="h3" key={location.loc}>
                   <li
                     className="m-5"
-                    key={location.loc}
                     onClick={() => handleLocationClick(location.loc)}
                     onMouseEnter={() => handleLocationHover(location.loc)}
                     onMouseLeave={() => handleLocationHover(null)}
                     style={{ cursor: "pointer", position: "relative" }}
+                    tabIndex={0} 
                   >
                     {highlightMatch(location.loc)}
 
@@ -105,6 +105,7 @@ const WhereILiveContent = ({ setIsOpen }: { setIsOpen: Dispatch<boolean> }) => {
                         <LucideCheck />
                       </span>
                     )}
+                    <div className="border-b mt-5 mb-5"></div>
                   </li>
                 </Typography>
               ))}
