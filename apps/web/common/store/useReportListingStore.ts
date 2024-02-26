@@ -1,6 +1,6 @@
 import { create } from "zustand"
 
-type T_ReportHostState = {
+type T_ReportListingState = {
   currentContent: string | null
   output: string[]
   subTitle: string
@@ -14,7 +14,7 @@ type T_ReportHostState = {
   setSelectables: (value: string[]) => void
 }
 
-const useReportHostStore = create<T_ReportHostState>((set) => ({
+const useReportListingStore = create<T_ReportListingState>((set) => ({
   currentContent: null,
   output: [],
   subTitle: "",
@@ -44,4 +44,4 @@ const useReportHostStore = create<T_ReportHostState>((set) => ({
     })),
 }))
 
-export default useReportHostStore
+export default useReportListingStore
