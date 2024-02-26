@@ -10,7 +10,7 @@ export const listingPrice = async () => {
         checkIn: '2024-01-29T03:01:27.936Z',
         checkOut: '2024-01-29T03:01:27.936Z',
         isNight: false,
-        countGuest: 5,
+        guestLimitCount: 5,
       },
       {
         fee: 5000,
@@ -19,7 +19,7 @@ export const listingPrice = async () => {
         checkIn: '2024-01-29T03:01:27.936Z',
         checkOut: '2024-01-29T03:01:27.936Z',
         isNight: false,
-        countGuest: 5,
+        guestLimitCount: 5,
       },
       {
         fee: 1000,
@@ -28,7 +28,7 @@ export const listingPrice = async () => {
         checkIn: '2024-01-29T03:01:27.936Z',
         checkOut: '2024-01-29T03:01:27.936Z',
         isNight: true,
-        countGuest: 10,
+        guestLimitCount: 10,
       },
       {
         fee: 4000,
@@ -37,7 +37,7 @@ export const listingPrice = async () => {
         checkIn: '2024-01-29T03:01:27.936Z',
         checkOut: '2024-01-29T03:01:27.936Z',
         isNight: true,
-        countGuest: 7,
+        guestLimitCount: 7,
       },
       {
         fee: 1500,
@@ -46,7 +46,7 @@ export const listingPrice = async () => {
         checkIn: '2024-01-29T03:01:27.936Z',
         checkOut: '2024-01-29T03:01:27.936Z',
         isNight: false,
-        countGuest: 5,
+        guestLimitCount: 5,
       },
     ],
   })
