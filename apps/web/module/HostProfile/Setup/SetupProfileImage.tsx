@@ -4,19 +4,17 @@ import Image from "next/image"
 import React, { useState } from "react"
 import { FileWithPath } from "react-dropzone"
 import toast from "react-hot-toast"
-import { E_GovernmentId } from "@repo/contract/build/GovernmentId/enum"
 import { T_BackendResponse } from "@repo/contract"
-import useAddGovernmentId from "@/module/AccountSettings/hooks/useAddGovernmentId"
 import useSessionStore from "@/common/store/useSessionStore"
 import { Camera } from "lucide-react"
 
 const SetupProfileImage = () => {
   const session = useSessionStore((state) => state)
-  const [idType, setIdType] = useState<E_GovernmentId | null>(null)
+  // const [idType] = useState<E_GovernmentId | null>(null)
   const [file, setFile] = useState<(FileWithPath & { preview: string }) | null>(
     null
   )
-  const { mutate, isPending } = useAddGovernmentId(session.id as number)
+  // const { mutate, isPending } = useAddGovernmentId(session.id as number)
 
   const handleUpdateUserImage = () => {
     const input = document.createElement("input")
@@ -34,7 +32,7 @@ const SetupProfileImage = () => {
     }
     input.click()
 
-    if (!idType || !file) {
+    if ( !file) {
       // toast.error("Please add image")
     } else {
       const callBackReq = {
@@ -50,13 +48,11 @@ const SetupProfileImage = () => {
           toast.error(String(err))
         },
       }
-      mutate({ type: idType, file }, callBackReq)
+      // mutate({ type: idType, file }, callBackReq)
     }
   }
 
-  console.log("ID type:", idType)
   console.log("File:", file)
-  console.log("isPending:", isPending)
 
   return (
     <div className="grid py-5 justify-start">
@@ -65,7 +61,7 @@ const SetupProfileImage = () => {
           <div className="relative h-60 w-60 rounded-full overflow-hidden border-4 border-white">
             <Image
               src={file?.preview ?? "/assets/1.jpg"}
-              alt={`preview-${idType}`}
+              alt={`Profile picture`}
               width={128}
               height={128}
               className="object-cover h-full w-full"
@@ -75,7 +71,7 @@ const SetupProfileImage = () => {
         <div className="absolute left-1/2 bottom-0 transform -translate-x-1/2 mb-2">
           <Button
             onClick={handleUpdateUserImage}
-            disabled={isPending}
+            // disabled={isPending}
             variant="ghost"
             size="default"
             className="flex gap-1 bg-gray-100 shadow-xl rounded-full"
