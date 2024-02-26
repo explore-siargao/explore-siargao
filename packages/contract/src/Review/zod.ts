@@ -1,4 +1,5 @@
 import { z } from "zod"
+import { Z_Address, Z_PersonalInfo } from ".."
 
 export const Z_Review = z.object({
   id: z.number().optional(),
@@ -11,7 +12,16 @@ export const Z_Review = z.object({
   locationRates: z.number().min(1).max(5),
   valueRates: z.number().min(1).max(5),
   comment: z.string(),
-  createdAt: z.date().optional(),
-  updatedAt: z.date().nullable().optional(),
-  deletedAt: z.date().nullable().optional(),
+  user:z.object({
+  profilePicture:z.string().optional().nullable(),
+  personalInfo:z.object({
+    firstName:z.string(),
+    lastName:z.string(),
+    address:z.lazy(()=>Z_Address)
+  })
+  }),
+  average:z.number().optional(),
+  createdAt: z.string(),
+  updatedAt: z.string().nullable().optional(),
+  deletedAt: z.string().nullable().optional(),
 })

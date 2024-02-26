@@ -36,6 +36,11 @@ export const Z_Listing = z.object({
     locationAverage: z.number().optional(),
     valueAverage: z.number().optional(),
 }),
+whereYoullBe:z.union([z.string(),z.object({})]).optional(),
+whereYoullSleep:z.union([z.string(),z.object({
+  location:z.string(),
+  coordinates:z.array(z.number())
+})]).optional(),
   createdAt: z.string().optional(),
   updatedAt: z.string().nullable().optional(),
   deletedAt: z.string().nullable().optional(),

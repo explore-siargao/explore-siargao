@@ -253,7 +253,7 @@ const hostDummy = {
   responseRate: 70,
   responseTime: "Reply after 4 Hours",
 }
-
+ 
 const userReviews = [
   {
     imageSrc: "1.jpg",
@@ -530,7 +530,8 @@ export const SingleView = ({listing}:{listing:T_Listing}) => {
           />
         </div>
         <div className="py-8">
-          <UserReviews reviews={userReviews} />
+          {/* @ts-ignore */}
+          <UserReviews reviews={listing.review} />
         </div>
         <div className="py-8">
           <WhereYoullBeDescription {...whereYouWillBeDesc} />

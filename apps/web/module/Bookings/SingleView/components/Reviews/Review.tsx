@@ -9,7 +9,7 @@ interface UserReviewProps {
   avatarKey: string
   name: string
   origin: string
-  rate: number
+  rate: number | undefined
   date: string
   review: string
   showMore: boolean
@@ -26,13 +26,15 @@ const Review = ({
 }: UserReviewProps) => {
   const displayStars = () => {
     const stars = []
+    if(rate!==undefined){
     for (let i = 0; i < rate; i++) {
       stars.push(<StarIcon key={i} className="h-3 w-3" />)
     }
-
+  
     return stars
   }
 
+}
   const [showMoreModalOpen, setShowMoreModalOpen] = useState(false)
 
   const openShowMoreModal = () => {
@@ -42,7 +44,7 @@ const Review = ({
   const closeShowMoreModal = () => {
     setShowMoreModalOpen(false)
   }
-
+const newDate = new Date(date)
   return (
     <div>
       <div className="flex items-center">
@@ -56,7 +58,11 @@ const Review = ({
         <div className="flex">{displayStars()}</div>
         <span>&middot;</span>
         <Typography variant={"h5"} fontWeight="semibold">
-          {date}
+          {newDate.toLocaleDateString('en-US',{
+          month:"long",
+          day:"numeric",
+          year:"numeric"
+          })}
         </Typography>
       </div>
       <Typography className="mt-2 w-full">{review}</Typography>
@@ -79,5 +85,4 @@ const Review = ({
     </div>
   )
 }
-
 export default Review

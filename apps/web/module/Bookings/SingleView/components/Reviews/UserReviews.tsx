@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import UserReview from "./Review"
 import { Button } from "@/common/components/ui/Button"
 import UserReviewModal from "../modals/UserReviewModal"
@@ -19,14 +19,26 @@ const UserReviews = ({ reviews }: T_UserReviewsProps) => {
       <div className="grid grid-cols-2 gap-y-8 gap-x-16">
         {reviews.map((review) => (
           <UserReview
-            key={review.date}
-            avatarKey={review.imageSrc}
-            name={review.name}
-            origin={review.origin}
-            rate={review.rate}
-            date={review.date}
-            review={review.review}
-            showMore={review.showMore}
+            key={review.id}
+            avatarKey={
+              review.user.profilePicture ? review.user.profilePicture : "1.jpg"
+            }
+            name={
+              review.user.personalInfo.firstName +
+              " " +
+              review.user.personalInfo.lastName
+            }
+            origin={
+              review.user.personalInfo.address.city +
+              " " +
+              review.user.personalInfo.address.stateProvince +
+              ", " +
+              review.user.personalInfo.address.country
+            }
+            rate={review.average}
+            date={review.createdAt}
+            review={review.comment}
+            showMore={true}
           />
         ))}
       </div>

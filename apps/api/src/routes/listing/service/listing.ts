@@ -107,7 +107,20 @@ export const getListing = async (req: Request, res: Response) => {
             rules: true,
           },
         },
-        review: true,
+        review: {
+          include:{
+            user:{
+              select:{
+                profilePicture:true,
+                personalInfo:{
+                  include:{
+                    address:true
+                  }
+                }
+              }
+            }
+          }
+        },
       },
     })
 
@@ -153,6 +166,12 @@ export const getListing = async (req: Request, res: Response) => {
       })
       const averageRating = transformedReviews.reduce((accumulator, currentValue) => accumulator + currentValue)/listing.review.length
 
+      const newReviews = listing.review.map((review)=>(
+        {
+          ...review,
+          average: (review.accuracyRates+review.checkInRates+review.cleanLinessRates+review.communicationRates+review.locationRates+review.valueRates)/6
+        }
+      ))
       const newHighLights = listing.highLights.map(({ highlights }) => ( highlights )); 
 
       const newResult = { ...listing }
@@ -160,7 +179,9 @@ export const getListing = async (req: Request, res: Response) => {
       newResult.whereYoullBe = JSON.parse(listing.whereYoullBe)
       newResult.whereYoullSleep = JSON.parse(listing.whereYoullSleep),
       //@ts-ignore
-      newResult.highLights = newHighLights
+      newResult.highLights = newHighLights,
+      //@ts-ignore
+      newResult.review = newReviews
       res.json(
         response.success({
           item: {...newResult, totalRates:{

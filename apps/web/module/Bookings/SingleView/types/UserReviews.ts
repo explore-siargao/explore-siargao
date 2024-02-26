@@ -1,13 +1,5 @@
-export type T_UserReviews = {
-  imageSrc: string
-  name: string
-  origin: string
-  rate: number
-  date: string
-  review: string
-  showMore: boolean
-}
+import { T_Review } from "@repo/contract"
 
 export type T_UserReviewsProps = {
-  reviews: T_UserReviews[]
+  reviews: T_Review[]
 }
