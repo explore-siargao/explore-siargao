@@ -80,7 +80,7 @@ export const SingleView = () => {
                   size="sm"
                   onClick={() => setShowModal(true)}
                 >
-                  <Flag fill="black" />
+                  <Flag className="h-4 w-4 mr-2" />
                   Report this listing
                 </Button>
               </div>

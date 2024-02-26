@@ -41,7 +41,7 @@ const options = [
         selectables: ["Photos", "Description", "House rules", "Title", "Location", "Price", "Amenities", "Bedrooms", "Bathrooms", "Something else"]
     },
     {
-        to: "submit",
+        to: "submitWithFeedback",
         text: "It’s something else",
         exampleText: "",
         subtitle: "",

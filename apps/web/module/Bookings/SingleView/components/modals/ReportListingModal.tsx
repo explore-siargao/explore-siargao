@@ -8,6 +8,9 @@ import Reported from "../ReportListing/Reported"
 import Scam from "../ReportListing/Scam"
 import ScamSelectables from "../ReportListing/ScamSelectables"
 import Feedback from "../ReportListing/Feedback"
+import Offensive from "../ReportListing/Offensive"
+import OffensiveTextArea from "../ReportListing/OffensiveTextArea"
+import SomethingElse from "../ReportListing/SomethingElse"
 
 type ReportListingModalProps = {
     isOpen: boolean
@@ -33,6 +36,18 @@ const ReportListingModal = ({isOpen, onClose}: ReportListingModalProps) => {
         content: () => <ScamSelectables />,
       },
       {
+        name: "offensive", 
+        content: () => <Offensive />,
+      },
+      {
+        name: "offensiveTextArea", 
+        content: () => <OffensiveTextArea />,
+      },
+      {
+        name: "somethingElse", 
+        content: () => <SomethingElse />,
+      },
+      {
         name: "submit", 
         content: () => <Reported withFeedback={false} closeModal={onClose}/>,
       },
@@ -50,7 +65,6 @@ const ReportListingModal = ({isOpen, onClose}: ReportListingModalProps) => {
     const output = useReportListingStore((state) => state.output)
 
     useEffect(() => {
-      console.log(currentContent)
       console.log(output)
     }, [output])
 
