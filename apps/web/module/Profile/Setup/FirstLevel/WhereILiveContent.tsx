@@ -1,7 +1,6 @@
-import { useState } from "react"
 import { Button } from "@/common/components/ui/Button"
 import { Input } from "@/common/components/ui/Input"
-import { Dispatch } from "react"
+import { Dispatch, useState } from "react"
 import useFirstLevelStore from "../store/useFirstLevelStore"
 import toast from "react-hot-toast"
 import { Typography } from "@/common/components/ui/Typography"
@@ -88,11 +87,11 @@ const WhereILiveContent = ({ setIsOpen }: { setIsOpen: Dispatch<boolean> }) => {
         {showResults && (
           <div>
             <ul>
-              {filteredLocations.map((location, index) => (
+              {filteredLocations.map((location) => (
                 <Typography variant="h3">
                   <li
                     className="m-5"
-                    key={index}
+                    key={location.loc}
                     onClick={() => handleLocationClick(location.loc)}
                     onMouseEnter={() => handleLocationHover(location.loc)}
                     onMouseLeave={() => handleLocationHover(null)}
