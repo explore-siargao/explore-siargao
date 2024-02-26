@@ -76,10 +76,10 @@ const DecadeYouWereBornContent = ({
           </Typography>
         </div>
         <div className="flex mt-5 cursor-pointer">
-          <div onMouseOver={() => {}} onFocus={() => {}} />
           <div
             className="clickable-typography cursor-pointer"
             onClick={handleDecadeTypographyClick}
+            onKeyDown={() => handleDecadeTypographyClick}
           >
             <Typography variant="h3" className="font-light">
               Show the decade I was born
