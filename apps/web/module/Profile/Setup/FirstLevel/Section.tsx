@@ -14,11 +14,11 @@ const Section = ({ modalContent, icon, title }: T_Section) => {
   return (
     <>
       <div className="border-b-2 relative">
+      <div onMouseOver={ () => {} } onFocus={ () => {} } />
         <div
           key={title}
           className="flex items-center p-5 rounded-xl hover:bg-primary-100 h-full cursor-pointer"
           onClick={() => setModalOpen(!modalOpen)}
-          tabIndex={0} 
         >
           {icon}
           <Typography variant="h2" className="ml-2 text-gray-500">
