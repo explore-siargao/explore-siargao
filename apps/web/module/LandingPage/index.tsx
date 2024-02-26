@@ -5,6 +5,7 @@ import useGetAllBookings from "../LandingPage/hooks/useGetAllBookings"
 import { Spinner } from "@/common/components/ui/Spinner"
 import useSessionStore from "@/common/store/useSessionStore"
 import Listing from "../Listing"
+import FirstLevel from "../Profile/Setup/FirstLevel"
 
 const LandingPage = () => {
   const userId = useSessionStore((state) => state).id
@@ -14,6 +15,7 @@ const LandingPage = () => {
       {isPending ? (
         <Spinner variant="primary" className="mt-4" />
       ) : (
+        <>
         <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 mx-auto w-full max-w-[2520px] justify-center">
           {data?.items?.map((item: any) => (
             <Listing
@@ -33,6 +35,8 @@ const LandingPage = () => {
             />
           ))}
         </ul>
+        <FirstLevel/>
+        </>
       )}
     </WidthWrapper>
   )
