@@ -13,3 +13,12 @@ export const Z_Address = z.object({
   updatedAt: z.date().nullable().optional(),
   deletedAt: z.date().nullable().optional(),
 })
+
+export const Z_AddUpdateAddress = z.object({
+  streetAddress: z.string(),
+  city: z.string(),
+  stateProvince: z.string(),
+  aptSuite: z.string().optional(),
+  zipCode: z.number(),
+  country: z.string(),
+})

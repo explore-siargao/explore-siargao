@@ -14,7 +14,7 @@ const PreferredLanguage = () => {
       </div>
       <button
         disabled
-        className="underline self-start select-none disabled:opacity-40"
+        className="underline self-start select-none disabled:opacity-40 text-sm"
       >
         Edit
       </button>

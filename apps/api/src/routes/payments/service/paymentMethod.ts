@@ -2,9 +2,9 @@ import { PrismaClient } from '@prisma/client'
 import { REQUIRED_VALUE_EMPTY } from '@/common/constants'
 import { Request, Response } from 'express'
 
-export const addpaymentMethod = async (req: Request, res: Response) => {
+export const addPaymentMethod = async (req: Request, res: Response) => {
   const prisma = new PrismaClient()
-  const { cardInfo } = req.body
+  const { cardInfo, cardType, lastFour } = req.body
   const userId = Number(req.params.userId)
   try {
     const isUserExist =
@@ -18,8 +18,10 @@ export const addpaymentMethod = async (req: Request, res: Response) => {
       if (cardInfo) {
         const newPaymentMethod = await prisma.paymentMethod.create({
           data: {
-            cardInfo: cardInfo,
-            userId: userId,
+            cardInfo,
+            userId,
+            cardType,
+            lastFour,
           },
           include: {
             user: true,
@@ -120,7 +122,7 @@ export const getPaymentMethods = async (req: Request, res: Response) => {
   }
 }
 
-export const removePaymentmethod = async (req: Request, res: Response) => {
+export const removePaymentMethod = async (req: Request, res: Response) => {
   const userId = Number(req.params.userId)
   const paymentMethodId = Number(req.params.paymentMethodId)
   const prisma = new PrismaClient()

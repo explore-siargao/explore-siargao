@@ -98,6 +98,7 @@ const PhoneNumber = ({ phoneNumber, userId }: IPersonalInfo) => {
                 defaultValue={
                   phoneNumber !== "" ? phoneNumber : "Enter a new phone number"
                 }
+                required
                 {...registerPhoneNumber("phoneNumber")}
               />
             </div>

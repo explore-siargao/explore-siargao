@@ -29,7 +29,7 @@ const SessionVerifier = () => {
   ) {
     router.push(`/create-account/${params.type}`)
   }
-  return <Spinner middle />
+  return <Spinner variant="primary" middle />
 }
 
 export default SessionVerifier
