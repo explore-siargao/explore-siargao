@@ -32,7 +32,7 @@ export class EncryptionService {
 
       if (Array.isArray(parsedValue)) {
         decryptedValue = JSON.stringify(parsedValue)
-      } else if (typeof parsedValue === "object" && parsedValue !== null) {
+      } else if (parsedValue && typeof parsedValue === "object") {
         decryptedValue = parsedValue
       }
     } catch (error: any) {
@@ -40,7 +40,7 @@ export class EncryptionService {
         const bytes = CryptoJS.AES.decrypt(encryptedValue, String(this.KEY))
         decryptedValue = bytes.toString(CryptoJS.enc.Utf8)
       } catch (error: any) {
-        console.error("Decryption failed:", error.message)
+        throw Error("Decryption failed:", error.message)
       }
     }
 

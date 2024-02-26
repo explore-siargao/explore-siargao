@@ -96,12 +96,14 @@ const LegalName = ({ firstName, lastName, userId }: IPersonalInfo) => {
                 label="First name"
                 defaultValue={firstName}
                 {...registerLegalName("firstName")}
+                required
               />
               <Input
                 id="lastName"
                 label="Last name"
                 defaultValue={lastName}
                 {...registerLegalName("lastName")}
+                required
               />
             </div>
             <Button className="w-20" size={"sm"} type="submit">

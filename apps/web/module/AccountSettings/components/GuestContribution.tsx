@@ -1,7 +1,7 @@
 "use client"
 import { Title } from "@/common/components/ui/Title"
 import { Typography } from "@/common/components/ui/Typography"
-import combineClasses from "@/common/helpers/combineClasses"
+import { cn } from "@/common/helpers/cn"
 import { Switch } from "@headlessui/react"
 import { APP_NAME } from "@repo/constants"
 import Link from "next/link"
@@ -26,7 +26,7 @@ const GuestContribution = () => {
           id="switchToggle"
           checked={enabled}
           onChange={setEnabled}
-          className={combineClasses(
+          className={cn(
             enabled ? "bg-text-600" : "bg-text-200",
             "relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-text-600 focus:ring-offset-2"
           )}
@@ -34,7 +34,7 @@ const GuestContribution = () => {
           <span className="sr-only">Use setting</span>
           <span
             aria-hidden="true"
-            className={combineClasses(
+            className={cn(
               enabled ? "translate-x-5" : "translate-x-0",
               "pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"
             )}

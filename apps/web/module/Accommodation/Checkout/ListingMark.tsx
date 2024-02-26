@@ -13,7 +13,7 @@ const ListingMark: React.FC<ListingMarkProps> = ({
   desc,
 }) => {
   return (
-    <div className="border border-gray-300 rounded-md p-4 mb-2 flex gap-4">
+    <div className="border border-gray-300 rounded-xl p-4 mb-2 flex gap-4">
       <div className="mt-1">{iconSymbol}</div>
       <div>
         <h3 className="font-semibold">{title}</h3>

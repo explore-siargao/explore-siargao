@@ -143,7 +143,7 @@ const LoginForm = () => {
             <div className="mt-6 grid gap-4">
               <Button
                 type="button"
-                variant={"outline"}
+                variant="outline"
                 imagePosition={Position.start}
                 disabled={isLoginPending}
                 icon={
@@ -169,7 +169,7 @@ const LoginForm = () => {
               </Button>
               <Button
                 type="button"
-                variant={"outline"}
+                variant="outline"
                 imagePosition={Position.start}
                 disabled={isLoginPending}
                 icon={
@@ -194,7 +194,7 @@ const LoginForm = () => {
                 </span>
               </Button>
               <Button
-                variant={"outline"}
+                variant="outline"
                 type="button"
                 onClick={() => {
                   router.push(LINK_CREATE_ACCOUNT)

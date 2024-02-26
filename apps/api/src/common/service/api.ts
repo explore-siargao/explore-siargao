@@ -38,10 +38,15 @@ export class ApiService {
   async get<T = T_BackendResponse>(
     endpoint: string,
     params?: Record<string, any>,
+    includeXenditAuth?: boolean,
+    removeContentType?: boolean,
     signal?: AbortSignal
   ): Promise<T> {
     const reqParams = new URLSearchParams(params).toString()
-    const otherOptions = this.constructOptions()
+    const otherOptions = this.constructOptions(
+      includeXenditAuth,
+      removeContentType
+    )
     const res = fetch(
       `${this.BASE_URL}${endpoint}${params ? `?${reqParams}` : ''}`,
       {

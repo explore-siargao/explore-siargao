@@ -15,7 +15,6 @@ import { prisma } from '@/common/helpers/prismaClient'
 import { wishGroup } from './wishGroup'
 import { review } from './review'
 import { reportListing } from './reportListing'
-import { reservationListing } from './reservationListing'
 import { listingHighlight } from './listingHighlight'
 import { listingPlaceOffer } from './listingPlaceOffer'
 import { houseRule } from './houseRule'
@@ -41,7 +40,6 @@ const main = async () => {
   await wishGroup()
   await review()
   await reportListing()
-  await reservationListing()
   await listingHighlight()
   await listingPlaceOffer()
   await houseRule()

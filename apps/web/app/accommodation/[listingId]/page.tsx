@@ -2,10 +2,10 @@ import AuthGuard from "@/common/components/AuthGuard"
 import React from "react"
 import { APP_NAME } from "@repo/constants"
 import { Metadata } from "next"
-import SingleView from "@/module/Bookings/SingleView"
 import { getRequest } from "@/common/helpers/getRequest"
 import { ACCOMMODATION } from "@/common/constants"
 import { T_Listing, Z_Listing } from "@repo/contract"
+import Accommodation from "@/module/Accommodation"
 
 export const metadata: Metadata = {
   title: `${ACCOMMODATION} - ${APP_NAME}`,
@@ -18,7 +18,7 @@ const AccommodationPage = async () => {
   console.log((await validateData).success)
   return (
     <AuthGuard>
-      <SingleView listing={listing.item as T_Listing} />
+      <Accommodation listing={listing.item as T_Listing}  />
     </AuthGuard>
   )
 }
