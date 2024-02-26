@@ -11,7 +11,10 @@ const WhereIWentToSchoolContent = ({
 }: {
   setIsOpen: Dispatch<boolean>
 }) => {
-  const { value: schoolName, onChange: handleInputChange } = InputMaxLength("", 40)
+  const { value: schoolName, onChange: handleInputChange } = InputMaxLength(
+    "",
+    40
+  )
   const setSchoolNameStore = useFirstLevelStore((state) => state.setSchoolName)
   const save = () => {
     if (schoolName) {

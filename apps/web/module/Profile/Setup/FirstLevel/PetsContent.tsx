@@ -8,7 +8,7 @@ import toast from "react-hot-toast"
 import InputMaxLength from "@/common/helpers/InputMaxLength"
 
 const PetsContent = ({ setIsOpen }: { setIsOpen: Dispatch<boolean> }) => {
-  const { value: pets, onChange: handleInputChange } =InputMaxLength("", 40)
+  const { value: pets, onChange: handleInputChange } = InputMaxLength("", 40)
   const setPetsStore = useFirstLevelStore((state) => state.setPets)
   const save = () => {
     if (pets) {
@@ -30,9 +30,7 @@ const PetsContent = ({ setIsOpen }: { setIsOpen: Dispatch<boolean> }) => {
         </Typography>
 
         <div className="mt-10 mb-10">
-          <Input label="Pets:" 
-          onChange={handleInputChange}
-          maxLength={40}/>
+          <Input label="Pets:" onChange={handleInputChange} maxLength={40} />
           <Typography
             variant="p"
             className="flex items-end justify-end font-semibold"

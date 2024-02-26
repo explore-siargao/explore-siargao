@@ -34,62 +34,86 @@ const menu = [
   {
     icon: <LucideGraduationCap />,
     title: "Where I went to school",
-    modalContent: (props: T_ModalContent) => <WhereIWentToSchoolContent setIsOpen={props.setIsOpen} />,
+    modalContent: (props: T_ModalContent) => (
+      <WhereIWentToSchoolContent setIsOpen={props.setIsOpen} />
+    ),
   },
   {
     icon: <LucideBriefcase />,
     title: "My work",
-    modalContent: (props: T_ModalContent) => <MyWorkContent setIsOpen={props.setIsOpen} />,
+    modalContent: (props: T_ModalContent) => (
+      <MyWorkContent setIsOpen={props.setIsOpen} />
+    ),
   },
   {
     icon: <LucideGlobe2 />,
     title: "Where I live",
-    modalContent: (props: T_ModalContent) => <WhereILiveContent setIsOpen={props.setIsOpen} />,
+    modalContent: (props: T_ModalContent) => (
+      <WhereILiveContent setIsOpen={props.setIsOpen} />
+    ),
   },
   {
     icon: <LucideLanguages />,
     title: "Languages you speak",
-    modalContent: (props: T_ModalContent) => <LanguageISpeakContent setIsOpen={props.setIsOpen} />,
+    modalContent: (props: T_ModalContent) => (
+      <LanguageISpeakContent setIsOpen={props.setIsOpen} />
+    ),
   },
   {
     icon: <LucidePlus />,
     title: "Decade you were born",
-    modalContent: (props: T_ModalContent) => <DecadeYouWereBornContent setIsOpen={props.setIsOpen} />,
+    modalContent: (props: T_ModalContent) => (
+      <DecadeYouWereBornContent setIsOpen={props.setIsOpen} />
+    ),
   },
   {
     icon: <LucideMusic />,
     title: "My favorite song in high school",
-    modalContent: (props: T_ModalContent) => <FavoriteSongInHighSchoolContent setIsOpen={props.setIsOpen} />,
+    modalContent: (props: T_ModalContent) => (
+      <FavoriteSongInHighSchoolContent setIsOpen={props.setIsOpen} />
+    ),
   },
   {
     icon: <LucideHeart />,
     title: "I'm obsessed with",
-    modalContent: (props: T_ModalContent) => <ObsessedWithContent setIsOpen={props.setIsOpen} />,
+    modalContent: (props: T_ModalContent) => (
+      <ObsessedWithContent setIsOpen={props.setIsOpen} />
+    ),
   },
   {
     icon: <LucideLightbulb />,
     title: "My fun fact",
-    modalContent: (props: T_ModalContent) => <MyFunFactContent setIsOpen={props.setIsOpen} />,
+    modalContent: (props: T_ModalContent) => (
+      <MyFunFactContent setIsOpen={props.setIsOpen} />
+    ),
   },
   {
     icon: <LucidePencil />,
     title: "My most useless skill",
-    modalContent: (props: T_ModalContent) => <MyMostUselessSkillContent setIsOpen={props.setIsOpen} />,
+    modalContent: (props: T_ModalContent) => (
+      <MyMostUselessSkillContent setIsOpen={props.setIsOpen} />
+    ),
   },
   {
     icon: <LucideBookOpen />,
     title: "My biography title would be",
-    modalContent: (props: T_ModalContent) => <MyBiographyTitleContent setIsOpen={props.setIsOpen} />,
+    modalContent: (props: T_ModalContent) => (
+      <MyBiographyTitleContent setIsOpen={props.setIsOpen} />
+    ),
   },
   {
     icon: <LucideClock />,
     title: "I spend too much time",
-    modalContent: (props: T_ModalContent) => <SpendTooMuchTimeContent setIsOpen={props.setIsOpen} />,
+    modalContent: (props: T_ModalContent) => (
+      <SpendTooMuchTimeContent setIsOpen={props.setIsOpen} />
+    ),
   },
   {
     icon: <LucidePawPrint />,
     title: "Pets",
-    modalContent: (props: T_ModalContent) => <PetsContent setIsOpen={props.setIsOpen} />,
+    modalContent: (props: T_ModalContent) => (
+      <PetsContent setIsOpen={props.setIsOpen} />
+    ),
   },
 ]
 

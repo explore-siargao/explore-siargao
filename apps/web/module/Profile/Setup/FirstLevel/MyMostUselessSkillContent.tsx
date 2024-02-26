@@ -11,7 +11,10 @@ const MyMostUselessSkillContent = ({
 }: {
   setIsOpen: Dispatch<boolean>
 }) => {
-  const { value: uselessSkill, onChange: handleInputChange } =InputMaxLength("", 40)
+  const { value: uselessSkill, onChange: handleInputChange } = InputMaxLength(
+    "",
+    40
+  )
   const setUselessSkillStore = useFirstLevelStore((state) => state.setWorkName)
   const save = () => {
     if (uselessSkill) {
@@ -23,34 +26,36 @@ const MyMostUselessSkillContent = ({
   }
   return (
     <>
-    <div>
-      <div className="p-5">
-        <Typography variant="h1" className="font-semibold mb-5">
-          What’s your most useless skill?
-        </Typography>
-        <Typography variant="h3">
-          Share a surprising but pointless talent you have. Example: Shuffling
-          cards with one hand.
-        </Typography>
-
-        <div className="mt-10 mb-10">
-          <Input label="My most useless skill:" 
-          onChange={handleInputChange}
-          maxLength={40}/>
-          <Typography
-            variant="p"
-            className="flex items-end justify-end font-semibold"
-          >
-            {uselessSkill.length}/40 characters
+      <div>
+        <div className="p-5">
+          <Typography variant="h1" className="font-semibold mb-5">
+            What’s your most useless skill?
           </Typography>
-        </div>
-        <div className="flex items-end justify-end">
-          <Button size="lg" variant="primary" onClick={() => save()}>
-            Save
-          </Button>
+          <Typography variant="h3">
+            Share a surprising but pointless talent you have. Example: Shuffling
+            cards with one hand.
+          </Typography>
+
+          <div className="mt-10 mb-10">
+            <Input
+              label="My most useless skill:"
+              onChange={handleInputChange}
+              maxLength={40}
+            />
+            <Typography
+              variant="p"
+              className="flex items-end justify-end font-semibold"
+            >
+              {uselessSkill.length}/40 characters
+            </Typography>
+          </div>
+          <div className="flex items-end justify-end">
+            <Button size="lg" variant="primary" onClick={() => save()}>
+              Save
+            </Button>
+          </div>
         </div>
       </div>
-    </div>
     </>
   )
 }

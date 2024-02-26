@@ -11,7 +11,10 @@ const MyBiographyTitleContent = ({
 }: {
   setIsOpen: Dispatch<boolean>
 }) => {
-  const { value: biography, onChange: handleInputChange } =InputMaxLength("", 40)
+  const { value: biography, onChange: handleInputChange } = InputMaxLength(
+    "",
+    40
+  )
   const setBiographyStore = useFirstLevelStore((state) => state.setBiography)
   const save = () => {
     if (biography) {
@@ -33,9 +36,11 @@ const MyBiographyTitleContent = ({
         </Typography>
 
         <div className="mt-10 mb-10">
-          <Input label="My biography title would be:" 
-          onChange={handleInputChange}
-          maxLength={40}/>
+          <Input
+            label="My biography title would be:"
+            onChange={handleInputChange}
+            maxLength={40}
+          />
           <Typography
             variant="p"
             className="flex items-end justify-end font-semibold"

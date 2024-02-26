@@ -7,7 +7,10 @@ import useFirstLevelStore from "../store/useFirstLevelStore"
 import InputMaxLength from "@/common/helpers/InputMaxLength"
 
 const MyWorkContent = ({ setIsOpen }: { setIsOpen: Dispatch<boolean> }) => {
-  const { value: workName, onChange: handleInputChange } =InputMaxLength("", 20)
+  const { value: workName, onChange: handleInputChange } = InputMaxLength(
+    "",
+    20
+  )
   const setWorkNameStore = useFirstLevelStore((state) => state.setWorkName)
   const save = () => {
     if (workName) {
@@ -17,7 +20,7 @@ const MyWorkContent = ({ setIsOpen }: { setIsOpen: Dispatch<boolean> }) => {
       toast.error("Please fill out the form")
     }
   }
-  
+
   return (
     <>
       <div className="p-5">
@@ -34,11 +37,7 @@ const MyWorkContent = ({ setIsOpen }: { setIsOpen: Dispatch<boolean> }) => {
         </Typography>
 
         <div className="mt-10 mb-5">
-          <Input
-            label="My work:"
-            onChange={handleInputChange}
-            maxLength={20}
-          />
+          <Input label="My work:" onChange={handleInputChange} maxLength={20} />
           <Typography
             variant="p"
             className="flex items-end justify-end font-semibold text-text-400"

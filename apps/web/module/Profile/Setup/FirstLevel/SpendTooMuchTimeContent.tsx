@@ -11,7 +11,8 @@ const SpendTooMuchTimeContent = ({
 }: {
   setIsOpen: Dispatch<boolean>
 }) => {
-  const { value: spendTooMuchTime, onChange: handleInputChange } =InputMaxLength("", 40)
+  const { value: spendTooMuchTime, onChange: handleInputChange } =
+    InputMaxLength("", 40)
   const setSpendTooMuchTimeStore = useFirstLevelStore(
     (state) => state.setSpendTooMuchTime
   )
