@@ -7,7 +7,7 @@ type T_ReportHostState = {
   placeholder: string
   selectables: string[]
   setCurrentContent: (value: string | null) => void
-  setOutput: (value: string[]) => void 
+  setOutput: (value: string[]) => void
   removeLastValue: () => void
   setSubTitle: (value: string) => void
   setPlaceHolder: (value: string) => void
@@ -19,24 +19,29 @@ const useReportHostStore = create<T_ReportHostState>((set) => ({
   output: [],
   subTitle: "",
   placeholder: "",
-  selectables: [], 
-  setCurrentContent: (value) => set(() => ({currentContent: value})),
-  setOutput: (value) => set((state) => ({
-    ...state.output,
-    output: [...state.output, ...value]
-  })),
-  removeLastValue: () => set((state) => ({
-    output: state.output.splice(0, state.output.length - 1)
-  })),
-  setSubTitle: (value) => set(() => ({
-    subTitle: value
-  })),
-  setPlaceHolder: (value) => set(() => ({
-    placeholder: value
-  })),
-  setSelectables: (value) => set(() => ({
-    selectables: value
-  }))
+  selectables: [],
+  setCurrentContent: (value) => set(() => ({ currentContent: value })),
+  setOutput: (value) =>
+    set((state) => ({
+      ...state.output,
+      output: [...state.output, ...value],
+    })),
+  removeLastValue: () =>
+    set((state) => ({
+      output: state.output.splice(0, state.output.length - 1),
+    })),
+  setSubTitle: (value) =>
+    set(() => ({
+      subTitle: value,
+    })),
+  setPlaceHolder: (value) =>
+    set(() => ({
+      placeholder: value,
+    })),
+  setSelectables: (value) =>
+    set(() => ({
+      selectables: value,
+    })),
 }))
 
 export default useReportHostStore

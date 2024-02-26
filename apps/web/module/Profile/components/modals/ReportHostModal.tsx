@@ -15,43 +15,43 @@ const ReportHostModal = ({ isOpen, onClose }: ReportHostModalProps) => {
   const reportListings = [
     {
       name: null,
-      content: () => <DefaultOption />
+      content: () => <DefaultOption />,
     },
     {
       name: "scam",
-      content: () => <Scam />
+      content: () => <Scam />,
     },
     {
       name: "scamSelectables",
-      content: () => <ScamSelectables />
+      content: () => <ScamSelectables />,
     },
     {
-      name: "offensive", 
+      name: "offensive",
       content: () => <Offensive />,
     },
     {
-      name: "offensiveContent", 
+      name: "offensiveContent",
       content: () => <OffensiveContent />,
     },
     {
-      name: "offensiveTextArea", 
-      content: () => <OffensiveTextArea isSecondLevel={false}/>,
+      name: "offensiveTextArea",
+      content: () => <OffensiveTextArea isSecondLevel={false} />,
     },
     {
-      name: "offensiveTextArea1", 
-      content: () => <OffensiveTextArea isSecondLevel={true}/>,
+      name: "offensiveTextArea1",
+      content: () => <OffensiveTextArea isSecondLevel={true} />,
     },
     {
-      name: "somethingElse", 
+      name: "somethingElse",
       content: () => <SomethingElse />,
     },
     {
-      name: "submit", 
-      content: () => <Reported withFeedback={false} closeModal={onClose}/>,
+      name: "submit",
+      content: () => <Reported withFeedback={false} closeModal={onClose} />,
     },
     {
-      name: "submitWithFeedback", 
-      content: () => <Reported withFeedback={true} closeModal={onClose}/>,
+      name: "submitWithFeedback",
+      content: () => <Reported withFeedback={true} closeModal={onClose} />,
     },
   ]
 
@@ -64,7 +64,9 @@ const ReportHostModal = ({ isOpen, onClose }: ReportHostModalProps) => {
 
   return (
     <ModalContainer isOpen={isOpen} onClose={onClose} size="sm">
-       {reportListings.find((listing) => currentContent === listing.name)?.content()}
+      {reportListings
+        .find((listing) => currentContent === listing.name)
+        ?.content()}
     </ModalContainer>
   )
 }

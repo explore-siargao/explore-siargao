@@ -544,10 +544,7 @@ export const SingleView = () => {
           />
         </div>
       </div>
-      <ReportListingModal
-        isOpen={showModal}
-        onClose={handleCloseModal}
-      />
+      <ReportListingModal isOpen={showModal} onClose={handleCloseModal} />
     </WidthWrapper>
   )
 }

@@ -13,66 +13,68 @@ import Reported from "@/module/Bookings/SingleView/components/ReportListing/Repo
 import Feedback from "@/module/Bookings/SingleView/components/ReportListing/Feedback"
 
 type ReportListingModalProps = {
-    isOpen: boolean
-    onClose: () => void
+  isOpen: boolean
+  onClose: () => void
 }
 
-const ReportListingModal = ({isOpen, onClose}: ReportListingModalProps) => {
-    const reportListings = [
-      {
-        name: null,
-        content: () => <DefaultOption />
-      },
-      {
-        name: "inaccurate", 
-        content: () => <Inaccurate />,
-      },
-      {
-        name: "scam", 
-        content: () => <Scam />,
-      },
-      {
-        name: "scamSelectables", 
-        content: () => <ScamSelectables />,
-      },
-      {
-        name: "offensive", 
-        content: () => <Offensive />,
-      },
-      {
-        name: "offensiveTextArea", 
-        content: () => <OffensiveTextArea />,
-      },
-      {
-        name: "somethingElse", 
-        content: () => <SomethingElse />,
-      },
-      {
-        name: "submit", 
-        content: () => <Reported withFeedback={false} closeModal={onClose}/>,
-      },
-      {
-        name: "submitWithFeedback", 
-        content: () => <Reported withFeedback={true} closeModal={onClose}/>,
-      },
-      {
-        name: "feedback", 
-        content: () => <Feedback closeModal={onClose}/>,
-      },
-    ]
+const ReportListingModal = ({ isOpen, onClose }: ReportListingModalProps) => {
+  const reportListings = [
+    {
+      name: null,
+      content: () => <DefaultOption />,
+    },
+    {
+      name: "inaccurate",
+      content: () => <Inaccurate />,
+    },
+    {
+      name: "scam",
+      content: () => <Scam />,
+    },
+    {
+      name: "scamSelectables",
+      content: () => <ScamSelectables />,
+    },
+    {
+      name: "offensive",
+      content: () => <Offensive />,
+    },
+    {
+      name: "offensiveTextArea",
+      content: () => <OffensiveTextArea />,
+    },
+    {
+      name: "somethingElse",
+      content: () => <SomethingElse />,
+    },
+    {
+      name: "submit",
+      content: () => <Reported withFeedback={false} closeModal={onClose} />,
+    },
+    {
+      name: "submitWithFeedback",
+      content: () => <Reported withFeedback={true} closeModal={onClose} />,
+    },
+    {
+      name: "feedback",
+      content: () => <Feedback closeModal={onClose} />,
+    },
+  ]
 
-    const currentContent = useReportListingStore((state) => state.currentContent)
-    const output = useReportListingStore((state) => state.output)
+  const currentContent = useReportListingStore((state) => state.currentContent)
+  const output = useReportListingStore((state) => state.output)
 
-    useEffect(() => {
-      console.log(output)
-    }, [output])
+  useEffect(() => {
+    console.log(output)
+  }, [output])
 
-    return (
+  return (
     <ModalContainer isOpen={isOpen} onClose={onClose} size="sm">
-       {reportListings.find((listing) => currentContent === listing.name)?.content()}
+      {reportListings
+        .find((listing) => currentContent === listing.name)
+        ?.content()}
     </ModalContainer>
-    )
+  )
 }
 
 export default ReportListingModal
