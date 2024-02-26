@@ -89,7 +89,6 @@ const WhereILiveContent = ({ setIsOpen }: { setIsOpen: Dispatch<boolean> }) => {
             <ul>
               {filteredLocations.map((location) => (
                 <Typography variant="h3">
-                  <div onMouseOver={() => {}} onFocus={() => {}} />
                   <li
                     className="m-5"
                     key={location.loc}
@@ -97,6 +96,7 @@ const WhereILiveContent = ({ setIsOpen }: { setIsOpen: Dispatch<boolean> }) => {
                     onMouseEnter={() => handleLocationHover(location.loc)}
                     onMouseLeave={() => handleLocationHover(null)}
                     style={{ cursor: "pointer", position: "relative" }}
+                    onKeyDown={() => handleLocationClick(location.loc)}
                   >
                     {highlightMatch(location.loc)}
 
