@@ -58,8 +58,8 @@ model PersonalInfo {
   user              User                @relation(fields: [userId], references: [id])
   address           Addresses?
   emergencyContacts EmergencyContacts[]
-  confirm           String              @db.VarChar(250)
-
+  confirm           String?              @db.VarChar(250)
+  profile           String?              @db.LongText()
   @@index([userId])
 }
 
