@@ -1,13 +1,11 @@
 import { ApiService } from "@/common/service/api"
 import { API_URL_PAYMENTS } from "@/common/constants"
 import { useMutation } from "@tanstack/react-query"
-interface CardInfoProps {
-  cardInfo: string
-  userId: number
-}
+import { T_AddPaymentMethod } from "@repo/contract"
+
 export async function addPaymentMethod(
   userId: number | undefined,
-  props: CardInfoProps
+  props: T_AddPaymentMethod
 ) {
   const apiService = new ApiService()
   return await apiService.post(
@@ -15,10 +13,9 @@ export async function addPaymentMethod(
     props
   )
 }
-
 function useAddPaymentMethod(userId: number) {
   const query = useMutation({
-    mutationFn: (props: CardInfoProps) => addPaymentMethod(userId, props),
+    mutationFn: (props: T_AddPaymentMethod) => addPaymentMethod(userId, props),
   })
   return query
 }

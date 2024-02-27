@@ -1,12 +1,12 @@
 import { ApiService } from "@/common/service/api"
-import { API_URL_BOOKINGS } from "@/common/constants"
+import { API_URL_LISTINGS } from "@/common/constants"
 import { T_Listing } from "@repo/contract"
 import { useMutation } from "@tanstack/react-query"
 
 export async function updateListing(userId: number | null, props: T_Listing) {
   const apiService = new ApiService()
   return await apiService.patch(
-    `${API_URL_BOOKINGS}/${userId}/listing/${props.id}`,
+    `${API_URL_LISTINGS}/${userId}/listing/${props.id}`,
     props
   )
 }

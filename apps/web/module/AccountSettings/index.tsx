@@ -129,7 +129,7 @@ const AccountSettings = () => {
             {" " + email + " "}
             <span>•</span>{" "}
             <Link
-              href="#"
+              href={`/profile/${session.id}`}
               className="font-semibold underline underline-offset-2"
             >
               Go to profile

@@ -1,12 +1,12 @@
 import { ApiService } from "@/common/service/api"
 import { IWishGroup } from "@/common/types/global"
-import { API_URL_BOOKINGS } from "@/common/constants"
+import { API_URL_LISTINGS } from "@/common/constants"
 import { useMutation } from "@tanstack/react-query"
 
 export async function deleteWishGroup(userId: number, title: string) {
   const apiService = new ApiService()
   return await apiService.delete(
-    `${API_URL_BOOKINGS}/${userId}/wish-group/delete/${String(title)}`
+    `${API_URL_LISTINGS}/${userId}/wish-group/delete/${String(title)}`
   )
 }
 

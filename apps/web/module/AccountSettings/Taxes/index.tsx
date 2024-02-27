@@ -4,7 +4,7 @@ import React, { useState } from "react"
 import { Breadcrumb } from "@/common/components/ui/Breadcrumb"
 import { Title } from "@/common/components/ui/Title"
 import { LINK_ACCOUNT } from "@/common/constants/links"
-import combineClasses from "@/common/helpers/combineClasses"
+import { cn } from "@/common/helpers/cn"
 import Taxpayers from "./Taxpayers"
 import TaxDocuments from "./TaxDocuments"
 import useSessionStore from "@/common/store/useSessionStore"
@@ -37,7 +37,7 @@ const Taxes = () => {
       <div className="hidden sm:block">
         <div className="flex border-b border-b-text-50">
           <button
-            className={combineClasses(
+            className={cn(
               tableState === 0
                 ? "border-text-900 text-text-900"
                 : "border-transparent text-text-500 hover:border-text-300 hover:text-text-700",
@@ -48,7 +48,7 @@ const Taxes = () => {
             Taxpayers
           </button>
           <button
-            className={combineClasses(
+            className={cn(
               tableState === 1
                 ? "border-text-900 text-text-900"
                 : "border-transparent text-text-500 hover:border-text-300 hover:text-text-700",

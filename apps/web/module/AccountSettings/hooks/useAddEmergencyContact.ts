@@ -1,11 +1,11 @@
 import { ApiService } from "@/common/service/api"
-import { IEmergencyContact } from "@/common/types/global"
 import { API_URL_USERS } from "@/common/constants"
 import { useMutation } from "@tanstack/react-query"
+import { T_AddEmergencyContact } from "@repo/contract/src/EmergencyContact/type"
 
 export async function addEmergencyContact(
   personId: number | undefined,
-  props: IEmergencyContact
+  props: T_AddEmergencyContact
 ) {
   const apiService = new ApiService()
   return await apiService.post(
@@ -16,7 +16,7 @@ export async function addEmergencyContact(
 
 function useAddEmergencyContact(personId: number) {
   const query = useMutation({
-    mutationFn: (props: IEmergencyContact) =>
+    mutationFn: (props: T_AddEmergencyContact) =>
       addEmergencyContact(personId, props),
   })
   return query

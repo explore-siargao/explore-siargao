@@ -1,9 +1,9 @@
 import isUserLoggedIn from '@/common/middleware/auth/isUserLoggedIn'
 import express from 'express'
 import {
-  addpaymentMethod,
+  addPaymentMethod,
   getPaymentMethods,
-  removePaymentmethod,
+  removePaymentMethod,
   updatePaymentMethod,
 } from './service/paymentMethod'
 import { addCoupon, getUsedCoupons, updateCoupon } from './service/coupons'
@@ -17,7 +17,7 @@ router.post(
   isCsrfTokenValid,
   isOriginValid,
   isUserLoggedIn,
-  addpaymentMethod
+  addPaymentMethod
 )
 router.get(
   '/:userId/payment-method',
@@ -38,7 +38,7 @@ router.delete(
   isCsrfTokenValid,
   isOriginValid,
   isUserLoggedIn,
-  removePaymentmethod
+  removePaymentMethod
 )
 
 //coupons
