@@ -9,7 +9,7 @@ import { Request, Response } from 'express'
 const profiles = [
   {
     id: 1,
-    imageKey:"1.jpg",
+    imageKey: '1.jpg',
     school: '',
     work: '',
     live: '',
@@ -26,7 +26,7 @@ const profiles = [
   },
   {
     id: 2,
-    imageKey:"1.jpg",
+    imageKey: '1.jpg',
     school: 'Laguna State Polytechnic University',
     work: 'IT',
     live: '',
@@ -43,7 +43,7 @@ const profiles = [
   },
   {
     id: 3,
-    imageKey:"1.jpg",
+    imageKey: '1.jpg',
     school: 'SMNHS',
     work: 'Programmer',
     live: '',
@@ -60,7 +60,7 @@ const profiles = [
   },
   {
     id: 4,
-    imageKey:"1.jpg",
+    imageKey: '1.jpg',
     school: '',
     work: '',
     live: '',
@@ -77,7 +77,7 @@ const profiles = [
   },
   {
     id: 5,
-    imageKey:"1.jpg",
+    imageKey: '1.jpg',
     school: 'LSPU',
     work: 'Zkript',
     live: 'Santa Maria Laguna',
@@ -126,7 +126,7 @@ export const updateProfile = async (req: Request, res: Response) => {
     spendTime,
     pets,
     aboutMe,
-    imageKey
+    imageKey,
   } = req.body
   try {
     const getUser = await prisma.user.findFirst({
@@ -143,7 +143,7 @@ export const updateProfile = async (req: Request, res: Response) => {
       return res.json(response.error({ message: USER_NOT_EXIST }))
     }
     if (
-        imageKey ||
+      imageKey ||
       school ||
       work ||
       live ||
@@ -165,7 +165,7 @@ export const updateProfile = async (req: Request, res: Response) => {
         },
         data: {
           profile: JSON.stringify({
-            imageKey:'1.jpg',
+            imageKey: '1.jpg',
             school: 'LSPU',
             work: 'Zkript',
             live: 'Santa Maria Laguna',

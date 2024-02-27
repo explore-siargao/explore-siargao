@@ -3,7 +3,7 @@ import { API_URL_USERS } from "@/common/constants"
 import { useMutation } from "@tanstack/react-query"
 
 interface ProfileProps {
-  imageKey?:string,
+  imageKey?: string
   school?: string
   work?: string
   live?: string
