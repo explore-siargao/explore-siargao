@@ -147,5 +147,5 @@ router.get('/:hostId/host-details-listing/:listingId', getHostDetailsInListing)
 //user profile
 router.get('/:id', getUserProfile)
 router.get('/:userId/profile', getProfile)
-router.patch('/:userId/profile',updateProfile)
+router.patch('/:userId/profile', updateProfile)
 export default router
