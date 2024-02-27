@@ -37,26 +37,6 @@ const SetupProfileImage = () => {
     },
   });
 
-  // const saveUpload = () => {
-  //   if ( !file) {
-  //     toast.error("Please add the Identification Type and an image");
-  //   } else {
-  //     const callBackReq = {
-  //       onSuccess: (data: T_BackendResponse) => {
-  //         if (!data.error) {
-  //           // setIdType(null);
-  //           setFile(null);
-  //           toast.success("Successfully uploaded Government ID");
-  //         } else {
-  //           toast.error(String(data.message));
-  //         }
-  //       },
-  //       onError: (err: any) => {
-  //         toast.error(String(err));
-  //       },
-  //     };
-  //   }
-  // };
   console.log('file: ', file);
 
   return (
