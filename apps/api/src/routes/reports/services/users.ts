@@ -361,7 +361,7 @@ export const addReportUser = async (req: Request, res: Response) => {
     if (!getUser) {
       return res.json(response.error({ message: USER_NOT_EXIST }))
     }
-    if(!validateInputs.success){
+    if (!validateInputs.success) {
       return res.json(response.error(JSON.parse(validateInputs.error.message)))
     }
     const newReportUser = await prisma.reportUser.create({
