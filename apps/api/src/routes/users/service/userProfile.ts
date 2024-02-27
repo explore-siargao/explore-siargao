@@ -1,4 +1,4 @@
-import { REQUIRED_VALUE_EMPTY, UNKNOWN_ERROR_OCCURRED, USER_NOT_AUTHORIZED, USER_NOT_EXIST } from '@/common/constants'
+import { REQUIRED_VALUE_EMPTY, UNKNOWN_ERROR_OCCURRED, USER_NOT_EXIST } from '@/common/constants'
 import { prisma } from '@/common/helpers/prismaClient'
 import { ResponseService } from '@/common/service/response'
 import { Request, Response } from 'express'
@@ -152,5 +152,6 @@ export const updateProfile = async(req:Request, res:Response)=>{
     }
     } catch (err:any) {
         const message = err.message ? err.message : UNKNOWN_ERROR_OCCURRED
+        res.json(response.error({message:message}))
     }
 }
