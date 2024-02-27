@@ -32,8 +32,5 @@
     "node": ">=20.10.0",
     "npm": ">=10.2.3"
   },
-  "engineStrict": true,
-  "dependencies": {
-    "swiper": "^11.0.6"
-  }
+  "engineStrict": true
 }
