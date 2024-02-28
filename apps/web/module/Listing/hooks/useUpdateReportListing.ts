@@ -1,5 +1,5 @@
 import { ApiService } from "@/common/service/api"
-import { API_URL_LISTINGS } from "@/common/constants"
+import { API_URL_REPORTS } from "@/common/constants"
 import { T_ReportListing } from "@repo/contract"
 import { useMutation } from "@tanstack/react-query"
 
@@ -9,15 +9,15 @@ export async function updateReport(
 ) {
   const apiService = new ApiService()
   return await apiService.patch(
-    `${API_URL_LISTINGS}/${userId}/reports/${props.id}`,
+    `${API_URL_REPORTS}/${userId}/listing/${props.id}`,
     props
   )
 }
 
-function useUpdateReport(userId: number | null) {
+function useUpdateReportListing(userId: number | null) {
   const query = useMutation({
     mutationFn: (props: T_ReportListing) => updateReport(userId, props),
   })
   return query
 }
-export default useUpdateReport
+export default useUpdateReportListing
