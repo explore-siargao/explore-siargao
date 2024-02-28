@@ -289,8 +289,6 @@ router.get('/cancellation-policies/id/:id', getCancellationPolicy)
 router.patch('/:userId/cancellation-policies/:id', updateCancellationPolicy)
 router.delete('/:userId/cancellation-policies/:id', deleteCancellationPolicy)
 
-
-
 //listing description
 router.get('/listing-description/:id', getDescription)
 router.get('/listing-description/listing/:listingId', getDescriptionByListing)
