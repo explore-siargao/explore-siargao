@@ -30,24 +30,26 @@ const HostReviews = ({ name, reviewsCount, reviews }: HostReviewsProps) => {
       </div>
       <div className="mt-8">
         <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-4">
-        {reviews.map(listing => (
-          <>
-            {listing?.review?.slice(0, 5).map((review, index) => (
-              <ReviewCard
-                key={index}
-                reviewerName={
-                  review?.user?.personalInfo?.firstName + 
-                  " " +
-                  review?.user?.personalInfo?.lastName
-                }
-                reviewMessage={review?.comment}
-                reviewerImage={"1.jpg"}
-                reviewDate={review?.createdAt}
-                forModal={false}
-              />
-            ))}
-          </>
-  ))}
+          {reviews.map((listing) => (
+            <>
+              {listing?.review
+                ?.slice(0, 5)
+                .map((review, index) => (
+                  <ReviewCard
+                    key={index}
+                    reviewerName={
+                      review?.user?.personalInfo?.firstName +
+                      " " +
+                      review?.user?.personalInfo?.lastName
+                    }
+                    reviewMessage={review?.comment}
+                    reviewerImage={"1.jpg"}
+                    reviewDate={review?.createdAt}
+                    forModal={false}
+                  />
+                ))}
+            </>
+          ))}
         </div>
         <Button
           variant="outline"

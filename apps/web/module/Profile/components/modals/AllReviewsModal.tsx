@@ -14,7 +14,12 @@ const AllReviewsModal = ({
   countReviews,
 }: AllReviewsModalProps) => {
   const tabs = [
-    { name: "From guests", href: "#", reviewCounts: countReviews, current: true },
+    {
+      name: "From guests",
+      href: "#",
+      reviewCounts: countReviews,
+      current: true,
+    },
     { name: "From hosts", href: "#", reviewCounts: 0, current: false },
   ]
 
@@ -72,38 +77,38 @@ const AllReviewsModal = ({
           <>
             {data.review.map((review) => (
               <>
-              <div key={index} className="my-5">
-                <div className="flex space-x-2">
-                <div className="w-4/5">
-                  <Typography variant="h3" fontWeight="semibold">
-                    {data.title}
-                  </Typography>
+                <div key={index} className="my-5">
+                  <div className="flex space-x-2">
+                    <div className="w-4/5">
+                      <Typography variant="h3" fontWeight="semibold">
+                        {data.title}
+                      </Typography>
+                    </div>
+                    <div className="w-1/5 bg-gray-200 h-14 relative rounded-md">
+                      <Image
+                        src={`${ASSET_ROOT}/${data?.images[0]?.fileKey}`}
+                        layout="fill"
+                        objectFit="cover"
+                        className="rounded-md"
+                        alt="listing-image"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <ReviewCard
+                      reviewerImage={"1.jpg"}
+                      reviewerName={
+                        review.user.personalInfo.firstName +
+                        " " +
+                        review.user.personalInfo.lastName
+                      }
+                      reviewMessage={review.comment}
+                      reviewDate={review.createdAt}
+                      forModal={true}
+                    />
+                    <hr />
+                  </div>
                 </div>
-                <div className="w-1/5 bg-gray-200 h-14 relative rounded-md">
-                  <Image
-                    src={`${ASSET_ROOT}/${data?.images[0]?.fileKey}`}
-                    layout="fill"
-                    objectFit="cover"
-                    className="rounded-md"
-                    alt="listing-image"
-                  />
-                </div>
-              </div>
-                <div>  
-                  <ReviewCard
-                  reviewerImage={"1.jpg"}
-                  reviewerName={
-                    review.user.personalInfo.firstName +
-                    " " +
-                    review.user.personalInfo.lastName
-                  }
-                  reviewMessage={review.comment}
-                  reviewDate={review.createdAt}
-                  forModal={true}
-                  />
-                  <hr />
-                </div>
-              </div>
               </>
             ))}
           </>

@@ -22,11 +22,11 @@ export type Review = {
 }
 
 export type Listing = {
-  id: number;
-  title: string;
-  images: { fileKey: string; alt: string }[];
-  review: Review[];
-};
+  id: number
+  title: string
+  images: { fileKey: string; alt: string }[]
+  review: Review[]
+}
 
 export type HostReviewsProps = {
   name: string
