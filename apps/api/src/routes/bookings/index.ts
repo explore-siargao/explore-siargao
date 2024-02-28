@@ -13,7 +13,13 @@ import {
 const router = express.Router()
 
 router.get('/', isCsrfTokenValid, isOriginValid, isUserLoggedIn, getBookings)
-router.get('/:hostId', isCsrfTokenValid, isOriginValid, isUserLoggedIn, getBookingByHost)
+router.get(
+  '/:hostId',
+  isCsrfTokenValid,
+  isOriginValid,
+  isUserLoggedIn,
+  getBookingByHost
+)
 router.post('/', isCsrfTokenValid, isOriginValid, isUserLoggedIn, addBooking)
 router.patch(
   '/:id',
