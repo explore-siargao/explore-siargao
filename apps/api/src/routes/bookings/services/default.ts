@@ -206,3 +206,34 @@ export const deleteBooking = async (req: Request, res: Response) => {
     )
   }
 }
+
+
+export const getBookingByHost = async(req:Request, res:Response)=>{
+ const hostId = Number(req.params.hostId)
+ try {
+  const bookingsByHostId = await prisma.booking.findMany({
+    where:{
+      Listing:{
+        hostedById:hostId
+      },
+      deletedAt:null
+    }
+  })
+  if(bookingsByHostId.length>0){
+    res.json(response.success({
+      items:bookingsByHostId,
+      allItemCount:bookingsByHostId.length,
+      message:""
+    }))
+  }else{
+    res.json(response.success({
+      items:bookingsByHostId,
+      allItemCount:bookingsByHostId.length,
+      message:"No booking found"
+  }))
+}
+ } catch (err:any) {
+  const message = err.message? err.message : UNKNOWN_ERROR_OCCURRED
+  res.json(response.error({message:message}))
+ } 
+}
