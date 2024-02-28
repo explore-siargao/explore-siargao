@@ -75,7 +75,7 @@ export const addBooking = async (req: Request, res: Response) => {
           data: {
             ...req.body,
             transactionId: newTransaction.id,
-            totalFee:totalPrice,
+            totalFee: totalPrice,
             xenditPaymentRequestId: paymentRequest.item?.id,
             xenditPaymentReferenceId: paymentRequest.item?.reference_id,
           },
@@ -129,7 +129,7 @@ export const addBooking = async (req: Request, res: Response) => {
           },
           data: {
             ...req.body,
-            totalFee:totalPrice,
+            totalFee: totalPrice,
             transactionId: newTransaction.id,
             xenditPaymentMethodId: paymentMethod.item?.id,
             xenditPaymentRequestId: paymentRequest.item?.id,

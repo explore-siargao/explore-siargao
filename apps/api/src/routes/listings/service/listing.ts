@@ -173,7 +173,7 @@ export const addListing = async (req: Request, res: Response) => {
             data: {
               fee: fee,
               cleaningFee: cleaningFee,
-              serviceFee: serviceFee
+              serviceFee: serviceFee,
             },
           })
 

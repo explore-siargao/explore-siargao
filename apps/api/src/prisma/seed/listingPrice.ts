@@ -6,17 +6,17 @@ export const listingPrice = async () => {
       {
         fee: 2000,
         cleaningFee: 100,
-        serviceFee: 100
+        serviceFee: 100,
       },
       {
         fee: 5000,
         cleaningFee: 200,
-        serviceFee: 100
+        serviceFee: 100,
       },
       {
         fee: 1000,
         cleaningFee: 50,
-        serviceFee: 50
+        serviceFee: 50,
       },
       {
         fee: 4000,

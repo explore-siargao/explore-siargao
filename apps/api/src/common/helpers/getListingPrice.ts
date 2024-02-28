@@ -17,7 +17,7 @@ export const getListingPrice = async ({
   fromDate,
   toDate,
 }: T_BookingGetPrice) => {
-  const listing =  await prisma.listing.findFirst({
+  const listing = await prisma.listing.findFirst({
     where: {
       id: listingId,
     },
@@ -36,6 +36,6 @@ export const getListingPrice = async ({
     : 0
   const guestCounts = childrenCount + adultCount
   const daysCount = differenceInDays(new Date(toDate), new Date(fromDate))
-  const totalPrice = (price * guestCounts) * daysCount
+  const totalPrice = price * guestCounts * daysCount
   return Number(totalPrice)
 }
