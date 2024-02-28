@@ -33,6 +33,7 @@ const ID_TYPES = [
   { name: "Postal ID", value: E_GovernmentId.PostalID },
 ]
 
+
 const GovernmentId = ({ governmentId }: IPersonalInfo) => {
   const queryClient = useQueryClient()
   const session = useSessionStore((state) => state)
@@ -81,7 +82,7 @@ const GovernmentId = ({ governmentId }: IPersonalInfo) => {
             toast.success("Successfully uploaded Government ID")
             queryClient.invalidateQueries({
               queryKey: ["session"],
-            })
+           })
           } else {
             toast.error(String(data.message))
           }
@@ -118,9 +119,7 @@ const GovernmentId = ({ governmentId }: IPersonalInfo) => {
             <Typography variant={"p"}>Government ID</Typography>
             <Typography fontWeight={"light"}>
               {governmentId
-                ? `${governmentId.length} ID${
-                    governmentId.length > 1 ? "s" : ""
-                  } provided`
+                ? `${governmentId.length} ID${governmentId.length > 1 ? "s" : ""} provided`
                 : "Not Provided"}
             </Typography>
           </div>
