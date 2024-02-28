@@ -44,7 +44,7 @@ export const getAllReports = async (req: Request, res: Response) => {
       },
     }))
 
-    const newResult = modifyResult.map((reportListing) => ({
+    const getAllReportsNewResults = modifyResult.map((reportListing) => ({
       id: reportListing.id,
       reports: JSON.parse(reportListing.reports),
       listing: reportListing.listing,
@@ -62,7 +62,7 @@ export const getAllReports = async (req: Request, res: Response) => {
     if (getAllReportsListing.length !== 0) {
       res.json(
         response.success({
-          items: newResult,
+          items: getAllReportsNewResults,
           allItemCount: getAllReportsListing.length,
           message: '',
         })
@@ -188,7 +188,7 @@ export const getReportsByListing = async (req: Request, res: Response) => {
       },
     }))
 
-    const newResult = modifyResult.map((reportListing) => ({
+    const getReportsByListingNewResults = modifyResult.map((reportListing) => ({
       id: reportListing.id,
       reports: JSON.parse(reportListing.reports),
       listing: reportListing.listing,
@@ -206,7 +206,7 @@ export const getReportsByListing = async (req: Request, res: Response) => {
     if (reportsByListingId.length !== 0) {
       res.json(
         response.success({
-          items: newResult,
+          items: getReportsByListingNewResults,
           allItemCount: reportsByListingId.length,
           message: '',
         })
@@ -270,7 +270,7 @@ export const getReport = async (req: Request, res: Response) => {
       reports: JSON.parse(getReportById?.reports as string),
     }
 
-    const newResult = {
+    const getReportNewResults = {
       id: modifyResult.id,
       reports: modifyResult.reports,
       listing: modifyResult.listing,
@@ -287,7 +287,7 @@ export const getReport = async (req: Request, res: Response) => {
 
     res.json(
       response.success({
-        item: newResult,
+        item: getReportNewResults,
         allItemCount: 1,
         message: '',
       })
