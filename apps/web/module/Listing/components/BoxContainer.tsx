@@ -37,14 +37,12 @@ const BoxContainer = ({
 }: BoxContainerProps) => {
   const [isClicked, setIsClicked] = useState(false)
   const handleClick = () => {
-    if(userId) {
+    if (userId) {
       setIsClicked((setIsClicked) => !setIsClicked)
       setAddWIshlistModal(!isClicked)
-    }
-    else {
+    } else {
       toast.error("You need to log in to add it to wishlist")
     }
-    
   }
 
   const [addWIshlistModal, setAddWIshlistModal] = useState(false)
@@ -54,15 +52,10 @@ const BoxContainer = ({
     <>
       <li>
         <div className="h-80 w-auto 2xl:h-72 2xl:w-auto rounded-2xl relative select-none">
-          <button
-            onClick={handleClick}
-            className="absolute top-3 right-3 z-40"
-          >
+          <button onClick={handleClick} className="absolute top-3 right-3 z-40">
             <HeartIcon
               className={` h-7 w-7 text-text-50 active:scale-90 ${
-                isClicked || isHearted
-                  ? "fill-error-500"
-                  : "fill-text-500/50 "
+                isClicked || isHearted ? "fill-error-500" : "fill-text-500/50 "
               }`}
             />
           </button>
