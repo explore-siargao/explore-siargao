@@ -1,5 +1,4 @@
 import { ApiService } from "@/common/service/api"
-import { IWishGroup } from "@/common/types/global"
 import { API_URL_REPORTS } from "@/common/constants"
 import { useMutation } from "@tanstack/react-query"
 import { T_ReportUser } from "@repo/contract"
