@@ -9,10 +9,7 @@ export async function addReportUser(
   props: T_ReportUser
 ) {
   const apiService = new ApiService()
-  return await apiService.post(
-    `${API_URL_REPORTS}/${userId}/user`,
-    props
-  )
+  return await apiService.post(`${API_URL_REPORTS}/${userId}/user`, props)
 }
 
 function useAddReportUser(userId: number) {
