@@ -5,8 +5,14 @@ import {
 } from '@/common/constants'
 import { ResponseService } from '@/common/service/response'
 import { prisma } from '@/common/helpers/prismaClient'
-import { T_AddBooking, Z_AddBooking, Z_Booking } from '@repo/contract'
+import {
+  T_AddBooking,
+  T_Booking,
+  Z_AddBooking,
+  Z_Booking,
+} from '@repo/contract'
 import { ApiService } from '@/common/service/api'
+import { getListingPrice } from '@/common/helpers/getListingPrice'
 
 const apiService = new ApiService()
 const XENDIT_ROOT_URL = '/api/xendit'
@@ -44,9 +50,17 @@ export const addBooking = async (req: Request, res: Response) => {
             userId: res.locals.user.id,
           },
         })
+
+        const totalPrice = await getListingPrice({
+          listingId: newBooking.listingId,
+          childrenCount: newBooking.childrenCount,
+          adultCount: newBooking.adultCount,
+          fromDate: String(newBooking.fromDate),
+          toDate: String(newBooking.toDate),
+        })
         const paymentRequest = await apiService.post(
           `${XENDIT_ROOT_URL}/gcash-create-payment`,
-          { amount: 1500, bookingId: newBooking.id }
+          { amount: totalPrice, bookingId: newBooking.id }
         )
         const newTransaction = await prisma.transaction.create({
           data: {
@@ -61,6 +75,7 @@ export const addBooking = async (req: Request, res: Response) => {
           data: {
             ...req.body,
             transactionId: newTransaction.id,
+            totalFee:totalPrice,
             xenditPaymentRequestId: paymentRequest.item?.id,
             xenditPaymentReferenceId: paymentRequest.item?.reference_id,
           },
@@ -87,13 +102,20 @@ export const addBooking = async (req: Request, res: Response) => {
             userId: res.locals.user.id,
           },
         })
+        const totalPrice = await getListingPrice({
+          listingId: newBooking.listingId,
+          childrenCount: newBooking.childrenCount,
+          adultCount: newBooking.adultCount,
+          fromDate: String(newBooking.fromDate),
+          toDate: String(newBooking.toDate),
+        })
         const paymentMethod = await apiService.post(
           `${XENDIT_ROOT_URL}/card-single-use`,
           { cardInfo, bookingId: newBooking.id }
         )
         const paymentRequest = await apiService.post(
           `${XENDIT_ROOT_URL}/card-create-payment`,
-          { paymentMethodId: paymentMethod.item?.id, amount: 126000 }
+          { paymentMethodId: paymentMethod.item?.id, amount: totalPrice }
         )
         const newTransaction = await prisma.transaction.create({
           data: {
@@ -107,6 +129,7 @@ export const addBooking = async (req: Request, res: Response) => {
           },
           data: {
             ...req.body,
+            totalFee:totalPrice,
             transactionId: newTransaction.id,
             xenditPaymentMethodId: paymentMethod.item?.id,
             xenditPaymentRequestId: paymentRequest.item?.id,

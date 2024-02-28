@@ -6,47 +6,27 @@ export const listingPrice = async () => {
       {
         fee: 2000,
         cleaningFee: 100,
-        serviceFee: 100,
-        checkIn: '2024-01-29T03:01:27.936Z',
-        checkOut: '2024-01-29T03:01:27.936Z',
-        isNight: false,
-        countGuest: 5,
+        serviceFee: 100
       },
       {
         fee: 5000,
         cleaningFee: 200,
-        serviceFee: 100,
-        checkIn: '2024-01-29T03:01:27.936Z',
-        checkOut: '2024-01-29T03:01:27.936Z',
-        isNight: false,
-        countGuest: 5,
+        serviceFee: 100
       },
       {
         fee: 1000,
         cleaningFee: 50,
-        serviceFee: 50,
-        checkIn: '2024-01-29T03:01:27.936Z',
-        checkOut: '2024-01-29T03:01:27.936Z',
-        isNight: true,
-        countGuest: 10,
+        serviceFee: 50
       },
       {
         fee: 4000,
         cleaningFee: 250,
         serviceFee: 200,
-        checkIn: '2024-01-29T03:01:27.936Z',
-        checkOut: '2024-01-29T03:01:27.936Z',
-        isNight: true,
-        countGuest: 7,
       },
       {
         fee: 1500,
         cleaningFee: 100,
         serviceFee: 100,
-        checkIn: '2024-01-29T03:01:27.936Z',
-        checkOut: '2024-01-29T03:01:27.936Z',
-        isNight: false,
-        countGuest: 5,
       },
     ],
   })
