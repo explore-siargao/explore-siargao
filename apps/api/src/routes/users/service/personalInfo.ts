@@ -417,6 +417,7 @@ export const addGovernmentId = async (req: Request, res: Response) => {
               ] as T_GovernmentId[]),
             },
           })
+
           res.json(
             response.success({
               items: JSON.parse(
@@ -432,29 +433,39 @@ export const addGovernmentId = async (req: Request, res: Response) => {
           const typeAlreadyExists = updatedGovernmentId.some(
             (govId: T_GovernmentId) => govId.type === type
           )
+      
+          //
           if (!typeAlreadyExists) {
-            const upload = await fileService.upload({ files })
-            updatedGovernmentId.push({
-              fileKey: upload.key,
-              type: type,
-              createdAt: new Date(),
-            })
-            const updateGovId = await prisma.personalInfo.update({
-              where: {
-                id: peronalInfoId,
-              },
-              data: {
-                governmentId: JSON.stringify(updatedGovernmentId),
-              },
-            })
-            res.json(
-              response.success({
-                items: JSON.parse(
-                  updateGovId.governmentId as string
-                ) as T_GovernmentId[],
-                message: 'Government Id successfully added',
+            if (updatedGovernmentId.length < 2) {
+              const upload = await fileService.upload({ files })
+              updatedGovernmentId.push({
+                fileKey: upload.key,
+                type: type,
+                createdAt: new Date(),
               })
-            )
+              const updateGovId = await prisma.personalInfo.update({
+                where: {
+                  id: peronalInfoId,
+                },
+                data: {
+                  governmentId: JSON.stringify(updatedGovernmentId),
+                },
+              })
+              res.json(
+                response.success({
+                  items: JSON.parse(
+                    updateGovId.governmentId as string
+                  ) as T_GovernmentId[],
+                  message: 'Government Id successfully added',
+                })
+              )
+            } else {
+              res.json(
+                response.error({
+                  message: '2 Government IDs are allowed',
+                })
+              )
+            }
           } else {
             res.json(
               response.error({
@@ -462,6 +473,8 @@ export const addGovernmentId = async (req: Request, res: Response) => {
               })
             )
           }
+          //
+
         }
       } else {
         res.json(
