@@ -26,7 +26,10 @@ const HostListings = ({ name, listings }: HostListingsProps) => {
         {listings.map((data, index) => (
           <ListingCard
             key={index}
-            image={data.imageKeys.fileKey}
+            image={
+              // @ts-ignore
+              data.images[0].fileKey
+            }
             title={data.title}
             rating={5}
             description={"Sample description"}

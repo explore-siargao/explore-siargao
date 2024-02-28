@@ -16,7 +16,7 @@ const ProfileCard = ({
   return (
     <div className="border bg-white p-8 rounded-xl shadow-lg w-full">
       <div className="grid grid-cols-5 gap-x-6">
-        <div className="col-span-3 mx-auto">
+        <div className="col-span-3 mx-auto flex flex-col items-center">
           <div className="relative h-24 w-24 rounded-full bg-gray-200">
             <Image
               src={`${ASSET_ROOT}/${profileImage}`}
@@ -29,7 +29,7 @@ const ProfileCard = ({
               <ShieldCheckIcon className="h-5 w-5 mx-auto text-white" />
             </div>
           </div>
-          <h1 className="text-3xl font-semibold text-center mt-2">{name}</h1>
+          <h1 className="text-3xl font-semibold mt-2 text-center">{name}</h1>
           <Typography
             variant="h5"
             className="flex justify-center items-center font-semibold"
@@ -59,7 +59,7 @@ const ProfileCard = ({
           </Typography>
           <hr className="mt-3 mb-2" />
           <Typography variant="h1" fontWeight="bold">
-            {hostingMonthAge}
+            {hostingMonthAge ? hostingMonthAge : 0}
           </Typography>
           <Typography variant="h6" fontWeight="semibold">
             Months hosting
