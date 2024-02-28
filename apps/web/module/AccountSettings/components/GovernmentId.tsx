@@ -14,6 +14,7 @@ import { E_GovernmentId } from "@repo/contract/build/GovernmentId/enum"
 import { T_BackendResponse, T_GovernmentId } from "@repo/contract"
 import GovernmentIdModal from "./modals/GovernmentIdModal"
 import { governmentIdMap } from "@/common/helpers/governmentIdMap"
+import { useQueryClient } from "@tanstack/react-query"
 
 type PersonalInfoProps = {
   isButtonClicked: boolean
@@ -32,8 +33,8 @@ const ID_TYPES = [
   { name: "Postal ID", value: E_GovernmentId.PostalID },
 ]
 
-const GovernmentId = ({ governmentId: initGovernmentId }: IPersonalInfo) => {
-  const [governmentId, setGovernmentId] = useState(initGovernmentId)
+const GovernmentId = ({ governmentId }: IPersonalInfo) => {
+  const queryClient = useQueryClient()
   const session = useSessionStore((state) => state)
   const [idType, setIdType] = useState<E_GovernmentId | null>(null)
   const [contentState, setContentState] = useState<PersonalInfoProps>({
@@ -78,10 +79,9 @@ const GovernmentId = ({ governmentId: initGovernmentId }: IPersonalInfo) => {
             setIdType(null)
             setFile(null)
             toast.success("Successfully uploaded Government ID")
-            setGovernmentId((prevGovernmentId) => [
-              ...(prevGovernmentId || [prevGovernmentId]),
-              { type: idType, fileKey: file.name, createdAt: new Date() },
-            ])
+            queryClient.invalidateQueries({
+              queryKey: ["session"],
+            })
           } else {
             toast.error(String(data.message))
           }
@@ -118,7 +118,9 @@ const GovernmentId = ({ governmentId: initGovernmentId }: IPersonalInfo) => {
             <Typography variant={"p"}>Government ID</Typography>
             <Typography fontWeight={"light"}>
               {governmentId
-                ? `${governmentId.length} ID${governmentId.length > 1 ? "s" : ""} provided`
+                ? `${governmentId.length} ID${
+                    governmentId.length > 1 ? "s" : ""
+                  } provided`
                 : "Not Provided"}
             </Typography>
           </div>
