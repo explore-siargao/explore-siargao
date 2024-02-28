@@ -32,7 +32,6 @@ const ID_TYPES = [
   { name: "Postal ID", value: E_GovernmentId.PostalID },
 ]
 
-
 const GovernmentId = ({ governmentId: initGovernmentId }: IPersonalInfo) => {
   const [governmentId, setGovernmentId] = useState(initGovernmentId)
   const session = useSessionStore((state) => state)
@@ -79,8 +78,9 @@ const GovernmentId = ({ governmentId: initGovernmentId }: IPersonalInfo) => {
             setIdType(null)
             setFile(null)
             toast.success("Successfully uploaded Government ID")
-            setGovernmentId(prevGovernmentId => [...(prevGovernmentId || [prevGovernmentId]),
-            { type: idType, fileKey: file.name, createdAt: new Date() }
+            setGovernmentId((prevGovernmentId) => [
+              ...(prevGovernmentId || [prevGovernmentId]),
+              { type: idType, fileKey: file.name, createdAt: new Date() },
             ])
           } else {
             toast.error(String(data.message))

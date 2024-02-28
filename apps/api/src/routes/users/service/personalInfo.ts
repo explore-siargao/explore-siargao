@@ -433,7 +433,7 @@ export const addGovernmentId = async (req: Request, res: Response) => {
           const typeAlreadyExists = updatedGovernmentId.some(
             (govId: T_GovernmentId) => govId.type === type
           )
-      
+
           //
           if (!typeAlreadyExists) {
             if (updatedGovernmentId.length < 2) {
@@ -474,7 +474,6 @@ export const addGovernmentId = async (req: Request, res: Response) => {
             )
           }
           //
-
         }
       } else {
         res.json(
