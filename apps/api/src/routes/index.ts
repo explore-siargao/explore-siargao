@@ -7,6 +7,7 @@ import TaxesRoute from '@/routes/taxes'
 import XenditRoute from '@/routes/xendit'
 import BookingsRoute from '@/routes/bookings'
 import TransactionsRoute from '@/routes/transactions'
+import ReportsRoute from '@/routes/reports'
 import { API_ROOT } from '@repo/constants'
 
 export default function (app: Application) {
@@ -18,4 +19,5 @@ export default function (app: Application) {
   app.use(`${API_ROOT}/xendit`, XenditRoute)
   app.use(`${API_ROOT}/bookings`, BookingsRoute)
   app.use(`${API_ROOT}/transactions`, TransactionsRoute)
+  app.use(`${API_ROOT}/reports`, ReportsRoute)
 }

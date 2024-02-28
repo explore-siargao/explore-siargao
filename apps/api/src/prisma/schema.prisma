@@ -10,18 +10,18 @@ datasource db {
 }
 
 model User {
-  id               Int                  @id @default(autoincrement())
-  email            String               @unique @db.VarChar(255)
-  password         String?              @db.VarChar(255)
+  id               Int               @id @default(autoincrement())
+  email            String            @unique @db.VarChar(255)
+  password         String?           @db.VarChar(255)
   changePasswordAt DateTime?
-  createdAt        DateTime             @default(now())
-  updatedAt        DateTime             @updatedAt
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
   deletedAt        DateTime?
-  role             UserRole             @default(User)
+  role             UserRole          @default(User)
   registrationType RegistrationType?
-  deactivated      Boolean              @default(false)
-  profilePicture   String?              @db.LongText
-  canReceiveEmail  Boolean              @default(false)
+  deactivated      Boolean           @default(false)
+  profilePicture   String?           @db.LongText
+  canReceiveEmail  Boolean           @default(false)
   tax              Tax?
   listing          Listing[]
   reportListing    ReportListing[]
@@ -193,33 +193,31 @@ model BasicAboutPlace {
 }
 
 model PaymentMethod {
-  id          Int                  @id @default(autoincrement())
-  userId      Int
-  cardInfo    String               @db.LongText
-  cardType    String               @db.VarChar(255)
-  lastFour    String               @db.VarChar(255)
-  createdAt   DateTime             @default(now())
-  updatedAt   DateTime             @updatedAt
-  deletedAt   DateTime?
-  isDefault   Boolean              @default(false)
-  user        User                 @relation(fields: [userId], references: [id])
-  Booking     Booking[]
+  id        Int       @id @default(autoincrement())
+  userId    Int
+  cardInfo  String    @db.LongText
+  cardType  String    @db.VarChar(255)
+  lastFour  String    @db.VarChar(255)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+  isDefault Boolean   @default(false)
+  user      User      @relation(fields: [userId], references: [id])
+  Booking   Booking[]
 
   @@index([userId])
 }
 
 model ReportListing {
-  id          Int       @id @default(autoincrement())
-  name        String    @db.VarChar(200)
-  reason      String    @db.Text()
-  description String?   @db.LongText()
-  reportedBy  Int
-  user        User      @relation(fields: [reportedBy], references: [id])
-  listingId   Int
-  listing     Listing   @relation(fields: [listingId], references: [id])
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  deletedAt   DateTime?
+  id         Int       @id @default(autoincrement())
+  reports    String    @db.LongText()
+  reportedBy Int
+  user       User      @relation(fields: [reportedBy], references: [id])
+  listingId  Int
+  listing    Listing   @relation(fields: [listingId], references: [id])
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  deletedAt  DateTime?
 
   @@index([reportedBy])
   @@index([listingId])
