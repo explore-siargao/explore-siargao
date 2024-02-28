@@ -329,7 +329,7 @@ export const addReport = async (req: Request, res: Response) => {
     }
     const newReport = await prisma.reportListing.create({
       data: {
-        reports: JSON.parse(reports),
+        reports: JSON.stringify(reports),
         listingId: listingId,
         reportedBy: userId,
       },
@@ -377,7 +377,7 @@ export const updateReport = async (req: Request, res: Response) => {
           id: id,
         },
         data: {
-          reports: reports,
+          reports: JSON.stringify(reports),
         },
       })
       res.json(
