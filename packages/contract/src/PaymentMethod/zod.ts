@@ -6,6 +6,7 @@ export const Z_PaymentMethod = z.object({
   userId: z.number(),
   user: Z_User,
   cardInfo: z.string(),
+  cvv:z.string().optional(),
   cardType: z.string(),
   lastFour: z.string(),
   createdAt: z.date().optional(),
