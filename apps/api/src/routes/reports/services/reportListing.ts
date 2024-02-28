@@ -19,7 +19,18 @@ export const getAllReports = async (req: Request, res: Response) => {
         },
       },
       include: {
-        user: true,
+        user: {
+          select: {
+            email: true,
+            profilePicture: true,
+            personalInfo: {
+              select: {
+                firstName: true,
+                lastName: true,
+              },
+            },
+          },
+        },
         listing: true,
       },
     })
@@ -32,10 +43,26 @@ export const getAllReports = async (req: Request, res: Response) => {
         whereYoullSleep: JSON.parse(reportListing.listing.whereYoullSleep),
       },
     }))
+
+    const newResult = modifyResult.map((reportListing) => ({
+      id: reportListing.id,
+      reports: JSON.parse(reportListing.reports),
+      listing: reportListing.listing,
+      reportedBy: {
+        email: reportListing.user.email,
+        name:
+          reportListing.user.personalInfo?.firstName +
+          ' ' +
+          reportListing.user.personalInfo?.lastName,
+        profilePicture: reportListing.user.profilePicture,
+      },
+      createdAt: reportListing.createdAt,
+    }))
+
     if (getAllReportsListing.length !== 0) {
       res.json(
         response.success({
-          items: modifyResult,
+          items: newResult,
           allItemCount: getAllReportsListing.length,
           message: '',
         })
@@ -49,6 +76,72 @@ export const getAllReports = async (req: Request, res: Response) => {
         })
       )
     }
+  } catch (err: any) {
+    res.json(response.error({ message: err.message }))
+  }
+}
+
+export const getAllReportListingByReportedBy = async (
+  req: Request,
+  res: Response
+) => {
+  const userId = Number(req.params.userId)
+  try {
+    const getUser = await prisma.user.findUnique({
+      where: {
+        id: userId,
+      },
+    })
+
+    if (!getUser) {
+      return res.json(response.error({ message: USER_NOT_EXIST }))
+    }
+    const reportListings = await prisma.reportListing.findMany({
+      where: {
+        reportedBy: userId,
+      },
+      include: {
+        user: {
+          select: {
+            email: true,
+            profilePicture: true,
+            personalInfo: {
+              select: {
+                firstName: true,
+                lastName: true,
+              },
+            },
+          },
+        },
+        listing: true,
+      },
+    })
+    const modifiedResult = reportListings.map((reportListing) => ({
+      id: reportListing.id,
+      reports: JSON.parse(reportListing.reports),
+      listing: {
+        ...reportListing.listing,
+        images: JSON.parse(reportListing.listing.images),
+        whereYoullBe: JSON.parse(reportListing.listing.whereYoullBe),
+        whereYoullSleep: JSON.parse(reportListing.listing.whereYoullSleep),
+      },
+      reportedBy: {
+        email: reportListing.user.email,
+        name:
+          reportListing.user.personalInfo?.firstName +
+          ' ' +
+          reportListing.user.personalInfo?.lastName,
+        profilePicture: reportListing.user.profilePicture,
+      },
+      createdAt: reportListing.createdAt,
+    }))
+    res.json(
+      response.success({
+        items: modifiedResult,
+        allItemCount: modifiedResult.length,
+        message: '',
+      })
+    )
   } catch (err: any) {
     res.json(response.error({ message: err.message }))
   }
@@ -70,7 +163,18 @@ export const getReportsByListing = async (req: Request, res: Response) => {
         listingId: listingId,
       },
       include: {
-        user: true,
+        user: {
+          select: {
+            email: true,
+            profilePicture: true,
+            personalInfo: {
+              select: {
+                firstName: true,
+                lastName: true,
+              },
+            },
+          },
+        },
         listing: true,
       },
     })
@@ -83,10 +187,26 @@ export const getReportsByListing = async (req: Request, res: Response) => {
         whereYoullSleep: JSON.parse(reportListing.listing.whereYoullSleep),
       },
     }))
+
+    const newResult = modifyResult.map((reportListing) => ({
+      id: reportListing.id,
+      reports: JSON.parse(reportListing.reports),
+      listing: reportListing.listing,
+      reportedBy: {
+        email: reportListing.user.email,
+        name:
+          reportListing.user.personalInfo?.firstName +
+          ' ' +
+          reportListing.user.personalInfo?.lastName,
+        profilePicture: reportListing.user.profilePicture,
+      },
+      createdAt: reportListing.createdAt,
+    }))
+
     if (reportsByListingId.length !== 0) {
       res.json(
         response.success({
-          items: modifyResult,
+          items: newResult,
           allItemCount: reportsByListingId.length,
           message: '',
         })
@@ -113,10 +233,30 @@ export const getReport = async (req: Request, res: Response) => {
         },
       },
       include: {
-        user: true,
+        user: {
+          select: {
+            email: true,
+            profilePicture: true,
+            personalInfo: {
+              select: {
+                firstName: true,
+                lastName: true,
+              },
+            },
+          },
+        },
         listing: true,
       },
     })
+
+    if (!getReportById) {
+      return res.json(
+        response.error({
+          message: 'Report already deleted or report data not found',
+        })
+      )
+    }
+
     const modifyResult = {
       ...getReportById,
       listing: {
@@ -127,22 +267,31 @@ export const getReport = async (req: Request, res: Response) => {
           getReportById?.listing.whereYoullSleep as string
         ),
       },
+      reports: JSON.parse(getReportById?.reports as string),
     }
-    if (getReportById) {
-      res.json(
-        response.success({
-          item: modifyResult,
-          allItemCount: 1,
-          message: '',
-        })
-      )
-    } else {
-      res.json(
-        response.error({
-          message: 'Report already deleted or report data not found',
-        })
-      )
+
+    const newResult = {
+      id: modifyResult.id,
+      reports: modifyResult.reports,
+      listing: modifyResult.listing,
+      reportedBy: {
+        email: modifyResult.user.email,
+        name:
+          modifyResult.user.personalInfo?.firstName +
+          ' ' +
+          modifyResult.user.personalInfo?.lastName,
+        profilePicture: modifyResult.user.profilePicture,
+      },
+      createdAt: modifyResult.createdAt,
     }
+
+    res.json(
+      response.success({
+        item: newResult,
+        allItemCount: 1,
+        message: '',
+      })
+    )
   } catch (err: any) {
     res.json(response.error({ message: err.message }))
   }
@@ -150,7 +299,7 @@ export const getReport = async (req: Request, res: Response) => {
 
 export const addReport = async (req: Request, res: Response) => {
   const userId = Number(req.params.userId)
-  const { name, reason, description, listingId } = req.body
+  const { reports, listingId } = req.body
   const isInputValid = Z_ReportListing.safeParse(req.body)
   try {
     const getUser = await prisma.user.findUnique({
@@ -180,9 +329,7 @@ export const addReport = async (req: Request, res: Response) => {
     }
     const newReport = await prisma.reportListing.create({
       data: {
-        name: name,
-        reason: reason,
-        description: description,
+        reports: JSON.parse(reports),
         listingId: listingId,
         reportedBy: userId,
       },
@@ -202,7 +349,7 @@ export const addReport = async (req: Request, res: Response) => {
 export const updateReport = async (req: Request, res: Response) => {
   const userId = Number(req.params.userId)
   const id = Number(req.params.id)
-  const { name, reason, description } = req.body
+  const { reports } = req.body
   try {
     const getUser = await prisma.user.findUnique({
       where: {
@@ -224,15 +371,13 @@ export const updateReport = async (req: Request, res: Response) => {
         })
       )
     }
-    if (reason || description) {
+    if (reports) {
       const updateReportById = await prisma.reportListing.update({
         where: {
           id: id,
         },
         data: {
-          name: name,
-          reason: reason,
-          description: description,
+          reports: reports,
         },
       })
       res.json(
