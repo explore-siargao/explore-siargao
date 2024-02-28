@@ -243,14 +243,10 @@ model ListingPrice {
   id          Int       @id @unique @default(autoincrement())
   fee         Int
   serviceFee  Int
-  isNight     Boolean?  @default(false)
-  checkIn     DateTime
-  checkOut    DateTime
-  countGuest  Int
+  cleaningFee Int
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   deletedAt   DateTime?
-  cleaningFee Int
   listing     Listing?
 }
 
@@ -437,6 +433,7 @@ model Booking {
   cardInfo                 String?        @db.LongText
   cardType                 String?        @db.VarChar(255)
   lastFour                 String?        @db.VarChar(255)
+  totalFee                Int?
   PaymentMethod            PaymentMethod? @relation(fields: [paymentMethodId], references: [id])
   paymentMethodId          Int?
   xenditPaymentMethodId    String?        @unique @db.VarChar(255)
