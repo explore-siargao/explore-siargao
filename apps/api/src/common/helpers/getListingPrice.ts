@@ -1,6 +1,4 @@
-import { Request, Response } from 'express'
 import { prisma } from './prismaClient'
-import { T_AddBooking, T_Booking } from '@repo/contract'
 import { differenceInDays } from 'date-fns'
 
 export type T_BookingGetPrice = {

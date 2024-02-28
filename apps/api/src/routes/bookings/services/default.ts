@@ -7,7 +7,6 @@ import { ResponseService } from '@/common/service/response'
 import { prisma } from '@/common/helpers/prismaClient'
 import {
   T_AddBooking,
-  T_Booking,
   Z_AddBooking,
   Z_Booking,
 } from '@repo/contract'
