@@ -312,8 +312,7 @@ router.post('/:userId/listing-description/:listingId', addDescription)
 router.patch('/:userId/listing-description/:id', updateDescription)
 router.delete('/:userId/listing-description/:id', deleteDescription)
 
-
-//notifications 
+//notifications
 router.get('/notifications/:hostId', getNotificationsByHost)
 
 export default router
