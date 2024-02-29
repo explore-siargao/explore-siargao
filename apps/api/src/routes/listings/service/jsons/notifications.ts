@@ -1,6 +1,6 @@
 const notifTypeEnum = {
-    BOOKING: "booking",
-    ADDED_REVIEW: "addedReview"
+    BOOKING: "Booking",
+    ADDED_REVIEW: "AddedReview"
   };
   
   export const notifications = [
