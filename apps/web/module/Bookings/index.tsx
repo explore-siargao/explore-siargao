@@ -5,7 +5,7 @@ import { WidthWrapper } from "@/common/components/WidthWrapper"
 import useGetAllBookings from "../LandingPage/hooks/useGetAllBookings"
 import { Spinner } from "@/common/components/ui/Spinner"
 import useSessionStore from "@/common/store/useSessionStore"
-import Notifications from "../Notification/Notification"
+import Notifications from "../Notification/components/Notification"
 
 const notifications = [
   {
