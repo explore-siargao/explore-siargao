@@ -8,6 +8,7 @@ import {
   updateBooking,
   deleteBooking,
 } from './services/default'
+import { getPaidEarnings, getThisMonthEarnings, getUpcomingEarnings } from './services/earnings'
 
 const router = express.Router()
 
@@ -27,5 +28,9 @@ router.delete(
   isUserLoggedIn,
   deleteBooking
 )
+
+router.get('/this-month', getThisMonthEarnings)
+router.get('/upcoming', getUpcomingEarnings)
+router.get('/paid', getPaidEarnings)
 
 export default router
