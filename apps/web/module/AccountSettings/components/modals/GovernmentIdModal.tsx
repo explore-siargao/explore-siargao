@@ -15,12 +15,7 @@ const GovernmentIdModal = ({
 }: GovernmentIdModalProps) => {
   const title = governmentIdMap[governmentId?.type]
   return (
-    <ModalContainer
-      title={title}
-      isOpen={isOpen}
-      onClose={onClose}
-      size="auto"
-    >
+    <ModalContainer title={title} isOpen={isOpen} onClose={onClose} size="auto">
       <div className="flex justify-center bg-primary-50 border border-primary-200 p-4">
         <div className="relative h-96">
           <Image
