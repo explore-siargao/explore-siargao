@@ -107,6 +107,7 @@ import {
   getDescriptionByListing,
   updateDescription,
 } from './service/listingDescription'
+import { getNotificationsByHost } from './service/notification'
 
 const router = express.Router()
 
@@ -310,5 +311,9 @@ router.get('/listing-description/listing/:listingId', getDescriptionByListing)
 router.post('/:userId/listing-description/:listingId', addDescription)
 router.patch('/:userId/listing-description/:id', updateDescription)
 router.delete('/:userId/listing-description/:id', deleteDescription)
+
+
+//notifications 
+router.get('/notifications/:hostId', getNotificationsByHost)
 
 export default router
