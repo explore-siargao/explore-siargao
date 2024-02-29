@@ -1,8 +1,8 @@
 import express from 'express'
 import {
-  addUser,
   deactivateAccount,
   getAllUsers,
+  getUserProfile,
   updatePassword,
 } from './service/default'
 import {
@@ -40,7 +40,6 @@ const router = express.Router()
 
 // DEFAULT
 router.get('/', getAllUsers)
-router.post('/', addUser)
 
 // AUTH
 router.post('/auth/info', info) // Use for Manual log in for Next-Auth
@@ -104,13 +103,7 @@ router.post(
   isUserLoggedIn,
   addEmergencyContact
 )
-router.post(
-  '/:personalInfoId/address/add/',
-  isCsrfTokenValid,
-  isOriginValid,
-  isUserLoggedIn,
-  addAddress
-)
+router.post('/:personalInfoId/address/add/', addAddress)
 router.patch(
   '/address/:userId',
   isUserLoggedIn,
@@ -146,7 +139,11 @@ router.patch('/personal-info/currency/:personalInfoId', updateCurrency)
 //Government Id
 router.get('/:peronalInfoId/government-id', getAllGovernmentIdByPersonInfoId)
 router.post('/:peronalInfoId/government-id', addGovernmentId)
-export default router
 
 //Host Details
 router.get('/:hostId/host-details-listing/:listingId', getHostDetailsInListing)
+
+//user profile
+router.get('/:id', getUserProfile)
+
+export default router

@@ -8,9 +8,9 @@ import { Typography } from "@/common/components/ui/Typography"
 import { Select, Option } from "@/common/components/ui/Select"
 import { COUNTRIES } from "@repo/constants"
 import { T_Taxes } from "@repo/contract"
-import useAddTax from "@/module/Bookings/hooks/useAddTax"
+import useAddTax from "@/module/Listing/hooks/useAddTax"
 import useSessionStore from "@/common/store/useSessionStore"
-import useGetTaxByUser from "@/module/Bookings/hooks/useGetTaxByUser"
+import useGetTaxByUser from "@/module/Listing/hooks/useGetTaxByUser"
 
 type ContentStateProps = {
   isButtonClicked: boolean

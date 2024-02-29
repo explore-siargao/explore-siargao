@@ -1,13 +1,14 @@
 import { Button } from "@/common/components/ui/Button"
 import { Input } from "@/common/components/ui/Input"
-import useGetCountries from "@/common/hooks/useGetCounties"
-import { IAddress } from "@/common/types/global"
 import React, { useState } from "react"
 import { useForm } from "react-hook-form"
 import useAddAddress from "../hooks/useAddAddress"
 import { useQueryClient } from "@tanstack/react-query"
 import toast from "react-hot-toast"
 import { Typography } from "@/common/components/ui/Typography"
+import { T_AddUpdateAddress, T_Address } from "@repo/contract"
+import { Option, Select } from "@/common/components/ui/Select"
+import { COUNTRIES } from "@repo/constants"
 
 type PersonalInfoProps = {
   isButtonClicked: boolean
@@ -17,20 +18,30 @@ const Address = ({
   streetAddress,
   country,
   city,
-  province,
+  stateProvince,
   zipCode,
+  aptSuite,
   id,
-}: IAddress) => {
-  const { data: countries, isPending: countriesIsPending } = useGetCountries()
+}: T_Address) => {
   const [contentState, setContentState] = useState<PersonalInfoProps>({
     isButtonClicked: false,
     contentId: "",
   })
-  const { register, reset, handleSubmit, getValues } = useForm<IAddress>()
+  const { register, reset, handleSubmit, getValues } =
+    useForm<T_AddUpdateAddress>({
+      values: {
+        streetAddress,
+        country,
+        city,
+        stateProvince,
+        zipCode,
+        aptSuite,
+      },
+    })
   const { mutate, isPending } = useAddAddress(id as number)
   const queryClient = useQueryClient()
 
-  const onSubmit = (formData: IAddress) => {
+  const onSubmit = (formData: T_AddUpdateAddress) => {
     const callBackReq = {
       onSuccess: (data: any) => {
         if (!data.error) {
@@ -58,7 +69,7 @@ const Address = ({
             <Typography variant={"p"}>Address</Typography>
             <Typography className="font-light">
               {zipCode
-                ? `${streetAddress} ${city}, ${province}, ${country}`
+                ? `${streetAddress} ${city}, ${stateProvince}, ${country}`
                 : "Enter an Address"}
             </Typography>
           </div>
@@ -95,49 +106,67 @@ const Address = ({
           </Typography>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="my-4 space-y-4">
-              <select
-                {...register("country")}
-                id="countries"
-                className="pr-10 text-text-900 focus-within:z-10 focus-within:ring-2 focus-within:ring-text-600 text-sm rounded-lg block h-14 w-[490px] p-2.5 "
-              >
-                <option selected>Choose a country</option>
-                {countriesIsPending ? (
-                  <option>Loading</option>
-                ) : (
-                  countries?.items?.map((country: any) => (
-                    <option key={country.country}>{country.country}</option>
-                  ))
-                )}
-              </select>
               <div className="grid grid-cols-2 gap-4">
+                <Select
+                  {...register("country", {
+                    required: "This field is required",
+                  })}
+                  label="Country"
+                  disabled={isPending}
+                  required
+                  className="col-span-1"
+                >
+                  <Option value={""}>Select Country</Option>
+                  {COUNTRIES.map((country) => (
+                    <Option key={country.code} value={country.code}>
+                      {country.name}
+                    </Option>
+                  ))}
+                </Select>
                 <Input
                   id="streetAddress"
                   label="Street address"
                   disabled={isPending}
-                  defaultValue={streetAddress}
-                  {...register("streetAddress")}
+                  {...register("streetAddress", {
+                    required: "This field is required",
+                  })}
+                  required
+                />
+                <Input
+                  id="streetAddress"
+                  label="Apt Suite"
+                  disabled={isPending}
+                  {...register("aptSuite")}
                 />
                 <Input
                   id="city"
-                  label="city"
+                  label="City"
                   disabled={isPending}
                   defaultValue={city}
-                  {...register("city")}
+                  {...register("city", {
+                    required: "This field is required",
+                  })}
+                  required
                 />
                 <Input
-                  id="stateProvice"
+                  id="stateProvince"
                   disabled={isPending}
                   label="State/Province"
-                  defaultValue={province}
-                  {...register("province")}
+                  {...register("stateProvince", {
+                    required: "This field is required",
+                  })}
+                  required
                 />
                 <Input
                   id="zipCode"
                   type="number"
-                  label="zip code"
+                  label="Zip code"
                   disabled={isPending}
                   defaultValue={zipCode}
-                  {...register("zipCode")}
+                  {...register("zipCode", {
+                    required: "This field is required",
+                  })}
+                  required
                 />
               </div>
             </div>

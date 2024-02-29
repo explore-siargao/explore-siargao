@@ -74,7 +74,7 @@ const AddWishlistModal = ({
       >
         {wishGroupIsPending ? (
           <Spinner
-            variant={"primary"}
+            variant="primary"
             size={"lg"}
             className="mx-auto my-auto d-blockr"
           >
@@ -92,7 +92,7 @@ const AddWishlistModal = ({
               >
                 <div className="h-60 w-60 rounded-3xl relative border border-text-100">
                   <Image
-                    src={`/assets/${item?.imageKeys[0].fileKey}`}
+                    src={`/assets/${item?.images[0].fileKey}`}
                     width={300}
                     height={300}
                     alt="photo"

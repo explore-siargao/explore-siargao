@@ -1,4 +1,3 @@
-"use client"
 import React from "react"
 import { Title } from "@/common/components/ui/Title"
 import BookingBoxContainer from "@/common/components/BookingBoxContainer"

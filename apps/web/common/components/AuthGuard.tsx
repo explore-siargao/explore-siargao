@@ -27,7 +27,7 @@ const AuthGuard = ({ children }: { children: React.ReactNode }) => {
   }
 
   if (isLoading) {
-    return <Spinner middle />
+    return <Spinner variant="primary" middle />
   }
 
   return <>{children}</>

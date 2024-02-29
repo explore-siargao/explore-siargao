@@ -22,7 +22,9 @@ const Wishlist = () => {
       </div>
       <div className="mt-4">
         {isPending ? (
-          <Spinner size={"md"}>Loading...</Spinner>
+          <Spinner variant="primary" size={"md"}>
+            Loading...
+          </Spinner>
         ) : (
           <>
             {data?.item?.length !== 0 ? (
@@ -30,7 +32,7 @@ const Wishlist = () => {
                 {data?.item?.map((data: any) => (
                   <WishlistBoxContainer
                     key={data?.id as number}
-                    photo={data?.imageKeys[0].fileKey}
+                    photo={data?.images[0].fileKey}
                     title={data?.title}
                     link={data?.title}
                     text={data?._count + " saved"}

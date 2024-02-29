@@ -11,7 +11,7 @@
         "AWS_REGION",
         "API_URL",
         "API_PORT",
-        "API_ENCRYPT_KEY",
+        "PASSWORD_ENCRYPT_KEY",
         "API_SIGN_KEY",
         "API_ORIGINS",
         "API_AUTH_URL",
@@ -25,7 +25,10 @@
         "WEB_URL",
         "RECAPTCHA_KEY",
         "RECAPTCHA_KEY_SECRET",
-        "NODE_ENV"
+        "NODE_ENV",
+        "XENDIT_URL",
+        "XENDIT_SECRET",
+        "CARD_ENCRYPT_KEY"
       ]
     },
     "lint": {

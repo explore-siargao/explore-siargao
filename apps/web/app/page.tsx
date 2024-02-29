@@ -1,6 +1,5 @@
 import AuthGuard from "@/common/components/AuthGuard"
-import Bookings from "@/module/Bookings"
-import BottomNavBar from "@/module/Authentication/components/BottomNavBar"
+import LandingPage from "@/module/LandingPage"
 import { APP_NAME } from "@repo/constants"
 import { Metadata } from "next"
 import { HOME } from "@/common/constants"
@@ -13,8 +12,7 @@ export const metadata: Metadata = {
 const HomePage = () => {
   return (
     <AuthGuard>
-      <Bookings />
-      <BottomNavBar />
+      <LandingPage />
     </AuthGuard>
   )
 }

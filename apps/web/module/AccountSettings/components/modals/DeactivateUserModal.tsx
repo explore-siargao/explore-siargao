@@ -37,6 +37,7 @@ const DeactivateUserModal = ({
       title="Deactivate your account"
       onClose={closeModal}
       isOpen={openModal}
+      size="auto"
     >
       <div className="p-6">
         <p className="text-text-400 font-light">

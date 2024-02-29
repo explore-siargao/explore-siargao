@@ -1,6 +1,6 @@
 import { ApiService } from "@/common/service/api"
 import { IWishGroup } from "@/common/types/global"
-import { API_URL_BOOKINGS } from "@/common/constants"
+import { API_URL_LISTINGS } from "@/common/constants"
 import { useMutation } from "@tanstack/react-query"
 
 export async function addEditWishListNote(
@@ -10,7 +10,7 @@ export async function addEditWishListNote(
 ) {
   const apiService = new ApiService()
   return await apiService.patch(
-    `${API_URL_BOOKINGS}/${userId}/note/${wishGroupId}`,
+    `${API_URL_LISTINGS}/${userId}/note/${wishGroupId}`,
     props
   )
 }

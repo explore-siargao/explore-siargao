@@ -55,7 +55,7 @@ const PreSignUpForm = () => {
         <div className="mt-6 grid gap-4">
           <Button
             type="button"
-            variant={"outline"}
+            variant="outline"
             imagePosition={Position.start}
             icon={
               <Image
@@ -76,7 +76,7 @@ const PreSignUpForm = () => {
           </Button>
           <Button
             type="button"
-            variant={"outline"}
+            variant="outline"
             imagePosition={Position.start}
             icon={
               <Image

@@ -39,6 +39,7 @@ const RemovePaymentModal = ({
   return (
     <ModalContainer
       title="Remove payment method"
+      size="auto"
       isOpen={openModal}
       onClose={closeModal}
     >

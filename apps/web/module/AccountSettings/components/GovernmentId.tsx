@@ -13,6 +13,7 @@ import useSessionStore from "@/common/store/useSessionStore"
 import { E_GovernmentId } from "@repo/contract/build/GovernmentId/enum"
 import { T_BackendResponse, T_GovernmentId } from "@repo/contract"
 import GovernmentIdModal from "./modals/GovernmentIdModal"
+import { governmentIdMap } from "@/common/helpers/governmentIdMap"
 
 type PersonalInfoProps = {
   isButtonClicked: boolean
@@ -105,11 +106,11 @@ const GovernmentId = ({ governmentId }: IPersonalInfo) => {
   ]
 
   return (
-    <div>
+    <div className="text-sm">
       {!contentState.isButtonClicked ? (
         <div className="flex justify-between py-5">
           <div>
-            <Typography variant={"p"}>Goverment ID</Typography>
+            <Typography variant={"p"}>Government ID</Typography>
             <Typography fontWeight={"light"}>
               {governmentId
                 ? `${governmentId.length} ID${governmentId.length > 1 ? "s" : ""} provided`
@@ -131,7 +132,7 @@ const GovernmentId = ({ governmentId }: IPersonalInfo) => {
       ) : (
         <div className="grid py-5">
           <div className="flex justify-between">
-            <Typography variant={"p"}>Goverment ID</Typography>
+            <Typography variant={"p"}>Government ID</Typography>
             <button
               className="underline self-start select-none"
               onClick={() =>
@@ -154,7 +155,7 @@ const GovernmentId = ({ governmentId }: IPersonalInfo) => {
               <div className="mt-4">
                 {governmentId?.map((id, index) => (
                   <p className="text-lg" key={id.type}>
-                    {index + 1}. {id.type}{" "}
+                    {index + 1}. {governmentIdMap[id.type]}{" "}
                     <span
                       onClick={() => openGovernmentIdModal(id)}
                       className="text-primary-500 underline cursor-pointer hover:text-primary-700"

@@ -19,12 +19,14 @@ import { signIn } from "next-auth/react"
 import { LINK_FORGOT_PASSWORD } from "../constants/links"
 import useGlobalInputEmail from "../store/useGlobalInputEmail"
 import { Typography } from "@/common/components/ui/Typography"
+import { EncryptionService } from "@repo/services/"
 
 enum Position {
   "end",
   "start",
 }
 
+const encryptionService = new EncryptionService("password")
 const LoginForm = () => {
   const router = useRouter()
   const searchParams = useSearchParams()
@@ -55,7 +57,13 @@ const LoginForm = () => {
         toast.error(String(err))
       },
     }
-    loginUser({ ...formData }, callBackReq)
+    loginUser(
+      {
+        ...formData,
+        password: encryptionService.encrypt(getValues("password") as string),
+      },
+      callBackReq
+    )
   }
 
   return (
@@ -135,7 +143,7 @@ const LoginForm = () => {
             <div className="mt-6 grid gap-4">
               <Button
                 type="button"
-                variant={"outline"}
+                variant="outline"
                 imagePosition={Position.start}
                 disabled={isLoginPending}
                 icon={
@@ -161,7 +169,7 @@ const LoginForm = () => {
               </Button>
               <Button
                 type="button"
-                variant={"outline"}
+                variant="outline"
                 imagePosition={Position.start}
                 disabled={isLoginPending}
                 icon={
@@ -186,7 +194,7 @@ const LoginForm = () => {
                 </span>
               </Button>
               <Button
-                variant={"outline"}
+                variant="outline"
                 type="button"
                 onClick={() => {
                   router.push(LINK_CREATE_ACCOUNT)
