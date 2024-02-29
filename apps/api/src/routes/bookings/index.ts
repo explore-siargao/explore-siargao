@@ -8,7 +8,11 @@ import {
   updateBooking,
   deleteBooking,
 } from './services/default'
-import { getPaidEarnings, getThisMonthEarnings, getUpcomingEarnings } from './services/earnings'
+import {
+  getPaidEarnings,
+  getThisMonthEarnings,
+  getUpcomingEarnings,
+} from './services/earnings'
 
 const router = express.Router()
 
