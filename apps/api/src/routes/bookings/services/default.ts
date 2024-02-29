@@ -35,7 +35,7 @@ export const getBookings = async (req: Request, res: Response) => {
 export const addBooking = async (req: Request, res: Response) => {
   const inputIsValid = Z_AddBooking.safeParse(req.body)
   if (inputIsValid.success) {
-    const { paymentType, cardInfo } = req.body as T_AddBooking
+    const { paymentType, cardInfo, cvv } = req.body as T_AddBooking
     try {
       if (paymentType === 'GCASH') {
         const newBooking = await prisma.booking.create({
@@ -89,7 +89,7 @@ export const addBooking = async (req: Request, res: Response) => {
         })
         const paymentMethod = await apiService.post(
           `${XENDIT_ROOT_URL}/card-single-use`,
-          { cardInfo, bookingId: newBooking.id }
+          { cardInfo, cvv, bookingId: newBooking.id }
         )
         const paymentRequest = await apiService.post(
           `${XENDIT_ROOT_URL}/card-create-payment`,
