@@ -363,19 +363,19 @@ export const deleteReview = async (req: Request, res: Response) => {
   }
 }
 
-
-export const getReviewsByHost = async(req:Request, res:Response)=>{
+export const getReviewsByHost = async (req: Request, res: Response) => {
   const hostId = Number(req.params.hostId)
   const filterReviews = reviews
-  .filter((review) => hostId === review.listing.hostedById)
-  .sort((a, b) => {
-    const dateA = new Date(a.createdAt).getTime();
-    const dateB = new Date(b.createdAt).getTime();
-    return dateA - dateB;
-  });
-  res.json(response.success({
-    items:filterReviews,
-    allItemCount:filterReviews.length
-  }))
-  
+    .filter((review) => hostId === review.listing.hostedById)
+    .sort((a, b) => {
+      const dateA = new Date(a.createdAt).getTime()
+      const dateB = new Date(b.createdAt).getTime()
+      return dateA - dateB
+    })
+  res.json(
+    response.success({
+      items: filterReviews,
+      allItemCount: filterReviews.length,
+    })
+  )
 }
