@@ -22,14 +22,13 @@ const ProfileFourthLevel = ({
   }
 
   return (
-    <div className="w-1/2">
+    <div>
       <div className="pb-5">
-        <Typography variant="h1" className="font-semibold">
+        <Typography variant="h2" className="font-semibold pb-5">
           Your past trips
         </Typography>
 
         <Typography
-          variant="h3"
           className="text-gray-600 flex items-end justify-between"
         >
           <span>Show the destination I've traveled to.</span>
@@ -37,11 +36,11 @@ const ProfileFourthLevel = ({
         </Typography>
       </div>
 
-      <div className="flex grid-cols-1 gap-5">
+      <div className="flex justify-between gap-3 sm:flex-row overflow-x-auto">
         {description.map((item) => (
           <div
             key={item.destination}
-            className={`border p-5 pb-12 rounded-xl w-[200px] ${
+            className={`w-full bg-gray-100 h-15 border p-5 pb-12 rounded-xl gap-5 ${
               checked ? "bg-primary-400" : "bg-primary-200 text-gray-300"
             }`}
             style={{

@@ -1,8 +1,8 @@
 import ModalContainer from "@/common/components/ModalContainer"
 import { Button } from "@/common/components/ui/Button"
 import { Typography } from "@/common/components/ui/Typography"
-import { useInputSetupProfileAboutYouStore } from "@/module/HostProfile/store/useSetupProfileAboutYouStore"
 import { useState } from "react"
+import { useInputSetupProfileAboutYouStore } from "../../Setup/store/useSetupProfileAboutYouStore"
 
 interface ISetUpProfileAboutYouModalProps {
   isModalOpen: boolean
@@ -20,7 +20,6 @@ const SetUpProfileAboutYouModal = ({
     (state) => state.setInputValue
   )
   const [value, setValue] = useState("")
-
   const saveInputValue = () => {
     setInputValue(value)
     onClose()
@@ -29,7 +28,7 @@ const SetUpProfileAboutYouModal = ({
   return (
     <ModalContainer onClose={onClose} isOpen={isModalOpen} size="sm">
       <div className="py-4 px-6 flex flex-col divide-text-100 overflow-y-auto">
-        <Typography variant="h1" fontWeight="semibold">
+        <Typography variant="h2" fontWeight="semibold">
           About you
         </Typography>
         <Typography variant="h5" className="mt-4">
