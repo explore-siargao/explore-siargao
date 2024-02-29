@@ -64,7 +64,6 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
       {
         cardInfo: encryptCard.encrypt({
           cardNumber: formData.cardNumber?.replace(/\s/g, ""),
-          cvv: formData.cvv,
           expirationMonth: splitExpiration[0],
           expirationYear: `20${splitExpiration[1]}`,
           cardholderName: formData.cardholderName,
