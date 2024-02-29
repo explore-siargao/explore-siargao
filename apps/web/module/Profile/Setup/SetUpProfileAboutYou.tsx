@@ -21,7 +21,7 @@ const SetUpProfileAboutYou = () => {
       <Typography variant="h2" fontWeight="semibold">
         About You
       </Typography>
-      
+
       <div className="relative">
         <div className="border border-gray-300 rounded-md p-5 mt-5 w-full h-25 border-dotted">
           <div className="absolute pl-3 left-2 text-gray-400">

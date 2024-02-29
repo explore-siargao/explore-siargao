@@ -21,9 +21,7 @@ const Section = ({ modalContent, icon, title }: T_Section) => {
           onKeyDown={() => setModalOpen(!modalOpen)}
         >
           {icon}
-          <Typography className="ml-2 text-gray-500">
-            {title}
-          </Typography>
+          <Typography className="ml-2 text-gray-500">{title}</Typography>
         </div>
       </div>
 

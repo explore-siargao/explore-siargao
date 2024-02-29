@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 }
 
 const ProfileEditPage = () => {
-  return <SetupProfile/>
+  return <SetupProfile />
 }
 
 export default ProfileEditPage

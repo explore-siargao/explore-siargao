@@ -28,9 +28,7 @@ const ProfileFourthLevel = ({
           Your past trips
         </Typography>
 
-        <Typography
-          className="text-gray-600 flex items-end justify-between"
-        >
+        <Typography className="text-gray-600 flex items-end justify-between">
           <span>Show the destination I've traveled to.</span>
           <ToggleSwitch checked={checked} onChange={handleToggleChange} />
         </Typography>
