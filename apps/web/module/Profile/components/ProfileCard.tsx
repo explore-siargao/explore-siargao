@@ -18,13 +18,15 @@ const ProfileCard = ({
       <div className="grid grid-cols-5 gap-x-6">
         <div className="col-span-3 mx-auto flex flex-col items-center">
           <div className="relative h-24 w-24 rounded-full bg-gray-200">
-            <Image
-              src={`${ASSET_ROOT}/${profileImage}`}
-              layout="fill"
-              objectFit="cover"
-              alt="Profile"
-              className="rounded-full"
-            />
+            {profileImage && (
+              <Image
+                src={`${ASSET_ROOT}/1.jpg`}
+                layout="fill"
+                objectFit="cover"
+                alt="Profile"
+                className="rounded-full"
+              />
+            )}
             <div className="bg-primary-600 h-8 w-8 rounded-full absolute bottom-1 right-[-5px] flex items-center">
               <ShieldCheckIcon className="h-5 w-5 mx-auto text-white" />
             </div>
@@ -34,7 +36,6 @@ const ProfileCard = ({
             variant="h5"
             className="flex justify-center items-center font-semibold"
           >
-            <MedalIcon className="h-3 w-3 mr-0.5" />
             {hostStatus}
           </Typography>
         </div>

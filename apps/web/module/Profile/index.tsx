@@ -12,11 +12,15 @@ import { useState } from "react"
 import ReportHostModal from "./components/modals/ReportHostModal"
 import useGetProfile from "./hooks/useGetProfile"
 import { Spinner } from "@/common/components/ui/Spinner"
+import { Button } from "@/common/components/ui/Button"
+import { LucideFlag } from "lucide-react"
 
 const HostProfile = () => {
   const [openReportModal, setOpenReportModal] = useState(false)
 
   const { data, isPending } = useGetProfile(1)
+
+  console.log('dsds', )
 
   return (
     <WidthWrapper width="small" className="my-24 lg:my-32">
@@ -31,7 +35,7 @@ const HostProfile = () => {
               <div className="mt-5">
                 <ProfileCard
                   name={data?.item?.userName}
-                  profileImage={data?.item?.profilePicture}
+                  profileImage={data?.item?.imageKey}
                   hostStatus={data?.item?.role}
                   reviewsCount={data?.item?.countReviews}
                   rating={data?.item?.ratings}
@@ -44,14 +48,16 @@ const HostProfile = () => {
                   confirmedInformation={data?.item?.confirmInfo}
                 />
               </div>
-              <div className="items-center mt-6 hidden lg:flex">
-                <FlagIcon className="h-5 w-5 mr-3" />
-                <button
-                  className="underline font-bold"
+              <div className="mt-2">
+                <Button
+                  variant="ghost"
+                  className="underline flex gap-1 items-center text-text-400 hover:text-text-600"
+                  size="sm"
                   onClick={() => setOpenReportModal(true)}
                 >
+                  <LucideFlag className="h-4 w-4" />
                   Report this profile
-                </button>
+                </Button>
               </div>
             </div>
           </div>

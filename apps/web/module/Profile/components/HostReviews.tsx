@@ -58,12 +58,6 @@ const HostReviews = ({ name, reviewsCount, reviews }: HostReviewsProps) => {
         >
           Show all {reviewsCount} reviews
         </Button>
-        <Typography variant="h6" className="mt-7">
-          Some info has been automatically translated.
-          <Link href="#" className="underline ml-1 font-semibold">
-            Show original
-          </Link>
-        </Typography>
       </div>
       <AllReviewsModal
         reviews={reviews}
