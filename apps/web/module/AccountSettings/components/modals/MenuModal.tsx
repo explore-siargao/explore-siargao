@@ -192,7 +192,7 @@ const MenuModal = ({
 
     return componentToRender
   }
-  return <>{toRender}</>
+  return <>{toRender()}</>
 }
 
 export default MenuModal
