@@ -26,7 +26,7 @@ const Section = ({ name, modalContent, icon, title }: T_Section) => {
         >
           <div className="w-8">{icon}</div>
           <div>
-            <Typography className="text-gray-500">
+            <Typography className="text-gray-500 text-left">
               {title}
               {sectionValue ? `: ${sectionValue}` : ""}
             </Typography>
