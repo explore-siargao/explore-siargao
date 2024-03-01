@@ -34,11 +34,11 @@ const dest = [
 ]
 
 const Setup = () => {
-  const { data } = useGetProfile(2); 
+  const { data } = useGetProfile(2)
   const profile = useProfileEditStore.getState()
   const { setProfileEdit } = useProfileEditStore((state) => state)
   useEffect(() => {
-    if(data?.item) {
+    if (data?.item) {
       setProfileEdit({ ...data?.item })
     }
   }, [data])
@@ -58,8 +58,8 @@ const Setup = () => {
               Your profile
             </Typography>
             <Typography className="pt-5 text-gray-500">
-              The information you share will be used across {APP_NAME} to
-              help other guests and Hosts get to know you.{" "}
+              The information you share will be used across {APP_NAME} to help
+              other guests and Hosts get to know you.{" "}
               <Link href="" className="font-semibold underline">
                 Learn more
               </Link>

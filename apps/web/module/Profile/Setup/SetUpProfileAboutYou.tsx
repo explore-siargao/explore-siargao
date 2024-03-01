@@ -7,9 +7,7 @@ import useProfileEditStore from "./store/useProfileEditStore"
 const SetUpProfileAboutYou = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
-  const aboutMe = useProfileEditStore(
-    (state) => state.aboutMe
-  )
+  const aboutMe = useProfileEditStore((state) => state.aboutMe)
 
   const openModal = () => setIsModalOpen(true)
   const closeModal = () => setIsModalOpen(false)

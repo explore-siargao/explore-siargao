@@ -19,8 +19,10 @@ const SetupProfileImage = () => {
         <div className="rounded-full flex justify-center">
           {imageFile || imageKey ? (
             <div className={cn("grid")}>
-              <div className={cn("w-full", "flex", "flex-col", "relative mb-4")}>
-                <div 
+              <div
+                className={cn("w-full", "flex", "flex-col", "relative mb-4")}
+              >
+                <div
                   className={cn(
                     "relative",
                     "h-52",
@@ -31,7 +33,11 @@ const SetupProfileImage = () => {
                   )}
                 >
                   <Image
-                    src={imageFile ? URL.createObjectURL(imageFile) : `/assets/${imageKey}`}
+                    src={
+                      imageFile
+                        ? URL.createObjectURL(imageFile)
+                        : `/assets/${imageKey}`
+                    }
                     alt={`Profile picture`}
                     width={300}
                     height={300}
@@ -42,7 +48,9 @@ const SetupProfileImage = () => {
             </div>
           ) : (
             <div className={cn("grid")}>
-              <div className={cn("w-full", "flex", "flex-col", "relative mb-4")}>
+              <div
+                className={cn("w-full", "flex", "flex-col", "relative mb-4")}
+              >
                 <div className="relative h-52 w-52 rounded-full overflow-hidden border-2 bg-gray-100 border-primary-400 border-dashed">
                   <label
                     htmlFor="dropzone-file"
@@ -57,13 +65,13 @@ const SetupProfileImage = () => {
           <Button
             variant="ghost"
             size="default"
-            className={cn("flex gap-1 bg-white hover:bg-primary-50 shadow-xl rounded-full z-20")}
+            className={cn(
+              "flex gap-1 bg-white hover:bg-primary-50 shadow-xl rounded-full z-20"
+            )}
             onClick={openModal}
           >
             <LucideUndo2 className="h-4 w-4" />
-            <Typography className="text-sm">
-              Edit
-            </Typography>
+            <Typography className="text-sm">Edit</Typography>
           </Button>
         </div>
         <SetupProfileImageModal

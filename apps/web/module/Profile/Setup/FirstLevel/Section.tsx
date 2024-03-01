@@ -13,7 +13,7 @@ type T_Section = {
 
 const Section = ({ name, modalContent, icon, title }: T_Section) => {
   // @ts-expect-error
-  const sectionValue = useProfileEditStore((state) => state[name]);
+  const sectionValue = useProfileEditStore((state) => state[name])
   const [modalOpen, setModalOpen] = useState(false)
   return (
     <>
@@ -26,7 +26,10 @@ const Section = ({ name, modalContent, icon, title }: T_Section) => {
         >
           <div className="w-8">{icon}</div>
           <div>
-            <Typography className="text-gray-500 text-left">{title}{sectionValue ? `: ${sectionValue}` : ""}</Typography>
+            <Typography className="text-gray-500">
+              {title}
+              {sectionValue ? `: ${sectionValue}` : ""}
+            </Typography>
           </div>
         </button>
       </div>

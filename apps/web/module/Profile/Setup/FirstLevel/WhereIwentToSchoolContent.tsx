@@ -19,7 +19,7 @@ const WhereIWentToSchoolContent = ({
   const save = () => {
     if (schoolName) {
       setSchoolNameStore(schoolName)
-      setIsOpen(false);
+      setIsOpen(false)
       toast.success("Saved")
     } else {
       toast.error("Please fill out the form")

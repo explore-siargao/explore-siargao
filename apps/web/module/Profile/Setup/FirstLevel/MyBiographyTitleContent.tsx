@@ -19,7 +19,7 @@ const MyBiographyTitleContent = ({
   const save = () => {
     if (biography) {
       setBiographyStore(biography)
-      setIsOpen(false);
+      setIsOpen(false)
       toast.success("Saved")
     } else {
       toast.error("Please fill out the form")
@@ -51,11 +51,11 @@ const MyBiographyTitleContent = ({
         </div>
       </div>
       <div className="border-t" />
-        <div className="flex items-end justify-end p-5">
-            <Button size="lg" variant="primary" onClick={() => save()}>
-              Save
-            </Button>
-          </div>
+      <div className="flex items-end justify-end p-5">
+        <Button size="lg" variant="primary" onClick={() => save()}>
+          Save
+        </Button>
+      </div>
     </div>
   )
 }

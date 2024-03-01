@@ -15,7 +15,7 @@ const MyWorkContent = ({ setIsOpen }: { setIsOpen: Dispatch<boolean> }) => {
   const save = () => {
     if (workName) {
       setWorkNameStore(workName)
-      setIsOpen(false);
+      setIsOpen(false)
       toast.success("Saved")
     } else {
       toast.error("Please fill out the form")

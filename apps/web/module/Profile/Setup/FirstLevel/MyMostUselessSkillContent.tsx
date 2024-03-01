@@ -15,11 +15,13 @@ const MyMostUselessSkillContent = ({
     "",
     40
   )
-  const setUselessSkillStore = useProfileEditStore((state) => state.setMostUselessSkill)
+  const setUselessSkillStore = useProfileEditStore(
+    (state) => state.setMostUselessSkill
+  )
   const save = () => {
     if (uselessSkill) {
       setUselessSkillStore(uselessSkill)
-      setIsOpen(false);
+      setIsOpen(false)
       toast.success("Saved")
     } else {
       toast.error("Please fill out the form")
@@ -52,10 +54,10 @@ const MyMostUselessSkillContent = ({
         </div>
         <div className="border-t" />
         <div className="flex items-end justify-end p-5">
-            <Button size="lg" variant="primary" onClick={() => save()}>
-              Save
-            </Button>
-          </div>
+          <Button size="lg" variant="primary" onClick={() => save()}>
+            Save
+          </Button>
+        </div>
       </div>
   )
 }

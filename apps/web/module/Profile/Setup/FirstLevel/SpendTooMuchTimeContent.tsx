@@ -19,7 +19,7 @@ const SpendTooMuchTimeContent = ({
   const save = () => {
     if (spendTooMuchTime) {
       setSpendTooMuchTimeStore(spendTooMuchTime)
-      setIsOpen(false);
+      setIsOpen(false)
       toast.success("Saved")
     } else {
       toast.error("Please fill out the form")
@@ -52,10 +52,10 @@ const SpendTooMuchTimeContent = ({
         </div>
         <div className="border-t" />
         <div className="flex items-end justify-end p-5">
-            <Button size="lg" variant="primary" onClick={() => save()}>
-              Save
-            </Button>
-          </div>
+          <Button size="lg" variant="primary" onClick={() => save()}>
+            Save
+          </Button>
+        </div>
       </div>
   )
 }
