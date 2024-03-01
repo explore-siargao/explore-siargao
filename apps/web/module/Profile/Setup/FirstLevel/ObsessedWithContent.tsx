@@ -28,7 +28,6 @@ const ObsessedWithContent = ({
     }
   }
   return (
-    <>
       <div>
         <div className="p-5">
           <Typography variant="h2" className="font-semibold mb-5">
@@ -60,7 +59,6 @@ const ObsessedWithContent = ({
             </Button>
           </div>
       </div>
-    </>
   )
 }
 

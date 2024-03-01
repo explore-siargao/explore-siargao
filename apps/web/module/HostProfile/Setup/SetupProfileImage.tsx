@@ -15,7 +15,6 @@ const SetupProfileImage = () => {
   const closeModal = () => setIsModalOpen(false)
 
   return (
-    <>
       <div className="relative">
         <div className="rounded-full flex justify-center">
           {imageFile || imageKey ? (
@@ -72,7 +71,6 @@ const SetupProfileImage = () => {
           onClose={closeModal}
         />
       </div>
-    </>
   )
 }
 

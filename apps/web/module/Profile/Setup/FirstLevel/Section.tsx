@@ -18,7 +18,7 @@ const Section = ({ name, modalContent, icon, title }: T_Section) => {
   return (
     <>
       <div className="border-b relative">
-        <div
+        <button
           key={title}
           className="flex items-center pt-5 pb-5 px-4 gap-4 rounded-xl hover:bg-primary-100 h-full cursor-pointer"
           onClick={() => setModalOpen(!modalOpen)}
@@ -26,9 +26,9 @@ const Section = ({ name, modalContent, icon, title }: T_Section) => {
         >
           <div className="w-8">{icon}</div>
           <div>
-            <Typography className="text-gray-500">{title}{sectionValue ? `: ${sectionValue}` : ""}</Typography>
+            <Typography className="text-gray-500 text-left">{title}{sectionValue ? `: ${sectionValue}` : ""}</Typography>
           </div>
-        </div>
+        </button>
       </div>
 
       <ModalContainer

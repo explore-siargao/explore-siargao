@@ -132,6 +132,7 @@ const LanguageISpeakContent = ({
             <ul>
               {filteredLanguages.map((language) => (
                 <Typography
+                  key={language.lang}
                   variant="h4"
                   className="font-semibold text-text-400"
                 >

@@ -28,7 +28,7 @@ const FavoriteSongInHighSchoolContent = ({
     }
   }
   return (
-    <>
+
       <div>
         <div className="p-5">
           <Typography variant="h2" className="font-semibold mb-5">
@@ -60,7 +60,6 @@ const FavoriteSongInHighSchoolContent = ({
             </Button>
           </div>
       </div>
-    </>
   )
 }
 

@@ -119,7 +119,6 @@ const SetupProfileImageModal = ({
               </label>
             )}
             {file && (
-              <>
                 <div className="flex items-center md:bottom-0">
                   <div className="flex justify-between w-full">
                     <Button
@@ -141,7 +140,6 @@ const SetupProfileImageModal = ({
                     </Button>
                   </div>
                 </div>
-              </>
             )}
           </div>
         </div>

@@ -19,7 +19,6 @@ const MyFunFactContent = ({ setIsOpen }: { setIsOpen: Dispatch<boolean> }) => {
     }
   }
   return (
-    <>
       <div>
         <div className="p-5">
           <Typography variant="h2" className="font-semibold mb-5">
@@ -51,7 +50,6 @@ const MyFunFactContent = ({ setIsOpen }: { setIsOpen: Dispatch<boolean> }) => {
             </Button>
           </div>
       </div>
-    </>
   )
 }
 

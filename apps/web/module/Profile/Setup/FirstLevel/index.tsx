@@ -133,7 +133,7 @@ const FirstLevel = () => {
   return (
     <div className="lg:grid grid-cols-2 gap-x-10 md:grid grid-cols">
       {menu.map((item) => (
-        <Section {...item} />
+        <Section {...item} key={item.title} />
       ))}
     </div>
   )
