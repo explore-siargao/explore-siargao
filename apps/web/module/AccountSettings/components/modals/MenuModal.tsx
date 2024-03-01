@@ -90,7 +90,7 @@ const MenuModal = ({
 
   const renderMenu = () => {
     return (
-      <ModalContainer onClose={hideModal} title="Settings" isOpen={openModal}>
+      <ModalContainer onClose={hideModal} title="Settings" isOpen={openModal} size="sm">
         <div className="p-6 flex flex-col items-center divide-y divide-text-100">
           <button
             onClick={() => setModalState(1)}

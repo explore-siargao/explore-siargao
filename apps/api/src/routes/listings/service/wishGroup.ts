@@ -355,26 +355,25 @@ export const addNewWishGroup = async (req: Request, res: Response) => {
 }
 
 export const deleteWishGroup = async (req: Request, res: Response) => {
-  const userId = Number(req.params.userId)
   const wishGroupId = Number(req.params.wishGroupId)
   try {
     const getUser = await prisma.user.findUnique({
       where: {
-        id: userId,
+        id: res.locals.user.id,
       },
     })
     if (getUser !== null) {
       const findWishGroup = await prisma.wishGroup.findFirst({
         where: {
           id: wishGroupId,
-          userId: userId,
+          userId: res.locals.user.id,
         },
       })
       if (findWishGroup !== null) {
         const removeWishGroup = await prisma.wishGroup.delete({
           where: {
             id: wishGroupId,
-            userId: userId,
+            userId: res.locals.user.id,
           },
         })
         res.json(

@@ -153,7 +153,7 @@ const WishlistsItemContainer = () => {
   }
 
   const session = useSessionStore((state) => state)
-  const { mutate } = useRemoveFromWishGroup(1)
+  const { mutate } = useRemoveFromWishGroup()
   const params = useParams()
   const { data, isPending } = useGetWishGroupByUserAndTitle(
     session.id as number,
