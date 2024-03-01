@@ -32,7 +32,6 @@ function Header({
     "/new-password",
   ]
   const renderHeader = () => {
-
     const [isModalOpen, setIsModalOpen] = useState(false)
     const openModal = () => setIsModalOpen(true)
     const closeModal = () => setIsModalOpen(false)
@@ -76,17 +75,17 @@ function Header({
                     </div>
                   )}
                   <div>
-                    <Button 
-                    variant="primary" 
-                    size="sm"
-                    onClick={openModal}>
+                    <Button variant="primary" size="sm" onClick={openModal}>
                       Apply to Host
                     </Button>
                   </div>
                   {session && <LandingPageMenu />}
                 </div>
               </nav>
-              <ApplyToHostModal isModalOpen={isModalOpen} onClose={closeModal} />
+              <ApplyToHostModal
+                isModalOpen={isModalOpen}
+                onClose={closeModal}
+              />
             </WidthWrapper>
           </header>
         </>
