@@ -1,6 +1,5 @@
 import { ApiService } from "@/common/service/api"
 import { API_URL_USERS } from "@/common/constants"
-import { T_Listing } from "@repo/contract"
 import { useMutation } from "@tanstack/react-query"
 
 export async function beAHost() {
