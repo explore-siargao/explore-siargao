@@ -1,5 +1,7 @@
+import { WidthWrapper } from "@/common/components/WidthWrapper";
 import { Typography } from "@/common/components/ui/Typography";
 import { cn } from "@/common/helpers/cn";
+import { differenceInDays, differenceInHours, formatDistance, subDays} from "date-fns";
 import React from "react"
 
 export interface NotificationContent {
@@ -22,57 +24,71 @@ export interface NotificationContent {
 
   const Notifications =({content,size}:NotificationProps)=>{
    
-    return <div className="notification-container ">
-        <div>
+    
+
+    return <div className="mx-auto">
+        <WidthWrapper className="my-24 lg:my-32">
             <Typography variant="h2" fontWeight="semibold" className="mb-4">
                 Activity
             </Typography>
-        </div>
           {content?.map((item:NotificationContent) => {
-             const now = new Date()
-             const createdAt = new Date(item.createdAt)
-             const timeDifferenceInMillis = Number(now) - Number(createdAt)
-             const timeDifferenceInHours = timeDifferenceInMillis / (1000 * 60 * 60);
-             const timeDifferenceInDays = timeDifferenceInHours / 24;
+            const now = new Date();
+            const createdAt = new Date(item.createdAt);
+            const timeDifferenceInDays = differenceInDays(now, createdAt);
+
+            const twoDaysAgo = subDays(new Date(), timeDifferenceInDays);
+            const formattedDistance = formatDistance(twoDaysAgo, new Date(), { addSuffix: true });
+             
             return(
-              <div key={item.id} className="notification ">
-                  <div className="content">
+                <div key={item.id} className="notification">
                 <div className="flex items-start right-0 border-b">
-                    <div className="py-4 pr-2">
+                  <div className="py-4 pr-2">
                     <div
-                        className={cn(
+                      className={cn(
                         `rounded-full`,
-                        size === "md" ? "h-16 w-16" : "h-12 w-12"
-                        )}
+                        size === "sm" ? "h-2 w-2" : "h-12 w-12"
+                      )}
                     >
-                        <img
+                      <img
                         src={`/assets/${item.profilePicture}`}
-                        width={10}
-                        height={10}
+                        width={.5}
+                        height={.5}
                         alt="Avatar"
                         className="object-cover h-full w-full rounded-full"
-                        
-                        />
+                      />
                     </div>
-                    </div>
-                    <div className="py-4 pl-2">
-                         <Typography variant="p" fontWeight="semibold">
-                         {item.name}
-                        </Typography>
-                       {item.type==="Booking" ? (<p>
-                        <span>{item.name}</span> booked your listing {item.listing.title} for {item.days} days
-                       </p>):(<p><span>{item.name}</span> added a review to your listing {item.listing.title}</p>)}
-                    </div>
-                    <div className="py-4 pl-2 justify-self-end">
-                        <Typography variant="p">
-                         {timeDifferenceInHours>=24 ?timeDifferenceInDays.toFixed(0)+"d":timeDifferenceInHours.toFixed(0)+"h"}
-                        </Typography>
-                    </div>
-                </div>
                   </div>
+                  <div className="py-4 pl-2 flex-grow">
+                    <div className="flex justify-between">
+                      <div>
+                        <Typography variant="p" fontWeight="semibold">
+                          {item.name}
+                        </Typography>
+                        {item.type === "Booking" ? (
+                          <p>
+                            Booked your listing 
+                            <span className="font-semibold"> {item.listing.title} </span>
+                            for 
+                            <span className="font-semibold"> {item.days} days</span>
+                          </p>
+                        ) : (
+                          <p>Added a review to your listing <span className="font-semibold">{item.listing.title}</span></p>
+                        )}
+                      </div>
+                      <div className="pl-2">
+                        <Typography variant="p">
+                        {formattedDistance}
+                        </Typography>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
+              
             
           )})}
+      </WidthWrapper>
+
       </div>;
 }
   export default Notifications;

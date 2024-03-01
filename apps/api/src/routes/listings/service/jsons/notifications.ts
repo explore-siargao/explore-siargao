@@ -14,7 +14,7 @@ export const notifications = [
     },
     type: notifTypeEnum.ADDED_REVIEW,
     days:5,
-    createdAt: '2024-02-29 00:09:08.728',
+    createdAt: '2024-02-29 23:09:08.728',
   },
   {
     id: 2,
@@ -86,7 +86,7 @@ export const notifications = [
     },
     type: notifTypeEnum.BOOKING,
     days:5,
-    createdAt: '2024-02-06 12:30:00.000',
+    createdAt: '2024-01-04 12:30:00.000',
   },
   {
     id: 8,
@@ -98,7 +98,7 @@ export const notifications = [
     },
     type: notifTypeEnum.ADDED_REVIEW,
     days:5,
-    createdAt: '2024-03-07 15:45:00.000',
+    createdAt: '2024-02-07 15:45:00.000',
   },
   {
     id: 9,
@@ -110,7 +110,7 @@ export const notifications = [
     },
     type: notifTypeEnum.ADDED_REVIEW,
     days:5,
-    createdAt: '2024-03-08 17:00:00.000',
+    createdAt: '2024-03-01 6:00:00.000',
   },
   {
     id: 10,
@@ -122,6 +122,6 @@ export const notifications = [
     },
     type: notifTypeEnum.BOOKING,
     days:5,
-    createdAt: '2024-03-09 18:15:00.000',
+    createdAt: '2024-02-09 18:15:00.000',
   },
 ]
