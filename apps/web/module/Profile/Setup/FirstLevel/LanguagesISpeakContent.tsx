@@ -86,7 +86,7 @@ const LanguageISpeakContent = ({
     if (selectedLanguages.length > 0) {
       const selectedLanguagesString = selectedLanguages.join(", ")
       setLanguageISpeakStore(selectedLanguagesString)
-      setIsOpen(false);
+      setIsOpen(false)
       toast.success("Saved")
     } else {
       toast.error("Please select at least one language")
@@ -155,11 +155,11 @@ const LanguageISpeakContent = ({
         </div>
       </div>
       <div className="border-t" />
-        <div className="flex items-end justify-end p-5">
-            <Button size="lg" variant="primary" onClick={() => save()}>
-              Save
-            </Button>
-          </div>
+      <div className="flex items-end justify-end p-5">
+        <Button size="lg" variant="primary" onClick={() => save()}>
+          Save
+        </Button>
+      </div>
     </>
   )
 }

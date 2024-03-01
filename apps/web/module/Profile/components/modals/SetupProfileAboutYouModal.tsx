@@ -13,12 +13,8 @@ const SetUpProfileAboutYouModal = ({
   isModalOpen,
   onClose,
 }: ISetUpProfileAboutYouModalProps) => {
-  const currentValue = useProfileEditStore(
-    (state) => state.aboutMe
-  )
-  const setInputValue = useProfileEditStore(
-    (state) => state.setAboutMe
-  )
+  const currentValue = useProfileEditStore((state) => state.aboutMe)
+  const setInputValue = useProfileEditStore((state) => state.setAboutMe)
   const [value, setValue] = useState("")
   const saveInputValue = () => {
     setInputValue(value)
@@ -49,7 +45,10 @@ const SetUpProfileAboutYouModal = ({
         </Typography>
 
         <div className="flex justify-end pt-1">
-          <Typography variant="h6" className="flex items-end justify-end font-semibold text-text-400 mt-3">
+          <Typography
+            variant="h6"
+            className="flex items-end justify-end font-semibold text-text-400 mt-3"
+          >
             {value.length}/450 characters
           </Typography>
         </div>

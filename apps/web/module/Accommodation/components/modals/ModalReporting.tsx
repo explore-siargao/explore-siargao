@@ -97,8 +97,7 @@ const ModalReporting = ({
 
     //sa third page to
     setBankorWire(
-      selectedReportRes ===
-        `The host asked me to pay outside of ${APP_NAME}`
+      selectedReportRes === `The host asked me to pay outside of ${APP_NAME}`
     )
     setCreditOrDebit(
       selectedReportRes === "The host shared their contact information"

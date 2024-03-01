@@ -12,7 +12,7 @@ const MyFunFactContent = ({ setIsOpen }: { setIsOpen: Dispatch<boolean> }) => {
   const save = () => {
     if (funFact) {
       setFunFactStore(funFact)
-      setIsOpen(false);
+      setIsOpen(false)
       toast.success("Saved")
     } else {
       toast.error("Please fill out the form")
@@ -46,10 +46,10 @@ const MyFunFactContent = ({ setIsOpen }: { setIsOpen: Dispatch<boolean> }) => {
         </div>
         <div className="border-t" />
         <div className="flex items-end justify-end p-5">
-            <Button size="lg" variant="primary" onClick={() => save()}>
-              Save
-            </Button>
-          </div>
+          <Button size="lg" variant="primary" onClick={() => save()}>
+            Save
+          </Button>
+        </div>
       </div>
     </>
   )
