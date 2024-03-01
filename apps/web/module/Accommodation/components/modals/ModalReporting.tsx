@@ -3,6 +3,7 @@ import RightRadioList from "@/common/components/RightRadioList"
 import { Button } from "@/common/components/ui/Button"
 import { Title } from "@/common/components/ui/Title"
 import { Typography } from "@/common/components/ui/Typography"
+import { APP_NAME } from "@repo/constants"
 import { ChangeEvent, useEffect, useState } from "react"
 
 interface ModalReportingProps {
@@ -97,7 +98,7 @@ const ModalReporting = ({
     //sa third page to
     setBankorWire(
       selectedReportRes ===
-        "The host asked me to pay outside of Explore-Siargao"
+        `The host asked me to pay outside of ${APP_NAME}`
     )
     setCreditOrDebit(
       selectedReportRes === "The host shared their contact information"

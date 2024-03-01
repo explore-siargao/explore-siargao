@@ -2,7 +2,7 @@ import ModalContainer from "@/common/components/ModalContainer"
 import { Button } from "@/common/components/ui/Button"
 import { Typography } from "@/common/components/ui/Typography"
 import { useState } from "react"
-import { useInputSetupProfileAboutYouStore } from "../../Setup/store/useSetupProfileAboutYouStore"
+import useProfileEditStore from "../../Setup/store/useProfileEditStore"
 
 interface ISetUpProfileAboutYouModalProps {
   isModalOpen: boolean
@@ -13,11 +13,11 @@ const SetUpProfileAboutYouModal = ({
   isModalOpen,
   onClose,
 }: ISetUpProfileAboutYouModalProps) => {
-  const currentValue = useInputSetupProfileAboutYouStore(
-    (state) => state.inputValue
+  const currentValue = useProfileEditStore(
+    (state) => state.aboutMe
   )
-  const setInputValue = useInputSetupProfileAboutYouStore(
-    (state) => state.setInputValue
+  const setInputValue = useProfileEditStore(
+    (state) => state.setAboutMe
   )
   const [value, setValue] = useState("")
   const saveInputValue = () => {
@@ -49,12 +49,12 @@ const SetUpProfileAboutYouModal = ({
         </Typography>
 
         <div className="flex justify-end pt-1">
-          <Typography variant={"h6"} fontWeight={"semibold"}>
-            {value.length}/450 Characters
+          <Typography variant="h6" className="flex items-end justify-end font-semibold text-text-400 mt-3">
+            {value.length}/450 characters
           </Typography>
         </div>
       </div>
-      <div className="flex items-center p-4 md:p-5 bottom-0 border-t border-gray-200 rounded-b dark:border-gray-600">
+      <div className="flex items-center p-4 md:p-5 bottom-0 border-t border-gray-200 rounded-b">
         <div className="flex justify-between w-full">
           <Button
             variant="default"

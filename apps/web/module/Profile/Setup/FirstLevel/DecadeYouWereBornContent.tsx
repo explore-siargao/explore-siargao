@@ -2,8 +2,8 @@ import { Button } from "@/common/components/ui/Button"
 import ToggleSwitch from "@/common/components/ui/Toggle"
 import { Typography } from "@/common/components/ui/Typography"
 import { Dispatch, useState } from "react"
-import useFirstLevelStore from "../store/useFirstLevelStore"
 import toast from "react-hot-toast"
+import useProfileEditStore from "../store/useProfileEditStore"
 
 interface Decade {
   decade: string
@@ -33,13 +33,14 @@ const DecadeYouWereBornContent = ({
   setIsOpen: Dispatch<boolean>
 }) => {
   const [decadeWereBorn, setDecadeWereBorn] = useState<string>("")
-  const setDecadeWereBornStore = useFirstLevelStore(
+  const setDecadeWereBornStore = useProfileEditStore(
     (state) => state.setDecadeWereBorn
   )
 
   const save = () => {
     if (decadeWereBorn) {
       setDecadeWereBornStore(decadeWereBorn)
+      setIsOpen(false);
       toast.success("Saved")
     } else {
       toast.error("Please fill out the form")
@@ -67,11 +68,11 @@ const DecadeYouWereBornContent = ({
   return (
     <div>
       <div className="p-5">
-        <Typography variant="h1" className="mt-5 mb-2 font-semibold">
+        <Typography variant="h2" className="mb-2 font-semibold">
           Decade you were born
         </Typography>
         <div>
-          <Typography variant="h3">
+          <Typography variant="h5">
             Don’t worry, other people won’t be able to see your exact birthday.{" "}
           </Typography>
         </div>
@@ -100,13 +101,13 @@ const DecadeYouWereBornContent = ({
             </Typography>
           )}
         </div>
-        <div className="border-t mb-5 mt-5"></div>
-        <div className="flex items-end justify-end">
+      </div>
+      <div className="border-t" />
+        <div className="flex items-end justify-end p-5">
           <Button size="lg" variant="primary" onClick={save}>
             Save
           </Button>
         </div>
-      </div>
     </div>
   )
 }

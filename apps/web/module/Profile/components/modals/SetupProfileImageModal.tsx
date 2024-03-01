@@ -7,7 +7,7 @@ import { FileWithPath, useDropzone } from "react-dropzone"
 import toast from "react-hot-toast"
 import Image from "next/image"
 import { cn } from "@/common/helpers/cn"
-import { useInputSetupProfileAboutYouStore } from "../../Setup/store/useSetupProfileAboutYouStore"
+import useProfileEditStore from "../../Setup/store/useProfileEditStore"
 
 interface ISetUpProfileAboutYouModalProps {
   isModalOpen: boolean
@@ -21,13 +21,13 @@ const SetupProfileImageModal = ({
     null
   )
   const [imageSaved, setImageSaved] = useState(false)
-  const { imageFile, setProfileImage } = useInputSetupProfileAboutYouStore()
+  const { setProfileImage } = useProfileEditStore()
 
   const handleSaveImage = () => {
+    onClose()
     if (!imageSaved && file) {
       setImageSaved(true)
       setProfileImage(file)
-      toast.success("Image saved")
     } else {
       toast.error("Image not saved")
     }
@@ -36,6 +36,7 @@ const SetupProfileImageModal = ({
   const handleRemoveImage = () => {
     setFile(null)
     setImageSaved(false)
+    setProfileImage(null)
   }
   const { getRootProps, getInputProps, isFocused } = useDropzone({
     multiple: false,
@@ -60,14 +61,13 @@ const SetupProfileImageModal = ({
   })
 
   return (
-    <div>
       <ModalContainer
         title="Add profile picture"
         onClose={onClose}
         isOpen={isModalOpen}
         size="sm"
       >
-        <div className="p-5">
+        <div className="px-4 pb-4">
           <div className="w-300 h-300 mx-auto">
             {file ? (
               <div className="flex justify-center my-6 bg-primary-50 rounded-lg border border-primary-200">
@@ -120,8 +120,7 @@ const SetupProfileImageModal = ({
             )}
             {file && (
               <>
-                <div className="flex justify-between items-center"></div>
-                <div className="flex items-center pt-4 md:bottom-0 border-t border-gray-200 rounded-b dark:border-gray-600">
+                <div className="flex items-center md:bottom-0">
                   <div className="flex justify-between w-full">
                     <Button
                       variant="ghost"
@@ -147,7 +146,6 @@ const SetupProfileImageModal = ({
           </div>
         </div>
       </ModalContainer>
-    </div>
   )
 }
 

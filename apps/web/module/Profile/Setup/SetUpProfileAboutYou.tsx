@@ -2,16 +2,14 @@ import React, { useState } from "react"
 import SetUpProfileModal from "../components/modals/SetupProfileAboutYouModal"
 import { Typography } from "@/common/components/ui/Typography"
 import Link from "next/link"
-import { useInputSetupProfileAboutYouStore } from "./store/useSetupProfileAboutYouStore"
+import useProfileEditStore from "./store/useProfileEditStore"
 
 const SetUpProfileAboutYou = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
-  const introText = useInputSetupProfileAboutYouStore(
-    (state) => state.inputValue
+  const aboutMe = useProfileEditStore(
+    (state) => state.aboutMe
   )
-
-  console.log(introText)
 
   const openModal = () => setIsModalOpen(true)
   const closeModal = () => setIsModalOpen(false)
@@ -27,13 +25,13 @@ const SetUpProfileAboutYou = () => {
           <div className="absolute pl-3 left-2 text-gray-400">
             <Link href={""}>
               <Typography>
-                {introText || "Write something fun and punchy."}
+                {aboutMe || "Write something fun and punchy."}
               </Typography>
             </Link>
           </div>
           <div className="pt-10 bottom-2 left-2 underline cursor-pointer">
             <Link href="#" onClick={openModal}>
-              <Typography>{introText ? "Edit intro" : "Add intro"}</Typography>
+              <Typography>{aboutMe ? "Edit intro" : "Add intro"}</Typography>
             </Link>
           </div>
         </div>

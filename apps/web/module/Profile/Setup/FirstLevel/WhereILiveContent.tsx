@@ -1,10 +1,10 @@
 import { Button } from "@/common/components/ui/Button"
 import { Input } from "@/common/components/ui/Input"
 import { Dispatch, useState } from "react"
-import useFirstLevelStore from "../store/useFirstLevelStore"
 import toast from "react-hot-toast"
 import { Typography } from "@/common/components/ui/Typography"
 import { LucideCheck } from "lucide-react"
+import useProfileEditStore from "../store/useProfileEditStore"
 
 const locationObj = [
   {
@@ -60,10 +60,11 @@ const WhereILiveContent = ({ setIsOpen }: { setIsOpen: Dispatch<boolean> }) => {
     )
   }
 
-  const setWhereILiveStore = useFirstLevelStore((state) => state.setWhereILive)
+  const setWhereILiveStore = useProfileEditStore((state) => state.setWhereILive)
   const save = () => {
     if (selectedLocation) {
       setWhereILiveStore(selectedLocation)
+      setIsOpen(false);
       toast.success("Saved")
     } else {
       toast.error("Please select a location")
@@ -73,10 +74,10 @@ const WhereILiveContent = ({ setIsOpen }: { setIsOpen: Dispatch<boolean> }) => {
   return (
     <>
       <div className="p-5">
-        <Typography variant="h1" className="font-semibold mt-5">
+        <Typography variant="h2" className="font-semibold">
           Where you live
         </Typography>
-        <div className="mt-10 mb-10">
+        <div className="mt-6">
           <Input
             type="search"
             label="Where I live:"

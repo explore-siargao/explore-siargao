@@ -1,9 +1,9 @@
 import { Input } from "@/common/components/ui/Input"
 import { Typography } from "@/common/components/ui/Typography"
 import { Dispatch, useState } from "react"
-import useFirstLevelStore from "../store/useFirstLevelStore"
 import toast from "react-hot-toast"
 import { Button } from "@/common/components/ui/Button"
+import useProfileEditStore from "../store/useProfileEditStore"
 
 const languagesObj = [
   {
@@ -69,7 +69,7 @@ const LanguageISpeakContent = ({
 }) => {
   const [selectedLanguages, setSelectedLanguages] = useState<string[]>([])
   const [searchTerm, setSearchTerm] = useState<string>("")
-  const setLanguageISpeakStore = useFirstLevelStore(
+  const setLanguageISpeakStore = useProfileEditStore(
     (state) => state.setLanguageISpeak
   )
 
@@ -86,6 +86,7 @@ const LanguageISpeakContent = ({
     if (selectedLanguages.length > 0) {
       const selectedLanguagesString = selectedLanguages.join(", ")
       setLanguageISpeakStore(selectedLanguagesString)
+      setIsOpen(false);
       toast.success("Saved")
     } else {
       toast.error("Please select at least one language")
@@ -116,10 +117,10 @@ const LanguageISpeakContent = ({
     <>
       <div className="flex flex-col divide-text-100 overflow-y-auto h-[600px]">
         <div className="p-5">
-          <Typography variant="h1" className="font-semibold mb-2">
+          <Typography variant="h2" className="font-semibold mb-2">
             Languages you speak
           </Typography>
-          <div className="mt-10 mb-10">
+          <div className="mt-6 mb-10">
             <Input
               type="search"
               label="Search for a language"
@@ -154,13 +155,11 @@ const LanguageISpeakContent = ({
         </div>
       </div>
       <div className="border-t" />
-      <div className="flex items-end justify-end p-5">
         <div className="flex items-end justify-end p-5">
-          <Button size="lg" variant="primary" onClick={() => save()}>
-            Save
-          </Button>
-        </div>
-      </div>
+            <Button size="lg" variant="primary" onClick={() => save()}>
+              Save
+            </Button>
+          </div>
     </>
   )
 }

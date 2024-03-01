@@ -1,7 +1,7 @@
 "use client"
 
 import { WidthWrapper } from "@/common/components/WidthWrapper"
-import React from "react"
+import React, { useEffect } from "react"
 import FirstLevel from "./FirstLevel"
 import SetUpProfileAboutYou from "./SetUpProfileAboutYou"
 import ProfileFourthLevel from "./ProfileFourthLevel"
@@ -9,9 +9,10 @@ import { Button } from "@/common/components/ui/Button"
 import { Typography } from "@/common/components/ui/Typography"
 import Link from "next/link"
 import toast from "react-hot-toast"
-import useFirstLevelStore from "./store/useFirstLevelStore"
-import { useInputSetupProfileAboutYouStore } from "./store/useSetupProfileAboutYouStore"
 import SetupProfileImage from "@/module/HostProfile/Setup/SetupProfileImage"
+import { APP_NAME } from "@repo/constants"
+import useGetProfile from "../hooks/useGetProfile"
+import useProfileEditStore from "./store/useProfileEditStore"
 
 const dest = [
   {
@@ -32,68 +33,39 @@ const dest = [
   },
 ]
 
-const index = () => {
-  const imageFile = useInputSetupProfileAboutYouStore(
-    (state) => state.imageFile
-  )
-  const school = useFirstLevelStore((state) => state.schoolName)
-  const work = useFirstLevelStore((state) => state.workName)
-  const favoriteSong = useFirstLevelStore((state) => state.favoriteSong)
-  const born = useFirstLevelStore((state) => state.decadeWereBorn)
-  const obsessedWith = useFirstLevelStore((state) => state.obsessedWith)
-  const language = useFirstLevelStore((state) => state.languageISpeak)
-  const funFact = useFirstLevelStore((state) => state.funFact)
-  const uselessSkill = useFirstLevelStore((state) => state.mostUselessSkill)
-  const biography = useFirstLevelStore((state) => state.biography)
-  const spendTime = useFirstLevelStore((state) => state.spendTooMuchTime)
-  const pets = useFirstLevelStore((state) => state.pets)
-  const live = useFirstLevelStore((state) => state.whereILive)
-  const aboutMe = useInputSetupProfileAboutYouStore((state) => state.inputValue)
-
-  const save = () => {
-    const savedInput = {
-      imageKey: "",
-      imageFile: imageFile,
-      school: school,
-      work: work,
-      favoriteSong: favoriteSong,
-      born: born,
-      obsessedWith: obsessedWith,
-      language: language,
-      funFact: funFact,
-      uselessSkill: uselessSkill,
-      biography: biography,
-      spendTime: spendTime,
-      pets: pets,
-      live: live,
-      aboutMe: aboutMe,
+const Setup = () => {
+  const { data } = useGetProfile(2); 
+  const profile = useProfileEditStore.getState()
+  const { setProfileEdit } = useProfileEditStore((state) => state)
+  useEffect(() => {
+    if(data?.item) {
+      setProfileEdit({ ...data?.item })
     }
-
-    console.log("savedInput: ", savedInput)
+  }, [data])
+  const save = () => {
+    console.log("savedInput: ", profile)
     toast.success("Data saved successfully")
   }
-
   return (
-    <WidthWrapper width="small" className="mt-32 lg:mt-36">
-      <div className="grid grid-cols-1 lg:grid-cols-3 mx-auto">
-        <div className=" lg:col-span-1 mx-auto">
+    <WidthWrapper width="small" className="mt-32 lg:mt-40">
+      <div className="flex flex-col lg:flex-row gap-0 md:gap-8 mx-auto">
+        <div className="w-72 mx-auto md:mx-none">
           <SetupProfileImage />
         </div>
-
-        <div className="col-span-2">
-          <div className="py-6">
+        <div className="flex-1">
+          <div>
             <Typography variant="h1" fontWeight="semibold">
               Your profile
             </Typography>
             <Typography className="pt-5 text-gray-500">
-              The information you share will be used across Explore-Siargao to
+              The information you share will be used across {APP_NAME} to
               help other guests and Hosts get to know you.{" "}
               <Link href="" className="font-semibold underline">
                 Learn more
               </Link>
             </Typography>
           </div>
-          <div>
+          <div className="mt-2">
             <FirstLevel />
           </div>
           <div className="py-6">
@@ -115,4 +87,4 @@ const index = () => {
   )
 }
 
-export default index
+export default Setup

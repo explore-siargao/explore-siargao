@@ -20,7 +20,7 @@ import ObsessedWithContent from "./ObsessedWithContent"
 import SpendTooMuchTimeContent from "./SpendTooMuchTimeContent"
 import MyMostUselessSkillContent from "./MyMostUselessSkillContent"
 import MyWorkContent from "./MyWorkContent"
-import MyFunFactContent from "./MyFuncFactContent"
+import MyFunFactContent from "./MyFunFactContent"
 import MyBiographyTitleContent from "./MyBiographyTitleContent"
 import FavoriteSongInHighSchoolContent from "./FavoriteSongInHighSchoolContent"
 import WhereIWentToSchoolContent from "./WhereIwentToSchoolContent"
@@ -32,6 +32,7 @@ export type T_ModalContent = { setIsOpen: Dispatch<boolean> }
 
 const menu = [
   {
+    name: "school",
     icon: <LucideGraduationCap />,
     title: "Where I went to school",
     modalContent: (props: T_ModalContent) => (
@@ -39,6 +40,7 @@ const menu = [
     ),
   },
   {
+    name: "work",
     icon: <LucideBriefcase />,
     title: "My work",
     modalContent: (props: T_ModalContent) => (
@@ -46,6 +48,7 @@ const menu = [
     ),
   },
   {
+    name: "live",
     icon: <LucideGlobe2 />,
     title: "Where I live",
     modalContent: (props: T_ModalContent) => (
@@ -53,6 +56,7 @@ const menu = [
     ),
   },
   {
+    name: "languageISpeak",
     icon: <LucideLanguages />,
     title: "Languages you speak",
     modalContent: (props: T_ModalContent) => (
@@ -60,6 +64,7 @@ const menu = [
     ),
   },
   {
+    name: "decadeWereBorn",
     icon: <LucidePlus />,
     title: "Decade you were born",
     modalContent: (props: T_ModalContent) => (
@@ -67,6 +72,7 @@ const menu = [
     ),
   },
   {
+    name: "favoriteSong",
     icon: <LucideMusic />,
     title: "My favorite song in high school",
     modalContent: (props: T_ModalContent) => (
@@ -74,6 +80,7 @@ const menu = [
     ),
   },
   {
+    name: "obsessedWith",
     icon: <LucideHeart />,
     title: "I'm obsessed with",
     modalContent: (props: T_ModalContent) => (
@@ -81,6 +88,7 @@ const menu = [
     ),
   },
   {
+    name: "funFact",
     icon: <LucideLightbulb />,
     title: "My fun fact",
     modalContent: (props: T_ModalContent) => (
@@ -88,6 +96,7 @@ const menu = [
     ),
   },
   {
+    name: "uselessSkill",
     icon: <LucidePencil />,
     title: "My most useless skill",
     modalContent: (props: T_ModalContent) => (
@@ -95,6 +104,7 @@ const menu = [
     ),
   },
   {
+    name: "biography",
     icon: <LucideBookOpen />,
     title: "My biography title would be",
     modalContent: (props: T_ModalContent) => (
@@ -102,6 +112,7 @@ const menu = [
     ),
   },
   {
+    name: "spendTime",
     icon: <LucideClock />,
     title: "I spend too much time",
     modalContent: (props: T_ModalContent) => (
@@ -109,6 +120,7 @@ const menu = [
     ),
   },
   {
+    name: "pets",
     icon: <LucidePawPrint />,
     title: "Pets",
     modalContent: (props: T_ModalContent) => (
