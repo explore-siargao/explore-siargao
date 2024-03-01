@@ -20,8 +20,6 @@ const HostProfile = () => {
 
   const { data, isPending } = useGetProfile(1)
 
-  console.log('dsds', )
-
   return (
     <WidthWrapper width="small" className="my-24 lg:my-32">
       {isPending ? (
