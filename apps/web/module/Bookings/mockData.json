@@ -1,0 +1,29 @@
+[
+  {
+    "fileKey": "/assets/1.jpg",
+    "description": "Your listing started in feb 21",
+    "guestCount": 5,
+    "dateRange": "feb 25 - feb 29",
+    "location": "Jolo, Sulu",
+    "cost": "P 2,500",
+    "status": "For verification"
+  },
+  {
+    "fileKey": "/assets/3.jpg",
+    "description": "Mahangin dito at maginhawa",
+    "guestCount": 3,
+    "dateRange": "feb 29 - feb 36",
+    "location": "Marawi, City",
+    "cost": "P 3,500",
+    "status": "In progress"
+  },
+  {
+    "fileKey": "/assets/3.jpg",
+    "description": "Malamig tsaka mainit",
+    "guestCount": 3,
+    "dateRange": "feb 46 - feb 38",
+    "location": "Downtown, Kinaladkad ng QC",
+    "cost": "P 36,500",
+    "status": "In progress"
+  }
+]
