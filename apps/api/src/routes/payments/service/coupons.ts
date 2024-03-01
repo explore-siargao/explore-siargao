@@ -74,7 +74,7 @@ export const addCoupon = async (req: Request, res: Response) => {
       (await prisma.user.findUnique({
         where: {
           id: userId,
-          OR: [{ role: 'Admin' }, { role: 'Host' }],
+          OR: [{ role: 'Admin' }, { isHost:true }],
         },
       })) !== null
     if (isUserExist) {

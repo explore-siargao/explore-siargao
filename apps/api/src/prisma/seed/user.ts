@@ -9,17 +9,20 @@ export const users = async () => {
         email: 'test@test.com',
         password: String(CryptoJS.AES.encrypt('test', passwordEncryptKey)),
         registrationType: 'Manual',
-        role: 'Host',
+        role: 'User',
+        isHost:true
       },
       {
         email: 'ramilkaharian25@gmail.com',
         registrationType: 'Google',
-        role: 'Host',
+        role: 'User',
+        isHost:true
       },
       {
         email: 'jp.madrigal07@gmail.com',
         registrationType: 'Google',
-        role: 'Host',
+        role: 'User',
+        isHost:true
       },
       {
         email: 'richard.delapena19@gmail.com',
