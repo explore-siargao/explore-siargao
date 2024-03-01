@@ -143,7 +143,13 @@ router.post('/:peronalInfoId/government-id', addGovernmentId)
 
 //Host Details
 router.get('/:hostId/host-details-listing/:listingId', getHostDetailsInListing)
-router.patch('/be-host', isUserLoggedIn, isCsrfTokenValid, isOriginValid, beAHost)
+router.patch(
+  '/be-host',
+  isUserLoggedIn,
+  isCsrfTokenValid,
+  isOriginValid,
+  beAHost
+)
 
 //user profile
 router.get('/:id', getUserProfile)

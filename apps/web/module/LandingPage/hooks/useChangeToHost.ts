@@ -5,9 +5,7 @@ import { useMutation } from "@tanstack/react-query"
 
 export async function beAHost() {
   const apiService = new ApiService()
-  return await apiService.patch(
-    `${API_URL_USERS}/be-host`
-  )
+  return await apiService.patch(`${API_URL_USERS}/be-host`)
 }
 
 function useChangeToHost() {
