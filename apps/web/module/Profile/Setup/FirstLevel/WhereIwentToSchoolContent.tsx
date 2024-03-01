@@ -1,10 +1,10 @@
 import { Button } from "@/common/components/ui/Button"
 import { Input } from "@/common/components/ui/Input"
 import { Typography } from "@/common/components/ui/Typography"
-import useFirstLevelStore from "../store/useFirstLevelStore"
 import { Dispatch } from "react"
 import toast from "react-hot-toast"
 import InputMaxLength from "../../../../common/helpers/InputMaxLength"
+import useProfileEditStore from "../store/useProfileEditStore"
 
 const WhereIWentToSchoolContent = ({
   setIsOpen,
@@ -15,10 +15,11 @@ const WhereIWentToSchoolContent = ({
     "",
     40
   )
-  const setSchoolNameStore = useFirstLevelStore((state) => state.setSchoolName)
+  const setSchoolNameStore = useProfileEditStore((state) => state.setSchoolName)
   const save = () => {
     if (schoolName) {
       setSchoolNameStore(schoolName)
+      setIsOpen(false)
       toast.success("Saved")
     } else {
       toast.error("Please fill out the form")
@@ -28,22 +29,22 @@ const WhereIWentToSchoolContent = ({
   return (
     <>
       <div className="p-5">
-        <Typography variant="h1" className="font-semibold mb-2 mt-5">
+        <Typography variant="h2" className="font-semibold mb-2">
           Where did you go to school?
         </Typography>
-        <Typography variant="h3" className="text-text-400">
+        <Typography variant="h5" className="text-text-400">
           Whether it’s home school, high school, or trade school, name the
           school that made you who you are.
         </Typography>
-        <div className="mt-10 mb-5">
+        <div className="mt-6">
           <Input
             label="Where I went to school:"
             onChange={handleInputChange}
             maxLength={40}
           />
           <Typography
-            variant="p"
-            className="flex items-end justify-end font-semibold text-text-400"
+            variant="h6"
+            className="flex items-end justify-end font-semibold text-text-400 mt-3"
           >
             {schoolName.length}/40 characters
           </Typography>
