@@ -35,7 +35,6 @@ const LandingPage = () => {
               />
             ))}
           </ul>
-          <FirstLevel />
         </>
       )}
     </WidthWrapper>

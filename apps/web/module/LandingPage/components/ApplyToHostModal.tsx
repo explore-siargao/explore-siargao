@@ -3,6 +3,9 @@ import { Button } from "@/common/components/ui/Button"
 import { Typography } from "@/common/components/ui/Typography"
 import useChangeToHost from "../hooks/useChangeToHost"
 import { Spinner } from "@/common/components/ui/Spinner"
+import { useQueryClient } from "@tanstack/react-query"
+import toast from "react-hot-toast"
+import { useRouter } from "next/navigation"
 
 interface ISetUpProfileAboutYouModalProps {
   isModalOpen: boolean
@@ -13,9 +16,27 @@ const ApplyToHostModal = ({
   isModalOpen,
   onClose,
 }: ISetUpProfileAboutYouModalProps) => {
-
+  const queryClient = useQueryClient()
+    const router = useRouter()
+    const callBackReq = {
+      onSuccess: (data: any) => {
+        if (!data.error) {
+          queryClient.invalidateQueries({
+            queryKey: ["users"],
+          })
+          onClose()
+          toast.success(data.message)
+          router.push('/hosting')
+        } else {
+          toast.error(String(data.message))
+          onClose()
+        }
+      },
+      onError: (err: any) => {
+        toast.error(String(err))
+      },
+    }    
     const {mutate, isPending} = useChangeToHost();
-
   return (
     <ModalContainer onClose={onClose} isOpen={isModalOpen} size="sm" title="Apply to Host">
       <div className="py-4 px-6 flex flex-col divide-text-100 overflow-y-auto">
@@ -30,7 +51,7 @@ const ApplyToHostModal = ({
             <Button
                 variant="primary"
                 className="ml-auto"
-                onClick={() => mutate()}
+                onClick={() => mutate(undefined,callBackReq)}
             >
                 {isPending ? (<Spinner size="sm">Loading...</Spinner>) : "Proceed"}
                 
