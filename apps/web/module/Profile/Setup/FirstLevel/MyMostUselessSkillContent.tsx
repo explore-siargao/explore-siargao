@@ -28,37 +28,37 @@ const MyMostUselessSkillContent = ({
     }
   }
   return (
-      <div>
-        <div className="p-5">
-          <Typography variant="h2" className="font-semibold mb-5">
-            What’s your most useless skill?
-          </Typography>
-          <Typography variant="h5">
-            Share a surprising but pointless talent you have. Example: Shuffling
-            cards with one hand.
-          </Typography>
+    <div>
+      <div className="p-5">
+        <Typography variant="h2" className="font-semibold mb-5">
+          What’s your most useless skill?
+        </Typography>
+        <Typography variant="h5">
+          Share a surprising but pointless talent you have. Example: Shuffling
+          cards with one hand.
+        </Typography>
 
-          <div className="mt-6">
-            <Input
-              label="My most useless skill:"
-              onChange={handleInputChange}
-              maxLength={40}
-            />
-            <Typography
-              variant="h6"
-              className="flex items-end justify-end font-semibold text-text-400 mt-3"
-            >
-              {uselessSkill.length}/40 characters
-            </Typography>
-          </div>
-        </div>
-        <div className="border-t" />
-        <div className="flex items-end justify-end p-5">
-          <Button size="lg" variant="primary" onClick={() => save()}>
-            Save
-          </Button>
+        <div className="mt-6">
+          <Input
+            label="My most useless skill:"
+            onChange={handleInputChange}
+            maxLength={40}
+          />
+          <Typography
+            variant="h6"
+            className="flex items-end justify-end font-semibold text-text-400 mt-3"
+          >
+            {uselessSkill.length}/40 characters
+          </Typography>
         </div>
       </div>
+      <div className="border-t" />
+      <div className="flex items-end justify-end p-5">
+        <Button size="lg" variant="primary" onClick={() => save()}>
+          Save
+        </Button>
+      </div>
+    </div>
   )
 }
 

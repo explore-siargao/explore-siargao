@@ -28,38 +28,37 @@ const FavoriteSongInHighSchoolContent = ({
     }
   }
   return (
+    <div>
+      <div className="p-5">
+        <Typography variant="h2" className="font-semibold mb-5">
+          What was your favorite song in high school?
+        </Typography>
+        <Typography variant="h5">
+          However embarrassing, share the tune you listened to on repeat as a
+          teenager.
+        </Typography>
 
-      <div>
-        <div className="p-5">
-          <Typography variant="h2" className="font-semibold mb-5">
-            What was your favorite song in high school?
+        <div className="mt-6">
+          <Input
+            label="My favorite song in high school:"
+            onChange={handleInputChange}
+            maxLength={40}
+          />
+          <Typography
+            variant="h6"
+            className="flex items-end justify-end font-semibold text-text-400 mt-3"
+          >
+            {favoriteSong.length}/40 characters
           </Typography>
-          <Typography variant="h5">
-            However embarrassing, share the tune you listened to on repeat as a
-            teenager.
-          </Typography>
-
-          <div className="mt-6">
-            <Input
-              label="My favorite song in high school:"
-              onChange={handleInputChange}
-              maxLength={40}
-            />
-            <Typography
-              variant="h6"
-              className="flex items-end justify-end font-semibold text-text-400 mt-3"
-            >
-              {favoriteSong.length}/40 characters
-            </Typography>
-          </div>
-        </div>
-        <div className="border-t" />
-        <div className="flex items-end justify-end p-5">
-          <Button size="lg" variant="primary" onClick={() => save()}>
-            Save
-          </Button>
         </div>
       </div>
+      <div className="border-t" />
+      <div className="flex items-end justify-end p-5">
+        <Button size="lg" variant="primary" onClick={() => save()}>
+          Save
+        </Button>
+      </div>
+    </div>
   )
 }
 
