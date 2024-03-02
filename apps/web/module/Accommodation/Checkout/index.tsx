@@ -64,7 +64,6 @@ const Checkout = () => {
         const splitExpiration = expirationDate.split("/")
         const encryptedCard = encryptionService.encrypt({
           cardNumber: cardNumber?.replace(/\s/g, ""),
-          cvv: cvv,
           expirationMonth: splitExpiration[0],
           expirationYear: `20${splitExpiration[1]}`,
           cardholderName: cardholderName,

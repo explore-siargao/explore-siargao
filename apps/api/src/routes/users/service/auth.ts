@@ -19,7 +19,7 @@ import CryptoJS from 'crypto-js'
 import { currencyByCountry } from '@/common/helpers/currencyByCountry'
 const prisma = new PrismaClient()
 const response = new ResponseService()
-import { EncryptionService } from '@repo/services/'
+import { EncryptionService } from '@repo/services'
 import { nextAuthSecret, webUrl } from '@/common/config'
 
 const decryptionService = new EncryptionService('password')
