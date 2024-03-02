@@ -31,7 +31,7 @@ const ProfileCard = ({
               <ShieldCheckIcon className="h-5 w-5 mx-auto text-white" />
             </div>
           </div>
-          <h1 className="text-3xl font-semibold mt-2 text-center">{name}</h1>
+          <Typography variant="h1" className="mt-2 text-center font-semibold">{name}</Typography>
           <Typography
             variant="h5"
             className="flex justify-center items-center font-semibold"
@@ -40,26 +40,27 @@ const ProfileCard = ({
           </Typography>
         </div>
         <div className="col-span-2">
-          <Typography variant="h1" fontWeight="semibold">
+          <Typography variant="h2" fontWeight="semibold">
             {reviewsCount}
           </Typography>
           <Typography variant="h6" fontWeight="semibold">
             Reviews
           </Typography>
           <hr className="mt-3 mb-2" />
-          <Typography
-            variant="h1"
-            fontWeight="bold"
-            className="flex items-center"
-          >
-            {rating}
-            <StarIcon className="h-4 w-5" />
-          </Typography>
+          <div className="flex items-center gap-1">
+            <Typography
+              variant="h2"
+              fontWeight="semibold"
+            >
+              {rating}
+            </Typography>
+            <StarIcon className="h-4 w-4" />
+          </div>
           <Typography variant="h6" fontWeight="semibold">
             Rating
           </Typography>
           <hr className="mt-3 mb-2" />
-          <Typography variant="h1" fontWeight="bold">
+          <Typography variant="h2" fontWeight="semibold">
             {hostingMonthAge ? hostingMonthAge : 0}
           </Typography>
           <Typography variant="h6" fontWeight="semibold">
