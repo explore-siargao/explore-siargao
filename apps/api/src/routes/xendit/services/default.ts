@@ -62,9 +62,9 @@ export const getPaymentMethod = async (req: Request, res: Response) => {
 }
 
 export const cardSingleUse = async (req: Request, res: Response) => {
-  const { cardInfo, bookingId } = req.body
+  const { cardInfo, cvv, bookingId } = req.body
   if (cardInfo && bookingId) {
-    const { cardNumber, expirationMonth, expirationYear, cvv, cardholderName } =
+    const { cardNumber, expirationMonth, expirationYear, cardholderName } =
       encryptionService.decrypt(cardInfo) as T_CardInfo
     try {
       const data = {

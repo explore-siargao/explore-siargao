@@ -36,6 +36,7 @@ import isOriginValid from '@/common/middleware/auth/isOriginValid'
 import isCsrfTokenValid from '@/common/middleware/auth/isCsrfTokenValid'
 import { getHostDetailsInListing } from './service/hostDetails'
 import { beAHost } from './service/beAHost'
+import { getProfile, updateProfile } from './service/userProfile'
 
 const router = express.Router()
 
@@ -153,5 +154,6 @@ router.patch(
 
 //user profile
 router.get('/:id', getUserProfile)
-
+router.get('/:userId/profile', getProfile)
+router.patch('/:userId/profile', updateProfile)
 export default router

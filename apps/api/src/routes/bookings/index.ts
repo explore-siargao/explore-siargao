@@ -7,11 +7,24 @@ import {
   addBooking,
   updateBooking,
   deleteBooking,
+  getBookingByHost,
 } from './services/default'
+import {
+  getPaidEarnings,
+  getThisMonthEarnings,
+  getUpcomingEarnings,
+} from './services/earnings'
 
 const router = express.Router()
 
 router.get('/', isCsrfTokenValid, isOriginValid, isUserLoggedIn, getBookings)
+router.get(
+  '/:hostId',
+  isCsrfTokenValid,
+  isOriginValid,
+  isUserLoggedIn,
+  getBookingByHost
+)
 router.post('/', isCsrfTokenValid, isOriginValid, isUserLoggedIn, addBooking)
 router.patch(
   '/:id',
@@ -27,5 +40,9 @@ router.delete(
   isUserLoggedIn,
   deleteBooking
 )
+
+router.get('/this-month', getThisMonthEarnings)
+router.get('/upcoming', getUpcomingEarnings)
+router.get('/paid', getPaidEarnings)
 
 export default router
