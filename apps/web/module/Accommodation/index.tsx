@@ -15,12 +15,12 @@ import WhereYoullBeDescription from "./components/Map"
 import ListingDateRangePicker from "./components/ListingDateRangePicker"
 import { Button } from "@/common/components/ui/Button"
 import { Flag, Tag } from "lucide-react"
-import ModalReporting from "./components/modals/ModalReporting"
 import { useState } from "react"
 import ListingMark from "@/module/Accommodation/Checkout/ListingMark"
 import { T_HouseRule, T_Listing } from "@repo/contract"
 import { T_HighlightsProps } from "./types/Highlights"
 import { T_HouseRules } from "./types/ThingsToKnow"
+import ReportListingModal from "./components/modals/ReportListingModal"
 
 const reportListingArr = [
   {
@@ -481,7 +481,7 @@ export const SingleView = ({listing}:{listing:T_Listing}) => {
 
 
   return (
-    <WidthWrapper width="small" className="mt-32 lg:mt-36">
+    <WidthWrapper width="small" className="mt-4 lg:mt-8">
       <SectionInfo
       // @ts-ignore
         images={listing.images}
@@ -526,7 +526,7 @@ export const SingleView = ({listing}:{listing:T_Listing}) => {
           </div>
         </div>
         <div className="md:w-96 md:relative">
-          <div className="md:sticky md:top-0">
+          <div className="md:sticky md:top-6">
             <CheckoutProcess
               checkoutDesc={{
                 serviceFee: Number(listing.price?.serviceFee),
@@ -580,7 +580,7 @@ export const SingleView = ({listing}:{listing:T_Listing}) => {
         </div>
         <div className="pt-8">
           <ThingsToKnow
-          //@ts-ignore
+            //@ts-ignore
             houseRules={newHouseRules}
             houseRulesModalData={houseRulesModalData}
             //@ts-ignore
@@ -592,11 +592,7 @@ export const SingleView = ({listing}:{listing:T_Listing}) => {
           />
         </div>
       </div>
-      <ModalReporting
-        isOpen={showModal}
-        onClose={handleCloseModal}
-        reportListingArr={reportListingArr}
-      />
+      <ReportListingModal isOpen={showModal} onClose={handleCloseModal} />
     </WidthWrapper>
   )
 }

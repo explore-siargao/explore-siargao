@@ -16,7 +16,8 @@ export const Z_PersonalInfo = z.object({
   language: z.string(),
   emergencyContacts: z.array(Z_EmergencyContact).optional(),
   phoneNumber: z.string(),
-  createdAt: z.string().optional(),
-  updatedAt: z.string().nullable().optional(),
-  deletedAt: z.string().nullable().optional(),
+  profile: z.string().optional().nullable(),
+  createdAt: z.date().optional(),
+  updatedAt: z.date().nullable().optional(),
+  deletedAt: z.date().nullable().optional(),
 })

@@ -23,6 +23,7 @@ import { cancellationPolicy } from './cancellationPolicy'
 import { rule } from './rule'
 import { forgotPassword } from './forgotPassword'
 import { multiAuth } from './multiAuth'
+import { reportUser } from './reportUser'
 const main = async () => {
   await users()
   await personalInfo()
@@ -48,6 +49,7 @@ const main = async () => {
   await rule()
   await forgotPassword()
   await multiAuth()
+  await reportUser()
 }
 
 main()

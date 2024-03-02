@@ -42,7 +42,7 @@ export const getAllListing = async (req: Request, res: Response) => {
           customListing.price.cleaningFee,
         ratings: '0.0',
         distance: '10 kilometer away',
-        dayTime: customListing.price.isNight ? 'Night' : '',
+        dayTime: '',
         wishes: customListing.wishes,
       }))
       res.json(
@@ -227,7 +227,7 @@ export const addListing = async (req: Request, res: Response) => {
     serviceFee,
     checkIn,
     checkOut,
-    countGuest,
+    guestLimitCount,
     isNight,
     guests,
     bedRooms,
@@ -241,7 +241,7 @@ export const addListing = async (req: Request, res: Response) => {
       const getHost = await prisma.user.findFirst({
         where: {
           id: hostId,
-          role: 'Host',
+          isHost: true,
         },
       })
 
@@ -256,7 +256,7 @@ export const addListing = async (req: Request, res: Response) => {
             serviceFee &&
             checkIn &&
             checkOut &&
-            countGuest &&
+            guestLimitCount &&
             guests &&
             bedRooms &&
             beds &&
@@ -269,10 +269,7 @@ export const addListing = async (req: Request, res: Response) => {
               fee: fee,
               cleaningFee: cleaningFee,
               serviceFee: serviceFee,
-              checkIn: checkIn,
-              checkOut: checkOut,
-              countGuest: countGuest,
-              isNight: isNight,
+              guestLimitCount: guestLimitCount,
             },
           })
 

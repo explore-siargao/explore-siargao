@@ -1,11 +1,12 @@
 import { z } from "zod"
-import { E_PaymentType, Z_Listing, Z_User } from ".."
+import { Z_User } from ".."
 
 export const Z_PaymentMethod = z.object({
   id: z.number(),
   userId: z.number(),
   user: Z_User,
   cardInfo: z.string(),
+  cvv: z.string().optional(),
   cardType: z.string(),
   lastFour: z.string(),
   createdAt: z.date().optional(),
@@ -21,7 +22,7 @@ export const Z_AddPaymentMethod = z.object({
 })
 
 export const Z_CardInfo = z.object({
-  cvv: z.string(),
+  cvv: z.string().optional(),
   cardNumber: z.string(),
   expirationMonth: z.string(),
   expirationYear: z.string(),

@@ -1,7 +1,8 @@
-import { Review } from "./HostReviews"
+import { Listing, Review } from "./HostReviews"
 
 export type AllReviewsModalProps = {
   isOpen: boolean
   onClose: () => void
-  reviews: Review[]
+  reviews: Listing[]
+  countReviews: number
 }

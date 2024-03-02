@@ -10,18 +10,19 @@ datasource db {
 }
 
 model User {
-  id               Int                  @id @default(autoincrement())
-  email            String               @unique @db.VarChar(255)
-  password         String?              @db.VarChar(255)
+  id               Int               @id @default(autoincrement())
+  email            String            @unique @db.VarChar(255)
+  password         String?           @db.VarChar(255)
   changePasswordAt DateTime?
-  createdAt        DateTime             @default(now())
-  updatedAt        DateTime             @updatedAt
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
   deletedAt        DateTime?
   role             UserRole             @default(User)
+  isHost           Boolean              @default(false)
   registrationType RegistrationType?
-  deactivated      Boolean              @default(false)
-  profilePicture   String?              @db.LongText
-  canReceiveEmail  Boolean              @default(false)
+  deactivated      Boolean           @default(false)
+  profilePicture   String?           @db.LongText
+  canReceiveEmail  Boolean           @default(false)
   tax              Tax?
   listing          Listing[]
   reportListing    ReportListing[]
@@ -36,6 +37,9 @@ model User {
   hostInfo         HostInfo?
   Booking          Booking[]
   Transaction      Transaction[]
+  Notification     Notification[]
+  ReportedUser     ReportUser[]      @relation("reportedUsers")
+  reportedByuser   ReportUser[]      @relation("reportedByUsers")
 }
 
 model PersonalInfo {
@@ -56,8 +60,8 @@ model PersonalInfo {
   user              User                @relation(fields: [userId], references: [id])
   address           Addresses?
   emergencyContacts EmergencyContacts[]
-  confirm           String              @db.VarChar(250)
-
+  confirm           String?              @db.VarChar(250)
+  profile           String?              @db.LongText()
   @@index([userId])
 }
 
@@ -158,6 +162,7 @@ model Listing {
   reports              ReportListing[]
   wishes               WishGroup[]
   Booking              Booking[]
+  Notification         Notification[]
 
   @@index([basicAboutPlaceId])
   @@index([listingPriceId])
@@ -193,36 +198,50 @@ model BasicAboutPlace {
 }
 
 model PaymentMethod {
-  id          Int                  @id @default(autoincrement())
-  userId      Int
-  cardInfo    String               @db.LongText
-  cardType    String               @db.VarChar(255)
-  lastFour    String               @db.VarChar(255)
-  createdAt   DateTime             @default(now())
-  updatedAt   DateTime             @updatedAt
-  deletedAt   DateTime?
-  isDefault   Boolean              @default(false)
-  user        User                 @relation(fields: [userId], references: [id])
-  Booking     Booking[]
+  id        Int       @id @default(autoincrement())
+  userId    Int
+  cardInfo  String    @db.LongText
+  cardType  String    @db.VarChar(255)
+  lastFour  String    @db.VarChar(255)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+  isDefault Boolean   @default(false)
+  user      User      @relation(fields: [userId], references: [id])
+  Booking   Booking[]
 
   @@index([userId])
 }
 
 model ReportListing {
-  id          Int       @id @default(autoincrement())
-  name        String    @db.VarChar(200)
-  reason      String    @db.Text()
-  description String?   @db.LongText()
-  reportedBy  Int
-  user        User      @relation(fields: [reportedBy], references: [id])
-  listingId   Int
-  listing     Listing   @relation(fields: [listingId], references: [id])
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  deletedAt   DateTime?
+  id         Int       @id @default(autoincrement())
+  reports    String    @db.LongText()
+  reportedBy Int
+  user       User      @relation(fields: [reportedBy], references: [id])
+  listingId  Int
+  listing    Listing   @relation(fields: [listingId], references: [id])
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  deletedAt  DateTime?
 
   @@index([reportedBy])
   @@index([listingId])
+}
+
+model ReportUser {
+  id             Int       @id @default(autoincrement())
+  report         String    @db.LongText()
+  reportedUserId Int
+  reportedUser   User      @relation("reportedUsers", fields: [reportedUserId], references: [id])
+  reportedBy     Int
+  reportedByUser User      @relation("reportedByUsers", map: "reported_user_by", fields: [reportedBy], references: [id])
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  deletedAt      DateTime?
+
+
+  @@index([reportedBy])
+  @@index([reportedUserId])
 }
 
 model Coupon {
@@ -245,14 +264,11 @@ model ListingPrice {
   id          Int       @id @unique @default(autoincrement())
   fee         Int
   serviceFee  Int
-  isNight     Boolean?  @default(false)
-  checkIn     DateTime
-  checkOut    DateTime
-  countGuest  Int
+  cleaningFee Int
+  guestLimitCount Int
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   deletedAt   DateTime?
-  cleaningFee Int
   listing     Listing?
 }
 
@@ -439,6 +455,7 @@ model Booking {
   cardInfo                 String?        @db.LongText
   cardType                 String?        @db.VarChar(255)
   lastFour                 String?        @db.VarChar(255)
+  totalFee                Int?
   PaymentMethod            PaymentMethod? @relation(fields: [paymentMethodId], references: [id])
   paymentMethodId          Int?
   xenditPaymentMethodId    String?        @unique @db.VarChar(255)
@@ -469,9 +486,28 @@ model Transaction {
   @@index([userId])
 }
 
+model Notification {
+  id        Int              @id
+  userId    Int
+  User      User             @relation(fields: [userId], references: [id])
+  listingId Int
+  Listing   Listing          @relation(fields: [listingId], references: [id])
+  type      NotificationType
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+  deletedAt DateTime?
+
+  @@index([listingId])
+  @@index([userId])
+}
+
+enum NotificationType {
+  Booking
+  AddedReview
+}
+
 enum UserRole {
   Admin
-  Host
   User
 }
 
