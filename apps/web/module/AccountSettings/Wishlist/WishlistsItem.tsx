@@ -2,11 +2,14 @@
 import { WidthWrapper } from "@/common/components/WidthWrapper"
 import WishlistsItemContainer from "@/module/AccountSettings/Wishlist/WishlistsItemContainer"
 import React from "react"
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic"
 
-const WorldMap = dynamic(() => import("@/module/AccountSettings/Wishlist/WorldMap"), {
-  ssr: false,
-});
+const WorldMap = dynamic(
+  () => import("@/module/AccountSettings/Wishlist/WorldMap"),
+  {
+    ssr: false,
+  }
+)
 
 const WishlistsItem = () => {
   return (

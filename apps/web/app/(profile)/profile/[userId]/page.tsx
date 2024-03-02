@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 }
 
 const HostProfilePage = async () => {
-  const userProfile = await getRequest(`/users/1`);
+  const userProfile = await getRequest(`/users/1`)
   return <Profile />
 }
 

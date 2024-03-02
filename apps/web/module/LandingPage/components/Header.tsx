@@ -15,9 +15,9 @@ import { cn } from "@/common/helpers/cn"
 
 function Header({
   contentWidth = "wide",
-  isFixed = true
+  isFixed = true,
 }: {
-  readonly contentWidth?: "medium" | "small" | "wide" | "full",
+  readonly contentWidth?: "medium" | "small" | "wide" | "full"
   isFixed?: boolean
 }) {
   const { data: session } = useSession()

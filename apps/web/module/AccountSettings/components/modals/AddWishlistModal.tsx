@@ -83,7 +83,7 @@ const AddWishlistModal = ({
             Loading...
           </Spinner>
         ) : (
-          <div 
+          <div
             className={cn(
               `grid grid-cols-2 max-h-[550px] overflow-y-auto`,
               wishGroup?.item?.length > 0 && "p-6"

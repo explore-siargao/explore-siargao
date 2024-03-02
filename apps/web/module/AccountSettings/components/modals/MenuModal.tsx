@@ -161,7 +161,12 @@ const MenuModal = ({
   }
   const renderDelete = () => {
     return (
-      <ModalContainer title="Delete this wishlist?" onClose={() => setModalState(0)} isOpen={openModal} size="sm">
+      <ModalContainer
+        title="Delete this wishlist?"
+        onClose={() => setModalState(0)}
+        isOpen={openModal}
+        size="sm"
+      >
         <div className="p-6 flex flex-col items-center">
           <Typography className="text-text-400 font-light w-60 text-center">
             {'"' + title + '"'} will be permanently deleted.
