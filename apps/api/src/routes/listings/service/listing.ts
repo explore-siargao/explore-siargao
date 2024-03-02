@@ -132,7 +132,7 @@ export const addListing = async (req: Request, res: Response) => {
     serviceFee,
     checkIn,
     checkOut,
-    countGuest,
+    guestLimitCount,
     isNight,
     guests,
     bedRooms,
@@ -161,7 +161,7 @@ export const addListing = async (req: Request, res: Response) => {
             serviceFee &&
             checkIn &&
             checkOut &&
-            countGuest &&
+            guestLimitCount &&
             guests &&
             bedRooms &&
             beds &&
@@ -174,6 +174,7 @@ export const addListing = async (req: Request, res: Response) => {
               fee: fee,
               cleaningFee: cleaningFee,
               serviceFee: serviceFee,
+              guestLimitCount: guestLimitCount,
             },
           })
 

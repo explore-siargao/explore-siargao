@@ -265,6 +265,7 @@ model ListingPrice {
   fee         Int
   serviceFee  Int
   cleaningFee Int
+  guestLimitCount Int
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   deletedAt   DateTime?
