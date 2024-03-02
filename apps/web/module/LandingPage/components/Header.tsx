@@ -1,5 +1,5 @@
 "use client"
-import React from "react"
+import React, { useState } from "react"
 import Image from "next/image"
 import Logo from "@/common/assets/logo.png"
 import { Button } from "@/common/components/ui/Button"
@@ -11,6 +11,7 @@ import { LINK_LOGIN } from "@/common/constants/links"
 import Link from "next/link"
 import { WidthWrapper } from "@/common/components/WidthWrapper"
 import { Typography } from "@/common/components/ui/Typography"
+import ApplyToHostModal from "./ApplyToHostModal"
 
 function Header({
   contentWidth = "wide",
@@ -30,7 +31,12 @@ function Header({
     "/logout",
     "/new-password",
   ]
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
   const renderHeader = () => {
+    const openModal = () => setIsModalOpen(true)
+    const closeModal = () => setIsModalOpen(false)
+
     if (!withoutHeader.includes(path as string)) {
       return (
         <>
@@ -70,13 +76,17 @@ function Header({
                     </div>
                   )}
                   <div>
-                    <Button variant="primary" size="sm">
+                    <Button variant="primary" size="sm" onClick={openModal}>
                       Apply to Host
                     </Button>
                   </div>
                   {session && <LandingPageMenu />}
                 </div>
               </nav>
+              <ApplyToHostModal
+                isModalOpen={isModalOpen}
+                onClose={closeModal}
+              />
             </WidthWrapper>
           </header>
         </>
