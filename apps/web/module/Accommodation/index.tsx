@@ -15,9 +15,9 @@ import WhereYoullBeDescription from "./components/Map"
 import ListingDateRangePicker from "./components/ListingDateRangePicker"
 import { Button } from "@/common/components/ui/Button"
 import { Flag, Tag } from "lucide-react"
-import ModalReporting from "./components/modals/ModalReporting"
 import { useState } from "react"
 import ListingMark from "@/module/Accommodation/Checkout/ListingMark"
+import ReportListingModal from "./components/modals/ReportListingModal"
 
 const reportListingArr = [
   {
@@ -544,11 +544,7 @@ export const SingleView = () => {
           />
         </div>
       </div>
-      <ModalReporting
-        isOpen={showModal}
-        onClose={handleCloseModal}
-        reportListingArr={reportListingArr}
-      />
+      <ReportListingModal isOpen={showModal} onClose={handleCloseModal} />
     </WidthWrapper>
   )
 }
