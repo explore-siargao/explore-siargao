@@ -1,5 +1,5 @@
 "use client"
-import AccountSettingWrapper from "@/common/components/AccountSettingWrapper"
+import AccountSettingWrapper from "@/module/AccountSettings/components/AccountSettingWrapper"
 import { LINK_ACCOUNT } from "@/common/constants/links"
 import React from "react"
 import { Title } from "@/common/components/ui/Title"

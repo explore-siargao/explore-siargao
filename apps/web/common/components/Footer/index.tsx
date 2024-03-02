@@ -12,10 +12,14 @@ import { APP_NAME } from "@repo/constants"
 import { SUPPORT, EXPLORE_SIARGAO, DESTINATION, PARTNER_WITH_US } from "./links"
 import { Globe } from "lucide-react"
 
-const Footer = () => {
+const Footer = ({
+  contentWidth = "wide",
+}: {
+  readonly contentWidth?: "medium" | "small" | "wide" | "full"
+}) => {
   return (
     <footer className="bg-gray-100 pb-6 pt-10 2xl:pt-16 bottom-0 border-t border-gray-200 mt-12">
-      <WidthWrapper width={"medium"}>
+      <WidthWrapper width={contentWidth}>
         <div className="md:flex border-b pb-4 md:pb-11">
           <div className="md:flex-1 pb-4 md:pb-0 md:mr-4 border-b md:border-b-0">
             <Typography className="mb-2 font-semibold text-sm">

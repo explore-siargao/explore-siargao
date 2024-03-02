@@ -1,4 +1,4 @@
-import AccountSettingWrapper from "@/common/components/AccountSettingWrapper"
+import AccountSettingWrapper from "@/module/AccountSettings/components/AccountSettingWrapper"
 import { Title } from "@/common/components/ui/Title"
 import { Typography } from "@/common/components/ui/Typography"
 import React from "react"

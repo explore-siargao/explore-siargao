@@ -15,6 +15,7 @@ import { IWishGroup } from "@/common/types/global"
 import useWishGroupWithCount from "../../hooks/useGetWishGroupWithCount"
 import { Spinner } from "@/common/components/ui/Spinner"
 import useAddToExistingWishGroup from "../../hooks/useAddToExistingWishGroup"
+import { cn } from "@/common/helpers/cn"
 
 interface AddWishlistProps {
   listingId: number
@@ -71,6 +72,7 @@ const AddWishlistModal = ({
         title="Add to wishlist"
         onClose={hideModal}
         isOpen={showModal}
+        size="sm"
       >
         {wishGroupIsPending ? (
           <Spinner
@@ -81,7 +83,12 @@ const AddWishlistModal = ({
             Loading...
           </Spinner>
         ) : (
-          <div className="p-6 grid grid-cols-2 max-h-[550px] overflow-y-auto">
+          <div 
+            className={cn(
+              `grid grid-cols-2 max-h-[550px] overflow-y-auto`,
+              wishGroup?.item?.length > 0 && "p-6"
+            )}
+          >
             {wishGroup?.item?.map((item: any, index: number) => (
               <button
                 type="button"
@@ -129,8 +136,9 @@ const AddWishlistModal = ({
         title="Create wishlist"
         onClose={() => setRenderState(0)}
         isOpen={showModal}
+        size="auto"
       >
-        <div className="p-6">
+        <div className="p-6 w-80">
           <Input
             label="Name"
             id="createModal"
