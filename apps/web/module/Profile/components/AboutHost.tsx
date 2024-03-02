@@ -84,7 +84,9 @@ const ABOUT_MAP = [
 const AboutHost = (props: AboutHostProps) => {
   return (
     <div>
-      <Typography variant="h1" className="font-semibold hidden lg:block">About {props.name}</Typography>
+      <Typography variant="h1" className="font-semibold hidden lg:block">
+        About {props.name}
+      </Typography>
       {/* @ts-expect-error */}
       {props.aboutMe && (
         <div className="mt-2 lg:mt-6">
@@ -92,21 +94,18 @@ const AboutHost = (props: AboutHostProps) => {
           <Typography>{props.aboutMe}</Typography>
         </div>
       )}
-      <div
-        className={cn(
-          "lg:grid grid-cols-2 gap-4",
-          "mt-2 lg:mt-6 mb-7"
-        )}
-      >
+      <div className={cn("lg:grid grid-cols-2 gap-4", "mt-2 lg:mt-6 mb-7")}>
         {ABOUT_MAP.map((item) => {
           // @ts-expect-error
-          const value = props[item.name];
+          const value = props[item.name]
           return value ? (
             <div className="flex items-center gap-2">
               {item.icon}
-              <Typography variant="h4">{item.title} {value}</Typography>
+              <Typography variant="h4">
+                {item.title} {value}
+              </Typography>
             </div>
-          ) : null;
+          ) : null
         })}
       </div>
       <Typography variant="p">{props.desc}</Typography>

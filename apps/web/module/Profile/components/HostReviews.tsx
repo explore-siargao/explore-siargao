@@ -4,32 +4,31 @@ import { Button } from "@/common/components/ui/Button"
 import { HostReviewsProps } from "../types/HostReviews"
 import { useState } from "react"
 import AllReviewsModal from "./modals/AllReviewsModal"
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperSlide } from "swiper/react"
 import { Navigation, Pagination, A11y } from "swiper/modules"
 import SwiperCustomButton from "./SwiperCustomButton"
 
 // Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/pagination';
+import "swiper/css"
+import "swiper/css/pagination"
 
 const HostReviews = ({ name, reviewsCount, reviews }: HostReviewsProps) => {
   const [openReviewsModal, setOpenReviewsModal] = useState(false)
 
   return (
     <div>
-      <Swiper modules={[Navigation, Pagination, A11y]}
+      <Swiper
+        modules={[Navigation, Pagination, A11y]}
         spaceBetween={20}
-        slidesPerView={1} 
-        breakpoints={
-          {
-            768: {
-              slidesPerView: 2,
-            }
-          }
-        }
+        slidesPerView={1}
+        breakpoints={{
+          768: {
+            slidesPerView: 2,
+          },
+        }}
       >
         <style>
-        {`
+          {`
         .swiper-wrapper {
           width: 100px;
         }
@@ -45,24 +44,22 @@ const HostReviews = ({ name, reviewsCount, reviews }: HostReviewsProps) => {
         </div>
         {reviews.map((listing) => (
           <>
-            {listing?.review
-              ?.slice(0, 5)
-              .map((review, index) => (
-                  <SwiperSlide className="mt-14">
-                      <ReviewCard
-                        key={index}
-                        reviewerName={
-                          review?.user?.personalInfo?.firstName +
-                          " " +
-                          review?.user?.personalInfo?.lastName
-                        }
-                        reviewMessage={review?.comment}
-                        reviewerImage={"1.jpg"}
-                        reviewDate={review?.createdAt}
-                        forModal={false}
-                      />
-                  </SwiperSlide>
-              ))}
+            {listing?.review?.slice(0, 5).map((review, index) => (
+              <SwiperSlide className="mt-14">
+                <ReviewCard
+                  key={index}
+                  reviewerName={
+                    review?.user?.personalInfo?.firstName +
+                    " " +
+                    review?.user?.personalInfo?.lastName
+                  }
+                  reviewMessage={review?.comment}
+                  reviewerImage={"1.jpg"}
+                  reviewDate={review?.createdAt}
+                  forModal={false}
+                />
+              </SwiperSlide>
+            ))}
           </>
         ))}
       </Swiper>

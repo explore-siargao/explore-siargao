@@ -31,7 +31,9 @@ const ProfileCard = ({
               <ShieldCheckIcon className="h-5 w-5 mx-auto text-white" />
             </div>
           </div>
-          <Typography variant="h1" className="mt-2 text-center font-semibold">{name}</Typography>
+          <Typography variant="h1" className="mt-2 text-center font-semibold">
+            {name}
+          </Typography>
           <Typography
             variant="h5"
             className="flex justify-center items-center font-semibold"
@@ -48,10 +50,7 @@ const ProfileCard = ({
           </Typography>
           <hr className="mt-3 mb-2" />
           <div className="flex items-center gap-1">
-            <Typography
-              variant="h2"
-              fontWeight="semibold"
-            >
+            <Typography variant="h2" fontWeight="semibold">
               {rating}
             </Typography>
             <StarIcon className="h-4 w-4" />

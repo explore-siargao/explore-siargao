@@ -262,162 +262,162 @@ export const getUserProfile = async (req: Request, res: Response) => {
     spendTime: '',
     pets: 'Cat',
     aboutMe: 'I am nice person',
-    "profilePicture": null,
-    "userName": "test account",
-    "role": "Host",
-    "countReviews": 2,
-    "ratings": "4.50",
-    "listingWithReviews": [
+    profilePicture: null,
+    userName: 'test account',
+    role: 'Host',
+    countReviews: 2,
+    ratings: '4.50',
+    listingWithReviews: [
       {
-        "id": 1,
-        "hostedById": 1,
-        "images": [
+        id: 1,
+        hostedById: 1,
+        images: [
           {
-            "fileKey": "1.jpg",
-            "alt": "image"
+            fileKey: '1.jpg',
+            alt: 'image',
           },
           {
-            "fileKey": "2.jpg",
-            "alt": "image"
+            fileKey: '2.jpg',
+            alt: 'image',
           },
           {
-            "fileKey": "3.jpg",
-            "alt": "image"
+            fileKey: '3.jpg',
+            alt: 'image',
           },
           {
-            "fileKey": "4.jpg",
-            "alt": "image"
+            fileKey: '4.jpg',
+            alt: 'image',
           },
           {
-            "fileKey": "5.jpg",
-            "alt": "image"
-          }
+            fileKey: '5.jpg',
+            alt: 'image',
+          },
         ],
-        "title": "Test",
-        "descriptionId": null,
-        "address": "Santa Maria, Laguna",
-        "listingPriceId": 1,
-        "category": "Accomodation",
-        "favoriteBy": null,
-        "whereYoullBe": {
-          "description": "Long description",
-          "workAround": "Work around information"
+        title: 'Test',
+        descriptionId: null,
+        address: 'Santa Maria, Laguna',
+        listingPriceId: 1,
+        category: 'Accomodation',
+        favoriteBy: null,
+        whereYoullBe: {
+          description: 'Long description',
+          workAround: 'Work around information',
         },
-        "whereYoullSleep": {
-          "kingBed": {
-            "count": 1,
-            "size": "Large",
-            "icon": "bed"
-          }
+        whereYoullSleep: {
+          kingBed: {
+            count: 1,
+            size: 'Large',
+            icon: 'bed',
+          },
         },
-        "createdAt": "2024-02-29T11:31:26.220Z",
-        "updatedAt": "2024-02-29T11:31:26.220Z",
-        "deletedAt": null,
-        "latitude": "1",
-        "longitude": "1",
-        "basicAboutPlaceId": null,
-        "review": [
+        createdAt: '2024-02-29T11:31:26.220Z',
+        updatedAt: '2024-02-29T11:31:26.220Z',
+        deletedAt: null,
+        latitude: '1',
+        longitude: '1',
+        basicAboutPlaceId: null,
+        review: [
           {
-            "id": 1,
-            "userId": 4,
-            "cleanLinessRates": 5,
-            "accuracyRates": 5,
-            "checkInRates": 5,
-            "communicationRates": 5,
-            "locationRates": 5,
-            "valueRates": 5,
-            "comment": "No comment",
-            "createdAt": "2024-02-29T11:31:26.229Z",
-            "updatedAt": "2024-02-29T11:31:26.229Z",
-            "deletedAt": null,
-            "listingId": 1,
-            "user": {
-              "personalInfo": {
-                "firstName": "Richard",
-                "lastName": "Dela pena"
-              }
-            }
+            id: 1,
+            userId: 4,
+            cleanLinessRates: 5,
+            accuracyRates: 5,
+            checkInRates: 5,
+            communicationRates: 5,
+            locationRates: 5,
+            valueRates: 5,
+            comment: 'No comment',
+            createdAt: '2024-02-29T11:31:26.229Z',
+            updatedAt: '2024-02-29T11:31:26.229Z',
+            deletedAt: null,
+            listingId: 1,
+            user: {
+              personalInfo: {
+                firstName: 'Richard',
+                lastName: 'Dela pena',
+              },
+            },
           },
           {
-            "id": 4,
-            "userId": 5,
-            "cleanLinessRates": 3,
-            "accuracyRates": 4,
-            "checkInRates": 5,
-            "communicationRates": 5,
-            "locationRates": 3,
-            "valueRates": 4,
-            "comment": "No comment",
-            "createdAt": "2024-02-29T11:31:26.229Z",
-            "updatedAt": "2024-02-29T11:31:26.229Z",
-            "deletedAt": null,
-            "listingId": 1,
-            "user": {
-              "personalInfo": {
-                "firstName": "Arjhay",
-                "lastName": "Andal"
-              }
-            }
-          }
-        ]
+            id: 4,
+            userId: 5,
+            cleanLinessRates: 3,
+            accuracyRates: 4,
+            checkInRates: 5,
+            communicationRates: 5,
+            locationRates: 3,
+            valueRates: 4,
+            comment: 'No comment',
+            createdAt: '2024-02-29T11:31:26.229Z',
+            updatedAt: '2024-02-29T11:31:26.229Z',
+            deletedAt: null,
+            listingId: 1,
+            user: {
+              personalInfo: {
+                firstName: 'Arjhay',
+                lastName: 'Andal',
+              },
+            },
+          },
+        ],
       },
       {
-        "id": 4,
-        "hostedById": 1,
-        "images": [
+        id: 4,
+        hostedById: 1,
+        images: [
           {
-            "fileKey": "4.jpg",
-            "alt": "image"
+            fileKey: '4.jpg',
+            alt: 'image',
           },
           {
-            "fileKey": "3.jpg",
-            "alt": "image"
+            fileKey: '3.jpg',
+            alt: 'image',
           },
           {
-            "fileKey": "2.jpg",
-            "alt": "image"
+            fileKey: '2.jpg',
+            alt: 'image',
           },
           {
-            "fileKey": "1.jpg",
-            "alt": "image"
+            fileKey: '1.jpg',
+            alt: 'image',
           },
           {
-            "fileKey": "5.jpg",
-            "alt": "image"
-          }
+            fileKey: '5.jpg',
+            alt: 'image',
+          },
         ],
-        "title": "Zkript View",
-        "descriptionId": null,
-        "address": "Paete, Laguna",
-        "listingPriceId": 4,
-        "category": "Accomodation",
-        "favoriteBy": null,
-        "whereYoullBe": {
-          "description": "Long description",
-          "workAround": "Work around information"
+        title: 'Zkript View',
+        descriptionId: null,
+        address: 'Paete, Laguna',
+        listingPriceId: 4,
+        category: 'Accomodation',
+        favoriteBy: null,
+        whereYoullBe: {
+          description: 'Long description',
+          workAround: 'Work around information',
         },
-        "whereYoullSleep": {
-          "kingBed": {
-            "count": 1,
-            "size": "Large",
-            "icon": "bed"
-          }
+        whereYoullSleep: {
+          kingBed: {
+            count: 1,
+            size: 'Large',
+            icon: 'bed',
+          },
         },
-        "createdAt": "2024-02-29T11:31:26.220Z",
-        "updatedAt": "2024-02-29T11:31:26.220Z",
-        "deletedAt": null,
-        "latitude": "1",
-        "longitude": "23",
-        "basicAboutPlaceId": null,
-        "review": []
-      }
+        createdAt: '2024-02-29T11:31:26.220Z',
+        updatedAt: '2024-02-29T11:31:26.220Z',
+        deletedAt: null,
+        latitude: '1',
+        longitude: '23',
+        basicAboutPlaceId: null,
+        review: [],
+      },
     ],
-    "hostedSince": null,
-    "confirmInfo": {
-      "identity": true,
-      "emailAddress": true,
-      "phoneNumber": true
-    }
+    hostedSince: null,
+    confirmInfo: {
+      identity: true,
+      emailAddress: true,
+      phoneNumber: true,
+    },
   }
   res.json(
     response.success({

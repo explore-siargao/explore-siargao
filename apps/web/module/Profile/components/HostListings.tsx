@@ -1,27 +1,26 @@
 import { Typography } from "@/common/components/ui/Typography"
 import ListingCard from "./ListingCard"
 import { HostListingsProps } from "../types/HostListings"
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperSlide } from "swiper/react"
 import { Navigation, Pagination, A11y } from "swiper/modules"
 import SwiperCustomButton from "./SwiperCustomButton"
 
 // Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/pagination';
+import "swiper/css"
+import "swiper/css/pagination"
 
 const HostListings = ({ name, listings }: HostListingsProps) => {
   return (
     <div>
-        <Swiper modules={[Navigation, Pagination, A11y]}
+      <Swiper
+        modules={[Navigation, Pagination, A11y]}
         spaceBetween={20}
-        slidesPerView={2} 
-        breakpoints={
-          {
-            768: {
-              slidesPerView: 3,
-            }
-          }
-        }
+        slidesPerView={2}
+        breakpoints={{
+          768: {
+            slidesPerView: 3,
+          },
+        }}
       >
         <div className="flex justify-between items-center absolute top-0 w-full z-10">
           <Typography variant="h1" fontWeight="semibold">
