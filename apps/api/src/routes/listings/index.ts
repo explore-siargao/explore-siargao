@@ -52,6 +52,7 @@ import {
   deleteReview,
   getReviewById,
   getReviewByListing,
+  getReviewsByHost,
   getReviewsByUserId,
   updateReview,
 } from './service/reviews'
@@ -236,6 +237,8 @@ router.get(
   isUserLoggedIn,
   getReviewById
 )
+
+router.get('/reviews/host/:hostId', getReviewsByHost)
 router.post(
   '/:userId/reviews/post',
   // isOriginValid,
