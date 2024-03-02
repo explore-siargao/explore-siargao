@@ -37,6 +37,8 @@ model User {
   Booking          Booking[]
   Transaction      Transaction[]
   Notification     Notification[]
+  ReportedUser     ReportUser[]      @relation("reportedUsers")
+  reportedByuser   ReportUser[]      @relation("reportedByUsers")
 }
 
 model PersonalInfo {
@@ -57,8 +59,8 @@ model PersonalInfo {
   user              User                @relation(fields: [userId], references: [id])
   address           Addresses?
   emergencyContacts EmergencyContacts[]
-  confirm           String              @db.VarChar(250)
-
+  confirm           String?              @db.VarChar(250)
+  profile           String?              @db.LongText()
   @@index([userId])
 }
 
@@ -211,20 +213,34 @@ model PaymentMethod {
 }
 
 model ReportListing {
-  id          Int       @id @default(autoincrement())
-  name        String    @db.VarChar(200)
-  reason      String    @db.Text()
-  description String?   @db.LongText()
-  reportedBy  Int
-  user        User      @relation(fields: [reportedBy], references: [id])
-  listingId   Int
-  listing     Listing   @relation(fields: [listingId], references: [id])
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  deletedAt   DateTime?
+  id         Int       @id @default(autoincrement())
+  reports    String    @db.LongText()
+  reportedBy Int
+  user       User      @relation(fields: [reportedBy], references: [id])
+  listingId  Int
+  listing    Listing   @relation(fields: [listingId], references: [id])
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  deletedAt  DateTime?
 
   @@index([reportedBy])
   @@index([listingId])
+}
+
+model ReportUser {
+  id             Int       @id @default(autoincrement())
+  report         String    @db.LongText()
+  reportedUserId Int
+  reportedUser   User      @relation("reportedUsers", fields: [reportedUserId], references: [id])
+  reportedBy     Int
+  reportedByUser User      @relation("reportedByUsers", map: "reported_user_by", fields: [reportedBy], references: [id])
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  deletedAt      DateTime?
+
+
+  @@index([reportedBy])
+  @@index([reportedUserId])
 }
 
 model Coupon {
@@ -247,14 +263,10 @@ model ListingPrice {
   id          Int       @id @unique @default(autoincrement())
   fee         Int
   serviceFee  Int
-  isNight     Boolean?  @default(false)
-  checkIn     DateTime
-  checkOut    DateTime
-  countGuest  Int
+  cleaningFee Int
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   deletedAt   DateTime?
-  cleaningFee Int
   listing     Listing?
 }
 
@@ -441,6 +453,7 @@ model Booking {
   cardInfo                 String?        @db.LongText
   cardType                 String?        @db.VarChar(255)
   lastFour                 String?        @db.VarChar(255)
+  totalFee                Int?
   PaymentMethod            PaymentMethod? @relation(fields: [paymentMethodId], references: [id])
   paymentMethodId          Int?
   xenditPaymentMethodId    String?        @unique @db.VarChar(255)

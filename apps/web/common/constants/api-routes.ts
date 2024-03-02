@@ -6,3 +6,4 @@ export const API_URL_BOOKINGS = `${API_ROOT}/bookings`
 export const API_URL_LISTINGS = `${API_ROOT}/listings`
 export const API_URL_TAX = `${API_ROOT}/taxes`
 export const API_URL_TRANSACTIONS = `${API_ROOT}/transactions`
+export const API_URL_REPORTS = `${API_ROOT}/reports`
