@@ -13,6 +13,7 @@ import useSessionStore from "@/common/store/useSessionStore"
 import { E_GovernmentId } from "@repo/contract/build/GovernmentId/enum"
 import { T_BackendResponse, T_GovernmentId } from "@repo/contract"
 import GovernmentIdModal from "./modals/GovernmentIdModal"
+import { governmentIdMap } from "@/common/helpers/governmentIdMap"
 
 type PersonalInfoProps = {
   isButtonClicked: boolean
@@ -154,7 +155,7 @@ const GovernmentId = ({ governmentId }: IPersonalInfo) => {
               <div className="mt-4">
                 {governmentId?.map((id, index) => (
                   <p className="text-lg" key={id.type}>
-                    {index + 1}. {id.type}{" "}
+                    {index + 1}. {governmentIdMap[id.type]}{" "}
                     <span
                       onClick={() => openGovernmentIdModal(id)}
                       className="text-primary-500 underline cursor-pointer hover:text-primary-700"

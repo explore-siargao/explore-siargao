@@ -211,17 +211,15 @@ model PaymentMethod {
 }
 
 model ReportListing {
-  id          Int       @id @default(autoincrement())
-  name        String    @db.VarChar(200)
-  reason      String    @db.Text()
-  description String?   @db.LongText()
-  reportedBy  Int
-  user        User      @relation(fields: [reportedBy], references: [id])
-  listingId   Int
-  listing     Listing   @relation(fields: [listingId], references: [id])
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  deletedAt   DateTime?
+  id         Int       @id @default(autoincrement())
+  reports    String    @db.LongText()
+  reportedBy Int
+  user       User      @relation(fields: [reportedBy], references: [id])
+  listingId  Int
+  listing    Listing   @relation(fields: [listingId], references: [id])
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  deletedAt  DateTime?
 
   @@index([reportedBy])
   @@index([listingId])
@@ -263,14 +261,10 @@ model ListingPrice {
   id          Int       @id @unique @default(autoincrement())
   fee         Int
   serviceFee  Int
-  isNight     Boolean?  @default(false)
-  checkIn     DateTime
-  checkOut    DateTime
-  countGuest  Int
+  cleaningFee Int
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   deletedAt   DateTime?
-  cleaningFee Int
   listing     Listing?
 }
 
@@ -457,6 +451,7 @@ model Booking {
   cardInfo                 String?        @db.LongText
   cardType                 String?        @db.VarChar(255)
   lastFour                 String?        @db.VarChar(255)
+  totalFee                Int?
   PaymentMethod            PaymentMethod? @relation(fields: [paymentMethodId], references: [id])
   paymentMethodId          Int?
   xenditPaymentMethodId    String?        @unique @db.VarChar(255)

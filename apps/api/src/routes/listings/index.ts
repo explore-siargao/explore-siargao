@@ -52,6 +52,7 @@ import {
   deleteReview,
   getReviewById,
   getReviewByListing,
+  getReviewsByHost,
   getReviewsByUserId,
   updateReview,
 } from './service/reviews'
@@ -92,14 +93,7 @@ import {
   getCancellationPolicy,
   updateCancellationPolicy,
 } from './service/cancellationPolicies'
-import {
-  addReport,
-  deleteReport,
-  getAllReports,
-  getReport,
-  getReportsByListing,
-  updateReport,
-} from './service/reportListings'
+
 import {
   addDescription,
   deleteDescription,
@@ -243,6 +237,8 @@ router.get(
   isUserLoggedIn,
   getReviewById
 )
+
+router.get('/reviews/host/:hostId', getReviewsByHost)
 router.post(
   '/:userId/reviews/post',
   // isOriginValid,
@@ -295,14 +291,6 @@ router.get(
 router.get('/cancellation-policies/id/:id', getCancellationPolicy)
 router.patch('/:userId/cancellation-policies/:id', updateCancellationPolicy)
 router.delete('/:userId/cancellation-policies/:id', deleteCancellationPolicy)
-
-//reports
-router.get('/all/reports', getAllReports)
-router.get('/reports/:listingId', getReportsByListing)
-router.get('/reports/id/:id', getReport)
-router.post('/:userId/reports', addReport)
-router.patch('/:userId/reports/:id', updateReport)
-router.delete('/:userId/reports/:id', deleteReport)
 
 //listing description
 router.get('/listing-description/:id', getDescription)
