@@ -12,8 +12,9 @@ import useAddGovernmentId from "../hooks/useAddGovernmentId"
 import useSessionStore from "@/common/store/useSessionStore"
 import { E_GovernmentId } from "@repo/contract/build/GovernmentId/enum"
 import { T_BackendResponse, T_GovernmentId } from "@repo/contract"
-import GovernmentIdModal from "./modals/GovernmentIdModal"
+import GovernmentIdModal from "../components/modals/GovernmentIdModal"
 import { governmentIdMap } from "@/common/helpers/governmentIdMap"
+import { useQueryClient } from "@tanstack/react-query"
 
 type PersonalInfoProps = {
   isButtonClicked: boolean
@@ -33,6 +34,7 @@ const ID_TYPES = [
 ]
 
 const GovernmentId = ({ governmentId }: IPersonalInfo) => {
+  const queryClient = useQueryClient()
   const session = useSessionStore((state) => state)
   const [idType, setIdType] = useState<E_GovernmentId | null>(null)
   const [contentState, setContentState] = useState<PersonalInfoProps>({
@@ -77,6 +79,9 @@ const GovernmentId = ({ governmentId }: IPersonalInfo) => {
             setIdType(null)
             setFile(null)
             toast.success("Successfully uploaded Government ID")
+            queryClient.invalidateQueries({
+              queryKey: ["session"],
+            })
           } else {
             toast.error(String(data.message))
           }
@@ -254,8 +259,8 @@ const GovernmentId = ({ governmentId }: IPersonalInfo) => {
       )}
       <GovernmentIdModal
         isOpen={isModalOpen}
-        onClose={closeModal}
         governmentId={selectedGovernmentId as T_GovernmentId}
+        onClose={closeModal}
       />
     </div>
   )

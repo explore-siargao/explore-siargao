@@ -1,10 +1,10 @@
 "use client"
 import React, { useState } from "react"
-import { Title } from "./ui/Title"
+import { Title } from "../../../common/components/ui/Title"
 import Image from "next/image"
 import { XMarkIcon } from "@heroicons/react/24/outline"
 import DeleteWIshlistsModal from "@/module/AccountSettings/modals/DeleteWIshlistsModal"
-import { Typography } from "./ui/Typography"
+import { Typography } from "../../../common/components/ui/Typography"
 import Link from "next/link"
 
 type Props = {

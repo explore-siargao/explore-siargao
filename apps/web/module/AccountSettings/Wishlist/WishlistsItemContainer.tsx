@@ -10,15 +10,15 @@ import Image from "next/image"
 import Link from "next/link"
 import { useParams } from "next/navigation"
 import toast from "react-hot-toast"
-import { LINK_ACCOUNT_WISHLIST } from "../constants/links"
+import { LINK_ACCOUNT_WISHLIST } from "../../../common/constants/links"
 import useGetWishGroupByUserAndTitle from "@/module/AccountSettings/hooks/useGetWishGroupByUserAndTitle"
-import useSessionStore from "../store/useSessionStore"
-import { Spinner } from "./ui/Spinner"
+import useSessionStore from "../../../common/store/useSessionStore"
+import { Spinner } from "../../../common/components/ui/Spinner"
 import AddNoteModal from "@/module/AccountSettings/components/modals/AddNoteModal"
 import MenuModal from "@/module/AccountSettings/components/modals/MenuModal"
-import { Title } from "./ui/Title"
-import { Typography } from "./ui/Typography"
-import { ComponentProps, DetailsType } from "../types/global"
+import { Title } from "../../../common/components/ui/Title"
+import { Typography } from "../../../common/components/ui/Typography"
+import { ComponentProps, DetailsType } from "../../../common/types/global"
 import { DocumentDuplicateIcon } from "@heroicons/react/24/outline"
 import useRemoveFromWishGroup from "@/module/AccountSettings/hooks/useRemoveFromWishGroup"
 import { useQueryClient } from "@tanstack/react-query"
@@ -155,7 +155,7 @@ const WishlistsItemContainer = () => {
   const session = useSessionStore((state) => state)
   const { mutate } = useRemoveFromWishGroup(1)
   const params = useParams()
-  const { data, isPending } = useGetWishGroupByUserAndTitle(
+  const { data, isLoading } = useGetWishGroupByUserAndTitle(
     session.id as number,
     params?._id as string
   )
@@ -174,7 +174,7 @@ const WishlistsItemContainer = () => {
 
   return (
     <>
-      {isPending ? (
+      {isLoading ? (
         <div className="p-6">
           <Spinner variant="primary" size="sm">
             Loading...

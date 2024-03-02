@@ -1,6 +1,5 @@
 import { Button } from "@/common/components/ui/Button"
 import { Typography } from "@/common/components/ui/Typography"
-import Image from "next/image"
 import React, { useState } from "react"
 import ReviewStarRating from "./ReviewStarRating"
 

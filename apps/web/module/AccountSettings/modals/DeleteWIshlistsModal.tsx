@@ -45,9 +45,13 @@ const DeleteWIshlistsModal = ({
     mutate({}, callBackReq)
   }
   return (
-    <ModalContainer onClose={onClose} isOpen={isOpen}>
+    <ModalContainer
+      title="Delete this wishlist?"
+      onClose={onClose}
+      isOpen={isOpen}
+      size="auto"
+    >
       <div className="p-6 flex flex-col items-center">
-        <Typography variant={"h3"}>Delete this wishlist?</Typography>
         <Typography className="text-text-400 font-light w-60 text-center">
           "{title}" will be permanently deleted.
         </Typography>

@@ -2,13 +2,13 @@ import { Button } from "@/common/components/ui/Button"
 import { Input } from "@/common/components/ui/Input"
 import { IUser } from "@/common/types/global"
 import React, { useState } from "react"
-import useUpdateUserEmail from "../hooks/useUpdateEmail.ts"
 import { useForm } from "react-hook-form"
 import { useQueryClient } from "@tanstack/react-query"
 import toast from "react-hot-toast"
 import { signIn } from "next-auth/react"
 import Cookies from "js-cookie"
 import { Typography } from "@/common/components/ui/Typography"
+import useUpdateUserEmail from "../hooks/useUpdateUserEmail"
 
 type PersonalInfoProps = {
   isButtonClicked: boolean

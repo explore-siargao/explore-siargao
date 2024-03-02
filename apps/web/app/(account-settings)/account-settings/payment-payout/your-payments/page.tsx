@@ -1,4 +1,4 @@
-import YourPayments from "@/module/AccountSettings/components/YourPayments"
+import YourPayments from "@/module/AccountSettings/PaymentPayout/YourPayments"
 import AuthGuard from "@/common/components/AuthGuard"
 import { APP_NAME } from "@repo/constants"
 import { YOUR_PAYMENTS } from "@/common/constants"

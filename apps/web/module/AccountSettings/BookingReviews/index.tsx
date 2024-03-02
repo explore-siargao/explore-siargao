@@ -1,16 +1,16 @@
 "use client"
-import AccountSettingWrapper from "@/common/components/AccountSettingWrapper"
+import AccountSettingWrapper from "@/module/AccountSettings/components/AccountSettingWrapper"
 import React, { useState } from "react"
-import BookingReviewItem from "./components/BookingReviewItem"
+import BookingReviewItem from "./BookingReviewItem"
 import { Breadcrumb } from "@/common/components/ui/Breadcrumb"
 import { Title } from "@/common/components/ui/Title"
 import { LINK_ACCOUNT } from "@/common/constants/links"
 import { cn } from "@/common/helpers/cn"
-import BookingReviewItemPending from "./components/BookingReviewItemPending"
-import useGetReviewsByUserId from "../Listing/hooks/useGetReviewsByUserId"
+import BookingReviewItemPending from "./BookingReviewItemPending"
+import useGetReviewsByUserId from "../../Listing/hooks/useGetReviewsByUserId"
 import useSessionStore from "@/common/store/useSessionStore"
 import { ACCOUNT, BOOKING_REVIEWS } from "@/common/constants"
-import useGetListings from "./hooks/useGetListings"
+import useGetListings from "../hooks/useGetListings"
 
 const bookingReviewsDummy = [
   {

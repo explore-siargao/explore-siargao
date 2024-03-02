@@ -1,8 +1,15 @@
 "use client"
-import WorldMap from "@/common/components/WorldMap"
 import { WidthWrapper } from "@/common/components/WidthWrapper"
-import WishlistsItemContainer from "@/common/components/WishlistsItemContainer"
+import WishlistsItemContainer from "@/module/AccountSettings/Wishlist/WishlistsItemContainer"
 import React from "react"
+import dynamic from "next/dynamic"
+
+const WorldMap = dynamic(
+  () => import("@/module/AccountSettings/Wishlist/WorldMap"),
+  {
+    ssr: false,
+  }
+)
 
 const WishlistsItem = () => {
   return (

@@ -441,7 +441,7 @@ export const SingleView = () => {
   }
 
   return (
-    <WidthWrapper width="small" className="mt-32 lg:mt-36">
+    <WidthWrapper width="small" className="mt-4 lg:mt-8">
       <SectionInfo
         images={imageGallery}
         title="Villa Manao · Private Pool | Bathtub | Sky shower"
@@ -482,7 +482,7 @@ export const SingleView = () => {
           </div>
         </div>
         <div className="md:w-96 md:relative">
-          <div className="md:sticky md:top-0">
+          <div className="md:sticky md:top-6">
             <CheckoutProcess
               checkoutDesc={{
                 serviceFee: 1000,
