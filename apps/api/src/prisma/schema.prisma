@@ -36,6 +36,8 @@ model User {
   hostInfo         HostInfo?
   Booking          Booking[]
   Transaction      Transaction[]
+  ReportedUser     ReportUser[]      @relation("reportedUsers")
+  reportedByuser   ReportUser[]      @relation("reportedByUsers")
 }
 
 model PersonalInfo {
@@ -56,8 +58,8 @@ model PersonalInfo {
   user              User                @relation(fields: [userId], references: [id])
   address           Addresses?
   emergencyContacts EmergencyContacts[]
-  confirm           String              @db.VarChar(250)
-
+  confirm           String?              @db.VarChar(250)
+  profile           String?              @db.LongText()
   @@index([userId])
 }
 
@@ -221,6 +223,22 @@ model ReportListing {
 
   @@index([reportedBy])
   @@index([listingId])
+}
+
+model ReportUser {
+  id             Int       @id @default(autoincrement())
+  report         String    @db.LongText()
+  reportedUserId Int
+  reportedUser   User      @relation("reportedUsers", fields: [reportedUserId], references: [id])
+  reportedBy     Int
+  reportedByUser User      @relation("reportedByUsers", map: "reported_user_by", fields: [reportedBy], references: [id])
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  deletedAt      DateTime?
+
+
+  @@index([reportedBy])
+  @@index([reportedUserId])
 }
 
 model Coupon {

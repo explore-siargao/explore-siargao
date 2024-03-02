@@ -6,7 +6,7 @@ export type ImageKeys = {
 export type Listings = {
   id: number
   hostedById: number
-  imageKeys: ImageKeys
+  images: ImageKeys
   title: string
   descriptionId: string
   address: string

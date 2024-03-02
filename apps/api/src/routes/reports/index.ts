@@ -18,4 +18,5 @@ router.get('/listing/:id', getReport)
 router.post('/:userId/listing', addReport)
 router.patch('/:userId/listing/:id', updateReport)
 router.delete('/:userId/listing/:id', deleteReport)
+
 export default router
