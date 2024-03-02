@@ -1,25 +1,115 @@
 import { Typography } from "@/common/components/ui/Typography"
-import { BriefcaseIcon, GlobeAltIcon } from "@heroicons/react/24/outline"
 import { AboutHostProps } from "../types/AboutHost"
+import {
+  LucideBaby,
+  LucideBookOpen,
+  LucideBriefcase,
+  LucideCake,
+  LucideClock,
+  LucideGlobe2,
+  LucideGraduationCap,
+  LucideHeart,
+  LucideLanguages,
+  LucideLightbulb,
+  LucideMusic,
+  LucidePawPrint,
+  LucidePencil,
+  LucidePlus,
+} from "lucide-react"
+import { cn } from "@/common/helpers/cn"
 
-const AboutHost = ({ name, work, livesIn, desc }: AboutHostProps) => {
+const ABOUT_MAP = [
+  {
+    name: "school",
+    icon: <LucideGraduationCap />,
+    title: "Went to",
+  },
+  {
+    name: "work",
+    icon: <LucideBriefcase />,
+    title: "Working as",
+  },
+  {
+    name: "live",
+    icon: <LucideGlobe2 />,
+    title: "Lives in",
+  },
+  {
+    name: "languageISpeak",
+    icon: <LucideLanguages />,
+    title: "Speak",
+  },
+  {
+    name: "decadeWereBorn",
+    icon: <LucideCake />,
+    title: "Born from",
+  },
+  {
+    name: "favoriteSong",
+    icon: <LucideMusic />,
+    title: "Favorite song is",
+  },
+  {
+    name: "obsessedWith",
+    icon: <LucideHeart />,
+    title: "Obsessed with",
+  },
+  {
+    name: "funFact",
+    icon: <LucideLightbulb />,
+    title: "Fun fact",
+  },
+  {
+    name: "uselessSkill",
+    icon: <LucidePencil />,
+    title: "Useless skill",
+  },
+  {
+    name: "biography",
+    icon: <LucideBookOpen />,
+    title: "Biography title",
+  },
+  {
+    name: "spendTime",
+    icon: <LucideClock />,
+    title: "Spend time",
+  },
+  {
+    name: "pets",
+    icon: <LucidePawPrint />,
+    title: "I have pet",
+  },
+]
+
+const AboutHost = (props: AboutHostProps) => {
   return (
     <div>
-      <Typography variant="h1" className="font-semibold hidden lg:block">About {name}</Typography>
-      <div className="mt-2 lg:mt-6">
-        <Typography>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam at quam quis nulla facilisis posuere. Ut bibendum non lacus ut vulputate. Aliquam eu scelerisque tortor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</Typography>
-      </div>
-      <div className="lg:grid grid-cols-2 mt-2 lg:mt-6 mb-7">
-        <div className="flex items-center">
-          <BriefcaseIcon className="h-6 w-6 mr-3 mb-0.5" strokeWidth={1.2} />
-          <Typography variant="h4">My work: {work}</Typography>
+      <Typography variant="h1" className="font-semibold hidden lg:block">About {props.name}</Typography>
+      {/* @ts-expect-error */}
+      {props.aboutMe && (
+        <div className="mt-2 lg:mt-6">
+          {/* @ts-expect-error */}
+          <Typography>{props.aboutMe}</Typography>
         </div>
-        <div className="flex items-center mt-3 lg:mt-0">
-          <GlobeAltIcon className="h-6 w-6 mr-3 mb-0.5" strokeWidth={1.2} />
-          <Typography variant="h4">Lives in {livesIn}</Typography>
-        </div>
+      )}
+      <div
+        className={cn(
+          "lg:grid grid-cols-2 gap-4",
+          "mt-2 lg:mt-6 mb-7"
+        )}
+      >
+        {ABOUT_MAP.map((item) => {
+          // @ts-expect-error
+          const value = props[item.name];
+          return value ? (
+            <div className="flex items-center gap-2">
+              {item.icon}
+              <Typography variant="h4">{item.title} {value}</Typography>
+            </div>
+          ) : null;
+        })}
       </div>
-      <Typography variant="p">{desc}</Typography>
+      <Typography variant="p">{props.desc}</Typography>
     </div>
   )
 }

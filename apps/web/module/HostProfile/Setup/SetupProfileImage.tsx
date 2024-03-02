@@ -58,8 +58,6 @@ const SetupProfileImage = () => {
     },
   })
 
-  console.log("file: ", file)
-
   return (
     <div className="rounded-full">
       {file ? (

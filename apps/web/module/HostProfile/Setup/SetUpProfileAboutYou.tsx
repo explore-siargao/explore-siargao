@@ -11,8 +11,6 @@ const SetUpProfileAboutYou = () => {
     (state) => state.inputValue
   )
 
-  console.log(introText)
-
   const openModal = () => setIsModalOpen(true)
   const closeModal = () => setIsModalOpen(false)
 

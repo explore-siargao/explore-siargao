@@ -14,7 +14,6 @@ import { LucideFlag } from "lucide-react"
 
 const HostProfile = ({ profile }: { profile: any }) => {
   const [openReportModal, setOpenReportModal] = useState(false)
-
   return (
     <WidthWrapper width="small" className="my-24 lg:my-32">
       <div className="mt-5 mx-3 md:mx-40 lg:mx-5 grid lg:grid-cols-12 gap-x-20 gap-y-4">
@@ -50,12 +49,7 @@ const HostProfile = ({ profile }: { profile: any }) => {
           </div>
         </div>
         <div className="lg:col-span-8 space-y-10 mt-5">
-          <AboutHost
-            name={profile?.userName}
-            work={profile?.work}
-            livesIn={profile?.livesIn}
-            desc={profile?.desc}
-          />
+          <AboutHost {...profile} />
           <hr />
           <HostReviews
             name={profile?.userName}
