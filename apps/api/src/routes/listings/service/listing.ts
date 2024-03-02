@@ -146,7 +146,7 @@ export const addListing = async (req: Request, res: Response) => {
       const getHost = await prisma.user.findFirst({
         where: {
           id: hostId,
-          role: 'Host',
+          isHost: true,
         },
       })
 
