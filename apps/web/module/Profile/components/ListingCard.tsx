@@ -17,8 +17,8 @@ const ListingCard = ({
           src={`${ASSET_ROOT}/${image}`}
           layout="fill"
           objectFit="cover"
-          className="rounded-full"
-          alt="Listing image"
+          className="rounded-md"
+          alt="image"
         />
       </div>
       <div className="flex mt-3 justify-between items-center">

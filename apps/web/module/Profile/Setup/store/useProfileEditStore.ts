@@ -1,17 +1,28 @@
+import { FileWithPath } from "react-dropzone"
 import { create } from "zustand"
-type T_FirstLevel = {
-  schoolName: string
-  workName: string
+
+export type T_ProfileEditStore = {
+  school: string
+  work: string
   favoriteSong: string
   obsessedWith: string
   decadeWereBorn: string
   funFact: string
   languageISpeak: string
-  whereILive: string
-  mostUselessSkill: string
+  live: string
+  uselessSkill: string
   biography: string
-  spendTooMuchTime: string
+  spendTime: string
   pets: string
+  aboutMe: string
+  imageFile: FileWithPath | null
+  imageKey: string | null
+}
+
+type T_ProfileEditStore_Actions = {
+  setAboutMe: (value: string) => void
+  setProfileImage: (value: FileWithPath | null) => void
+  setProfileImageKey: (value: string) => void
   setSchoolName: (newSchoolName: string) => void
   setWorkName: (newWorkName: string) => void
   setFavoriteSong: (newFavoriteSong: string) => void
@@ -24,79 +35,79 @@ type T_FirstLevel = {
   setSpendTooMuchTime: (newSpendTooMuchTime: string) => void
   setPets: (newPets: string) => void
   setWhereILive: (newPets: string) => void
+  setProfileEdit: (state: T_ProfileEditStore) => void
 }
-const useFirstLevelStore = create<T_FirstLevel>((set) => ({
-  schoolName: "",
+
+const useProfileEditStore = create<
+  T_ProfileEditStore & T_ProfileEditStore_Actions
+>((set) => ({
+  aboutMe: "",
+  imageFile: null,
+  imageKey: null,
+  live: "",
+  school: "",
+  work: "",
+  favoriteSong: "",
+  decadeWereBorn: "",
+  obsessedWith: "",
+  languageISpeak: "",
+  funFact: "",
+  uselessSkill: "",
+  biography: "",
+  spendTime: "",
+  pets: "",
+  setAboutMe: (value: string) => set({ aboutMe: value }),
+  setProfileImage: (value: FileWithPath | null) => set({ imageFile: value }),
+  setProfileImageKey: (value: string) => set({ imageKey: value }),
   setSchoolName: (newSchoolName: string) => {
     console.log("School:", newSchoolName)
-    set(() => ({ schoolName: newSchoolName }))
+    set(() => ({ school: newSchoolName }))
   },
-
-  workName: "",
   setWorkName: (newWorkName: string) => {
     console.log("Work:", newWorkName)
-    set(() => ({ workName: newWorkName }))
+    set(() => ({ work: newWorkName }))
   },
-
-  favoriteSong: "",
   setFavoriteSong: (newFavoriteSong: string) => {
     console.log("Favorite song:", newFavoriteSong)
     set(() => ({ favoriteSong: newFavoriteSong }))
   },
-
-  decadeWereBorn: "",
   setDecadeWereBorn: (newDecadeWereBorn: string) => {
     console.log("Decade were born:", newDecadeWereBorn)
     set(() => ({ decadeWereBorn: newDecadeWereBorn }))
   },
-
-  obsessedWith: "",
   setObsessedWith: (newObsessedWith: string) => {
     console.log("Obsessed with:", newObsessedWith)
     set(() => ({ obsessedWith: newObsessedWith }))
   },
-
-  languageISpeak: "",
   setLanguageISpeak: (newLanguageISpeak: string) => {
     console.log("Languages I speak:", newLanguageISpeak)
     set(() => ({ languageISpeak: newLanguageISpeak }))
   },
-
-  funFact: "",
   setFunFact: (newFunFact: string) => {
     console.log("Fun fact:", newFunFact)
     set(() => ({ funFact: newFunFact }))
   },
-
-  mostUselessSkill: "",
   setMostUselessSkill: (newMostUselessSkill: string) => {
     console.log("Most useless skill:", newMostUselessSkill)
-    set(() => ({ mostUselessSkill: newMostUselessSkill }))
+    set(() => ({ uselessSkill: newMostUselessSkill }))
   },
-
-  biography: "",
   setBiography: (newBiography: string) => {
     console.log("Biography:", newBiography)
     set(() => ({ biography: newBiography }))
   },
-
-  spendTooMuchTime: "",
   setSpendTooMuchTime: (newSpendTooMuchTime: string) => {
     console.log("I spend too much time:", newSpendTooMuchTime)
-    set(() => ({ spendTooMuchTime: newSpendTooMuchTime }))
+    set(() => ({ spendTime: newSpendTooMuchTime }))
   },
-
-  pets: "",
   setPets: (newPets: string) => {
     console.log("Pets:", newPets)
     set(() => ({ pets: newPets }))
   },
-
-  whereILive: "",
   setWhereILive: (newWhereILive: string) => {
     console.log("Where I live:", newWhereILive)
-    set(() => ({ whereILive: newWhereILive }))
+    set(() => ({ live: newWhereILive }))
   },
+  setProfileEdit: (value: T_ProfileEditStore | undefined) => set({ ...value }),
 }))
 
-export default useFirstLevelStore
+export default useProfileEditStore

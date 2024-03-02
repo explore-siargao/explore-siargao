@@ -6,19 +6,12 @@ import toast from "react-hot-toast"
 import InputMaxLength from "@/common/helpers/InputMaxLength"
 import useProfileEditStore from "../store/useProfileEditStore"
 
-const MyBiographyTitleContent = ({
-  setIsOpen,
-}: {
-  setIsOpen: Dispatch<boolean>
-}) => {
-  const { value: biography, onChange: handleInputChange } = InputMaxLength(
-    "",
-    40
-  )
-  const setBiographyStore = useProfileEditStore((state) => state.setBiography)
+const MyFunFactContent = ({ setIsOpen }: { setIsOpen: Dispatch<boolean> }) => {
+  const { value: funFact, onChange: handleInputChange } = InputMaxLength("", 40)
+  const setFunFactStore = useProfileEditStore((state) => state.setFunFact)
   const save = () => {
-    if (biography) {
-      setBiographyStore(biography)
+    if (funFact) {
+      setFunFactStore(funFact)
       setIsOpen(false)
       toast.success("Saved")
     } else {
@@ -29,16 +22,16 @@ const MyBiographyTitleContent = ({
     <div>
       <div className="p-5">
         <Typography variant="h2" className="font-semibold mb-5">
-          What would your biography title be?
+          What’s a fun fact about you?
         </Typography>
         <Typography variant="h5">
-          If someone wrote a book about your life, what would they call it?
-          Example: Born to Roam or Chronicles of a Dog Mom.
+          Share something unique or unexpected about you. Example: I was in a
+          music video or I’m a juggler.
         </Typography>
 
         <div className="mt-6">
           <Input
-            label="My biography title would be:"
+            label="My fun fact:"
             onChange={handleInputChange}
             maxLength={40}
           />
@@ -46,7 +39,7 @@ const MyBiographyTitleContent = ({
             variant="h6"
             className="flex items-end justify-end font-semibold text-text-400 mt-3"
           >
-            {biography.length}/40 characters
+            {funFact.length}/40 characters
           </Typography>
         </div>
       </div>
@@ -60,4 +53,4 @@ const MyBiographyTitleContent = ({
   )
 }
 
-export default MyBiographyTitleContent
+export default MyFunFactContent
