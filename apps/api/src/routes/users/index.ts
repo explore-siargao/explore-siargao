@@ -35,6 +35,7 @@ import isUserLoggedIn from '@/common/middleware/auth/isUserLoggedIn'
 import isOriginValid from '@/common/middleware/auth/isOriginValid'
 import isCsrfTokenValid from '@/common/middleware/auth/isCsrfTokenValid'
 import { getHostDetailsInListing } from './service/hostDetails'
+import { getProfile, updateProfile } from './service/userProfile'
 
 const router = express.Router()
 
@@ -145,5 +146,6 @@ router.get('/:hostId/host-details-listing/:listingId', getHostDetailsInListing)
 
 //user profile
 router.get('/:id', getUserProfile)
-
+router.get('/:userId/profile', getProfile)
+router.patch('/:userId/profile', updateProfile)
 export default router

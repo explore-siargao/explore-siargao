@@ -1,19 +1,26 @@
 import { ApiService } from "@/common/service/api"
 import { API_URL_USERS } from "@/common/constants"
 import { useQuery } from "@tanstack/react-query"
+import { T_BackendResponse } from "@repo/contract"
+import { T_ProfileEditStore } from "../Setup/store/useProfileEditStore"
 
-export async function getProfile(id: number | undefined) {
-  const apiService = new ApiService()
-  return await apiService.get(`${API_URL_USERS}/${id}`)
+type T_DBReturn = Omit<T_BackendResponse, "item"> & {
+  item: T_ProfileEditStore
 }
 
-function useGetProfile(id: number | undefined) {
+export async function getProfile(userId: number | undefined) {
+  const apiService = new ApiService()
+  return await apiService.get<T_DBReturn>(`${API_URL_USERS}/${userId}/profile`)
+}
+
+function useGetProfile(userId: number | undefined) {
   const query = useQuery({
-    queryKey: ["user-profile", id],
-    queryFn: () => getProfile(id),
+    queryKey: ["user-profile", userId],
+    queryFn: () => getProfile(userId),
     refetchOnWindowFocus: false,
-    enabled: !!id,
+    enabled: !!userId,
   })
   return query
 }
+
 export default useGetProfile
