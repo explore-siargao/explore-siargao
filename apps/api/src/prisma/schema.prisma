@@ -36,6 +36,7 @@ model User {
   hostInfo         HostInfo?
   Booking          Booking[]
   Transaction      Transaction[]
+  Notification     Notification[]
   ReportedUser     ReportUser[]      @relation("reportedUsers")
   reportedByuser   ReportUser[]      @relation("reportedByUsers")
 }
@@ -160,6 +161,7 @@ model Listing {
   reports              ReportListing[]
   wishes               WishGroup[]
   Booking              Booking[]
+  Notification         Notification[]
 
   @@index([basicAboutPlaceId])
   @@index([listingPriceId])
@@ -480,6 +482,26 @@ model Transaction {
   Booking                Booking?
 
   @@index([userId])
+}
+
+model Notification {
+  id        Int              @id
+  userId    Int
+  User      User             @relation(fields: [userId], references: [id])
+  listingId Int
+  Listing   Listing          @relation(fields: [listingId], references: [id])
+  type      NotificationType
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+  deletedAt DateTime?
+
+  @@index([listingId])
+  @@index([userId])
+}
+
+enum NotificationType {
+  Booking
+  AddedReview
 }
 
 enum UserRole {
