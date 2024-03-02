@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 const HostProfilePage = async () => {
   const userProfile = await getRequest(`/users/1`)
-  return <Profile />
+  return <Profile profile={userProfile.item} />
 }
 
 export default HostProfilePage

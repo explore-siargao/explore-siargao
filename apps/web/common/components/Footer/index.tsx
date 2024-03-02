@@ -26,8 +26,8 @@ const Footer = ({
               Support
             </Typography>
             <ul>
-              {SUPPORT.map((item) => (
-                <li key={item.name}>
+              {SUPPORT.map((item, index) => (
+                <li key={`${item.name}-${index}`}>
                   <Link href={item.link}>
                     <Typography className="mb-1 hover:underline inline-block hover:duration-300 cursor-pointer text-sm text-text-500">
                       {item.name}
