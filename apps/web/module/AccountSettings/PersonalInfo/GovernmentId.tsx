@@ -12,7 +12,7 @@ import useAddGovernmentId from "../hooks/useAddGovernmentId"
 import useSessionStore from "@/common/store/useSessionStore"
 import { E_GovernmentId } from "@repo/contract/build/GovernmentId/enum"
 import { T_BackendResponse, T_GovernmentId } from "@repo/contract"
-import GovernmentIdModal from "./modals/GovernmentIdModal"
+import GovernmentIdModal from "../components/modals/GovernmentIdModal"
 import { governmentIdMap } from "@/common/helpers/governmentIdMap"
 import { useQueryClient } from "@tanstack/react-query"
 

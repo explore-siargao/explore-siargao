@@ -11,11 +11,14 @@ import { LINK_LOGIN } from "@/common/constants/links"
 import Link from "next/link"
 import { WidthWrapper } from "@/common/components/WidthWrapper"
 import { Typography } from "@/common/components/ui/Typography"
+import { cn } from "@/common/helpers/cn"
 
 function Header({
   contentWidth = "wide",
+  isFixed = true,
 }: {
   readonly contentWidth?: "medium" | "small" | "wide" | "full"
+  isFixed?: boolean
 }) {
   const { data: session } = useSession()
   const path = usePathname()
@@ -34,7 +37,12 @@ function Header({
     if (!withoutHeader.includes(path as string)) {
       return (
         <>
-          <header className="fixed w-full inset-x-0 top-0 z-50 bg-white border-y-gray-200/50 border flex flex-col items-center">
+          <header
+            className={cn(
+              `w-full inset-x-0 top-0 z-50 bg-white border-y-gray-200/50 border flex flex-col items-center`,
+              isFixed && "fixed"
+            )}
+          >
             <div className="min-w-full py-3 text-center bg-primary-50 sr-only md:not-sr-only">
               <Typography fontWeight={"light"} className="py-2">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
