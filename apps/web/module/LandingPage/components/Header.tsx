@@ -22,6 +22,7 @@ function Header({
   isFixed?: boolean
 }) {
   const { data: session } = useSession()
+  const [isHost, setIsHost] = useState(false)
   const path = usePathname()
   const router = useRouter()
   let withoutHeader = [
@@ -35,10 +36,10 @@ function Header({
     "/new-password",
   ]
   const [isModalOpen, setIsModalOpen] = useState(false)
-
   const renderHeader = () => {
     const openModal = () => setIsModalOpen(true)
     const closeModal = () => setIsModalOpen(false)
+  
 
     if (!withoutHeader.includes(path as string)) {
       return (
@@ -84,9 +85,16 @@ function Header({
                     </div>
                   )}
                   <div>
-                    <Button variant="primary" size="sm" onClick={openModal}>
-                      Apply to Host
-                    </Button>
+                    
+                    {isHost ? (
+                       <Button variant="ghost" className="underline" size="sm" onClick={() => router.push("/hosting")}>
+                        Manage Listing
+                      </Button>
+                    ) : (
+                      <Button variant="primary" size="sm" onClick={openModal}>
+                        Apply to Host
+                      </Button>
+                    )}
                   </div>
                   {session && <LandingPageMenu />}
                 </div>
@@ -94,6 +102,7 @@ function Header({
               <ApplyToHostModal
                 isModalOpen={isModalOpen}
                 onClose={closeModal}
+                setIsHost={setIsHost}
               />
             </WidthWrapper>
           </header>

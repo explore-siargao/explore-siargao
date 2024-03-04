@@ -10,11 +10,13 @@ import { useRouter } from "next/navigation"
 interface ISetUpProfileAboutYouModalProps {
   isModalOpen: boolean
   onClose: () => void
+  setIsHost: (value: boolean) => void
 }
 
 const ApplyToHostModal = ({
   isModalOpen,
   onClose,
+  setIsHost
 }: ISetUpProfileAboutYouModalProps) => {
   const queryClient = useQueryClient()
   const router = useRouter()
@@ -27,6 +29,7 @@ const ApplyToHostModal = ({
         onClose()
         toast.success(data.message)
         router.push("/hosting")
+        setIsHost(true)
       } else {
         toast.error(String(data.message))
         onClose()
