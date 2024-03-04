@@ -132,11 +132,11 @@ const EarningsThisMonth = ({
           </Typography>
 
           <div className="flex gap-4 justify-between pb-4">
-            {summaryData.map((column, columnIndex) => (
-              <div key={`column-${columnIndex}`} className="flex flex-col">
-                {column.map((item, itemIndex) => (
+            {summaryData.map((column, columns) => (
+              <div key={`column-${columns}`} className="flex flex-col">
+                {column.map((item, items) => (
                   <h6
-                    key={`column-${columnIndex}-item-${itemIndex}`}
+                    key={`column-${columns}-item-${items}`}
                     className="pt-2 text-sm"
                   >
                     {item}
