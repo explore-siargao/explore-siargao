@@ -153,7 +153,25 @@ router.patch(
 )
 
 //user profile
-router.get('/user-profile',isUserLoggedIn, isCsrfTokenValid, isOriginValid, getUserProfile)
-router.get('/profile', isUserLoggedIn, isCsrfTokenValid, isOriginValid, getProfile)
-router.patch('/profile', isUserLoggedIn, isCsrfTokenValid, isOriginValid, updateProfile)
+router.get(
+  '/user-profile',
+  isUserLoggedIn,
+  isCsrfTokenValid,
+  isOriginValid,
+  getUserProfile
+)
+router.get(
+  '/profile',
+  isUserLoggedIn,
+  isCsrfTokenValid,
+  isOriginValid,
+  getProfile
+)
+router.patch(
+  '/profile',
+  isUserLoggedIn,
+  isCsrfTokenValid,
+  isOriginValid,
+  updateProfile
+)
 export default router

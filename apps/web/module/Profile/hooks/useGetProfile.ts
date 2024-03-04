@@ -17,7 +17,7 @@ function useGetProfile() {
   const query = useQuery({
     queryKey: ["user-profile"],
     queryFn: () => getProfile(),
-    refetchOnWindowFocus: false
+    refetchOnWindowFocus: false,
   })
   return query
 }

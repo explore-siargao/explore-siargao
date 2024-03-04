@@ -18,9 +18,7 @@ interface ProfileProps {
   pets?: string
   aboutMe?: string
 }
-export async function updateProfile(
-  props: ProfileProps
-) {
+export async function updateProfile(props: ProfileProps) {
   const apiService = new ApiService()
   return await apiService.patch(`${API_URL_USERS}/profile`, props)
 }

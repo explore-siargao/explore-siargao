@@ -113,34 +113,37 @@ export const getProfile = async (req: Request, res: Response) => {
   )
 }
 
-export const updateProfile = async (req:Request, res:Response)=>{
+export const updateProfile = async (req: Request, res: Response) => {
   const userId = Number(res.locals.user.id)
 
-const index = profiles.findIndex((profile)=>profile.id===userId)
-if(index!==-1){
-  profiles[index] = {...profiles[index], 
-              id:profiles[index]?.id ||  0,
-              imageKey: "4.jpg",
-              school: 'LSPU',
-              work: 'Zkript',
-              live: 'Santa Maria Laguna',
-              language: 'English, Tagalog',
-              decadeWereBorn: '90s',
-              favoriteSong: 'I believe',
-              obsessedWith: 'her',
-              funFact: 'Be honest',
-              uselessSkill: 'None',
-              biography: 'To see is to believed',
-              spendTime: 'Studying',
-              pets: 'Cat, Dog',
-              aboutMe: 'Im a honest person'
-}
-res.json(response.success({
-  item:profiles[index],
-  allItemCount:1,
-  message:"Profile successfully updated"
-}))
-}
+  const index = profiles.findIndex((profile) => profile.id === userId)
+  if (index !== -1) {
+    profiles[index] = {
+      ...profiles[index],
+      id: profiles[index]?.id || 0,
+      imageKey: '4.jpg',
+      school: 'LSPU',
+      work: 'Zkript',
+      live: 'Santa Maria Laguna',
+      language: 'English, Tagalog',
+      decadeWereBorn: '90s',
+      favoriteSong: 'I believe',
+      obsessedWith: 'her',
+      funFact: 'Be honest',
+      uselessSkill: 'None',
+      biography: 'To see is to believed',
+      spendTime: 'Studying',
+      pets: 'Cat, Dog',
+      aboutMe: 'Im a honest person',
+    }
+    res.json(
+      response.success({
+        item: profiles[index],
+        allItemCount: 1,
+        message: 'Profile successfully updated',
+      })
+    )
+  }
 }
 
 // export const updateProfile = async (req: Request, res: Response) => {
