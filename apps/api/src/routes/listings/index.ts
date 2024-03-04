@@ -153,7 +153,7 @@ router.post(
 )
 
 router.delete(
-  '/wish/delete/:wishGroupId',
+  '/wish/delete/:listingId',
   isOriginValid,
   isCsrfTokenValid,
   isUserLoggedIn,
