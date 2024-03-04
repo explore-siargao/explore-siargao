@@ -107,7 +107,10 @@ const AddWishlistModal = ({
                   />
                 </div>
                 <div className="flex-1 ml-1 -space-y-1 w-auto">
-                  <Title size={"ContentTitle"} className="text-text-500 text-left">
+                  <Title
+                    size={"ContentTitle"}
+                    className="text-text-500 text-left"
+                  >
                     {item.title}
                   </Title>
                   <Typography className="text-text-300 text-left">
