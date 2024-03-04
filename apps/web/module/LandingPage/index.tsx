@@ -37,7 +37,14 @@ const LandingPage = () => {
           </ul>
         </>
       )}
-      <EarningsThisMonth earnings={0} date={""} grossEarnings={0} adjustments={0} serviceFee={0} taxesWithheld={0}/>
+      <EarningsThisMonth
+        earnings={0}
+        date={""}
+        grossEarnings={0}
+        adjustments={0}
+        serviceFee={0}
+        taxesWithheld={0}
+      />
     </WidthWrapper>
   )
 }
