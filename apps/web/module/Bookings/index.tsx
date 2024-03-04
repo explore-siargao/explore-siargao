@@ -7,6 +7,7 @@ import { LucidePlus, LucideTable } from "lucide-react"
 import { PaymentStatus } from "./SingleView/components/PaymentStatus"
 import { createColumnHelper } from "@tanstack/react-table"
 import Link from "next/link"
+import { Button } from "@/common/components/ui/Button"
 
 interface ITypes {
   fileKey: string
@@ -71,7 +72,7 @@ const Bookings = () => {
     columnHelper.accessor("fileKey", {
       header: "Listing",
       cell: (info) => (
-        <Link href="/pornhub.com">
+        <Link href="/profile">
           <div className="flex items-center gap-5">
             <Image
               className="rounded-xl"
@@ -122,26 +123,59 @@ const Bookings = () => {
 
   return (
     <WidthWrapper className="mt-40 w-full">
-      <div className="px-12">
-        <div className="mb-12">
+      {data.length > 0 ? (
+        <div className="px-12">
+          <div className="mb-12">
+            <Typography
+              variant="h1"
+              fontWeight="semibold"
+              className="flex justify-between items-center pl-4"
+            >
+              Your listing
+              <div className="flex gap-5">
+                <span className="bg-white rounded-full p-2 cursor-pointer shadow-lg">
+                  <LucideTable />
+                </span>
+                <span className="bg-white rounded-full p-2 cursor-pointer shadow-lg">
+                  <LucidePlus />
+                </span>
+              </div>
+            </Typography>
+          </div>
+          <Table data={data} columns={columns} />
+        </div>
+      ) : (
+        <div className="px-12">
+          <Typography variant="h1" fontWeight="semibold">
+            Trips
+          </Typography>
+          <hr className="mt-5 mb-5"></hr>
+          <Typography variant="h1" fontWeight="semibold">
+            No trips booked...yet!
+          </Typography>
           <Typography
-            variant="h1"
+            variant="h4"
             fontWeight="semibold"
-            className="flex justify-between items-center pl-4"
+            className="text-gray-600"
           >
-            Your listing
-            <div className="flex gap-5">
-              <span className="bg-white rounded-full p-2 cursor-pointer shadow-lg">
-                <LucideTable />
-              </span>
-              <span className="bg-white rounded-full p-2 cursor-pointer shadow-lg">
-                <LucidePlus />
-              </span>
-            </div>
+            Time to dust off your bags and start planning your next adventure
+          </Typography>
+          <Button variant="outline" size="lg" className="mt-3 font-semibold">
+            Start searching
+          </Button>
+          <hr className="mt-12 mb-5"></hr>
+          <Typography
+            variant="h4"
+            fontWeight="semibold"
+            className="text-gray-600"
+          >
+            Can't find your reservation here?{" "}
+            <button className="font-semibold underline text-gray-800">
+              Visit the help center
+            </button>
           </Typography>
         </div>
-        <Table data={data} columns={columns} />
-      </div>
+      )}
     </WidthWrapper>
   )
 }
