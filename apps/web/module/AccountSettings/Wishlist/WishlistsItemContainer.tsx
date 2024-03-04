@@ -199,18 +199,22 @@ const WishlistsItemContainer = () => {
           <ul className="grid gap-4 grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 w-full justify-center pt-4 pb-6 px-4">
             {data?.items?.length !== 0 ? (
               data?.items?.map((item, index) => (
-                <SavedWishlists 
-                itemId={item.id}
-                listingId={item.id}
-                location={item.listing.address}
-                date={item.listing.description}
-                distance={"100 kilometers away"}
-                price={item.listing.price.fee + item.listing.price.serviceFee + item.listing.price.cleaningFee}
-                imageKey={item.listing.images}
-                isNight={item?.price?.isNight}
-                ratings={"0.0"}
-                note={item.note}
-                showAddNote={() => showAddNoteModal(item)}
+                <SavedWishlists
+                  itemId={item.id}
+                  listingId={item.id}
+                  location={item.listing.address}
+                  date={item.listing.description}
+                  distance={"100 kilometers away"}
+                  price={
+                    item.listing.price.fee +
+                    item.listing.price.serviceFee +
+                    item.listing.price.cleaningFee
+                  }
+                  imageKey={item.listing.images}
+                  isNight={item?.price?.isNight}
+                  ratings={"0.0"}
+                  note={item.note}
+                  showAddNote={() => showAddNoteModal(item)}
                 />
               ))
             ) : (
