@@ -1,10 +1,3 @@
-// import {
-//   REQUIRED_VALUE_EMPTY,
-//   UNKNOWN_ERROR_OCCURRED,
-//   USER_NOT_EXIST,
-// } from '@/common/constants'
-// import { prisma } from '@/common/helpers/prismaClient'
-// import { FileService } from '@/common/service/file'
 import { ResponseService } from '@/common/service/response'
 import { Request, Response } from 'express'
 let profiles = [
