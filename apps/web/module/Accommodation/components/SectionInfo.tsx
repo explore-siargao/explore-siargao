@@ -4,9 +4,9 @@ import { Typography } from "@/common/components/ui/Typography"
 import ImageGallery from "./ImageGallery"
 import ImageGalleryModal from "./modals/ImageGalleryModal"
 import ShareSave from "./ShareSave"
-import { T_SectionInfoProps } from "../types/SectionInfo"
+import { T_SectionInfo } from "@repo/contract"
 
-const SectionInfo = ({ title, images }: T_SectionInfoProps) => {
+const SectionInfo = ({ title, images }: T_SectionInfo) => {
   const [galleryModalOpen, setGalleryModalOpen] = useState(false)
   const openModal = () => {
     setGalleryModalOpen(true)
