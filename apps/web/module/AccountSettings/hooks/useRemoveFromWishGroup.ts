@@ -12,8 +12,7 @@ export async function removeFromWishGroup(wishGroupId: number) {
 
 function useRemoveFromWishGroup() {
   const query = useMutation({
-    mutationFn: (props: IWishGroup) =>
-      removeFromWishGroup(props?.id as number),
+    mutationFn: (props: IWishGroup) => removeFromWishGroup(props?.id as number),
   })
   return query
 }
