@@ -57,7 +57,7 @@ const ActionButton = ({ onClick, text }: ComponentProps) => (
     className="h-10 w-10 cursor-pointer hover:bg-gray-50 p-2 text-xs"
     onClick={onClick}
   >
-    <MoreHorizontal className="h-5 w-5"/>
+    <MoreHorizontal className="h-5 w-5" />
     {text && <span>{text}</span>}
   </button>
 )
