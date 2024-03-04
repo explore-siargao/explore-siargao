@@ -355,7 +355,7 @@ export const addNewWishGroup = async (req: Request, res: Response) => {
 }
 
 export const deleteWishGroup = async (req: Request, res: Response) => {
-  const wishGroupId = Number(req.params.wishGroupId)
+  const listingId = Number(req.params.listingId)
   try {
     const getUser = await prisma.user.findUnique({
       where: {
@@ -365,14 +365,14 @@ export const deleteWishGroup = async (req: Request, res: Response) => {
     if (getUser !== null) {
       const findWishGroup = await prisma.wishGroup.findFirst({
         where: {
-          id: wishGroupId,
+          listingId: listingId,
           userId: res.locals.user.id,
         },
       })
       if (findWishGroup !== null) {
-        const removeWishGroup = await prisma.wishGroup.delete({
+        const removeWishGroup = await prisma.wishGroup.deleteMany({
           where: {
-            id: wishGroupId,
+            listingId: listingId,
             userId: res.locals.user.id,
           },
         })
