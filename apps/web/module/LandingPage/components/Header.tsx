@@ -39,7 +39,6 @@ function Header({
   const renderHeader = () => {
     const openModal = () => setIsModalOpen(true)
     const closeModal = () => setIsModalOpen(false)
-  
 
     if (!withoutHeader.includes(path as string)) {
       return (
@@ -85,9 +84,13 @@ function Header({
                     </div>
                   )}
                   <div>
-                    
                     {isHost ? (
-                       <Button variant="ghost" className="underline" size="sm" onClick={() => router.push("/hosting")}>
+                      <Button
+                        variant="ghost"
+                        className="underline"
+                        size="sm"
+                        onClick={() => router.push("/hosting")}
+                      >
                         Manage Listing
                       </Button>
                     ) : (

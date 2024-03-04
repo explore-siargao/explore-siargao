@@ -16,7 +16,7 @@ interface ISetUpProfileAboutYouModalProps {
 const ApplyToHostModal = ({
   isModalOpen,
   onClose,
-  setIsHost
+  setIsHost,
 }: ISetUpProfileAboutYouModalProps) => {
   const queryClient = useQueryClient()
   const router = useRouter()
