@@ -219,7 +219,7 @@ const WishlistsItemContainer = () => {
                       onClick={() => handleClick(index, item?.id as number)}
                     />
                     <Image
-                      src={`/assets/${JSON.parse(item.listing.images)[0].fileKey}`}
+                      src={`/assets/${item.listing.images[0].fileKey}`}
                       width={300}
                       height={300}
                       alt={item.listing.images[0].fileKey}
