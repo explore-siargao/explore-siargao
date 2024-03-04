@@ -1,6 +1,6 @@
 "use client"
 import { WidthWrapper } from "@/common/components/WidthWrapper"
-import Table from "./SingleView/components/Table"
+import Table from "../../common/components/Table/Index"
 import Image from "next/image"
 import { Typography } from "@/common/components/ui/Typography"
 import { LucidePlus, LucideTable } from "lucide-react"
@@ -8,6 +8,7 @@ import { PaymentStatus } from "./SingleView/components/PaymentStatus"
 import { createColumnHelper } from "@tanstack/react-table"
 import Link from "next/link"
 import { Button } from "@/common/components/ui/Button"
+
 
 interface ITypes {
   fileKey: string
@@ -20,53 +21,10 @@ interface ITypes {
 }
 
 const Bookings = () => {
-  const data = [
-    {
-      fileKey: "3.jpg",
-      description: "Your listing started in feb 21",
-      guestCount: 5,
-      dateRange: "feb 25 - feb 29",
-      location: "Jolo, Sulu",
-      totalCost: "P 2,500",
-      paymentStatus: "For verification",
-    },
-    {
-      fileKey: "1.jpg",
-      description: "Mahangin dito at maginhawa",
-      guestCount: 3,
-      dateRange: "feb 29 - feb 36",
-      location: "Marawi, City",
-      totalCost: "P 3,500",
-      paymentStatus: "In progress",
-    },
-    {
-      fileKey: "3.jpg",
-      description: "Malamig tsaka mainit",
-      guestCount: 3,
-      dateRange: "feb 46 - feb 38",
-      location: "Downtown, Kinaladkad ng QC",
-      totalCost: "P 36,500",
-      paymentStatus: "In progress",
-    },
-    {
-      fileKey: "4.jpg",
-      description: "Malamig tsaka mainitttttt",
-      guestCount: 3,
-      dateRange: "feb 46 - feb 38",
-      location: "Downtown, Kinaladkad ng QC",
-      totalCost: "P 366,500",
-      paymentStatus: "In progress",
-    },
-    {
-      fileKey: "5.jpg",
-      description: "Malamig tsaka mainit",
-      guestCount: 3,
-      dateRange: "feb 46 - feb 38",
-      location: "Downtown, Kinaladkad ng QC",
-      totalCost: "P 36,500",
-      paymentStatus: "In progresssss",
-    },
+  const testData = [
+   
   ]
+  
   const columnHelper = createColumnHelper<ITypes>()
   const columns = [
     columnHelper.accessor("fileKey", {
@@ -131,7 +89,7 @@ const Bookings = () => {
 
   return (
     <WidthWrapper className="mt-40 w-full">
-      {data.length > 0 ? (
+      {testData.length > 0 ? (
         <div className="px-12">
           <div className="mb-12">
             <Typography
@@ -139,7 +97,7 @@ const Bookings = () => {
               fontWeight="semibold"
               className="flex justify-between items-center pl-4"
             >
-              Your listing
+              Your booking
               <div className="flex gap-5">
                 <span className="bg-white rounded-full p-2 cursor-pointer shadow-lg">
                   <LucideTable />
@@ -150,7 +108,7 @@ const Bookings = () => {
               </div>
             </Typography>
           </div>
-          <Table data={data} columns={columns} />
+          <Table data={testData} columns={columns}/>
         </div>
       ) : (
         <div className="px-12">
