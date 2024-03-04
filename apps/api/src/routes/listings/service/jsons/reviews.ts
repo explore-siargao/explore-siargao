@@ -84,7 +84,7 @@ export const reviews = [
     rate: 4,
     comment: 'Nice place, clean and comfortable.',
     listing: {
-      image: '6.jpg',
+      image: '1.jpg',
       title: 'Modern Apartment Downtown',
       hostedById: 1,
     },
@@ -104,7 +104,7 @@ export const reviews = [
     rate: 5,
     comment: 'Absolutely loved it! Will definitely come back.',
     listing: {
-      image: '7.jpg',
+      image: '2.jpg',
       title: 'Charming Cottage by the Lake',
       hostedById: 1,
     },
@@ -124,7 +124,7 @@ export const reviews = [
     rate: 3,
     comment: 'Decent stay, but could use some improvements.',
     listing: {
-      image: '8.jpg',
+      image: '3.jpg',
       title: 'Suburban Family Home',
       hostedById: 2,
     },
@@ -144,7 +144,7 @@ export const reviews = [
     rate: 4,
     comment: 'Lovely place, enjoyed every moment.',
     listing: {
-      image: '9.jpg',
+      image: '4.jpg',
       title: 'Quaint Countryside Cottage',
       hostedById: 2,
     },
@@ -164,7 +164,7 @@ export const reviews = [
     rate: 3,
     comment: 'Not bad, but nothing extraordinary either.',
     listing: {
-      image: '10.jpg',
+      image: '5.jpg',
       title: 'Cozy Studio Apartment',
       hostedById: 2,
     },
@@ -184,7 +184,7 @@ export const reviews = [
     rate: 4,
     comment: 'Had a pleasant stay, would recommend.',
     listing: {
-      image: '11.jpg',
+      image: '6.jpg',
       title: 'Spacious Loft in the City',
       hostedById: 2,
     },
@@ -204,7 +204,7 @@ export const reviews = [
     rate: 5,
     comment: 'Absolutely stunning property!',
     listing: {
-      image: '12.jpg',
+      image: '1.jpg',
       title: 'Historic Mansion Estate',
       hostedById: 3,
     },
@@ -224,7 +224,7 @@ export const reviews = [
     rate: 3,
     comment: 'Not bad, but could be cleaner.',
     listing: {
-      image: '13.jpg',
+      image: '2.jpg',
       title: 'Sunny Beach House',
       hostedById: 3,
     },
@@ -244,7 +244,7 @@ export const reviews = [
     rate: 4,
     comment: 'Great value for the price.',
     listing: {
-      image: '14.jpg',
+      image: '3.jpg',
       title: 'Cozy Cabin in the Woods',
       hostedById: 3,
     },
@@ -264,7 +264,7 @@ export const reviews = [
     rate: 3,
     comment: 'Average experience, nothing special.',
     listing: {
-      image: '15.jpg',
+      image: '4.jpg',
       title: 'Studio Apartment Downtown',
       hostedById: 3,
     },
@@ -284,7 +284,7 @@ export const reviews = [
     rate: 5,
     comment: 'Amazing place, exceeded expectations!',
     listing: {
-      image: '16.jpg',
+      image: '5.jpg',
       title: 'Luxury Penthouse Suite',
       hostedById: 3,
     },
@@ -304,7 +304,7 @@ export const reviews = [
     rate: 4,
     comment: 'Enjoyable stay, would recommend.',
     listing: {
-      image: '17.jpg',
+      image: '6.jpg',
       title: 'Modern Loft with City Views',
       hostedById: 3,
     },
@@ -324,7 +324,7 @@ export const reviews = [
     rate: 3,
     comment: 'Decent stay, nothing extraordinary.',
     listing: {
-      image: '18.jpg',
+      image: '1.jpg',
       title: 'Cozy Cabin Retreat',
       hostedById: 4,
     },
@@ -344,7 +344,7 @@ export const reviews = [
     rate: 4,
     comment: 'Lovely place, perfect for a weekend getaway.',
     listing: {
-      image: '19.jpg',
+      image: '2.jpg',
       title: 'Riverside Cottage',
       hostedById: 4,
     },
@@ -364,7 +364,7 @@ export const reviews = [
     rate: 4,
     comment: 'Fantastic view from the balcony!',
     listing: {
-      image: '20.jpg',
+      image: '3.jpg',
       title: 'City Skyline Apartment',
       hostedById: 4,
     },
