@@ -3,6 +3,7 @@ import { PrismaClient } from '@prisma/client'
 import { REQUIRED_VALUE_EMPTY, USER_NOT_EXIST } from '@/common/constants'
 import { Z_Review } from '@repo/contract'
 import { Request, Response } from 'express'
+import { reviews } from './jsons/reviews'
 
 const prisma = new PrismaClient()
 const response = new ResponseService()
@@ -360,4 +361,21 @@ export const deleteReview = async (req: Request, res: Response) => {
   } catch (err: any) {
     res.json(response.error({ message: err.message }))
   }
+}
+
+export const getReviewsByHost = async (req: Request, res: Response) => {
+  const hostId = Number(req.params.hostId)
+  const filterReviews = reviews
+    .filter((review) => hostId === review.listing.hostedById)
+    .sort((a, b) => {
+      const dateA = new Date(a.createdAt).getTime()
+      const dateB = new Date(b.createdAt).getTime()
+      return dateA - dateB
+    })
+  res.json(
+    response.success({
+      items: filterReviews,
+      allItemCount: filterReviews.length,
+    })
+  )
 }

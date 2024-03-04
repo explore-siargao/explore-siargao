@@ -13,41 +13,34 @@ export const reportListing = async () => {
     },
   })
 
+  const reportData = ['Scam', 'Not same on picture', 'Host post false images']
+  const asStringData = JSON.stringify(reportData)
+
   const createReportListings = await prisma.reportListing.createMany({
     data: [
       {
         listingId: getListings[1]?.id || 0,
-        name: 'Scam',
-        reason: 'Not same on picture',
-        description: 'Host post false images',
+        reports: asStringData,
         reportedBy: getUsers[4]?.id || 0,
       },
       {
         listingId: getListings[1]?.id || 0,
-        name: 'Scam',
-        reason: 'Not same on picture',
-        description: 'Host post false images',
+        reports: asStringData,
         reportedBy: getUsers[3]?.id || 0,
       },
       {
         listingId: getListings[4]?.id || 0,
-        name: 'bad service',
-        reason: 'Crew is not good',
-        description: 'They do not work properly',
+        reports: asStringData,
         reportedBy: getUsers[3]?.id || 0,
       },
       {
         listingId: getListings[4]?.id || 0,
-        name: 'bad service',
-        reason: 'Crew is not good',
-        description: 'They do not work properly',
+        reports: asStringData,
         reportedBy: getUsers[4]?.id || 0,
       },
       {
         listingId: getListings[1]?.id || 0,
-        name: 'Waste of money',
-        reason: 'Food so pricy',
-        description: 'The price of place is not as expected from price',
+        reports: asStringData,
         reportedBy: getUsers[3]?.id || 0,
       },
     ],

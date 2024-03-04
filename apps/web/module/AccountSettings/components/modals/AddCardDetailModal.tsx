@@ -11,7 +11,7 @@ import { useForm } from "react-hook-form"
 import { useQueryClient } from "@tanstack/react-query"
 import toast from "react-hot-toast"
 import valid from "card-validator"
-import ErrorMessage from "../ui/ErrorMessage"
+import ErrorMessage from "../../PaymentPayout/ErrorMessage"
 import ModalContainerFooter from "@/common/components/ModalContainer/ModalContainerFooter"
 import { Option, Select } from "@/common/components/ui/Select"
 import { COUNTRIES } from "@repo/constants"
@@ -64,7 +64,6 @@ const AddCardDetailModal = ({ isOpen, onClose, userId }: CardDetailModal) => {
       {
         cardInfo: encryptCard.encrypt({
           cardNumber: formData.cardNumber?.replace(/\s/g, ""),
-          cvv: formData.cvv,
           expirationMonth: splitExpiration[0],
           expirationYear: `20${splitExpiration[1]}`,
           cardholderName: formData.cardholderName,

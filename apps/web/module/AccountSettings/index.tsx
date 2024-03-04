@@ -1,6 +1,6 @@
 "use client"
 import React from "react"
-import AccountSettingWrapper from "@/common/components/AccountSettingWrapper"
+import AccountSettingWrapper from "@/module/AccountSettings/components/AccountSettingWrapper"
 import { AccountMenuContainer } from "@/common/components/AccountMenuContainer"
 import {
   LINK_ACCOUNT_BOOKING_REVIEWS,

@@ -18,13 +18,13 @@ const ConfirmedInformation = ({
             Identity
           </li>
         )}
-        {confirmedInformation.email && (
+        {confirmedInformation.emailAddress && (
           <li className="flex items-center">
             <Check className="h-5 w-5 mr-3" />
             Email address
           </li>
         )}
-        {confirmedInformation.phone && (
+        {confirmedInformation.phoneNumber && (
           <li className="flex items-center">
             <Check className="h-5 w-5 mr-3" />
             Phone number
