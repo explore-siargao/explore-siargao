@@ -5,7 +5,6 @@ import useGetAllBookings from "../LandingPage/hooks/useGetAllBookings"
 import { Spinner } from "@/common/components/ui/Spinner"
 import useSessionStore from "@/common/store/useSessionStore"
 import Listing from "../Listing"
-import EarningsThisMonth from "../Host/Earnings/EarningsThisMonth"
 
 const LandingPage = () => {
   const userId = useSessionStore((state) => state).id
@@ -37,14 +36,7 @@ const LandingPage = () => {
           </ul>
         </>
       )}
-      <EarningsThisMonth
-        earnings={0}
-        date={""}
-        grossEarnings={0}
-        adjustments={0}
-        serviceFee={0}
-        taxesWithheld={0}
-      />
+     
     </WidthWrapper>
   )
 }
