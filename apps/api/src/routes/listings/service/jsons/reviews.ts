@@ -8,9 +8,9 @@ export const reviews = [
       title: 'Luxury Beachfront Villa',
       hostedById: 1,
     },
-    reviewedBy:{
-      name:'Alice Smith',
-      profilePic:"1.jpg",
+    reviewedBy: {
+      name: 'Alice Smith',
+      profilePic: '1.jpg',
     },
     reply: {
       name: 'John Doe',
@@ -28,9 +28,9 @@ export const reviews = [
       title: 'Rustic Mountain Cabin',
       hostedById: 12,
     },
-    reviewedBy:{
-      name:'John Melley',
-      profilePic:"2.jpg",
+    reviewedBy: {
+      name: 'John Melley',
+      profilePic: '2.jpg',
     },
     reply: {
       name: 'Emily Williams',
@@ -48,9 +48,9 @@ export const reviews = [
       title: 'Secluded Mountain Retreat',
       hostedById: 1,
     },
-    reviewedBy:{
-      name:'Michael Brown',
-      profilePic:"2.jpg",
+    reviewedBy: {
+      name: 'Michael Brown',
+      profilePic: '2.jpg',
     },
     reply: {
       name: 'Olivia Wilson',
@@ -68,9 +68,9 @@ export const reviews = [
       title: 'Urban Loft in the City',
       hostedById: 9,
     },
-    reviewedBy:{
-      name:'jesica Martinez',
-      profilePic:"1.jpg",
+    reviewedBy: {
+      name: 'jesica Martinez',
+      profilePic: '1.jpg',
     },
     reply: {
       name: 'William Taylor',
@@ -88,9 +88,9 @@ export const reviews = [
       title: 'Modern Apartment Downtown',
       hostedById: 1,
     },
-    reviewedBy:{
-      name:'Daniel Garcia',
-      profilePic:"1.jpg",
+    reviewedBy: {
+      name: 'Daniel Garcia',
+      profilePic: '1.jpg',
     },
     reply: {
       name: 'Sophia Rodriguez',
@@ -108,9 +108,9 @@ export const reviews = [
       title: 'Charming Cottage by the Lake',
       hostedById: 1,
     },
-    reviewedBy:{
-      name:'Jhay Montes',
-      profilePic:"1.jpg",
+    reviewedBy: {
+      name: 'Jhay Montes',
+      profilePic: '1.jpg',
     },
     reply: {
       name: 'Liam Anderson',
@@ -128,9 +128,9 @@ export const reviews = [
       title: 'Suburban Family Home',
       hostedById: 2,
     },
-    reviewedBy:{
-      name:'Eiron Jonsey',
-      profilePic:"2.jpg",
+    reviewedBy: {
+      name: 'Eiron Jonsey',
+      profilePic: '2.jpg',
     },
     reply: {
       name: 'Noah Thompson',
@@ -148,9 +148,9 @@ export const reviews = [
       title: 'Quaint Countryside Cottage',
       hostedById: 2,
     },
-    reviewedBy:{
-      name:'Carlos Miguel',
-      profilePic:"1.jpg",
+    reviewedBy: {
+      name: 'Carlos Miguel',
+      profilePic: '1.jpg',
     },
     reply: {
       name: 'Ethan Harris',
@@ -168,9 +168,9 @@ export const reviews = [
       title: 'Cozy Studio Apartment',
       hostedById: 2,
     },
-    reviewedBy:{
-      name:'Liam Thomson',
-      profilePic:"2.jpg",
+    reviewedBy: {
+      name: 'Liam Thomson',
+      profilePic: '2.jpg',
     },
     reply: {
       name: 'Ava Wilson',
@@ -188,9 +188,9 @@ export const reviews = [
       title: 'Spacious Loft in the City',
       hostedById: 2,
     },
-    reviewedBy:{
-      name:'Janrey Maligaya',
-      profilePic:"1.jpg",
+    reviewedBy: {
+      name: 'Janrey Maligaya',
+      profilePic: '1.jpg',
     },
     reply: {
       name: 'Mia Davis',
@@ -208,9 +208,9 @@ export const reviews = [
       title: 'Historic Mansion Estate',
       hostedById: 3,
     },
-    reviewedBy:{
-      name:'Almira Reyes',
-      profilePic:"1.jpg",
+    reviewedBy: {
+      name: 'Almira Reyes',
+      profilePic: '1.jpg',
     },
     reply: {
       name: 'Olivia Wilson',
@@ -228,9 +228,9 @@ export const reviews = [
       title: 'Sunny Beach House',
       hostedById: 3,
     },
-    reviewedBy:{
-      name:'Lucas Garcia',
-      profilePic:"1.jpg",
+    reviewedBy: {
+      name: 'Lucas Garcia',
+      profilePic: '1.jpg',
     },
     reply: {
       name: 'Sophia Brown',
@@ -248,9 +248,9 @@ export const reviews = [
       title: 'Cozy Cabin in the Woods',
       hostedById: 3,
     },
-    reviewedBy:{
-      name:'Benjie Lee',
-      profilePic:"1.jpg",
+    reviewedBy: {
+      name: 'Benjie Lee',
+      profilePic: '1.jpg',
     },
     reply: {
       name: 'Emma Thompson',
@@ -268,9 +268,9 @@ export const reviews = [
       title: 'Studio Apartment Downtown',
       hostedById: 3,
     },
-    reviewedBy:{
-      name:'Hanna Rivera',
-      profilePic:"2.jpg",
+    reviewedBy: {
+      name: 'Hanna Rivera',
+      profilePic: '2.jpg',
     },
     reply: {
       name: 'William Taylor',
@@ -288,9 +288,9 @@ export const reviews = [
       title: 'Luxury Penthouse Suite',
       hostedById: 3,
     },
-    reviewedBy:{
-      name:'Ryuka Rengpku',
-      profilePic:"1.jpg",
+    reviewedBy: {
+      name: 'Ryuka Rengpku',
+      profilePic: '1.jpg',
     },
     reply: {
       name: 'Daniel Harris',
@@ -308,9 +308,9 @@ export const reviews = [
       title: 'Modern Loft with City Views',
       hostedById: 3,
     },
-    reviewedBy:{
-      name:'Ei Morales',
-      profilePic:"1.jpg",
+    reviewedBy: {
+      name: 'Ei Morales',
+      profilePic: '1.jpg',
     },
     reply: {
       name: 'Emily Johnson',
@@ -328,9 +328,9 @@ export const reviews = [
       title: 'Cozy Cabin Retreat',
       hostedById: 4,
     },
-    reviewedBy:{
-      name:'Ashley Yumang',
-      profilePic:"2.jpg",
+    reviewedBy: {
+      name: 'Ashley Yumang',
+      profilePic: '2.jpg',
     },
     reply: {
       name: 'Noah Anderson',
@@ -348,9 +348,9 @@ export const reviews = [
       title: 'Riverside Cottage',
       hostedById: 4,
     },
-    reviewedBy:{
-      name:'Garry Rol',
-      profilePic:"2.jpg",
+    reviewedBy: {
+      name: 'Garry Rol',
+      profilePic: '2.jpg',
     },
     reply: {
       name: 'Jacob Harris',
@@ -368,9 +368,9 @@ export const reviews = [
       title: 'City Skyline Apartment',
       hostedById: 4,
     },
-    reviewedBy:{
-      name:'James Rosales',
-      profilePic:"2.jpg",
+    reviewedBy: {
+      name: 'James Rosales',
+      profilePic: '2.jpg',
     },
     reply: {
       name: 'Jacob Anderson',
