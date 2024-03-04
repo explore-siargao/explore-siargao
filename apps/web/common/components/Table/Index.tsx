@@ -2,7 +2,7 @@ import React, { useMemo } from "react"
 import {
   useReactTable,
   getCoreRowModel,
-  flexRender
+  flexRender,
 } from "@tanstack/react-table"
 import Pagination from "./Pagination"
 
@@ -75,21 +75,20 @@ const Table = ({ data: tableData, columns: tableColumns }: TableProps) => {
         </tbody>
       </table>
       <div className="flex items-end justify-end mt-5">
-      <Pagination
-        pageIndex={table.getState().pagination.pageIndex}
-        pageCount={table.getPageCount()}
-        canPreviousPage={table.getCanPreviousPage()}
-        canNextPage={table.getCanNextPage()}
-        onPageChange={table.setPageIndex}
-        onFirstPage={table.firstPage}
-        onLastPage={table.lastPage}
-        onPreviousPage={table.previousPage}
-        onNextPage={table.nextPage}
-        pageSize={table.getState().pagination.pageSize}
-        onPageSizeChange={table.setPageSize}
-      />
+        <Pagination
+          pageIndex={table.getState().pagination.pageIndex}
+          pageCount={table.getPageCount()}
+          canPreviousPage={table.getCanPreviousPage()}
+          canNextPage={table.getCanNextPage()}
+          onPageChange={table.setPageIndex}
+          onFirstPage={table.firstPage}
+          onLastPage={table.lastPage}
+          onPreviousPage={table.previousPage}
+          onNextPage={table.nextPage}
+          pageSize={table.getState().pagination.pageSize}
+          onPageSizeChange={table.setPageSize}
+        />
       </div>
-      
     </div>
   )
 }

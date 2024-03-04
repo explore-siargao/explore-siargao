@@ -1,18 +1,23 @@
-import { LucideChevronLeft, LucideChevronRight, LucideChevronsLeft, LucideChevronsRight } from 'lucide-react'
-import React from 'react'
+import {
+  LucideChevronLeft,
+  LucideChevronRight,
+  LucideChevronsLeft,
+  LucideChevronsRight,
+} from "lucide-react"
+import React from "react"
 
 interface PaginationProps {
-  pageIndex: number;
-  pageCount: number;
-  canPreviousPage: boolean;
-  canNextPage: boolean;
-  onPageChange: (pageIndex: number) => void;
-  onFirstPage: () => void;
-  onLastPage: () => void;
-  onPreviousPage: () => void;
-  onNextPage: () => void;
-  pageSize: number;
-  onPageSizeChange: (pageSize: number) => void;
+  pageIndex: number
+  pageCount: number
+  canPreviousPage: boolean
+  canNextPage: boolean
+  onPageChange: (pageIndex: number) => void
+  onFirstPage: () => void
+  onLastPage: () => void
+  onPreviousPage: () => void
+  onNextPage: () => void
+  pageSize: number
+  onPageSizeChange: (pageSize: number) => void
 }
 
 const Pagination = ({
@@ -26,7 +31,7 @@ const Pagination = ({
   onPreviousPage,
   onNextPage,
   pageSize,
-  onPageSizeChange
+  onPageSizeChange,
 }: PaginationProps) => {
   return (
     <div className="flex items-center gap-2">
@@ -35,28 +40,28 @@ const Pagination = ({
         onClick={onFirstPage}
         disabled={!canPreviousPage}
       >
-        {<LucideChevronsLeft/>}
+        {<LucideChevronsLeft />}
       </button>
       <button
         className="border rounded p-1"
         onClick={onPreviousPage}
         disabled={!canPreviousPage}
       >
-        {<LucideChevronLeft/>}
+        {<LucideChevronLeft />}
       </button>
       <button
         className="border rounded p-1"
         onClick={onNextPage}
         disabled={!canNextPage}
       >
-        {<LucideChevronRight/>}
+        {<LucideChevronRight />}
       </button>
       <button
         className="border rounded p-1"
         onClick={onLastPage}
         disabled={!canNextPage}
       >
-        {<LucideChevronsRight/>}
+        {<LucideChevronsRight />}
       </button>
       <span className="flex items-center gap-1">
         <div>Page</div>

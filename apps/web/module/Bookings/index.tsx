@@ -9,7 +9,6 @@ import { createColumnHelper } from "@tanstack/react-table"
 import Link from "next/link"
 import { Button } from "@/common/components/ui/Button"
 
-
 interface ITypes {
   fileKey: string
   description: string
@@ -21,10 +20,8 @@ interface ITypes {
 }
 
 const Bookings = () => {
-  const testData = [
-   
-  ]
-  
+  const testData = []
+
   const columnHelper = createColumnHelper<ITypes>()
   const columns = [
     columnHelper.accessor("fileKey", {
@@ -108,7 +105,7 @@ const Bookings = () => {
               </div>
             </Typography>
           </div>
-          <Table data={testData} columns={columns}/>
+          <Table data={testData} columns={columns} />
         </div>
       ) : (
         <div className="px-12">
