@@ -1,9 +1,11 @@
+import { FileService } from '@/common/service/file'
 import { ResponseService } from '@/common/service/response'
 import { Request, Response } from 'express'
 let profiles = [
   {
     id: 1,
     imageKey: '1.jpg',
+    imageFile:null,
     school: '',
     work: '',
     live: '',
@@ -21,6 +23,7 @@ let profiles = [
   {
     id: 2,
     imageKey: '1.jpg',
+    imageFile:null,
     school: 'Laguna State Polytechnic University',
     work: 'IT',
     live: '',
@@ -38,6 +41,7 @@ let profiles = [
   {
     id: 3,
     imageKey: '1.jpg',
+    imageFile:null,
     school: 'SMNHS',
     work: 'Programmer',
     live: '',
@@ -55,6 +59,7 @@ let profiles = [
   {
     id: 4,
     imageKey: '1.jpg',
+    imageFile:null,
     school: '',
     work: '',
     live: '',
@@ -72,6 +77,7 @@ let profiles = [
   {
     id: 5,
     imageKey: '1.jpg',
+    imageFile:null,
     school: 'LSPU',
     work: 'Zkript',
     live: 'Santa Maria Laguna',
@@ -89,7 +95,8 @@ let profiles = [
 ]
 
 const response = new ResponseService()
-// const fileService = new FileService()
+
+const fileService = new FileService()
 export const getProfile = async (req: Request, res: Response) => {
   const userId = Number(res.locals.user.id)
   const getUserProfile = profiles.find((profile) => profile.id === userId)
@@ -107,26 +114,42 @@ export const getProfile = async (req: Request, res: Response) => {
 
 export const updateProfile = async (req: Request, res: Response) => {
   const userId = Number(res.locals.user.id)
-
+const {
+  school,
+  work,
+  favoriteSong,
+  obsessedWith,
+  decadeWereBorn,
+  funFact,
+  languageISpeak,
+  live,
+  uselessSkill,
+  biography,
+  spendTime,
+  pets,
+  aboutMe,
+  imageFile
+} = req.body
   const index = profiles.findIndex((profile) => profile.id === userId)
   if (index !== -1) {
     profiles[index] = {
       ...profiles[index],
       id: profiles[index]?.id || 0,
+      imageFile:imageFile,
       imageKey: '4.jpg',
-      school: 'LSPU',
-      work: 'Zkript',
-      live: 'Santa Maria Laguna',
-      language: 'English, Tagalog',
-      decadeWereBorn: '90s',
-      favoriteSong: 'I believe',
-      obsessedWith: 'her',
-      funFact: 'Be honest',
-      uselessSkill: 'None',
-      biography: 'To see is to believed',
-      spendTime: 'Studying',
-      pets: 'Cat, Dog',
-      aboutMe: 'Im a honest person',
+      school: school,
+      work: work,
+      live: live,
+      language: languageISpeak,
+      decadeWereBorn: decadeWereBorn,
+      favoriteSong: favoriteSong,
+      obsessedWith: obsessedWith,
+      funFact: funFact,
+      uselessSkill: uselessSkill,
+      biography: biography,
+      spendTime: spendTime,
+      pets: pets,
+      aboutMe: aboutMe,
     }
     res.json(
       response.success({

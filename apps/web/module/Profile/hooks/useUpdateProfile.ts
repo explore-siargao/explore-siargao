@@ -1,6 +1,7 @@
 import { ApiService } from "@/common/service/api"
 import { API_URL_USERS } from "@/common/constants"
 import { useMutation } from "@tanstack/react-query"
+import { T_ProfileEditStore } from "../Setup/store/useProfileEditStore"
 
 interface ProfileProps {
   imageKey?: string
@@ -18,14 +19,14 @@ interface ProfileProps {
   pets?: string
   aboutMe?: string
 }
-export async function updateProfile(props: ProfileProps) {
+export async function updateProfile(props: T_ProfileEditStore) {
   const apiService = new ApiService()
   return await apiService.patch(`${API_URL_USERS}/profile`, props)
 }
 
 function useUpdateProfile() {
   const query = useMutation({
-    mutationFn: (props: ProfileProps) => updateProfile(props),
+    mutationFn: (props: T_ProfileEditStore) => updateProfile(props),
   })
   return query
 }

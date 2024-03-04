@@ -64,7 +64,7 @@ const Setup = () => {
     },
   }
   const save = () => {
-    mutate({ aboutMe: "" }, callBackReq)
+    mutate(profile, callBackReq)
   }
   return (
     <WidthWrapper width="small" className="mt-32 lg:mt-40">
