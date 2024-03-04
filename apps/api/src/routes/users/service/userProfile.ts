@@ -95,7 +95,6 @@ let profiles = [
 
 const response = new ResponseService()
 
-
 export const getProfile = async (req: Request, res: Response) => {
   const userId = Number(res.locals.user.id)
   const getUserProfile = profiles.find((profile) => profile.id === userId)
