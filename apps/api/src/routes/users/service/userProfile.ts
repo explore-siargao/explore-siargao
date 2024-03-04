@@ -1,4 +1,3 @@
-import { FileService } from '@/common/service/file'
 import { ResponseService } from '@/common/service/response'
 import { Request, Response } from 'express'
 let profiles = [
@@ -96,7 +95,7 @@ let profiles = [
 
 const response = new ResponseService()
 
-const fileService = new FileService()
+
 export const getProfile = async (req: Request, res: Response) => {
   const userId = Number(res.locals.user.id)
   const getUserProfile = profiles.find((profile) => profile.id === userId)
