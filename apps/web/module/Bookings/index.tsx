@@ -92,29 +92,37 @@ const Bookings = () => {
     }),
     columnHelper.accessor("guestCount", {
       header: "Guest Count",
-      cell: (info) => <Typography variant="p">{info.getValue()}</Typography>,
+      cell: (guestCount) => (
+        <Typography variant="p">{guestCount.getValue()}</Typography>
+      ),
     }),
     columnHelper.accessor("dateRange", {
       header: "Date",
-      cell: (info) => <Typography variant="p">{info.getValue()}</Typography>,
+      cell: (dateRange) => (
+        <Typography variant="p">{dateRange.getValue()}</Typography>
+      ),
     }),
     columnHelper.accessor("location", {
       header: "Location",
-      cell: (info) => <Typography variant="p">{info.getValue()}</Typography>,
+      cell: (location) => (
+        <Typography variant="p">{location.getValue()}</Typography>
+      ),
     }),
     columnHelper.accessor("totalCost", {
       header: "Total Cost",
-      cell: (info) => <Typography variant="p">{info.getValue()}</Typography>,
+      cell: (totalCost) => (
+        <Typography variant="p">{totalCost.getValue()}</Typography>
+      ),
     }),
     columnHelper.accessor("paymentStatus", {
       header: "Payment Status",
-      cell: (info) => (
+      cell: (paymentStatus) => (
         <Link href="/payment-status">
           <div className="flex items-center">
             <span>
               <PaymentStatus />
             </span>
-            <Typography variant="p">{info.getValue()}</Typography>
+            <Typography variant="p">{paymentStatus.getValue()}</Typography>
           </div>
         </Link>
       ),
