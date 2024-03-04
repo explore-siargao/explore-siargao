@@ -1,38 +1,50 @@
 import { Typography } from "@/common/components/ui/Typography"
-import { ChevronLeft, ChevronRight } from "lucide-react"
 import ListingCard from "./ListingCard"
 import { HostListingsProps } from "../types/HostListings"
+import { Swiper, SwiperSlide } from "swiper/react"
+import { Navigation, Pagination, A11y } from "swiper/modules"
+import SwiperCustomButton from "./SwiperCustomButton"
+
+// Import Swiper styles
+import "swiper/css"
+import "swiper/css/pagination"
 
 const HostListings = ({ name, listings }: HostListingsProps) => {
   return (
     <div>
-      <div className="flex justify-between items-center">
-        <Typography variant="h1" fontWeight="semibold">
-          {name}'s listings
-        </Typography>
-        <div className="hidden md:block space-x-2">
-          <button
-            className="border border-gray-300 p-2 rounded-full disabled:opacity-40"
-            disabled
-          >
-            <ChevronLeft className="h-4 w-4" />
-          </button>
-          <button className="border border-gray-300 p-2 rounded-full">
-            <ChevronRight className="h-4 w-4" />
-          </button>
+      <Swiper
+        modules={[Navigation, Pagination, A11y]}
+        spaceBetween={20}
+        slidesPerView={2}
+        breakpoints={{
+          768: {
+            slidesPerView: 3,
+          },
+        }}
+      >
+        <div className="flex justify-between items-center absolute top-0 w-full z-10">
+          <Typography variant="h1" fontWeight="semibold">
+            {name}'s listings
+          </Typography>
+          <div className="hidden md:block space-x-2">
+            <SwiperCustomButton />
+          </div>
         </div>
-      </div>
-      <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {listings.map((data, index) => (
-          <ListingCard
-            key={index}
-            image={data.imageKeys.fileKey}
-            title={data.title}
-            rating={5}
-            description={"Sample description"}
-          />
+          <SwiperSlide className="mt-14">
+            <ListingCard
+              key={index}
+              image={
+                // @ts-ignore
+                data.images[0].fileKey
+              }
+              title={data.title}
+              rating={5}
+              description={"Sample description"}
+            />
+          </SwiperSlide>
         ))}
-      </div>
+      </Swiper>
     </div>
   )
 }

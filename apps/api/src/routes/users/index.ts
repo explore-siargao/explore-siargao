@@ -35,6 +35,8 @@ import isUserLoggedIn from '@/common/middleware/auth/isUserLoggedIn'
 import isOriginValid from '@/common/middleware/auth/isOriginValid'
 import isCsrfTokenValid from '@/common/middleware/auth/isCsrfTokenValid'
 import { getHostDetailsInListing } from './service/hostDetails'
+import { beAHost } from './service/beAHost'
+import { getProfile, updateProfile } from './service/userProfile'
 
 const router = express.Router()
 
@@ -142,8 +144,16 @@ router.post('/:peronalInfoId/government-id', addGovernmentId)
 
 //Host Details
 router.get('/:hostId/host-details-listing/:listingId', getHostDetailsInListing)
+router.patch(
+  '/be-host',
+  isUserLoggedIn,
+  isCsrfTokenValid,
+  isOriginValid,
+  beAHost
+)
 
 //user profile
 router.get('/:id', getUserProfile)
-
+router.get('/:userId/profile', getProfile)
+router.patch('/:userId/profile', updateProfile)
 export default router

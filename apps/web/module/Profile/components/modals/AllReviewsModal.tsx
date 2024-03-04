@@ -7,21 +7,27 @@ import Image from "next/image"
 import { ASSET_ROOT } from "@/common/constants"
 import { Button } from "@/common/components/ui/Button"
 
-const tabs = [
-  { name: "From guests", href: "#", reviewCounts: 60, current: true },
-  { name: "From hosts", href: "#", reviewCounts: 0, current: false },
-]
-
 const AllReviewsModal = ({
   isOpen,
   onClose,
   reviews,
+  countReviews,
 }: AllReviewsModalProps) => {
+  const tabs = [
+    {
+      name: "From guests",
+      href: "#",
+      reviewCounts: countReviews,
+      current: true,
+    },
+    { name: "From hosts", href: "#", reviewCounts: 0, current: false },
+  ]
+
   return (
     <ModalContainer isOpen={isOpen} onClose={onClose} size="sm">
       <div className="p-5 h-[80vh] overflow-y-auto">
         <Typography variant="h2" fontWeight="semibold">
-          60 reviews
+          {countReviews} reviews
         </Typography>
         <div>
           <div className="sm:hidden">
@@ -68,36 +74,44 @@ const AllReviewsModal = ({
           </div>
         </div>
         {reviews.map((data, index) => (
-          <div key={index} className="my-5">
-            <div className="flex space-x-2">
-              <div className="w-4/5">
-                <Typography variant="h3" fontWeight="semibold">
-                  Seaview Villa with 3 queen beds
-                </Typography>
-              </div>
-              <div className="w-1/5 bg-gray-200 h-14 relative rounded-md">
-                <Image
-                  src={`${ASSET_ROOT}/1.jpg`}
-                  layout="fill"
-                  objectFit="cover"
-                  className="rounded-md"
-                  alt="listing-image"
-                />
-              </div>
-            </div>
-            <ReviewCard
-              reviewerImage={data.user.profilePicture}
-              reviewerName={
-                data.user.personalInfo.firstName +
-                " " +
-                data.user.personalInfo.lastName
-              }
-              reviewMessage={data.comment}
-              reviewDate={data.createdAt}
-              forModal={true}
-            />
-            <hr />
-          </div>
+          <>
+            {data.review.map((review) => (
+              <>
+                <div key={index} className="my-5">
+                  <div className="flex space-x-2">
+                    <div className="w-4/5">
+                      <Typography variant="h3" fontWeight="semibold">
+                        {data.title}
+                      </Typography>
+                    </div>
+                    <div className="w-1/5 bg-gray-200 h-14 relative rounded-md">
+                      <Image
+                        src={`${ASSET_ROOT}/${data?.images[0]?.fileKey}`}
+                        layout="fill"
+                        objectFit="cover"
+                        className="rounded-md"
+                        alt="listing-image"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <ReviewCard
+                      reviewerImage={"1.jpg"}
+                      reviewerName={
+                        review.user.personalInfo.firstName +
+                        " " +
+                        review.user.personalInfo.lastName
+                      }
+                      reviewMessage={review.comment}
+                      reviewDate={review.createdAt}
+                      forModal={true}
+                    />
+                    <hr />
+                  </div>
+                </div>
+              </>
+            ))}
+          </>
         ))}
         <Button variant="outline" className="text-base font-semibold">
           Show more reviews

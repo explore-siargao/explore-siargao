@@ -37,6 +37,7 @@ export const Z_AddBooking = z.object({
   fromDate: z.union([z.string(), z.date()]),
   toDate: z.union([z.string(), z.date()]),
   cardInfo: z.string().optional(),
+  cvv: z.string().optional(),
   paymentMethodId: z.number().optional(),
   lastFour: z.string().optional(),
   cardType: z.string().optional(),

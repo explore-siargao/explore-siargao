@@ -1,5 +1,5 @@
 "use client"
-import AccountSettingWrapper from "@/common/components/AccountSettingWrapper"
+import AccountSettingWrapper from "@/module/AccountSettings/components/AccountSettingWrapper"
 import React, { useState } from "react"
 import { Breadcrumb } from "@/common/components/ui/Breadcrumb"
 import { Title } from "@/common/components/ui/Title"

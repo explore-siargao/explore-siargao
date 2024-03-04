@@ -90,7 +90,12 @@ const MenuModal = ({
 
   const renderMenu = () => {
     return (
-      <ModalContainer onClose={hideModal} title="Settings" isOpen={openModal}>
+      <ModalContainer
+        onClose={hideModal}
+        title="Settings"
+        isOpen={openModal}
+        size="sm"
+      >
         <div className="p-6 flex flex-col items-center divide-y divide-text-100">
           <button
             onClick={() => setModalState(1)}
@@ -161,9 +166,13 @@ const MenuModal = ({
   }
   const renderDelete = () => {
     return (
-      <ModalContainer onClose={() => setModalState(0)} isOpen={openModal}>
+      <ModalContainer
+        title="Delete this wishlist?"
+        onClose={() => setModalState(0)}
+        isOpen={openModal}
+        size="sm"
+      >
         <div className="p-6 flex flex-col items-center">
-          <Typography variant={"h3"}>Delete this wishlist?</Typography>
           <Typography className="text-text-400 font-light w-60 text-center">
             {'"' + title + '"'} will be permanently deleted.
           </Typography>
@@ -192,7 +201,7 @@ const MenuModal = ({
 
     return componentToRender
   }
-  return <>{toRender}</>
+  return <>{toRender()}</>
 }
 
 export default MenuModal
