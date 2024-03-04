@@ -19,7 +19,7 @@ import MenuModal from "@/module/AccountSettings/components/modals/MenuModal"
 import { Title } from "../../../common/components/ui/Title"
 import { Typography } from "../../../common/components/ui/Typography"
 import { ComponentProps, DetailsType } from "../../../common/types/global"
-import { DocumentDuplicateIcon } from "@heroicons/react/24/outline"
+import { Copy, MoreHorizontal } from "lucide-react"
 import useRemoveFromWishGroup from "@/module/AccountSettings/hooks/useRemoveFromWishGroup"
 import { useQueryClient } from "@tanstack/react-query"
 
@@ -47,19 +47,17 @@ const HeartButton = ({
 }) => (
   <HeartIcon
     id={"heart" + id}
-    className={`absolute top-3 right-3 h-7 w-7 text-text-50 active:scale-90 ${
-      !isClicked ? "fill-error-500" : "fill-text-500/50 "
-    }`}
+    className="absolute top-3 right-3 h-7 w-7 text-text-50 active:scale-90 fill-error-500"
     onClick={onClick}
   />
 )
 
-const ActionButton = ({ onClick, icon, text }: ComponentProps) => (
+const ActionButton = ({ onClick, text }: ComponentProps) => (
   <button
-    className="h-10 w-10 cursor-pointer rounded-full hover:bg-gray-50 p-2 text-xs"
+    className="h-10 w-10 cursor-pointer hover:bg-gray-50 p-2 text-xs"
     onClick={onClick}
   >
-    {icon}
+    <MoreHorizontal className="h-5 w-5" />
     {text && <span>{text}</span>}
   </button>
 )
@@ -138,7 +136,7 @@ const WishlistsItemContainer = () => {
         queryClient.invalidateQueries({
           queryKey: ["wish-group-count"],
         })
-        toast.success("Wishlist Successfully rempved from group")
+        toast.success("Wishlist Successfully removed from group")
       } else {
         toast.error(String(data.message))
       }
@@ -153,7 +151,7 @@ const WishlistsItemContainer = () => {
   }
 
   const session = useSessionStore((state) => state)
-  const { mutate } = useRemoveFromWishGroup(1)
+  const { mutate } = useRemoveFromWishGroup()
   const params = useParams()
   const { data, isLoading } = useGetWishGroupByUserAndTitle(
     session.id as number,
@@ -193,8 +191,9 @@ const WishlistsItemContainer = () => {
             >
               {decodeURIComponent(params?._id as string)}
             </Typography>
-            <div className="flex gap-3">
-              <DocumentDuplicateIcon
+            <div className="flex items-center gap-3">
+              <Copy
+                strokeWidth={1.5}
                 onClick={() => {
                   toast("Link copied!", {
                     icon: (
@@ -203,9 +202,9 @@ const WishlistsItemContainer = () => {
                   })
                   copyToClipboard()
                 }}
-                className="h-10 w-10 cursor-pointer rounded-full hover:bg-gray-50 p-2"
+                className="h-9 w-9 cursor-pointer hover:bg-gray-50 p-2"
               />
-              <ActionButton onClick={() => setOpenMenu(true)} icon={"•••"} />
+              <ActionButton onClick={() => setOpenMenu(true)} />
             </div>
           </div>
           {/* ... (other components remain unchanged) */}
