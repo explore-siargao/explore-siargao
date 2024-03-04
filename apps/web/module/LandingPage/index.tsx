@@ -5,7 +5,6 @@ import useGetAllBookings from "../LandingPage/hooks/useGetAllBookings"
 import { Spinner } from "@/common/components/ui/Spinner"
 import useSessionStore from "@/common/store/useSessionStore"
 import Listing from "../Listing"
-import Reviews from "../Host/Reviews/components/Reviews"
 
 const LandingPage = () => {
   const userId = useSessionStore((state) => state).id

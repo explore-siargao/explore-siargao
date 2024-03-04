@@ -44,9 +44,6 @@ const ReviewCard = () => {
               {review.reviewedBy.name}
             </Typography>
             <h4 className="text-gray-500 text-[15px]">
-              {/* {date.toLocaleString("en-US", { month: "long" }) +
-              " " +
-              date.toLocaleString("en-US", { year: "numeric" })} */}
               {format(review.createdAt, "MMMM dd, yyyy")}
             </h4>
           </div>
