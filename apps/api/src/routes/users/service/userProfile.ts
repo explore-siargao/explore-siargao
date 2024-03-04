@@ -5,7 +5,7 @@ let profiles = [
   {
     id: 1,
     imageKey: '1.jpg',
-    imageFile:null,
+    imageFile: null,
     school: '',
     work: '',
     live: '',
@@ -23,7 +23,7 @@ let profiles = [
   {
     id: 2,
     imageKey: '1.jpg',
-    imageFile:null,
+    imageFile: null,
     school: 'Laguna State Polytechnic University',
     work: 'IT',
     live: '',
@@ -41,7 +41,7 @@ let profiles = [
   {
     id: 3,
     imageKey: '1.jpg',
-    imageFile:null,
+    imageFile: null,
     school: 'SMNHS',
     work: 'Programmer',
     live: '',
@@ -59,7 +59,7 @@ let profiles = [
   {
     id: 4,
     imageKey: '1.jpg',
-    imageFile:null,
+    imageFile: null,
     school: '',
     work: '',
     live: '',
@@ -77,7 +77,7 @@ let profiles = [
   {
     id: 5,
     imageKey: '1.jpg',
-    imageFile:null,
+    imageFile: null,
     school: 'LSPU',
     work: 'Zkript',
     live: 'Santa Maria Laguna',
@@ -114,28 +114,28 @@ export const getProfile = async (req: Request, res: Response) => {
 
 export const updateProfile = async (req: Request, res: Response) => {
   const userId = Number(res.locals.user.id)
-const {
-  school,
-  work,
-  favoriteSong,
-  obsessedWith,
-  decadeWereBorn,
-  funFact,
-  languageISpeak,
-  live,
-  uselessSkill,
-  biography,
-  spendTime,
-  pets,
-  aboutMe,
-  imageFile
-} = req.body
+  const {
+    school,
+    work,
+    favoriteSong,
+    obsessedWith,
+    decadeWereBorn,
+    funFact,
+    languageISpeak,
+    live,
+    uselessSkill,
+    biography,
+    spendTime,
+    pets,
+    aboutMe,
+    imageFile,
+  } = req.body
   const index = profiles.findIndex((profile) => profile.id === userId)
   if (index !== -1) {
     profiles[index] = {
       ...profiles[index],
       id: profiles[index]?.id || 0,
-      imageFile:imageFile,
+      imageFile: imageFile,
       imageKey: '4.jpg',
       school: school,
       work: work,
