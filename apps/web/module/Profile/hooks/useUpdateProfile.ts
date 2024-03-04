@@ -19,16 +19,15 @@ interface ProfileProps {
   aboutMe?: string
 }
 export async function updateProfile(
-  userId: number | null,
   props: ProfileProps
 ) {
   const apiService = new ApiService()
-  return await apiService.patch(`${API_URL_USERS}/${userId}/profile`, props)
+  return await apiService.patch(`${API_URL_USERS}/profile`, props)
 }
 
-function useUpdateProfile(userId: number | null) {
+function useUpdateProfile() {
   const query = useMutation({
-    mutationFn: (props: ProfileProps) => updateProfile(userId, props),
+    mutationFn: (props: ProfileProps) => updateProfile(props),
   })
   return query
 }

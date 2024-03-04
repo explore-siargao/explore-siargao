@@ -4,9 +4,11 @@ import {
   USER_NOT_EXIST,
 } from '@/common/constants'
 import { prisma } from '@/common/helpers/prismaClient'
+import { FileService } from '@/common/service/file'
 import { ResponseService } from '@/common/service/response'
+import { File } from 'buffer'
 import { Request, Response } from 'express'
-const profiles = [
+let profiles = [
   {
     id: 1,
     imageKey: '1.jpg',
@@ -95,8 +97,9 @@ const profiles = [
 ]
 
 const response = new ResponseService()
+// const fileService = new FileService()
 export const getProfile = async (req: Request, res: Response) => {
-  const userId = Number(req.params.userId)
+  const userId = Number(res.locals.user.id)
   const getUserProfile = profiles.find((profile) => profile.id === userId)
   if (getUserProfile === undefined) {
     return res.json(response.error({ message: 'This profile not found' }))
@@ -110,90 +113,122 @@ export const getProfile = async (req: Request, res: Response) => {
   )
 }
 
-export const updateProfile = async (req: Request, res: Response) => {
-  const userId = Number(req.params.userId)
-  const {
-    school,
-    work,
-    live,
-    language,
-    born,
-    favoriteSong,
-    obsessedWith,
-    funFact,
-    uselessSkill,
-    biography,
-    spendTime,
-    pets,
-    aboutMe,
-    imageKey,
-  } = req.body
-  try {
-    const getUser = await prisma.user.findFirst({
-      where: {
-        personalInfo: {
-          userId: userId,
-        },
-      },
-      include: {
-        personalInfo: true,
-      },
-    })
-    if (!getUser) {
-      return res.json(response.error({ message: USER_NOT_EXIST }))
-    }
-    if (
-      imageKey ||
-      school ||
-      work ||
-      live ||
-      language ||
-      born ||
-      favoriteSong ||
-      obsessedWith ||
-      funFact ||
-      uselessSkill ||
-      biography ||
-      spendTime ||
-      pets ||
-      aboutMe
-    ) {
-      const patchProfile = await prisma.personalInfo.update({
-        where: {
-          id: getUser.personalInfo?.id,
-          deletedAt: null,
-        },
-        data: {
-          profile: JSON.stringify({
-            imageKey: '1.jpg',
-            school: 'LSPU',
-            work: 'Zkript',
-            live: 'Santa Maria Laguna',
-            language: 'English, Tagalog',
-            decadeWereBorn: '90s',
-            favoriteSong: 'I believe',
-            obsessedWith: 'her',
-            funFact: 'Be honest',
-            uselessSkill: 'None',
-            biography: 'To see is to believed',
-            spendTime: 'Studying',
-            pets: 'Cat, Dog',
-            aboutMe: 'Im a honest person',
-          }),
-        },
-      })
-      res.json(
-        response.success({
-          item: JSON.parse(patchProfile.profile as string),
-          allItemCount: 1,
-          message: 'Profile successfully updated',
-        })
-      )
-    } else {
-      res.json(response.error({ message: REQUIRED_VALUE_EMPTY }))
-    }
-  } catch (err: any) {
-    const message = err.message ? err.message : UNKNOWN_ERROR_OCCURRED
-    res.json(response.error({ message: message }))
-  }
+export const updateProfile = async (req:Request, res:Response)=>{
+  const userId = Number(res.locals.user.id)
+
+const index = profiles.findIndex((profile)=>profile.id===userId)
+if(index!==-1){
+  profiles[index] = {...profiles[index], 
+              id:profiles[index]?.id ||  0,
+              imageKey: "4.jpg",
+              school: 'LSPU',
+              work: 'Zkript',
+              live: 'Santa Maria Laguna',
+              language: 'English, Tagalog',
+              decadeWereBorn: '90s',
+              favoriteSong: 'I believe',
+              obsessedWith: 'her',
+              funFact: 'Be honest',
+              uselessSkill: 'None',
+              biography: 'To see is to believed',
+              spendTime: 'Studying',
+              pets: 'Cat, Dog',
+              aboutMe: 'Im a honest person'
 }
+res.json(response.success({
+  item:profiles[index],
+  allItemCount:1,
+  message:"Profile successfully updated"
+}))
+}
+}
+
+// export const updateProfile = async (req: Request, res: Response) => {
+//   const file = req.files
+//   const {
+//     school,
+//     work,
+//     live,
+//     language,
+//     born,
+//     favoriteSong,
+//     obsessedWith,
+//     funFact,
+//     uselessSkill,
+//     biography,
+//     spendTime,
+//     pets,
+//     aboutMe,
+//     imageKey,
+//   } = req.body
+//   try {
+//     const getUser = await prisma.user.findFirst({
+//       where: {
+//         personalInfo: {
+//           userId: res.locals.user.id,
+//         },
+//       },
+//       include: {
+//         personalInfo: true,
+//       },
+//     })
+//     if (!getUser) {
+//       return res.json(response.error({ message: USER_NOT_EXIST }))
+//     }
+//     if (
+//       file ||
+//       imageKey ||
+//       school ||
+//       work ||
+//       live ||
+//       language ||
+//       born ||
+//       favoriteSong ||
+//       obsessedWith ||
+//       funFact ||
+//       uselessSkill ||
+//       biography ||
+//       spendTime ||
+//       pets ||
+//       aboutMe
+//     ) {
+//       const upload = await fileService.upload({files:file})
+//       const patchProfile = await prisma.personalInfo.update({
+//         where: {
+//           id: getUser.personalInfo?.id,
+//           deletedAt: null,
+//         },
+//         data: {
+//           profile: JSON.stringify({
+//             imageKey: upload.key,
+//             school: 'LSPU',
+//             work: 'Zkript',
+//             live: 'Santa Maria Laguna',
+//             language: 'English, Tagalog',
+//             decadeWereBorn: '90s',
+//             favoriteSong: 'I believe',
+//             obsessedWith: 'her',
+//             funFact: 'Be honest',
+//             uselessSkill: 'None',
+//             biography: 'To see is to believed',
+//             spendTime: 'Studying',
+//             pets: 'Cat, Dog',
+//             aboutMe: 'Im a honest person'
+//           }),
+//         },
+//       })
+//       res.json(
+//         response.success({
+//           item: JSON.parse(patchProfile.profile as string),
+//           allItemCount: 1,
+//           message: 'Profile successfully updated',
+//         })
+//       )
+//     } else {
+//       res.json(response.error({ message: REQUIRED_VALUE_EMPTY }))
+//     }
+//   } catch (err: any) {
+//     const message = err.message ? err.message : UNKNOWN_ERROR_OCCURRED
+//     res.json(response.error({ message: message }))
+//   }
+// }

@@ -13,6 +13,9 @@ import SetupProfileImage from "@/module/Profile/Setup/SetupProfileImage"
 import { APP_NAME } from "@repo/constants"
 import useGetProfile from "../hooks/useGetProfile"
 import useProfileEditStore from "./store/useProfileEditStore"
+import useUpdateProfile from "../hooks/useUpdateProfile"
+import { useQueryClient } from "@tanstack/react-query"
+import { Spinner } from "@/common/components/ui/Spinner"
 
 const dest = [
   {
@@ -34,7 +37,8 @@ const dest = [
 ]
 
 const Setup = () => {
-  const { data } = useGetProfile(2)
+  const { data, isPending:profileIsPending} = useGetProfile()
+  const {mutate, isPending} = useUpdateProfile() 
   const profile = useProfileEditStore.getState()
   const { setProfileEdit } = useProfileEditStore((state) => state)
   useEffect(() => {
@@ -42,12 +46,29 @@ const Setup = () => {
       setProfileEdit({ ...data?.item })
     }
   }, [data])
+
+  const queryClient = useQueryClient()
+  const callBackReq = {
+    onSuccess: (data: any) => {
+      if (!data.error) {
+        queryClient.invalidateQueries({
+          queryKey: ["user-profile"],
+        })
+        toast.success(data.message)
+      } else {
+        toast.error(String(data.message))
+      }
+    },
+    onError: (err: any) => {
+      toast.error(String(err))
+    },
+  }
   const save = () => {
-    console.log("savedInput: ", profile)
-    toast.success("Data saved successfully")
+    mutate({aboutMe:""},callBackReq)
   }
   return (
     <WidthWrapper width="small" className="mt-32 lg:mt-40">
+      {profileIsPending ? (<Spinner size="md">Loading...</Spinner>):(
       <div className="flex flex-col lg:flex-row gap-0 md:gap-8 mx-auto">
         <div className="w-72 mx-auto md:mx-none">
           <SetupProfileImage />
@@ -78,11 +99,14 @@ const Setup = () => {
           <div className="border-t mt-5"></div>
           <div className="flex justify-end sm:text-right pt-5">
             <Button variant="primary" onClick={save}>
-              Done
+              {isPending? (
+                <Spinner size="sm">Loading...</Spinner>
+              ):"Done"}
             </Button>
           </div>
         </div>
       </div>
+      )}
     </WidthWrapper>
   )
 }
