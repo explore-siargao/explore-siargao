@@ -5,10 +5,15 @@ import { XMarkIcon } from "@heroicons/react/24/outline"
 import { ChevronRight, ChevronLeft } from "lucide-react"
 
 type Prop = {
+    images: []
+    location: string
+    desc: string
+    rating: string
+    countReviews: number
     onClose: () => void
 }
 
-const MapCustomPopup = ({onClose}: Prop) => {
+const MapCustomPopup = ({images, location, desc, rating, countReviews, onClose}: Prop) => {
     return(
         <>
         <style>
@@ -45,14 +50,14 @@ const MapCustomPopup = ({onClose}: Prop) => {
             <div className="h-44 w-44">
             <div className="absolute bottom-0 left-0 right-0 h-[36%] w-full p-1.5">
                 <div className="flex justify-between items-center">
-                    <h4 className="font-semibold text-sm w-32 whitespace-nowrap overflow-hidden text-ellipsis">Hut in Balian Beach</h4>
+                    <h4 className="font-semibold text-sm w-32 whitespace-nowrap overflow-hidden text-ellipsis">{location}</h4>
                     <div className="space-x-0.5 flex items-center">
                         <StarIcon className="h-4 w-4"/>
-                        <h4 className="text-sm">4.86</h4>
-                        <h4 className="text-sm">(325)</h4>
+                        <h4 className="text-sm">{rating}</h4>
+                        <h4 className="text-sm">({countReviews})</h4>
                     </div>
                 </div>
-                <h4 className="text-sm text-gray-500 whitespace-nowrap overflow-hidden text-ellipsis">BALIAN TREE HOUSE OF BALIAN TREE</h4>
+                <h4 className="text-sm text-gray-500 whitespace-nowrap overflow-hidden text-ellipsis">{desc}</h4>
                 <h4 className="text-sm text-gray-500 whitespace-nowrap overflow-hidden text-ellipsis">1 king bed</h4>
             </div>
             </div>
