@@ -1,3 +1,4 @@
+"use client"
 import { Typography } from "@/common/components/ui/Typography"
 import React from "react"
 import {
@@ -10,8 +11,10 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts"
+import useGetThisMonthEarnings from "../hooks/useGetThisMonthEarnings"
+import { Spinner } from "@/common/components/ui/Spinner"
 
-const data = [
+const datas = [
   {
     month: "Jan",
     earnings: 40.0,
@@ -78,13 +81,14 @@ const EarningsThisMonth = ({
   serviceFee,
   taxesWithheld,
 }: IYearToDateSummary) => {
+  const {data, isPending} = useGetThisMonthEarnings()
   const summaryData = [
     ["Gross earnings", "Adjustments", "Service fee", "Taxes withheld"],
     [
-      `$${grossEarnings.toFixed(2)}`,
-      `$${adjustments.toFixed(2)}`,
-      `$${serviceFee.toFixed(2)}`,
-      `$${taxesWithheld.toFixed(2)}`,
+      `₱${grossEarnings.toFixed(2)}`,
+      `₱${adjustments.toFixed(2)}`,
+      `₱${serviceFee.toFixed(2)}`,
+      `₱${taxesWithheld.toFixed(2)}`,
     ],
   ]
 
@@ -95,30 +99,35 @@ const EarningsThisMonth = ({
           Earnings
         </Typography>
         <Typography variant="h1">
-          You've made <span className="text-gray-400">$102.00</span> this month
+          You've made <span className="text-gray-400">₱{isPending ? 0.00 : data?.item&& (data?.item.total).toFixed(2)}</span> this month
         </Typography>
         <ResponsiveContainer width="100%" height={400}>
+          {isPending ?(
+            <Spinner size="md">Loading...</Spinner>
+          ):(
           <LineChart
             width={500}
             height={400}
-            data={data}
+            data={data?.item ? data.item.amount:[]}
             margin={{
               top: 40,
-              right: 80,
+              right: 90,
+              left:10
             }}
           >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="month" />
-            <YAxis tickFormatter={(value) => `$${value}`} />
-            <Tooltip formatter={(value) => `$${value}`} />
+            <XAxis dataKey={"date"} tickFormatter={(value:string)=>new Date(value).toLocaleDateString('en-US',{year:'numeric',day:"numeric",month:"long"})} />
+            <YAxis dataKey={"earning"} tickFormatter={(value: number) => `₱${value}`} />
+            <Tooltip formatter={(value: number) => `₱${value}`} />
             <Legend />
             <Line
               type="monotone"
-              dataKey="earnings"
+              dataKey="earning"
               stroke="#8884d8"
               activeDot={{ r: 8 }}
             />
           </LineChart>
+          )}
         </ResponsiveContainer>
       </div>
 
@@ -147,8 +156,8 @@ const EarningsThisMonth = ({
           </div>
 
           <div className="bottom-0 border-t flex gap-4 justify-between">
-            <Typography className="pt-4 text-sm">Total(USD)</Typography>
-            <Typography className="pt-4 text-sm">$102.00</Typography>
+            <Typography className="pt-4 text-sm">Total(Peso)</Typography>
+            <Typography className="pt-4 text-sm">₱102.00</Typography>
           </div>
         </div>
       </div>

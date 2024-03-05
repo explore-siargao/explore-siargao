@@ -41,8 +41,8 @@ router.delete(
   deleteBooking
 )
 
-router.get('/this-month', getThisMonthEarnings)
-router.get('/upcoming', getUpcomingEarnings)
-router.get('/paid', getPaidEarnings)
+router.get('/earnings/this-month', getThisMonthEarnings)
+router.get('/earnings/upcoming', getUpcomingEarnings)
+router.get('/earnings/paid', getPaidEarnings)
 
 export default router
