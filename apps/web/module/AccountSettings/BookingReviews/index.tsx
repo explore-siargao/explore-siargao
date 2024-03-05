@@ -104,23 +104,23 @@ const BookingReviews = () => {
   } else if (tableState === 0) {
     content = (
       <div className="flex flex-col">
-        {toReviewsData?.items?.length === 0 ? 
-        (<Typography variant="h3">No bookings at the moment.</Typography>)
-        :
-        toReviewsData?.items?.map((item, index) => (
-          <div key={item.id}>
-            <BookingReviewItemPending
-              id={item.id}
-              title={item.listing.title}
-              image={item.listing.image}
-              dateFrom={item.fromDate}
-              dateTo={item.toDate}
-              key={item.id}
-            />
-            {index === toReviewsData?.items?.length! - 1 ? <></> : <hr />}
-          </div>
-        ))
-        }
+        {toReviewsData?.items?.length === 0 ? (
+          <Typography variant="h3">No bookings at the moment.</Typography>
+        ) : (
+          toReviewsData?.items?.map((item, index) => (
+            <div key={item.id}>
+              <BookingReviewItemPending
+                id={item.id}
+                title={item.listing.title}
+                image={item.listing.image}
+                dateFrom={item.fromDate}
+                dateTo={item.toDate}
+                key={item.id}
+              />
+              {index === toReviewsData?.items?.length! - 1 ? <></> : <hr />}
+            </div>
+          ))
+        )}
       </div>
     )
   }
