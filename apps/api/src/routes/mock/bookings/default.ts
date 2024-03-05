@@ -9,7 +9,8 @@ let toReviews = [
     listingId: 1,
     listing: {
       title: 'Open World',
-      image: '1.jpg',
+      imageKey: '1.jpg',
+      address: "Santa Maria, Laguna",
     },
     createdAt: '2024-03-05 02:54:13.658',
   },
@@ -20,7 +21,8 @@ let toReviews = [
     listingId: 2,
     listing: {
       title: 'Mountain Retreat',
-      image: '2.jpg',
+      imageKey: '2.jpg',
+      address: "Mabitac, Laguna",
     },
     createdAt: '2024-03-06 04:16:10.987',
   },
@@ -31,7 +33,8 @@ let toReviews = [
     listingId: 3,
     listing: {
       title: 'Beach House Paradise',
-      image: '3.jpg',
+      imageKey: '3.jpg',
+      address: "Pangil, Laguna",
     },
     createdAt: '2024-03-07 08:46:30.123',
   },
@@ -42,7 +45,8 @@ let toReviews = [
     listingId: 4,
     listing: {
       title: 'City Apartment',
-      image: '4.jpg',
+      imageKey: '4.jpg',
+      address: "Pakil, Laguna",
     },
     createdAt: '2024-03-08 12:31:05.321',
   },
@@ -53,7 +57,8 @@ let toReviews = [
     listingId: 5,
     listing: {
       title: 'Countryside Cottage',
-      image: '5.jpg',
+      imageKey: '5.jpg',
+      address: "Paete, Laguna",
     },
     createdAt: '2024-03-09 15:21:20.765',
   },
@@ -64,7 +69,8 @@ let toReviews = [
     listingId: 6,
     listing: {
       title: 'Luxury Villa',
-      image: '1.jpg',
+      imageKey: '1.jpg',
+      address: "Lumban, Laguna",
     },
     createdAt: '2024-03-10 18:11:40.234',
   },
@@ -75,7 +81,8 @@ let toReviews = [
     listingId: 7,
     listing: {
       title: 'Riverside Cabin',
-      image: '2.jpg',
+      imageKey: '2.jpg',
+      address: "Pagsanjan, Laguna",
     },
     createdAt: '2024-03-11 22:06:15.789',
   },
@@ -86,7 +93,8 @@ let toReviews = [
     listingId: 8,
     listing: {
       title: 'Historic Mansion',
-      image: '2.jpg',
+      imageKey: '2.jpg',
+      address: "Santa Maria, Laguna",
     },
     createdAt: '2024-03-12 01:41:30.987',
   },
@@ -97,7 +105,8 @@ let toReviews = [
     listingId: 9,
     listing: {
       title: 'Ski Chalet',
-      image: '4.jpg',
+      imageKey: '4.jpg',
+      address: "Pagsanjan, Laguna",
     },
     createdAt: '2024-03-13 05:26:10.654',
   },
@@ -108,7 +117,8 @@ let toReviews = [
     listingId: 10,
     listing: {
       title: 'Treehouse Hideaway',
-      image: '5.jpg',
+      imageKey: '5.jpg',
+      address: "Lumban, Laguna",
     },
     createdAt: '2024-03-14 09:11:20.543',
   },

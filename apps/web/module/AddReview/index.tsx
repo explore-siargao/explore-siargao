@@ -10,10 +10,12 @@ import useSessionStore from "@/common/store/useSessionStore"
 import { WidthWrapper } from "@/common/components/WidthWrapper"
 import toast from "react-hot-toast"
 import useAddReview from "./hooks/useAddReview"
-import useGetListing from "../LandingPage/hooks/useGetListing"
 import { ArrowLeft, ArrowRight, LucideChevronLeft } from "lucide-react"
 import { Title } from "@/common/components/ui/Title"
 import Link from "next/link"
+import useGetToReviewById from "../AccountSettings/hooks/useGetToReviewById"
+import Image from "next/image"
+import { ASSET_ROOT } from "@/common/constants"
 
 const AddReview = () => {
   const listingName = "booking"
@@ -25,7 +27,8 @@ const AddReview = () => {
 
   const userId = useSessionStore((state) => state).id
   const { mutate } = useAddReview(userId as number)
-  const { data } = useGetListing(listingId)
+  const { data: toReviewData } = useGetToReviewById(listingId)
+
   const form = useForm()
   const stepHandler = (action: "back" | "next") => {
     if (action === "back") {
@@ -187,10 +190,12 @@ const AddReview = () => {
           </form>
         </FormProvider>
         <div className="w-full flex flex-col gap-y-4 h-full">
-          <div className="w-full p-4 border bg-primary-50 rounded-md h-full"></div>
+          <div className="w-full p-4 border bg-primary-50 rounded-md h-full relative">
+            <Image src={`${ASSET_ROOT}/${toReviewData?.item?.listing?.imageKey}`} layout="fill" objectFit="cover" alt="booking-image" className="rounded-md" />
+          </div>
           <div>
-            <div className="font-medium">{data?.item?.title}</div>
-            <div className="text-gray-400">{data?.item?.address}</div>
+            <div className="font-medium">{toReviewData?.item?.listing?.title}</div>
+            <div className="text-gray-400">{toReviewData?.item?.listing?.address}</div>
           </div>
         </div>
       </div>
