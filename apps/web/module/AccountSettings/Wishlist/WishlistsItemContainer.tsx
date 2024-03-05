@@ -136,7 +136,7 @@ const WishlistsItemContainer = () => {
         queryClient.invalidateQueries({
           queryKey: ["wish-group-count"],
         })
-        toast.success("Wishlist Successfully removed from group")
+        toast.success("Wishlist successfully removed from the group")
       } else {
         toast.error(String(data.message))
       }
@@ -216,7 +216,7 @@ const WishlistsItemContainer = () => {
                     <HeartButton
                       id={item.id}
                       isClicked={Boolean(isClickedArray[index])}
-                      onClick={() => handleClick(index, item?.id as number)}
+                      onClick={() => handleClick(index, item?.listingId as number)}
                     />
                     <Image
                       src={`/assets/${item.listing.images[0].fileKey}`}

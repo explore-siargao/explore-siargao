@@ -21,12 +21,14 @@ interface AddWishlistProps {
   listingId: number
   isOpen: boolean
   onClose: () => void
+  handleAdded: () => void
 }
 
 const AddWishlistModal = ({
   listingId,
   isOpen: showModal,
   onClose: hideModal,
+  handleAdded
 }: AddWishlistProps) => {
   const userId = useSessionStore((state) => state).id
   const cancelButtonRef = useRef(null)
@@ -52,6 +54,7 @@ const AddWishlistModal = ({
         queryClient.invalidateQueries({
           queryKey: ["wish-group-count"],
         })
+        handleAdded()
         hideModal()
         toast.success("Wish Group Successfully Created")
       } else {

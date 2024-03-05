@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Title } from "../../../common/components/ui/Title"
 import { HeartIcon } from "@heroicons/react/24/outline"
 import { StarIcon } from "@heroicons/react/20/solid"
@@ -8,6 +8,8 @@ import AddWishlistModal from "@/module/AccountSettings/components/modals/AddWish
 import useSessionStore from "../../../common/store/useSessionStore"
 import Slider from "../../../common/components/Slider"
 import toast from "react-hot-toast"
+import useRemoveFromWishGroup from "@/module/AccountSettings/hooks/useRemoveFromWishGroup"
+import { useQueryClient } from "@tanstack/react-query"
 
 type BoxContainerProps = {
   listingId: number
@@ -35,18 +37,54 @@ const BoxContainer = ({
   ratings,
   isHearted,
 }: BoxContainerProps) => {
-  const [isClicked, setIsClicked] = useState(false)
+  const [addWIshlistModal, setAddWIshlistModal] = useState(false)
+  const userId = useSessionStore((state) => state).id
+
+  const [isAdded, setIsAdded] = useState(false)
+
+  const { mutate } = useRemoveFromWishGroup()
+  const queryClient = useQueryClient()
+  
+  const callBackReq = {
+    onSuccess: (data: any) => {
+      if (!data.error) {
+        setIsAdded(false)
+
+        queryClient.invalidateQueries({
+          queryKey: ["wish-group"],
+        })
+        queryClient.invalidateQueries({
+          queryKey: ["wish-group-count"],
+        })
+
+        toast.success("Wishlist successfully removed from the group")
+      } else {
+        toast.error(String(data.message))
+      }
+    },
+    onError: (err: any) => {
+      toast.error(String(err))
+    },
+  }
+
   const handleClick = () => {
     if (userId) {
-      setIsClicked((setIsClicked) => !setIsClicked)
-      setAddWIshlistModal(!isClicked)
+      if(isAdded) {
+        mutate({ id: listingId }, callBackReq)
+      }
+      else {
+        setAddWIshlistModal(true)
+      }
     } else {
       toast.error("You need to log in to add it to wishlist")
     }
   }
-
-  const [addWIshlistModal, setAddWIshlistModal] = useState(false)
-  const userId = useSessionStore((state) => state).id
+  
+  useEffect(() => {
+    if(isHearted) {
+      setIsAdded(true)
+    }
+  }, [])
 
   return (
     <>
@@ -55,7 +93,7 @@ const BoxContainer = ({
           <button onClick={handleClick} className="absolute top-3 right-3 z-40">
             <HeartIcon
               className={` h-7 w-7 text-text-50 active:scale-90 ${
-                isClicked || isHearted ? "fill-error-500" : "fill-text-500/50 "
+                isAdded ? "fill-error-500" : "fill-text-500/50 "
               }`}
             />
           </button>
@@ -86,6 +124,7 @@ const BoxContainer = ({
       <AddWishlistModal
         listingId={listingId}
         isOpen={addWIshlistModal}
+        handleAdded={() => setIsAdded(true)}
         onClose={() => setAddWIshlistModal(false)}
       />
     </>
