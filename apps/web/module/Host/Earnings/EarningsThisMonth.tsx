@@ -81,7 +81,7 @@ const EarningsThisMonth = ({
   serviceFee,
   taxesWithheld,
 }: IYearToDateSummary) => {
-  const {data, isPending} = useGetThisMonthEarnings()
+  const { data, isPending } = useGetThisMonthEarnings()
   const summaryData = [
     ["Gross earnings", "Adjustments", "Service fee", "Taxes withheld"],
     [
@@ -99,34 +99,50 @@ const EarningsThisMonth = ({
           Earnings
         </Typography>
         <Typography variant="h1">
-          You've made <span className="text-gray-400">₱{isPending ? 0.00 : data?.item&& (data?.item.total).toFixed(2)}</span> this month
+          You've made{" "}
+          <span className="text-gray-400">
+            ₱{isPending ? 0.0 : data?.item && (data?.item.total).toFixed(2)}
+          </span>{" "}
+          this month
         </Typography>
         <ResponsiveContainer width="100%" height={400}>
-          {isPending ?(
+          {isPending ? (
             <Spinner size="md">Loading...</Spinner>
-          ):(
-          <LineChart
-            width={500}
-            height={400}
-            data={data?.item ? data.item.amount:[]}
-            margin={{
-              top: 40,
-              right: 90,
-              left:10
-            }}
-          >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey={"date"} tickFormatter={(value:string)=>new Date(value).toLocaleDateString('en-US',{year:'numeric',day:"numeric",month:"long"})} />
-            <YAxis dataKey={"earning"} tickFormatter={(value: number) => `₱${value}`} />
-            <Tooltip formatter={(value: number) => `₱${value}`} />
-            <Legend />
-            <Line
-              type="monotone"
-              dataKey="earning"
-              stroke="#8884d8"
-              activeDot={{ r: 8 }}
-            />
-          </LineChart>
+          ) : (
+            <LineChart
+              width={500}
+              height={400}
+              data={data?.item ? data.item.amount : []}
+              margin={{
+                top: 40,
+                right: 90,
+                left: 10,
+              }}
+            >
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis
+                dataKey={"date"}
+                tickFormatter={(value: string) =>
+                  new Date(value).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    day: "numeric",
+                    month: "long",
+                  })
+                }
+              />
+              <YAxis
+                dataKey={"earning"}
+                tickFormatter={(value: number) => `₱${value}`}
+              />
+              <Tooltip formatter={(value: number) => `₱${value}`} />
+              <Legend />
+              <Line
+                type="monotone"
+                dataKey="earning"
+                stroke="#8884d8"
+                activeDot={{ r: 8 }}
+              />
+            </LineChart>
           )}
         </ResponsiveContainer>
       </div>
