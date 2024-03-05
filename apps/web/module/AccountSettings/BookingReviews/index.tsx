@@ -12,6 +12,7 @@ import useSessionStore from "@/common/store/useSessionStore"
 import { ACCOUNT, BOOKING_REVIEWS } from "@/common/constants"
 import useGetListings from "../hooks/useGetListings"
 import useGetToReviews from "../hooks/useGetToReviews"
+import { Typography } from "@/common/components/ui/Typography"
 
 const BookingReviews = () => {
   const [tableState, setTableState] = useState(0)
@@ -103,7 +104,10 @@ const BookingReviews = () => {
   } else if (tableState === 0) {
     content = (
       <div className="flex flex-col">
-        {toReviewsData?.items?.map((item, index) => (
+        {toReviewsData?.items?.length === 0 ? 
+        (<Typography variant="h3">No bookings at the moment.</Typography>)
+        :
+        toReviewsData?.items?.map((item, index) => (
           <div key={item.id}>
             <BookingReviewItemPending
               id={item.id}
@@ -115,7 +119,8 @@ const BookingReviews = () => {
             />
             {index === toReviewsData?.items?.length! - 1 ? <></> : <hr />}
           </div>
-        ))}
+        ))
+        }
       </div>
     )
   }
