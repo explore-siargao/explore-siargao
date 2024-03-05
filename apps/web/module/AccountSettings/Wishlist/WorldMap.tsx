@@ -84,27 +84,20 @@ const WorldMap = () => {
                 icon={navIcon}
                 >
                   <MapCustomPopup 
+                  itemId={item.id}
+                  price={
+                    item.listing.price.fee +
+                    item.listing.price.serviceFee +
+                    item.listing.price.cleaningFee
+                  }
+                  date={item.listing.description}
+                  isNight={false}
                   images={item.listing.images}
                   location={item.listing.address}
                   desc={item.listing.title}
                   rating={"0.0"}
                   countReviews={item.listing.review.length}
                   onClose={closePopup}/>
-                  {/* <Listing
-                    key={item.id}
-                    listingId={item.id}
-                    location={item.listing.address}
-                    date={item.listing.description}
-                    distance={"100 kilometers"}
-                    price={"₱" + (item.listing.price.fee +
-                      item.listing.price.serviceFee +
-                      item.listing.price.cleaningFee)
-                    }
-                    imageKey={item.listing.images}
-                    dayTime={item?.price?.isNight}
-                    ratings={"0.0"}
-                    isHearted={true}
-                  /> */}
                 </Marker>
               ))
           )}

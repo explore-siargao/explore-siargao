@@ -3,8 +3,13 @@ import Image from "next/image"
 import { StarIcon, HeartIcon } from "@heroicons/react/20/solid"
 import { XMarkIcon } from "@heroicons/react/24/outline"
 import { ChevronRight, ChevronLeft } from "lucide-react"
+import Listing from "@/module/Listing"
 
 type Prop = {
+    itemId: number
+    date: string
+    price: number
+    isNight: boolean
     images: []
     location: string
     desc: string
@@ -13,7 +18,7 @@ type Prop = {
     onClose: () => void
 }
 
-const MapCustomPopup = ({images, location, desc, rating, countReviews, onClose}: Prop) => {
+const MapCustomPopup = ({itemId, date, price, isNight, images, location, desc, rating, countReviews, onClose}: Prop) => {
     return(
         <>
         <style>
@@ -26,7 +31,7 @@ const MapCustomPopup = ({images, location, desc, rating, countReviews, onClose}:
         }
         </style>
         <Popup className="request-popup">
-            <div className="absolute bg-gray-200 top-0 left-0 right-0 rounded-none h-[64%] w-full">
+            {/* <div className="absolute bg-gray-200 top-0 left-0 right-0 rounded-none h-[64%] w-full">
                 <div className="relative h-full w-full">
                     <Image src="/assets/1.jpg" layout="fill" objectFit="cover" alt=""/>
                 </div>
@@ -60,7 +65,21 @@ const MapCustomPopup = ({images, location, desc, rating, countReviews, onClose}:
                 <h4 className="text-sm text-gray-500 whitespace-nowrap overflow-hidden text-ellipsis">{desc}</h4>
                 <h4 className="text-sm text-gray-500 whitespace-nowrap overflow-hidden text-ellipsis">1 king bed</h4>
             </div>
-            </div>
+            </div> */}
+            <ul className="absolute bg-gray-200 top-0 left-0 right-0 rounded-none w-[300px]">
+                <Listing
+                    key={itemId}
+                    listingId={itemId}
+                    location={location}
+                    date={date}
+                    distance={"100 kilometers"}
+                    price={"₱" + price}
+                    imageKey={images}
+                    dayTime={isNight ? "Night" : ""}
+                    ratings={"0.0"}
+                    isHearted={true}
+                  />
+            </ul>
         </Popup>
         </>
     )
