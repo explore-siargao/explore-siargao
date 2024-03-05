@@ -191,11 +191,21 @@ const AddReview = () => {
         </FormProvider>
         <div className="w-full flex flex-col gap-y-4 h-full">
           <div className="w-full p-4 border bg-primary-50 rounded-md h-full relative">
-            <Image src={`${ASSET_ROOT}/${toReviewData?.item?.listing?.imageKey}`} layout="fill" objectFit="cover" alt="booking-image" className="rounded-md" />
+            <Image
+              src={`${ASSET_ROOT}/${toReviewData?.item?.listing?.imageKey}`}
+              layout="fill"
+              objectFit="cover"
+              alt="booking-image"
+              className="rounded-md"
+            />
           </div>
           <div>
-            <div className="font-medium">{toReviewData?.item?.listing?.title}</div>
-            <div className="text-gray-400">{toReviewData?.item?.listing?.address}</div>
+            <div className="font-medium">
+              {toReviewData?.item?.listing?.title}
+            </div>
+            <div className="text-gray-400">
+              {toReviewData?.item?.listing?.address}
+            </div>
           </div>
         </div>
       </div>

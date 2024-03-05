@@ -10,7 +10,7 @@ let toReviews = [
     listing: {
       title: 'Open World',
       imageKey: '1.jpg',
-      address: "Santa Maria, Laguna",
+      address: 'Santa Maria, Laguna',
     },
     createdAt: '2024-03-05 02:54:13.658',
   },
@@ -22,7 +22,7 @@ let toReviews = [
     listing: {
       title: 'Mountain Retreat',
       imageKey: '2.jpg',
-      address: "Mabitac, Laguna",
+      address: 'Mabitac, Laguna',
     },
     createdAt: '2024-03-06 04:16:10.987',
   },
@@ -34,7 +34,7 @@ let toReviews = [
     listing: {
       title: 'Beach House Paradise',
       imageKey: '3.jpg',
-      address: "Pangil, Laguna",
+      address: 'Pangil, Laguna',
     },
     createdAt: '2024-03-07 08:46:30.123',
   },
@@ -46,7 +46,7 @@ let toReviews = [
     listing: {
       title: 'City Apartment',
       imageKey: '4.jpg',
-      address: "Pakil, Laguna",
+      address: 'Pakil, Laguna',
     },
     createdAt: '2024-03-08 12:31:05.321',
   },
@@ -58,7 +58,7 @@ let toReviews = [
     listing: {
       title: 'Countryside Cottage',
       imageKey: '5.jpg',
-      address: "Paete, Laguna",
+      address: 'Paete, Laguna',
     },
     createdAt: '2024-03-09 15:21:20.765',
   },
@@ -70,7 +70,7 @@ let toReviews = [
     listing: {
       title: 'Luxury Villa',
       imageKey: '1.jpg',
-      address: "Lumban, Laguna",
+      address: 'Lumban, Laguna',
     },
     createdAt: '2024-03-10 18:11:40.234',
   },
@@ -82,7 +82,7 @@ let toReviews = [
     listing: {
       title: 'Riverside Cabin',
       imageKey: '2.jpg',
-      address: "Pagsanjan, Laguna",
+      address: 'Pagsanjan, Laguna',
     },
     createdAt: '2024-03-11 22:06:15.789',
   },
@@ -94,7 +94,7 @@ let toReviews = [
     listing: {
       title: 'Historic Mansion',
       imageKey: '2.jpg',
-      address: "Santa Maria, Laguna",
+      address: 'Santa Maria, Laguna',
     },
     createdAt: '2024-03-12 01:41:30.987',
   },
@@ -106,7 +106,7 @@ let toReviews = [
     listing: {
       title: 'Ski Chalet',
       imageKey: '4.jpg',
-      address: "Pagsanjan, Laguna",
+      address: 'Pagsanjan, Laguna',
     },
     createdAt: '2024-03-13 05:26:10.654',
   },
@@ -118,7 +118,7 @@ let toReviews = [
     listing: {
       title: 'Treehouse Hideaway',
       imageKey: '5.jpg',
-      address: "Lumban, Laguna",
+      address: 'Lumban, Laguna',
     },
     createdAt: '2024-03-14 09:11:20.543',
   },

@@ -61,7 +61,9 @@ const BookingReviewItemPending = ({
       </div>
       <div className="w-full text-right">
         <Button
-          onClick={() => router.push(`/account-settings/booking-reviews/add-review/${id}`)}
+          onClick={() =>
+            router.push(`/account-settings/booking-reviews/add-review/${id}`)
+          }
           variant={"primary"}
         >
           Add Review
