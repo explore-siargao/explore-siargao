@@ -28,7 +28,7 @@ const AddWishlistModal = ({
   listingId,
   isOpen: showModal,
   onClose: hideModal,
-  handleAdded
+  handleAdded,
 }: AddWishlistProps) => {
   const userId = useSessionStore((state) => state).id
   const cancelButtonRef = useRef(null)

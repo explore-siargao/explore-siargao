@@ -44,7 +44,7 @@ const BoxContainer = ({
 
   const { mutate } = useRemoveFromWishGroup()
   const queryClient = useQueryClient()
-  
+
   const callBackReq = {
     onSuccess: (data: any) => {
       if (!data.error) {
@@ -69,19 +69,18 @@ const BoxContainer = ({
 
   const handleClick = () => {
     if (userId) {
-      if(isAdded) {
+      if (isAdded) {
         mutate({ id: listingId }, callBackReq)
-      }
-      else {
+      } else {
         setAddWIshlistModal(true)
       }
     } else {
       toast.error("You need to log in to add it to wishlist")
     }
   }
-  
+
   useEffect(() => {
-    if(isHearted) {
+    if (isHearted) {
       setIsAdded(true)
     }
   }, [])
