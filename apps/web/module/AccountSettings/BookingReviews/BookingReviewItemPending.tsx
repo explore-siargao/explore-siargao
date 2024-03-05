@@ -1,35 +1,46 @@
 import { Button } from "@/common/components/ui/Button"
 import { Textarea } from "@/common/components/ui/Textarea"
 import { Typography } from "@/common/components/ui/Typography"
+import { ASSET_ROOT } from "@/common/constants"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 import React from "react"
 
 type BookingReviewItemProps = {
   id: number
-  pic?: string
-  name: string
-  reviewedTime?: string
+  image: string
+  title: string
+  dateFrom: string
+  dateTo: string
 }
 
 const BookingReviewItemPending = ({
   id,
-  name,
-  pic,
-  reviewedTime,
+  title,
+  image,
+  dateFrom,
+  dateTo,
 }: BookingReviewItemProps) => {
   const router = useRouter()
+
+  const rawDateFrom = new Date(dateFrom)
+  const rawDateTo = new Date(dateTo)
+
+  const formattedDateFrom = rawDateFrom.toLocaleDateString("en-US", {month: "long", day: "numeric", year: "numeric"})
+  const formattedDateTo = rawDateTo.toLocaleDateString("en-US", {month: "long", day: "numeric", year: "numeric"})
   return (
     <div key={id} className="flex w-full p-6 gap-x-4 items-center">
       <div className="flex w-full gap-x-4 items-center">
-        <div className="h-24 w-24 rounded-lg bg-primary-100"></div>
+        <div className="h-24 w-24 rounded-lg bg-primary-100 relative">
+          <Image src={`${ASSET_ROOT}/${image}`} layout="fill" objectFit="cover" className="rounded-lg" alt="booking-image" />
+        </div>
         <div className="h-full flex flex-col content-between">
           <div className="col-span-3">
-            <Typography variant={"h2"}>{name}</Typography>
+            <Typography variant={"h3"}>{title}</Typography>
           </div>
           <div className="col-span-3">
-            <Typography variant={"p"} className="text-gray-500 flex-shrink-0">
-              June 7, 2024 to June 12, 2024
+            <Typography variant="h6" className="text-gray-500 flex-shrink-0">
+              {formattedDateFrom} to {formattedDateTo}
             </Typography>
           </div>
         </div>
