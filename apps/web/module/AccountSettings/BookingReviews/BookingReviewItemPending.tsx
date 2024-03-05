@@ -26,13 +26,27 @@ const BookingReviewItemPending = ({
   const rawDateFrom = new Date(dateFrom)
   const rawDateTo = new Date(dateTo)
 
-  const formattedDateFrom = rawDateFrom.toLocaleDateString("en-US", {month: "long", day: "numeric", year: "numeric"})
-  const formattedDateTo = rawDateTo.toLocaleDateString("en-US", {month: "long", day: "numeric", year: "numeric"})
+  const formattedDateFrom = rawDateFrom.toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  })
+  const formattedDateTo = rawDateTo.toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  })
   return (
     <div key={id} className="flex w-full p-6 gap-x-4 items-center">
       <div className="flex w-full gap-x-4 items-center">
         <div className="h-24 w-24 rounded-lg bg-primary-100 relative">
-          <Image src={`${ASSET_ROOT}/${image}`} layout="fill" objectFit="cover" className="rounded-lg" alt="booking-image" />
+          <Image
+            src={`${ASSET_ROOT}/${image}`}
+            layout="fill"
+            objectFit="cover"
+            className="rounded-lg"
+            alt="booking-image"
+          />
         </div>
         <div className="h-full flex flex-col content-between">
           <div className="col-span-3">

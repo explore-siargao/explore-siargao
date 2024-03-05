@@ -141,7 +141,7 @@ const BookingReviews = () => {
             )}
             onClick={() => setTableState(0)}
           >
-            To Review 
+            To Review
             <span className="ml-2 inline-flex items-center rounded-full bg-error-600 px-2.5 py-0.5 text-[10px] font-bold text-white ring-1 ring-inset ring-error-500/10">
               {toReviewsData?.allItemCount}
             </span>
