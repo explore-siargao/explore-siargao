@@ -11,90 +11,7 @@ import useGetReviewsByUserId from "../../Listing/hooks/useGetReviewsByUserId"
 import useSessionStore from "@/common/store/useSessionStore"
 import { ACCOUNT, BOOKING_REVIEWS } from "@/common/constants"
 import useGetListings from "../hooks/useGetListings"
-
-const bookingReviewsDummy = {
-  "error": false,
-  "items": [
-    {
-      "id": 2,
-      "fromDate": "2024-02-06 04:15:20.123",
-      "toDate": "2024-02-11 04:15:20.123",
-      "listingId": 2,
-      "listing": {
-        "title": "Mountain Retreat",
-        "image": "2.jpg"
-      },
-      "createdAt": "2024-03-06 04:16:10.987"
-    },
-    {
-      "id": 3,
-      "fromDate": "2024-02-07 08:45:45.567",
-      "toDate": "2024-02-12 08:45:45.567",
-      "listingId": 3,
-      "listing": {
-        "title": "Beach House Paradise",
-        "image": "3.jpg"
-      },
-      "createdAt": "2024-03-07 08:46:30.123"
-    },
-    {
-      "id": 5,
-      "fromDate": "2024-02-09 15:20:35.456",
-      "toDate": "2024-02-14 15:20:35.456",
-      "listingId": 5,
-      "listing": {
-        "title": "Countryside Cottage",
-        "image": "5.jpg"
-      },
-      "createdAt": "2024-03-09 15:21:20.765"
-    },
-    {
-      "id": 7,
-      "fromDate": "2024-02-11 22:05:30.321",
-      "toDate": "2024-02-16 22:05:30.321",
-      "listingId": 7,
-      "listing": {
-        "title": "Riverside Cabin",
-        "image": "7.jpg"
-      },
-      "createdAt": "2024-03-11 22:06:15.789"
-    },
-    {
-      "id": 8,
-      "fromDate": "2024-02-16 01:40:45.678",
-      "toDate": "2024-03-02 01:40:45.678",
-      "listingId": 8,
-      "listing": {
-        "title": "Historic Mansion",
-        "image": "8.jpg"
-      },
-      "createdAt": "2024-03-12 01:41:30.987"
-    },
-    {
-      "id": 9,
-      "fromDate": "2024-03-01 05:25:20.987",
-      "toDate": "2024-03-04 05:25:20.987",
-      "listingId": 9,
-      "listing": {
-        "title": "Ski Chalet",
-        "image": "9.jpg"
-      },
-      "createdAt": "2024-03-13 05:26:10.654"
-    },
-    {
-      "id": 10,
-      "fromDate": "2024-03-01 09:10:35.234",
-      "toDate": "2024-03-04 09:10:35.234",
-      "listingId": 10,
-      "listing": {
-        "title": "Treehouse Hideaway",
-        "image": "10.jpg"
-      },
-      "createdAt": "2024-03-14 09:11:20.543"
-    }
-  ],
-  "allItemCount": 7
-}
+import useGetToReviews from "../hooks/useGetToReviews"
 
 const BookingReviews = () => {
   const [tableState, setTableState] = useState(0)
@@ -102,6 +19,7 @@ const BookingReviews = () => {
   const userId = useSessionStore().id
   const { data: reviewsByUserId } = useGetReviewsByUserId(userId as number)
   const { data: listingData } = useGetListings()
+  const { data: toReviewsData } = useGetToReviews()
 
   type ratingsSchema = {
     accuracyRates: number
@@ -185,7 +103,7 @@ const BookingReviews = () => {
   } else if (tableState === 0) {
     content = (
       <div className="flex flex-col">
-        {bookingReviewsDummy?.items?.map((item, index) => (
+        {toReviewsData?.items?.map((item, index) => (
           <div key={item.id}>
             <BookingReviewItemPending
               id={item.id}
@@ -195,7 +113,7 @@ const BookingReviews = () => {
               dateTo={item.toDate}
               key={item.id}
             />
-            {index === bookingReviewsDummy?.items.length! - 1 ? <></> : <hr />}
+            {index === toReviewsData?.items?.length! - 1 ? <></> : <hr />}
           </div>
         ))}
       </div>
@@ -218,7 +136,10 @@ const BookingReviews = () => {
             )}
             onClick={() => setTableState(0)}
           >
-            To Review
+            To Review 
+            <span className="ml-2 inline-flex items-center rounded-full bg-error-600 px-2.5 py-0.5 text-[10px] font-bold text-white ring-1 ring-inset ring-error-500/10">
+              {toReviewsData?.allItemCount}
+            </span>
           </button>
           <button
             className={cn(
