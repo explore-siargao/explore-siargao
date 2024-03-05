@@ -8,6 +8,8 @@ import { prisma } from '@/common/helpers/prismaClient'
 import { T_AddBooking, Z_AddBooking, Z_Booking } from '@repo/contract'
 import { ApiService } from '@/common/service/api'
 import { getListingPrice } from '@/common/helpers/getListingPrice'
+import { webUrl } from '@/common/config'
+import { AuthEmail } from '@/routes/bookings/services/authEmail'
 
 const apiService = new ApiService()
 const XENDIT_ROOT_URL = '/api/xendit'
@@ -57,6 +59,8 @@ export const addBooking = async (req: Request, res: Response) => {
           `${XENDIT_ROOT_URL}/gcash-create-payment`,
           { amount: totalPrice, bookingId: newBooking.id }
         )
+      const sendEmailParams = { to: res.locals.user.email, amount: String(totalPrice)}
+      const authEmail = new AuthEmail()
         const newTransaction = await prisma.transaction.create({
           data: {
             userId: res.locals.user.id,
@@ -75,7 +79,9 @@ export const addBooking = async (req: Request, res: Response) => {
             xenditPaymentReferenceId: paymentRequest.item?.reference_id,
           },
         })
-
+        if(newTransaction){
+          authEmail.sendReiptConfirmation(sendEmailParams)
+        }
         res.json(
           response.success({
             item: updatedBooking,
