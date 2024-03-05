@@ -24,10 +24,11 @@ import {
     main,
     paragraph,
     reportLink,
+    listingImage,
   } from './styles'
-  
-  
-  export const EmailConfirmation = (amount:string) =>{
+import formatCurrency from '@/common/helpers/formatCurrency'
+
+  export const PaymentEmailConfirmation = (amount:string,image:string,title:string) =>{
     const date = new Date().toLocaleDateString('en-US',{month:"long", day:"numeric", year:"numeric"})
     return(
     <Html>
@@ -43,15 +44,25 @@ import {
             style={logo}
           />
           <Heading style={heading}>
-            Your Payment Receipt for {APP_NAME}
+            Your payment receipt for {APP_NAME}
           </Heading>
-         
           <Text style={paragraph}>
-            Date: {date}
+          <span style={{ marginRight: '10px' }}>
+          <Img
+            src={`${process.env.WEB_URL}/assets/${image}`}
+            width="60"
+            height="42"
+            alt={title}
+            style={listingImage}
+          /> 
+          </span>
+          <span style={{ marginRight: '10px' }}>Date: {date}</span><br />
+            <span style={{ marginRight: '10px' }}>Amount: {formatCurrency(Number(amount))}</span>
           </Text>
-          <Text style={paragraph}>
-            Amount:	₱{amount}
-          </Text>
+          <Hr style={hr} />
+            <Text style={paragraph}>
+            "Thank you for choosing to visit us! We appreciate your patronage and hope you had an enjoyable experience. We look forward to welcoming you back soon!"
+            </Text>
           <Hr style={hr} />
           <Link href={process.env.WEB_URL} style={reportLink}>
             {APP_NAME}
@@ -62,5 +73,5 @@ import {
   
     )}
   
-  export default EmailConfirmation
+  export default PaymentEmailConfirmation
   

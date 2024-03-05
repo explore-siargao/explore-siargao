@@ -47,7 +47,11 @@ export const addBooking = async (req: Request, res: Response) => {
             userId: res.locals.user.id,
           },
         })
-
+        const getListing = await prisma.listing.findFirst({
+          where: {
+            id: newBooking.listingId,
+          },
+        })
         const totalPrice = await getListingPrice({
           listingId: newBooking.listingId,
           childrenCount: newBooking.childrenCount,
@@ -59,8 +63,14 @@ export const addBooking = async (req: Request, res: Response) => {
           `${XENDIT_ROOT_URL}/gcash-create-payment`,
           { amount: totalPrice, bookingId: newBooking.id }
         )
-      const sendEmailParams = { to: res.locals.user.email, amount: String(totalPrice)}
-      const authEmail = new AuthEmail()
+
+        const sendEmailParams = {
+          to: res.locals.user.email,
+          amount: String(totalPrice),
+          image: JSON.parse(String(getListing?.images))[0].fileKey as string,
+          title:getListing?.title as string
+        }
+        const authEmail = new AuthEmail()
         const newTransaction = await prisma.transaction.create({
           data: {
             userId: res.locals.user.id,
@@ -79,7 +89,7 @@ export const addBooking = async (req: Request, res: Response) => {
             xenditPaymentReferenceId: paymentRequest.item?.reference_id,
           },
         })
-        if(newTransaction){
+        if (newTransaction) {
           authEmail.sendReiptConfirmation(sendEmailParams)
         }
         res.json(

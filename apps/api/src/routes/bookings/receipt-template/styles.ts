@@ -4,6 +4,12 @@ export const logo = {
     height: 42,
   }
   
+  export const listingImage = {
+    borderRadius: 21,
+    width: 60,
+    height: 42,
+  }
+
   export const main = {
     backgroundColor: '#ffffff',
     fontFamily:
@@ -14,6 +20,9 @@ export const logo = {
     margin: '0 auto',
     padding: '20px 0 48px',
     width: '560px',
+    display:'flex',
+    justifyContent: 'space-between'
+
   }
   
   export const heading = {
