@@ -11,31 +11,8 @@ import useGetReviewsByUserId from "../../Listing/hooks/useGetReviewsByUserId"
 import useSessionStore from "@/common/store/useSessionStore"
 import { ACCOUNT, BOOKING_REVIEWS } from "@/common/constants"
 import useGetListings from "../hooks/useGetListings"
-
-const bookingReviewsDummy = [
-  {
-    id: 1,
-    joinedDate: "Joined on August 2014",
-    name: "Luna Tres Villas",
-    pic: "http://localhost:3000/5.jpg",
-    reviewMessage:
-      "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorem omnis similique illum id quo soluta atque tenetur necessitatibus reprehenderit perspiciatis, dolores, aliquid voluptate aut maxime perferendis provident distinctio nulla magni alias dolore facilis? Accusantium, sit. Quo neque numquam itaque minus libero sapiente eum iste odio eius soluta ulla soluta ulla hello pmi nas an asd ! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorem omnis similique illum id quo soluta atque tenetur necessitatibus reprehenderit perspiciatis, dolores",
-    location: "United Kingdom",
-    reviewedTime: "March 3, 2017",
-    averageRating: 3,
-  },
-  {
-    id: 2,
-    joinedDate: "Joined on August 2014",
-    name: "Inn Hotels II",
-    pic: "http://localhost:3000/5.jpg",
-    location: "United Kingdom",
-    reviewMessage:
-      "Laborum nisi consectetur esse irure consequat nulla nulla eu fugiat duis incididunt quis laborum. Nulla ea adipisicing ex et occaecat commodo sint ea do officia irure. Aliquip do incididunt ut sunt. Aliquip velit non consequat velit sit minim laborum voluptate sunt ex excepteur ad deserunt.",
-    reviewedTime: "March 3, 2017",
-    averageRating: 5,
-  },
-]
+import useGetToReviews from "../hooks/useGetToReviews"
+import { Typography } from "@/common/components/ui/Typography"
 
 const BookingReviews = () => {
   const [tableState, setTableState] = useState(0)
@@ -43,6 +20,7 @@ const BookingReviews = () => {
   const userId = useSessionStore().id
   const { data: reviewsByUserId } = useGetReviewsByUserId(userId as number)
   const { data: listingData } = useGetListings()
+  const { data: toReviewsData } = useGetToReviews()
 
   type ratingsSchema = {
     accuracyRates: number
@@ -84,7 +62,7 @@ const BookingReviews = () => {
     "December",
   ]
 
-  if (tableState === 0) {
+  if (tableState === 1) {
     content = (
       <>
         {reviewsByUserId?.items?.map((item, index) => {
@@ -123,20 +101,26 @@ const BookingReviews = () => {
         })}
       </>
     )
-  } else if (tableState === 1) {
+  } else if (tableState === 0) {
     content = (
       <div className="flex flex-col">
-        {listingData?.items?.map((item, index) => (
-          <div key={item.id}>
-            <BookingReviewItemPending
-              id={item.id}
-              name={item.title}
-              pic={JSON.stringify(item.images)}
-              key={item.id}
-            />
-            {index === listingData.items?.length! - 1 ? <></> : <hr />}
-          </div>
-        ))}
+        {toReviewsData?.items?.length === 0 ? (
+          <Typography variant="h3">No bookings at the moment.</Typography>
+        ) : (
+          toReviewsData?.items?.map((item, index) => (
+            <div key={item.id}>
+              <BookingReviewItemPending
+                id={item.id}
+                title={item.listing.title}
+                image={item.listing.image}
+                dateFrom={item.fromDate}
+                dateTo={item.toDate}
+                key={item.id}
+              />
+              {index === toReviewsData?.items?.length! - 1 ? <></> : <hr />}
+            </div>
+          ))
+        )}
       </div>
     )
   }
@@ -157,7 +141,10 @@ const BookingReviews = () => {
             )}
             onClick={() => setTableState(0)}
           >
-            Reviewed
+            To Review
+            <span className="ml-2 inline-flex items-center rounded-full bg-error-600 px-2.5 py-0.5 text-[10px] font-bold text-white ring-1 ring-inset ring-error-500/10">
+              {toReviewsData?.allItemCount}
+            </span>
           </button>
           <button
             className={cn(
@@ -168,7 +155,7 @@ const BookingReviews = () => {
             )}
             onClick={() => setTableState(1)}
           >
-            To Review
+            Reviewed
           </button>
         </div>
         <div className="mt-6">{content}</div>
