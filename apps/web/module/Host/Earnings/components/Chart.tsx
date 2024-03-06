@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 import {
   BarChart,
   Bar,
@@ -8,22 +8,22 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
-} from "recharts";
-import formatCurrency from "@/common/helpers/formatCurrency";
-import { Typography } from "@/common/components/ui/Typography";
+} from "recharts"
+import formatCurrency from "@/common/helpers/formatCurrency"
+import { Typography } from "@/common/components/ui/Typography"
 
 interface YearToDateSummary {
-  gross: number;
-  adjustment: number;
-  serviceFee: number;
-  tax: number;
+  gross: number
+  adjustment: number
+  serviceFee: number
+  tax: number
   total: number
 }
 
 interface Amount {
-  id: number;
-  earning: number;
-  date: string;
+  id: number
+  earning: number
+  date: string
 }
 
 export enum ChartType {
@@ -31,56 +31,62 @@ export enum ChartType {
   "paid",
   "this-month",
 }
-interface Earnings{
-  amount:Amount[]
-  yearToDateSummary:YearToDateSummary,
-  earningsCount:number,
-  total:number
-  }
-
-interface ChartProps {
-  data: Amount[];
-  totalAmount:number
-  isPending: boolean;
-  width: string;
-  height: number;
-  type: ChartType;
+interface Earnings {
+  amount: Amount[]
+  yearToDateSummary: YearToDateSummary
+  earningsCount: number
+  total: number
 }
 
-const Chart = ({ width, height, data, totalAmount, isPending, type,}: ChartProps) => {
-  
-  let title = "";
+interface ChartProps {
+  data: Amount[]
+  totalAmount: number
+  isPending: boolean
+  width: string
+  height: number
+  type: ChartType
+}
+
+const Chart = ({
+  width,
+  height,
+  data,
+  totalAmount,
+  isPending,
+  type,
+}: ChartProps) => {
+  let title = ""
 
   switch (type) {
     case ChartType.upcoming:
-      title = "Your upcoming earnings";
-      break;
+      title = "Your upcoming earnings"
+      break
     case ChartType.paid:
-      title = "Your paid";
-      break;
+      title = "Your paid"
+      break
     case ChartType["this-month"]:
-      title = "You've made this month";
-      break;
+      title = "You've made this month"
+      break
     default:
-      title = "Earnings";
+      title = "Earnings"
   }
 
   return (
     <>
-        <>
+      <>
         <Typography variant="h2" fontWeight="semibold">
           Earnings
         </Typography>
         <Typography variant="h1">
           {title}{" "}
           <span className="text-gray-400">
-            {
-                isPending ? formatCurrency(0.0,"Philippines") : formatCurrency(totalAmount , "Philippines")
-            }
+            {isPending
+              ? formatCurrency(0.0, "Philippines")
+              : formatCurrency(totalAmount, "Philippines")}
           </span>{" "}
         </Typography>
       </>
-       
+
       <ResponsiveContainer width={width} height={height}>
         <BarChart
           data={isPending ? undefined : data}
@@ -107,9 +113,7 @@ const Chart = ({ width, height, data, totalAmount, isPending, type,}: ChartProps
             }
           />
           <Tooltip
-            formatter={(value: number) =>
-              formatCurrency(value, "Philippines")
-            }
+            formatter={(value: number) => formatCurrency(value, "Philippines")}
           />
           <Bar
             dataKey="earning"
@@ -119,7 +123,7 @@ const Chart = ({ width, height, data, totalAmount, isPending, type,}: ChartProps
         </BarChart>
       </ResponsiveContainer>
     </>
-  );
-};
+  )
+}
 
-export default Chart;
+export default Chart

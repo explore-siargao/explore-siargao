@@ -6,22 +6,25 @@ import formatCurrency from "@/common/helpers/formatCurrency"
 import Chart, { ChartType } from "./components/Chart"
 import { format } from "date-fns"
 
-
-
 const EarningUpcoming = () => {
   const { data, isPending } = useGetUpcomingEarnings()
-  const currentDate = new Date();
+  const currentDate = new Date()
 
   const summaryData = [
     ["Gross earnings", "Adjustments", "Service fee", "Taxes withheld"],
     [
       formatCurrency(data?.item?.yearToDateSummary?.gross ?? "", "Philippines"),
-      formatCurrency(data?.item?.yearToDateSummary?.adjustment ?? "", "Philippines"),
-      formatCurrency(data?.item?.yearToDateSummary?.serviceFee ?? "", "Philippines"),
-      formatCurrency(data?.item?.yearToDateSummary?.tax ?? "", "Philippines")
+      formatCurrency(
+        data?.item?.yearToDateSummary?.adjustment ?? "",
+        "Philippines"
+      ),
+      formatCurrency(
+        data?.item?.yearToDateSummary?.serviceFee ?? "",
+        "Philippines"
+      ),
+      formatCurrency(data?.item?.yearToDateSummary?.tax ?? "", "Philippines"),
     ],
-  ];
-  
+  ]
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-4">
@@ -32,13 +35,13 @@ const EarningUpcoming = () => {
           <div className="left p-4 lg:col-span-3">
             {data?.item && data.item.amount.length > 0 ? (
               <>
-                <Chart 
-                data={data.item.amount} 
-                totalAmount ={data.item.total}
-                isPending={isPending} 
-                width="100%" 
-                height={400} 
-                type={ChartType.upcoming} 
+                <Chart
+                  data={data.item.amount}
+                  totalAmount={data.item.total}
+                  isPending={isPending}
+                  width="100%"
+                  height={400}
+                  type={ChartType.upcoming}
                 />
               </>
             ) : (
@@ -82,7 +85,9 @@ const EarningUpcoming = () => {
 
                 <div className="bottom-0 border-t flex gap-4 justify-between">
                   <Typography className="pt-4 text-sm">Total(Peso)</Typography>
-                  <Typography className="pt-4 text-sm">{formatCurrency(data.item.total, "Philippines")}</Typography>
+                  <Typography className="pt-4 text-sm">
+                    {formatCurrency(data.item.total, "Philippines")}
+                  </Typography>
                 </div>
               </div>
             ) : null}
