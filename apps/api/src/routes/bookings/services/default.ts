@@ -13,7 +13,7 @@ import { AuthEmail } from '@/routes/bookings/services/authEmail'
 
 const apiService = new ApiService()
 const XENDIT_ROOT_URL = '/api/xendit'
-
+const authEmail = new AuthEmail()
 const response = new ResponseService()
 export const getBookings = async (req: Request, res: Response) => {
   try {
@@ -34,6 +34,7 @@ export const getBookings = async (req: Request, res: Response) => {
     res.json(response.error({ message }))
   }
 }
+
 
 export const addBooking = async (req: Request, res: Response) => {
   const inputIsValid = Z_AddBooking.safeParse(req.body)
@@ -70,7 +71,7 @@ export const addBooking = async (req: Request, res: Response) => {
           image: JSON.parse(String(getListing?.images))[0].fileKey as string,
           title:getListing?.title as string
         }
-        const authEmail = new AuthEmail()
+      
         const newTransaction = await prisma.transaction.create({
           data: {
             userId: res.locals.user.id,
@@ -113,6 +114,11 @@ export const addBooking = async (req: Request, res: Response) => {
             userId: res.locals.user.id,
           },
         })
+        const getListing = await prisma.listing.findFirst({
+          where: {
+            id: newBooking.listingId,
+          },
+        })
         const totalPrice = await getListingPrice({
           listingId: newBooking.listingId,
           childrenCount: newBooking.childrenCount,
@@ -128,6 +134,12 @@ export const addBooking = async (req: Request, res: Response) => {
           `${XENDIT_ROOT_URL}/card-create-payment`,
           { paymentMethodId: paymentMethod.item?.id, amount: totalPrice }
         )
+        const sendEmailParams = {
+          to: res.locals.user.email,
+          amount: String(totalPrice),
+          image: JSON.parse(String(getListing?.images))[0].fileKey as string,
+          title:getListing?.title as string
+        }
         const newTransaction = await prisma.transaction.create({
           data: {
             userId: res.locals.user.id,
@@ -147,6 +159,9 @@ export const addBooking = async (req: Request, res: Response) => {
             xenditPaymentReferenceId: paymentRequest.item?.reference_id,
           },
         })
+        if (newTransaction) {
+          authEmail.sendReiptConfirmation(sendEmailParams)
+        }
         res.json(
           response.success({
             item: updatedBooking,
