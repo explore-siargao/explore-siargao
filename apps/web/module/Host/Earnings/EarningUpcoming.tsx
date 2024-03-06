@@ -66,10 +66,7 @@ const EarningUpcoming = () => {
 
                 <div className="flex gap-4 justify-between pb-4">
                   {summaryData.map((row) => (
-                    <div
-                      key={`row-${row}`}
-                      className="flex flex-col"
-                    >
+                    <div key={`row-${row}`} className="flex flex-col">
                       {row.map((item, rowCount) => (
                         <h6 key={`${rowCount}`} className="pt-2 text-sm">
                           {item}
