@@ -67,7 +67,10 @@ const EarningUpcoming = () => {
                   {summaryData.map((row, rowIndex) => (
                     <div key={`row-${rowIndex}`} className="flex flex-col">
                       {row.map((item, itemIndex) => (
-                        <h6 key={`cell-${rowIndex}-${itemIndex}`} className="pt-2 text-sm">
+                        <h6
+                          key={`cell-${rowIndex}-${itemIndex}`}
+                          className="pt-2 text-sm"
+                        >
                           {item}
                         </h6>
                       ))}
