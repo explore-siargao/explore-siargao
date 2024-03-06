@@ -69,9 +69,9 @@ const EarningUpcoming = () => {
                       key={`column-${columnIndex}`}
                       className="flex flex-col"
                     >
-                      {column.map((item, itemIndex) => (
+                      {column.map((item, rowCount) => (
                         <h6
-                          key={`item-${columnIndex}-${itemIndex}`}
+                          key={`${rowCount}`}
                           className="pt-2 text-sm"
                         >
                           {item}
