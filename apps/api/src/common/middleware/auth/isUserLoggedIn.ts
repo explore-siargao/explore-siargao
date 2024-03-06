@@ -57,6 +57,7 @@ const isUserLoggedIn = async (
         throw new Error('We cannot find your account in our system')
       }
       const authUser: T_Session = {
+        isHost: user?.isHost as boolean,
         id: user?.id as number,
         registrationType: user?.registrationType as E_RegistrationType,
         email: user?.email as string,

@@ -13,6 +13,7 @@ import { WidthWrapper } from "@/common/components/WidthWrapper"
 import { Typography } from "@/common/components/ui/Typography"
 import { cn } from "@/common/helpers/cn"
 import ApplyToHostModal from "./ApplyToHostModal"
+import useSessionStore from "@/common/store/useSessionStore"
 
 function Header({
   contentWidth = "wide",
@@ -22,7 +23,7 @@ function Header({
   isFixed?: boolean
 }) {
   const { data: session } = useSession()
-  const [isHost, setIsHost] = useState(false)
+  const isHost = useSessionStore((state) => state.isHost) 
   const path = usePathname()
   const router = useRouter()
   let withoutHeader = [
@@ -87,7 +88,7 @@ function Header({
                     {isHost ? (
                       <Button
                         variant="ghost"
-                        className="underline"
+                        className="underline font-semibold"
                         size="sm"
                         onClick={() => router.push("/hosting")}
                       >
@@ -105,7 +106,6 @@ function Header({
               <ApplyToHostModal
                 isModalOpen={isModalOpen}
                 onClose={closeModal}
-                setIsHost={setIsHost}
               />
             </WidthWrapper>
           </header>
