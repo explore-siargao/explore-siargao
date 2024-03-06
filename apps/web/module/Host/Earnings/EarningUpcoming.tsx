@@ -34,16 +34,14 @@ const EarningUpcoming = () => {
         <>
           <div className="left p-4 lg:col-span-3">
             {data?.item && data.item.amount.length > 0 ? (
-              
-                <Chart
-                  data={data.item.amount}
-                  totalAmount={data.item.total}
-                  isPending={isPending}
-                  width="100%"
-                  height={400}
-                  type={ChartType.upcoming}
-                />
-              
+              <Chart
+                data={data.item.amount}
+                totalAmount={data.item.total}
+                isPending={isPending}
+                width="100%"
+                height={400}
+                type={ChartType.upcoming}
+              />
             ) : (
               <>
                 <Typography fontWeight="semibold" variant="h2" className="pb-4">
@@ -66,15 +64,18 @@ const EarningUpcoming = () => {
                 </Typography>
 
                 <div className="flex gap-4 justify-between pb-4">
-                {summaryData.map((column, columnIndex) => (
-                  <div key={`column-${columnIndex}`} className="flex flex-col">
-                    {column.map((item) => (
-                      <h6 key={item} className="pt-2 text-sm">
-                        {item}
-                      </h6>
-                    ))}
-                  </div>
-                ))}
+                  {summaryData.map((column, columnIndex) => (
+                    <div
+                      key={`column-${columnIndex}`}
+                      className="flex flex-col"
+                    >
+                      {column.map((item) => (
+                        <h6 key={item} className="pt-2 text-sm">
+                          {item}
+                        </h6>
+                      ))}
+                    </div>
+                  ))}
                 </div>
 
                 <div className="bottom-0 border-t flex gap-4 justify-between">
