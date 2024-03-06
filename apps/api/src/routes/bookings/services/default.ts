@@ -8,12 +8,12 @@ import { prisma } from '@/common/helpers/prismaClient'
 import { T_AddBooking, Z_AddBooking, Z_Booking } from '@repo/contract'
 import { ApiService } from '@/common/service/api'
 import { getListingPrice } from '@/common/helpers/getListingPrice'
-import { webUrl } from '@/common/config'
-import { AuthEmail } from '@/routes/bookings/services/authEmail'
+import { BookingReceiptEmail } from './BookingReceiptEmail'
 
-const apiService = new ApiService()
+
+const apiService = new ApiService() 
 const XENDIT_ROOT_URL = '/api/xendit'
-const authEmail = new AuthEmail()
+const bookingReceiptEmail = new BookingReceiptEmail()
 const response = new ResponseService()
 export const getBookings = async (req: Request, res: Response) => {
   try {
@@ -67,7 +67,7 @@ export const addBooking = async (req: Request, res: Response) => {
         const sendEmailParams = {
           to: res.locals.user.email,
           amount: String(totalPrice),
-          image: JSON.parse(String(getListing?.images))[0].fileKey as string,
+          imageKey: JSON.parse(String(getListing?.images))[0].fileKey as string,
           title: getListing?.title as string,
         }
 
@@ -90,7 +90,7 @@ export const addBooking = async (req: Request, res: Response) => {
           },
         })
         if (newTransaction) {
-          authEmail.sendReiptConfirmation(sendEmailParams)
+          bookingReceiptEmail.sendReiptConfirmation(sendEmailParams)
         }
         res.json(
           response.success({
@@ -136,7 +136,7 @@ export const addBooking = async (req: Request, res: Response) => {
         const sendEmailParams = {
           to: res.locals.user.email,
           amount: String(totalPrice),
-          image: JSON.parse(String(getListing?.images))[0].fileKey as string,
+          imageKey: JSON.parse(String(getListing?.images))[0].fileKey as string,
           title: getListing?.title as string,
         }
         const newTransaction = await prisma.transaction.create({
@@ -159,7 +159,7 @@ export const addBooking = async (req: Request, res: Response) => {
           },
         })
         if (newTransaction) {
-          authEmail.sendReiptConfirmation(sendEmailParams)
+          bookingReceiptEmail.sendReiptConfirmation(sendEmailParams)
         }
         res.json(
           response.success({

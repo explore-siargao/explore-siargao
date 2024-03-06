@@ -5,20 +5,20 @@ import { APP_NAME } from '@repo/constants'
 
 export type TSendEmailParams = {
   to: string[] | string
-  image: string
+  imageKey: string
   title: string
 }
 
-export class AuthEmail extends EmailService {
+export class BookingReceiptEmail extends EmailService {
   async sendReiptConfirmation(
     sendEmailParams: TSendEmailParams & {
       amount: string
-      image: string
+      imageKey: string
       title: string
     }
   ) {
-    const { to, amount, image, title } = sendEmailParams
-    const emailHtml = render(PaymentEmailConfirmation(amount, image, title))
+    const { to, amount, imageKey, title } = sendEmailParams
+    const emailHtml = render(PaymentEmailConfirmation(amount, imageKey, title))
     const sendEmail = super.sendEmail({
       to: typeof to === 'string' ? [to] : to,
       template: emailHtml,

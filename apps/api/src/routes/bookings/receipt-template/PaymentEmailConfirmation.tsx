@@ -30,7 +30,7 @@ import formatCurrency from '@/common/helpers/formatCurrency'
 
 export const PaymentEmailConfirmation = (
   amount: string,
-  image: string,
+  imageKey: string,
   title: string
 ) => {
   const date = new Date().toLocaleDateString('en-US', {
@@ -56,7 +56,7 @@ export const PaymentEmailConfirmation = (
           </Heading>
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <img
-              src={`${process.env.WEB_URL}/assets/${image}`}
+              src={`${process.env.WEB_URL}/assets/${imageKey}`}
               width="50"
               height="42"
               alt={title}
