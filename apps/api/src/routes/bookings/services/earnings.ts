@@ -37,6 +37,21 @@ const earnings = [
     earning: 2200.0,
     date: '2024-02-29 00:09:08.728',
   },
+  {
+    id: 7,
+    earning: 2200.0,
+    date: '2024-05-29 00:09:08.728',
+  },
+  {
+    id: 7,
+    earning: 2200.0,
+    date: '2024-04-29 00:09:08.728',
+  },
+  {
+    id: 7,
+    earning: 2200.0,
+    date: '2024-04-20 00:09:08.728',
+  },
 ]
 
 const response = new ResponseService()
@@ -56,10 +71,17 @@ export const getThisMonthEarnings = async (req: Request, res: Response) => {
   res.json(
     response.success({
       item: {
-        amount: filterThisMonthEarnings,
+         amount:filterThisMonthEarnings,
+        yearToDateSummary:{
+          gross:19000,
+          adjustment:1000,
+          serviceFee:1000,
+          tax:1000
+        },
+
         earningsCount: filterThisMonthEarnings.length,
         total: parseFloat(totalEarnings.toFixed(2)),
-      },
+      }
     })
   )
 }
@@ -82,6 +104,12 @@ export const getUpcomingEarnings = async (req: Request, res: Response) => {
     response.success({
       item: {
         amount: filterUpcomingEarning,
+        yearToDateSummary:{
+          gross:19000,
+          adjustment:1000,
+          serviceFee:1000,
+          tax:1000
+        },
         earningsCount: filterUpcomingEarning.length,
         total: parseFloat(totalEarnings.toFixed(2)),
       },
@@ -108,6 +136,12 @@ export const getPaidEarnings = async (req: Request, res: Response) => {
     response.success({
       item: {
         amount: filterPaidEarnings,
+        yearToDateSummary:{
+          gross:19000,
+          adjustment:1000,
+          serviceFee:1000,
+          tax:1000
+        },
         earningsCount: filterPaidEarnings.length,
         total: parseFloat(totalEarnings.toFixed(2)),
       },
