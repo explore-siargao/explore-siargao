@@ -47,5 +47,4 @@ router.get('/this-month', getThisMonthEarnings)
 router.get('/upcoming', getUpcomingEarnings)
 router.get('/paid', getPaidEarnings)
 
-
 export default router
