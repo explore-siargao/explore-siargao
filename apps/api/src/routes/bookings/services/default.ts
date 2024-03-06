@@ -35,7 +35,6 @@ export const getBookings = async (req: Request, res: Response) => {
   }
 }
 
-
 export const addBooking = async (req: Request, res: Response) => {
   const inputIsValid = Z_AddBooking.safeParse(req.body)
   if (inputIsValid.success) {
@@ -69,9 +68,9 @@ export const addBooking = async (req: Request, res: Response) => {
           to: res.locals.user.email,
           amount: String(totalPrice),
           image: JSON.parse(String(getListing?.images))[0].fileKey as string,
-          title:getListing?.title as string
+          title: getListing?.title as string,
         }
-      
+
         const newTransaction = await prisma.transaction.create({
           data: {
             userId: res.locals.user.id,
@@ -138,7 +137,7 @@ export const addBooking = async (req: Request, res: Response) => {
           to: res.locals.user.email,
           amount: String(totalPrice),
           image: JSON.parse(String(getListing?.images))[0].fileKey as string,
-          title:getListing?.title as string
+          title: getListing?.title as string,
         }
         const newTransaction = await prisma.transaction.create({
           data: {

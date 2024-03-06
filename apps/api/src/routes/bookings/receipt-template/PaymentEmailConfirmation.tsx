@@ -51,27 +51,46 @@ export const PaymentEmailConfirmation = (
             alt={APP_NAME}
             style={logo}
           />
-          <Heading style={heading}>You paid {formatCurrency(Number(amount))} to {APP_NAME}</Heading>
-          <div style={{ display: 'flex', alignItems: 'center'}}>
+          <Heading style={heading}>
+            You paid {formatCurrency(Number(amount))} to {APP_NAME}
+          </Heading>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
             <img
               src={`${process.env.WEB_URL}/assets/1.jpg`}
               width="50"
               height="42"
               alt={title}
-              style={{ marginRight: '10px' , marginTop:'7px' }} 
+              style={{ marginRight: '10px', marginTop: '7px' }}
             />
-            <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", marginTop:'7px' }}>
-              <p style={{ fontWeight: 'bold', margin:0 }}>{title}</p>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                marginTop: '7px',
+              }}
+            >
+              <p style={{ fontWeight: 'bold', margin: 0 }}>{title}</p>
             </div>
           </div>
           <Text style={paragraph}>
-          Transaction ID: 
-          <span style={{ marginRight: '10px' }}>
-            <Link href='#' style={{color:"#9DD5D6", textDecoration:"underline", marginLeft:"10px"}}>
-             ES-0001112222
-            </Link>
-            </span><br />
-            <span style={{ marginRight: '10px' }}>Transaction Date: {date}</span>
+            Transaction ID:
+            <span style={{ marginRight: '10px' }}>
+              <Link
+                href="#"
+                style={{
+                  color: '#9DD5D6',
+                  textDecoration: 'underline',
+                  marginLeft: '10px',
+                }}
+              >
+                ES-0001112222
+              </Link>
+            </span>
+            <br />
+            <span style={{ marginRight: '10px' }}>
+              Transaction Date: {date}
+            </span>
             <br />
           </Text>
           <Hr style={hr} />
