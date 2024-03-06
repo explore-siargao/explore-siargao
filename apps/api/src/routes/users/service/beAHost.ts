@@ -2,9 +2,9 @@ import { UNKNOWN_ERROR_OCCURRED } from '@/common/constants'
 import { prisma } from '@/common/helpers/prismaClient'
 import { ResponseService } from '@/common/service/response'
 import { Request, Response } from 'express'
-import { AuthEmail } from './authEmail'
+import { HostEmail } from './hostEmail'
 
-const authEmail = new AuthEmail()
+const hostEmail = new HostEmail()
 const response = new ResponseService()
 export const beAHost = async (req: Request, res: Response) => {
   const sendEmailParams = { to: res.locals.user.email }
@@ -30,7 +30,7 @@ export const beAHost = async (req: Request, res: Response) => {
     })
 
     if (addAsHost) {
-      authEmail.sendHostConfirmation(sendEmailParams)
+      hostEmail.sendHostConfirmation(sendEmailParams)
     }
     res.json(
       response.success({

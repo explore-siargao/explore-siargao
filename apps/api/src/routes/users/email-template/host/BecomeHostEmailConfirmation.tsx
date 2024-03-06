@@ -1,6 +1,5 @@
 import {
   Body,
-  Button,
   Container,
   Head,
   Heading,
@@ -9,14 +8,11 @@ import {
   Img,
   Link,
   Preview,
-  Section,
   Text,
 } from '@react-email/components'
 import { APP_NAME } from '@repo/constants'
 import * as React from 'react'
 import {
-  buttonContainer,
-  button,
   container,
   heading,
   hr,
@@ -26,7 +22,7 @@ import {
   reportLink,
 } from '../styles'
 
-export const PaymentEmailConfirmation = () => {
+export const BecomeHostEmailConfirmation = () => {
   return (
     <Html>
       <Head />
@@ -55,4 +51,4 @@ export const PaymentEmailConfirmation = () => {
   )
 }
 
-export default PaymentEmailConfirmation
+export default BecomeHostEmailConfirmation
