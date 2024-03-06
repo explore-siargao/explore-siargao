@@ -21,7 +21,7 @@ interface ITypes {
 }
 
 const Bookings = () => {
-  const {data, isPending} = useGetBookings(2)
+  const { data, isPending } = useGetBookings(2)
 
   const columnHelper = createColumnHelper<ITypes>()
   const columns = [
