@@ -56,9 +56,18 @@ const Bookings = () => {
     columnHelper.accessor("fromDate", {
       header: "Date",
       cell: (dateRange) => {
-        const fromDate = new Date(dateRange.getValue()).toLocaleDateString('en-US',{month:"long",day:"2-digit"})
-        const toDate = new Date(dateRange.row.original.toDate).toLocaleDateString('en-US',{month:"long",day:"2-digit", year:"numeric"})
-       return <Typography variant="p">{fromDate+" - "+toDate}</Typography>
+        const fromDate = new Date(dateRange.getValue()).toLocaleDateString(
+          "en-US",
+          { month: "long", day: "2-digit" }
+        )
+        const toDate = new Date(
+          dateRange.row.original.toDate
+        ).toLocaleDateString("en-US", {
+          month: "long",
+          day: "2-digit",
+          year: "numeric",
+        })
+        return <Typography variant="p">{fromDate + " - " + toDate}</Typography>
       },
     }),
     columnHelper.accessor("Listing.address", {
@@ -90,12 +99,9 @@ const Bookings = () => {
 
   return (
     <WidthWrapper className="mt-40 w-full">
-
-      {
-      isPending ? (
+      {isPending ? (
         <Spinner size="md">Loading...</Spinner>
-      ):
-      data?.items?.length !== 0 ? (
+      ) : data?.items?.length !== 0 ? (
         <div className="px-12">
           <div className="mb-12">
             <Typography

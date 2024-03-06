@@ -7,30 +7,29 @@ import {
 import Pagination from "./Pagination"
 
 export interface BookingsData {
-  id:number,
-  listingId:number,
-  Listing:{
-    title:string,
-    imageKey:string,
-    address:string
-  },
-  fromDate:string,
-  toDate:string,
-  guestCount:number,
-  totalFee:number,
-  transactionId:number,
-  Transaction:{
-    status:string
-  },
-  createdAt:string
+  id: number
+  listingId: number
+  Listing: {
+    title: string
+    imageKey: string
+    address: string
+  }
+  fromDate: string
+  toDate: string
+  guestCount: number
+  totalFee: number
+  transactionId: number
+  Transaction: {
+    status: string
+  }
+  createdAt: string
 }
 interface TableProps {
   data: BookingsData[]
-  columns: any[]  
+  columns: any[]
 }
 
-const Table = ({ data, columns}: TableProps) => {
-
+const Table = ({ data, columns }: TableProps) => {
   const table = useReactTable({
     data,
     columns,
