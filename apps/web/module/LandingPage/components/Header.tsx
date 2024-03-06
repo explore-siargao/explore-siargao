@@ -23,7 +23,7 @@ function Header({
   isFixed?: boolean
 }) {
   const { data: session } = useSession()
-  const isHost = useSessionStore((state) => state.isHost) 
+  const isHost = useSessionStore((state) => state.isHost)
   const path = usePathname()
   const router = useRouter()
   let withoutHeader = [

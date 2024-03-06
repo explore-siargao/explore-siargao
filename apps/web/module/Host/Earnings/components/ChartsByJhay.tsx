@@ -17,55 +17,56 @@ import { extend } from "dayjs"
 import { cn } from "@/common/helpers/cn"
 
 const chartVariants = cva("", {
-    variants: {
-        variant: {
-            bar: "BarChart",
-            line: "LineChart"
-        },
-        width: {
-            default: "w-[100%]",
-            sm: "w-[40%]"
-        },
-        height: {
-            default: "h-[400]",
-            sm: "h-[200]"
-        }
+  variants: {
+    variant: {
+      bar: "BarChart",
+      line: "LineChart",
     },
-    defaultVariants: {
-        variant: "line",
-        width: "default",
-        height: "default"
-    }
+    width: {
+      default: "w-[100%]",
+      sm: "w-[40%]",
+    },
+    height: {
+      default: "h-[400]",
+      sm: "h-[200]",
+    },
+  },
+  defaultVariants: {
+    variant: "line",
+    width: "default",
+    height: "default",
+  },
 })
 
 export interface ChartProps
-    extends React.HTMLAttributes<HTMLDivElement>,
+  extends React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof chartVariants> {
-        children: React.ReactNode
-    }
+  children: React.ReactNode
+}
 
-    const ChartV = React.forwardRef<HTMLDivElement, ChartProps>(
-        ({variant, width, height, children, className}, ref) => {
-            const Comp = variant === "bar" ? BarChart : LineChart
-            return (
-                <div ref={ref} className={cn(chartVariants({variant, width, height}), className)}>
-                    <Comp>
-                        {children}
-                    </Comp>
-                </div>
-            )
-        }
+const ChartV = React.forwardRef<HTMLDivElement, ChartProps>(
+  ({ variant, width, height, children, className }, ref) => {
+    const Comp = variant === "bar" ? BarChart : LineChart
+    return (
+      <div
+        ref={ref}
+        className={cn(chartVariants({ variant, width, height }), className)}
+      >
+        <Comp>{children}</Comp>
+      </div>
     )
+  }
+)
 ChartV.displayName = "ChartByJhay"
 
-
 interface IType {
-    id: number
-    earning: number
-    date: number
-    amount: number
-  }[]
-  
+  id: number
+  earning: number
+  date: number
+  amount: number
+}
+;[]
+
 interface IYearToDateSummary {
   title?: string
   color?: string //gagawin tong parang varian
@@ -83,8 +84,7 @@ const ChartByJhay = ({
   width,
   height,
   data,
-  isPending
-  
+  isPending,
 }: IYearToDateSummary) => {
   return (
     <>
@@ -102,7 +102,10 @@ const ChartByJhay = ({
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="date" tickFormatter={(value: string) => value} />
-          <YAxis dataKey={"earning"} tickFormatter={(value: number) => value.toString()} />
+          <YAxis
+            dataKey={"earning"}
+            tickFormatter={(value: number) => value.toString()}
+          />
           <Tooltip formatter={(value: number) => value.toString()} />
           <Legend />
           <Bar

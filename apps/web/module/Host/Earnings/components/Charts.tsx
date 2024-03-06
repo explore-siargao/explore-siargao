@@ -12,7 +12,7 @@ import {
 import formatCurrency from "@/common/helpers/formatCurrency"
 
 interface IType {
-  amount: [earning: number,date: string]
+  amount: [earning: number, date: string]
 }
 
 interface ChartProps {
@@ -21,9 +21,8 @@ interface ChartProps {
   width: string
   height: number
 }
-const Chart = ({width, height, data, isPending }: ChartProps) => {
+const Chart = ({ width, height, data, isPending }: ChartProps) => {
   return (
-  
     <ResponsiveContainer width={width} height={height}>
       <BarChart
         data={isPending ? undefined : data}
