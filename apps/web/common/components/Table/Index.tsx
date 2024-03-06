@@ -6,14 +6,30 @@ import {
 } from "@tanstack/react-table"
 import Pagination from "./Pagination"
 
+export interface BookingsData {
+  id:number,
+  listingId:number,
+  Listing:{
+    title:string,
+    imageKey:string,
+    address:string
+  },
+  fromDate:string,
+  toDate:string,
+  guestCount:number,
+  totalFee:number,
+  transactionId:number,
+  Transaction:{
+    status:string
+  },
+  createdAt:string
+}
 interface TableProps {
-  data: any[]
-  columns: any[]
+  data: BookingsData[]
+  columns: any[]  
 }
 
-const Table = ({ data: tableData, columns: tableColumns }: TableProps) => {
-  const data = useMemo(() => tableData, [tableData])
-  const columns = useMemo(() => tableColumns, [tableColumns])
+const Table = ({ data, columns}: TableProps) => {
 
   const table = useReactTable({
     data,

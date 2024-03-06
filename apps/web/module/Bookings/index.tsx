@@ -1,6 +1,6 @@
 "use client"
 import { WidthWrapper } from "@/common/components/WidthWrapper"
-import Table from "../../common/components/Table/Index"
+import Table, { BookingsData } from "../../common/components/Table/Index"
 import Image from "next/image"
 import { Typography } from "@/common/components/ui/Typography"
 import { LucidePlus, LucideTable } from "lucide-react"
@@ -9,6 +9,7 @@ import { createColumnHelper } from "@tanstack/react-table"
 import Link from "next/link"
 import { Button } from "@/common/components/ui/Button"
 import useGetBookings from "./hooks/useGetBookings"
+import { Spinner } from "@/common/components/ui/Spinner"
 
 interface ITypes {
   fileKey: string
@@ -23,9 +24,9 @@ interface ITypes {
 const Bookings = () => {
   const { data, isPending } = useGetBookings(2)
 
-  const columnHelper = createColumnHelper<ITypes>()
+  const columnHelper = createColumnHelper<BookingsData>()
   const columns = [
-    columnHelper.accessor("fileKey", {
+    columnHelper.accessor("Listing.imageKey", {
       header: "Listing",
       cell: (info) => (
         <Link href="/profile">
@@ -39,7 +40,7 @@ const Bookings = () => {
             />
             <span>
               <Typography variant="p">
-                {info.row.original.description}
+                {info.row.original.Listing.title}
               </Typography>
             </span>
           </div>
@@ -52,25 +53,27 @@ const Bookings = () => {
         <Typography variant="p">{guestCount.getValue()}</Typography>
       ),
     }),
-    columnHelper.accessor("dateRange", {
+    columnHelper.accessor("fromDate", {
       header: "Date",
-      cell: (dateRange) => (
-        <Typography variant="p">{dateRange.getValue()}</Typography>
-      ),
+      cell: (dateRange) => {
+        const fromDate = new Date(dateRange.getValue()).toLocaleDateString('en-US',{month:"long",day:"2-digit"})
+        const toDate = new Date(dateRange.row.original.toDate).toLocaleDateString('en-US',{month:"long",day:"2-digit", year:"numeric"})
+       return <Typography variant="p">{fromDate+" - "+toDate}</Typography>
+      },
     }),
-    columnHelper.accessor("location", {
+    columnHelper.accessor("Listing.address", {
       header: "Location",
       cell: (location) => (
         <Typography variant="p">{location.getValue()}</Typography>
       ),
     }),
-    columnHelper.accessor("totalCost", {
+    columnHelper.accessor("totalFee", {
       header: "Total Cost",
       cell: (totalCost) => (
         <Typography variant="p">{totalCost.getValue()}</Typography>
       ),
     }),
-    columnHelper.accessor("paymentStatus", {
+    columnHelper.accessor("Transaction.status", {
       header: "Payment Status",
       cell: (paymentStatus) => (
         <Link href="/payment-status">
@@ -87,7 +90,12 @@ const Bookings = () => {
 
   return (
     <WidthWrapper className="mt-40 w-full">
-      {testData.length > 0 ? (
+
+      {
+      isPending ? (
+        <Spinner size="md">Loading...</Spinner>
+      ):
+      data?.items?.length !== 0 ? (
         <div className="px-12">
           <div className="mb-12">
             <Typography
@@ -106,7 +114,7 @@ const Bookings = () => {
               </div>
             </Typography>
           </div>
-          <Table data={testData} columns={columns} />
+          <Table data={data?.items as BookingsData[]} columns={columns} />
         </div>
       ) : (
         <div className="px-12">
