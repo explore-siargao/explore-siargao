@@ -34,7 +34,7 @@ const EarningUpcoming = () => {
         <>
           <div className="left p-4 lg:col-span-3">
             {data?.item && data.item.amount.length > 0 ? (
-              <>
+              
                 <Chart
                   data={data.item.amount}
                   totalAmount={data.item.total}
@@ -43,7 +43,7 @@ const EarningUpcoming = () => {
                   height={400}
                   type={ChartType.upcoming}
                 />
-              </>
+              
             ) : (
               <>
                 <Typography fontWeight="semibold" variant="h2" className="pb-4">
@@ -66,14 +66,14 @@ const EarningUpcoming = () => {
                 </Typography>
 
                 <div className="flex gap-4 justify-between pb-4">
-                  {summaryData.map((column, columnIndex) => (
+                  {summaryData.map((column, id) => (
                     <div
-                      key={`column-${columnIndex}`}
+                      key={`column-${id}`}
                       className="flex flex-col"
                     >
                       {column.map((item, itemIndex) => (
                         <h6
-                          key={`column-${columnIndex}-item-${itemIndex}`}
+                          key={`column-${id}-item-${itemIndex}`}
                           className="pt-2 text-sm"
                         >
                           {item}
