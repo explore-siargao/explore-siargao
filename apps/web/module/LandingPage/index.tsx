@@ -5,7 +5,6 @@ import useGetAllBookings from "../LandingPage/hooks/useGetAllBookings"
 import { Spinner } from "@/common/components/ui/Spinner"
 import useSessionStore from "@/common/store/useSessionStore"
 import Listing from "../Listing"
-import EarningUpcoming from "../Host/Earnings/EarningUpcoming"
 
 
 const LandingPage = () => {
@@ -38,7 +37,6 @@ const LandingPage = () => {
           </ul>
         </>
       )}
-      <EarningUpcoming/>
     </WidthWrapper>
   )
 }

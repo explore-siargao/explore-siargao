@@ -15,10 +15,10 @@ const EarningUpcoming = () => {
   const summaryData = [
     ["Gross earnings", "Adjustments", "Service fee", "Taxes withheld"],
     [
-      (data?.item && data.item.yearToDateSummary && data.item.yearToDateSummary.gross) ? formatCurrency(data.item.yearToDateSummary.gross, "Philippines") : "",
-      (data?.item && data.item.yearToDateSummary && data.item.yearToDateSummary.adjustment) ? formatCurrency(data.item.yearToDateSummary.adjustment, "Philippines") : "",
-      (data?.item && data.item.yearToDateSummary && data.item.yearToDateSummary.serviceFee) ? formatCurrency(data.item.yearToDateSummary.serviceFee, "Philippines") : "",
-      (data?.item && data.item.yearToDateSummary && data.item.yearToDateSummary.tax) ? formatCurrency(data.item.yearToDateSummary.tax, "Philippines") : ""
+      formatCurrency(data?.item?.yearToDateSummary?.gross ?? "", "Philippines"),
+      formatCurrency(data?.item?.yearToDateSummary?.adjustment ?? "", "Philippines"),
+      formatCurrency(data?.item?.yearToDateSummary?.serviceFee ?? "", "Philippines"),
+      formatCurrency(data?.item?.yearToDateSummary?.tax ?? "", "Philippines")
     ],
   ];
   
@@ -38,7 +38,7 @@ const EarningUpcoming = () => {
                 isPending={isPending} 
                 width="100%" 
                 height={400} 
-                type={ChartType["this-month"]} 
+                type={ChartType.upcoming} 
                 />
               </>
             ) : (
@@ -59,7 +59,7 @@ const EarningUpcoming = () => {
                   Year-to-date summary
                 </Typography>
                 <Typography variant="p" className="text-gray-400 pb-4">
-                  Jan 1 - {format(currentDate, "MMMM d")}
+                  Jan 1 - {format(currentDate, "MMMM d yyyy")}
                 </Typography>
 
                 <div className="flex gap-4 justify-between pb-4">
