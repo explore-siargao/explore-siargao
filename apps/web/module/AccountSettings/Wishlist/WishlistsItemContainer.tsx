@@ -124,7 +124,7 @@ const WishlistsItemContainer = () => {
         queryClient.invalidateQueries({
           queryKey: ["wish-group-count"],
         })
-        toast.success("Wishlist Successfully removed from group")
+        toast.success("Wishlist successfully removed from the group")
       } else {
         toast.error(String(data.message))
       }
