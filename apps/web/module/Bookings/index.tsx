@@ -8,6 +8,7 @@ import { PaymentStatus } from "./SingleView/components/PaymentStatus"
 import { createColumnHelper } from "@tanstack/react-table"
 import Link from "next/link"
 import { Button } from "@/common/components/ui/Button"
+import useGetBookings from "./hooks/useGetBookings"
 
 interface ITypes {
   fileKey: string
@@ -20,7 +21,7 @@ interface ITypes {
 }
 
 const Bookings = () => {
-  const testData = []
+  const {data, isPending} = useGetBookings(2)
 
   const columnHelper = createColumnHelper<ITypes>()
   const columns = [
