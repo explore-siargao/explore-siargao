@@ -5,7 +5,6 @@ import { Spinner } from "@/common/components/ui/Spinner"
 import formatCurrency from "@/common/helpers/formatCurrency"
 import Chart, { ChartType } from "./components/Chart"
 import { format } from "date-fns"
-import { Row } from "react-day-picker"
 
 const EarningUpcoming = () => {
   const { data, isPending } = useGetUpcomingEarnings()
@@ -65,10 +64,10 @@ const EarningUpcoming = () => {
                 </Typography>
 
                 <div className="flex gap-4 justify-between pb-4">
-                  {summaryData.map((row) => (
-                    <div key={`row-${row}`} className="flex flex-col">
-                      {row.map((item, rowCount) => (
-                        <h6 key={`${rowCount}`} className="pt-2 text-sm">
+                  {summaryData.map((row, rowIndex) => (
+                    <div key={`row-${rowIndex}`} className="flex flex-col">
+                      {row.map((item, itemIndex) => (
+                        <h6 key={`cell-${rowIndex}-${itemIndex}`} className="pt-2 text-sm">
                           {item}
                         </h6>
                       ))}
