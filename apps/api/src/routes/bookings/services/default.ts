@@ -8,10 +8,11 @@ import { prisma } from '@/common/helpers/prismaClient'
 import { T_AddBooking, Z_AddBooking, Z_Booking } from '@repo/contract'
 import { ApiService } from '@/common/service/api'
 import { getListingPrice } from '@/common/helpers/getListingPrice'
+import { BookingReceiptEmail } from './BookingReceiptEmail'
 
 const apiService = new ApiService()
 const XENDIT_ROOT_URL = '/api/xendit'
-
+const bookingReceiptEmail = new BookingReceiptEmail()
 const response = new ResponseService()
 export const getBookings = async (req: Request, res: Response) => {
   try {
@@ -45,7 +46,11 @@ export const addBooking = async (req: Request, res: Response) => {
             userId: res.locals.user.id,
           },
         })
-
+        const getListing = await prisma.listing.findFirst({
+          where: {
+            id: newBooking.listingId,
+          },
+        })
         const totalPrice = await getListingPrice({
           listingId: newBooking.listingId,
           childrenCount: newBooking.childrenCount,
@@ -57,6 +62,14 @@ export const addBooking = async (req: Request, res: Response) => {
           `${XENDIT_ROOT_URL}/gcash-create-payment`,
           { amount: totalPrice, bookingId: newBooking.id }
         )
+
+        const sendEmailParams = {
+          to: res.locals.user.email,
+          amount: String(totalPrice),
+          imageKey: JSON.parse(String(getListing?.images))[0].fileKey as string,
+          title: getListing?.title as string,
+        }
+
         const newTransaction = await prisma.transaction.create({
           data: {
             userId: res.locals.user.id,
@@ -75,7 +88,9 @@ export const addBooking = async (req: Request, res: Response) => {
             xenditPaymentReferenceId: paymentRequest.item?.reference_id,
           },
         })
-
+        if (newTransaction) {
+          bookingReceiptEmail.sendReiptConfirmation(sendEmailParams)
+        }
         res.json(
           response.success({
             item: updatedBooking,
@@ -97,6 +112,11 @@ export const addBooking = async (req: Request, res: Response) => {
             userId: res.locals.user.id,
           },
         })
+        const getListing = await prisma.listing.findFirst({
+          where: {
+            id: newBooking.listingId,
+          },
+        })
         const totalPrice = await getListingPrice({
           listingId: newBooking.listingId,
           childrenCount: newBooking.childrenCount,
@@ -112,6 +132,12 @@ export const addBooking = async (req: Request, res: Response) => {
           `${XENDIT_ROOT_URL}/card-create-payment`,
           { paymentMethodId: paymentMethod.item?.id, amount: totalPrice }
         )
+        const sendEmailParams = {
+          to: res.locals.user.email,
+          amount: String(totalPrice),
+          imageKey: JSON.parse(String(getListing?.images))[0].fileKey as string,
+          title: getListing?.title as string,
+        }
         const newTransaction = await prisma.transaction.create({
           data: {
             userId: res.locals.user.id,
@@ -131,6 +157,9 @@ export const addBooking = async (req: Request, res: Response) => {
             xenditPaymentReferenceId: paymentRequest.item?.reference_id,
           },
         })
+        if (newTransaction) {
+          bookingReceiptEmail.sendReiptConfirmation(sendEmailParams)
+        }
         res.json(
           response.success({
             item: updatedBooking,
