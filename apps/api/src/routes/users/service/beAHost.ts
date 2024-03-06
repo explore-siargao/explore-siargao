@@ -2,9 +2,12 @@ import { UNKNOWN_ERROR_OCCURRED } from '@/common/constants'
 import { prisma } from '@/common/helpers/prismaClient'
 import { ResponseService } from '@/common/service/response'
 import { Request, Response } from 'express'
+import { AuthEmail } from './authEmail'
 
+const authEmail = new AuthEmail()
 const response = new ResponseService()
 export const beAHost = async (req: Request, res: Response) => {
+  const sendEmailParams = { to: res.locals.user.email }
   try {
     const checkUserIsHost = await prisma.user.findFirst({
       where: {
@@ -25,6 +28,10 @@ export const beAHost = async (req: Request, res: Response) => {
         isHost: true,
       },
     })
+    
+    if(addAsHost){
+    authEmail.sendHostConfirmation(sendEmailParams)
+    }
     res.json(
       response.success({
         item: { isHost: addAsHost.isHost },
