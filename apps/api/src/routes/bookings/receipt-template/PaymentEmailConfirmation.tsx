@@ -56,7 +56,7 @@ export const PaymentEmailConfirmation = (
           </Heading>
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <img
-              src={`${process.env.WEB_URL}/assets/1.jpg`}
+              src={`${process.env.WEB_URL}/assets/${image}`}
               width="50"
               height="42"
               alt={title}
