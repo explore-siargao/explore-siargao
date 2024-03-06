@@ -112,7 +112,7 @@ const BookingReviews = () => {
               <BookingReviewItemPending
                 id={item.id}
                 title={item.listing.title}
-                image={item.listing.image}
+                image={item.listing.imageKey}
                 dateFrom={item.fromDate}
                 dateTo={item.toDate}
                 key={item.id}
