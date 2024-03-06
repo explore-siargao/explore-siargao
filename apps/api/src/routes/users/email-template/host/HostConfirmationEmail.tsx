@@ -41,11 +41,9 @@ export const PaymentEmailConfirmation = () => {
             style={logo}
           />
           <Heading style={heading}>Congratulations!</Heading>
-
-          <Hr style={hr} />
           <Text style={paragraph}>
-            "You are now an ExploreSiargao host. We appreciate your trust and
-            confidence with us. You can now start adding your listing."
+            You are now an ExploreSiargao host. We appreciate your trust and
+            confidence with us. You can now start adding your listing.
           </Text>
           <Hr style={hr} />
           <Link href={process.env.WEB_URL} style={reportLink}>
