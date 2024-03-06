@@ -70,10 +70,7 @@ const EarningUpcoming = () => {
                       className="flex flex-col"
                     >
                       {column.map((item, rowCount) => (
-                        <h6
-                          key={`${rowCount}`}
-                          className="pt-2 text-sm"
-                        >
+                        <h6 key={`${rowCount}`} className="pt-2 text-sm">
                           {item}
                         </h6>
                       ))}
