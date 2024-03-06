@@ -32,9 +32,7 @@ export class AuthEmail extends EmailService {
     return await sendEmail
   }
 
-  async sendHostConfirmation(
-    sendEmailParams: TSendEmailParams
-  ) {
+  async sendHostConfirmation(sendEmailParams: TSendEmailParams) {
     const { to } = sendEmailParams
     const emailHtml = render(HostConfirmationEmail())
     const sendEmail = super.sendEmail({

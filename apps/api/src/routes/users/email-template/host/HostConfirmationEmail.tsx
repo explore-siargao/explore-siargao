@@ -41,7 +41,7 @@ export const PaymentEmailConfirmation = () => {
             style={logo}
           />
           <Heading style={heading}>Congratulations!</Heading>
-          
+
           <Hr style={hr} />
           <Text style={paragraph}>
             "You are now an ExploreSiargao host. We appreciate your trust and

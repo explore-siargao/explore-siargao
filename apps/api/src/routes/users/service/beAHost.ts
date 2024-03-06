@@ -28,9 +28,9 @@ export const beAHost = async (req: Request, res: Response) => {
         isHost: true,
       },
     })
-    
-    if(addAsHost){
-    authEmail.sendHostConfirmation(sendEmailParams)
+
+    if (addAsHost) {
+      authEmail.sendHostConfirmation(sendEmailParams)
     }
     res.json(
       response.success({
