@@ -10,8 +10,7 @@ import { ApiService } from '@/common/service/api'
 import { getListingPrice } from '@/common/helpers/getListingPrice'
 import { BookingReceiptEmail } from './BookingReceiptEmail'
 
-
-const apiService = new ApiService() 
+const apiService = new ApiService()
 const XENDIT_ROOT_URL = '/api/xendit'
 const bookingReceiptEmail = new BookingReceiptEmail()
 const response = new ResponseService()
