@@ -13,7 +13,6 @@ const EarningUpcoming = () => {
   const summaryData = [
     ["Gross earnings", "Adjustments", "Service fee", "Taxes withheld"],
     [
-      
       formatCurrency(data?.item?.yearToDateSummary?.gross ?? "", "Philippines"),
       formatCurrency(
         data?.item?.yearToDateSummary?.adjustment ?? "",
@@ -71,7 +70,10 @@ const EarningUpcoming = () => {
                       className="flex flex-col"
                     >
                       {column.map((item, itemIndex) => (
-                        <h6 key={`item-${columnIndex}-${itemIndex}`} className="pt-2 text-sm">
+                        <h6
+                          key={`item-${columnIndex}-${itemIndex}`}
+                          className="pt-2 text-sm"
+                        >
                           {item}
                         </h6>
                       ))}
