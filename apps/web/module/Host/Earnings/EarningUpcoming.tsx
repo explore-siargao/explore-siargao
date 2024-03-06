@@ -34,6 +34,7 @@ const EarningUpcoming = () => {
               <>
                 <Chart 
                 data={data.item.amount} 
+                totalAmount ={data.item.total}
                 isPending={isPending} 
                 width="100%" 
                 height={400} 

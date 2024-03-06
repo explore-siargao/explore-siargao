@@ -39,14 +39,15 @@ interface Earnings{
   }
 
 interface ChartProps {
-  data: Earnings;
+  data: Amount[];
+  totalAmount:number
   isPending: boolean;
   width: string;
   height: number;
   type: ChartType;
 }
 
-const Chart = ({ width, height, data, isPending, type,}: ChartProps) => {
+const Chart = ({ width, height, data, totalAmount, isPending, type,}: ChartProps) => {
   
   let title = "";
 
@@ -73,9 +74,9 @@ const Chart = ({ width, height, data, isPending, type,}: ChartProps) => {
         <Typography variant="h1">
           {title}{" "}
           <span className="text-gray-400">
-            {formatCurrency(
-                isPending ? 0.0 : data.item.total, "Philippines"
-            )}
+            {
+                isPending ? formatCurrency(0.0,"Philippines") : formatCurrency(totalAmount , "Philippines")
+            }
           </span>{" "}
         </Typography>
       </>
