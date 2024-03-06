@@ -52,6 +52,7 @@ import {
   deleteReview,
   getReviewById,
   getReviewByListing,
+  getReviewsByHost,
   getReviewsByUserId,
   updateReview,
 } from './service/reviews'
@@ -100,6 +101,7 @@ import {
   getDescriptionByListing,
   updateDescription,
 } from './service/listingDescription'
+import { getNotificationsByHost } from './service/notification'
 
 const router = express.Router()
 
@@ -236,6 +238,8 @@ router.get(
   isUserLoggedIn,
   getReviewById
 )
+
+router.get('/reviews/host/:hostId', getReviewsByHost)
 router.post(
   '/:userId/reviews/post',
   // isOriginValid,
@@ -295,5 +299,8 @@ router.get('/listing-description/listing/:listingId', getDescriptionByListing)
 router.post('/:userId/listing-description/:listingId', addDescription)
 router.patch('/:userId/listing-description/:id', updateDescription)
 router.delete('/:userId/listing-description/:id', deleteDescription)
+
+//notifications
+router.get('/notifications/:hostId', getNotificationsByHost)
 
 export default router
