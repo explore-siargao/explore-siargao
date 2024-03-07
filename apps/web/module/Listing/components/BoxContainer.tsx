@@ -52,17 +52,22 @@ const BoxContainer = ({
   return (
     <>
       <li>
-  <Link href={'/accommodation/${listingId}'}>
-        <div className="h-80 w-auto 2xl:h-72 2xl:w-auto rounded-2xl relative select-none">
-          <button onClick={handleClick} className="absolute top-3 right-3 z-40">
-            <HeartIcon
-              className={` h-7 w-7 text-text-50 active:scale-90 ${
-                isClicked || isHearted ? "fill-error-500" : "fill-text-500/50 "
-              }`}
-            />
-          </button>
-          <Slider images={imageKey} />
-        </div>
+        <Link href={"/accommodation/${listingId}"}>
+          <div className="h-80 w-auto 2xl:h-72 2xl:w-auto rounded-2xl relative select-none">
+            <button
+              onClick={handleClick}
+              className="absolute top-3 right-3 z-40"
+            >
+              <HeartIcon
+                className={` h-7 w-7 text-text-50 active:scale-90 ${
+                  isClicked || isHearted
+                    ? "fill-error-500"
+                    : "fill-text-500/50 "
+                }`}
+              />
+            </button>
+            <Slider images={imageKey} />
+          </div>
         </Link>
         <div className="flex-1 -space-y-1 w-auto">
           <div className="flex justify-between">
