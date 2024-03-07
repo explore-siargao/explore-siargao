@@ -9,7 +9,11 @@ export const metadata: Metadata = {
 }
 
 const LoginPage = () => {
-  return <Login />
+  
+  return (
+    <div className="h-screen overflow-hidden"><Login /></div>
+  )
+  
 }
 
 export default LoginPage
