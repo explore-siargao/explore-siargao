@@ -109,10 +109,10 @@ const router = express.Router()
 //listings by host
 router.get(
   '/hosted',
-isOriginValid,
-isCsrfTokenValid,
-isUserLoggedIn,
-getListingsByHost
+  isOriginValid,
+  isCsrfTokenValid,
+  isUserLoggedIn,
+  getListingsByHost
 )
 
 // DEFAULT
@@ -312,7 +312,5 @@ router.delete('/:userId/listing-description/:id', deleteDescription)
 
 //notifications
 router.get('/notifications/:hostId', getNotificationsByHost)
-
-
 
 export default router
