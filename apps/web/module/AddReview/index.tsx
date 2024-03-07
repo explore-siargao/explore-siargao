@@ -164,7 +164,7 @@ const AddReview = () => {
               <div>
                 {stepIndex < 6 && (
                   <Button
-                  type="button"
+                    type="button"
                     onClick={() =>
                       !form.watch(reviewSteps[stepIndex]?.fieldName as string)
                         ? null
