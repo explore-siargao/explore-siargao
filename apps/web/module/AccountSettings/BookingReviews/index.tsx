@@ -89,7 +89,7 @@ const BookingReviews = () => {
                 id={item.listing.id}
                 location={item.listing.address}
                 name={item.listing.title}
-                pic={""}
+                pic={item.listing.images[0].fileKey}
                 reviewMessage={item.comment}
                 reviewedTime={`${monthName} ${day}, ${year}`}
                 key={item.id}
