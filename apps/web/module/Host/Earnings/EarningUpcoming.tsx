@@ -91,7 +91,7 @@ const EarningUpcoming = () => {
                 </div>
 
                 <div className="bottom-0 border-t flex gap-4 justify-between">
-                  <Typography className="pt-4 text-sm">Total(Peso)</Typography>
+                  <Typography className="pt-4 text-sm">Total</Typography>
                   <Typography className="pt-4 text-sm">
                     {formatCurrency(data.item.total, "Philippines")}
                   </Typography>
