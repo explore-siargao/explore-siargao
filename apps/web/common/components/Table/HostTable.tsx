@@ -56,26 +56,22 @@ const HostListingTable = ({ data, columns }: TableProps) => {
           ))}
         </thead>
         <tbody>
-          {table.getRowModel().rows.map((row) => {
-            return (
-              <tr className=" hover:bg-primary-500 cursor-pointer" key={row.id}>
-                {row.getVisibleCells().map((cell, _$) => {
-                  let className = "py-2 pl-4 items-center gap-5"
-                  if (_$ === 0) className += " rounded-l-xl"
-                  if (_$ === row.getVisibleCells().length - 1)
-                    className += " rounded-r-xl"
-                  return (
-                    <td className={className} key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </td>
-                  )
-                })}
-              </tr>
-            )
-          })}
+          {table.getRowModel().rows.map((row) => (
+            <tr className="hover:bg-primary-500 cursor-pointer" key={row.id}>
+              {row.getVisibleCells().map((cell, _id) => {
+                const isFirstCell = _id === 0
+                const isLastCell = _id === row.getVisibleCells().length - 1
+                const className = `py-2 pl-4 items-center gap-5 ${
+                  isFirstCell ? "rounded-l-xl " : ""
+                }${isLastCell ? "rounded-r-xl" : ""}`
+                return (
+                  <td className={className} key={cell.id}>
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </td>
+                )
+              })}
+            </tr>
+          ))}
         </tbody>
       </table>
       <div className="flex items-end justify-end mt-5">
