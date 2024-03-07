@@ -193,6 +193,7 @@ const WishlistsItemContainer = () => {
             {data?.items?.length !== 0 ? (
               data?.items?.map((item, index) => (
                 <SavedWishlists
+                key={item.id}
                   itemId={item.id}
                   listingId={item.listingId}
                   location={item.listing.address}
