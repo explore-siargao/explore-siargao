@@ -28,7 +28,7 @@ export default async function WishlistLayout({
   const session = await getServerSession(authOptions)
 
   return (
-    <html lang="en" id = "layout">
+    <html lang="en" id="layout">
       <link rel="icon" type="image/x-icon" href={LOGO_SINGLE_IMAGE} />
       <body className={nunito.className}>
         <Toaster />
