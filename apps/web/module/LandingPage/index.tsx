@@ -37,7 +37,7 @@ const LandingPage = () => {
           </ul>
         </>
       )}
-      <EarningUpcoming/>
+      <EarningUpcoming />
     </WidthWrapper>
   )
 }
