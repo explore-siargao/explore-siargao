@@ -1,34 +1,34 @@
-import React from "react";
+import React from "react"
 import {
   useReactTable,
   getCoreRowModel,
   flexRender,
-} from "@tanstack/react-table";
-import Pagination from "./Pagination";
+} from "@tanstack/react-table"
+import Pagination from "./Pagination"
 
 export interface ListingsData {
-  id: number;
-  hostId: number;
-  title: string;
-  address: string;
-  imageKey: string;
-  status: string;
+  id: number
+  hostId: number
+  title: string
+  address: string
+  imageKey: string
+  status: string
 }
 interface TableProps {
-  data: ListingsData[];
-  columns: any[];
+  data: ListingsData[]
+  columns: any[]
 }
 
 const renderContentWithFlexRender = (content: any, context: any) => {
-  return flexRender(content, context);
-};
+  return flexRender(content, context)
+}
 
 const HostListingTable = ({ data, columns }: TableProps) => {
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
-  });
+  })
 
   return (
     <div>
@@ -55,7 +55,7 @@ const HostListingTable = ({ data, columns }: TableProps) => {
                       </div>
                     )}
                   </th>
-                );
+                )
               })}
             </tr>
           ))}
@@ -63,15 +63,12 @@ const HostListingTable = ({ data, columns }: TableProps) => {
         <tbody>
           {table.getRowModel().rows.map((row) => {
             return (
-              <tr
-                className=" hover:bg-primary-500 cursor-pointer"
-                key={row.id}
-              >
+              <tr className=" hover:bg-primary-500 cursor-pointer" key={row.id}>
                 {row.getVisibleCells().map((cell, _id) => {
-                  let className = "py-2 pl-4 items-center gap-5";
-                  if (_id === 0) className += " rounded-l-xl";
+                  let className = "py-2 pl-4 items-center gap-5"
+                  if (_id === 0) className += " rounded-l-xl"
                   if (_id === row.getVisibleCells().length - 1)
-                    className += " rounded-r-xl";
+                    className += " rounded-r-xl"
                   return (
                     <td className={className} key={cell.id}>
                       {renderContentWithFlexRender(
@@ -79,10 +76,10 @@ const HostListingTable = ({ data, columns }: TableProps) => {
                         cell.getContext()
                       )}
                     </td>
-                  );
+                  )
                 })}
               </tr>
-            );
+            )
           })}
         </tbody>
       </table>
@@ -102,7 +99,7 @@ const HostListingTable = ({ data, columns }: TableProps) => {
         />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default HostListingTable;
+export default HostListingTable
