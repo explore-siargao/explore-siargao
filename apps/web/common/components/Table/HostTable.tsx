@@ -1,4 +1,3 @@
-import React from "react"
 import {
   useReactTable,
   getCoreRowModel,
@@ -17,10 +16,6 @@ export interface ListingsData {
 interface TableProps {
   data: ListingsData[]
   columns: any[]
-}
-
-const renderContentWithFlexRender = (content: any, context: any) => {
-  return flexRender(content, context)
 }
 
 const HostListingTable = ({ data, columns }: TableProps) => {
@@ -47,7 +42,7 @@ const HostListingTable = ({ data, columns }: TableProps) => {
                     {header.isPlaceholder ? null : (
                       <div>
                         <span>
-                          {renderContentWithFlexRender(
+                          {flexRender(
                             header.column.columnDef.header,
                             header.getContext()
                           )}
@@ -64,14 +59,14 @@ const HostListingTable = ({ data, columns }: TableProps) => {
           {table.getRowModel().rows.map((row) => {
             return (
               <tr className=" hover:bg-primary-500 cursor-pointer" key={row.id}>
-                {row.getVisibleCells().map((cell, _id) => {
+                {row.getVisibleCells().map((cell, _$) => {
                   let className = "py-2 pl-4 items-center gap-5"
-                  if (_id === 0) className += " rounded-l-xl"
-                  if (_id === row.getVisibleCells().length - 1)
+                  if (_$ === 0) className += " rounded-l-xl"
+                  if (_$ === row.getVisibleCells().length - 1)
                     className += " rounded-r-xl"
                   return (
                     <td className={className} key={cell.id}>
-                      {renderContentWithFlexRender(
+                      {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
                       )}
