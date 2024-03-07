@@ -64,11 +64,10 @@ const EarningUpcoming = () => {
                 </Typography>
 
                 <div className="flex gap-4 justify-between pb-4">
-                  {summaryData.map((row, rowIndex) => (
+                  {summaryData.map((row) => (
                     <div className="flex flex-col">
-                      {row.map((item, itemIndex) => (
+                      {row.map((item) => (
                         <h6
-                          key={`cell-${rowIndex}-${itemIndex}`}
                           className="pt-2 text-sm"
                         >
                           {item}
