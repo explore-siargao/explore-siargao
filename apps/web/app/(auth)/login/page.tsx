@@ -9,11 +9,11 @@ export const metadata: Metadata = {
 }
 
 const LoginPage = () => {
-  
   return (
-    <div className="h-screen overflow-hidden"><Login /></div>
+    <div className="h-screen overflow-hidden">
+      <Login />
+    </div>
   )
-  
 }
 
 export default LoginPage
