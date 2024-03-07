@@ -71,17 +71,17 @@ export const getThisMonthEarnings = async (req: Request, res: Response) => {
   res.json(
     response.success({
       item: {
-         amount:filterThisMonthEarnings,
-        yearToDateSummary:{
-          gross:19000,
-          adjustment:1000,
-          serviceFee:1000,
-          tax:1000
+        amount: filterThisMonthEarnings,
+        yearToDateSummary: {
+          gross: 19000,
+          adjustment: 1000,
+          serviceFee: 1000,
+          tax: 1000,
         },
 
         earningsCount: filterThisMonthEarnings.length,
         total: parseFloat(totalEarnings.toFixed(2)),
-      }
+      },
     })
   )
 }
@@ -104,11 +104,11 @@ export const getUpcomingEarnings = async (req: Request, res: Response) => {
     response.success({
       item: {
         amount: filterUpcomingEarning,
-        yearToDateSummary:{
-          gross:19000,
-          adjustment:1000,
-          serviceFee:1000,
-          tax:1000
+        yearToDateSummary: {
+          gross: 19000,
+          adjustment: 1000,
+          serviceFee: 1000,
+          tax: 1000,
         },
         earningsCount: filterUpcomingEarning.length,
         total: parseFloat(totalEarnings.toFixed(2)),
@@ -136,11 +136,11 @@ export const getPaidEarnings = async (req: Request, res: Response) => {
     response.success({
       item: {
         amount: filterPaidEarnings,
-        yearToDateSummary:{
-          gross:19000,
-          adjustment:1000,
-          serviceFee:1000,
-          tax:1000
+        yearToDateSummary: {
+          gross: 19000,
+          adjustment: 1000,
+          serviceFee: 1000,
+          tax: 1000,
         },
         earningsCount: filterPaidEarnings.length,
         total: parseFloat(totalEarnings.toFixed(2)),
