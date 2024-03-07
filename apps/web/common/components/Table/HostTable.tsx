@@ -1,0 +1,96 @@
+import {
+  useReactTable,
+  getCoreRowModel,
+  flexRender,
+} from "@tanstack/react-table"
+import Pagination from "./Pagination"
+
+export interface ListingsData {
+  id: number
+  hostId: number
+  title: string
+  address: string
+  imageKey: string
+  status: string
+}
+interface TableProps {
+  data: ListingsData[]
+  columns: any[]
+}
+
+const HostListingTable = ({ data, columns }: TableProps) => {
+  const table = useReactTable({
+    data,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+  })
+
+  return (
+    <div>
+      <table className="w-full table-auto">
+        <thead className="text-left">
+          {table.getHeaderGroups().map((headerGroup) => (
+            <tr key={headerGroup.id}>
+              {headerGroup.headers.map((header) => {
+                return (
+                  <th
+                    className="pl-4"
+                    key={header.id}
+                    colSpan={header.colSpan}
+                    scope="col"
+                  >
+                    {header.isPlaceholder ? null : (
+                      <div>
+                        <span>
+                          {flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
+                        </span>
+                      </div>
+                    )}
+                  </th>
+                )
+              })}
+            </tr>
+          ))}
+        </thead>
+        <tbody>
+          {table.getRowModel().rows.map((row) => (
+            <tr className="hover:bg-primary-500 cursor-pointer" key={row.id}>
+              {row.getVisibleCells().map((cell, _id) => {
+                const isFirstCell = _id === 0
+                const isLastCell = _id === row.getVisibleCells().length - 1
+                const className = `py-2 pl-4 items-center gap-5 ${
+                  isFirstCell ? "rounded-l-xl " : ""
+                }${isLastCell ? "rounded-r-xl" : ""}`
+                return (
+                  <td className={className} key={cell.id}>
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </td>
+                )
+              })}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <div className="flex items-end justify-end mt-5">
+        <Pagination
+          pageIndex={table.getState().pagination.pageIndex}
+          pageCount={table.getPageCount()}
+          canPreviousPage={table.getCanPreviousPage()}
+          canNextPage={table.getCanNextPage()}
+          onPageChange={table.setPageIndex}
+          onFirstPage={table.firstPage}
+          onLastPage={table.lastPage}
+          onPreviousPage={table.previousPage}
+          onNextPage={table.nextPage}
+          pageSize={table.getState().pagination.pageSize}
+          onPageSizeChange={table.setPageSize}
+        />
+      </div>
+    </div>
+  )
+}
+
+export default HostListingTable
