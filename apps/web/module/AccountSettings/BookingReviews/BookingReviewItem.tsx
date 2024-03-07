@@ -88,12 +88,12 @@ const BookingReviewItem = ({
 
       <div className="h-72 w-72 2xl:w-full bg-primary-100 rounded-lg relative ">
         <Image
-            src={`/assets/${pic}`}
-            width={300}
-            height={300}
-            alt={pic}
-            className="object-cover h-full w-full rounded-xl"
-          />
+          src={`/assets/${pic}`}
+          width={300}
+          height={300}
+          alt={pic}
+          className="object-cover h-full w-full rounded-xl"
+        />
       </div>
     </div>
   )
