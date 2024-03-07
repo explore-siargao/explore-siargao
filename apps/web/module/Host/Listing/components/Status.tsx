@@ -21,9 +21,7 @@ export interface HostListingStatusProps
   children?: React.ReactNode
 }
 
-
 const Status = React.forwardRef<HTMLElement, HostListingStatusProps>(
-  
   ({ variant, className, children }, ref) => {
     const PaymentStatusClass = StatusVariants({ variant, className })
     return (
@@ -42,4 +40,3 @@ const Status = React.forwardRef<HTMLElement, HostListingStatusProps>(
 Status.displayName = "Status"
 
 export { Status, StatusVariants }
-

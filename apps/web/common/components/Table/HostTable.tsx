@@ -5,12 +5,20 @@ import {
 } from "@tanstack/react-table"
 import Pagination from "./Pagination"
 
+export interface ListingsData {
+  id: number
+  hostId: number
+  title: string
+  address: string
+  imageKey: string
+  status: string
+}
 interface TableProps {
-data: any[]
+  data: ListingsData[]
   columns: any[]
 }
 
-const HostTable = ({ data, columns }: TableProps) => {
+const HostListingTable = ({ data, columns }: TableProps) => {
   const table = useReactTable({
     data,
     columns,
@@ -89,4 +97,4 @@ const HostTable = ({ data, columns }: TableProps) => {
   )
 }
 
-export default HostTable
+export default HostListingTable
