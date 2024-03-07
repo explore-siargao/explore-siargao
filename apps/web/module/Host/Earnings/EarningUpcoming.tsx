@@ -10,22 +10,6 @@ const EarningUpcoming = () => {
   const { data, isPending } = useGetUpcomingEarnings()
   const currentDate = new Date()
 
-  const summaryData = [
-    ["Gross earnings", "Adjustments", "Service fee", "Taxes withheld"],
-    [
-      formatCurrency(data?.item?.yearToDateSummary?.gross ?? "", "Philippines"),
-      formatCurrency(
-        data?.item?.yearToDateSummary?.adjustment ?? "",
-        "Philippines"
-      ),
-      formatCurrency(
-        data?.item?.yearToDateSummary?.serviceFee ?? "",
-        "Philippines"
-      ),
-      formatCurrency(data?.item?.yearToDateSummary?.tax ?? "", "Philippines"),
-    ],
-  ]
-
   return (
     <div className="grid grid-cols-1 lg:grid-cols-4">
       {isPending ? (
@@ -63,14 +47,39 @@ const EarningUpcoming = () => {
                   Jan 1 - {format(currentDate, "MMMM d yyyy")}
                 </Typography>
 
-                <div className="flex gap-4 justify-between pb-4">
-                  {summaryData.map((row) => (
-                    <div className="flex flex-col">
-                      {row.map((item) => (
-                        <h6 className="pt-2 text-sm">{item}</h6>
-                      ))}
+                <div className="flex justify-between pb-4">
+                  <div className="flex flex-col">
+                    <div>Gross earnings</div>
+                    <div>Adjustments</div>
+                    <div>Service fee</div>
+                    <div>Taxes withheld</div>
+                  </div>
+                  <div className="flex flex-col">
+                    <div>
+                      {formatCurrency(
+                        data?.item?.yearToDateSummary?.gross ?? "",
+                        "Philippines"
+                      )}
                     </div>
-                  ))}
+                    <div>
+                      {formatCurrency(
+                        data?.item?.yearToDateSummary?.adjustment ?? "",
+                        "Philippines"
+                      )}
+                    </div>
+                    <div>
+                      {formatCurrency(
+                        data?.item?.yearToDateSummary?.serviceFee ?? "",
+                        "Philippines"
+                      )}
+                    </div>
+                    <div>
+                      {formatCurrency(
+                        data?.item?.yearToDateSummary?.tax ?? "",
+                        "Philippines"
+                      )}
+                    </div>
+                  </div>
                 </div>
 
                 <div className="bottom-0 border-t flex gap-4 justify-between">
