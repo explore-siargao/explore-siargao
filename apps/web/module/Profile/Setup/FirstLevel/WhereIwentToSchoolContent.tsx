@@ -16,6 +16,7 @@ const WhereIWentToSchoolContent = ({
     40
   )
   const setSchoolNameStore = useProfileEditStore((state) => state.setSchoolName)
+  const school = useProfileEditStore((state) => state.school)
   const save = () => {
     if (schoolName) {
       setSchoolNameStore(schoolName)
@@ -41,6 +42,7 @@ const WhereIWentToSchoolContent = ({
             label="Where I went to school:"
             onChange={handleInputChange}
             maxLength={40}
+            defaultValue={school}
           />
           <Typography
             variant="h6"

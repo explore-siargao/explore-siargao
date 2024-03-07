@@ -9,6 +9,7 @@ import useProfileEditStore from "../store/useProfileEditStore"
 const PetsContent = ({ setIsOpen }: { setIsOpen: Dispatch<boolean> }) => {
   const { value: pets, onChange: handleInputChange } = InputMaxLength("", 40)
   const setPetsStore = useProfileEditStore((state) => state.setPets)
+  const myPets = useProfileEditStore((state) => state.pets)
   const save = () => {
     if (pets) {
       setPetsStore(pets)
@@ -30,7 +31,7 @@ const PetsContent = ({ setIsOpen }: { setIsOpen: Dispatch<boolean> }) => {
         </Typography>
 
         <div className="mt-6">
-          <Input label="Pets:" onChange={handleInputChange} maxLength={40} />
+          <Input label="Pets:" onChange={handleInputChange} maxLength={40} defaultValue={myPets} />
           <Typography
             variant="h6"
             className="flex items-end justify-end font-semibold text-text-400 mt-3"

@@ -18,6 +18,9 @@ const ObsessedWithContent = ({
   const setObsessedWithStore = useProfileEditStore(
     (state) => state.setObsessedWith
   )
+  const obsess = useProfileEditStore(
+    (state) => state.obsessedWith
+  )
   const save = () => {
     if (obsessedWith) {
       setObsessedWithStore(obsessedWith)
@@ -43,6 +46,7 @@ const ObsessedWithContent = ({
             label="I'm obsessed with:"
             onChange={handleInputChange}
             maxLength={40}
+            defaultValue={obsess}
           />
           <Typography
             variant="h6"

@@ -16,6 +16,7 @@ import useProfileEditStore from "./store/useProfileEditStore"
 import useUpdateProfile from "../hooks/useUpdateProfile"
 import { useQueryClient } from "@tanstack/react-query"
 import { Spinner } from "@/common/components/ui/Spinner"
+import { useRouter } from "next/navigation"
 
 const dest = [
   {
@@ -47,6 +48,7 @@ const Setup = () => {
     }
   }, [data])
 
+  const router = useRouter()
   const queryClient = useQueryClient()
   const callBackReq = {
     onSuccess: (data: any) => {
@@ -55,6 +57,7 @@ const Setup = () => {
           queryKey: ["user-profile"],
         })
         toast.success(data.message)
+        router.back()
       } else {
         toast.error(String(data.message))
       }

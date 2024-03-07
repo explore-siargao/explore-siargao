@@ -16,6 +16,7 @@ const MyBiographyTitleContent = ({
     40
   )
   const setBiographyStore = useProfileEditStore((state) => state.setBiography)
+  const bio = useProfileEditStore((state) => state.biography)
   const save = () => {
     if (biography) {
       setBiographyStore(biography)
@@ -41,6 +42,7 @@ const MyBiographyTitleContent = ({
             label="My biography title would be:"
             onChange={handleInputChange}
             maxLength={40}
+            defaultValue={bio}
           />
           <Typography
             variant="h6"
