@@ -142,7 +142,7 @@ export interface DetailsType {
   link: string
   img: string
   title: string
-  listingId:number | undefined,
+  listingId: number | undefined
   address: string
   description: string
   price: string

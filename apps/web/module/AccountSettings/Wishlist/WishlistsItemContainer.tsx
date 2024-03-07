@@ -64,7 +64,7 @@ const ActionButton = ({ onClick, text }: ComponentProps) => (
 const WishlistsItemContainer = () => {
   const [details, setDetails] = useState<DetailsType>({
     id: 0,
-    listingId:0,
+    listingId: 0,
     link: "",
     img: "",
     title: "",
@@ -95,7 +95,7 @@ const WishlistsItemContainer = () => {
   const setDetailsForItem = (item: any) => {
     setDetails({
       id: item?.id,
-      listingId:item?.listingId,
+      listingId: item?.listingId,
       link: item?.link,
       img: item?.listing?.images[0].fileKey,
       title: item?.listing?.title,
