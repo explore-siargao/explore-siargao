@@ -11,16 +11,6 @@ import { Button } from "@/common/components/ui/Button"
 import useGetBookings from "./hooks/useGetBookings"
 import { Spinner } from "@/common/components/ui/Spinner"
 
-interface ITypes {
-  fileKey: string
-  description: string
-  guestCount: string
-  dateRange: string
-  location: string
-  totalCost: string
-  paymentStatus: string
-}
-
 const Bookings = () => {
   const { data, isPending } = useGetBookings(2)
 
@@ -28,19 +18,20 @@ const Bookings = () => {
   const columns = [
     columnHelper.accessor("Listing.imageKey", {
       header: "Listing",
-      cell: (info) => (
+      cell: (Listing) => (
         <Link href="/profile">
           <div className="flex items-center gap-5">
-            <Image
-              className="rounded-xl"
-              src={`/assets/${info.getValue()}`}
-              alt="Image"
-              width={100}
-              height={100}
-            />
+            <div className="relative w-24 h-16 rounded-xl overflow-hidden">
+              <Image
+                src={`/assets/${Listing.getValue()}`}
+                alt="Image"
+                layout="fill"
+                objectFit="cover"
+              />
+            </div>
             <span>
               <Typography variant="p">
-                {info.row.original.Listing.title}
+                {Listing.row.original.Listing.title}
               </Typography>
             </span>
           </div>
@@ -109,7 +100,7 @@ const Bookings = () => {
               fontWeight="semibold"
               className="flex justify-between items-center pl-4"
             >
-              Your booking
+              Your bookings
               <div className="flex gap-5">
                 <span className="bg-white rounded-full p-2 cursor-pointer shadow-lg">
                   <LucideTable />
