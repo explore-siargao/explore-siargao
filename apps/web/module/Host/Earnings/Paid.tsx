@@ -34,30 +34,24 @@ const Paid = () => {
         <>
           <div className="left p-4 lg:col-span-3">
             {data?.item && data.item.amount.length > 0 ? (
-              <>
-                <Chart
-                  width="100%"
-                  height={400}
-                  isPending={isPending}
-                  data={data.item.amount}
-                  type={ChartType.paid}
-                  totalAmount={data.item.total}
-                />
-              </>
+              <Chart
+                width="100%"
+                height={400}
+                isPending={isPending}
+                data={data.item.amount}
+                type={ChartType.paid}
+                totalAmount={data.item.total}
+              />
             ) : (
-              <>
-                <div className="p-4">
-                  <Typography variant="h1" fontWeight="semibold">
-                    Paid
-                  </Typography>
-                  <Typography variant="p" className="text-gray-800 mt-5">
-                    Payouts are sent after guests check in.{" "}
-                    <button className="underline">
-                      Learn how payouts work
-                    </button>
-                  </Typography>
-                </div>
-              </>
+              <div className="p-4">
+                <Typography variant="h1" fontWeight="semibold">
+                  Paid
+                </Typography>
+                <Typography variant="p" className="text-gray-800 mt-5">
+                  Payouts are sent after guests check in.{" "}
+                  <button className="underline">Learn how payouts work</button>
+                </Typography>
+              </div>
             )}
           </div>
           <div className="p-6 col-span-1 lg:col-span-1">
@@ -71,16 +65,13 @@ const Paid = () => {
                 </Typography>
 
                 <div className="flex gap-4 justify-between pb-4 px-4">
-                  {summaryData.map((column, columnIndex) => (
-                    <div
-                      key={`column-${columnIndex}`}
-                      className="flex flex-col"
-                    >
-                      {column.map((item, itemIndex) => (
+                  {summaryData.map((column, _colId) => (
+                    <div key={`column-${_colId}`} className="flex flex-col">
+                      {column.map((item, _itemId) => (
                         <Typography
                           variant="p"
                           fontWeight="semibold"
-                          key={`column-${columnIndex}-item-${itemIndex}`}
+                          key={`column-${_colId}-item-${_itemId}`}
                           className="pt-2 text-sm"
                         >
                           {item}
