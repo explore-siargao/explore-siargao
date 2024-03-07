@@ -63,31 +63,30 @@ const EarningUpcoming = () => {
                     </Typography>
                   </div>
                   <div className="flex flex-col">
-                      <Typography className="pt-2 text-sm">
-                        {formatCurrency(
-                          data?.item?.yearToDateSummary?.gross ?? "",
-                          "Philippines"
-                        )}
-                      </Typography>
-                      <Typography className="pt-2 text-sm">
-                        {formatCurrency(
-                          data?.item?.yearToDateSummary?.adjustment ?? "",
-                          "Philippines"
-                        )}
-                      </Typography>
-                      <Typography className="pt-2 text-sm">
-                        {formatCurrency(
-                          data?.item?.yearToDateSummary?.serviceFee ?? "",
-                          "Philippines"
-                        )}
-                      </Typography>
-                      <Typography className="pt-2 text-sm">
-                        {formatCurrency(
-                          data?.item?.yearToDateSummary?.tax ?? "",
-                          "Philippines"
-                        )}
-                      </Typography>
-
+                    <Typography className="pt-2 text-sm">
+                      {formatCurrency(
+                        data?.item?.yearToDateSummary?.gross ?? "",
+                        "Philippines"
+                      )}
+                    </Typography>
+                    <Typography className="pt-2 text-sm">
+                      {formatCurrency(
+                        data?.item?.yearToDateSummary?.adjustment ?? "",
+                        "Philippines"
+                      )}
+                    </Typography>
+                    <Typography className="pt-2 text-sm">
+                      {formatCurrency(
+                        data?.item?.yearToDateSummary?.serviceFee ?? "",
+                        "Philippines"
+                      )}
+                    </Typography>
+                    <Typography className="pt-2 text-sm">
+                      {formatCurrency(
+                        data?.item?.yearToDateSummary?.tax ?? "",
+                        "Philippines"
+                      )}
+                    </Typography>
                   </div>
                 </div>
 
