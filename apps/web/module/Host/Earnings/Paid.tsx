@@ -65,13 +65,13 @@ const Paid = () => {
                 </Typography>
 
                 <div className="flex gap-4 justify-between pb-4 px-4">
-                  {summaryData.map((column, _colId) => (
-                    <div key={`column-${_colId}`} className="flex flex-col">
-                      {column.map((item, _itemId) => (
+                  {summaryData.map((column) => (
+                    <div key={`column-${column}`} className="flex flex-col">
+                      {column.map((item) => (
                         <Typography
                           variant="p"
                           fontWeight="semibold"
-                          key={`column-${_colId}-item-${_itemId}`}
+                          key={`column-${column}-item-${item}`}
                           className="pt-2 text-sm"
                         >
                           {item}
