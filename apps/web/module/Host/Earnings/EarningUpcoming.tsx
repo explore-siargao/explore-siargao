@@ -9,7 +9,21 @@ import { format } from "date-fns"
 const EarningUpcoming = () => {
   const { data, isPending } = useGetUpcomingEarnings()
   const currentDate = new Date()
-
+  const summaryData = [
+    ["Gross earnings", "Adjustments", "Service fee", "Taxes withheld"],
+    [
+      formatCurrency(data?.item?.yearToDateSummary?.gross ?? "", "Philippines"),
+      formatCurrency(
+        data?.item?.yearToDateSummary?.adjustment ?? "",
+        "Philippines"
+      ),
+      formatCurrency(
+        data?.item?.yearToDateSummary?.serviceFee ?? "",
+        "Philippines"
+      ),
+      formatCurrency(data?.item?.yearToDateSummary?.tax ?? "", "Philippines"),
+    ],
+  ]
   return (
     <div className="grid grid-cols-1 lg:grid-cols-4">
       {isPending ? (
@@ -47,52 +61,36 @@ const EarningUpcoming = () => {
                   Jan 1 - {format(currentDate, "MMMM d yyyy")}
                 </Typography>
 
-                <div className="flex justify-between pb-4">
-                  <div className="flex flex-col">
-                    <Typography className="pt-2 text-sm">
-                      Gross earnings
-                    </Typography>
-                    <Typography className="pt-2 text-sm">
-                      Adjustments
-                    </Typography>
-                    <Typography className="pt-2 text-sm">
-                      Service fee
-                    </Typography>
-                    <Typography className="pt-2 text-sm">
-                      Taxes withheld
-                    </Typography>
-                  </div>
-                  <div className="flex flex-col">
-                    <Typography className="pt-2 text-sm">
-                      {formatCurrency(
-                        data?.item?.yearToDateSummary?.gross ?? "",
-                        "Philippines"
-                      )}
-                    </Typography>
-                    <Typography className="pt-2 text-sm">
-                      {formatCurrency(
-                        data?.item?.yearToDateSummary?.adjustment ?? "",
-                        "Philippines"
-                      )}
-                    </Typography>
-                    <Typography className="pt-2 text-sm">
-                      {formatCurrency(
-                        data?.item?.yearToDateSummary?.serviceFee ?? "",
-                        "Philippines"
-                      )}
-                    </Typography>
-                    <Typography className="pt-2 text-sm">
-                      {formatCurrency(
-                        data?.item?.yearToDateSummary?.tax ?? "",
-                        "Philippines"
-                      )}
-                    </Typography>
-                  </div>
+                <div className="flex gap-4 justify-between pb-4 px-4">
+                  {summaryData.map((column) => (
+                    <div key={`column-${column}`} className="flex flex-col">
+                      {column.map((item) => (
+                        <Typography
+                          variant="p"
+                          fontWeight="semibold"
+                          key={`column-${column}-item-${item}`}
+                          className="pt-2 text-sm"
+                        >
+                          {item}
+                        </Typography>
+                      ))}
+                    </div>
+                  ))}
                 </div>
 
-                <div className="bottom-0 border-t flex gap-4 justify-between">
-                  <Typography className="pt-4 text-sm">Total</Typography>
-                  <Typography className="pt-4 text-sm">
+                <div className="bottom-0 border-t flex gap-4 justify-between px-4">
+                  <Typography
+                    className="pt-4"
+                    variant="p"
+                    fontWeight="semibold"
+                  >
+                    Total
+                  </Typography>
+                  <Typography
+                    className="pt-4 text-sm"
+                    variant="p"
+                    fontWeight="semibold"
+                  >
                     {formatCurrency(data.item.total, "Philippines")}
                   </Typography>
                 </div>
