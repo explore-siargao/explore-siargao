@@ -9,12 +9,16 @@ import useGetThisMonthEarnings from "../hooks/useGetThisMonthEarnings"
 import { T_BackendResponse } from "@repo/contract"
 
 const EarningsThisMonth = () => {
-  const { data:thisMonth, isPending:thisMonthIsPending } =  useGetThisMonthEarnings()
+  const { data: thisMonth, isPending: thisMonthIsPending } =
+    useGetThisMonthEarnings()
   const currentDate = new Date()
   const summaryData = [
     ["Gross earnings", "Adjustments", "Service fee", "Taxes withheld"],
     [
-      formatCurrency(thisMonth?.item?.yearToDateSummary?.gross ?? "", "Philippines"),
+      formatCurrency(
+        thisMonth?.item?.yearToDateSummary?.gross ?? "",
+        "Philippines"
+      ),
       formatCurrency(
         thisMonth?.item?.yearToDateSummary?.adjustment ?? "",
         "Philippines"
@@ -23,7 +27,10 @@ const EarningsThisMonth = () => {
         thisMonth?.item?.yearToDateSummary?.serviceFee ?? "",
         "Philippines"
       ),
-      formatCurrency(thisMonth?.item?.yearToDateSummary?.tax ?? "", "Philippines"),
+      formatCurrency(
+        thisMonth?.item?.yearToDateSummary?.tax ?? "",
+        "Philippines"
+      ),
     ],
   ]
   return (

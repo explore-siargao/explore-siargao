@@ -6,14 +6,17 @@ import formatCurrency from "@/common/helpers/formatCurrency"
 import Chart, { ChartType } from "./components/Chart"
 import { format } from "date-fns"
 
-
 const EarningUpcoming = () => {
-  const { data:upcoming, isPending:upcomingIsPending } =  useGetUpcomingEarnings()
+  const { data: upcoming, isPending: upcomingIsPending } =
+    useGetUpcomingEarnings()
   const currentDate = new Date()
   const summaryData = [
     ["Gross earnings", "Adjustments", "Service fee", "Taxes withheld"],
     [
-      formatCurrency(upcoming?.item?.yearToDateSummary?.gross ?? "", "Philippines"),
+      formatCurrency(
+        upcoming?.item?.yearToDateSummary?.gross ?? "",
+        "Philippines"
+      ),
       formatCurrency(
         upcoming?.item?.yearToDateSummary?.adjustment ?? "",
         "Philippines"
@@ -22,7 +25,10 @@ const EarningUpcoming = () => {
         upcoming?.item?.yearToDateSummary?.serviceFee ?? "",
         "Philippines"
       ),
-      formatCurrency(upcoming?.item?.yearToDateSummary?.tax ?? "", "Philippines"),
+      formatCurrency(
+        upcoming?.item?.yearToDateSummary?.tax ?? "",
+        "Philippines"
+      ),
     ],
   ]
   return (
@@ -54,7 +60,7 @@ const EarningUpcoming = () => {
           </div>
         </>
       )}
-    </div> 
+    </div>
   )
 }
 

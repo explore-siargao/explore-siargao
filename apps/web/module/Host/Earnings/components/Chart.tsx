@@ -74,17 +74,23 @@ const Chart = ({
   return (
     <>
       <>
-        <Typography variant={type===ChartType["this-month"] ? "h1":"p"} fontWeight="semibold">
+        <Typography
+          variant={type === ChartType["this-month"] ? "h1" : "p"}
+          fontWeight="semibold"
+        >
           Earnings
         </Typography>
-        <Typography variant="h1" className={type===ChartType["this-month"] ? "text-[30px]":""}>
+        <Typography
+          variant="h1"
+          className={type === ChartType["this-month"] ? "text-[30px]" : ""}
+        >
           {title}{" "}
           <span className="text-gray-400">
             {isPending
               ? formatCurrency(0.0, "Philippines")
               : formatCurrency(totalAmount, "Philippines")}
           </span>{" "}
-          {type===ChartType["this-month"]? "this month":""}
+          {type === ChartType["this-month"] ? "this month" : ""}
         </Typography>
       </>
 

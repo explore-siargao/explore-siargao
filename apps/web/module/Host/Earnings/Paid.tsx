@@ -56,7 +56,7 @@ const Paid = () => {
           </div>
         </>
       )}
-    </div> 
+    </div>
   )
 }
 
