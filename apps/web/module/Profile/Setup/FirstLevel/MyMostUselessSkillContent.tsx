@@ -18,9 +18,7 @@ const MyMostUselessSkillContent = ({
   const setUselessSkillStore = useProfileEditStore(
     (state) => state.setMostUselessSkill
   )
-  const uselessSkills = useProfileEditStore(
-    (state) => state.uselessSkill
-  )
+  const uselessSkills = useProfileEditStore((state) => state.uselessSkill)
   const save = () => {
     if (uselessSkill) {
       setUselessSkillStore(uselessSkill)

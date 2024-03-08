@@ -1,12 +1,12 @@
-import { Button } from "@/common/components/ui/Button";
-import ToggleSwitch from "@/common/components/ui/Toggle";
-import { Typography } from "@/common/components/ui/Typography";
-import { Dispatch, useState } from "react";
-import toast from "react-hot-toast";
-import useProfileEditStore from "../store/useProfileEditStore";
+import { Button } from "@/common/components/ui/Button"
+import ToggleSwitch from "@/common/components/ui/Toggle"
+import { Typography } from "@/common/components/ui/Typography"
+import { Dispatch, useState } from "react"
+import toast from "react-hot-toast"
+import useProfileEditStore from "../store/useProfileEditStore"
 
 interface Decade {
-  decade: string;
+  decade: string
 }
 
 const decadeObj: Decade[] = [
@@ -25,39 +25,39 @@ const decadeObj: Decade[] = [
   {
     decade: "Born in the 50's",
   },
-];
+]
 
 const DecadeYouWereBornContent = ({
   setIsOpen,
 }: {
-  setIsOpen: Dispatch<boolean>;
+  setIsOpen: Dispatch<boolean>
 }) => {
-  const decadeOn = useProfileEditStore((state) => state.decadeWereBorn);
-  const [toggleState, setToggleState] = useState<boolean>(decadeOn !== "");
+  const decadeOn = useProfileEditStore((state) => state.decadeWereBorn)
+  const [toggleState, setToggleState] = useState<boolean>(decadeOn !== "")
 
   const setDecadeWereBornStore = useProfileEditStore(
     (state) => state.setDecadeWereBorn
-  );
+  )
 
   const save = () => {
     if (toggleState) {
-      setDecadeWereBornStore(decadeObj[2]?.decade as string); // Example for setting decade
-      setIsOpen(false);
-      toast.success("Saved");
+      setDecadeWereBornStore(decadeObj[2]?.decade as string) // Example for setting decade
+      setIsOpen(false)
+      toast.success("Saved")
     } else {
-      setIsOpen(false);
-      setDecadeWereBornStore(""); // Clear the decade
+      setIsOpen(false)
+      setDecadeWereBornStore("") // Clear the decade
     }
-  };
+  }
 
   const handleToggleChange = (checked: boolean) => {
-    setToggleState(checked);
+    setToggleState(checked)
     if (checked) {
-      setDecadeWereBornStore(decadeObj[2]?.decade as string); // Example for setting decade
+      setDecadeWereBornStore(decadeObj[2]?.decade as string) // Example for setting decade
     } else {
-      setDecadeWereBornStore(""); // Clear the decade
+      setDecadeWereBornStore("") // Clear the decade
     }
-  };
+  }
 
   return (
     <div>
@@ -71,17 +71,17 @@ const DecadeYouWereBornContent = ({
           </Typography>
         </div>
         <div className="flex mt-5 cursor-pointer">
-          <div
-            className="clickable-typography cursor-pointer"
-          >
+          <div className="clickable-typography cursor-pointer">
             <Typography variant="h3" className="font-light">
               Show the decade I was born
             </Typography>
           </div>
           <div className="flex-grow" />
-          <div className="flex items-end justify-end "
-          >
-            <ToggleSwitch checked={toggleState} onChange={()=>handleToggleChange(!toggleState)} />
+          <div className="flex items-end justify-end ">
+            <ToggleSwitch
+              checked={toggleState}
+              onChange={() => handleToggleChange(!toggleState)}
+            />
           </div>
         </div>
         <div>
@@ -99,7 +99,7 @@ const DecadeYouWereBornContent = ({
         </Button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default DecadeYouWereBornContent;
+export default DecadeYouWereBornContent

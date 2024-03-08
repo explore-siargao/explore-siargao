@@ -18,9 +18,7 @@ const FavoriteSongInHighSchoolContent = ({
   const setFavoriteSongStore = useProfileEditStore(
     (state) => state.setFavoriteSong
   )
-  const songs = useProfileEditStore(
-    (state) => state.favoriteSong
-  )
+  const songs = useProfileEditStore((state) => state.favoriteSong)
   const save = () => {
     if (favoriteSong) {
       setFavoriteSongStore(favoriteSong)

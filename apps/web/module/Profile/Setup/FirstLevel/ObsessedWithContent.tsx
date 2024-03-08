@@ -18,9 +18,7 @@ const ObsessedWithContent = ({
   const setObsessedWithStore = useProfileEditStore(
     (state) => state.setObsessedWith
   )
-  const obsess = useProfileEditStore(
-    (state) => state.obsessedWith
-  )
+  const obsess = useProfileEditStore((state) => state.obsessedWith)
   const save = () => {
     if (obsessedWith) {
       setObsessedWithStore(obsessedWith)
