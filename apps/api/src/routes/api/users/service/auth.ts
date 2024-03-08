@@ -16,7 +16,6 @@ import { capitalize } from 'lodash'
 import { Z_UserRegister } from '@repo/contract'
 import { ResponseService } from '@/common/service/response'
 import randomNumber from '@/common/helpers/randomNumber'
-import CryptoJS from 'crypto-js'
 import { currencyByCountry } from '@/common/helpers/currencyByCountry'
 const prisma = new PrismaClient()
 const response = new ResponseService()
@@ -70,7 +69,6 @@ export const verifySignIn = async (req: Request, res: Response) => {
       ) {
         res.json(
           response.error({
-            item: null,
             message: `Invalid login method, please login using your password`,
           })
         )
@@ -87,7 +85,6 @@ export const verifySignIn = async (req: Request, res: Response) => {
       } else {
         res.json(
           response.success({
-            item: null,
             message: 'Email is not registered',
           })
         )
@@ -205,9 +202,7 @@ export const manual = async (req: Request, res: Response) => {
       const decryptInputPassword = decryptionService.decrypt(password)
       if (user && originalPassword === decryptInputPassword) {
         res.json(
-          response.success({
-            item: null,
-          })
+          response.success({})
         )
       } else {
         res.json(response.error({ message: 'Email or password is invalid' }))
@@ -484,7 +479,6 @@ export const mfaVerify = async (req: Request, res: Response) => {
         })
         res.json(
           response.success({
-            item: {},
             message: 'User Verified',
           })
         )
