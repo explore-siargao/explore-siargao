@@ -17,10 +17,10 @@ const Section = ({ name, modalContent, icon, title }: T_Section) => {
   const [modalOpen, setModalOpen] = useState(false)
   return (
     <>
-      <div className="border-b relative">
+      <div className="border-b relative hover:bg-primary-100 cursor-pointer">
         <button
           key={title}
-          className="flex items-center pt-5 pb-5 px-4 gap-4 rounded-xl hover:bg-primary-100 h-full cursor-pointer"
+          className="flex items-center pt-5 pb-5 px-4 gap-4 rounded-xl h-full"
           onClick={() => setModalOpen(!modalOpen)}
           onKeyDown={() => setModalOpen(!modalOpen)}
         >
