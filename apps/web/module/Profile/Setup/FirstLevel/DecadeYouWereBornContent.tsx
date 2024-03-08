@@ -1,12 +1,12 @@
-import { Button } from "@/common/components/ui/Button"
-import ToggleSwitch from "@/common/components/ui/Toggle"
-import { Typography } from "@/common/components/ui/Typography"
-import { Dispatch, useState } from "react"
-import toast from "react-hot-toast"
-import useProfileEditStore from "../store/useProfileEditStore"
+import { Button } from "@/common/components/ui/Button";
+import ToggleSwitch from "@/common/components/ui/Toggle";
+import { Typography } from "@/common/components/ui/Typography";
+import { Dispatch, useState } from "react";
+import toast from "react-hot-toast";
+import useProfileEditStore from "../store/useProfileEditStore";
 
 interface Decade {
-  decade: string
+  decade: string;
 }
 
 const decadeObj: Decade[] = [
@@ -25,45 +25,39 @@ const decadeObj: Decade[] = [
   {
     decade: "Born in the 50's",
   },
-]
+];
 
 const DecadeYouWereBornContent = ({
   setIsOpen,
 }: {
-  setIsOpen: Dispatch<boolean>
+  setIsOpen: Dispatch<boolean>;
 }) => {
-  const [decadeWereBorn, setDecadeWereBorn] = useState<string>("")
+  const decadeOn = useProfileEditStore((state) => state.decadeWereBorn);
+  const [toggleState, setToggleState] = useState<boolean>(decadeOn !== "");
+
   const setDecadeWereBornStore = useProfileEditStore(
     (state) => state.setDecadeWereBorn
-  )
+  );
 
   const save = () => {
-    if (decadeWereBorn) {
-      setDecadeWereBornStore(decadeWereBorn)
-      setIsOpen(false)
-      toast.success("Saved")
+    if (toggleState) {
+      setDecadeWereBornStore(decadeObj[2]?.decade as string); // Example for setting decade
+      setIsOpen(false);
+      toast.success("Saved");
     } else {
-      toast.error("Please fill out the form")
+      setIsOpen(false);
+      setDecadeWereBornStore(""); // Clear the decade
     }
-  }
+  };
 
   const handleToggleChange = (checked: boolean) => {
+    setToggleState(checked);
     if (checked) {
-      setDecadeWereBorn(selectedDecade?.decade ?? "")
+      setDecadeWereBornStore(decadeObj[2]?.decade as string); // Example for setting decade
     } else {
-      setDecadeWereBorn("")
+      setDecadeWereBornStore(""); // Clear the decade
     }
-  }
-
-  const handleToggleSwitchChange = () => {
-    handleToggleChange(!decadeWereBorn)
-  }
-
-  const selectedDecade: Decade | undefined = decadeObj[2]
-
-  const handleDecadeTypographyClick = () => {
-    handleToggleSwitchChange()
-  }
+  };
 
   return (
     <div>
@@ -73,31 +67,27 @@ const DecadeYouWereBornContent = ({
         </Typography>
         <div>
           <Typography variant="h5">
-            Don’t worry, other people won’t be able to see your exact birthday.{" "}
+            Don’t worry, other people won’t be able to see your exact birthday.
           </Typography>
         </div>
         <div className="flex mt-5 cursor-pointer">
           <div
             className="clickable-typography cursor-pointer"
-            onClick={handleDecadeTypographyClick}
-            onKeyDown={() => handleDecadeTypographyClick}
           >
             <Typography variant="h3" className="font-light">
               Show the decade I was born
             </Typography>
           </div>
           <div className="flex-grow" />
-          <div className="flex items-end justify-end ">
-            <ToggleSwitch
-              checked={!!decadeWereBorn}
-              onChange={handleToggleSwitchChange}
-            />
+          <div className="flex items-end justify-end "
+          >
+            <ToggleSwitch checked={toggleState} onChange={()=>handleToggleChange(!toggleState)} />
           </div>
         </div>
         <div>
-          {selectedDecade && (
+          {decadeOn !== "" && (
             <Typography variant="h4" className="text-gray-500 font-light">
-              {selectedDecade.decade}
+              {decadeObj[2]?.decade} {/* Example of displaying the decade */}
             </Typography>
           )}
         </div>
@@ -109,7 +99,7 @@ const DecadeYouWereBornContent = ({
         </Button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default DecadeYouWereBornContent
+export default DecadeYouWereBornContent;

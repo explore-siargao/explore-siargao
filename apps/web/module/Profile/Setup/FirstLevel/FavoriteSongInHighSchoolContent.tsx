@@ -27,7 +27,7 @@ const FavoriteSongInHighSchoolContent = ({
       setIsOpen(false)
       toast.success("Saved")
     } else {
-      toast.error("Please fill out the form")
+      setIsOpen(false)
     }
   }
   return (

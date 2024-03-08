@@ -27,7 +27,7 @@ let profiles = [
     work: 'IT',
     live: '',
     language: 'English, French',
-    decadeWereBorn: '80s',
+    decadeWereBorn: '',
     favoriteSong: 'I believe',
     obsessedWith: 'Her',
     funFact: '',

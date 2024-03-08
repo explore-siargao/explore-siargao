@@ -12,19 +12,19 @@ const ConfirmedInformation = ({
         {name}'s confirmed information
       </Typography>
       <ul className="mt-4">
-        {confirmedInformation.identity && (
+        {confirmedInformation?.identity && (
           <li className="flex items-center">
             <Check className="h-5 w-5 mr-3" />
             Identity
           </li>
         )}
-        {confirmedInformation.emailAddress && (
+        {confirmedInformation?.emailAddress && (
           <li className="flex items-center">
             <Check className="h-5 w-5 mr-3" />
             Email address
           </li>
         )}
-        {confirmedInformation.phoneNumber && (
+        {confirmedInformation?.phoneNumber && (
           <li className="flex items-center">
             <Check className="h-5 w-5 mr-3" />
             Phone number

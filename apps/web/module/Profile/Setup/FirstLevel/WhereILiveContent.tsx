@@ -68,7 +68,7 @@ const WhereILiveContent = ({ setIsOpen }: { setIsOpen: Dispatch<boolean> }) => {
       setIsOpen(false)
       toast.success("Saved")
     } else {
-      toast.error("Please select a location")
+      setIsOpen(false)
     }
   }
 
