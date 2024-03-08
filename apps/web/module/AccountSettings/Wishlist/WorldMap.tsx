@@ -47,19 +47,17 @@ const WorldMap = () => {
     if (marker) {
       // @ts-ignore
       marker.closePopup()
+      console.log(marker)
     }
   }
-
-  useEffect(() => {
-    console.log(markerRef)
-  }, [])
 
   return (
     <>
       <MapContainer
-        //@ts-ignore
         center={[
+          // @ts-ignore
           data?.items[0]?.listing?.latitude,
+          // @ts-ignore
           data?.items[0]?.listing?.longitude,
         ]}
         zoom={12}
@@ -79,8 +77,9 @@ const WorldMap = () => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         {data?.items?.length !== 0 &&
-          data?.items?.map((item) => (
+          data?.items?.map((item, index) => (
             <Marker
+              key={index}
               ref={markerRef}
               position={[item.listing.latitude, item.listing.longitude]}
               icon={navIcon}
@@ -92,13 +91,10 @@ const WorldMap = () => {
                   item.listing.price.serviceFee +
                   item.listing.price.cleaningFee
                 }
-                date={item.listing.description}
                 isNight={false}
                 images={item.listing.images}
                 location={item.listing.address}
-                desc={item.listing.title}
                 rating={"0.0"}
-                countReviews={item.listing.review.length}
                 onClose={closePopup}
               />
             </Marker>

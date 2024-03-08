@@ -1,33 +1,31 @@
 import { Popup } from "react-leaflet"
-import Image from "next/image"
 import { StarIcon, HeartIcon } from "@heroicons/react/20/solid"
 import { XMarkIcon } from "@heroicons/react/24/outline"
-import { ChevronRight, ChevronLeft } from "lucide-react"
-import Listing from "@/module/Listing"
+import Image from "next/image"
+import { Swiper, SwiperSlide } from "swiper/react"
+import { Navigation, Pagination } from "swiper/modules"
+import "swiper/swiper-bundle.css"
+import "swiper/css/navigation"
+import "swiper/css/pagination"
+import Link from "next/link"
 
 type Prop = {
   itemId: number
-  date: string
   price: number
   isNight: boolean
   images: []
   location: string
-  desc: string
   rating: string
-  countReviews: number
   onClose: () => void
 }
 
 const MapCustomPopup = ({
   itemId,
-  date,
   price,
   isNight,
   images,
   location,
-  desc,
   rating,
-  countReviews,
   onClose,
 }: Prop) => {
   return (
@@ -35,60 +33,83 @@ const MapCustomPopup = ({
       <style>
         {`
           .request-popup .leaflet-popup-content-wrapper {
-            border-radius: 0px;
+            border-radius: 6px;
           }
         `}
       </style>
       <Popup className="request-popup">
-        {/* <div className="absolute bg-gray-200 top-0 left-0 right-0 rounded-none h-[64%] w-full">
-                <div className="relative h-full w-full">
-                    <Image src="/assets/1.jpg" layout="fill" objectFit="cover" alt=""/>
-                </div>
-                <div className="bg-gray-500 border border-gray-300 rounded-full absolute left-1 top-1 text-white px-4 py-1">
-                    Host
-                </div>
-                <button className="bg-white rounded-full z-10 p-1 border border-gray-300 absolute right-1 top-1"
-                onClick={onClose}>
-                    <XMarkIcon className="h-4 w-4" />
-                </button>
-                <button className="bg-white rounded-full p-1 border border-gray-300 absolute right-9 top-1">
-                    <HeartIcon className="h-4 w-4" fill="red"/>
-                </button>
-                <button className="bg-white rounded-full border border-gray-300 p-1 absolute left-1 top-14">
-                    <ChevronLeft className="h-4 w-4" />
-                </button>
-                <button className="bg-white rounded-full border border-gray-300 p-1 absolute right-1 top-14">
-                    <ChevronRight className="h-4 w-4" />
-                </button>
+        <button className="bg-white rounded-full z-10 p-1 border border-gray-300 absolute right-1 top-1"
+          onClick={onClose}>
+          <XMarkIcon className="h-4 w-4" />
+        </button>
+        <Link href={process.env.WEB_URL + "/accommodation/" + itemId} target="_blank">
+          <div className="absolute bg-gray-200 top-0 left-0 right-0 h-[70%] rounded-t-md w-full">
+            <Swiper
+              navigation
+              pagination={{ type: "bullets", clickable: true }}
+              modules={[Navigation, Pagination]}
+              className="h-full w-full rounded-t-md"
+            >
+              <style>{`
+                .swiper-button-prev, .swiper-button-next {
+                  color: black;
+                  background-color: white;
+                  border-radius: 50%; 
+                  width: 30px; 
+                  height: 30px;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+                }
+                .swiper-button-next:after, 
+                .swiper-button-prev:after {
+                  font-size: 10px;
+                  font-weight: 600;
+                }
+                .swiper-pagination-bullet {
+                  background-color: white;
+                }
+              `}</style>
+
+              {images.map((image, imageIndex) => (
+                <SwiperSlide key={imageIndex}>
+                  <div className="flex h-full w-full items-center justify-center rounded-t-md">
+                    <Image
+                      width={300}
+                      height={300}
+                      // @ts-ignore
+                      src={`/assets/${image.fileKey}`}
+                      // @ts-ignore
+                      alt={image.alt}
+                      className="block h-full w-full object-cover"
+                    />
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+            <div className="z-10 p-1 absolute right-9 top-[1px]">
+              <HeartIcon
+                className={`h-6 w-6 text-text-50 active:scale-90 fill-error-500`}
+              />
             </div>
-            <div className="h-44 w-44">
-            <div className="absolute bottom-0 left-0 right-0 h-[36%] w-full p-1.5">
+            </div>
+            <div className="h-[250px] w-44">
+            <div className="absolute bottom-0 left-0 right-0 h-[30%] w-full p-2.5">
                 <div className="flex justify-between items-center">
-                    <h4 className="font-semibold text-sm w-32 whitespace-nowrap overflow-hidden text-ellipsis">{location}</h4>
+                    <h4 className="font-semibold text-sm text-text-700 w-32 whitespace-nowrap overflow-hidden text-ellipsis">{location}</h4>
                     <div className="space-x-0.5 flex items-center">
-                        <StarIcon className="h-4 w-4"/>
-                        <h4 className="text-sm">{rating}</h4>
-                        <h4 className="text-sm">({countReviews})</h4>
+                        <StarIcon className="h-4 w-4 mb-0.5 text-text-700"/>
+                        <h4 className="text-sm text-text-700">{rating}</h4>
                     </div>
                 </div>
-                <h4 className="text-sm text-gray-500 whitespace-nowrap overflow-hidden text-ellipsis">{desc}</h4>
-                <h4 className="text-sm text-gray-500 whitespace-nowrap overflow-hidden text-ellipsis">1 king bed</h4>
+                <h4 className="text-sm text-gray-500 whitespace-nowrap overflow-hidden text-ellipsis">100 kilometers away</h4>
+                <h4 className="text-sm text-text-700 font-semibold underline whitespace-nowrap overflow-hidden text-ellipsis">
+                ₱{price} <span className="font-normal">{isNight}</span>
+                </h4>
             </div>
-            </div> */}
-        <ul className="absolute bg-gray-200 top-0 left-0 right-0 rounded-none w-[300px]">
-          <Listing
-            key={itemId}
-            listingId={itemId}
-            location={location}
-            date={date}
-            distance={"100 kilometers"}
-            price={"₱" + price}
-            imageKey={images}
-            dayTime={isNight ? "Night" : ""}
-            ratings={"0.0"}
-            isHearted={true}
-          />
-        </ul>
+            </div>
+            </Link>
       </Popup>
     </>
   )
