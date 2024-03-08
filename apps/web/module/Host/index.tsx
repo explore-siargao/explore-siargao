@@ -3,6 +3,7 @@ import { Typography } from "@/common/components/ui/Typography"
 import { Title } from "@/common/components/ui/Title"
 import { Button } from "@/common/components/ui/Button"
 import { LucideBook } from "lucide-react"
+import { WidthWrapper } from "@/common/components/WidthWrapper"
 
 const tabs = [
   {
@@ -49,6 +50,7 @@ const HostingPage: React.FC<HostingPageProps> = ({ hostName }) => {
     description = "You don't have any guests checking out today or tomorrow"
   }
   return (
+    <WidthWrapper className="my-24 lg:my-36">
     <div>
       <div className="">
         <Title size={"default"} className="flex font-semibold mb-10">
@@ -60,9 +62,9 @@ const HostingPage: React.FC<HostingPageProps> = ({ hostName }) => {
         </Title>
       </div>
       <div className="">
+      <div className="flex-grow" />
         <Typography variant={"h1"} className="flex font-semibold mb-5">
           Your reservations
-          <div className="flex-grow" />
           <Button
             variant={"ghost"}
             className="flex items-end font-semibold text-[17px] underline"
@@ -86,6 +88,7 @@ const HostingPage: React.FC<HostingPageProps> = ({ hostName }) => {
         </div>
       </div>
     </div>
+    </WidthWrapper>
   )
 }
 
