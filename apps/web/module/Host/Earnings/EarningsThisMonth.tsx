@@ -1,12 +1,10 @@
 import React from "react"
 import { Typography } from "@/common/components/ui/Typography"
-import useGetUpcomingEarnings from "../hooks/useGetUpcomingEarnings"
 import { Spinner } from "@/common/components/ui/Spinner"
 import formatCurrency from "@/common/helpers/formatCurrency"
 import Chart, { ChartType } from "./components/Chart"
 import { format } from "date-fns"
 import useGetThisMonthEarnings from "../hooks/useGetThisMonthEarnings"
-import { T_BackendResponse } from "@repo/contract"
 
 const EarningsThisMonth = () => {
   const { data: thisMonth, isPending: thisMonthIsPending } =

@@ -36,7 +36,7 @@ const EarningUpcoming = () => {
       {upcomingIsPending ? (
         <Spinner size="md">Loading...</Spinner>
       ) : (
-        <>
+     
           <div className="left p-4 lg:col-span-3">
             {upcoming?.item && upcoming.item.amount.length > 0 ? (
               <Chart
@@ -58,7 +58,7 @@ const EarningUpcoming = () => {
               </>
             )}
           </div>
-        </>
+        
       )}
     </div>
   )
