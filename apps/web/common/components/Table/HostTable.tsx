@@ -19,7 +19,7 @@ interface TableProps {
   columns: any[]
 }
 
-const Table = ({ data, columns }: TableProps) => {
+const HostTable = ({ data, columns }: TableProps) => {
   const table = useReactTable({
     data,
     columns,
@@ -98,4 +98,4 @@ const Table = ({ data, columns }: TableProps) => {
   )
 }
 
-export default Table
+export default HostTable
