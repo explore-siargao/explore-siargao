@@ -42,7 +42,7 @@ interface ChartProps {
   data: Amount[]
   totalAmount: number
   isPending: boolean
-  width: string
+  width: string | number
   height: number
   type: ChartType
 }
@@ -73,16 +73,10 @@ const Chart = ({
 
   return (
     <>
-      <>
-        <Typography
-          variant={type === ChartType["this-month"] ? "h1" : "p"}
-          fontWeight="semibold"
-        >
-          Earnings
-        </Typography>
+      <div>
         <Typography
           variant="h1"
-          className={type === ChartType["this-month"] ? "text-[30px]" : ""}
+          className="text-[30px]"
         >
           {title}{" "}
           <span className="text-gray-400">
@@ -92,7 +86,7 @@ const Chart = ({
           </span>{" "}
           {type === ChartType["this-month"] ? "this month" : ""}
         </Typography>
-      </>
+      </div>
 
       <ResponsiveContainer width={width} height={height}>
         <BarChart

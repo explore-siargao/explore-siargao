@@ -27,34 +27,26 @@ const Paid = () => {
   ]
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-4">
-      {isPending ? (
-        <Spinner size="md">Loading...</Spinner>
+    <div className="mt-8">
+      {data?.item && data.item.amount.length > 0 ? (
+        <Chart
+          width="100%"
+          height={400}
+          isPending={isPending}
+          data={data.item.amount}
+          type={ChartType.paid}
+          totalAmount={data.item.total}
+        />
       ) : (
-        <>
-          <div className="left p-4 lg:col-span-3">
-            {data?.item && data.item.amount.length > 0 ? (
-              <Chart
-                width="100%"
-                height={400}
-                isPending={isPending}
-                data={data.item.amount}
-                type={ChartType.paid}
-                totalAmount={data.item.total}
-              />
-            ) : (
-              <div className="p-4">
-                <Typography variant="h1" fontWeight="semibold">
-                  Paid
-                </Typography>
-                <Typography variant="p" className="text-gray-800 mt-5">
-                  Payouts are sent after guests check in.{" "}
-                  <button className="underline">Learn how payouts work</button>
-                </Typography>
-              </div>
-            )}
-          </div>
-        </>
+        <div className="p-4">
+          <Typography variant="h1" fontWeight="semibold">
+            Paid
+          </Typography>
+          <Typography variant="p" className="text-gray-800 mt-5">
+            Payouts are sent after guests check in.{" "}
+            <button className="underline">Learn how payouts work</button>
+          </Typography>
+        </div>
       )}
     </div>
   )
