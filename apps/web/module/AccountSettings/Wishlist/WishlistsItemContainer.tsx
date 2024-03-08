@@ -64,6 +64,7 @@ const ActionButton = ({ onClick, text }: ComponentProps) => (
 const WishlistsItemContainer = () => {
   const [details, setDetails] = useState<DetailsType>({
     id: 0,
+    listingId: 0,
     link: "",
     img: "",
     title: "",
@@ -94,6 +95,7 @@ const WishlistsItemContainer = () => {
   const setDetailsForItem = (item: any) => {
     setDetails({
       id: item?.id,
+      listingId: item?.listingId,
       link: item?.link,
       img: item?.listing?.images[0].fileKey,
       title: item?.listing?.title,
@@ -149,15 +151,6 @@ const WishlistsItemContainer = () => {
     return (data?.items || []).map(() => false)
   })
 
-  const handleClick = (index: number, wishGroupId: number) => {
-    setIsClickedArray((prev) => {
-      const updatedArray = [...prev]
-      updatedArray[index] = !prev[index]
-      mutate({ id: wishGroupId }, callBackReq)
-      return updatedArray
-    })
-  }
-
   return (
     <>
       {isLoading ? (
@@ -200,8 +193,9 @@ const WishlistsItemContainer = () => {
             {data?.items?.length !== 0 ? (
               data?.items?.map((item, index) => (
                 <SavedWishlists
+                  key={item.id}
                   itemId={item.id}
-                  listingId={item.id}
+                  listingId={item.listingId}
                   location={item.listing.address}
                   date={item.listing.description}
                   distance={"100 kilometers away"}
