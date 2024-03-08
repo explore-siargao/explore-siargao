@@ -1,6 +1,6 @@
 import { MapContainer, TileLayer, Popup, Marker } from "react-leaflet"
 import "leaflet/dist/leaflet.css"
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import MapCustomPopup from "@/common/components/MapCustomPopup"
 import { Icon } from "leaflet"
 import useSessionStore from "@/common/store/useSessionStore"
@@ -15,7 +15,7 @@ const navIcon = new Icon({
 
 const WorldMap = () => {
   const mapRef = useRef(null)
-  const markerRef = useRef(null)
+  const [markerRefs, setMarkerRefs] = useState([])
 
   const session = useSessionStore((state) => state)
   const params = useParams()
@@ -24,43 +24,48 @@ const WorldMap = () => {
     params?._id as string
   )
 
-  const showPopup = () => {
+  const showPopup = (index: any) => {
     const map = mapRef.current
     if (!map) {
       return
     }
 
-    const marker = markerRef.current
+    const marker = markerRefs[index]
     if (marker) {
       // @ts-ignore
       marker.openPopup()
     }
   }
 
-  const closePopup = () => {
+  const closePopup = (index: any) => {
     const map = mapRef.current
     if (!map) {
       return
     }
 
-    const marker = markerRef.current
+    const marker = markerRefs[index]
     if (marker) {
       // @ts-ignore
       marker.closePopup()
-      console.log(marker)
     }
   }
+
+  useEffect(() => {
+    // @ts-ignore
+    if (data?.items?.length > 0) {
+      // @ts-ignore
+      setMarkerRefs(Array(data.items.length).fill(null))
+    }
+  }, [data])
 
   return (
     <>
       <MapContainer
         center={[
-          // @ts-ignore
-          data?.items[0]?.listing?.latitude,
-          // @ts-ignore
-          data?.items[0]?.listing?.longitude,
+          9.9,
+          126.03
         ]}
-        zoom={12}
+        zoom={11}
         scrollWheelZoom={true}
         style={{
           height: "100%",
@@ -80,9 +85,10 @@ const WorldMap = () => {
           data?.items?.map((item, index) => (
             <Marker
               key={index}
-              ref={markerRef}
               position={[item.listing.latitude, item.listing.longitude]}
               icon={navIcon}
+              // @ts-ignore
+              ref={el => markerRefs[index] = el}
             >
               <MapCustomPopup
                 itemId={item.id}
@@ -95,7 +101,7 @@ const WorldMap = () => {
                 images={item.listing.images}
                 location={item.listing.address}
                 rating={"0.0"}
-                onClose={closePopup}
+                onClose={() => closePopup(index)}
               />
             </Marker>
           ))}
