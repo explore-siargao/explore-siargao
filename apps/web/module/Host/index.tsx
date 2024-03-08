@@ -53,17 +53,18 @@ const HostingPage: React.FC<HostingPageProps> = ({ hostName }) => {
     <WidthWrapper className="my-24 lg:my-36">
       <div>
         <div className="">
-          <Title size={"default"} className="flex font-semibold mb-10">
-            Welcome, {hostName}
-            <div className="flex-grow" />
-            <Button variant="outline" className="flex items-end ">
+          <div className="flex items-center justify-between pb-4">
+            <Title size="default" className="flex font-semibold">
+              Welcome, {hostName}
+            </Title>
+            <Button variant="outline" className="flex items-end">
               Complete your listing
             </Button>
-          </Title>
+          </div>
         </div>
         <div className="">
           <div className="flex-grow" />
-          <Typography variant={"h1"} className="flex font-semibold mb-5">
+          <Typography variant={"h1"} className="flex justify-between font-semibold mb-5">
             Your reservations
             <Button
               variant={"ghost"}
