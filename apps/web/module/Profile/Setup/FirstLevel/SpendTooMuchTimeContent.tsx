@@ -16,9 +16,7 @@ const SpendTooMuchTimeContent = ({
   const setSpendTooMuchTimeStore = useProfileEditStore(
     (state) => state.setSpendTooMuchTime
   )
-  const tooMuchTime = useProfileEditStore(
-    (state) => state.spendTime
-  )
+  const tooMuchTime = useProfileEditStore((state) => state.spendTime)
   const save = () => {
     if (spendTooMuchTime) {
       setSpendTooMuchTimeStore(spendTooMuchTime)

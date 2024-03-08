@@ -12,7 +12,7 @@ const MyWorkContent = ({ setIsOpen }: { setIsOpen: Dispatch<boolean> }) => {
     20
   )
   const setWorkNameStore = useProfileEditStore((state) => state.setWorkName)
-  const myWork = useProfileEditStore((state)=>state.work)
+  const myWork = useProfileEditStore((state) => state.work)
   const save = () => {
     if (workName) {
       setWorkNameStore(workName)
@@ -39,7 +39,12 @@ const MyWorkContent = ({ setIsOpen }: { setIsOpen: Dispatch<boolean> }) => {
         </Typography>
 
         <div className="mt-6 mb-5">
-          <Input label="My work:" onChange={handleInputChange} maxLength={20} defaultValue={myWork} />
+          <Input
+            label="My work:"
+            onChange={handleInputChange}
+            maxLength={20}
+            defaultValue={myWork}
+          />
           <Typography
             variant="h6"
             className="flex items-end justify-end font-semibold text-text-400 mt-3"

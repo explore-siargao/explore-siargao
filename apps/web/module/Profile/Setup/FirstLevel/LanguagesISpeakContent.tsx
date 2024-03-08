@@ -63,60 +63,76 @@ const languagesObj = [
   },
 ]
 
-const LanguageISpeakContent = ({ setIsOpen }: { setIsOpen: Dispatch<boolean> }) => {
-  const [selectedLanguages, setSelectedLanguages] = useState<string[]>([]);
-  const [languageCheckboxes, setLanguageCheckboxes] = useState<{ [key: string]: boolean }>({});
-  const [searchTerm, setSearchTerm] = useState<string>("");
-  const setLanguageISpeakStore = useProfileEditStore((state) => state.setLanguageISpeak);
-  const languageISpeakStore = useProfileEditStore((state) => state.languageISpeak);
+const LanguageISpeakContent = ({
+  setIsOpen,
+}: {
+  setIsOpen: Dispatch<boolean>
+}) => {
+  const [selectedLanguages, setSelectedLanguages] = useState<string[]>([])
+  const [languageCheckboxes, setLanguageCheckboxes] = useState<{
+    [key: string]: boolean
+  }>({})
+  const [searchTerm, setSearchTerm] = useState<string>("")
+  const setLanguageISpeakStore = useProfileEditStore(
+    (state) => state.setLanguageISpeak
+  )
+  const languageISpeakStore = useProfileEditStore(
+    (state) => state.languageISpeak
+  )
 
   useEffect(() => {
     if (languageISpeakStore) {
-      setSelectedLanguages(languageISpeakStore.split(", "));
+      setSelectedLanguages(languageISpeakStore.split(", "))
     }
-  }, []);
+  }, [])
 
   useEffect(() => {
-    const checkboxes: { [key: string]: boolean } = {};
+    const checkboxes: { [key: string]: boolean } = {}
     languagesObj.forEach((language) => {
-      checkboxes[language.lang] = selectedLanguages.includes(language.lang);
-    });
-    setLanguageCheckboxes(checkboxes);
-  }, [selectedLanguages]);
+      checkboxes[language.lang] = selectedLanguages.includes(language.lang)
+    })
+    setLanguageCheckboxes(checkboxes)
+  }, [selectedLanguages])
 
   const toggleLanguage = (lang: string) => {
-    const isSelected = languageCheckboxes[lang];
-    const updatedCheckboxes = { ...languageCheckboxes, [lang]: !isSelected };
-    setLanguageCheckboxes(updatedCheckboxes);
-    setSelectedLanguages(Object.keys(updatedCheckboxes).filter((key) => updatedCheckboxes[key]));
-  };
+    const isSelected = languageCheckboxes[lang]
+    const updatedCheckboxes = { ...languageCheckboxes, [lang]: !isSelected }
+    setLanguageCheckboxes(updatedCheckboxes)
+    setSelectedLanguages(
+      Object.keys(updatedCheckboxes).filter((key) => updatedCheckboxes[key])
+    )
+  }
 
   const save = () => {
     if (selectedLanguages.length > 0) {
-      const selectedLanguagesString = selectedLanguages.join(", ");
-      setLanguageISpeakStore(selectedLanguagesString);
-      setIsOpen(false);
-      toast.success("Saved");
+      const selectedLanguagesString = selectedLanguages.join(", ")
+      setLanguageISpeakStore(selectedLanguagesString)
+      setIsOpen(false)
+      toast.success("Saved")
     } else {
-      toast.error("Please select at least one language");
+      toast.error("Please select at least one language")
     }
-  };
+  }
 
   const filteredLanguages = languagesObj.filter((language) =>
     language.lang.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  )
 
   const highlightMatch = (text: string) => {
-    const index = text.toLowerCase().indexOf(searchTerm.toLowerCase());
-    if (index === -1) return text;
+    const index = text.toLowerCase().indexOf(searchTerm.toLowerCase())
+    if (index === -1) return text
     return (
       <>
         <span className="font-semibold">{text.substring(0, index)}</span>
-        <span className="font-light">{text.substring(index, index + searchTerm.length)}</span>
-        <span className="font-semibold">{text.substring(index + searchTerm.length)}</span>
+        <span className="font-light">
+          {text.substring(index, index + searchTerm.length)}
+        </span>
+        <span className="font-semibold">
+          {text.substring(index + searchTerm.length)}
+        </span>
       </>
-    );
-  };
+    )
+  }
 
   return (
     <>
@@ -136,7 +152,11 @@ const LanguageISpeakContent = ({ setIsOpen }: { setIsOpen: Dispatch<boolean> }) 
           <div>
             <ul>
               {filteredLanguages.map((language) => (
-                <Typography key={language.lang} variant="h4" className="font-semibold text-text-400">
+                <Typography
+                  key={language.lang}
+                  variant="h4"
+                  className="font-semibold text-text-400"
+                >
                   <li key={language.lang}>
                     <div className="flex items-end justify-end">
                       <Input
@@ -163,7 +183,7 @@ const LanguageISpeakContent = ({ setIsOpen }: { setIsOpen: Dispatch<boolean> }) 
         </Button>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default LanguageISpeakContent;
+export default LanguageISpeakContent
