@@ -64,7 +64,10 @@ const HostingPage: React.FC<HostingPageProps> = ({ hostName }) => {
         </div>
         <div className="">
           <div className="flex-grow" />
-          <Typography variant={"h1"} className="flex justify-between font-semibold mb-5">
+          <Typography
+            variant={"h1"}
+            className="flex justify-between font-semibold mb-5"
+          >
             Your reservations
             <Button
               variant={"ghost"}
