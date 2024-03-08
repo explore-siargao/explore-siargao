@@ -47,48 +47,60 @@ export const verifySignIn = async (req: Request, res: Response) => {
           isSocial) ||
         (user && user.registrationType === RegistrationType.Manual && !isSocial)
       ) {
-        res.json(response.success({
-          item:{email}
-        }))
+        res.json(
+          response.success({
+            item: { email },
+          })
+        )
       } else if (
         user &&
         user.registrationType !== RegistrationType.Manual &&
         !isSocial
       ) {
-        res.json(response.error({
-          item:null,
-          message: `Invalid login method, please login using your ${type} account`
-        }))
+        res.json(
+          response.error({
+            item: null,
+            message: `Invalid login method, please login using your ${type} account`,
+          })
+        )
       } else if (
         user &&
         user.registrationType === RegistrationType.Manual &&
         isSocial
       ) {
-        res.json(response.error({
-          item:null,
-          message: `Invalid login method, please login using your password`
-        }))
+        res.json(
+          response.error({
+            item: null,
+            message: `Invalid login method, please login using your password`,
+          })
+        )
       } else if ((!user && type === 'google') || type === 'facebook') {
-        res.json(response.success({
-          action: {
-            type: 'SOCIAL_REGISTER',
-            description: type,
-          },
-          message: 'Email is not registered',
-        }))
+        res.json(
+          response.success({
+            action: {
+              type: 'SOCIAL_REGISTER',
+              description: type,
+            },
+            message: 'Email is not registered',
+          })
+        )
       } else {
-        res.json(response.success({
-          item: null,
-          message: 'Email is not registered',
-        }))
+        res.json(
+          response.success({
+            item: null,
+            message: 'Email is not registered',
+          })
+        )
       }
     } catch (err: any) {
-      res.json(response.error({
-        message:err.message ? err.message : UNKNOWN_ERROR_OCCURRED
-      }))
+      res.json(
+        response.error({
+          message: err.message ? err.message : UNKNOWN_ERROR_OCCURRED,
+        })
+      )
     }
   } else {
-    res.json(response.error({message:REQUIRED_VALUE_EMPTY}))
+    res.json(response.error({ message: REQUIRED_VALUE_EMPTY }))
   }
 }
 
@@ -192,19 +204,27 @@ export const manual = async (req: Request, res: Response) => {
       const originalPassword = decryptedPassword.toString()
       const decryptInputPassword = decryptionService.decrypt(password)
       if (user && originalPassword === decryptInputPassword) {
-        res.json(response.success({
-          item:null
-        }))
+        res.json(
+          response.success({
+            item: null,
+          })
+        )
       } else {
-        res.json(response.error({message:'Email or password is invalid'}))
+        res.json(response.error({ message: 'Email or password is invalid' }))
       }
     } catch (err: any) {
-      res.json(response.error({message:err.message? err.message : UNKNOWN_ERROR_OCCURRED}))
+      res.json(
+        response.error({
+          message: err.message ? err.message : UNKNOWN_ERROR_OCCURRED,
+        })
+      )
     }
   } else {
-    res.json(response.error({
-      message:REQUIRED_VALUE_EMPTY
-    }))
+    res.json(
+      response.error({
+        message: REQUIRED_VALUE_EMPTY,
+      })
+    )
   }
 }
 
@@ -223,24 +243,29 @@ export const info = async (req: Request, res: Response) => {
           },
         })
         if (user) {
-          res.json(response.success({
-            item: {
-              name: `${user.personalInfo?.firstName} ${user.personalInfo?.lastName}`,
-              email: user.email,
-            },
-          }))
+          res.json(
+            response.success({
+              item: {
+                name: `${user.personalInfo?.firstName} ${user.personalInfo?.lastName}`,
+                email: user.email,
+              },
+            })
+          )
         } else {
-          res.json(response.error({message:'No data found'}))
-
+          res.json(response.error({ message: 'No data found' }))
         }
       } catch (err: any) {
-        res.json(response.error({message:err.message? err.message : UNKNOWN_ERROR_OCCURRED}))
+        res.json(
+          response.error({
+            message: err.message ? err.message : UNKNOWN_ERROR_OCCURRED,
+          })
+        )
       }
     } else {
-      res.json(response.error({message:REQUIRED_VALUE_EMPTY}))
+      res.json(response.error({ message: REQUIRED_VALUE_EMPTY }))
     }
   } else {
-    res.json(response.error({message:USER_NOT_AUTHORIZED}))
+    res.json(response.error({ message: USER_NOT_AUTHORIZED }))
   }
 }
 
@@ -289,16 +314,20 @@ export const forgot = async (req: Request, res: Response) => {
             expiredAt: dayjs().add(30, 'minutes').format(),
           },
         })
-        res.json(response.success({message:successMessage}))
+        res.json(response.success({ message: successMessage }))
       } else {
         authEmail.sendForgotPasswordEmail(sendEmailParams)
-        res.json(response.success({message:successMessage}))
+        res.json(response.success({ message: successMessage }))
       }
     } catch (err: any) {
-      res.json(response.error({message:err.message? err.message : UNKNOWN_ERROR_OCCURRED}))
+      res.json(
+        response.error({
+          message: err.message ? err.message : UNKNOWN_ERROR_OCCURRED,
+        })
+      )
     }
   } else {
-    res.json(response.error({message:REQUIRED_VALUE_EMPTY}))
+    res.json(response.error({ message: REQUIRED_VALUE_EMPTY }))
   }
 }
 
@@ -346,15 +375,24 @@ export const forgotVerify = async (req: Request, res: Response) => {
             password: String(encryptPassword),
           },
         })
-        res.json(response.success({message:'Password successfully updated'}))
+        res.json(response.success({ message: 'Password successfully updated' }))
       } else {
-        res.json(response.error({message:'Some values are invalid or forgot password token is expired'}))
+        res.json(
+          response.error({
+            message:
+              'Some values are invalid or forgot password token is expired',
+          })
+        )
       }
     } catch (err: any) {
-      res.json(response.error({message: err.message? err.message : UNKNOWN_ERROR_OCCURRED}))
+      res.json(
+        response.error({
+          message: err.message ? err.message : UNKNOWN_ERROR_OCCURRED,
+        })
+      )
     }
   } else {
-    res.json(response.error({message:REQUIRED_VALUE_EMPTY}))
+    res.json(response.error({ message: REQUIRED_VALUE_EMPTY }))
   }
 }
 
@@ -395,16 +433,20 @@ export const mfa = async (req: Request, res: Response) => {
             expiredAt: dayjs().add(3, 'minutes').format(),
           },
         })
-        res.json(response.success({message:successMessage}))
+        res.json(response.success({ message: successMessage }))
       } else {
         authEmail.sendMFA(sendEmailParams)
-        res.json(response.success({message:successMessage}))
+        res.json(response.success({ message: successMessage }))
       }
     } catch (err: any) {
-      res.json(response.error({message:err.message? err.message:UNKNOWN_ERROR_OCCURRED}))
+      res.json(
+        response.error({
+          message: err.message ? err.message : UNKNOWN_ERROR_OCCURRED,
+        })
+      )
     }
   } else {
-    res.json(response.error({message:REQUIRED_VALUE_EMPTY}))
+    res.json(response.error({ message: REQUIRED_VALUE_EMPTY }))
   }
 }
 
@@ -440,18 +482,24 @@ export const mfaVerify = async (req: Request, res: Response) => {
             used: true,
           },
         })
-        res.json(response.success({
-          item:{},
-          message:"User Verified"
-        }))
+        res.json(
+          response.success({
+            item: {},
+            message: 'User Verified',
+          })
+        )
       } else {
-        res.json(response.error({message:'Invalid or expired token'}))
+        res.json(response.error({ message: 'Invalid or expired token' }))
       }
     } catch (err: any) {
-      res.json(response.error({message:err.message? err.message : UNKNOWN_ERROR_OCCURRED}))
+      res.json(
+        response.error({
+          message: err.message ? err.message : UNKNOWN_ERROR_OCCURRED,
+        })
+      )
     }
   } else {
-    res.json(response.error({message:REQUIRED_VALUE_EMPTY}))
+    res.json(response.error({ message: REQUIRED_VALUE_EMPTY }))
   }
 }
 
@@ -482,23 +530,29 @@ export const updateUserEmail = async (req: Request, res: Response) => {
             },
           })
 
-          res.json(response.success({
-            item: {
-              user: updateEmail,
-            },
-            message: 'Sucessfully updated',
-          }))
+          res.json(
+            response.success({
+              item: {
+                user: updateEmail,
+              },
+              message: 'Sucessfully updated',
+            })
+          )
         } else {
-          res.json(response.error({message:'Invalid email address'}))
+          res.json(response.error({ message: 'Invalid email address' }))
         }
       } else {
-        res.json(response.error({message:REQUIRED_VALUE_EMPTY}))
+        res.json(response.error({ message: REQUIRED_VALUE_EMPTY }))
       }
     } else {
-      res.json(response.error({message:USER_NOT_EXIST}))
+      res.json(response.error({ message: USER_NOT_EXIST }))
     }
   } catch (err: any) {
-    res.json(response.error({message:err.message? err.message: UNKNOWN_ERROR_OCCURRED}))
+    res.json(
+      response.error({
+        message: err.message ? err.message : UNKNOWN_ERROR_OCCURRED,
+      })
+    )
   }
 }
 
@@ -525,21 +579,27 @@ export const userDetails = async (req: Request, res: Response) => {
           },
         },
       })
-      res.json(response.success({
-        item: {
-          id: user?.id,
-          email: user?.email,
-          canReceivedEmail: user?.canReceiveEmail,
-          registrationType: user?.registrationType,
-          profilePicture: user?.profilePicture,
-          personalInfo: user?.personalInfo,
-        },
-      }))
+      res.json(
+        response.success({
+          item: {
+            id: user?.id,
+            email: user?.email,
+            canReceivedEmail: user?.canReceiveEmail,
+            registrationType: user?.registrationType,
+            profilePicture: user?.profilePicture,
+            personalInfo: user?.personalInfo,
+          },
+        })
+      )
     } catch (err: any) {
-      res.json(response.error({message:err.message? err.message: UNKNOWN_ERROR_OCCURRED}))
+      res.json(
+        response.error({
+          message: err.message ? err.message : UNKNOWN_ERROR_OCCURRED,
+        })
+      )
     }
   } else {
-    res.json(response.error({message:USER_NOT_AUTHORIZED}))
+    res.json(response.error({ message: USER_NOT_AUTHORIZED }))
   }
 }
 

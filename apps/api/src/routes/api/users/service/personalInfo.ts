@@ -32,14 +32,20 @@ export const getPersonalInfo = async (req: Request, res: Response) => {
         : null,
     }
     if (getPersonalInfo !== null) {
-      res.json(response.success({
-        item:modifyPersonInfo
-      }))
+      res.json(
+        response.success({
+          item: modifyPersonInfo,
+        })
+      )
     } else {
-      res.json(response.success({message:"No data found"}))
+      res.json(response.success({ message: 'No data found' }))
     }
   } catch (err: any) {
-    res.json(response.error({message:err.message? err.message : UNKNOWN_ERROR_OCCURRED}))
+    res.json(
+      response.error({
+        message: err.message ? err.message : UNKNOWN_ERROR_OCCURRED,
+      })
+    )
   }
 }
 
@@ -69,12 +75,18 @@ export const updatePersonalInfo = async (req: Request, res: Response) => {
         confirm: JSON.stringify(confirm),
       },
     })
-    res.json(response.success({
-      item:editPersonalInfo,
-      message:"Successfully updated"
-    }))
+    res.json(
+      response.success({
+        item: editPersonalInfo,
+        message: 'Successfully updated',
+      })
+    )
   } catch (err: any) {
-    res.json(response.error({message:err.message? err.message : UNKNOWN_ERROR_OCCURRED}))
+    res.json(
+      response.error({
+        message: err.message ? err.message : UNKNOWN_ERROR_OCCURRED,
+      })
+    )
   }
 }
 
@@ -101,18 +113,26 @@ export const addEmergencyContact = async (req: Request, res: Response) => {
           },
         })
 
-        res.json(response.success({
-          item:newEmergencyContact,
-          message:'Emergency Contact Successfully Added'
-        }))
+        res.json(
+          response.success({
+            item: newEmergencyContact,
+            message: 'Emergency Contact Successfully Added',
+          })
+        )
       } else {
-        res.json(response.error({message:'No personal information data found'}))
+        res.json(
+          response.error({ message: 'No personal information data found' })
+        )
       }
     } else {
-      res.json(response.error({message:REQUIRED_VALUE_EMPTY}))
+      res.json(response.error({ message: REQUIRED_VALUE_EMPTY }))
     }
   } catch (err: any) {
-    res.json(response.error({message:err.message? err.message:UNKNOWN_ERROR_OCCURRED}))
+    res.json(
+      response.error({
+        message: err.message ? err.message : UNKNOWN_ERROR_OCCURRED,
+      })
+    )
   }
 }
 
@@ -141,18 +161,26 @@ export const removeEmergencyContact = async (req: Request, res: Response) => {
             peronalInfoId: personInfoId,
           },
         })
-        res.json(response.success({
-          item:deleteEmergencyContact,
-          message:'Sucessfully deleted emergency contact'
-        }))
+        res.json(
+          response.success({
+            item: deleteEmergencyContact,
+            message: 'Sucessfully deleted emergency contact',
+          })
+        )
       } else {
-        res.json(response.error({message:'Emergency contact already deleted'}))
+        res.json(
+          response.error({ message: 'Emergency contact already deleted' })
+        )
       }
     } else {
-      res.json(response.error({message:USER_NOT_EXIST}))
+      res.json(response.error({ message: USER_NOT_EXIST }))
     }
   } catch (err: any) {
-    res.json(response.error({message:err.message? err.message : UNKNOWN_ERROR_OCCURRED}))
+    res.json(
+      response.error({
+        message: err.message ? err.message : UNKNOWN_ERROR_OCCURRED,
+      })
+    )
   }
 }
 
@@ -204,15 +232,26 @@ export const addAddress = async (req: Request, res: Response) => {
           })
           returnAddress = updateAddress
         }
-        res.json(response.success({item:returnAddress, message:'Address successfully updated'}))
+        res.json(
+          response.success({
+            item: returnAddress,
+            message: 'Address successfully updated',
+          })
+        )
       } else {
-        res.json(response.error({message:'No personal information data found'}))
+        res.json(
+          response.error({ message: 'No personal information data found' })
+        )
       }
     } else {
-      res.json(response.error({message:REQUIRED_VALUE_EMPTY}))
+      res.json(response.error({ message: REQUIRED_VALUE_EMPTY }))
     }
   } catch (err: any) {
-    res.json(response.error({message:err.message? err.message: UNKNOWN_ERROR_OCCURRED}))
+    res.json(
+      response.error({
+        message: err.message ? err.message : UNKNOWN_ERROR_OCCURRED,
+      })
+    )
   }
 }
 
@@ -248,18 +287,24 @@ export const editAddress = async (req: Request, res: Response) => {
             zipCode: zipCode,
           },
         })
-        res.json(response.success({
-          item:updateAddress,
-          message:'Address successfully updated'
-        }))
+        res.json(
+          response.success({
+            item: updateAddress,
+            message: 'Address successfully updated',
+          })
+        )
       } else {
-        res.json(response.error({message:USER_NOT_EXIST}))
+        res.json(response.error({ message: USER_NOT_EXIST }))
       }
     } else {
-      res.json(response.error({message:REQUIRED_VALUE_EMPTY}))
+      res.json(response.error({ message: REQUIRED_VALUE_EMPTY }))
     }
   } catch (err: any) {
-    res.json(response.error({message:err.message? err.message : UNKNOWN_ERROR_OCCURRED}))
+    res.json(
+      response.error({
+        message: err.message ? err.message : UNKNOWN_ERROR_OCCURRED,
+      })
+    )
   }
 }
 
@@ -275,17 +320,26 @@ export const getAllGovernmentIdByPersonInfoId = async (
       },
     })
     if (getPersonInfoId) {
-      res.json(response.success({
-        items:JSON.parse(getPersonInfoId?.governmentId as string),
-        allItemCount:getPersonInfoId?.governmentId === null
-        ? 0
-        : JSON.parse(getPersonInfoId?.governmentId as string).length,
-      }))
+      res.json(
+        response.success({
+          items: JSON.parse(getPersonInfoId?.governmentId as string),
+          allItemCount:
+            getPersonInfoId?.governmentId === null
+              ? 0
+              : JSON.parse(getPersonInfoId?.governmentId as string).length,
+        })
+      )
     } else {
-      res.json(response.error({message:'This person not found in our system'}))
+      res.json(
+        response.error({ message: 'This person not found in our system' })
+      )
     }
   } catch (err: any) {
-    res.json(response.error({message:err.message? err.message : UNKNOWN_ERROR_OCCURRED}))
+    res.json(
+      response.error({
+        message: err.message ? err.message : UNKNOWN_ERROR_OCCURRED,
+      })
+    )
   }
 }
 
