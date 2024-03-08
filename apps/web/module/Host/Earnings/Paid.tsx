@@ -54,55 +54,9 @@ const Paid = () => {
               </div>
             )}
           </div>
-          <div className="p-6 col-span-1 lg:col-span-1">
-            {data?.item && data.item.amount.length > 0 ? (
-              <div className="border rounded-lg shadow-lg p-4 h-70">
-                <Typography variant="h2" fontWeight="semibold" className="px-4">
-                  Year-to-date summary
-                </Typography>
-                <Typography variant="p" className="text-gray-400 pb-4 px-4">
-                  Jan 1 - {format(currentDate, "MMMM d yyyy")}
-                </Typography>
-
-                <div className="flex gap-4 justify-between pb-4 px-4">
-                  {summaryData.map((column) => (
-                    <div key={`column-${column}`} className="flex flex-col">
-                      {column.map((item) => (
-                        <Typography
-                          variant="p"
-                          fontWeight="semibold"
-                          key={`column-${column}-item-${item}`}
-                          className="pt-2 text-sm"
-                        >
-                          {item}
-                        </Typography>
-                      ))}
-                    </div>
-                  ))}
-                </div>
-
-                <div className="bottom-0 border-t flex gap-4 justify-between px-4">
-                  <Typography
-                    className="pt-4"
-                    variant="p"
-                    fontWeight="semibold"
-                  >
-                    Total
-                  </Typography>
-                  <Typography
-                    className="pt-4 text-sm"
-                    variant="p"
-                    fontWeight="semibold"
-                  >
-                    {formatCurrency(data.item.total, "Philippines")}
-                  </Typography>
-                </div>
-              </div>
-            ) : null}
-          </div>
         </>
       )}
-    </div>
+    </div> 
   )
 }
 

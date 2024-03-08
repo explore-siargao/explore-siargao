@@ -65,7 +65,7 @@ const Chart = ({
       title = "Your paid earnings"
       break
     case ChartType["this-month"]:
-      title = "You've made this month"
+      title = "You've made"
       break
     default:
       title = "Earnings"
@@ -74,16 +74,17 @@ const Chart = ({
   return (
     <>
       <>
-        <Typography variant="p" fontWeight="semibold">
+        <Typography variant={type===ChartType["this-month"] ? "h1":"p"} fontWeight="semibold">
           Earnings
         </Typography>
-        <Typography variant="h1">
+        <Typography variant="h1" className={type===ChartType["this-month"] ? "text-[30px]":""}>
           {title}{" "}
           <span className="text-gray-400">
             {isPending
               ? formatCurrency(0.0, "Philippines")
               : formatCurrency(totalAmount, "Philippines")}
           </span>{" "}
+          {type===ChartType["this-month"]? "this month":""}
         </Typography>
       </>
 

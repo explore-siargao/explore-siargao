@@ -9,7 +9,7 @@ export async function getUpcomingEarnings() {
 
 function useGetUpcomingEarnings() {
   const query = useQuery({
-    queryKey: ["this-month-earnings"],
+    queryKey: ["upcoming-earnings"],
     queryFn: () => getUpcomingEarnings(),
     refetchOnWindowFocus: false,
   })
