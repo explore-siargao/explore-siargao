@@ -9,7 +9,7 @@ export async function getPaidEarnings() {
 
 function useGetPaidEarnings() {
   const query = useQuery({
-    queryKey: ["this-month-earnings"],
+    queryKey: ["paid-earnings"],
     queryFn: () => getPaidEarnings(),
     refetchOnWindowFocus: false,
   })

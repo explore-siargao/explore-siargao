@@ -42,7 +42,7 @@ interface ChartProps {
   data: Amount[]
   totalAmount: number
   isPending: boolean
-  width: string
+  width: string | number
   height: number
   type: ChartType
 }
@@ -65,7 +65,7 @@ const Chart = ({
       title = "Your paid earnings"
       break
     case ChartType["this-month"]:
-      title = "You've made this month"
+      title = "You've made"
       break
     default:
       title = "Earnings"
@@ -73,19 +73,17 @@ const Chart = ({
 
   return (
     <>
-      <>
-        <Typography variant="p" fontWeight="semibold">
-          Earnings
-        </Typography>
-        <Typography variant="h1">
+      <div>
+        <Typography variant="h1" className="text-[30px]">
           {title}{" "}
           <span className="text-gray-400">
             {isPending
               ? formatCurrency(0.0, "Philippines")
               : formatCurrency(totalAmount, "Philippines")}
           </span>{" "}
+          {type === ChartType["this-month"] ? "this month" : ""}
         </Typography>
-      </>
+      </div>
 
       <ResponsiveContainer width={width} height={height}>
         <BarChart
