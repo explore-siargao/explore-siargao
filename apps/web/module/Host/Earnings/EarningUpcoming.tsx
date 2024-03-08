@@ -36,29 +36,27 @@ const EarningUpcoming = () => {
       {upcomingIsPending ? (
         <Spinner size="md">Loading...</Spinner>
       ) : (
-     
-          <div className="left p-4 lg:col-span-3">
-            {upcoming?.item && upcoming.item.amount.length > 0 ? (
-              <Chart
-                data={upcoming.item.amount}
-                totalAmount={upcoming.item.total}
-                isPending={upcomingIsPending}
-                width="100%"
-                height={400}
-                type={ChartType.upcoming}
-              />
-            ) : (
-              <>
-                <Typography fontWeight="semibold" variant="h2" className="pb-4">
-                  Upcoming
-                </Typography>
-                <Typography fontWeight="semibold" variant="p">
-                  No upcoming earnings at the moment.
-                </Typography>
-              </>
-            )}
-          </div>
-        
+        <div className="left p-4 lg:col-span-3">
+          {upcoming?.item && upcoming.item.amount.length > 0 ? (
+            <Chart
+              data={upcoming.item.amount}
+              totalAmount={upcoming.item.total}
+              isPending={upcomingIsPending}
+              width="100%"
+              height={400}
+              type={ChartType.upcoming}
+            />
+          ) : (
+            <>
+              <Typography fontWeight="semibold" variant="h2" className="pb-4">
+                Upcoming
+              </Typography>
+              <Typography fontWeight="semibold" variant="p">
+                No upcoming earnings at the moment.
+              </Typography>
+            </>
+          )}
+        </div>
       )}
     </div>
   )
