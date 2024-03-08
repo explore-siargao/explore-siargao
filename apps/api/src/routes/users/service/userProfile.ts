@@ -1,15 +1,10 @@
-import {
-  REQUIRED_VALUE_EMPTY,
-  UNKNOWN_ERROR_OCCURRED,
-  USER_NOT_EXIST,
-} from '@/common/constants'
-import { prisma } from '@/common/helpers/prismaClient'
 import { ResponseService } from '@/common/service/response'
 import { Request, Response } from 'express'
-const profiles = [
+let profiles = [
   {
     id: 1,
     imageKey: '1.jpg',
+    imageFile: null,
     school: '',
     work: '',
     live: '',
@@ -27,6 +22,7 @@ const profiles = [
   {
     id: 2,
     imageKey: '1.jpg',
+    imageFile: null,
     school: 'Laguna State Polytechnic University',
     work: 'IT',
     live: '',
@@ -44,6 +40,7 @@ const profiles = [
   {
     id: 3,
     imageKey: '1.jpg',
+    imageFile: null,
     school: 'SMNHS',
     work: 'Programmer',
     live: '',
@@ -61,6 +58,7 @@ const profiles = [
   {
     id: 4,
     imageKey: '1.jpg',
+    imageFile: null,
     school: '',
     work: '',
     live: '',
@@ -78,6 +76,7 @@ const profiles = [
   {
     id: 5,
     imageKey: '1.jpg',
+    imageFile: null,
     school: 'LSPU',
     work: 'Zkript',
     live: 'Santa Maria Laguna',
@@ -95,8 +94,9 @@ const profiles = [
 ]
 
 const response = new ResponseService()
+
 export const getProfile = async (req: Request, res: Response) => {
-  const userId = Number(req.params.userId)
+  const userId = Number(res.locals.user.id)
   const getUserProfile = profiles.find((profile) => profile.id === userId)
   if (getUserProfile === undefined) {
     return res.json(response.error({ message: 'This profile not found' }))
@@ -111,89 +111,140 @@ export const getProfile = async (req: Request, res: Response) => {
 }
 
 export const updateProfile = async (req: Request, res: Response) => {
-  const userId = Number(req.params.userId)
+  const userId = Number(res.locals.user.id)
   const {
     school,
     work,
-    live,
-    language,
-    born,
     favoriteSong,
     obsessedWith,
+    decadeWereBorn,
     funFact,
+    languageISpeak,
+    live,
     uselessSkill,
     biography,
     spendTime,
     pets,
     aboutMe,
-    imageKey,
+    imageFile,
   } = req.body
-  try {
-    const getUser = await prisma.user.findFirst({
-      where: {
-        personalInfo: {
-          userId: userId,
-        },
-      },
-      include: {
-        personalInfo: true,
-      },
-    })
-    if (!getUser) {
-      return res.json(response.error({ message: USER_NOT_EXIST }))
+  const index = profiles.findIndex((profile) => profile.id === userId)
+  if (index !== -1) {
+    profiles[index] = {
+      ...profiles[index],
+      id: profiles[index]?.id || 0,
+      imageFile: imageFile,
+      imageKey: '4.jpg',
+      school: school,
+      work: work,
+      live: live,
+      language: languageISpeak,
+      decadeWereBorn: decadeWereBorn,
+      favoriteSong: favoriteSong,
+      obsessedWith: obsessedWith,
+      funFact: funFact,
+      uselessSkill: uselessSkill,
+      biography: biography,
+      spendTime: spendTime,
+      pets: pets,
+      aboutMe: aboutMe,
     }
-    if (
-      imageKey ||
-      school ||
-      work ||
-      live ||
-      language ||
-      born ||
-      favoriteSong ||
-      obsessedWith ||
-      funFact ||
-      uselessSkill ||
-      biography ||
-      spendTime ||
-      pets ||
-      aboutMe
-    ) {
-      const patchProfile = await prisma.personalInfo.update({
-        where: {
-          id: getUser.personalInfo?.id,
-          deletedAt: null,
-        },
-        data: {
-          profile: JSON.stringify({
-            imageKey: '1.jpg',
-            school: 'LSPU',
-            work: 'Zkript',
-            live: 'Santa Maria Laguna',
-            language: 'English, Tagalog',
-            decadeWereBorn: '90s',
-            favoriteSong: 'I believe',
-            obsessedWith: 'her',
-            funFact: 'Be honest',
-            uselessSkill: 'None',
-            biography: 'To see is to believed',
-            spendTime: 'Studying',
-            pets: 'Cat, Dog',
-            aboutMe: 'Im a honest person',
-          }),
-        },
+    res.json(
+      response.success({
+        item: profiles[index],
+        allItemCount: 1,
+        message: 'Profile successfully updated',
       })
-      res.json(
-        response.success({
-          item: JSON.parse(patchProfile.profile as string),
-          allItemCount: 1,
-          message: 'Profile successfully updated',
-        })
-      )
-    } else {
-      res.json(response.error({ message: REQUIRED_VALUE_EMPTY }))
-    }
-  } catch (err: any) {
-    const message = err.message ? err.message : UNKNOWN_ERROR_OCCURRED
-    res.json(response.error({ message: message }))
+    )
   }
 }
+
+// export const updateProfile = async (req: Request, res: Response) => {
+//   const file = req.files
+//   const {
+//     school,
+//     work,
+//     live,
+//     language,
+//     born,
+//     favoriteSong,
+//     obsessedWith,
+//     funFact,
+//     uselessSkill,
+//     biography,
+//     spendTime,
+//     pets,
+//     aboutMe,
+//     imageKey,
+//   } = req.body
+//   try {
+//     const getUser = await prisma.user.findFirst({
+//       where: {
+//         personalInfo: {
+//           userId: res.locals.user.id,
+//         },
+//       },
+//       include: {
+//         personalInfo: true,
+//       },
+//     })
+//     if (!getUser) {
+//       return res.json(response.error({ message: USER_NOT_EXIST }))
+//     }
+//     if (
+//       file ||
+//       imageKey ||
+//       school ||
+//       work ||
+//       live ||
+//       language ||
+//       born ||
+//       favoriteSong ||
+//       obsessedWith ||
+//       funFact ||
+//       uselessSkill ||
+//       biography ||
+//       spendTime ||
+//       pets ||
+//       aboutMe
+//     ) {
+//       const upload = await fileService.upload({files:file})
+//       const patchProfile = await prisma.personalInfo.update({
+//         where: {
+//           id: getUser.personalInfo?.id,
+//           deletedAt: null,
+//         },
+//         data: {
+//           profile: JSON.stringify({
+//             imageKey: upload.key,
+//             school: 'LSPU',
+//             work: 'Zkript',
+//             live: 'Santa Maria Laguna',
+//             language: 'English, Tagalog',
+//             decadeWereBorn: '90s',
+//             favoriteSong: 'I believe',
+//             obsessedWith: 'her',
+//             funFact: 'Be honest',
+//             uselessSkill: 'None',
+//             biography: 'To see is to believed',
+//             spendTime: 'Studying',
+//             pets: 'Cat, Dog',
+//             aboutMe: 'Im a honest person'
+//           }),
+//         },
+//       })
+//       res.json(
+//         response.success({
+//           item: JSON.parse(patchProfile.profile as string),
+//           allItemCount: 1,
+//           message: 'Profile successfully updated',
+//         })
+//       )
+//     } else {
+//       res.json(response.error({ message: REQUIRED_VALUE_EMPTY }))
+//     }
+//   } catch (err: any) {
+//     const message = err.message ? err.message : UNKNOWN_ERROR_OCCURRED
+//     res.json(response.error({ message: message }))
+//   }
+// }
