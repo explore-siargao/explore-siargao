@@ -1,6 +1,5 @@
 import { create } from "zustand"
 
-
 type T_Guest = {
   adults: number
   children: number

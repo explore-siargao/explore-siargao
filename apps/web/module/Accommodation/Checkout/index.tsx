@@ -22,8 +22,6 @@ import useGetPaymentMethods from "@/module/AccountSettings/hooks/useGetPaymentMe
 import toast from "react-hot-toast"
 import { useSearchParams } from "next/navigation"
 
-
-
 const encryptionService = new EncryptionService("card")
 
 const Checkout = () => {
@@ -36,7 +34,6 @@ const Checkout = () => {
   const dateFrom = searchParams.get("dateFrom")
   const dateTo = searchParams.get("dateTo")
 
-  
   const paymentInfo = usePaymentInfoStore((state) => state)
   const session = useSessionStore((state) => state)
   const { data: paymentMethods, isPending: isPendingPaymentMethods } =
@@ -50,10 +47,10 @@ const Checkout = () => {
     useState(false)
   const dateRange = useCheckInOutDateStore((state) => state.dateRange)
   const { adults, children, infants } = useGuestAdd((state) => ({
-    adults: parseInt(adultCounts!, 10) || 0, 
-    children: parseInt(childrenCounts!, 10) || 0, 
-    infants: parseInt(infantCounts!, 10) || 0, 
-  }));
+    adults: parseInt(adultCounts!, 10) || 0,
+    children: parseInt(childrenCounts!, 10) || 0,
+    infants: parseInt(infantCounts!, 10) || 0,
+  }))
   const totalGuest = adults + children + infants
   const validatePayment = () => {
     let isValid = false
@@ -147,14 +144,14 @@ const Checkout = () => {
               </button>
             </div>
             <Typography className="text-sm">
-            {dateFrom !== null
-              ? format(new Date(dateFrom), "LLL dd, y")
-              : "Date from"}{" "}
-            -{" "}
-            {dateTo !== null
-              ? format(new Date(dateTo), "LLL dd, y")
-              : "Date to"}
-          </Typography>
+              {dateFrom !== null
+                ? format(new Date(dateFrom), "LLL dd, y")
+                : "Date from"}{" "}
+              -{" "}
+              {dateTo !== null
+                ? format(new Date(dateTo), "LLL dd, y")
+                : "Date to"}
+            </Typography>
           </div>
           <div className="flex w-full flex-col">
             <div className="flex justify-between w-full">
