@@ -74,10 +74,7 @@ const Chart = ({
   return (
     <>
       <div>
-        <Typography
-          variant="h1"
-          className="text-[30px]"
-        >
+        <Typography variant="h1" className="text-[30px]">
           {title}{" "}
           <span className="text-gray-400">
             {isPending

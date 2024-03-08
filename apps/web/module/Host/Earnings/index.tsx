@@ -1,17 +1,16 @@
 "use client"
-import React from 'react'
+import React from "react"
 import EarningsThisMonth from "./EarningsThisMonth"
 import EarningUpcoming from "./EarningUpcoming"
 import Paid from "./Paid"
-import useGetThisMonthEarnings from '../hooks/useGetThisMonthEarnings'
-import { Typography } from '@/common/components/ui/Typography'
-import { format } from 'date-fns'
-import formatCurrency from '@/common/helpers/formatCurrency'
-import { WidthWrapper } from '@/common/components/WidthWrapper'
+import useGetThisMonthEarnings from "../hooks/useGetThisMonthEarnings"
+import { Typography } from "@/common/components/ui/Typography"
+import { format } from "date-fns"
+import formatCurrency from "@/common/helpers/formatCurrency"
+import { WidthWrapper } from "@/common/components/WidthWrapper"
 
 const Earnings = () => {
-  const { data: thisMonth } =
-    useGetThisMonthEarnings()
+  const { data: thisMonth } = useGetThisMonthEarnings()
   const currentDate = new Date()
   const summaryData = [
     ["Gross earnings", "Adjustments", "Service fee", "Taxes withheld"],
@@ -35,12 +34,12 @@ const Earnings = () => {
     ],
   ]
   return (
-    <WidthWrapper width="medium" className="grid grid-cols-1 lg:grid-cols-4 gap-12 lg:gap-0 mt-28 md:mt-36">
+    <WidthWrapper
+      width="medium"
+      className="grid grid-cols-1 lg:grid-cols-4 gap-12 lg:gap-0 mt-28 md:mt-36"
+    >
       <div className="lg:col-span-3">
-        <Typography
-          variant="h1"
-          fontWeight="semibold"
-        >
+        <Typography variant="h1" fontWeight="semibold">
           Earnings
         </Typography>
 
@@ -75,11 +74,7 @@ const Earnings = () => {
           </div>
 
           <div className="bottom-0 border-t flex gap-4 justify-between">
-            <Typography
-              className="pt-4"
-              variant="p"
-              fontWeight="semibold"
-            >
+            <Typography className="pt-4" variant="p" fontWeight="semibold">
               Total
             </Typography>
             <Typography
