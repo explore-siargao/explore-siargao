@@ -13,12 +13,13 @@ export interface ListingsData {
   imageKey: string
   status: string
 }
+
 interface TableProps {
   data: ListingsData[]
   columns: any[]
 }
 
-const HostListingTable = ({ data, columns }: TableProps) => {
+const Table = ({ data, columns }: TableProps) => {
   const table = useReactTable({
     data,
     columns,
@@ -56,22 +57,26 @@ const HostListingTable = ({ data, columns }: TableProps) => {
           ))}
         </thead>
         <tbody>
-          {table.getRowModel().rows.map((row) => (
-            <tr className="hover:bg-primary-500 cursor-pointer" key={row.id}>
-              {row.getVisibleCells().map((cell, _id) => {
-                const isFirstCell = _id === 0
-                const isLastCell = _id === row.getVisibleCells().length - 1
-                const className = `py-2 pl-4 items-center gap-5 ${
-                  isFirstCell ? "rounded-l-xl " : ""
-                }${isLastCell ? "rounded-r-xl" : ""}`
-                return (
-                  <td className={className} key={cell.id}>
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </td>
-                )
-              })}
-            </tr>
-          ))}
+          {table.getRowModel().rows.map((row) => {
+            return (
+              <tr className=" hover:bg-primary-500 cursor-pointer" key={row.id}>
+                {row.getVisibleCells().map((cell, _id) => {
+                  let className = "py-2 pl-4 items-center gap-5"
+                  if (_id === 0) className += " rounded-l-xl"
+                  if (_id === row.getVisibleCells().length - 1)
+                    className += " rounded-r-xl"
+                  return (
+                    <td className={className} key={cell.id}>
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                      )}
+                    </td>
+                  )
+                })}
+              </tr>
+            )
+          })}
         </tbody>
       </table>
       <div className="flex items-end justify-end mt-5">
@@ -93,4 +98,4 @@ const HostListingTable = ({ data, columns }: TableProps) => {
   )
 }
 
-export default HostListingTable
+export default Table
