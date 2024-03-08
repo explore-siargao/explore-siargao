@@ -39,27 +39,15 @@ export const getAllUsers = async (req: Request, res: Response) => {
     }))
     const addresses = await prisma.addresses.findMany({})
     if (users.length > 0) {
-      res.json({
-        error: false,
-        items: [modifyUsers, addresses],
-        itemCount: users.length,
-        message: '',
-      })
+      res.json(response.success({
+        items:[modifyUsers, addresses],
+        allItemCount: users.length,
+      }))
     } else {
-      res.json({
-        error: false,
-        items: null,
-        itemCount: 0,
-        message: 'No data found',
-      })
+      res.json(response.error({message:"No data found"}))
     }
   } catch (err: any) {
-    res.json({
-      error: true,
-      items: null,
-      itemCount: 0,
-      message: err.message,
-    })
+    res.json(response.error({message:err.message? err.message:UNKNOWN_ERROR_OCCURRED}))
   }
 }
 
