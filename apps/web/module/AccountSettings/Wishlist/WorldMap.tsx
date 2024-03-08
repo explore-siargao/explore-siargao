@@ -61,10 +61,7 @@ const WorldMap = () => {
   return (
     <>
       <MapContainer
-        center={[
-          9.9,
-          126.03
-        ]}
+        center={[9.9, 126.03]}
         zoom={11}
         scrollWheelZoom={true}
         style={{
@@ -88,7 +85,7 @@ const WorldMap = () => {
               position={[item.listing.latitude, item.listing.longitude]}
               icon={navIcon}
               // @ts-ignore
-              ref={el => markerRefs[index] = el}
+              ref={(el) => (markerRefs[index] = el)}
             >
               <MapCustomPopup
                 itemId={item.id}

@@ -38,11 +38,16 @@ const MapCustomPopup = ({
         `}
       </style>
       <Popup className="request-popup">
-        <button className="bg-white rounded-full z-10 p-1 border border-gray-300 absolute right-1 top-1"
-          onClick={onClose}>
+        <button
+          className="bg-white rounded-full z-10 p-1 border border-gray-300 absolute right-1 top-1"
+          onClick={onClose}
+        >
           <XMarkIcon className="h-4 w-4" />
         </button>
-        <Link href={process.env.WEB_URL + "/accommodation/" + itemId} target="_blank">
+        <Link
+          href={process.env.WEB_URL + "/accommodation/" + itemId}
+          target="_blank"
+        >
           <div className="absolute bg-gray-200 top-0 left-0 right-0 h-[70%] rounded-t-md w-full">
             <Swiper
               navigation
@@ -93,23 +98,27 @@ const MapCustomPopup = ({
                 className={`h-6 w-6 text-text-50 active:scale-90 fill-error-500`}
               />
             </div>
-            </div>
-            <div className="h-[250px] w-44">
+          </div>
+          <div className="h-[250px] w-44">
             <div className="absolute bottom-0 left-0 right-0 h-[30%] w-full p-2.5">
-                <div className="flex justify-between items-center">
-                    <h4 className="font-semibold text-sm text-text-700 w-32 whitespace-nowrap overflow-hidden text-ellipsis">{location}</h4>
-                    <div className="space-x-0.5 flex items-center">
-                        <StarIcon className="h-4 w-4 mb-0.5 text-text-700"/>
-                        <h4 className="text-sm text-text-700">{rating}</h4>
-                    </div>
-                </div>
-                <h4 className="text-sm text-gray-500 whitespace-nowrap overflow-hidden text-ellipsis">100 kilometers away</h4>
-                <h4 className="text-sm text-text-700 font-semibold underline whitespace-nowrap overflow-hidden text-ellipsis">
-                ₱{price} <span className="font-normal">{isNight}</span>
+              <div className="flex justify-between items-center">
+                <h4 className="font-semibold text-sm text-text-700 w-32 whitespace-nowrap overflow-hidden text-ellipsis">
+                  {location}
                 </h4>
+                <div className="space-x-0.5 flex items-center">
+                  <StarIcon className="h-4 w-4 mb-0.5 text-text-700" />
+                  <h4 className="text-sm text-text-700">{rating}</h4>
+                </div>
+              </div>
+              <h4 className="text-sm text-gray-500 whitespace-nowrap overflow-hidden text-ellipsis">
+                100 kilometers away
+              </h4>
+              <h4 className="text-sm text-text-700 font-semibold underline whitespace-nowrap overflow-hidden text-ellipsis">
+                ₱{price} <span className="font-normal">{isNight}</span>
+              </h4>
             </div>
-            </div>
-            </Link>
+          </div>
+        </Link>
       </Popup>
     </>
   )
