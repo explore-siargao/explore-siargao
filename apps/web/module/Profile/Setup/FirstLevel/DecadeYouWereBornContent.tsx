@@ -41,7 +41,7 @@ const DecadeYouWereBornContent = ({
 
   const save = () => {
     if (toggleState) {
-      setDecadeWereBornStore(decadeObj[2]?.decade as string); // Example for setting decade
+      setDecadeWereBornStore(String(decadeObj[2]?.decade))
       setIsOpen(false);
       toast.success("Saved");
     } else {
@@ -53,7 +53,7 @@ const DecadeYouWereBornContent = ({
   const handleToggleChange = (checked: boolean) => {
     setToggleState(checked);
     if (checked) {
-      setDecadeWereBornStore(decadeObj[2]?.decade as string); // Example for setting decade
+      setDecadeWereBornStore(String(decadeObj[2]?.decade))
     } else {
       setDecadeWereBornStore(""); // Clear the decade
     }

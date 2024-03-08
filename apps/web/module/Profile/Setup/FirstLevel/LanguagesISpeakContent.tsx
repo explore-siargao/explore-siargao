@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, Dispatch } from "react";
 import { Button } from "@/common/components/ui/Button";
 import { Input } from "@/common/components/ui/Input";
 import { Typography } from "@/common/components/ui/Typography";
-import { Dispatch } from "react";
 import toast from "react-hot-toast";
 import useProfileEditStore from "../store/useProfileEditStore";
 
