@@ -5,14 +5,11 @@ import Link from "next/link"
 import valid from "card-validator"
 import { useForm } from "react-hook-form"
 import usePaymentInfoStore from "./store/usePaymentInfoStore"
-import { useEffect } from "react"
 
 const PaymentSavedForm = () => {
     const updatePaymentInfo = usePaymentInfoStore(
     (state) => state.updatePaymentInfo
     )
-
-    const cvv = usePaymentInfoStore((state) => state.cvv);
 
     const {
         register,
@@ -33,10 +30,6 @@ const PaymentSavedForm = () => {
           })
         }
     }
-
-    useEffect(() => {
-        console.log(cvv);
-    }, [cvv])
 
     return (
         <div>
