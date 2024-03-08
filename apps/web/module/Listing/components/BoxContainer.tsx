@@ -59,10 +59,11 @@ const BoxContainer = ({
               className="absolute top-3 right-3 z-40"
             >
               <HeartIcon
-                className={` h-7 w-7 text-text-50 active:scale-90 ${isClicked || isHearted
+                className={` h-7 w-7 text-text-50 active:scale-90 ${
+                  isClicked || isHearted
                     ? "fill-error-500"
                     : "fill-text-500/50 "
-                  }`}
+                }`}
               />
             </button>
             <Slider images={imageKey} />
