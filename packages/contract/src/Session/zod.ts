@@ -10,5 +10,6 @@ export const Z_Session = z.object({
   changePasswordAt: z.string().nullable(),
   role: z.nativeEnum(E_UserRole),
   canReceiveEmail: z.boolean(),
+  isHost: z.boolean(),
   personalInfo: z.nullable(Z_PersonalInfo),
 })

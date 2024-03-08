@@ -15,6 +15,7 @@ const useSessionStore = create<T_Session & T_Session_Action>((set) => ({
   changePasswordAt: null,
   canReceiveEmail: false,
   role: E_UserRole.User,
+  isHost: false,
   personalInfo: null,
   update: (session: T_Session) => set(() => ({ ...session })),
   remove: () =>
@@ -27,6 +28,7 @@ const useSessionStore = create<T_Session & T_Session_Action>((set) => ({
       changePasswordAt: null,
       canReceiveEmail: false,
       role: E_UserRole.User,
+      isHost: false,
       personalInfo: null,
     }),
 }))

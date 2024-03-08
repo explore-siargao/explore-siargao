@@ -65,6 +65,7 @@ const isUserLoggedIn = async (
         deactivated: user?.deactivated as boolean,
         canReceiveEmail: user?.canReceiveEmail as boolean,
         changePasswordAt: String(user?.changePasswordAt),
+        isHost: user?.isHost as boolean,
         // TODO: FIX THE ANY FOR THIS VALUE
         personalInfo: {
           ...user?.personalInfo,
