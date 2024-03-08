@@ -42,8 +42,8 @@ const DecadeYouWereBornContent = ({
   const save = () => {
     if (toggleState) {
       setDecadeWereBornStore(String(decadeObj[2]?.decade))
-      setIsOpen(false);
-      toast.success("Saved");
+      setIsOpen(false)
+      toast.success("Saved")
     } else {
       setIsOpen(false)
       setDecadeWereBornStore("") // Clear the decade
