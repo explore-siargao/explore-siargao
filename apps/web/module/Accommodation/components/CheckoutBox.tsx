@@ -94,7 +94,11 @@ const CheckoutBox = ({ checkoutDesc }: CheckoutProcessProps) => {
         </div>
         <Button
           variant="primary"
-          onClick={() => router.push("/accommodation/1/checkout")}
+          onClick={() =>
+            router.push(
+              `/accommodation/1/checkout?guests=${totalGuest}&dateFrom=${dateRange.from ? format(dateRange.from, "MM/dd/yyyy") : ""}&dateTo=${dateRange.to ? format(dateRange.to, "MM/dd/yyyy") : ""}&adultCount=${adults}&childrenCount=${children}&infantCount=${infants}`
+            )
+          }
         >
           Book Now
         </Button>
