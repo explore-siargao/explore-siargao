@@ -62,7 +62,7 @@ const Chart = ({
       title = "Your upcoming earnings"
       break
     case ChartType.paid:
-      title = "Your paid"
+      title = "Your paid earnings"
       break
     case ChartType["this-month"]:
       title = "You've made this month"
@@ -74,7 +74,7 @@ const Chart = ({
   return (
     <>
       <>
-        <Typography variant="h2" fontWeight="semibold">
+        <Typography variant="p" fontWeight="semibold">
           Earnings
         </Typography>
         <Typography variant="h1">
