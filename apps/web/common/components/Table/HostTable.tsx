@@ -13,13 +13,14 @@ export interface ListingsData {
   imageKey: string
   status: string
 }
+
 interface TableProps {
   data: ListingsData[]
   columns: any[]
 }
 
-const HostListingTable = ({ data, columns }: TableProps) => {
-  const table = useReactTable({
+const HostTable = ({ data, columns }: TableProps) => {
+  const hostTable = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
@@ -29,22 +30,22 @@ const HostListingTable = ({ data, columns }: TableProps) => {
     <div>
       <table className="w-full table-auto">
         <thead className="text-left">
-          {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id}>
-              {headerGroup.headers.map((header) => {
+          {hostTable.getHeaderGroups().map((headerGroups) => (
+            <tr key={headerGroups.id}>
+              {headerGroups.headers.map((headers) => {
                 return (
                   <th
                     className="pl-4"
-                    key={header.id}
-                    colSpan={header.colSpan}
+                    key={headers.id}
+                    colSpan={headers.colSpan}
                     scope="col"
                   >
-                    {header.isPlaceholder ? null : (
+                    {headers.isPlaceholder ? null : (
                       <div>
                         <span>
                           {flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
+                            headers.column.columnDef.header,
+                            headers.getContext()
                           )}
                         </span>
                       </div>
@@ -56,41 +57,45 @@ const HostListingTable = ({ data, columns }: TableProps) => {
           ))}
         </thead>
         <tbody>
-          {table.getRowModel().rows.map((row) => (
-            <tr className="hover:bg-primary-500 cursor-pointer" key={row.id}>
-              {row.getVisibleCells().map((cell, _id) => {
-                const isFirstCell = _id === 0
-                const isLastCell = _id === row.getVisibleCells().length - 1
-                const className = `py-2 pl-4 items-center gap-5 ${
-                  isFirstCell ? "rounded-l-xl " : ""
-                }${isLastCell ? "rounded-r-xl" : ""}`
-                return (
-                  <td className={className} key={cell.id}>
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </td>
-                )
-              })}
-            </tr>
-          ))}
+          {hostTable.getRowModel().rows.map((row) => {
+            return (
+              <tr className=" hover:bg-primary-500 cursor-pointer" key={row.id}>
+                {row.getVisibleCells().map((cell, _cell) => {
+                  let className = "py-2 pl-4 items-center gap-5"
+                  if (_cell === 0) className += " rounded-l-xl"
+                  if (_cell === row.getVisibleCells().length - 1)
+                    className += " rounded-r-xl"
+                  return (
+                    <td className={className} key={cell.id}>
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                      )}
+                    </td>
+                  )
+                })}
+              </tr>
+            )
+          })}
         </tbody>
       </table>
       <div className="flex items-end justify-end mt-5">
         <Pagination
-          pageIndex={table.getState().pagination.pageIndex}
-          pageCount={table.getPageCount()}
-          canPreviousPage={table.getCanPreviousPage()}
-          canNextPage={table.getCanNextPage()}
-          onPageChange={table.setPageIndex}
-          onFirstPage={table.firstPage}
-          onLastPage={table.lastPage}
-          onPreviousPage={table.previousPage}
-          onNextPage={table.nextPage}
-          pageSize={table.getState().pagination.pageSize}
-          onPageSizeChange={table.setPageSize}
+          pageIndex={hostTable.getState().pagination.pageIndex}
+          pageCount={hostTable.getPageCount()}
+          canPreviousPage={hostTable.getCanPreviousPage()}
+          canNextPage={hostTable.getCanNextPage()}
+          onPageChange={hostTable.setPageIndex}
+          onFirstPage={hostTable.firstPage}
+          onLastPage={hostTable.lastPage}
+          onPreviousPage={hostTable.previousPage}
+          onNextPage={hostTable.nextPage}
+          pageSize={hostTable.getState().pagination.pageSize}
+          onPageSizeChange={hostTable.setPageSize}
         />
       </div>
     </div>
   )
 }
 
-export default HostListingTable
+export default HostTable
