@@ -18,13 +18,14 @@ const FavoriteSongInHighSchoolContent = ({
   const setFavoriteSongStore = useProfileEditStore(
     (state) => state.setFavoriteSong
   )
+  const songs = useProfileEditStore((state) => state.favoriteSong)
   const save = () => {
     if (favoriteSong) {
       setFavoriteSongStore(favoriteSong)
       setIsOpen(false)
       toast.success("Saved")
     } else {
-      toast.error("Please fill out the form")
+      setIsOpen(false)
     }
   }
   return (
@@ -43,6 +44,7 @@ const FavoriteSongInHighSchoolContent = ({
             label="My favorite song in high school:"
             onChange={handleInputChange}
             maxLength={40}
+            defaultValue={songs}
           />
           <Typography
             variant="h6"

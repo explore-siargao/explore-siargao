@@ -9,13 +9,14 @@ import useProfileEditStore from "../store/useProfileEditStore"
 const MyFunFactContent = ({ setIsOpen }: { setIsOpen: Dispatch<boolean> }) => {
   const { value: funFact, onChange: handleInputChange } = InputMaxLength("", 40)
   const setFunFactStore = useProfileEditStore((state) => state.setFunFact)
+  const facts = useProfileEditStore((state) => state.funFact)
   const save = () => {
     if (funFact) {
       setFunFactStore(funFact)
       setIsOpen(false)
       toast.success("Saved")
     } else {
-      toast.error("Please fill out the form")
+      setIsOpen(false)
     }
   }
   return (
@@ -34,6 +35,7 @@ const MyFunFactContent = ({ setIsOpen }: { setIsOpen: Dispatch<boolean> }) => {
             label="My fun fact:"
             onChange={handleInputChange}
             maxLength={40}
+            defaultValue={facts}
           />
           <Typography
             variant="h6"

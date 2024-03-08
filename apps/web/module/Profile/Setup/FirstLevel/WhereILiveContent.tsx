@@ -61,13 +61,14 @@ const WhereILiveContent = ({ setIsOpen }: { setIsOpen: Dispatch<boolean> }) => {
   }
 
   const setWhereILiveStore = useProfileEditStore((state) => state.setWhereILive)
+  const live = useProfileEditStore((state) => state.live)
   const save = () => {
     if (selectedLocation) {
       setWhereILiveStore(selectedLocation)
       setIsOpen(false)
       toast.success("Saved")
     } else {
-      toast.error("Please select a location")
+      setIsOpen(false)
     }
   }
 
@@ -83,6 +84,7 @@ const WhereILiveContent = ({ setIsOpen }: { setIsOpen: Dispatch<boolean> }) => {
             label="Where I live:"
             value={searchTerm}
             onChange={handleInputChange}
+            defaultValue={live}
           />
         </div>
         {showResults && (

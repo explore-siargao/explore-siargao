@@ -1,8 +1,8 @@
+import { useEffect, useState, Dispatch } from "react"
+import { Button } from "@/common/components/ui/Button"
 import { Input } from "@/common/components/ui/Input"
 import { Typography } from "@/common/components/ui/Typography"
-import { Dispatch, useState } from "react"
 import toast from "react-hot-toast"
-import { Button } from "@/common/components/ui/Button"
 import useProfileEditStore from "../store/useProfileEditStore"
 
 const languagesObj = [
@@ -68,18 +68,38 @@ const LanguageISpeakContent = ({
   setIsOpen: Dispatch<boolean>
 }) => {
   const [selectedLanguages, setSelectedLanguages] = useState<string[]>([])
+  const [languageCheckboxes, setLanguageCheckboxes] = useState<{
+    [key: string]: boolean
+  }>({})
   const [searchTerm, setSearchTerm] = useState<string>("")
   const setLanguageISpeakStore = useProfileEditStore(
     (state) => state.setLanguageISpeak
   )
+  const languageISpeakStore = useProfileEditStore(
+    (state) => state.languageISpeak
+  )
+
+  useEffect(() => {
+    if (languageISpeakStore) {
+      setSelectedLanguages(languageISpeakStore.split(", "))
+    }
+  }, [])
+
+  useEffect(() => {
+    const checkboxes: { [key: string]: boolean } = {}
+    languagesObj.forEach((language) => {
+      checkboxes[language.lang] = selectedLanguages.includes(language.lang)
+    })
+    setLanguageCheckboxes(checkboxes)
+  }, [selectedLanguages])
 
   const toggleLanguage = (lang: string) => {
-    const isSelected = selectedLanguages.includes(lang)
-    if (isSelected) {
-      setSelectedLanguages(selectedLanguages.map((l) => (l !== lang ? l : "")))
-    } else {
-      setSelectedLanguages([...selectedLanguages, lang])
-    }
+    const isSelected = languageCheckboxes[lang]
+    const updatedCheckboxes = { ...languageCheckboxes, [lang]: !isSelected }
+    setLanguageCheckboxes(updatedCheckboxes)
+    setSelectedLanguages(
+      Object.keys(updatedCheckboxes).filter((key) => updatedCheckboxes[key])
+    )
   }
 
   const save = () => {
@@ -142,7 +162,7 @@ const LanguageISpeakContent = ({
                         className="w-10"
                         label=""
                         type="checkbox"
-                        checked={selectedLanguages.includes(language.lang)}
+                        checked={languageCheckboxes[language.lang]}
                         onChange={() => toggleLanguage(language.lang)}
                       />
                     </div>
@@ -157,7 +177,7 @@ const LanguageISpeakContent = ({
       </div>
       <div className="border-t" />
       <div className="flex items-end justify-end p-5">
-        <Button size="lg" variant="primary" onClick={() => save()}>
+        <Button size="lg" variant="primary" onClick={save}>
           Save
         </Button>
       </div>

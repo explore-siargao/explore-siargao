@@ -16,6 +16,8 @@ import useProfileEditStore from "./store/useProfileEditStore"
 import useUpdateProfile from "../hooks/useUpdateProfile"
 import { useQueryClient } from "@tanstack/react-query"
 import { Spinner } from "@/common/components/ui/Spinner"
+import { useRouter } from "next/navigation"
+import useSessionStore from "@/common/store/useSessionStore"
 
 const dest = [
   {
@@ -37,6 +39,7 @@ const dest = [
 ]
 
 const Setup = () => {
+  const session = useSessionStore((state) => state)
   const { data, isPending: profileIsPending } = useGetProfile()
   const { mutate, isPending } = useUpdateProfile()
   const profile = useProfileEditStore.getState()
@@ -47,6 +50,7 @@ const Setup = () => {
     }
   }, [data])
 
+  const router = useRouter()
   const queryClient = useQueryClient()
   const callBackReq = {
     onSuccess: (data: any) => {
@@ -55,6 +59,7 @@ const Setup = () => {
           queryKey: ["user-profile"],
         })
         toast.success(data.message)
+        router.back()
       } else {
         toast.error(String(data.message))
       }
@@ -94,10 +99,14 @@ const Setup = () => {
             <div className="py-6">
               <SetUpProfileAboutYou />
             </div>
-            <div className="border-t mt-5"></div>
-            <div className="py-6">
-              <ProfileFourthLevel description={dest} />
-            </div>
+            {session.isHost && (
+              <>
+                <div className="border-t mt-5"></div>
+                <div className="py-6">
+                  <ProfileFourthLevel description={dest} />
+                </div>
+              </>
+            )}
             <div className="border-t mt-5"></div>
             <div className="flex justify-end sm:text-right pt-5">
               <Button variant="primary" onClick={save}>

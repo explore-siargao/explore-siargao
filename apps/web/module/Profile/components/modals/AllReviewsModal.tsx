@@ -73,7 +73,7 @@ const AllReviewsModal = ({
             </div>
           </div>
         </div>
-        {reviews.map((data, index) => (
+        {reviews?.map((data, index) => (
           <>
             {data.review.map((review) => (
               <>

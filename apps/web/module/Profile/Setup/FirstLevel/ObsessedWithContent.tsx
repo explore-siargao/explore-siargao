@@ -18,13 +18,14 @@ const ObsessedWithContent = ({
   const setObsessedWithStore = useProfileEditStore(
     (state) => state.setObsessedWith
   )
+  const obsess = useProfileEditStore((state) => state.obsessedWith)
   const save = () => {
     if (obsessedWith) {
       setObsessedWithStore(obsessedWith)
       setIsOpen(false)
       toast.success("Saved")
     } else {
-      toast.error("Please fill out the form")
+      setIsOpen(false)
     }
   }
   return (
@@ -43,6 +44,7 @@ const ObsessedWithContent = ({
             label="I'm obsessed with:"
             onChange={handleInputChange}
             maxLength={40}
+            defaultValue={obsess}
           />
           <Typography
             variant="h6"

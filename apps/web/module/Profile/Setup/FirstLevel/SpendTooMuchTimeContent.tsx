@@ -16,13 +16,14 @@ const SpendTooMuchTimeContent = ({
   const setSpendTooMuchTimeStore = useProfileEditStore(
     (state) => state.setSpendTooMuchTime
   )
+  const tooMuchTime = useProfileEditStore((state) => state.spendTime)
   const save = () => {
     if (spendTooMuchTime) {
       setSpendTooMuchTimeStore(spendTooMuchTime)
       setIsOpen(false)
       toast.success("Saved")
     } else {
-      toast.error("Please fill out the form")
+      setIsOpen(false)
     }
   }
   return (
@@ -41,6 +42,7 @@ const SpendTooMuchTimeContent = ({
             label="I spend too much time:"
             onChange={handleInputChange}
             maxLength={40}
+            defaultValue={tooMuchTime}
           />
           <Typography
             variant="h6"

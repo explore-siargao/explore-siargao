@@ -32,37 +32,31 @@ const DecadeYouWereBornContent = ({
 }: {
   setIsOpen: Dispatch<boolean>
 }) => {
-  const [decadeWereBorn, setDecadeWereBorn] = useState<string>("")
+  const decadeOn = useProfileEditStore((state) => state.decadeWereBorn)
+  const [toggleState, setToggleState] = useState<boolean>(decadeOn !== "")
+
   const setDecadeWereBornStore = useProfileEditStore(
     (state) => state.setDecadeWereBorn
   )
 
   const save = () => {
-    if (decadeWereBorn) {
-      setDecadeWereBornStore(decadeWereBorn)
+    if (toggleState) {
+      setDecadeWereBornStore(String(decadeObj[2]?.decade))
       setIsOpen(false)
       toast.success("Saved")
     } else {
-      toast.error("Please fill out the form")
+      setIsOpen(false)
+      setDecadeWereBornStore("") // Clear the decade
     }
   }
 
   const handleToggleChange = (checked: boolean) => {
+    setToggleState(checked)
     if (checked) {
-      setDecadeWereBorn(selectedDecade?.decade ?? "")
+      setDecadeWereBornStore(String(decadeObj[2]?.decade))
     } else {
-      setDecadeWereBorn("")
+      setDecadeWereBornStore("") // Clear the decade
     }
-  }
-
-  const handleToggleSwitchChange = () => {
-    handleToggleChange(!decadeWereBorn)
-  }
-
-  const selectedDecade: Decade | undefined = decadeObj[2]
-
-  const handleDecadeTypographyClick = () => {
-    handleToggleSwitchChange()
   }
 
   return (
@@ -73,15 +67,11 @@ const DecadeYouWereBornContent = ({
         </Typography>
         <div>
           <Typography variant="h5">
-            Don’t worry, other people won’t be able to see your exact birthday.{" "}
+            Don’t worry, other people won’t be able to see your exact birthday.
           </Typography>
         </div>
         <div className="flex mt-5 cursor-pointer">
-          <div
-            className="clickable-typography cursor-pointer"
-            onClick={handleDecadeTypographyClick}
-            onKeyDown={() => handleDecadeTypographyClick}
-          >
+          <div className="clickable-typography cursor-pointer">
             <Typography variant="h3" className="font-light">
               Show the decade I was born
             </Typography>
@@ -89,15 +79,15 @@ const DecadeYouWereBornContent = ({
           <div className="flex-grow" />
           <div className="flex items-end justify-end ">
             <ToggleSwitch
-              checked={!!decadeWereBorn}
-              onChange={handleToggleSwitchChange}
+              checked={toggleState}
+              onChange={() => handleToggleChange(!toggleState)}
             />
           </div>
         </div>
         <div>
-          {selectedDecade && (
+          {decadeOn !== "" && (
             <Typography variant="h4" className="text-gray-500 font-light">
-              {selectedDecade.decade}
+              {decadeObj[2]?.decade} {/* Example of displaying the decade */}
             </Typography>
           )}
         </div>

@@ -30,7 +30,7 @@ const HostListings = ({ name, listings }: HostListingsProps) => {
             <SwiperCustomButton />
           </div>
         </div>
-        {listings.map((data, index) => (
+        {listings?.map((data, index) => (
           <SwiperSlide className="mt-14">
             <ListingCard
               key={index}

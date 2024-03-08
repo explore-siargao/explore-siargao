@@ -42,7 +42,7 @@ const HostReviews = ({ name, reviewsCount, reviews }: HostReviewsProps) => {
             <SwiperCustomButton />
           </div>
         </div>
-        {reviews.map((listing) => (
+        {reviews?.map((listing) => (
           <>
             {listing?.review?.slice(0, 5).map((review, index) => (
               <SwiperSlide className="mt-14">

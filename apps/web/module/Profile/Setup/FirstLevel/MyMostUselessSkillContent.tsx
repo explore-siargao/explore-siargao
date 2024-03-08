@@ -18,13 +18,14 @@ const MyMostUselessSkillContent = ({
   const setUselessSkillStore = useProfileEditStore(
     (state) => state.setMostUselessSkill
   )
+  const uselessSkills = useProfileEditStore((state) => state.uselessSkill)
   const save = () => {
     if (uselessSkill) {
       setUselessSkillStore(uselessSkill)
       setIsOpen(false)
       toast.success("Saved")
     } else {
-      toast.error("Please fill out the form")
+      setIsOpen(false)
     }
   }
   return (
@@ -43,6 +44,7 @@ const MyMostUselessSkillContent = ({
             label="My most useless skill:"
             onChange={handleInputChange}
             maxLength={40}
+            defaultValue={uselessSkills}
           />
           <Typography
             variant="h6"
