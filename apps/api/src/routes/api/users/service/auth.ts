@@ -201,9 +201,7 @@ export const manual = async (req: Request, res: Response) => {
       const originalPassword = decryptedPassword.toString()
       const decryptInputPassword = decryptionService.decrypt(password)
       if (user && originalPassword === decryptInputPassword) {
-        res.json(
-          response.success({})
-        )
+        res.json(response.success({}))
       } else {
         res.json(response.error({ message: 'Email or password is invalid' }))
       }
