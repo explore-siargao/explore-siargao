@@ -2,7 +2,7 @@ import { Button } from "@/common/components/ui/Button"
 import { Typography } from "@/common/components/ui/Typography"
 import React, { useState } from "react"
 import ReviewStarRating from "./ReviewStarRating"
-
+import Image from "next/image"
 type BookingReviewItemProps = {
   id: number
   pic: string
@@ -87,13 +87,13 @@ const BookingReviewItem = ({
       </article>
 
       <div className="h-72 w-72 2xl:w-full bg-primary-100 rounded-lg relative ">
-        {/* <Image
-            src={pic}
-            width={300}
-            height={300}
-            alt={pic}
-            className="object-cover h-full w-full rounded-xl"
-          /> */}
+        <Image
+          src={`/assets/${pic}`}
+          width={300}
+          height={300}
+          alt={pic}
+          className="object-cover h-full w-full rounded-xl"
+        />
       </div>
     </div>
   )

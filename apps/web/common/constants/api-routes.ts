@@ -1,9 +1,7 @@
-import { API_ROOT } from "@repo/constants"
-
-export const API_URL_USERS = `${API_ROOT}/users`
-export const API_URL_PAYMENTS = `${API_ROOT}/payments`
-export const API_URL_BOOKINGS = `${API_ROOT}/bookings`
-export const API_URL_LISTINGS = `${API_ROOT}/listings`
-export const API_URL_TAX = `${API_ROOT}/taxes`
-export const API_URL_TRANSACTIONS = `${API_ROOT}/transactions`
-export const API_URL_REPORTS = `${API_ROOT}/reports`
+export const API_URL_USERS = `/users`
+export const API_URL_PAYMENTS = `/payments`
+export const API_URL_BOOKINGS = `/bookings`
+export const API_URL_LISTINGS = `/listings`
+export const API_URL_TAX = `/taxes`
+export const API_URL_TRANSACTIONS = `/transactions`
+export const API_URL_REPORTS = `/reports`

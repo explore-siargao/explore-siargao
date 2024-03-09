@@ -1,15 +1,20 @@
+import { API_ROOT, MOCK_ROOT } from "@repo/constants"
 import { T_BackendResponse } from "@repo/contract"
 
 export class ApiService {
   private BASE_URL: string | undefined
+  private ROOT_PATH: string | undefined
 
   constructor(source: "main" | "auth" | "mock" = "main") {
     if (source === "main") {
       this.BASE_URL = process.env.API_URL
+      this.ROOT_PATH = API_ROOT
     } else if (source === "auth") {
       this.BASE_URL = process.env.API_AUTH_URL
+      this.ROOT_PATH = API_ROOT
     } else {
       this.BASE_URL = process.env.API_MOCK_URL
+      this.ROOT_PATH = MOCK_ROOT
     }
   }
 
@@ -34,7 +39,7 @@ export class ApiService {
     const reqParams = new URLSearchParams(params).toString()
     const otherOptions = this.constructOptions()
     const res = fetch(
-      `${this.BASE_URL}${endpoint}${params ? `?${reqParams}` : ""}`,
+      `${this.BASE_URL}${this.ROOT_PATH}${endpoint}${params ? `?${reqParams}` : ""}`,
       {
         ...otherOptions,
         ...(signal ? { signal } : {}),
@@ -50,7 +55,7 @@ export class ApiService {
     removeContentType?: boolean
   ): Promise<T> {
     const otherOptions = this.constructOptions(removeContentType)
-    const res = fetch(`${this.BASE_URL}${endpoint}`, {
+    const res = fetch(`${this.BASE_URL}${this.ROOT_PATH}${endpoint}`, {
       method: "POST",
       body: !raw ? JSON.stringify(body) : body,
       ...otherOptions,
@@ -65,7 +70,7 @@ export class ApiService {
     removeContentType?: boolean
   ): Promise<T> {
     const otherOptions = this.constructOptions(removeContentType)
-    const res = fetch(`${this.BASE_URL}${endpoint}`, {
+    const res = fetch(`${this.BASE_URL}${this.ROOT_PATH}${endpoint}`, {
       method: "PATCH",
       body: !raw ? JSON.stringify(body) : body,
       ...otherOptions,
@@ -80,7 +85,7 @@ export class ApiService {
     removeContentType?: boolean
   ): Promise<T> {
     const otherOptions = this.constructOptions(removeContentType)
-    const res = fetch(`${this.BASE_URL}${endpoint}`, {
+    const res = fetch(`${this.BASE_URL}${this.ROOT_PATH}${endpoint}`, {
       method: "DELETE",
       body: !raw ? JSON.stringify(body) : body,
       ...otherOptions,

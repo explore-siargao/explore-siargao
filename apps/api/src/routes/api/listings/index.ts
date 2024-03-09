@@ -102,8 +102,18 @@ import {
   updateDescription,
 } from './service/listingDescription'
 import { getNotificationsByHost } from './service/notification'
+import { getListingsByHost } from './service/listingsByHost'
 
 const router = express.Router()
+
+//listings by host
+router.get(
+  '/hosted',
+  isOriginValid,
+  isCsrfTokenValid,
+  isUserLoggedIn,
+  getListingsByHost
+)
 
 // DEFAULT
 router.get('/', getAllListing)
