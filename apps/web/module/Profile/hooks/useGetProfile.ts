@@ -8,17 +8,16 @@ type T_DBReturn = Omit<T_BackendResponse, "item"> & {
   item: T_ProfileEditStore
 }
 
-export async function getProfile(userId: number | undefined) {
+export async function getProfile() {
   const apiService = new ApiService()
-  return await apiService.get<T_DBReturn>(`${API_URL_USERS}/${userId}/profile`)
+  return await apiService.get<T_DBReturn>(`${API_URL_USERS}/profile`)
 }
 
-function useGetProfile(userId: number | undefined) {
+function useGetProfile() {
   const query = useQuery({
-    queryKey: ["user-profile", userId],
-    queryFn: () => getProfile(userId),
+    queryKey: ["user-profile"],
+    queryFn: () => getProfile(),
     refetchOnWindowFocus: false,
-    enabled: !!userId,
   })
   return query
 }
