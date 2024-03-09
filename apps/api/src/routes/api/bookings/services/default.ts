@@ -8,7 +8,7 @@ import { prisma } from '@/common/helpers/prismaClient'
 import { T_AddBooking, Z_AddBooking, Z_Booking } from '@repo/contract'
 import { ApiService } from '@/common/service/api'
 import { getListingPrice } from '@/common/helpers/getListingPrice'
-import { BookingReceiptEmail } from './BookingReceiptEmail'
+import { BookingReceiptEmail } from './bookingReceiptEmail'
 
 const apiService = new ApiService()
 const XENDIT_ROOT_URL = '/api/xendit'

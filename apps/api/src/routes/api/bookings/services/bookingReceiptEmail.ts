@@ -1,6 +1,6 @@
 import { render } from '@react-email/render'
 import { EmailService } from '@/common/service/email'
-import PaymentEmailConfirmation from '@/routes/bookings/receipt-template/PaymentEmailConfirmation'
+import PaymentEmailConfirmation from '@/routes/api/bookings/email-template/PaymentEmailConfirmation'
 import { APP_NAME } from '@repo/constants'
 
 export type TSendEmailParams = {
