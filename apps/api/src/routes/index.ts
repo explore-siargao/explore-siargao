@@ -1,17 +1,23 @@
 import { Application } from 'express'
+import { API_ROOT, MOCK_ROOT } from '@repo/constants'
 import AssetsRoute from '@/routes/assets'
-import UsersRoute from '@/routes/users'
-import ListingsRoute from '@/routes/listings'
-import PaymentRoute from '@/routes/payments'
-import TaxesRoute from '@/routes/taxes'
-import XenditRoute from '@/routes/xendit'
-import BookingsRoute from '@/routes/bookings'
-import TransactionsRoute from '@/routes/transactions'
-import ReportsRoute from '@/routes/reports'
-import { API_ROOT } from '@repo/constants'
+
+// api
+import UsersRoute from '@/routes/api/users'
+import ListingsRoute from '@/routes/api/listings'
+import PaymentRoute from '@/routes/api/payments'
+import TaxesRoute from '@/routes/api/taxes'
+import XenditRoute from '@/routes/api/xendit'
+import BookingsRoute from '@/routes/api/bookings'
+import TransactionsRoute from '@/routes/api/transactions'
+import ReportsRoute from '@/routes/api/reports'
+// mock
+import MockUsersRoute from '@/routes/mock/users'
+import MockBookingsRoute from '@/routes/mock/bookings'
 
 export default function (app: Application) {
   app.use(`/assets`, AssetsRoute)
+  // API
   app.use(`${API_ROOT}/users`, UsersRoute)
   app.use(`${API_ROOT}/payments`, PaymentRoute)
   app.use(`${API_ROOT}/taxes`, TaxesRoute)
@@ -20,4 +26,7 @@ export default function (app: Application) {
   app.use(`${API_ROOT}/bookings`, BookingsRoute)
   app.use(`${API_ROOT}/transactions`, TransactionsRoute)
   app.use(`${API_ROOT}/reports`, ReportsRoute)
+  // MOCK
+  app.use(`${MOCK_ROOT}/users`, MockUsersRoute)
+  app.use(`${MOCK_ROOT}/bookings`, MockBookingsRoute)
 }
