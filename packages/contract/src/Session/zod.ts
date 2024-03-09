@@ -2,6 +2,7 @@ import { z } from "zod"
 import { E_UserRole, Z_PersonalInfo } from ".."
 
 export const Z_Session = z.object({
+  isHost: z.boolean(),
   id: z.number().nullable(),
   email: z.string().nullable(),
   profilePicture: z.string().nullable(),

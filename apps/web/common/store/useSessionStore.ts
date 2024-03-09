@@ -7,6 +7,7 @@ type T_Session_Action = {
 }
 
 const useSessionStore = create<T_Session & T_Session_Action>((set) => ({
+  isHost: false,
   id: null,
   email: null,
   profilePicture: null,
@@ -20,6 +21,7 @@ const useSessionStore = create<T_Session & T_Session_Action>((set) => ({
   update: (session: T_Session) => set(() => ({ ...session })),
   remove: () =>
     set({
+      isHost: false,
       id: null,
       email: null,
       profilePicture: null,
