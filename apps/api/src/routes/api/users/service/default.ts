@@ -151,7 +151,7 @@ export const updatePassword = async (req: Request, res: Response) => {
 }
 
 export const getUserProfile = async (req: Request, res: Response) => {
-  const id = Number(req.params.id)
+  const id = Number(res.locals.user.id)
   const getUser = await prisma.user.findFirst({
     where: {
       id: id,
