@@ -5,11 +5,11 @@ import Image from "next/image"
 import { Typography } from "@/common/components/ui/Typography"
 import { LucidePlus, LucideTable } from "lucide-react"
 import { PaymentStatus } from "./SingleView/components/PaymentStatus"
-import { createColumnHelper } from "@tanstack/react-table"
 import Link from "next/link"
 import { Button } from "@/common/components/ui/Button"
 import useGetBookings from "./hooks/useGetBookings"
 import { Spinner } from "@/common/components/ui/Spinner"
+import { createColumnHelper } from "@tanstack/react-table"
 
 const Bookings = () => {
   const { data, isPending } = useGetBookings(2)
@@ -18,12 +18,12 @@ const Bookings = () => {
   const columns = [
     columnHelper.accessor("Listing.imageKey", {
       header: "Listing",
-      cell: (Listing) => (
+      cell: (listing) => (
         <Link href="/profile">
           <div className="flex items-center gap-5">
             <div className="relative w-24 h-16 rounded-xl overflow-hidden">
               <Image
-                src={`/assets/${Listing.getValue()}`}
+                src={`/assets/${listing.getValue()}`}
                 alt="Image"
                 layout="fill"
                 objectFit="cover"
@@ -31,7 +31,7 @@ const Bookings = () => {
             </div>
             <span>
               <Typography variant="p">
-                {Listing.row.original.Listing.title}
+                {listing.row.original.Listing.title}
               </Typography>
             </span>
           </div>
