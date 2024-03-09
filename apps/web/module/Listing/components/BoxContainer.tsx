@@ -10,6 +10,7 @@ import Slider from "../../../common/components/Slider"
 import toast from "react-hot-toast"
 import useRemoveFromWishGroup from "@/module/AccountSettings/hooks/useRemoveFromWishGroup"
 import { useQueryClient } from "@tanstack/react-query"
+import Link from "next/link"
 
 type BoxContainerProps = {
   listingId: number
@@ -88,37 +89,44 @@ const BoxContainer = ({
   return (
     <>
       <li>
-        <div className="h-80 w-auto 2xl:h-72 2xl:w-auto rounded-2xl relative select-none">
-          <button onClick={handleClick} className="absolute top-3 right-3 z-40">
-            <HeartIcon
-              className={` h-7 w-7 text-text-50 active:scale-90 ${
-                isAdded ? "fill-error-500" : "fill-text-500/50 "
-              }`}
-            />
-          </button>
-          <Slider images={imageKey} />
-        </div>
-        <div className="flex-1 -space-y-1 w-auto">
-          <div className="flex justify-between">
-            <Title size={"ContentTitle"} className="text-text-500">
-              {location}
-            </Title>
-            <div className="flex text-text-500 place-items-center gap-1">
-              <StarIcon className="h-4 w-auto" />
-              {ratings}
+        <Link href={`/accommodation/${listingId}`}>
+          <div className="h-80 w-auto 2xl:h-72 2xl:w-auto rounded-2xl relative select-none">
+            <button
+              onClick={handleClick}
+              className="absolute top-3 right-3 z-40"
+            >
+              <HeartIcon
+                className={` h-7 w-7 text-text-50 active:scale-90 ${
+                  isAdded || isHearted
+                    ? "fill-error-500"
+                    : "fill-text-500/50 "
+                }`}
+              />
+            </button>
+            <Slider images={imageKey} />
+          </div>
+          <div className="flex-1 -space-y-1 w-auto">
+            <div className="flex justify-between">
+              <Title size={"ContentTitle"} className="text-text-500">
+                {location}
+              </Title>
+              <div className="flex text-text-500 place-items-center gap-1">
+                <StarIcon className="h-4 w-auto" />
+                {ratings}
+              </div>
             </div>
+            <div className="text-text-300 text-sm">
+              <Typography variant={"p"}>{distance}</Typography>
+              <Typography variant={"p"}>{date}</Typography>
+            </div>
+            <Typography
+              variant={"p"}
+              className="text-text-700 font-semibold underline"
+            >
+              {price} <span className="font-normal">{dayTime}</span>
+            </Typography>
           </div>
-          <div className="text-text-300 text-sm">
-            <Typography variant={"p"}>{distance}</Typography>
-            <Typography variant={"p"}>{date}</Typography>
-          </div>
-          <Typography
-            variant={"p"}
-            className="text-text-700 font-semibold underline"
-          >
-            {price} <span className="font-normal">{dayTime}</span>
-          </Typography>
-        </div>
+        </Link>
       </li>
       <AddWishlistModal
         listingId={listingId}

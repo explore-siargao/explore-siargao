@@ -6,6 +6,7 @@ import { Spinner } from "@/common/components/ui/Spinner"
 import { useQueryClient } from "@tanstack/react-query"
 import toast from "react-hot-toast"
 import { useRouter } from "next/navigation"
+import useSessionStore from "@/common/store/useSessionStore"
 
 interface ISetUpProfileAboutYouModalProps {
   isModalOpen: boolean
@@ -26,6 +27,9 @@ const ApplyToHostModal = ({
         })
         onClose()
         toast.success(data.message)
+        useSessionStore
+          .getState()
+          .update({ ...useSessionStore.getState(), isHost: true })
         router.push("/hosting")
       } else {
         toast.error(String(data.message))

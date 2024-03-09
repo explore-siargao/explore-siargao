@@ -31,6 +31,15 @@ const Slider = ({ images }: SliderProps) => {
           justify-content: center;
           align-items: center;
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+          opacity: 0;
+          transition: opacity 0.3s ease-in-out;
+          cursor: pointer;
+        }
+        .swiper:hover .swiper-button-prev:not(:disabled), .swiper:hover .swiper-button-next:not(:disabled) {
+          opacity: 1;
+        }
+        .swiper-button-prev.swiper-button-disabled{
+          opacity: 0;
         }
         .swiper-button-next:after, 
         .swiper-button-prev:after {
