@@ -8,7 +8,10 @@ export const reviews = [
       title: 'Luxury Beachfront Villa',
       hostedById: 1,
     },
-    reviewedBy: 'Alice Smith',
+    reviewedBy: {
+      name: 'Alice Smith',
+      profilePic: '1.jpg',
+    },
     reply: {
       name: 'John Doe',
       reply: 'Thank you for the kind words!',
@@ -25,7 +28,10 @@ export const reviews = [
       title: 'Rustic Mountain Cabin',
       hostedById: 12,
     },
-    reviewedBy: 'David Johnson',
+    reviewedBy: {
+      name: 'John Melley',
+      profilePic: '2.jpg',
+    },
     reply: {
       name: 'Emily Williams',
       reply: 'Glad you enjoyed your stay!',
@@ -42,7 +48,10 @@ export const reviews = [
       title: 'Secluded Mountain Retreat',
       hostedById: 1,
     },
-    reviewedBy: 'Michael Brown',
+    reviewedBy: {
+      name: 'Michael Brown',
+      profilePic: '2.jpg',
+    },
     reply: {
       name: 'Olivia Wilson',
       reply: 'Thank you for your kind review!',
@@ -59,7 +68,10 @@ export const reviews = [
       title: 'Urban Loft in the City',
       hostedById: 9,
     },
-    reviewedBy: 'Jessica Martinez',
+    reviewedBy: {
+      name: 'jesica Martinez',
+      profilePic: '1.jpg',
+    },
     reply: {
       name: 'William Taylor',
       reply: 'We appreciate your feedback!',
@@ -72,11 +84,14 @@ export const reviews = [
     rate: 4,
     comment: 'Nice place, clean and comfortable.',
     listing: {
-      image: '6.jpg',
+      image: '1.jpg',
       title: 'Modern Apartment Downtown',
       hostedById: 1,
     },
-    reviewedBy: 'Daniel Garcia',
+    reviewedBy: {
+      name: 'Daniel Garcia',
+      profilePic: '1.jpg',
+    },
     reply: {
       name: 'Sophia Rodriguez',
       reply: 'Thank you for staying with us!',
@@ -89,11 +104,14 @@ export const reviews = [
     rate: 5,
     comment: 'Absolutely loved it! Will definitely come back.',
     listing: {
-      image: '7.jpg',
+      image: '2.jpg',
       title: 'Charming Cottage by the Lake',
       hostedById: 1,
     },
-    reviewedBy: 'Emma Wilson',
+    reviewedBy: {
+      name: 'Jhay Montes',
+      profilePic: '1.jpg',
+    },
     reply: {
       name: 'Liam Anderson',
       reply: 'Looking forward to your next visit!',
@@ -106,11 +124,14 @@ export const reviews = [
     rate: 3,
     comment: 'Decent stay, but could use some improvements.',
     listing: {
-      image: '8.jpg',
+      image: '3.jpg',
       title: 'Suburban Family Home',
       hostedById: 2,
     },
-    reviewedBy: 'Mia Davis',
+    reviewedBy: {
+      name: 'Eiron Jonsey',
+      profilePic: '2.jpg',
+    },
     reply: {
       name: 'Noah Thompson',
       reply: "Thank you for your feedback. We'll work on it!",
@@ -123,11 +144,14 @@ export const reviews = [
     rate: 4,
     comment: 'Lovely place, enjoyed every moment.',
     listing: {
-      image: '9.jpg',
+      image: '4.jpg',
       title: 'Quaint Countryside Cottage',
       hostedById: 2,
     },
-    reviewedBy: 'Ava Clark',
+    reviewedBy: {
+      name: 'Carlos Miguel',
+      profilePic: '1.jpg',
+    },
     reply: {
       name: 'Ethan Harris',
       reply: 'Thank you for your kind words!',
@@ -140,11 +164,14 @@ export const reviews = [
     rate: 3,
     comment: 'Not bad, but nothing extraordinary either.',
     listing: {
-      image: '10.jpg',
+      image: '5.jpg',
       title: 'Cozy Studio Apartment',
       hostedById: 2,
     },
-    reviewedBy: 'Liam Thompson',
+    reviewedBy: {
+      name: 'Liam Thomson',
+      profilePic: '2.jpg',
+    },
     reply: {
       name: 'Ava Wilson',
       reply: 'We appreciate your feedback!',
@@ -157,11 +184,14 @@ export const reviews = [
     rate: 4,
     comment: 'Had a pleasant stay, would recommend.',
     listing: {
-      image: '11.jpg',
+      image: '6.jpg',
       title: 'Spacious Loft in the City',
       hostedById: 2,
     },
-    reviewedBy: 'Ethan Martinez',
+    reviewedBy: {
+      name: 'Janrey Maligaya',
+      profilePic: '1.jpg',
+    },
     reply: {
       name: 'Mia Davis',
       reply: 'Thank you for your recommendation!',
@@ -174,11 +204,14 @@ export const reviews = [
     rate: 5,
     comment: 'Absolutely stunning property!',
     listing: {
-      image: '12.jpg',
+      image: '1.jpg',
       title: 'Historic Mansion Estate',
       hostedById: 3,
     },
-    reviewedBy: 'Aiden Thomas',
+    reviewedBy: {
+      name: 'Almira Reyes',
+      profilePic: '1.jpg',
+    },
     reply: {
       name: 'Olivia Wilson',
       reply: "We're glad you enjoyed your stay!",
@@ -191,11 +224,14 @@ export const reviews = [
     rate: 3,
     comment: 'Not bad, but could be cleaner.',
     listing: {
-      image: '13.jpg',
+      image: '2.jpg',
       title: 'Sunny Beach House',
       hostedById: 3,
     },
-    reviewedBy: 'Lucas Garcia',
+    reviewedBy: {
+      name: 'Lucas Garcia',
+      profilePic: '1.jpg',
+    },
     reply: {
       name: 'Sophia Brown',
       reply: "Thank you for your feedback. We'll improve!",
@@ -208,11 +244,14 @@ export const reviews = [
     rate: 4,
     comment: 'Great value for the price.',
     listing: {
-      image: '14.jpg',
+      image: '3.jpg',
       title: 'Cozy Cabin in the Woods',
       hostedById: 3,
     },
-    reviewedBy: 'Benjamin Lee',
+    reviewedBy: {
+      name: 'Benjie Lee',
+      profilePic: '1.jpg',
+    },
     reply: {
       name: 'Emma Thompson',
       reply: "We're glad you enjoyed your stay!",
@@ -225,11 +264,14 @@ export const reviews = [
     rate: 3,
     comment: 'Average experience, nothing special.',
     listing: {
-      image: '15.jpg',
+      image: '4.jpg',
       title: 'Studio Apartment Downtown',
       hostedById: 3,
     },
-    reviewedBy: 'Hannah Roberts',
+    reviewedBy: {
+      name: 'Hanna Rivera',
+      profilePic: '2.jpg',
+    },
     reply: {
       name: 'William Taylor',
       reply: 'Thank you for your feedback!',
@@ -242,11 +284,14 @@ export const reviews = [
     rate: 5,
     comment: 'Amazing place, exceeded expectations!',
     listing: {
-      image: '16.jpg',
+      image: '5.jpg',
       title: 'Luxury Penthouse Suite',
       hostedById: 3,
     },
-    reviewedBy: 'Isabella White',
+    reviewedBy: {
+      name: 'Ryuka Rengpku',
+      profilePic: '1.jpg',
+    },
     reply: {
       name: 'Daniel Harris',
       reply: "We're thrilled to hear that!",
@@ -259,11 +304,14 @@ export const reviews = [
     rate: 4,
     comment: 'Enjoyable stay, would recommend.',
     listing: {
-      image: '17.jpg',
+      image: '6.jpg',
       title: 'Modern Loft with City Views',
       hostedById: 3,
     },
-    reviewedBy: 'Alexander Martinez',
+    reviewedBy: {
+      name: 'Ei Morales',
+      profilePic: '1.jpg',
+    },
     reply: {
       name: 'Emily Johnson',
       reply: 'Thank you for your recommendation!',
@@ -276,11 +324,14 @@ export const reviews = [
     rate: 3,
     comment: 'Decent stay, nothing extraordinary.',
     listing: {
-      image: '18.jpg',
+      image: '1.jpg',
       title: 'Cozy Cabin Retreat',
       hostedById: 4,
     },
-    reviewedBy: 'Charlotte Brown',
+    reviewedBy: {
+      name: 'Ashley Yumang',
+      profilePic: '2.jpg',
+    },
     reply: {
       name: 'Noah Anderson',
       reply: 'Thank you for your feedback!',
@@ -293,11 +344,14 @@ export const reviews = [
     rate: 4,
     comment: 'Lovely place, perfect for a weekend getaway.',
     listing: {
-      image: '19.jpg',
+      image: '2.jpg',
       title: 'Riverside Cottage',
       hostedById: 4,
     },
-    reviewedBy: 'Amelia Taylor',
+    reviewedBy: {
+      name: 'Garry Rol',
+      profilePic: '2.jpg',
+    },
     reply: {
       name: 'Jacob Harris',
       reply: "We're glad you enjoyed your stay!",
@@ -310,11 +364,14 @@ export const reviews = [
     rate: 4,
     comment: 'Fantastic view from the balcony!',
     listing: {
-      image: '20.jpg',
+      image: '3.jpg',
       title: 'City Skyline Apartment',
       hostedById: 4,
     },
-    reviewedBy: 'Sophia Brown',
+    reviewedBy: {
+      name: 'James Rosales',
+      profilePic: '2.jpg',
+    },
     reply: {
       name: 'Jacob Anderson',
       reply: "We're glad you enjoyed the view!",

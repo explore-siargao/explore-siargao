@@ -14,11 +14,9 @@ import {
   getThisMonthEarnings,
   getUpcomingEarnings,
 } from './services/earnings'
-import { paginatedBooking } from './services/paginatedBooking.ts'
 
 const router = express.Router()
 
-router.get('/paginated', paginatedBooking)
 router.get('/', isCsrfTokenValid, isOriginValid, isUserLoggedIn, getBookings)
 router.get(
   '/:hostId',
