@@ -5,7 +5,7 @@ import { Typography } from "@/common/components/ui/Typography"
 import valid from "card-validator"
 import { ChevronLeft } from "lucide-react"
 import Link from "next/link"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import PaymentOptions from "./PaymentOptions"
 import useCheckInOutDateStore from "@/module/Accommodation/store/useCheckInOutDateStore"
 import useGuestAdd from "@/module/Accommodation/store/useGuestsStore"
@@ -20,10 +20,20 @@ import { EncryptionService } from "@repo/services/"
 import useSessionStore from "@/common/store/useSessionStore"
 import useGetPaymentMethods from "@/module/AccountSettings/hooks/useGetPaymentMethods"
 import toast from "react-hot-toast"
+import { useSearchParams } from "next/navigation"
 
 const encryptionService = new EncryptionService("card")
 
 const Checkout = () => {
+  const searchParams = useSearchParams()
+
+  const guests = searchParams.get("guests")
+  const adultCounts = searchParams.get("adultCount")
+  const childrenCounts = searchParams.get("childrenCount")
+  const infantCounts = searchParams.get("infantCount")
+  const dateFrom = searchParams.get("dateFrom")
+  const dateTo = searchParams.get("dateTo")
+
   const paymentInfo = usePaymentInfoStore((state) => state)
   const session = useSessionStore((state) => state)
   const { data: paymentMethods, isPending: isPendingPaymentMethods } =
@@ -36,7 +46,11 @@ const Checkout = () => {
   const [checkInOutCalendarModalIsOpen, setCheckInOutCalendarModalIsOpen] =
     useState(false)
   const dateRange = useCheckInOutDateStore((state) => state.dateRange)
-  const { adults, children, infants } = useGuestAdd((state) => state.guest)
+  const { adults, children, infants } = useGuestAdd((state) => ({
+    adults: parseInt(adultCounts!, 10) || 0,
+    children: parseInt(childrenCounts!, 10) || 0,
+    infants: parseInt(infantCounts!, 10) || 0,
+  }))
   const totalGuest = adults + children + infants
   const validatePayment = () => {
     let isValid = false
@@ -130,12 +144,12 @@ const Checkout = () => {
               </button>
             </div>
             <Typography className="text-sm">
-              {dateRange?.from != undefined
-                ? format(dateRange.from, "LLL dd, y")
+              {dateFrom !== null
+                ? format(new Date(dateFrom), "LLL dd, y")
                 : "Date from"}{" "}
               -{" "}
-              {dateRange?.to != undefined
-                ? format(dateRange.to, "LLL dd, y")
+              {dateTo !== null
+                ? format(new Date(dateTo), "LLL dd, y")
                 : "Date to"}
             </Typography>
           </div>
@@ -150,7 +164,7 @@ const Checkout = () => {
                 Edit
               </button>
             </div>
-            <Typography className="text-sm">{`${totalGuest} guest${totalGuest > 1 ? "s" : ""}`}</Typography>
+            <Typography className="text-sm">{`${guests} guest${Number(guests) > 1 ? "s" : ""}`}</Typography>
           </div>
           <hr className="my-4" />
           <PaymentOptions />
