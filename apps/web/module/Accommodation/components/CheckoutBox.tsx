@@ -11,7 +11,7 @@ import useCheckInOutDateStore from "@/module/Accommodation/store/useCheckInOutDa
 import Asterisk from "@/common/components/ui/Asterisk"
 import { format } from "date-fns"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 import GuestAddModal from "./modals/GuestAddModal"
 import useGuestAdd from "@/module/Accommodation/store/useGuestsStore"
 import { APP_NAME } from "@repo/constants"
@@ -31,6 +31,7 @@ interface CheckoutProcessProps {
 
 const CheckoutBox = ({ checkoutDesc }: CheckoutProcessProps) => {
   const router = useRouter()
+  const params = useParams<{ listingId: string }>()
   const [isBreakdownModalOpen, setIsBreakdownModalOpen] = useState(false)
   const [isMoreInfoModalOpen, setIsMoreInfoModalOpen] = useState(false)
   const [isGuestsModalOpen, setIsGuestsModalOpen] = useState(false)
@@ -96,7 +97,7 @@ const CheckoutBox = ({ checkoutDesc }: CheckoutProcessProps) => {
           variant="primary"
           onClick={() =>
             router.push(
-              `/accommodation/1/checkout?guests=${totalGuest}&dateFrom=${dateRange.from ? format(dateRange.from, "MM/dd/yyyy") : ""}&dateTo=${dateRange.to ? format(dateRange.to, "MM/dd/yyyy") : ""}&adultCount=${adults}&childrenCount=${children}&infantCount=${infants}`
+              `/accommodation/${params.listingId}/checkout`
             )
           }
         >

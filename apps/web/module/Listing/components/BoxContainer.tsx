@@ -89,10 +89,13 @@ const BoxContainer = ({
   return (
     <>
       <li>
-        <Link href={`/accommodation/${listingId}`}>
+        <Link href={`/accommodation/${listingId}`} target="_blank">
           <div className="h-80 w-auto 2xl:h-72 2xl:w-auto rounded-2xl relative select-none">
             <button
-              onClick={handleClick}
+              onClick={(e) => {
+                e.preventDefault()
+                handleClick()
+              }}
               className="absolute top-3 right-3 z-40"
             >
               <HeartIcon
@@ -121,7 +124,7 @@ const BoxContainer = ({
               variant={"p"}
               className="text-text-700 font-semibold underline"
             >
-              {price} <span className="font-normal">{dayTime}</span>
+              {price} <span className="font-normal">{dayTime}asdasd</span>
             </Typography>
           </div>
         </Link>

@@ -20,23 +20,13 @@ import { EncryptionService } from "@repo/services/"
 import useSessionStore from "@/common/store/useSessionStore"
 import useGetPaymentMethods from "@/module/AccountSettings/hooks/useGetPaymentMethods"
 import toast from "react-hot-toast"
-import { useSearchParams } from "next/navigation"
 
 const encryptionService = new EncryptionService("card")
 
 const Checkout = () => {
-  const searchParams = useSearchParams()
-
-  const guests = searchParams.get("guests")
-  const adultCounts = searchParams.get("adultCount")
-  const childrenCounts = searchParams.get("childrenCount")
-  const infantCounts = searchParams.get("infantCount")
-  const dateFrom = searchParams.get("dateFrom")
-  const dateTo = searchParams.get("dateTo")
-
   const paymentInfo = usePaymentInfoStore((state) => state)
   const session = useSessionStore((state) => state)
-  const { data: paymentMethods, isPending: isPendingPaymentMethods } =
+  const { data: paymentMethods } =
     useGetPaymentMethods(session.id)
   const updatePaymentInfo = usePaymentInfoStore(
     (state) => state.updatePaymentInfo
@@ -46,11 +36,7 @@ const Checkout = () => {
   const [checkInOutCalendarModalIsOpen, setCheckInOutCalendarModalIsOpen] =
     useState(false)
   const dateRange = useCheckInOutDateStore((state) => state.dateRange)
-  const { adults, children, infants } = useGuestAdd((state) => ({
-    adults: parseInt(adultCounts!, 10) || 0,
-    children: parseInt(childrenCounts!, 10) || 0,
-    infants: parseInt(infantCounts!, 10) || 0,
-  }))
+  const { adults, children, infants } = useGuestAdd((state) => state.guest)
   const totalGuest = adults + children + infants
   const validatePayment = () => {
     let isValid = false
@@ -115,7 +101,7 @@ const Checkout = () => {
     return isValid
   }
   return (
-    <WidthWrapper width="small" className="mt-24 md:mt-36 lg:mt-40">
+    <WidthWrapper width="small" className="mt-4 md:mt-8 lg:mt-10">
       <div className="flex items-center gap-x-4">
         <Link href="/accommodation/1">
           <ChevronLeft />
@@ -144,12 +130,12 @@ const Checkout = () => {
               </button>
             </div>
             <Typography className="text-sm">
-              {dateFrom !== null
-                ? format(new Date(dateFrom), "LLL dd, y")
+              {dateRange.from
+                ? format(new Date(dateRange.from), "LLL dd, y")
                 : "Date from"}{" "}
               -{" "}
-              {dateTo !== null
-                ? format(new Date(dateTo), "LLL dd, y")
+              {dateRange.to
+                ? format(new Date(dateRange.to), "LLL dd, y")
                 : "Date to"}
             </Typography>
           </div>
@@ -164,7 +150,7 @@ const Checkout = () => {
                 Edit
               </button>
             </div>
-            <Typography className="text-sm">{`${guests} guest${Number(guests) > 1 ? "s" : ""}`}</Typography>
+            <Typography className="text-sm">{`${totalGuest} guest${Number(totalGuest) > 1 ? "s" : ""}`}</Typography>
           </div>
           <hr className="my-4" />
           <PaymentOptions />
