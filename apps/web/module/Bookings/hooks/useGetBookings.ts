@@ -3,7 +3,7 @@ import { ApiService } from "@/common/service/api"
 import { useQuery } from "@tanstack/react-query"
 
 export async function getBookings(page: number) {
-  const apiService = new ApiService()
+  const apiService = new ApiService("mock")
   return await apiService.get(`${API_URL_BOOKINGS}/paginated?page=${page}`)
 }
 

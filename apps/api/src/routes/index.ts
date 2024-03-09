@@ -14,6 +14,7 @@ import ReportsRoute from '@/routes/api/reports'
 // mock
 import MockUsersRoute from '@/routes/mock/users'
 import MockBookingsRoute from '@/routes/mock/bookings'
+import MockListingsRoute from '@/routes/mock/listings'
 
 export default function (app: Application) {
   app.use(`/assets`, AssetsRoute)
@@ -29,4 +30,5 @@ export default function (app: Application) {
   // MOCK
   app.use(`${MOCK_ROOT}/users`, MockUsersRoute)
   app.use(`${MOCK_ROOT}/bookings`, MockBookingsRoute)
+  app.use(`${MOCK_ROOT}/listings`, MockListingsRoute)
 }
