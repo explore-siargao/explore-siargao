@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Title } from "../../../common/components/ui/Title"
 import { HeartIcon } from "@heroicons/react/24/outline"
 import { StarIcon } from "@heroicons/react/20/solid"
@@ -8,6 +8,9 @@ import AddWishlistModal from "@/module/AccountSettings/components/modals/AddWish
 import useSessionStore from "../../../common/store/useSessionStore"
 import Slider from "../../../common/components/Slider"
 import toast from "react-hot-toast"
+import useRemoveFromWishGroup from "@/module/AccountSettings/hooks/useRemoveFromWishGroup"
+import { useQueryClient } from "@tanstack/react-query"
+import Link from "next/link"
 
 type BoxContainerProps = {
   listingId: number
@@ -35,57 +38,98 @@ const BoxContainer = ({
   ratings,
   isHearted,
 }: BoxContainerProps) => {
-  const [isClicked, setIsClicked] = useState(false)
+  const [addWIshlistModal, setAddWIshlistModal] = useState(false)
+  const userId = useSessionStore((state) => state).id
+
+  const [isAdded, setIsAdded] = useState(false)
+
+  const { mutate } = useRemoveFromWishGroup()
+  const queryClient = useQueryClient()
+
+  const callBackReq = {
+    onSuccess: (data: any) => {
+      if (!data.error) {
+        setIsAdded(false)
+
+        queryClient.invalidateQueries({
+          queryKey: ["wish-group"],
+        })
+        queryClient.invalidateQueries({
+          queryKey: ["wish-group-count"],
+        })
+
+        toast.success("Wishlist successfully removed from the group")
+      } else {
+        toast.error(String(data.message))
+      }
+    },
+    onError: (err: any) => {
+      toast.error(String(err))
+    },
+  }
+
   const handleClick = () => {
     if (userId) {
-      setIsClicked((setIsClicked) => !setIsClicked)
-      setAddWIshlistModal(!isClicked)
+      if (isAdded) {
+        mutate({ id: listingId }, callBackReq)
+      } else {
+        setAddWIshlistModal(true)
+      }
     } else {
       toast.error("You need to log in to add it to wishlist")
     }
   }
 
-  const [addWIshlistModal, setAddWIshlistModal] = useState(false)
-  const userId = useSessionStore((state) => state).id
+  useEffect(() => {
+    if (isHearted) {
+      setIsAdded(true)
+    }
+  }, [])
 
   return (
     <>
       <li>
-        <div className="h-80 w-auto 2xl:h-72 2xl:w-auto rounded-2xl relative select-none">
-          <button onClick={handleClick} className="absolute top-3 right-3 z-40">
-            <HeartIcon
-              className={` h-7 w-7 text-text-50 active:scale-90 ${
-                isClicked || isHearted ? "fill-error-500" : "fill-text-500/50 "
-              }`}
-            />
-          </button>
-          <Slider images={imageKey} />
-        </div>
-        <div className="flex-1 -space-y-1 w-auto">
-          <div className="flex justify-between">
-            <Title size={"ContentTitle"} className="text-text-500">
-              {location}
-            </Title>
-            <div className="flex text-text-500 place-items-center gap-1">
-              <StarIcon className="h-4 w-auto" />
-              {ratings}
+        <Link href={`/accommodation/${listingId}`}>
+          <div className="h-80 w-auto 2xl:h-72 2xl:w-auto rounded-2xl relative select-none">
+            <button
+              onClick={handleClick}
+              className="absolute top-3 right-3 z-40"
+            >
+              <HeartIcon
+                className={` h-7 w-7 text-text-50 active:scale-90 ${
+                  isAdded || isHearted ? "fill-error-500" : "fill-text-500/50 "
+                }`}
+              />
+            </button>
+            <Slider images={imageKey} />
+          </div>
+          <div className="flex-1 -space-y-1 w-auto">
+            <div className="flex justify-between">
+              <Title size={"ContentTitle"} className="text-text-500">
+                {location}
+              </Title>
+              <div className="flex text-text-500 place-items-center gap-1">
+                <StarIcon className="h-4 w-auto" />
+                {ratings}
+              </div>
             </div>
+            <div className="text-text-300 text-sm">
+              <Typography variant={"p"}>{distance}</Typography>
+              <Typography variant={"p"}>{date}</Typography>
+            </div>
+            <Typography
+              variant={"p"}
+              className="text-text-700 font-semibold underline"
+            >
+              {price} <span className="font-normal">{dayTime}</span>
+            </Typography>
           </div>
-          <div className="text-text-300 text-sm">
-            <Typography variant={"p"}>{distance}</Typography>
-            <Typography variant={"p"}>{date}</Typography>
-          </div>
-          <Typography
-            variant={"p"}
-            className="text-text-700 font-semibold underline"
-          >
-            {price} <span className="font-normal">{dayTime}</span>
-          </Typography>
-        </div>
+        </Link>
       </li>
       <AddWishlistModal
         listingId={listingId}
         isOpen={addWIshlistModal}
+        handleAdded={() => setIsAdded(true)}
         onClose={() => setAddWIshlistModal(false)}
       />
     </>

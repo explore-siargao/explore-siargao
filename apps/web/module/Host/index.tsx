@@ -3,6 +3,7 @@ import { Typography } from "@/common/components/ui/Typography"
 import { Title } from "@/common/components/ui/Title"
 import { Button } from "@/common/components/ui/Button"
 import { LucideBook } from "lucide-react"
+import { WidthWrapper } from "@/common/components/WidthWrapper"
 
 const tabs = [
   {
@@ -49,43 +50,51 @@ const HostingPage: React.FC<HostingPageProps> = ({ hostName }) => {
     description = "You don't have any guests checking out today or tomorrow"
   }
   return (
-    <div>
-      <div className="">
-        <Title size={"default"} className="flex font-semibold mb-10">
-          Welcome, {hostName}
-          <div className="flex-grow" />
-          <Button variant="outline" className="flex items-end ">
-            Complete your listing
-          </Button>
-        </Title>
-      </div>
-      <div className="">
-        <Typography variant={"h1"} className="flex font-semibold mb-5">
-          Your reservations
-          <div className="flex-grow" />
-          <Button
-            variant={"ghost"}
-            className="flex items-end font-semibold text-[17px] underline"
-          >
-            All reservations (0)
-          </Button>
-        </Typography>
-      </div>
-
+    <WidthWrapper className="my-24 lg:my-36">
       <div>
-        <OvalTab tabs={tabs} />
-        <div className="flex bg-gray-100 h-[300px] w-full mt-5 items-center justify-center">
-          <div className="text-gray-500">
-            <div className="flex items-center justify-center mb-5">{icon}</div>
-            <div className="w-[200px]">
-              <Typography variant={"p"} className="font-semibold">
-                {description}
-              </Typography>
+        <div className="">
+          <div className="flex items-center justify-between pb-4">
+            <Title size="default" className="flex font-semibold">
+              Welcome, {hostName}
+            </Title>
+            <Button variant="outline" className="flex items-end">
+              Complete your listing
+            </Button>
+          </div>
+        </div>
+        <div className="">
+          <div className="flex-grow" />
+          <Typography
+            variant={"h1"}
+            className="flex justify-between font-semibold mb-5"
+          >
+            Your reservations
+            <Button
+              variant={"ghost"}
+              className="flex items-end font-semibold text-[17px] underline"
+            >
+              All reservations (0)
+            </Button>
+          </Typography>
+        </div>
+
+        <div>
+          <OvalTab tabs={tabs} />
+          <div className="flex bg-gray-100 h-[300px] w-full mt-5 items-center justify-center">
+            <div className="text-gray-500">
+              <div className="flex items-center justify-center mb-5">
+                {icon}
+              </div>
+              <div className="w-[200px]">
+                <Typography variant={"p"} className="font-semibold">
+                  {description}
+                </Typography>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </WidthWrapper>
   )
 }
 

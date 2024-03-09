@@ -13,6 +13,7 @@ import { WidthWrapper } from "@/common/components/WidthWrapper"
 import { Typography } from "@/common/components/ui/Typography"
 import { cn } from "@/common/helpers/cn"
 import ApplyToHostModal from "./ApplyToHostModal"
+import useSessionStore from "@/common/store/useSessionStore"
 
 function Header({
   contentWidth = "wide",
@@ -22,6 +23,7 @@ function Header({
   isFixed?: boolean
 }) {
   const { data: session } = useSession()
+  const isHost = useSessionStore((state) => state.isHost)
   const path = usePathname()
   const router = useRouter()
   let withoutHeader = [
@@ -35,7 +37,6 @@ function Header({
     "/new-password",
   ]
   const [isModalOpen, setIsModalOpen] = useState(false)
-
   const renderHeader = () => {
     const openModal = () => setIsModalOpen(true)
     const closeModal = () => setIsModalOpen(false)
@@ -84,9 +85,20 @@ function Header({
                     </div>
                   )}
                   <div>
-                    <Button variant="primary" size="sm" onClick={openModal}>
-                      Apply to Host
-                    </Button>
+                    {isHost ? (
+                      <Button
+                        variant="ghost"
+                        className="underline font-semibold"
+                        size="sm"
+                        onClick={() => router.push("/hosting")}
+                      >
+                        Manage Listing
+                      </Button>
+                    ) : (
+                      <Button variant="primary" size="sm" onClick={openModal}>
+                        Apply to Host
+                      </Button>
+                    )}
                   </div>
                   {session && <LandingPageMenu />}
                 </div>
