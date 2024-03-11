@@ -4,8 +4,8 @@ import { Request, Response } from 'express'
 import { ResponseService } from '@/common/service/response'
 
 const response = new ResponseService()
+const prisma = new PrismaClient()
 export const addPaymentMethod = async (req: Request, res: Response) => {
-  const prisma = new PrismaClient()
   const { cardInfo, cardType, lastFour } = req.body
   const userId = Number(req.params.userId)
   try {
@@ -45,7 +45,6 @@ export const addPaymentMethod = async (req: Request, res: Response) => {
 }
 
 export const getPaymentMethods = async (req: Request, res: Response) => {
-  const prisma = new PrismaClient()
   const userId = Number(req.params.userId)
   try {
     const isUserExist =
@@ -98,7 +97,6 @@ export const getPaymentMethods = async (req: Request, res: Response) => {
 export const removePaymentMethod = async (req: Request, res: Response) => {
   const userId = Number(req.params.userId)
   const paymentMethodId = Number(req.params.paymentMethodId)
-  const prisma = new PrismaClient()
   try {
     const isUserExist =
       (await prisma.user.findFirst({
@@ -144,7 +142,6 @@ export const updatePaymentMethod = async (req: Request, res: Response) => {
   const userId = Number(req.params.userId)
   const paymentMethodId = Number(req.params.paymentMethodId)
   try {
-    const prisma = new PrismaClient()
     const getUser = await prisma.user.findFirst({
       where: {
         id: userId,

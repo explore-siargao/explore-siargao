@@ -4,8 +4,8 @@ import { Request, Response } from 'express'
 import { ResponseService } from '@/common/service/response'
 
 const response = new ResponseService()
+const prisma = new PrismaClient()
 export const getUsedCoupons = async (req: Request, res: Response) => {
-  const prisma = new PrismaClient()
   const userId = Number(req.params.userId)
   try {
     const isUserExist =
@@ -58,7 +58,6 @@ export const getUsedCoupons = async (req: Request, res: Response) => {
 }
 
 export const addCoupon = async (req: Request, res: Response) => {
-  const prisma = new PrismaClient()
   const { code, expirationDate, reward } = req.body
   const userId = Number(req.params.userId)
   try {
@@ -97,7 +96,6 @@ export const addCoupon = async (req: Request, res: Response) => {
 }
 
 export const updateCoupon = async (req: Request, res: Response) => {
-  const prisma = new PrismaClient()
   const userId = Number(req.params.userId)
   const { code, reward, expirationDate, usedBy, isUsed } = req.body
   try {
