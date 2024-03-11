@@ -73,10 +73,10 @@ const AllReviewsModal = ({
             </div>
           </div>
         </div>
-        {reviews?.map((data, index) => (
-          <div key={index}>
+        {reviews?.map((data) => (
+          <div key={data.id}>
             {data?.review?.map((review) => (
-              <div key={index}>
+              <div key={review.id}>
                 <div className="my-5">
                   <div className="flex space-x-2">
                     <div className="w-4/5">
