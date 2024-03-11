@@ -99,7 +99,7 @@ const AboutHost = (props: AboutHostProps) => {
           // @ts-expect-error
           const value = props[item.name]
           return value ? (
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2" key={item.name}>
               {item.icon}
               <Typography variant="h4">
                 {item.title} {value}

@@ -73,11 +73,11 @@ const AllReviewsModal = ({
             </div>
           </div>
         </div>
-        {reviews.map((data, index) => (
-          <>
-            {data.review.map((review) => (
-              <>
-                <div key={index} className="my-5">
+        {reviews?.map((data, index) => (
+          <div key={index}>
+            {data?.review?.map((review) => (
+              <div key={index}>
+                <div className="my-5">
                   <div className="flex space-x-2">
                     <div className="w-4/5">
                       <Typography variant="h3" fontWeight="semibold">
@@ -109,9 +109,9 @@ const AllReviewsModal = ({
                     <hr />
                   </div>
                 </div>
-              </>
+              </div>
             ))}
-          </>
+          </div>
         ))}
         <Button variant="outline" className="text-base font-semibold">
           Show more reviews
