@@ -8,8 +8,5 @@ const router = express.Router()
 
 // DEFAULT
 router.get('/', () => console.log('test user mock'))
-router.get(
-    '/:id',
-    getProfile
-  )
+router.get('/:id', getProfile)
 export default router
