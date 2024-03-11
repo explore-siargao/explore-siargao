@@ -1,6 +1,9 @@
-import { Response, Request} from 'express'
+import { Response, Request } from 'express'
 import { FileService } from '@/common/service/file'
-import { REQUIRED_VALUE_EMPTY, UNKNOWN_ERROR_OCCURRED } from '@/common/constants'
+import {
+  REQUIRED_VALUE_EMPTY,
+  UNKNOWN_ERROR_OCCURRED,
+} from '@/common/constants'
 import { ResponseService } from '@/common/service/response'
 
 const fileService = new FileService()
@@ -17,9 +20,13 @@ export const getAsset = async (req: Request, res: Response) => {
         res.end(file)
       }
     } catch (err: any) {
-      res.json(response.error({message:err.message? err.message: UNKNOWN_ERROR_OCCURRED}))
+      res.json(
+        response.error({
+          message: err.message ? err.message : UNKNOWN_ERROR_OCCURRED,
+        })
+      )
     }
   } else {
-    res.json(response.error({message:REQUIRED_VALUE_EMPTY}))
+    res.json(response.error({ message: REQUIRED_VALUE_EMPTY }))
   }
 }
