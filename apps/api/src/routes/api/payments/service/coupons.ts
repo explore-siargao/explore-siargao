@@ -1,5 +1,9 @@
 import { PrismaClient } from '@prisma/client'
-import { REQUIRED_VALUE_EMPTY, UNKNOWN_ERROR_OCCURRED, USER_NOT_EXIST } from '@/common/constants'
+import {
+  REQUIRED_VALUE_EMPTY,
+  UNKNOWN_ERROR_OCCURRED,
+  USER_NOT_EXIST,
+} from '@/common/constants'
 import { Request, Response } from 'express'
 import { ResponseService } from '@/common/service/response'
 
@@ -50,10 +54,14 @@ export const getUsedCoupons = async (req: Request, res: Response) => {
         })
       )
     } else {
-      res.json(response.error({message:USER_NOT_EXIST}))
+      res.json(response.error({ message: USER_NOT_EXIST }))
     }
   } catch (err: any) {
-    res.json(response.error({message:err.message? err.message : UNKNOWN_ERROR_OCCURRED}))
+    res.json(
+      response.error({
+        message: err.message ? err.message : UNKNOWN_ERROR_OCCURRED,
+      })
+    )
   }
 }
 
@@ -83,15 +91,28 @@ export const addCoupon = async (req: Request, res: Response) => {
             user: true,
           },
         })
-        res.json(response.success({item:newCoupon, message:'New coupon successfully created'}))
+        res.json(
+          response.success({
+            item: newCoupon,
+            message: 'New coupon successfully created',
+          })
+        )
       } else {
-        res.json(response.error({message:REQUIRED_VALUE_EMPTY}))
+        res.json(response.error({ message: REQUIRED_VALUE_EMPTY }))
       }
     } else {
-      res.json(response.error({message:'User Admin or Host is not exist from our system'}))
+      res.json(
+        response.error({
+          message: 'User Admin or Host is not exist from our system',
+        })
+      )
     }
   } catch (err: any) {
-    res.json(response.error({message:err.message? err.message : UNKNOWN_ERROR_OCCURRED}))
+    res.json(
+      response.error({
+        message: err.message ? err.message : UNKNOWN_ERROR_OCCURRED,
+      })
+    )
   }
 }
 
@@ -129,18 +150,28 @@ export const updateCoupon = async (req: Request, res: Response) => {
               user: true,
             },
           })
-          res.json(response.success({item:updateCoupon, message:'Coupon successfully updated'}))
+          res.json(
+            response.success({
+              item: updateCoupon,
+              message: 'Coupon successfully updated',
+            })
+          )
         } else {
-          res.json(response.error({message:'Invalid code or code already in used'}))
+          res.json(
+            response.error({ message: 'Invalid code or code already in used' })
+          )
         }
       } else {
-        res.json(response.error({message:REQUIRED_VALUE_EMPTY}))
+        res.json(response.error({ message: REQUIRED_VALUE_EMPTY }))
       }
     } else {
-      res.json(response.error({message:USER_NOT_EXIST})
-        )
+      res.json(response.error({ message: USER_NOT_EXIST }))
     }
   } catch (err: any) {
-    res.json(response.error({message:err.message? err.message : UNKNOWN_ERROR_OCCURRED}))
+    res.json(
+      response.error({
+        message: err.message ? err.message : UNKNOWN_ERROR_OCCURRED,
+      })
+    )
   }
 }
