@@ -1,4 +1,4 @@
-import { MapContainer, TileLayer, Popup, Marker } from "react-leaflet"
+import { MapContainer, TileLayer, Marker, FeatureGroup } from "react-leaflet"
 import "leaflet/dist/leaflet.css"
 import { useEffect, useRef, useState } from "react"
 import MapCustomPopup from "@/common/components/MapCustomPopup"
@@ -6,7 +6,6 @@ import { Icon } from "leaflet"
 import useSessionStore from "@/common/store/useSessionStore"
 import { useParams } from "next/navigation"
 import useGetWishGroupByUserAndTitle from "../hooks/useGetWishGroupByUserAndTitle"
-import Listing from "@/module/Listing"
 
 const navIcon = new Icon({
   iconUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png",
@@ -55,6 +54,14 @@ const WorldMap = () => {
     if (data?.items?.length > 0) {
       // @ts-ignore
       setMarkerRefs(Array(data.items.length).fill(null))
+
+      const map = mapRef.current
+      const bounds = data?.items?.map((item) => [
+        item.listing.latitude,
+        item.listing.longitude,
+      ])
+      // @ts-ignore
+      map.target.fitBounds([bounds])
     }
   }, [data])
 
