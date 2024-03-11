@@ -1,5 +1,9 @@
 import { PrismaClient } from '@prisma/client'
-import { REQUIRED_VALUE_EMPTY, UNKNOWN_ERROR_OCCURRED, USER_NOT_EXIST } from '@/common/constants'
+import {
+  REQUIRED_VALUE_EMPTY,
+  UNKNOWN_ERROR_OCCURRED,
+  USER_NOT_EXIST,
+} from '@/common/constants'
 import { Request, Response } from 'express'
 import { ResponseService } from '@/common/service/response'
 
@@ -29,18 +33,24 @@ export const addPaymentMethod = async (req: Request, res: Response) => {
             user: true,
           },
         })
-        res.json(response.success({
-          item:newPaymentMethod,
-          message:'Payment method successfully added'
-        }))
+        res.json(
+          response.success({
+            item: newPaymentMethod,
+            message: 'Payment method successfully added',
+          })
+        )
       } else {
-        res.json(response.error({message:REQUIRED_VALUE_EMPTY}))
+        res.json(response.error({ message: REQUIRED_VALUE_EMPTY }))
       }
     } else {
-      res.json(response.error({message:USER_NOT_EXIST}))
+      res.json(response.error({ message: USER_NOT_EXIST }))
     }
   } catch (err: any) {
-    res.json(response.error({message:err.message? err.message :UNKNOWN_ERROR_OCCURRED}))
+    res.json(
+      response.error({
+        message: err.message ? err.message : UNKNOWN_ERROR_OCCURRED,
+      })
+    )
   }
 }
 
@@ -83,15 +93,21 @@ export const getPaymentMethods = async (req: Request, res: Response) => {
           },
         },
       }))
-      res.json(response.success({
-        items:modifyResult,
-        allItemCount:getPaymentsMethod.length
-      }))
+      res.json(
+        response.success({
+          items: modifyResult,
+          allItemCount: getPaymentsMethod.length,
+        })
+      )
     } else {
-      res.json(response.error({message:USER_NOT_EXIST}))
+      res.json(response.error({ message: USER_NOT_EXIST }))
     }
   } catch (err: any) {
-    res.json(response.error({message:err.message? err.message : UNKNOWN_ERROR_OCCURRED}))
+    res.json(
+      response.error({
+        message: err.message ? err.message : UNKNOWN_ERROR_OCCURRED,
+      })
+    )
   }
 }
 
@@ -123,18 +139,24 @@ export const removePaymentMethod = async (req: Request, res: Response) => {
             userId: userId,
           },
         })
-        res.json(response.success({
-          item:deletePayementMethod,
-          message:'Payment method successfully removed'
-        }))
+        res.json(
+          response.success({
+            item: deletePayementMethod,
+            message: 'Payment method successfully removed',
+          })
+        )
       } else {
-        res.json(response.error({message:'Payment Method already deleted'}))
+        res.json(response.error({ message: 'Payment Method already deleted' }))
       }
     } else {
-      res.json(response.error({message:'user not exists to our system'}))
+      res.json(response.error({ message: 'user not exists to our system' }))
     }
   } catch (err: any) {
-    res.json(response.error({message:err.message? err.message: UNKNOWN_ERROR_OCCURRED}))
+    res.json(
+      response.error({
+        message: err.message ? err.message : UNKNOWN_ERROR_OCCURRED,
+      })
+    )
   }
 }
 
@@ -188,20 +210,28 @@ export const updatePaymentMethod = async (req: Request, res: Response) => {
               isDefault: isDefault,
             },
           })
-          res.json(response.success({
-            item:[updatePaymentMethod, successDefault],
-            message:'Sucessfully updated'
-          }))
+          res.json(
+            response.success({
+              item: [updatePaymentMethod, successDefault],
+              message: 'Sucessfully updated',
+            })
+          )
         } else {
-          res.json(response.error({message:REQUIRED_VALUE_EMPTY}))
+          res.json(response.error({ message: REQUIRED_VALUE_EMPTY }))
         }
       } else {
-        res.json(response.error({message:'Payment method not exist to our system'}))
+        res.json(
+          response.error({ message: 'Payment method not exist to our system' })
+        )
       }
     } else {
-      res.json(response.error({message:USER_NOT_EXIST}))
+      res.json(response.error({ message: USER_NOT_EXIST }))
     }
   } catch (err: any) {
-    res.json(response.error({message:err.message? err.message : UNKNOWN_ERROR_OCCURRED}))
+    res.json(
+      response.error({
+        message: err.message ? err.message : UNKNOWN_ERROR_OCCURRED,
+      })
+    )
   }
 }
