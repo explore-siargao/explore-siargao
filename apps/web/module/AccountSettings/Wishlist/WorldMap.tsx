@@ -56,11 +56,12 @@ const WorldMap = () => {
       setMarkerRefs(Array(data.items.length).fill(null))
 
       const map = mapRef.current
-      const bounds = data?.items?.map(item => [item.listing.latitude, item.listing.longitude]);
-      // @ts-ignore
-      map.target.fitBounds([
-        bounds
+      const bounds = data?.items?.map((item) => [
+        item.listing.latitude,
+        item.listing.longitude,
       ])
+      // @ts-ignore
+      map.target.fitBounds([bounds])
     }
   }, [data])
 
@@ -107,7 +108,7 @@ const WorldMap = () => {
                 onClose={() => closePopup(index)}
               />
             </Marker>
-        ))}
+          ))}
       </MapContainer>
     </>
   )
