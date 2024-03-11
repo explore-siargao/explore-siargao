@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express'
 import { UNKNOWN_ERROR_OCCURRED } from '../../constants'
-import { nextAuthSecret } from '@/common/config/'
+import { nextAuthSecret } from '@repo/constants'
 import { PrismaClient } from '@prisma/client'
 import { decode } from 'next-auth/jwt'
 import { ResponseService } from '@/common/service/response'

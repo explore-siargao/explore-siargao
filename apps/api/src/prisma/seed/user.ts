@@ -1,5 +1,5 @@
 import { prisma } from '@/common/helpers/prismaClient'
-import { passwordEncryptKey } from '@/common/config'
+import { passwordEncryptKey } from '@repo/constants'
 import CryptoJS from 'crypto-js'
 
 export const users = async () => {
