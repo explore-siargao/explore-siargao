@@ -1,37 +1,107 @@
-import { MapContainer, TileLayer, Popup } from "react-leaflet"
+import { MapContainer, TileLayer, Popup, Marker } from "react-leaflet"
 import "leaflet/dist/leaflet.css"
+import { useEffect, useRef, useState } from "react"
+import MapCustomPopup from "@/common/components/MapCustomPopup"
+import { Icon } from "leaflet"
+import useSessionStore from "@/common/store/useSessionStore"
+import { useParams } from "next/navigation"
+import useGetWishGroupByUserAndTitle from "../hooks/useGetWishGroupByUserAndTitle"
+import Listing from "@/module/Listing"
+
+const navIcon = new Icon({
+  iconUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png",
+  iconAnchor: [12, 0],
+})
 
 const WorldMap = () => {
-  const position = [9.8666632, 126.0499998]
-  const location = [{ id: 1, position: [9.8666632, 126.0499998] }]
+  const mapRef = useRef(null)
+  const [markerRefs, setMarkerRefs] = useState([])
+
+  const session = useSessionStore((state) => state)
+  const params = useParams()
+  const { data, isLoading } = useGetWishGroupByUserAndTitle(
+    session.id as number,
+    params?._id as string
+  )
+
+  const showPopup = (index: any) => {
+    const map = mapRef.current
+    if (!map) {
+      return
+    }
+
+    const marker = markerRefs[index]
+    if (marker) {
+      // @ts-ignore
+      marker.openPopup()
+    }
+  }
+
+  const closePopup = (index: any) => {
+    const map = mapRef.current
+    if (!map) {
+      return
+    }
+
+    const marker = markerRefs[index]
+    if (marker) {
+      // @ts-ignore
+      marker.closePopup()
+    }
+  }
+
+  useEffect(() => {
+    // @ts-ignore
+    if (data?.items?.length > 0) {
+      // @ts-ignore
+      setMarkerRefs(Array(data.items.length).fill(null))
+    }
+  }, [data])
+
   return (
     <>
       <MapContainer
-        //@ts-ignore
-        center={position}
-        zoom={12}
+        center={[9.9, 126.03]}
+        zoom={11}
         scrollWheelZoom={true}
         style={{
           height: "100%",
           width: "100%",
           zIndex: 30,
         }}
+        // @ts-ignore
+        whenReady={(map: any) => {
+          mapRef.current = map
+        }}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        {location.map((item) => (
-          <Popup
-            autoClose={false}
-            closeOnClick={false}
-            //@ts-ignore
-            position={item.position}
-            key={item.id}
-          >
-            Explore Siargao
-          </Popup>
-        ))}
+        {data?.items?.length !== 0 &&
+          data?.items?.map((item, index) => (
+            <Marker
+              key={index}
+              position={[item.listing.latitude, item.listing.longitude]}
+              icon={navIcon}
+              // @ts-ignore
+              ref={(el) => (markerRefs[index] = el)}
+            >
+              <MapCustomPopup
+                itemId={item.id}
+                price={
+                  item.listing.price.fee +
+                  item.listing.price.serviceFee +
+                  item.listing.price.cleaningFee
+                }
+                isNight={false}
+                images={item.listing.images}
+                location={item.listing.address}
+                rating={"0.0"}
+                onClose={() => closePopup(index)}
+              />
+            </Marker>
+          ))}
       </MapContainer>
     </>
   )

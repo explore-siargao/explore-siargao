@@ -21,12 +21,14 @@ interface AddWishlistProps {
   listingId: number
   isOpen: boolean
   onClose: () => void
+  handleAdded: () => void
 }
 
 const AddWishlistModal = ({
   listingId,
   isOpen: showModal,
   onClose: hideModal,
+  handleAdded,
 }: AddWishlistProps) => {
   const userId = useSessionStore((state) => state).id
   const cancelButtonRef = useRef(null)
@@ -52,6 +54,7 @@ const AddWishlistModal = ({
         queryClient.invalidateQueries({
           queryKey: ["wish-group-count"],
         })
+        handleAdded()
         hideModal()
         toast.success("Wish Group Successfully Created")
       } else {
@@ -107,10 +110,13 @@ const AddWishlistModal = ({
                   />
                 </div>
                 <div className="flex-1 ml-1 -space-y-1 w-auto">
-                  <Title size={"ContentTitle"} className="text-text-500">
+                  <Title
+                    size={"ContentTitle"}
+                    className="text-text-500 text-left"
+                  >
                     {item.title}
                   </Title>
-                  <Typography className="text-text-300">
+                  <Typography className="text-text-300 text-left">
                     {item._count + " saved"}
                   </Typography>
                 </div>

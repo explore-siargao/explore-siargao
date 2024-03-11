@@ -5,7 +5,7 @@ import { Typography } from "@/common/components/ui/Typography"
 import valid from "card-validator"
 import { ChevronLeft } from "lucide-react"
 import Link from "next/link"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import PaymentOptions from "./PaymentOptions"
 import useCheckInOutDateStore from "@/module/Accommodation/store/useCheckInOutDateStore"
 import useGuestAdd from "@/module/Accommodation/store/useGuestsStore"
@@ -26,7 +26,7 @@ const encryptionService = new EncryptionService("card")
 const Checkout = () => {
   const paymentInfo = usePaymentInfoStore((state) => state)
   const session = useSessionStore((state) => state)
-  const { data: paymentMethods, isPending: isPendingPaymentMethods } =
+  const { data: paymentMethods } =
     useGetPaymentMethods(session.id)
   const updatePaymentInfo = usePaymentInfoStore(
     (state) => state.updatePaymentInfo
@@ -101,7 +101,7 @@ const Checkout = () => {
     return isValid
   }
   return (
-    <WidthWrapper width="small" className="mt-24 md:mt-36 lg:mt-40">
+    <WidthWrapper width="small" className="mt-4 md:mt-8 lg:mt-10">
       <div className="flex items-center gap-x-4">
         <Link href="/accommodation/1">
           <ChevronLeft />
@@ -130,12 +130,12 @@ const Checkout = () => {
               </button>
             </div>
             <Typography className="text-sm">
-              {dateRange?.from != undefined
-                ? format(dateRange.from, "LLL dd, y")
+              {dateRange.from
+                ? format(new Date(dateRange.from), "LLL dd, y")
                 : "Date from"}{" "}
               -{" "}
-              {dateRange?.to != undefined
-                ? format(dateRange.to, "LLL dd, y")
+              {dateRange.to
+                ? format(new Date(dateRange.to), "LLL dd, y")
                 : "Date to"}
             </Typography>
           </div>
@@ -150,7 +150,7 @@ const Checkout = () => {
                 Edit
               </button>
             </div>
-            <Typography className="text-sm">{`${totalGuest} guest${totalGuest > 1 ? "s" : ""}`}</Typography>
+            <Typography className="text-sm">{`${totalGuest} guest${Number(totalGuest) > 1 ? "s" : ""}`}</Typography>
           </div>
           <hr className="my-4" />
           <PaymentOptions />

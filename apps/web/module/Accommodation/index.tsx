@@ -9,7 +9,7 @@ import AvatarTitleDescription from "./components/AvatarTitleDescription"
 import RatingSummary from "./components/Reviews/RatingSummary"
 import UserReviews from "./components/Reviews/UserReviews"
 import Highlights from "./components/Highlights"
-import CheckoutProcess from "./components/CheckoutBox"
+import CheckoutBox from "./components/CheckoutBox"
 import PlaceOffers from "./components/PlaceOffers"
 import WhereYoullBeDescription from "./components/Map"
 import ListingDateRangePicker from "./components/ListingDateRangePicker"
@@ -483,7 +483,7 @@ export const SingleView = () => {
         </div>
         <div className="md:w-96 md:relative">
           <div className="md:sticky md:top-6">
-            <CheckoutProcess
+            <CheckoutBox
               checkoutDesc={{
                 serviceFee: 1000,
                 durationCost: 125000,
