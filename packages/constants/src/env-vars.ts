@@ -1,14 +1,14 @@
 import path from 'path'
 import dotenv from 'dotenv'
 
-dotenv.config({ path: path.join(__dirname, '../../../../../.env') })
+dotenv.config({ path: path.join(__dirname, '../../../.env') })
 
 export const port = process.env.API_PORT || 9000
 export const passwordEncryptKey = process.env.PASSWORD_ENCRYPT_KEY || ''
 export const cardEncryptKey = process.env.CARD_ENCRYPT_KEY || ''
 export const signKey = process.env.API_SIGN_KEY || ''
 export const origins = process.env.API_ORIGINS?.split(
-  ','
+  ',' 
 ) as unknown as string[]
 export const webUrl = process.env.WEB_URL || ''
 export const apiUrl = process.env.API_URL || ''

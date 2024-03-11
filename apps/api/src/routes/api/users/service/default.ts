@@ -7,9 +7,9 @@ import {
   USER_NOT_EXIST,
 } from '@/common/constants'
 import { ResponseService } from '@/common/service/response'
-import { passwordEncryptKey } from '@/common/config'
 import { currencyByCountry } from '@/common/helpers/currencyByCountry'
 import { prisma } from '@/common/helpers/prismaClient'
+import { passwordEncryptKey } from '@repo/constants'
 
 const response = new ResponseService()
 export const getAllUsers = async (req: Request, res: Response) => {

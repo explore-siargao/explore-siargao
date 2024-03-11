@@ -20,7 +20,7 @@ import { currencyByCountry } from '@/common/helpers/currencyByCountry'
 const prisma = new PrismaClient()
 const response = new ResponseService()
 import { EncryptionService } from '@repo/services'
-import { nextAuthSecret, webUrl } from '@/common/config'
+import { nextAuthSecret, webUrl } from '@repo/constants'
 
 const decryptionService = new EncryptionService('password')
 const encryptionService = new EncryptionService('password')
