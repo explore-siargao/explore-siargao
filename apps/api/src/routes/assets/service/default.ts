@@ -1,4 +1,4 @@
-import { Response, Request, response } from 'express'
+import { Response, Request} from 'express'
 import { FileService } from '@/common/service/file'
 import { REQUIRED_VALUE_EMPTY, UNKNOWN_ERROR_OCCURRED } from '@/common/constants'
 import { ResponseService } from '@/common/service/response'
