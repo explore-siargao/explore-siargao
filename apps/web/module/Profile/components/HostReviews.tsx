@@ -45,7 +45,7 @@ const HostReviews = ({ name, reviewsCount, reviews }: HostReviewsProps) => {
         {reviews?.map((listing) => (
           <div key={listing.id}>
             {listing?.review?.slice(0, 5).map((review, index) => (
-              <SwiperSlide className="mt-14"  key={index}>
+              <SwiperSlide className="mt-14" key={index}>
                 <ReviewCard
                   reviewerName={
                     review?.user?.personalInfo?.firstName +
