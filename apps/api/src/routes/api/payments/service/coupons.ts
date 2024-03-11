@@ -1,7 +1,9 @@
 import { PrismaClient } from '@prisma/client'
-import { REQUIRED_VALUE_EMPTY } from '@/common/constants'
+import { REQUIRED_VALUE_EMPTY, UNKNOWN_ERROR_OCCURRED, USER_NOT_EXIST } from '@/common/constants'
 import { Request, Response } from 'express'
+import { ResponseService } from '@/common/service/response'
 
+const response = new ResponseService()
 export const getUsedCoupons = async (req: Request, res: Response) => {
   const prisma = new PrismaClient()
   const userId = Number(req.params.userId)
@@ -41,27 +43,17 @@ export const getUsedCoupons = async (req: Request, res: Response) => {
           },
         },
       }))
-      res.json({
-        error: false,
-        items: modifyResult,
-        itemCount: getUsedCoupons.length,
-        message: '',
-      })
+      res.json(
+        response.success({
+          items: modifyResult,
+          allItemCount: getUsedCoupons.length,
+        })
+      )
     } else {
-      res.json({
-        error: true,
-        items: null,
-        itemCount: 0,
-        message: 'user not exists to our system',
-      })
+      res.json(response.error({message:USER_NOT_EXIST}))
     }
   } catch (err: any) {
-    res.json({
-      error: true,
-      items: null,
-      itemCount: 0,
-      message: err.message,
-    })
+    res.json(response.error({message:err.message? err.message : UNKNOWN_ERROR_OCCURRED}))
   }
 }
 
@@ -92,35 +84,15 @@ export const addCoupon = async (req: Request, res: Response) => {
             user: true,
           },
         })
-        res.json({
-          error: false,
-          items: newCoupon,
-          itemCount: 1,
-          message: 'New coupon successfully created',
-        })
+        res.json(response.success({item:newCoupon, message:'New coupon successfully created'}))
       } else {
-        res.json({
-          error: true,
-          items: null,
-          itemCount: 0,
-          message: REQUIRED_VALUE_EMPTY,
-        })
+        res.json(response.error({message:REQUIRED_VALUE_EMPTY}))
       }
     } else {
-      res.json({
-        error: true,
-        items: null,
-        itemCount: 0,
-        message: 'User Admin or Host is not exist from our system',
-      })
+      res.json(response.error({message:'User Admin or Host is not exist from our system'}))
     }
   } catch (err: any) {
-    res.json({
-      error: true,
-      items: null,
-      itemCount: 0,
-      message: err.message,
-    })
+    res.json(response.error({message:err.message? err.message : UNKNOWN_ERROR_OCCURRED}))
   }
 }
 
@@ -159,42 +131,18 @@ export const updateCoupon = async (req: Request, res: Response) => {
               user: true,
             },
           })
-          res.json({
-            error: false,
-            items: updateCoupon,
-            itemCount: 1,
-            message: 'Coupon successfully updated',
-          })
+          res.json(response.success({item:updateCoupon, message:'Coupon successfully updated'}))
         } else {
-          res.json({
-            error: true,
-            items: null,
-            itemCount: 0,
-            message: 'Invalid code or code already in used',
-          })
+          res.json(response.error({message:'Invalid code or code already in used'}))
         }
       } else {
-        res.json({
-          error: true,
-          items: null,
-          itemCount: 0,
-          message: REQUIRED_VALUE_EMPTY,
-        })
+        res.json(response.error({message:REQUIRED_VALUE_EMPTY}))
       }
     } else {
-      res.json({
-        error: true,
-        items: null,
-        itemCount: 0,
-        message: 'User is not exist from our system',
-      })
+      res.json(response.error({message:USER_NOT_EXIST})
+        )
     }
-  } catch (e: any) {
-    res.json({
-      error: true,
-      items: null,
-      itemCount: 0,
-      message: e.message,
-    })
+  } catch (err: any) {
+    res.json(response.error({message:err.message? err.message : UNKNOWN_ERROR_OCCURRED}))
   }
 }
