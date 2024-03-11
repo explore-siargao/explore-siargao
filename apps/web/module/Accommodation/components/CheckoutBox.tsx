@@ -96,9 +96,7 @@ const CheckoutBox = ({ checkoutDesc }: CheckoutProcessProps) => {
         <Button
           variant="primary"
           onClick={() =>
-            router.push(
-              `/accommodation/${params.listingId}/checkout`
-            )
+            router.push(`/accommodation/${params.listingId}/checkout`)
           }
         >
           Book Now
