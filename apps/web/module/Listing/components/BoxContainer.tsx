@@ -127,7 +127,7 @@ const BoxContainer = ({
               fontWeight="semibold"
               className="text-text-700 underline"
             >
-              {price} <span className="font-normal">{dayTime}asdasd</span>
+              {price} <span className="font-normal">{dayTime}</span>
             </Typography>
           </div>
         </Link>
