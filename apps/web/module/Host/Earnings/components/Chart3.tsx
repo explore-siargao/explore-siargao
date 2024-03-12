@@ -57,7 +57,7 @@ const Chart3 = ({
   type,
 }: ChartProps) => {
   let title = ""
-  console.log('yeah', data)
+  console.log("yeah", data)
   switch (type) {
     case ChartType.upcoming:
       title = "Your upcoming earnings"
@@ -112,7 +112,7 @@ const Chart3 = ({
             formatter={(value: number) => formatCurrency(value, "Philippines")}
             labelFormatter={(value: string) => {
               const newDate = format(new Date(value), "yyyy")
-              return newDate;
+              return newDate
             }}
           />
           <Bar

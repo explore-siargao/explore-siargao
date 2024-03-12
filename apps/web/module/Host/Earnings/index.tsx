@@ -15,10 +15,7 @@ const Earnings = () => {
   const summaryData = [
     ["Gross earnings", "Adjustments", "Service fee", "Taxes withheld"],
     [
-      formatCurrency(
-        94800,
-        "Philippines"
-      ),
+      formatCurrency(94800, "Philippines"),
       formatCurrency(
         thisMonth?.item?.yearToDateSummary?.adjustment ?? "",
         "Philippines"
