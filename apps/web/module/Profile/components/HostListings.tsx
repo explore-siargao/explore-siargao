@@ -23,7 +23,7 @@ const HostListings = ({ name, listings }: HostListingsProps) => {
         }}
       >
         <div className="flex justify-between items-center absolute top-0 w-full z-10">
-          <Typography variant="h1" fontWeight="semibold">
+          <Typography variant="h2" fontWeight="semibold" className="text-2xl">
             {name}'s listings
           </Typography>
           <div className="hidden md:block space-x-2">

@@ -69,9 +69,13 @@ const LoginForm = () => {
   return (
     <div className="p-8 md:p-6 ">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <h1 className="font-semibold text-xl mt-1 mb-4">
+        <Typography
+          variant="h1"
+          fontWeight="semibold"
+          className="text-xl mt-1 mb-4"
+        >
           Welcome to {APP_NAME}
-        </h1>
+        </Typography>
         <div>
           <Input
             label="Email"
@@ -91,7 +95,6 @@ const LoginForm = () => {
         </div>
         <div className="flex mt-2">
           <Typography
-            variant={"p"}
             className="text-xs text-text-500 tracking-tighter"
           >
             By signing in or creating an account, you agree with our{" "}
@@ -133,7 +136,7 @@ const LoginForm = () => {
         </div>
         <div className="flex">
           <span className="border-b-2 h-0 w-full my-auto"></span>
-          <Typography variant={"p"} className="text-xs mx-5">
+          <Typography className="text-xs mx-5">
             or
           </Typography>
           <span className="border-b-2 shadow-md h-0 w-full my-auto"></span>

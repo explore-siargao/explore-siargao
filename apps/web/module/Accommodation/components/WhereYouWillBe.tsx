@@ -27,7 +27,9 @@ const WhereYouWillBe: React.FC<WhereYouWillBe> = ({ title }) => {
 
   return (
     <div>
-      <h1 className="font-semibold text-3xl px-4 mb-5">Where You'll be</h1>
+      <Typography fontWeight="semibold" className="text-3xl px-4 mb-5">
+        Where You'll be
+      </Typography>
       <div className="container px-4">
         <TitleSection
           title={title}
@@ -36,9 +38,12 @@ const WhereYouWillBe: React.FC<WhereYouWillBe> = ({ title }) => {
       </div>
       <div className="px-4">
         {readMore ? (
-          <Typography>{firstDesc}</Typography>
+          <Typography variant="p" fontWeight="normal">{firstDesc}</Typography>
         ) : (
-          <Typography>{`${firstDesc.slice(0, maxLength)}...`}</Typography>
+          <Typography variant="p" fontWeight="normal">{`${firstDesc.slice(
+            0,
+            maxLength
+          )}...`}</Typography>
         )}
       </div>
       <Button
@@ -46,7 +51,6 @@ const WhereYouWillBe: React.FC<WhereYouWillBe> = ({ title }) => {
         variant={"ghost"}
         onClick={setToggleReadMore}
       >
-        {/* Read more &gt; */}
         {readMore ? "Read Less" : "Read more >"}
       </Button>
       <div className="container px-4 mb-5">
@@ -57,9 +61,12 @@ const WhereYouWillBe: React.FC<WhereYouWillBe> = ({ title }) => {
       </div>
       <div className="px-4">
         {secondReadMore ? (
-          <Typography>{secondDesc}</Typography>
+          <Typography variant="p">{secondDesc}</Typography>
         ) : (
-          <Typography>{`${secondDesc.slice(0, maxLength)}...`}</Typography>
+          <Typography variant="p">{`${secondDesc.slice(
+            0,
+            maxLength
+          )}...`}</Typography>
         )}
       </div>
       <Button
@@ -67,7 +74,6 @@ const WhereYouWillBe: React.FC<WhereYouWillBe> = ({ title }) => {
         variant={"ghost"}
         onClick={setToggleSecondReadMore}
       >
-        {/* Read more &gt; */}
         {secondReadMore ? "Read Less" : "Read more >"}
       </Button>
     </div>

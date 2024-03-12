@@ -1,10 +1,9 @@
 import ModalContainer from "@/common/components/ModalContainer"
 import RightRadioList from "@/common/components/RightRadioList"
 import { Button } from "@/common/components/ui/Button"
-import { Title } from "@/common/components/ui/Title"
 import { Typography } from "@/common/components/ui/Typography"
 import { APP_NAME } from "@repo/constants"
-import { ChangeEvent, useEffect, useState } from "react"
+import { ChangeEvent, useState } from "react"
 
 interface ModalReportingProps {
   isOpen: boolean
@@ -142,16 +141,16 @@ const ModalReporting = ({
       <div className="p-6 flex flex-col divide-text-100 overflow-y-auto h-[400px]">
         {currentPage === 1 && (
           <>
-            <Title className="flex text-xl font-semibold mb-1">
+            <Typography variant="h2" fontWeight="semibold" className="flex mb-1">
               {currentPage === 1 || !isInaccurateSelected
                 ? "Why are you reporting this listing?"
                 : "Describe how it's inaccurate or incorrect"}
-            </Title>
-            <Title className="text-md font-semibold mt-2">
+            </Typography>
+            <Typography variant="h4" fontWeight="semibold" className="mt-2">
               {currentPage === 1 || !isScam
                 ? "This won't be shared with the Host."
                 : ""}
-            </Title>
+            </Typography>
             <div>
               <RightRadioList
                 title={""}
@@ -167,29 +166,29 @@ const ModalReporting = ({
         {currentPage === 2 && (
           <>
             {isInaccurateSelected && (
-              <Title className="flex text-xl font-semibold mb-1">
+              <Typography  variant="h2" fontWeight="semibold" className="flex mb-1">
                 Describe how it's inaccurate or incorrect
-              </Title>
+              </Typography>
             )}
             {isReport && (
-              <Title className="flex text-xl font-semibold mb-1 border-none">
+              <Typography variant="h2" fontWeight="semibold" className="flex border-none">
                 We got your report
-              </Title>
+              </Typography>
             )}
             {isScam && (
-              <Title className="flex text-xl font-semibold mb-1 border-none">
+              <Typography variant="h2" fontWeight="semibold" className="flex border-none">
                 Why do you think it's a scam?
-              </Title>
+              </Typography>
             )}
             {isOffensive && (
-              <Title className="flex text-xl font-semibold mb-1 border-none">
+              <Typography variant="h2" fontWeight="semibold" className="flex border-none">
                 Why do you think it's offensive
-              </Title>
+              </Typography>
             )}
             {isSomethingElse && (
-              <Title className="flex text-xl font-semibold mb-1 border-none">
+              <Typography variant="h2" fontWeight="semibold" className="flex border-none">
                 Why are you reporting this listing?
-              </Title>
+              </Typography>
             )}
 
             {selectedOption === "It's inaccurate or incorrect" && (
@@ -203,26 +202,26 @@ const ModalReporting = ({
 
             {selectedOption === "It’s not a real place to stay" && (
               <div className="mt-7">
-                <Typography variant={"h3"}>
+                <Typography variant="h3">
                   Thanks for taking the time to let us know what’s going on.
                   Reports like yours help keep our community safe and secure.
                 </Typography>
               </div>
             )}
             {selectedOption === "It’s a scam" && (
-              <Title className="flex text-xl font-semibold mb-1">
+              <Typography variant="h2" fontWeight="semibold" className="flex mb-1">
                 Why do you think it’s a scam?
-              </Title>
+              </Typography>
             )}
             {selectedOption === "It’s offensive" && (
-              <Title className="flex text-xl font-semibold mb-1">
+              <Typography variant="h2" fontWeight="semibold" className="flex mb-1">
                 Why do you think it’s offensive?
-              </Title>
+              </Typography>
             )}
             {selectedOption === "It’s something else" && (
-              <Title className="flex text-xl font-semibold mb-1">
+              <Typography variant="h2" fontWeight="semibold" className="flex mb-1">
                 Why are you reporting this listing?
-              </Title>
+              </Typography>
             )}
             {/* //Page 2 ko to*/}
             {selectedReport?.choices && selectedReport.choices.length > 0 && (

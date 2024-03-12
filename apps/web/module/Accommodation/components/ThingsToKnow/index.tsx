@@ -42,7 +42,7 @@ const ThingsToKnow = ({
 
   return (
     <>
-      <Typography variant={"h2"}>Things to know</Typography>
+      <Typography variant="h2" fontWeight="semibold">Things to know</Typography>
       <div className="flex w-full mt-4 mb-6">
         <div className="w-full md:w-1/3">
           <TitleLists title="House Rules" rules={houseRules} />

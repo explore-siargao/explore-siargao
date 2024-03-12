@@ -11,11 +11,11 @@ import { WidthWrapper } from "@/common/components/WidthWrapper"
 import toast from "react-hot-toast"
 import useAddReview from "./hooks/useAddReview"
 import { ArrowLeft, ArrowRight, LucideChevronLeft } from "lucide-react"
-import { Title } from "@/common/components/ui/Title"
 import Link from "next/link"
 import useGetToReviewById from "../AccountSettings/hooks/useGetToReviewById"
 import Image from "next/image"
 import { ASSET_ROOT } from "@/common/constants"
+import { Typography } from "@/common/components/ui/Typography"
 
 const AddReview = () => {
   const listingName = "booking"
@@ -103,9 +103,13 @@ const AddReview = () => {
       <Link href={"/account-settings/booking-reviews"}>
         <LucideChevronLeft strokeWidth={1} />
       </Link>
-      <Title className="pb-8 mt-8 mb-8 md:pb-0 justify-center">
+      <Typography
+        variant="h2"
+        fontWeight="semibold"
+        className="text-4xl my-3.5 pb-8 mt-8 mb-8 md:pb-0 justify-center"
+      >
         Review Booking
-      </Title>
+      </Typography>
 
       <div className="flex h-96 md:flex-row flex-col gap-x-20 justify-center mb-20">
         <FormProvider {...form}>
@@ -117,7 +121,9 @@ const AddReview = () => {
               {[...Array(7)].map((_, index) => (
                 <div
                   key={`form-${_}`}
-                  className={`w-full h-1 ${index === stepIndex ? "bg-primary-600" : "bg-primary-300"}`}
+                  className={`w-full h-1 ${
+                    index === stepIndex ? "bg-primary-600" : "bg-primary-300"
+                  }`}
                 ></div>
               ))}
             </div>
@@ -173,7 +179,11 @@ const AddReview = () => {
                     onKeyUp={() => {}}
                     onFocus={() => {}}
                     variant="ghost"
-                    className={`${!form.watch(reviewSteps[stepIndex]?.fieldName as string) ? "opacity-50 pointer-events-none" : ""}`}
+                    className={`${
+                      !form.watch(reviewSteps[stepIndex]?.fieldName as string)
+                        ? "opacity-50 pointer-events-none"
+                        : ""
+                    }`}
                   >
                     <div className="flex gap-2 items-center">
                       Next

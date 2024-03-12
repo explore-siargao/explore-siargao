@@ -8,7 +8,7 @@ const ConfirmedInformation = ({
 }: ConfirmedInformationProps) => {
   return (
     <div className="lg:px-6 lg:py-8 lg:border lg:rounded-xl w-full">
-      <Typography variant="h1" fontWeight="semibold">
+      <Typography variant="h2" fontWeight="semibold" className="text-2xl">
         {name}'s confirmed information
       </Typography>
       <ul className="mt-4">

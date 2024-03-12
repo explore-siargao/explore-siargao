@@ -3,7 +3,6 @@ import AccountSettingWrapper from "@/module/AccountSettings/components/AccountSe
 import React, { useState } from "react"
 import BookingReviewItem from "./BookingReviewItem"
 import { Breadcrumb } from "@/common/components/ui/Breadcrumb"
-import { Title } from "@/common/components/ui/Title"
 import { LINK_ACCOUNT } from "@/common/constants/links"
 import { cn } from "@/common/helpers/cn"
 import BookingReviewItemPending from "./BookingReviewItemPending"
@@ -128,7 +127,7 @@ const BookingReviews = () => {
     <AccountSettingWrapper>
       <div>
         <Breadcrumb home={ACCOUNT} page={BOOKING_REVIEWS} link={LINK_ACCOUNT} />
-        <Title>{BOOKING_REVIEWS}</Title>
+        <Typography variant="h1" fontWeight="semibold" className="text-4xl my-3.5">{BOOKING_REVIEWS}</Typography>
       </div>
       <div className="hidden sm:block">
         <div className="flex border-b border-b-text-50">
