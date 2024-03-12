@@ -22,7 +22,8 @@ export const review = async () => {
         communicationRates: 5,
         locationRates: 5,
         valueRates: 5,
-        comment: 'Enjoyed our stay at Casa del Mar! The place was beautiful and pristine. The house was spacious and had such a good view. Would recommend to friends, adult families and those with furry family members. Great place to stay if you plan on diving/snorkeling or would just need a place to relax. Location wise, I would not recommend it to those with little kids or older family members as getting up and down to the beach from the house is a bit of a workout. The caretaker, Kuya Herman took such good care of us and was so attentive and accommodating. He truly cared for the property as the whole place was extremely clean. Would love to come back again! James',
+        comment:
+          'Enjoyed our stay at Casa del Mar! The place was beautiful and pristine. The house was spacious and had such a good view. Would recommend to friends, adult families and those with furry family members. Great place to stay if you plan on diving/snorkeling or would just need a place to relax. Location wise, I would not recommend it to those with little kids or older family members as getting up and down to the beach from the house is a bit of a workout. The caretaker, Kuya Herman took such good care of us and was so attentive and accommodating. He truly cared for the property as the whole place was extremely clean. Would love to come back again! James',
         listingId: getListings[0]?.id || 0,
         userId: getUsers[3]?.id || 3,
       },

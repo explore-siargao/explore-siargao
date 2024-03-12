@@ -23,7 +23,7 @@ export const address = async () => {
         aptSuite: null,
         streetAddress: '789 Orchid Street, Barangay Poblacion',
         city: 'Makati City',
-        stateProvince:'Metro Manila',
+        stateProvince: 'Metro Manila',
         country: 'PH',
         zipCode: 1234,
       },
