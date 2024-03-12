@@ -1,5 +1,4 @@
 import ModalContainer from "@/common/components/ModalContainer"
-import { Title } from "@/common/components/ui/Title"
 import { Typography } from "@/common/components/ui/Typography"
 import React from "react"
 import { Button } from "@/common/components/ui/Button"
@@ -27,10 +26,10 @@ const CancellationPolicyModal = ({
   return (
     <ModalContainer onClose={onClose} isOpen={isOpen} size="sm">
       <div className="pb-0 mb-0 py-4 px-8 flex flex-col divide-text-100 overflow-y-auto h-[600px]">
-        <Title size={"ContentTitle"} className="flex font-semibold mb-5">
+        <Typography variant="h2" fontWeight="semibold" className="flex mb-5">
           Cancellation policy
-        </Title>
-        <Typography className="mb-5" variant={"h5"}>
+        </Typography>
+        <Typography variant="h5" fontWeight="normal" className="mb-5">
           Before you book, make sure you're comfortable with this Host's
           cancellation policy. Keep in mind that Explore Siargao's{" "}
           <button className="font-semibold underline">
@@ -40,13 +39,13 @@ const CancellationPolicyModal = ({
           caused by COVID-19.
         </Typography>
 
-        <Typography className="font-semibold" variant={"h4"}>
+        <Typography variant="h4" fontWeight="semibold">
           Cancel by
         </Typography>
 
         {groupCancellationPolicy.map((gCancellationPolicy) => (
           <div className="mt-5" key={gCancellationPolicy.id}>
-            <Typography className="flex font-semibold" variant={"h4"}>
+            <Typography variant="h4" fontWeight="semibold" className="flex">
               {gCancellationPolicy.title}
             </Typography>
 
@@ -56,8 +55,8 @@ const CancellationPolicyModal = ({
 
                 {item.otherDescription && (
                   <Typography
-                    className="text-right justify-items-start mb-5"
                     variant="h5"
+                    className="text-right justify-items-start mb-5"
                   >
                     {item.otherDescription}
                   </Typography>
@@ -69,7 +68,7 @@ const CancellationPolicyModal = ({
         <div className="flex mt-6 w-full">
           <Button
             className="text-sm font-semibold underline mx-0 px-0"
-            variant={"ghost"}
+            variant="ghost"
           >
             Learn more about cancellation policies
           </Button>

@@ -1,7 +1,6 @@
 "use client"
 import PesoSign from "@/common/components/PesoSign"
 import { Button } from "@/common/components/ui/Button"
-import { Select } from "@/common/components/ui/Select"
 import formatCurrency from "@/common/helpers/formatCurrency"
 import CheckoutBreakdownModal from "./modals/CheckoutBreakdownModal"
 import { useState } from "react"
@@ -10,11 +9,11 @@ import CheckInOutModal from "./modals/CheckInOutModal"
 import useCheckInOutDateStore from "@/module/Accommodation/store/useCheckInOutDateStore"
 import Asterisk from "@/common/components/ui/Asterisk"
 import { format } from "date-fns"
-import Link from "next/link"
 import { useParams, useRouter } from "next/navigation"
 import GuestAddModal from "./modals/GuestAddModal"
 import useGuestAdd from "@/module/Accommodation/store/useGuestsStore"
 import { APP_NAME } from "@repo/constants"
+import { Typography } from "@/common/components/ui/Typography"
 
 interface ICheckout {
   id?: number
@@ -42,10 +41,10 @@ const CheckoutBox = ({ checkoutDesc }: CheckoutProcessProps) => {
   const totalGuest = adults + children + infants
   return (
     <div className="border rounded-xl shadow-lg px-6 pb-6 pt-5 flex flex-col divide-text-100 overflow-y-auto mb-5">
-      <span className="text-xl font-semibold mb-4">
-        {formatCurrency(checkoutDesc.titlePrice, "Philippines")}{" "}
-        <small className="font-light">night</small>
-      </span>
+      <Typography variant="h2" fontWeight="semibold" className="mb-4">
+        {formatCurrency(checkoutDesc.titlePrice, "Philippines")}
+        <small className="font-light"> night</small>
+      </Typography>
       <div className="font-semibold grid grid-cols-1 gap-3 w-full">
         <div className="grid grid-cols-2 gap-3">
           <div
