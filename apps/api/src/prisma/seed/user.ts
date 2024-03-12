@@ -6,7 +6,7 @@ export const users = async () => {
   const createUsers = await prisma.user.createMany({
     data: [
       {
-        email: 'test@test.com',
+        email: 'diana@ramos.com',
         password: String(CryptoJS.AES.encrypt('test', passwordEncryptKey)),
         registrationType: 'Manual',
         role: 'User',
