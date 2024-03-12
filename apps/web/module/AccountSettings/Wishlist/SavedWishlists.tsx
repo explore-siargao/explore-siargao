@@ -44,16 +44,17 @@ const SavedWishlists = ({
   )
 
   return (
-    <div 
-    key={itemId} 
-    onMouseEnter={() => {
-      setIsHover(true)
-      setSelectedHoverItem(itemId)
-    }} 
-    onMouseLeave={() => {
-      setIsHover(false)
-      setSelectedHoverItem(null)
-    }}>
+    <div
+      key={itemId}
+      onMouseEnter={() => {
+        setIsHover(true)
+        setSelectedHoverItem(itemId)
+      }}
+      onMouseLeave={() => {
+        setIsHover(false)
+        setSelectedHoverItem(null)
+      }}
+    >
       <Listing
         key={itemId}
         listingId={listingId}

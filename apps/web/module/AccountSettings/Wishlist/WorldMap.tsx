@@ -100,7 +100,11 @@ const WorldMap = () => {
             <Marker
               key={index}
               position={[item.listing.latitude, item.listing.longitude]}
-              icon={selectedHoverMarker === item.id  && isHover ? navIconHover : navIcon}
+              icon={
+                selectedHoverMarker === item.id && isHover
+                  ? navIconHover
+                  : navIcon
+              }
               // @ts-ignore
               ref={(el) => (markerRefs[index] = el)}
             >
