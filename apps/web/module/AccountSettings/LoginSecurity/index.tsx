@@ -13,7 +13,13 @@ const LoginSecurity = () => {
     <AccountSettingWrapper>
       <div>
         <Breadcrumb home={ACCOUNT} page={LOGIN_SECURITY} link={LINK_ACCOUNT} />
-        <Typography variant="h1" fontWeight="semibold" className="text-4xl my-3.5">{LOGIN_SECURITY}</Typography>
+        <Typography
+          variant="h1"
+          fontWeight="semibold"
+          className="text-4xl my-3.5"
+        >
+          {LOGIN_SECURITY}
+        </Typography>
       </div>
       <div className="mt-4">
         <UpdatePassword />

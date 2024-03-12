@@ -141,7 +141,11 @@ const ModalReporting = ({
       <div className="p-6 flex flex-col divide-text-100 overflow-y-auto h-[400px]">
         {currentPage === 1 && (
           <>
-            <Typography variant="h2" fontWeight="semibold" className="flex mb-1">
+            <Typography
+              variant="h2"
+              fontWeight="semibold"
+              className="flex mb-1"
+            >
               {currentPage === 1 || !isInaccurateSelected
                 ? "Why are you reporting this listing?"
                 : "Describe how it's inaccurate or incorrect"}
@@ -166,27 +170,47 @@ const ModalReporting = ({
         {currentPage === 2 && (
           <>
             {isInaccurateSelected && (
-              <Typography  variant="h2" fontWeight="semibold" className="flex mb-1">
+              <Typography
+                variant="h2"
+                fontWeight="semibold"
+                className="flex mb-1"
+              >
                 Describe how it's inaccurate or incorrect
               </Typography>
             )}
             {isReport && (
-              <Typography variant="h2" fontWeight="semibold" className="flex border-none">
+              <Typography
+                variant="h2"
+                fontWeight="semibold"
+                className="flex border-none"
+              >
                 We got your report
               </Typography>
             )}
             {isScam && (
-              <Typography variant="h2" fontWeight="semibold" className="flex border-none">
+              <Typography
+                variant="h2"
+                fontWeight="semibold"
+                className="flex border-none"
+              >
                 Why do you think it's a scam?
               </Typography>
             )}
             {isOffensive && (
-              <Typography variant="h2" fontWeight="semibold" className="flex border-none">
+              <Typography
+                variant="h2"
+                fontWeight="semibold"
+                className="flex border-none"
+              >
                 Why do you think it's offensive
               </Typography>
             )}
             {isSomethingElse && (
-              <Typography variant="h2" fontWeight="semibold" className="flex border-none">
+              <Typography
+                variant="h2"
+                fontWeight="semibold"
+                className="flex border-none"
+              >
                 Why are you reporting this listing?
               </Typography>
             )}
@@ -209,17 +233,29 @@ const ModalReporting = ({
               </div>
             )}
             {selectedOption === "It’s a scam" && (
-              <Typography variant="h2" fontWeight="semibold" className="flex mb-1">
+              <Typography
+                variant="h2"
+                fontWeight="semibold"
+                className="flex mb-1"
+              >
                 Why do you think it’s a scam?
               </Typography>
             )}
             {selectedOption === "It’s offensive" && (
-              <Typography variant="h2" fontWeight="semibold" className="flex mb-1">
+              <Typography
+                variant="h2"
+                fontWeight="semibold"
+                className="flex mb-1"
+              >
                 Why do you think it’s offensive?
               </Typography>
             )}
             {selectedOption === "It’s something else" && (
-              <Typography variant="h2" fontWeight="semibold" className="flex mb-1">
+              <Typography
+                variant="h2"
+                fontWeight="semibold"
+                className="flex mb-1"
+              >
                 Why are you reporting this listing?
               </Typography>
             )}

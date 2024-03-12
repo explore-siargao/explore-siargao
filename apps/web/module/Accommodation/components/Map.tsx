@@ -15,7 +15,9 @@ const WhereYoullBeDescription = ({ location, coordinates, desc }: MapProps) => {
   return (
     <div className="flex flex-col w-full">
       <div className="flex-1 w-full">
-        <Typography variant="h2" fontWeight="semibold" className="mb-5">Where you'll be</Typography>
+        <Typography variant="h2" fontWeight="semibold" className="mb-5">
+          Where you'll be
+        </Typography>
         <div className="w-12/12 h-[450px] bg-primary-200 mb-5">
           <SpecificMap
             coordinates={coordinates as [number, number]}

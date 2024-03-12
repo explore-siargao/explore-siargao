@@ -38,7 +38,9 @@ const WhereYouWillBe: React.FC<WhereYouWillBe> = ({ title }) => {
       </div>
       <div className="px-4">
         {readMore ? (
-          <Typography variant="p" fontWeight="normal">{firstDesc}</Typography>
+          <Typography variant="p" fontWeight="normal">
+            {firstDesc}
+          </Typography>
         ) : (
           <Typography variant="p" fontWeight="normal">{`${firstDesc.slice(
             0,

@@ -30,7 +30,9 @@ const AccountMenuContainer = ({
     >
       {icon}
       <div className="hidden md:block">
-        <Typography variant="p" fontWeight="semibold">{title}</Typography>
+        <Typography variant="p" fontWeight="semibold">
+          {title}
+        </Typography>
         <span className="text-text-300 text-sm">{content}</span>
       </div>
       <div className="flex md:hidden self-center justify-between w-full">

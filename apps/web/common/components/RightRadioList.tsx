@@ -40,7 +40,9 @@ const RightRadioList: React.FC<RightRadioListProps> = ({
         <div key={choice.id} className="flex w-full py-3 border-b">
           <label className="flex items-center w-full">
             <div>
-              <Typography variant="p" className="text-gray-600">{choice.option}</Typography>
+              <Typography variant="p" className="text-gray-600">
+                {choice.option}
+              </Typography>
               <div className="items-start">
                 {choice.description && (
                   <Typography variant="p" className="text-gray-400">

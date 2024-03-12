@@ -127,7 +127,13 @@ const BookingReviews = () => {
     <AccountSettingWrapper>
       <div>
         <Breadcrumb home={ACCOUNT} page={BOOKING_REVIEWS} link={LINK_ACCOUNT} />
-        <Typography variant="h1" fontWeight="semibold" className="text-4xl my-3.5">{BOOKING_REVIEWS}</Typography>
+        <Typography
+          variant="h1"
+          fontWeight="semibold"
+          className="text-4xl my-3.5"
+        >
+          {BOOKING_REVIEWS}
+        </Typography>
       </div>
       <div className="hidden sm:block">
         <div className="flex border-b border-b-text-50">

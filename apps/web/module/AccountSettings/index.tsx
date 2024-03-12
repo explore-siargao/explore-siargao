@@ -120,7 +120,13 @@ const AccountSettings = () => {
 
   return (
     <AccountSettingWrapper>
-      <Typography variant="h1" fontWeight="semibold" className="text-4xl my-3.5 pb-5 md:pb-0">Account</Typography>
+      <Typography
+        variant="h1"
+        fontWeight="semibold"
+        className="text-4xl my-3.5 pb-5 md:pb-0"
+      >
+        Account
+      </Typography>
       <div className="space-y-5">
         <div className="pb-5 border-b md:border-none">
           <div className="hidden md:block">
@@ -149,10 +155,7 @@ const AccountSettings = () => {
               </div>
               <div className="flex flex-col">
                 <Typography variant="h4">{uppercaseFirstChar} </Typography>
-                <Typography
-                  fontWeight="light"
-                  className="mt-0 text-sm"
-                >
+                <Typography fontWeight="light" className="mt-0 text-sm">
                   Show profile
                 </Typography>
               </div>

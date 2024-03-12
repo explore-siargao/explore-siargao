@@ -94,9 +94,7 @@ const LoginForm = () => {
           />
         </div>
         <div className="flex mt-2">
-          <Typography
-            className="text-xs text-text-500 tracking-tighter"
-          >
+          <Typography className="text-xs text-text-500 tracking-tighter">
             By signing in or creating an account, you agree with our{" "}
             <Link href="#" className="text-info-500 underline">
               Terms & conditions
@@ -136,9 +134,7 @@ const LoginForm = () => {
         </div>
         <div className="flex">
           <span className="border-b-2 h-0 w-full my-auto"></span>
-          <Typography className="text-xs mx-5">
-            or
-          </Typography>
+          <Typography className="text-xs mx-5">or</Typography>
           <span className="border-b-2 shadow-md h-0 w-full my-auto"></span>
         </div>
         <div>
