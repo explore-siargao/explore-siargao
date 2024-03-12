@@ -1,3 +1,4 @@
+import useMarkerHover from "@/common/store/useMarkerHover"
 import { ComponentProps } from "@/common/types/global"
 import Listing from "@/module/Listing"
 
@@ -28,6 +29,9 @@ const SavedWishlists = ({
   note,
   showAddNote,
 }: SavedWishlistsProps) => {
+  const setIsHover = useMarkerHover((state) => state.setIsHover)
+  const setSelectedHoverItem = useMarkerHover((state) => state.setSelectedItem)
+
   const AddEditNoteButton = ({ onClick, id, note }: ComponentProps) => (
     <button
       type="button"
@@ -40,7 +44,16 @@ const SavedWishlists = ({
   )
 
   return (
-    <div key={itemId}>
+    <div 
+    key={itemId} 
+    onMouseEnter={() => {
+      setIsHover(true)
+      setSelectedHoverItem(itemId)
+    }} 
+    onMouseLeave={() => {
+      setIsHover(false)
+      setSelectedHoverItem(null)
+    }}>
       <Listing
         key={itemId}
         listingId={listingId}
