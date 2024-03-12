@@ -3,10 +3,10 @@ import { Typography } from "@/common/components/ui/Typography"
 import useGetUpcomingEarnings from "../hooks/useGetUpcomingEarnings"
 import { Spinner } from "@/common/components/ui/Spinner"
 import formatCurrency from "@/common/helpers/formatCurrency"
-import Chart, { ChartType } from "./components/Chart"
+import Chart, { ChartType } from "./components/Chart2"
 import { format } from "date-fns"
 
-const EarningUpcoming = () => {
+const EarningsUpcoming = () => {
   const { data: upcoming, isPending: upcomingIsPending } =
     useGetUpcomingEarnings()
   const currentDate = new Date()
@@ -56,4 +56,4 @@ const EarningUpcoming = () => {
   )
 }
 
-export default EarningUpcoming
+export default EarningsUpcoming

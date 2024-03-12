@@ -48,7 +48,7 @@ interface ChartProps {
   type: ChartType
 }
 
-const Chart = ({
+const Chart2 = ({
   width,
   height,
   data,
@@ -99,7 +99,7 @@ const Chart = ({
           <XAxis
             dataKey="date"
             tickFormatter={(value: string) => {
-              return format(new Date(value), "d")
+              return format(new Date(value), "MMM yyyy")
             }}
           />
           <YAxis
@@ -111,7 +111,7 @@ const Chart = ({
           <Tooltip
             formatter={(value: number) => formatCurrency(value, "Philippines")}
             labelFormatter={(value: string) => {
-              const newDate = format(new Date(value), "MMMM dd, yyyy")
+              const newDate = format(new Date(value), "MMM yyyy")
               return newDate;
             }}
           />
@@ -126,4 +126,4 @@ const Chart = ({
   )
 }
 
-export default Chart
+export default Chart2

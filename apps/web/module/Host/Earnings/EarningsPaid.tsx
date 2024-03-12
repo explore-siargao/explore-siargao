@@ -4,10 +4,10 @@ import { Typography } from "@/common/components/ui/Typography"
 import { Spinner } from "@/common/components/ui/Spinner"
 import formatCurrency from "@/common/helpers/formatCurrency"
 import useGetPaidEarnings from "../hooks/useGetPaidEarnings"
-import Chart, { ChartType } from "./components/Chart"
+import Chart, { ChartType } from "./components/Chart3"
 import { format } from "date-fns"
 
-const Paid = () => {
+const EarningsPaid = () => {
   const currentDate = new Date()
   const { data, isPending } = useGetPaidEarnings()
   const summaryData = [
@@ -52,4 +52,4 @@ const Paid = () => {
   )
 }
 
-export default Paid
+export default EarningsPaid
