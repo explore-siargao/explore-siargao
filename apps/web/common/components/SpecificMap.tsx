@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import { MapContainer, TileLayer, CircleMarker, Marker } from "react-leaflet"
 import "leaflet/dist/leaflet.css"
 import { Icon } from "leaflet"
@@ -24,6 +24,9 @@ const SpecificMap = ({
   mapWidth,
 }: SpecificMapProps) => {
   const [showMap, setShowMap] = useState(false)
+
+  const mapRef = useRef(null)
+
   const HandleResize = () => {
     setShowMap(false)
   }
@@ -36,6 +39,17 @@ const SpecificMap = ({
     return () => clearTimeout(timer)
   }, [HandleResize])
 
+  useEffect(() => {
+    const map = mapRef.current
+
+    if(map) {
+      // @ts-ignore
+      map.target.fitBounds([
+        coordinates
+      ])
+    }
+  }, [mapRef])
+
   return (
     <div className="flex-1 block bg-primary-200">
       <div className={`${mapHeight} ${mapWidth} relative`}>
@@ -43,12 +57,16 @@ const SpecificMap = ({
           <MapContainer
             //@ts-ignore
             center={coordinates}
-            zoom={15}
+            zoom={11}
             scrollWheelZoom={true}
             style={{
               height: "100%",
               width: "100%",
               zIndex: 30,
+            }}
+            // @ts-ignore
+            whenReady={(map: any) => {
+              mapRef.current = map
             }}
           >
             <TileLayer
