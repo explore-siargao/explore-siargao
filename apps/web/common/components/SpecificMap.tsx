@@ -42,11 +42,9 @@ const SpecificMap = ({
   useEffect(() => {
     const map = mapRef.current
 
-    if(map) {
+    if (map) {
       // @ts-ignore
-      map.target.fitBounds([
-        coordinates
-      ])
+      map.target.fitBounds([coordinates])
     }
   }, [mapRef])
 
