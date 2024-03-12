@@ -85,21 +85,22 @@ function Header({
                     </div>
                   )}
                   <div>
-                    {isHost ? (
-                      <Button
-                        variant="ghost"
-                        className="underline font-semibold"
-                        size="sm"
-                        onClick={() => router.push("/hosting")}
-                      >
-                        Manage Listing
-                      </Button>
-                    ) : (
-                      <Button variant="primary" size="sm" onClick={openModal}>
-                        Apply to Host
-                      </Button>
-                    )}
-                  </div>
+                  {!path.includes("/hosting") && !isHost && (
+                    <Button variant="primary" size="sm" onClick={openModal}>
+                      Apply to Host
+                    </Button>
+                  )}
+                  {isHost && !path.includes("/hosting") && (
+                    <Button
+                      variant="ghost"
+                      className="underline font-semibold"
+                      size="sm"
+                      onClick={() => router.push("/hosting")}
+                    >
+                      Manage Listing
+                    </Button>
+                  )}
+                </div>
                   {session && <LandingPageMenu />}
                 </div>
               </nav>
