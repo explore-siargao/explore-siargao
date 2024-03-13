@@ -21,22 +21,26 @@ export interface PaymentHistoryStatusProps
   children?: React.ReactNode
 }
 
-const PaymentHistoryStatus = React.forwardRef<HTMLElement, PaymentHistoryStatusProps>(
-  ({ variant, className, children }, ref) => {
-    const PaymentHistoryStatusClass = PaymentHistoryStatusVariants({ variant, className })
-    return (
-      <span
-        ref={ref}
-        className={cn(
-          "rounded-full w-2 h-2 inline-block mr-2",
-          PaymentHistoryStatusClass
-        )}
-      >
-        {children}
-      </span>
-    )
-  }
-)
+const PaymentHistoryStatus = React.forwardRef<
+  HTMLElement,
+  PaymentHistoryStatusProps
+>(({ variant, className, children }, ref) => {
+  const PaymentHistoryStatusClass = PaymentHistoryStatusVariants({
+    variant,
+    className,
+  })
+  return (
+    <span
+      ref={ref}
+      className={cn(
+        "rounded-full w-2 h-2 inline-block mr-2",
+        PaymentHistoryStatusClass
+      )}
+    >
+      {children}
+    </span>
+  )
+})
 PaymentHistoryStatus.displayName = "Status"
 
 export { PaymentHistoryStatus, PaymentHistoryStatusVariants }
