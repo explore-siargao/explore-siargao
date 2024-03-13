@@ -1,15 +1,16 @@
-import React from "react"
-import { Typography } from "@/common/components/ui/Typography"
+import React from "react";
+import { Typography } from "@/common/components/ui/Typography";
 
 interface SummaryData {
-  labels: string[]
-  values: string[][]
-  total: string
+  labels: string[];
+  values: string[][];
+  total: string;
 }
 
 interface OverAllSummaryProps {
-  overAllSummaryData: SummaryData
+  overAllSummaryData: SummaryData;
 }
+
 const OverAllSummary: React.FC<OverAllSummaryProps> = ({
   overAllSummaryData,
 }) => {
@@ -19,8 +20,8 @@ const OverAllSummary: React.FC<OverAllSummaryProps> = ({
         Overall Summary
       </Typography>
       <div className="flex flex-col">
-        {overAllSummaryData.labels.map((header, items) => (
-          <div className="flex gap-4 justify-between">
+        {overAllSummaryData.labels.map((header, index) => (
+          <div key={header} className="flex gap-4 justify-between">
             <Typography
               variant="p"
               fontWeight="semibold"
@@ -33,7 +34,7 @@ const OverAllSummary: React.FC<OverAllSummaryProps> = ({
               fontWeight="semibold"
               className="pt-2 text-sm"
             >
-              {overAllSummaryData.values[0]?.[items]}
+              {overAllSummaryData.values[0]?.[index]}
             </Typography>
           </div>
         ))}
@@ -47,7 +48,7 @@ const OverAllSummary: React.FC<OverAllSummaryProps> = ({
         </Typography>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default OverAllSummary
+export default OverAllSummary;
