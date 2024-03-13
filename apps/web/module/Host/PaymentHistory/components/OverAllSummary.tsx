@@ -20,7 +20,7 @@ const OverAllSummary: React.FC<OverAllSummaryProps> = ({
       </Typography>
       <div className="flex flex-col">
         {overAllSummaryData.labels.map((header, items) => (
-          <div key={`${items}`} className="flex gap-4 justify-between">
+          <div className="flex gap-4 justify-between">
             <Typography
               variant="p"
               fontWeight="semibold"
