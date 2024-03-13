@@ -1,41 +1,47 @@
-import { ResponseService } from "@/common/service/response";
-import { Request, Response } from "express";
-import { earnings } from "./jsons/earnings";
+import { ResponseService } from '@/common/service/response'
+import { Request, Response } from 'express'
+import { earnings } from './jsons/earnings'
 
-const response = new ResponseService();
+const response = new ResponseService()
 
-export const getPaidBookings = async(req: Request, res: Response) => {
+export const getPaidBookings = async (req: Request, res: Response) => {
+  const currentDate = new Date()
 
-    const currentDate = new Date();
-    
-   
-    const filteredBookings = earnings.filter(earning => {
-        const earningDate = new Date(earning.date);
-        return (
-            earningDate.getFullYear() < currentDate.getFullYear() ||
-            (earningDate.getFullYear() === currentDate.getFullYear() &&
-                earningDate.getMonth() < currentDate.getMonth())
-        );
-    });
+  const filteredBookings = earnings.filter((earning) => {
+    const earningDate = new Date(earning.date)
+    return (
+      earningDate.getFullYear() < currentDate.getFullYear() ||
+      (earningDate.getFullYear() === currentDate.getFullYear() &&
+        earningDate.getMonth() < currentDate.getMonth())
+    )
+  })
 
-    filteredBookings.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
-    const totalEarnings = filteredBookings.reduce((sum, item) => sum + (item?.earning as number), 0);
-    const adjustment = 1000;
-    const tax = 1000;
-    const service = 10000;
+  filteredBookings.sort(
+    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+  )
+  const totalEarnings = filteredBookings.reduce(
+    (sum, item) => sum + (item?.earning as number),
+    0
+  )
+  const adjustment = 1000
+  const tax = 1000
+  const service = 10000
 
-    res.json(response.success({
-        item:{
-            bookings: filteredBookings,
-            pageItemCount: 1,
-            allItemCount: filteredBookings.length,
-            summary:{
-                gross: parseFloat(totalEarnings.toFixed(2)),
-                adjustments: adjustment,
-                service: service,
-                taxes: tax,
-                totalEarnings: parseFloat(totalEarnings.toFixed(2)) + tax + adjustment + service,
-            }
-        }
-    }));
-};
+  res.json(
+    response.success({
+      item: {
+        bookings: filteredBookings,
+        pageItemCount: 1,
+        allItemCount: filteredBookings.length,
+        summary: {
+          gross: parseFloat(totalEarnings.toFixed(2)),
+          adjustments: adjustment,
+          service: service,
+          taxes: tax,
+          totalEarnings:
+            parseFloat(totalEarnings.toFixed(2)) + tax + adjustment + service,
+        },
+      },
+    })
+  )
+}
