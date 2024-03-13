@@ -1,5 +1,5 @@
 import { PAYMENT_HISTORY } from "@/common/constants"
-import Graph from "@/module/Host/PaymentHistory/components/Graph"
+import Graph from "@/module/Host/PaymentHistory/Graph"
 import { APP_NAME } from "@repo/constants"
 import { Metadata } from "next"
 

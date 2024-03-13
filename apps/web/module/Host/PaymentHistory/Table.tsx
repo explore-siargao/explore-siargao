@@ -3,9 +3,9 @@ import React from "react"
 import { Typography } from "@/common/components/ui/Typography"
 import { WidthWrapper } from "@/common/components/WidthWrapper"
 import Tabs from "@/common/components/Tabs"
-import OverAllSummary from "./OverAllSummary"
 import formatCurrency from "@/common/helpers/formatCurrency"
 import { BarChart2, LucideTable } from "lucide-react"
+import OverAllSummary from "./components/OverAllSummary"
 
 const tabs = [
   {

@@ -3,7 +3,7 @@ import React from "react"
 import { Typography } from "@/common/components/ui/Typography"
 import { WidthWrapper } from "@/common/components/WidthWrapper"
 import Tabs from "@/common/components/Tabs"
-import OverAllSummary from "./OverAllSummary"
+import OverAllSummary from "./components/OverAllSummary"
 import formatCurrency from "@/common/helpers/formatCurrency"
 import { BarChart2, LucideTable } from "lucide-react"
 
@@ -27,7 +27,7 @@ const summaryData = {
   ],
   total: formatCurrency(6000, "Philippines"),
 }
-const Table = () => {
+const Graph = () => {
   return (
     <WidthWrapper
       width="medium"
@@ -49,4 +49,4 @@ const Table = () => {
   )
 }
 
-export default Table
+export default Graph
