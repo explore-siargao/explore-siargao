@@ -7,11 +7,11 @@ type T_MarkerHover = {
   setSelectedItem: (value: number | null) => void
 }
 
-const useMarkerHover = create<T_MarkerHover>((set) => ({
+const useMarkerHoverStore = create<T_MarkerHover>((set) => ({
   isHover: false,
   selectedItem: null,
   setIsHover: (value) => set(() => ({ isHover: value })),
   setSelectedItem: (value) => set(() => ({ selectedItem: value })),
 }))
 
-export default useMarkerHover
+export default useMarkerHoverStore

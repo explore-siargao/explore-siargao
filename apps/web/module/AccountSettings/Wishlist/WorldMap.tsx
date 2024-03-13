@@ -6,7 +6,7 @@ import { Icon } from "leaflet"
 import useSessionStore from "@/common/store/useSessionStore"
 import { useParams } from "next/navigation"
 import useGetWishGroupByUserAndTitle from "../hooks/useGetWishGroupByUserAndTitle"
-import useMarkerHover from "@/common/store/useMarkerHover"
+import useMarkerHoverStore from "@/common/store/useMarkerHoverStore"
 
 const navIcon = new Icon({
   iconUrl: "/primary-marker.svg",
@@ -22,8 +22,8 @@ const WorldMap = () => {
   const mapRef = useRef(null)
   const [markerRefs, setMarkerRefs] = useState([])
 
-  const isHover = useMarkerHover((state) => state.isHover)
-  const selectedHoverMarker = useMarkerHover((state) => state.selectedItem)
+  const isHover = useMarkerHoverStore((state) => state.isHover)
+  const selectedHoverMarker = useMarkerHoverStore((state) => state.selectedItem)
 
   const session = useSessionStore((state) => state)
   const params = useParams()

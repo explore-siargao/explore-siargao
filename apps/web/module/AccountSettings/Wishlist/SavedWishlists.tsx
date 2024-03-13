@@ -1,4 +1,4 @@
-import useMarkerHover from "@/common/store/useMarkerHover"
+import useMarkerHoverStore from "@/common/store/useMarkerHoverStore"
 import { ComponentProps } from "@/common/types/global"
 import Listing from "@/module/Listing"
 
@@ -29,8 +29,8 @@ const SavedWishlists = ({
   note,
   showAddNote,
 }: SavedWishlistsProps) => {
-  const setIsHover = useMarkerHover((state) => state.setIsHover)
-  const setSelectedHoverItem = useMarkerHover((state) => state.setSelectedItem)
+  const setIsHover = useMarkerHoverStore((state) => state.setIsHover)
+  const setSelectedHoverItem = useMarkerHoverStore((state) => state.setSelectedItem)
 
   const AddEditNoteButton = ({ onClick, id, note }: ComponentProps) => (
     <button
