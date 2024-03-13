@@ -5,10 +5,10 @@ import { earnings } from "./jsons/earnings";
 const response = new ResponseService();
 
 export const getUpcomingBookings = async(req: Request, res: Response) => {
-    // Get the current date
+
     const currentDate = new Date();
     
-    // Filter bookings for months after the current month
+  
     const filteredBookings = earnings.filter(earning => {
         const earningDate = new Date(earning.date);
         return (
@@ -18,7 +18,7 @@ export const getUpcomingBookings = async(req: Request, res: Response) => {
         );
     });
 
-    // Sort filtered bookings by date in ascending order
+  
     filteredBookings.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
     const totalEarnings = filteredBookings.reduce((sum, item) => sum + (item?.earning as number), 0);

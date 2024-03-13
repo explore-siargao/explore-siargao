@@ -33,10 +33,10 @@ export const getMonthYearBookings = async (req: Request, res: Response) => {
 
     const allDates = Array.from({ length: daysInMonth}, (_, index) => index + 1);
 
-    const listing: { [date: string]: object[] } = {}; // Modified to array type
-    const earningsByDate: { [date: string]: number[] } = {}; // Modified to array type
-    const dateFrom: { [date: string]: string[] } = {}; // Modified to array type
-    const dateTo: { [date: string]: string[] } = {}; // Modified to array type
+    const listing: { [date: string]: object[] } = {}; 
+    const earningsByDate: { [date: string]: number[] } = {};
+    const dateFrom: { [date: string]: string[] } = {}; 
+    const dateTo: { [date: string]: string[] } = {}; 
     
     earnings.forEach(item => {
         const itemDate = new Date(item.date);
@@ -46,20 +46,20 @@ export const getMonthYearBookings = async (req: Request, res: Response) => {
         const dateString = `${year}-${month}-${day}`;
 
         if (!earningsByDate[dateString]) {
-            earningsByDate[dateString] = []; // Initialize array if not exists
-            listing[dateString] = []; // Initialize array if not exists
-            dateFrom[dateString] = []; // Initialize array if not exists
-            dateTo[dateString] = []; // Initialize array if not exists
+            earningsByDate[dateString] = []; 
+            listing[dateString] = []; 
+            dateFrom[dateString] = []; 
+            dateTo[dateString] = []; 
         }
 
-        // Push item's earning to the array
+       
         earningsByDate[dateString]?.push(item.earning);
         listing[dateString]?.push(item.Listing);
         dateFrom[dateString]?.push(item.dateFrom);
         dateTo[dateString]?.push(item.dateTo);
     });
 
-    // Create consolidated earnings array including all entries
+  
     let consolidatedEarnings: any[] = [];
     allDates.forEach(date => {
         const dateString = `${year}-${(month as number).toString().padStart(2, '0')}-${date.toString().padStart(2, '0')}`;
@@ -68,7 +68,7 @@ export const getMonthYearBookings = async (req: Request, res: Response) => {
         const dateFromForDate = dateFrom[dateString] || [];
         const dateToForDate = dateTo[dateString] || [];
 
-        // Zip all arrays together
+   
         const entriesForDate = earningsForDate.map((earning, index) => ({
             date: dateString + " 00:00:00",
             dateFrom: dateFromForDate[index] || null,
@@ -77,7 +77,7 @@ export const getMonthYearBookings = async (req: Request, res: Response) => {
             earning: earning,
         }));
 
-        // If there are no earnings for this date, push a null entry
+      
         if (entriesForDate.length === 0) {
             consolidatedEarnings.push({
                 date: dateString + " 00:00:00",

@@ -5,10 +5,10 @@ import { earnings } from "./jsons/earnings";
 const response = new ResponseService();
 
 export const getPaidBookings = async(req: Request, res: Response) => {
-    // Get the current date
+
     const currentDate = new Date();
     
-    // Filter bookings for months prior to the current month
+   
     const filteredBookings = earnings.filter(earning => {
         const earningDate = new Date(earning.date);
         return (

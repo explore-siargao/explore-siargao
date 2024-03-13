@@ -4,7 +4,7 @@ import { earnings } from "./jsons/earnings";
 
 const response = new ResponseService()
 export const getThisMonthBookings = async(req:Request, res:Response)=>{
-    // Get the current date
+
 const currentDate = new Date();
 
 const firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
