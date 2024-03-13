@@ -30,7 +30,9 @@ const SavedWishlists = ({
   showAddNote,
 }: SavedWishlistsProps) => {
   const setIsHover = useMarkerHoverStore((state) => state.setIsHover)
-  const setSelectedHoverItem = useMarkerHoverStore((state) => state.setSelectedItem)
+  const setSelectedHoverItem = useMarkerHoverStore(
+    (state) => state.setSelectedItem
+  )
 
   const AddEditNoteButton = ({ onClick, id, note }: ComponentProps) => (
     <button
