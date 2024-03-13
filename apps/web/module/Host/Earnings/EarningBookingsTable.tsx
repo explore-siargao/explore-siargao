@@ -17,7 +17,7 @@ const EarningBookingsTable = () => {
         dateFrom: "03-04-2024 11:05:04",
         dateTo: "03-05-2024 11:05:04",
         earnings: 2000,
-      }
+      },
     },
     {
       bookings: {
@@ -25,8 +25,8 @@ const EarningBookingsTable = () => {
         dateFrom: "03-06-2024 11:05:04",
         dateTo: "03-07-2024 11:05:04",
         earnings: 5000,
-      }
-    }
+      },
+    },
   ]
 
   const columnHelper = createColumnHelper<EarningBookingsData>()
