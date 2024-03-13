@@ -29,22 +29,22 @@ const EarningsTable = ({ data, columns }: TableProps) => {
     <div>
       <table className="w-full table-auto">
         <thead className="text-left">
-          {earningsTable.getHeaderGroups().map((headerGroups) => (
-            <tr key={headerGroups.id}>
-              {headerGroups.headers.map((headers) => {
+          {earningsTable.getHeaderGroups().map((earningsTableHeaderGroup) => (
+            <tr key={earningsTableHeaderGroup.id}>
+              {earningsTableHeaderGroup.headers.map((earningsTableHeader) => {
                 return (
                   <th
                     className="pl-4"
-                    key={headers.id}
-                    colSpan={headers.colSpan}
+                    key={earningsTableHeader.id}
+                    colSpan={earningsTableHeader.colSpan}
                     scope="col"
                   >
-                    {headers.isPlaceholder ? null : (
+                    {earningsTableHeader.isPlaceholder ? null : (
                       <div>
                         <span>
                           {flexRender(
-                            headers.column.columnDef.header,
-                            headers.getContext()
+                            earningsTableHeader.column.columnDef.header,
+                            earningsTableHeader.getContext()
                           )}
                         </span>
                       </div>
@@ -56,13 +56,13 @@ const EarningsTable = ({ data, columns }: TableProps) => {
           ))}
         </thead>
         <tbody>
-          {earningsTable.getRowModel().rows.map((row) => {
+          {earningsTable.getRowModel().rows.map((earningsTableRow) => {
             return (
-              <tr className=" hover:bg-primary-500 cursor-pointer" key={row.id}>
-                {row.getVisibleCells().map((cell, _cell) => {
+              <tr className=" hover:bg-primary-500 cursor-pointer" key={earningsTableRow.id}>
+                {earningsTableRow.getVisibleCells().map((cell, _cell) => {
                   let className = "py-2 pl-4 items-center gap-5"
                   if (_cell === 0) className += " rounded-l-xl"
-                  if (_cell === row.getVisibleCells().length - 1)
+                  if (_cell === earningsTableRow.getVisibleCells().length - 1)
                     className += " rounded-r-xl"
                   return (
                     <td className={className} key={cell.id}>
