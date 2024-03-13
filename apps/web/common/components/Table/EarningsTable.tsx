@@ -10,7 +10,7 @@ export interface EarningBookingsData {
     listing: string
     dateFrom: string
     dateTo: string
-    amount: number
+    earnings: number
   }
 }
 

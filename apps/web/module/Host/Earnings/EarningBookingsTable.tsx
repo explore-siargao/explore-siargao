@@ -16,31 +16,17 @@ const EarningBookingsTable = () => {
         listing: "1.jpg",
         dateFrom: "03-04-2024 11:05:04",
         dateTo: "03-05-2024 11:05:04",
-        amount: 2000,
-      },
-      summary: {
-        gross: 2000,
-        adjustments: 1000,
-        service: 1000,
-        taxes: 1000,
-        totalEarnings: 2000,
-      },
+        earnings: 2000,
+      }
     },
     {
       bookings: {
         listing: "2.jpg",
         dateFrom: "03-06-2024 11:05:04",
         dateTo: "03-07-2024 11:05:04",
-        amount: 5000,
-      },
-      summary: {
-        gross: 3000,
-        adjustments: 2000,
-        service: 1500,
-        taxes: 1200,
-        totalEarnings: 2000,
-      },
-    },
+        earnings: 5000,
+      }
+    }
   ]
 
   const columnHelper = createColumnHelper<EarningBookingsData>()
@@ -79,12 +65,12 @@ const EarningBookingsTable = () => {
         return <Typography variant="p">{dateFrom + " - " + dateTo}</Typography>
       },
     }),
-    columnHelper.accessor("bookings.amount", {
-      header: "Amount",
-      cell: (amount) => {
+    columnHelper.accessor("bookings.earnings", {
+      header: "Earnings",
+      cell: (earnings) => {
         return (
           <Typography variant="p">
-            {formatCurrency(amount.getValue(), "Philippines")}
+            {formatCurrency(earnings.getValue(), "Philippines")}
           </Typography>
         )
       },
