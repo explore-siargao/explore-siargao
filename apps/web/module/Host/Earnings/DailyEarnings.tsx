@@ -1,5 +1,6 @@
 "use client"
 import formatCurrency from "@/common/helpers/formatCurrency"
+import { format } from "date-fns"
 import {
   Bar,
   BarChart,
@@ -93,6 +94,10 @@ const Daily = () => {
           />
           <Tooltip
             formatter={(value: number) => formatCurrency(value, "Philippines")}
+            labelFormatter={(value: string) => {
+              const newDate = format(new Date(value), "MMMM dd, yyyy")
+              return newDate
+            }}
           />
           <Bar
             dataKey="earning"

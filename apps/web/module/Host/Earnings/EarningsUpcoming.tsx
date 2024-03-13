@@ -3,7 +3,7 @@ import { Typography } from "@/common/components/ui/Typography"
 import useGetUpcomingEarnings from "../hooks/useGetUpcomingEarnings"
 import { Spinner } from "@/common/components/ui/Spinner"
 import formatCurrency from "@/common/helpers/formatCurrency"
-import Chart, { ChartType } from "./components/Chart2"
+import Chart, { ChartType } from "./components/Chart"
 import { format } from "date-fns"
 
 const EarningsUpcoming = () => {
@@ -34,14 +34,26 @@ const EarningsUpcoming = () => {
   return (
     <div className="mt-8">
       {upcoming?.item && upcoming.item.amount.length > 0 ? (
-        <Chart
-          data={upcoming.item.amount}
-          totalAmount={upcoming.item.total}
-          isPending={upcomingIsPending}
-          width="100%"
-          height={400}
-          type={ChartType.upcoming}
-        />
+        <>
+          <div>
+          <Typography variant="h1" className="text-[30px]">
+            Your upcoming earnings{" "}
+            <span className="text-gray-400">
+              {upcomingIsPending
+                ? formatCurrency(0.0, "Philippines")
+                : formatCurrency(upcoming.item.total, "Philippines")}
+            </span>
+          </Typography>
+          </div>
+          <Chart
+            data={upcoming.item.amount}
+            isPending={upcomingIsPending}
+            width="100%"
+            height={400}
+            type={ChartType.upcoming}
+            earningType="monthly"
+          />
+        </>
       ) : (
         <>
           <Typography fontWeight="semibold" variant="h2" className="pb-4">

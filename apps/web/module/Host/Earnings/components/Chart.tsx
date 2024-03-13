@@ -10,8 +10,8 @@ import {
   ResponsiveContainer,
 } from "recharts"
 import formatCurrency from "@/common/helpers/formatCurrency"
-import { Typography } from "@/common/components/ui/Typography"
 import { format } from "date-fns"
+import { useRouter } from 'next/navigation'
 
 interface YearToDateSummary {
   gross: number
@@ -41,88 +41,102 @@ interface Earnings {
 
 interface ChartProps {
   data: Amount[]
-  totalAmount: number
   isPending: boolean
   width: string | number
   height: number
   type: ChartType
+  earningType: 'daily' | 'monthly' | 'yearly'
 }
 
 const Chart = ({
   width,
   height,
   data,
-  totalAmount,
   isPending,
   type,
+  earningType
 }: ChartProps) => {
-  let title = ""
-  console.log("yeah", data)
-  switch (type) {
-    case ChartType.upcoming:
-      title = "Your upcoming earnings"
-      break
-    case ChartType.paid:
-      title = "Your paid earnings"
-      break
-    case ChartType["this-month"]:
-      title = "You've made"
-      break
-    default:
-      title = "Earnings"
-  }
+  const router = useRouter()
 
   return (
-    <>
-      <div>
-        <Typography variant="h1" className="text-[30px]">
-          {title}{" "}
-          <span className="text-gray-400">
-            {isPending
-              ? formatCurrency(0.0, "Philippines")
-              : formatCurrency(totalAmount, "Philippines")}
-          </span>{" "}
-          {type === ChartType["this-month"] ? "this month" : ""}
-        </Typography>
-      </div>
-
-      <ResponsiveContainer width={width} height={height}>
-        <BarChart
-          data={isPending ? undefined : data}
-          margin={{
-            top: 40,
-            right: 90,
-            left: 10,
-          }}
-        >
-          <CartesianGrid />
-          <XAxis
-            dataKey="date"
-            tickFormatter={(value: string) => {
-              return format(new Date(value), "d")
-            }}
-          />
-          <YAxis
-            dataKey={"earning"}
-            tickFormatter={(value: number) =>
-              formatCurrency(value, "Philippines")
+    <ResponsiveContainer width={width} height={height}>
+      <BarChart
+        data={isPending ? undefined : data}
+        margin={{
+          top: 40,
+          right: 90,
+          left: 10,
+        }}
+      >
+        <CartesianGrid />
+        <XAxis
+          dataKey="date"
+          tickFormatter={(value: string) => {
+            let newDate
+            if(earningType === 'yearly') {
+              newDate = format(new Date(value), "yyyy")
             }
-          />
-          <Tooltip
-            formatter={(value: number) => formatCurrency(value, "Philippines")}
-            labelFormatter={(value: string) => {
-              const newDate = format(new Date(value), "MMMM dd, yyyy")
-              return newDate
-            }}
-          />
-          <Bar
-            dataKey="earning"
-            fill="#9FC7C7"
-            activeBar={<Rectangle fill="#8BB3B3" />}
-          />
-        </BarChart>
-      </ResponsiveContainer>
-    </>
+            else if(earningType === 'monthly') {
+              newDate = format(new Date(value), "MMM yyyy")
+            }
+            else {
+              newDate = format(new Date(value), "d")
+            }
+            return newDate
+          }}
+        />
+        <YAxis
+          dataKey={"earning"}
+          tickFormatter={(value: number) =>
+            formatCurrency(value, "Philippines")
+          }
+        />
+        <Tooltip
+          formatter={(value: number) => formatCurrency(value, "Philippines")}
+          labelFormatter={(value: string) => {
+            let newDate
+            if(earningType === 'yearly') {
+              newDate = format(new Date(value), "yyyy")
+            }
+            else if(earningType === 'monthly') {
+              newDate = format(new Date(value), "MMM yyyy")
+            }
+            else {
+              newDate = format(new Date(value), "MMMM d, yyyy")
+            }
+            return newDate
+          }}
+        />
+        <Bar
+          dataKey="earning"
+          fill="#9FC7C7"
+          activeBar={<Rectangle fill="#8BB3B3" />}
+          onClick={(value: any) => {
+            let earningType
+            
+            switch (type) {
+              case ChartType.upcoming:
+                earningType = "monthly"
+                break
+              case ChartType.paid:
+                earningType = "monthly"
+                break
+              case ChartType["this-month"]:
+                earningType = "daily"
+                break
+              default:
+                earningType = ""
+            }
+
+            const selectedMonth = format(new Date(value.date), "MMMM").toLowerCase()
+            const selectedDay = format(new Date(value.date), "d")
+            const selectedYear = format(new Date(value.date), "yyyy")
+
+            router.push(`/host/earnings/${selectedMonth}-${selectedYear}/graph`)
+          }}
+        />
+      </BarChart>
+    </ResponsiveContainer>
   )
 }
 
