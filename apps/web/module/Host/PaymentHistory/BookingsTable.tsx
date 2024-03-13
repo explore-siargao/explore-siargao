@@ -5,9 +5,9 @@ import { createColumnHelper } from "@tanstack/react-table"
 import Link from "next/link"
 import Image from "next/image"
 import { Typography } from "@/common/components/ui/Typography"
-import { Status } from "./components/Status"
 import { WidthWrapper } from "@/common/components/WidthWrapper"
 import formatCurrency from "@/common/helpers/formatCurrency"
+import { PaymentHistoryStatus } from "./components/Status"
 
 const dummy = [
   {
@@ -135,10 +135,10 @@ const BookingsTable = () => {
           <div className="flex items-center">
             <span>
               {status.getValue() === statusEnum.CANCELLED && (
-                <Status variant="Danger" />
+                <PaymentHistoryStatus variant="Danger" />
               )}
               {status.getValue() === statusEnum.COMPLETED && (
-                <Status variant="Success" />
+                <PaymentHistoryStatus variant="Success" />
               )}
             </span>
             <Typography variant="p">{status.getValue()}</Typography>

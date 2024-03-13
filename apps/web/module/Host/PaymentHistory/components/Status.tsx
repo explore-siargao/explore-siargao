@@ -2,7 +2,7 @@ import * as React from "react"
 import { cn } from "@/common/helpers/cn"
 import { VariantProps, cva } from "class-variance-authority"
 
-const StatusVariants = cva("", {
+const PaymentHistoryStatusVariants = cva("", {
   variants: {
     variant: {
       Success: "bg-green-400",
@@ -15,21 +15,21 @@ const StatusVariants = cva("", {
   },
 })
 
-export interface HostListingStatusProps
+export interface PaymentHistoryStatusProps
   extends React.DetailsHTMLAttributes<HTMLElement>,
-    VariantProps<typeof StatusVariants> {
+    VariantProps<typeof PaymentHistoryStatusVariants> {
   children?: React.ReactNode
 }
 
-const Status = React.forwardRef<HTMLElement, HostListingStatusProps>(
+const PaymentHistoryStatus = React.forwardRef<HTMLElement, PaymentHistoryStatusProps>(
   ({ variant, className, children }, ref) => {
-    const PaymentStatusClass = StatusVariants({ variant, className })
+    const PaymentHistoryStatusClass = PaymentHistoryStatusVariants({ variant, className })
     return (
       <span
         ref={ref}
         className={cn(
           "rounded-full w-2 h-2 inline-block mr-2",
-          PaymentStatusClass
+          PaymentHistoryStatusClass
         )}
       >
         {children}
@@ -37,6 +37,6 @@ const Status = React.forwardRef<HTMLElement, HostListingStatusProps>(
     )
   }
 )
-Status.displayName = "Status"
+PaymentHistoryStatus.displayName = "Status"
 
-export { Status, StatusVariants }
+export { PaymentHistoryStatus, PaymentHistoryStatusVariants }
