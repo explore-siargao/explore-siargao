@@ -1,14 +1,14 @@
-import React from "react";
-import { Typography } from "@/common/components/ui/Typography";
+import React from "react"
+import { Typography } from "@/common/components/ui/Typography"
 
 interface SummaryData {
-  labels: string[];
-  values: string[][];
-  total: string;
+  labels: string[]
+  values: string[][]
+  total: string
 }
 
 interface OverAllSummaryProps {
-  overAllSummaryData: SummaryData;
+  overAllSummaryData: SummaryData
 }
 
 const OverAllSummary: React.FC<OverAllSummaryProps> = ({
@@ -48,7 +48,7 @@ const OverAllSummary: React.FC<OverAllSummaryProps> = ({
         </Typography>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default OverAllSummary;
+export default OverAllSummary
