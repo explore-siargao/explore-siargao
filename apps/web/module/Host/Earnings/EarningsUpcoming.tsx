@@ -36,14 +36,14 @@ const EarningsUpcoming = () => {
       {upcoming?.item && upcoming.item.amount.length > 0 ? (
         <>
           <div>
-          <Typography variant="h1" className="text-[30px]">
-            Your upcoming earnings{" "}
-            <span className="text-gray-400">
-              {upcomingIsPending
-                ? formatCurrency(0.0, "Philippines")
-                : formatCurrency(upcoming.item.total, "Philippines")}
-            </span>
-          </Typography>
+            <Typography variant="h1" className="text-[30px]">
+              Your upcoming earnings{" "}
+              <span className="text-gray-400">
+                {upcomingIsPending
+                  ? formatCurrency(0.0, "Philippines")
+                  : formatCurrency(upcoming.item.total, "Philippines")}
+              </span>
+            </Typography>
           </div>
           <Chart
             data={upcoming.item.amount}

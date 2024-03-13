@@ -11,7 +11,7 @@ import {
 } from "recharts"
 import formatCurrency from "@/common/helpers/formatCurrency"
 import { format } from "date-fns"
-import { useRouter } from 'next/navigation'
+import { useRouter } from "next/navigation"
 
 interface YearToDateSummary {
   gross: number
@@ -45,7 +45,7 @@ interface ChartProps {
   width: string | number
   height: number
   type: ChartType
-  earningType: 'daily' | 'monthly' | 'yearly'
+  earningType: "daily" | "monthly" | "yearly"
 }
 
 const Chart = ({
@@ -54,7 +54,7 @@ const Chart = ({
   data,
   isPending,
   type,
-  earningType
+  earningType,
 }: ChartProps) => {
   const router = useRouter()
 
@@ -73,13 +73,11 @@ const Chart = ({
           dataKey="date"
           tickFormatter={(value: string) => {
             let newDate
-            if(earningType === 'yearly') {
+            if (earningType === "yearly") {
               newDate = format(new Date(value), "yyyy")
-            }
-            else if(earningType === 'monthly') {
+            } else if (earningType === "monthly") {
               newDate = format(new Date(value), "MMM yyyy")
-            }
-            else {
+            } else {
               newDate = format(new Date(value), "d")
             }
             return newDate
@@ -95,13 +93,11 @@ const Chart = ({
           formatter={(value: number) => formatCurrency(value, "Philippines")}
           labelFormatter={(value: string) => {
             let newDate
-            if(earningType === 'yearly') {
+            if (earningType === "yearly") {
               newDate = format(new Date(value), "yyyy")
-            }
-            else if(earningType === 'monthly') {
+            } else if (earningType === "monthly") {
               newDate = format(new Date(value), "MMM yyyy")
-            }
-            else {
+            } else {
               newDate = format(new Date(value), "MMMM d, yyyy")
             }
             return newDate
@@ -113,7 +109,7 @@ const Chart = ({
           activeBar={<Rectangle fill="#8BB3B3" />}
           onClick={(value: any) => {
             let earningType
-            
+
             switch (type) {
               case ChartType.upcoming:
                 earningType = "monthly"
@@ -128,7 +124,10 @@ const Chart = ({
                 earningType = ""
             }
 
-            const selectedMonth = format(new Date(value.date), "MMMM").toLowerCase()
+            const selectedMonth = format(
+              new Date(value.date),
+              "MMMM"
+            ).toLowerCase()
             const selectedDay = format(new Date(value.date), "d")
             const selectedYear = format(new Date(value.date), "yyyy")
 

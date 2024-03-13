@@ -29,14 +29,14 @@ const EarningsPaid = () => {
       {data?.item && data.item.amount.length > 0 ? (
         <>
           <div>
-          <Typography variant="h1" className="text-[30px]">
-            Your paid earnings{" "}
-            <span className="text-gray-400">
-              {isPending
-                ? formatCurrency(0.0, "Philippines")
-                : formatCurrency(data.item.total, "Philippines")}
-            </span>
-          </Typography>
+            <Typography variant="h1" className="text-[30px]">
+              Your paid earnings{" "}
+              <span className="text-gray-400">
+                {isPending
+                  ? formatCurrency(0.0, "Philippines")
+                  : formatCurrency(data.item.total, "Philippines")}
+              </span>
+            </Typography>
           </div>
           <Chart
             width="100%"

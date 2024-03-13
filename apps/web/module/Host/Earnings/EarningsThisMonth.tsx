@@ -12,15 +12,15 @@ const EarningsThisMonth = () => {
       {thisMonth?.item && thisMonth.item.amount.length > 0 ? (
         <>
           <div>
-          <Typography variant="h1" className="text-[30px]">
-            You&apos;ve made{" "}
-            <span className="text-gray-400">
-              {thisMonthIsPending
-                ? formatCurrency(0.0, "Philippines")
-                : formatCurrency(thisMonth.item.total, "Philippines")}
-            </span>{" "}
-            this month
-          </Typography>
+            <Typography variant="h1" className="text-[30px]">
+              You&apos;ve made{" "}
+              <span className="text-gray-400">
+                {thisMonthIsPending
+                  ? formatCurrency(0.0, "Philippines")
+                  : formatCurrency(thisMonth.item.total, "Philippines")}
+              </span>{" "}
+              this month
+            </Typography>
           </div>
           <Chart
             data={thisMonth.item.amount}
