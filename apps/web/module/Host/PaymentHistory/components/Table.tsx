@@ -8,22 +8,26 @@ import formatCurrency from "@/common/helpers/formatCurrency"
 import { BarChart2, LucideTable } from "lucide-react"
 
 const tabs = [
-  { name: "Graph", icon: <BarChart2 size={20}/>, link: "/hosting/payment-history/graph"},
-  { name: "Table", icon: <LucideTable size={20}/>, link: "/hosting/payment-history/table", isSelected: true },
-  ];
-  const summaryData = {
-    labels: ["Completed", "Cancelled"],
-    values: [
-        [
-            formatCurrency(2000, "Philippines"),
-            formatCurrency(4000, "Philippines"),
-        ],
-    ],
-    total: formatCurrency(6000, "Philippines"),
-};
+  {
+    name: "Graph",
+    icon: <BarChart2 size={20} />,
+    link: "/hosting/payment-history/graph",
+  },
+  {
+    name: "Table",
+    icon: <LucideTable size={20} />,
+    link: "/hosting/payment-history/table",
+    isSelected: true,
+  },
+]
+const summaryData = {
+  labels: ["Completed", "Cancelled"],
+  values: [
+    [formatCurrency(2000, "Philippines"), formatCurrency(4000, "Philippines")],
+  ],
+  total: formatCurrency(6000, "Philippines"),
+}
 const Table = () => {
-  
- 
   return (
     <WidthWrapper
       width="medium"
@@ -31,20 +35,18 @@ const Table = () => {
     >
       <div className="lg:col-span-3">
         <Typography variant="h1" fontWeight="semibold" className="mb-2">
-         Payment History
+          Payment History
         </Typography>
-        <Tabs tabs={tabs}/>
+        <Tabs tabs={tabs} />
         <div className="text-center justify-center pt-10 text-gray-400">
           This is Table tab
         </div>
       </div>
       <div className="col-span-1 relative">
-       <OverAllSummary overAllSummaryData={summaryData}/>
+        <OverAllSummary overAllSummaryData={summaryData} />
       </div>
     </WidthWrapper>
   )
 }
 
 export default Table
-
-

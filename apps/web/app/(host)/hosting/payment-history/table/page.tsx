@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 }
 
 const GraphPage = () => {
-  return <Table/>
+  return <Table />
 }
 
 export default GraphPage

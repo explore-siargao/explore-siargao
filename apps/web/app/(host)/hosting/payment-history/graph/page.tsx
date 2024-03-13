@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 }
 
 const GraphPage = () => {
-  return <Graph/>
+  return <Graph />
 }
 
 export default GraphPage
