@@ -58,7 +58,10 @@ const EarningsTable = ({ data, columns }: TableProps) => {
         <tbody>
           {earningsTable.getRowModel().rows.map((earningsTableRow) => {
             return (
-              <tr className=" hover:bg-primary-500 cursor-pointer" key={earningsTableRow.id}>
+              <tr
+                className=" hover:bg-primary-500 cursor-pointer"
+                key={earningsTableRow.id}
+              >
                 {earningsTableRow.getVisibleCells().map((cell, _cell) => {
                   let className = "py-2 pl-4 items-center gap-5"
                   if (_cell === 0) className += " rounded-l-xl"
