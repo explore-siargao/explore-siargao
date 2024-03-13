@@ -19,8 +19,8 @@ const OverAllSummary: React.FC<OverAllSummaryProps> = ({
         Overall Summary
       </Typography>
       <div className="flex flex-col">
-        {overAllSummaryData.labels.map((header, mark) => (
-          <div key={`mark-${mark}`} className="flex gap-4 justify-between">
+        {overAllSummaryData.labels.map((header, items) => (
+          <div key={`${items}`} className="flex gap-4 justify-between">
             <Typography
               variant="p"
               fontWeight="semibold"
@@ -33,7 +33,7 @@ const OverAllSummary: React.FC<OverAllSummaryProps> = ({
               fontWeight="semibold"
               className="pt-2 text-sm"
             >
-              {overAllSummaryData.values[0]?.[mark]}
+              {overAllSummaryData.values[0]?.[items]}
             </Typography>
           </div>
         ))}
