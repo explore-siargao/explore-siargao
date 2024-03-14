@@ -35,15 +35,15 @@ const EarningsPaid = () => {
           />
         </>
       ) : (
-        <div className="p-4">
-          <Typography variant="h1" fontWeight="semibold">
+        <>
+          <Typography fontWeight="semibold" variant="h2" className="pb-4">
             Paid
           </Typography>
-          <Typography variant="p" className="text-gray-800 mt-5">
+          <Typography fontWeight="semibold" variant="p">
             Payouts are sent after guests check in.{" "}
             <button className="underline">Learn how payouts work</button>
           </Typography>
-        </div>
+        </>
       )}
     </div>
   )
