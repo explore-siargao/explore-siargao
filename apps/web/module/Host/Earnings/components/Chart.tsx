@@ -161,7 +161,9 @@ const Chart = ({
             const selectedDay = format(new Date(value.date), "d")
             const selectedYear = format(new Date(value.date), "yyyy")
 
-            router.push(`/hosting/earnings/${selectedMonth}-${selectedYear}/graph`)
+            router.push(
+              `/hosting/earnings/${selectedMonth}-${selectedYear}/graph`
+            )
           }}
         />
       </BarChart>

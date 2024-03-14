@@ -17,7 +17,10 @@ const EarningsThisMonth = () => {
               <span className="text-gray-400">
                 {thisMonthIsPending
                   ? formatCurrency(0.0, "Philippines")
-                  : formatCurrency(thisMonth.item.summary.totalEarnings, "Philippines")}
+                  : formatCurrency(
+                      thisMonth.item.summary.totalEarnings,
+                      "Philippines"
+                    )}
               </span>{" "}
               this month
             </Typography>

@@ -24,10 +24,10 @@ const months = {
 }
 
 const EarningDetails = () => {
-  const { type, date } = useParams<{type: string, date: string}>()
+  const { type, date } = useParams<{ type: string; date: string }>()
   const [monthName, year] = date.toLowerCase().split("-")
 
-  let dateObject = "";
+  let dateObject = ""
 
   // @ts-expect-error
   const month = months[monthName]

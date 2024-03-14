@@ -41,7 +41,10 @@ const EarningsUpcoming = () => {
               <span className="text-gray-400">
                 {upcomingIsPending
                   ? formatCurrency(0.0, "Philippines")
-                  : formatCurrency(upcoming.item.summary.totalEarnings, "Philippines")}
+                  : formatCurrency(
+                      upcoming.item.summary.totalEarnings,
+                      "Philippines"
+                    )}
               </span>
             </Typography>
           </div>
