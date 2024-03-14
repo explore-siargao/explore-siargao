@@ -4,15 +4,15 @@ import { useQuery } from "@tanstack/react-query"
 
 export async function getThisMonthEarnings() {
   const apiService = new ApiService("mock")
-  return await apiService.get(`${API_URL_BOOKINGS}/earnings/this-month`)
+  return await apiService.get(`${API_URL_BOOKINGS}/earnings/this-month/bookings`)
 }
 
-function useGetThisMonthEarnings() {
+function useGetThisMonthEarningsWithBookings() {
   const query = useQuery({
-    queryKey: ["this-month-earnings"],
+    queryKey: ["this-month-earnings-bookings"],
     queryFn: () => getThisMonthEarnings(),
     refetchOnWindowFocus: false,
   })
   return query
 }
-export default useGetThisMonthEarnings
+export default useGetThisMonthEarningsWithBookings

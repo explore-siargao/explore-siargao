@@ -5,10 +5,19 @@ import useGetAllBookings from "../LandingPage/hooks/useGetAllBookings"
 import { Spinner } from "@/common/components/ui/Spinner"
 import useSessionStore from "@/common/store/useSessionStore"
 import Listing from "../Listing"
+import useGetThisMonthEarnings from "../Host/hooks/useGetThisMonthEarnings"
+import useGetUpcomingEarnings from "../Host/hooks/useGetUpcomingEarnings"
+import useGetPaidEarnings from "../Host/hooks/useGetPaidEarnings"
+import useGetMonthYearEarnings from "../Host/hooks/useGetMonthYearEarnings"
+import useGetThisMonthEarningsWithBookings from "../Host/hooks/useGetThisMonthEarningsWithBookings"
+import useGetUpcomingEarningsWithBookings from "../Host/hooks/useGetUpcomingEarningsWithBookings"
+import useGetPaidEarningsWithBookings from "../Host/hooks/useGetPaidEarningsWithBookings"
+import useGetMonthYearEarningsWithBookings from "../Host/hooks/useGetMonthYearEarningsWithBookings"
 
 const LandingPage = () => {
   const userId = useSessionStore((state) => state).id
   const { data, isPending } = useGetAllBookings()
+  const {data:earnings} = useGetMonthYearEarningsWithBookings("march-2024")
   return (
     <WidthWrapper className="my-24 lg:my-36">
       {isPending ? (
