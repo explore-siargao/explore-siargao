@@ -56,30 +56,30 @@ const Chart = ({
   type,
 }: ChartProps) => {
   let title = ""
-let options = {}
+  let options = {}
   switch (type) {
     case ChartType.upcoming:
       title = "Your upcoming earnings"
-      options ={
+      options = {
         year: "numeric",
         month: "long",
-        day:"2-digit"
+        day: "2-digit",
       }
       break
     case ChartType.paid:
       title = "Your paid earnings"
-      options={
+      options = {
         year: "numeric",
         month: "2-digit",
-        day:"2-digit"
+        day: "2-digit",
       }
       break
     case ChartType["this-month"]:
       title = "You've made"
-      options={
+      options = {
         year: "numeric",
         month: "long",
-        day:"2-digit"
+        day: "2-digit",
       }
       break
     default:

@@ -16,22 +16,13 @@ const Earnings = () => {
   const summaryData = [
     ["Gross earnings", "Adjustments", "Service fee", "Taxes withheld"],
     [
-      formatCurrency(
-        thisMonth?.item?.summary?.gross ?? "",
-        "Philippines"
-      ),
+      formatCurrency(thisMonth?.item?.summary?.gross ?? "", "Philippines"),
       formatCurrency(
         thisMonth?.item?.summary?.adjustments ?? "",
         "Philippines"
       ),
-      formatCurrency(
-        thisMonth?.item?.summary?.service ?? "",
-        "Philippines"
-      ),
-      formatCurrency(
-        thisMonth?.item?.summary?.tax ?? "",
-        "Philippines"
-      ),
+      formatCurrency(thisMonth?.item?.summary?.service ?? "", "Philippines"),
+      formatCurrency(thisMonth?.item?.summary?.tax ?? "", "Philippines"),
     ],
   ]
   return (
@@ -83,7 +74,10 @@ const Earnings = () => {
               variant="p"
               fontWeight="semibold"
             >
-              {formatCurrency(thisMonth?.item?.summary.totalEarnings as number, "Philippines")}
+              {formatCurrency(
+                thisMonth?.item?.summary.totalEarnings as number,
+                "Philippines"
+              )}
             </Typography>
           </div>
         </div>
