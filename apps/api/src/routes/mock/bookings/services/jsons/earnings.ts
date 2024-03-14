@@ -9,11 +9,11 @@ export const earnings = [
       address: 'Pasig City, Philippines',
       imageKey: '1.jpg',
     },
-    status:"Completed",
+    status: 'Completed',
     user: {
       id: 1,
-      firstName: "John Patrick",
-      lastName: "Madrigal"
+      firstName: 'John Patrick',
+      lastName: 'Madrigal',
     },
     earning: 22000.25,
   },
@@ -27,11 +27,11 @@ export const earnings = [
       address: 'Makati City, Philippines',
       imageKey: '2.jpg',
     },
-    status:"Completed",
+    status: 'Completed',
     user: {
       id: 2,
-      firstName: "Ramil",
-      lastName: "Kaharian"
+      firstName: 'Ramil',
+      lastName: 'Kaharian',
     },
     earning: 11000.0,
   },
@@ -45,11 +45,11 @@ export const earnings = [
       address: 'Tiny home in Tagaytay, Philippines',
       imageKey: '3.jpg',
     },
-    status:"Cancelled",
+    status: 'Cancelled',
     user: {
       id: 3,
-      firstName: "Jose",
-      lastName: "Rizal"
+      firstName: 'Jose',
+      lastName: 'Rizal',
     },
     earning: 6700.0,
   },
@@ -63,11 +63,11 @@ export const earnings = [
       address: 'Island in El Nido, Philippines',
       imageKey: '4.jpg',
     },
-    status:"Cancelled",
+    status: 'Cancelled',
     user: {
       id: 4,
-      firstName: "Andres",
-      lastName: "Bonifacio"
+      firstName: 'Andres',
+      lastName: 'Bonifacio',
     },
     earning: 12500.0,
   },
@@ -81,11 +81,11 @@ export const earnings = [
       address: 'Entire cabin in Calaca, Philippines',
       imageKey: '5.jpg',
     },
-    status:"Completed",
+    status: 'Completed',
     user: {
       id: 1,
-      firstName: "John Patrick",
-      lastName: "Madrigal"
+      firstName: 'John Patrick',
+      lastName: 'Madrigal',
     },
     earning: 22000.0,
   },
@@ -99,11 +99,11 @@ export const earnings = [
       address: 'Island in El Nido, Philippine',
       imageKey: '1.jpg',
     },
-    status:"Completed",
+    status: 'Completed',
     user: {
       id: 1,
-      firstName: "John Patrick",
-      lastName: "Madrigal"
+      firstName: 'John Patrick',
+      lastName: 'Madrigal',
     },
     earning: 16000.0,
   },
@@ -117,11 +117,11 @@ export const earnings = [
       address: 'Island in El Nido, Philippine',
       imageKey: '1.jpg',
     },
-    status:"Cancelled",
+    status: 'Cancelled',
     user: {
       id: 2,
-      firstName: "Ramil",
-      lastName: "Kaharian"
+      firstName: 'Ramil',
+      lastName: 'Kaharian',
     },
     earning: 2200.0,
   },
@@ -135,11 +135,11 @@ export const earnings = [
       address: 'Island in El Nido, Philippines',
       imageKey: '4.jpg',
     },
-    status:"Completed",
+    status: 'Completed',
     user: {
       id: 6,
-      firstName: "ArJhay",
-      lastName: "Andal"
+      firstName: 'ArJhay',
+      lastName: 'Andal',
     },
     earning: 2200.0,
   },
@@ -153,11 +153,11 @@ export const earnings = [
       address: 'Pasig City, Philippines',
       imageKey: '1.jpg',
     },
-    status:"Completed",
+    status: 'Completed',
     user: {
       id: 7,
-      firstName: "Richard",
-      lastName: "Dela Pena"
+      firstName: 'Richard',
+      lastName: 'Dela Pena',
     },
     earning: 2200.0,
   },
@@ -171,11 +171,11 @@ export const earnings = [
       address: 'Entire serviced apartment in Pasay, Philippines',
       imageKey: '2.jpg',
     },
-    status:"Cancelled",
+    status: 'Cancelled',
     user: {
       id: 8,
-      firstName: "John",
-      lastName: "jaen"
+      firstName: 'John',
+      lastName: 'jaen',
     },
     earning: 2200.0,
   },
@@ -189,11 +189,11 @@ export const earnings = [
       address: 'Entire villa in Lobo, Philippines',
       imageKey: '3.jpg',
     },
-    status:"Completed",
+    status: 'Completed',
     user: {
       id: 6,
-      firstName: "ArJhay",
-      lastName: "Andal"
+      firstName: 'ArJhay',
+      lastName: 'Andal',
     },
     earning: 10000,
   },
@@ -207,11 +207,11 @@ export const earnings = [
       address: 'Entire home in Silang, Philippines',
       imageKey: '5.jpg',
     },
-    status:"Completed",
+    status: 'Completed',
     user: {
       id: 6,
-      firstName: "ArJhay",
-      lastName: "Andal"
+      firstName: 'ArJhay',
+      lastName: 'Andal',
     },
     earning: 10000,
   },
@@ -225,11 +225,11 @@ export const earnings = [
       address: 'Entire condo in Makati, Philippines',
       imageKey: '4.jpg',
     },
-    status:"Cancelled",
+    status: 'Cancelled',
     user: {
       id: 9,
-      firstName: "Jose",
-      lastName: "Manalo"
+      firstName: 'Jose',
+      lastName: 'Manalo',
     },
     earning: 10000,
   },
@@ -243,11 +243,11 @@ export const earnings = [
       address: 'Entire home in Silang, Philippines',
       imageKey: '5.jpg',
     },
-    status:"Completed",
+    status: 'Completed',
     user: {
       id: 6,
-      firstName: "ArJhay",
-      lastName: "Andal"
+      firstName: 'ArJhay',
+      lastName: 'Andal',
     },
     earning: 5000,
   },
@@ -261,11 +261,11 @@ export const earnings = [
       address: 'Entire villa in Lobo, Philippines',
       imageKey: '3.jpg',
     },
-    status:"Completed",
+    status: 'Completed',
     user: {
       id: 9,
-      firstName: "Jose",
-      lastName: "Manalo"
+      firstName: 'Jose',
+      lastName: 'Manalo',
     },
     earning: 5000,
   },
@@ -279,11 +279,11 @@ export const earnings = [
       address: 'Entire serviced apartment in Pasay, Philippines',
       imageKey: '2.jpg',
     },
-    status:"Cancelled",
+    status: 'Cancelled',
     user: {
       id: 6,
-      firstName: "ArJhay",
-      lastName: "Andal"
+      firstName: 'ArJhay',
+      lastName: 'Andal',
     },
     earning: 5000,
   },
