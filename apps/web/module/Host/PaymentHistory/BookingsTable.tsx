@@ -5,7 +5,6 @@ import { createColumnHelper } from "@tanstack/react-table"
 import Link from "next/link"
 import Image from "next/image"
 import { Typography } from "@/common/components/ui/Typography"
-import { WidthWrapper } from "@/common/components/WidthWrapper"
 import formatCurrency from "@/common/helpers/formatCurrency"
 import { PaymentHistoryStatus } from "./components/Status"
 
