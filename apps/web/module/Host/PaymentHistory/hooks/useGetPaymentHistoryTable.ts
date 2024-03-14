@@ -4,7 +4,9 @@ import { useQuery } from "@tanstack/react-query"
 
 export async function getPaymentHistoryTable(date: string) {
   const apiService = new ApiService("mock")
-  return await apiService.get(`${API_URL_BOOKINGS}/payment-history/${date}/bookings`)
+  return await apiService.get(
+    `${API_URL_BOOKINGS}/payment-history/${date}/bookings`
+  )
 }
 
 function useGetPaymentHistoryTable(date: string) {
