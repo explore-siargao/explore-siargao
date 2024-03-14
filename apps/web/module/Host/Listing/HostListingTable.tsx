@@ -18,6 +18,49 @@ const statusEnum = {
   LIVE: "Live",
 }
 
+const listingsData: ListingsData[] = [
+  {
+    id: 1,
+    hostId: 101,
+    title: "Cozy Apartment in Downtown",
+    address: "123 Main St, City",
+    imageKey: "1.jpg",
+    status: "Active",
+  },
+  {
+    id: 2,
+    hostId: 102,
+    title: "Beachfront Villa",
+    address: "456 Beach Ave, Beach City",
+    imageKey: "2.jpg",
+    status: "Active",
+  },
+  {
+    id: 3,
+    hostId: 103,
+    title: "Mountain Cabin Retreat",
+    address: "789 Mountain Rd, Mountain Town",
+    imageKey: "3.jpg",
+    status: "Inactive",
+  },
+  {
+    id: 4,
+    hostId: 104,
+    title: "Luxury Penthouse Suite",
+    address: "101 Skyline Dr, City",
+    imageKey: "4.jpg",
+    status: "Active",
+  },
+  {
+    id: 5,
+    hostId: 105,
+    title: "Rustic Farmhouse",
+    address: "202 Farm Rd, Countryside",
+    imageKey: "5.jpg",
+    status: "Active",
+  },
+]
+
 const HostListing = () => {
   const { data, isPending } = useGetListingsByHost()
 
@@ -95,10 +138,7 @@ const HostListing = () => {
               </div>
             </Typography>
           </div>
-          <HostListingTable
-            data={data?.items as ListingsData[]}
-            columns={columns}
-          />
+          <HostListingTable data={listingsData} columns={columns} />
         </div>
       )}
     </WidthWrapper>
