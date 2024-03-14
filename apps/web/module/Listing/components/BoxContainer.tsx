@@ -124,7 +124,7 @@ const BoxContainer = ({
               variant={"p"}
               className="text-text-700 font-semibold underline"
             >
-              {price} <span className="font-normal">{dayTime}asdasd</span>
+              {price} <span className="font-normal">{dayTime}</span>
             </Typography>
           </div>
         </Link>

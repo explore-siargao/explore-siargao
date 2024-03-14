@@ -1,8 +1,8 @@
 "use client"
 import React from "react"
 import EarningsThisMonth from "./EarningsThisMonth"
-import EarningUpcoming from "./EarningUpcoming"
-import Paid from "./Paid"
+import EarningsUpcoming from "./EarningsUpcoming"
+import Paid from "./EarningsPaid"
 import useGetThisMonthEarnings from "../hooks/useGetThisMonthEarnings"
 import { Typography } from "@/common/components/ui/Typography"
 import { format } from "date-fns"
@@ -15,10 +15,7 @@ const Earnings = () => {
   const summaryData = [
     ["Gross earnings", "Adjustments", "Service fee", "Taxes withheld"],
     [
-      formatCurrency(
-        thisMonth?.item?.yearToDateSummary?.gross ?? "",
-        "Philippines"
-      ),
+      formatCurrency(94800, "Philippines"),
       formatCurrency(
         thisMonth?.item?.yearToDateSummary?.adjustment ?? "",
         "Philippines"
@@ -44,7 +41,7 @@ const Earnings = () => {
         </Typography>
 
         <EarningsThisMonth />
-        <EarningUpcoming />
+        <EarningsUpcoming />
         <Paid />
       </div>
       <div className="col-span-1 relative">
@@ -82,7 +79,7 @@ const Earnings = () => {
               variant="p"
               fontWeight="semibold"
             >
-              {formatCurrency(thisMonth?.item?.total, "Philippines")}
+              {formatCurrency(97800, "Philippines")}
             </Typography>
           </div>
         </div>
