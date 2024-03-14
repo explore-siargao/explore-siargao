@@ -148,9 +148,9 @@ const BookingsTable = () => {
     }),
   ]
   return (
-      <div className="pt-8">
-        <PaymentHistoryTable data={dummy} columns={columns} />
-      </div>
+    <div className="pt-8">
+      <PaymentHistoryTable data={dummy} columns={columns} />
+    </div>
   )
 }
 

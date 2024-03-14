@@ -31,9 +31,9 @@ const summaryData = {
 const Table = () => {
   return (
     <WidthWrapper
-    width="medium"
-    className="grid grid-cols-1 lg:grid-cols-4 gap-12 lg:gap-10 mt-28 md:mt-36"
-  >
+      width="medium"
+      className="grid grid-cols-1 lg:grid-cols-4 gap-12 lg:gap-10 mt-28 md:mt-36"
+    >
       <div className="lg:col-span-3">
         <Typography variant="h1" fontWeight="semibold" className="mb-2">
           Payment History

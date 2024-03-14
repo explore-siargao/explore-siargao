@@ -39,7 +39,7 @@ const GraphTab = () => {
           Payment History
         </Typography>
         <Tabs tabs={tabs} />
-        <Graph/>
+        <Graph />
       </div>
       <div className="col-span-1 relative">
         <OverAllSummary overAllSummaryData={summaryData} />

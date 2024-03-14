@@ -24,31 +24,31 @@ const PaymentHistoryGraph = () => {
   ]
 
   return (
-      <ResponsiveContainer width="100%" height={400}>
-        <BarChart
-          data={data}
-          margin={{
-            top: 40,
-            left: 10,
-          }}
-        >
-          <CartesianGrid />
-          <XAxis dataKey="name" />
-          <YAxis
-            tickFormatter={(value: number) =>
-              formatCurrency(value, "Philippines")
-            }
-          />
-          <Tooltip
-            formatter={(value: number) => formatCurrency(value, "Philippines")}
-          />
-          <Bar
-            dataKey="value"
-            fill="#9FC7C7"
-            activeBar={<Rectangle fill="#8BB3B3" />}
-          />
-        </BarChart>
-      </ResponsiveContainer>
+    <ResponsiveContainer width="100%" height={400}>
+      <BarChart
+        data={data}
+        margin={{
+          top: 40,
+          left: 10,
+        }}
+      >
+        <CartesianGrid />
+        <XAxis dataKey="name" />
+        <YAxis
+          tickFormatter={(value: number) =>
+            formatCurrency(value, "Philippines")
+          }
+        />
+        <Tooltip
+          formatter={(value: number) => formatCurrency(value, "Philippines")}
+        />
+        <Bar
+          dataKey="value"
+          fill="#9FC7C7"
+          activeBar={<Rectangle fill="#8BB3B3" />}
+        />
+      </BarChart>
+    </ResponsiveContainer>
   )
 }
 

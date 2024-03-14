@@ -15,7 +15,7 @@ import HostListingTable, {
 const statusEnum = {
   PENDING: "Pending",
   DECLINED: "Declined",
-  LIVE: "Live", 
+  LIVE: "Live",
 }
 
 const listingsData: ListingsData[] = [
@@ -59,8 +59,7 @@ const listingsData: ListingsData[] = [
     imageKey: "5.jpg",
     status: "Active",
   },
-];
-
+]
 
 const HostListing = () => {
   const { data, isPending } = useGetListingsByHost()
@@ -139,10 +138,7 @@ const HostListing = () => {
               </div>
             </Typography>
           </div>
-          <HostListingTable
-            data={listingsData}
-            columns={columns}
-          />
+          <HostListingTable data={listingsData} columns={columns} />
         </div>
       )}
     </WidthWrapper>
