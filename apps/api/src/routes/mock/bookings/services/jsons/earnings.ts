@@ -1,6 +1,6 @@
 export const earnings = [
   {
-    date: '2024-02-01 00:09:08.728',
+    date: '2023-02-01 00:09:08.728',
     dateFrom: '2024-02-01 00:09:08.728',
     dateTo: '2024-02-10 00:09:08.728',
     Listing: {
@@ -8,6 +8,12 @@ export const earnings = [
       title: 'Glamping in Lincoln National Park September Beach',
       address: 'Pasig City, Philippines',
       imageKey: '1.jpg',
+    },
+    status:"Completed",
+    user: {
+      id: 1,
+      firstName: "John Patrick",
+      lastName: "Madrigal"
     },
     earning: 22000.25,
   },
@@ -21,6 +27,12 @@ export const earnings = [
       address: 'Makati City, Philippines',
       imageKey: '2.jpg',
     },
+    status:"Completed",
+    user: {
+      id: 2,
+      firstName: "Ramil",
+      lastName: "Kaharian"
+    },
     earning: 11000.0,
   },
   {
@@ -32,6 +44,12 @@ export const earnings = [
       title: 'Casita Isabella Tiny House on wheels',
       address: 'Tiny home in Tagaytay, Philippines',
       imageKey: '3.jpg',
+    },
+    status:"Cancelled",
+    user: {
+      id: 3,
+      firstName: "Jose",
+      lastName: "Rizal"
     },
     earning: 6700.0,
   },
@@ -45,6 +63,12 @@ export const earnings = [
       address: 'Island in El Nido, Philippines',
       imageKey: '4.jpg',
     },
+    status:"Cancelled",
+    user: {
+      id: 4,
+      firstName: "Andres",
+      lastName: "Bonifacio"
+    },
     earning: 12500.0,
   },
   {
@@ -56,6 +80,12 @@ export const earnings = [
       title: 'Cabin 1 - Mountainside luxury cabin w Batulao view',
       address: 'Entire cabin in Calaca, Philippines',
       imageKey: '5.jpg',
+    },
+    status:"Completed",
+    user: {
+      id: 1,
+      firstName: "John Patrick",
+      lastName: "Madrigal"
     },
     earning: 22000.0,
   },
@@ -69,6 +99,12 @@ export const earnings = [
       address: 'Island in El Nido, Philippine',
       imageKey: '1.jpg',
     },
+    status:"Completed",
+    user: {
+      id: 1,
+      firstName: "John Patrick",
+      lastName: "Madrigal"
+    },
     earning: 16000.0,
   },
   {
@@ -80,6 +116,12 @@ export const earnings = [
       title: 'Exclusive Private Island + Brother Island, El Nido',
       address: 'Island in El Nido, Philippine',
       imageKey: '1.jpg',
+    },
+    status:"Cancelled",
+    user: {
+      id: 2,
+      firstName: "Ramil",
+      lastName: "Kaharian"
     },
     earning: 2200.0,
   },
@@ -93,6 +135,12 @@ export const earnings = [
       address: 'Island in El Nido, Philippines',
       imageKey: '4.jpg',
     },
+    status:"Completed",
+    user: {
+      id: 6,
+      firstName: "ArJhay",
+      lastName: "Andal"
+    },
     earning: 2200.0,
   },
   {
@@ -104,6 +152,12 @@ export const earnings = [
       title: 'Glamping in Lincoln National Park September Beach',
       address: 'Pasig City, Philippines',
       imageKey: '1.jpg',
+    },
+    status:"Completed",
+    user: {
+      id: 7,
+      firstName: "Richard",
+      lastName: "Dela Pena"
     },
     earning: 2200.0,
   },
@@ -117,6 +171,12 @@ export const earnings = [
       address: 'Entire serviced apartment in Pasay, Philippines',
       imageKey: '2.jpg',
     },
+    status:"Cancelled",
+    user: {
+      id: 8,
+      firstName: "John",
+      lastName: "jaen"
+    },
     earning: 2200.0,
   },
   {
@@ -128,6 +188,12 @@ export const earnings = [
       title: 'Cozy Beach House in Lobo',
       address: 'Entire villa in Lobo, Philippines',
       imageKey: '3.jpg',
+    },
+    status:"Completed",
+    user: {
+      id: 6,
+      firstName: "ArJhay",
+      lastName: "Andal"
     },
     earning: 10000,
   },
@@ -141,6 +207,12 @@ export const earnings = [
       address: 'Entire home in Silang, Philippines',
       imageKey: '5.jpg',
     },
+    status:"Completed",
+    user: {
+      id: 6,
+      firstName: "ArJhay",
+      lastName: "Andal"
+    },
     earning: 10000,
   },
   {
@@ -152,6 +224,12 @@ export const earnings = [
       title: 'Stunning View | Wood House in Poblacion Makati',
       address: 'Entire condo in Makati, Philippines',
       imageKey: '4.jpg',
+    },
+    status:"Cancelled",
+    user: {
+      id: 9,
+      firstName: "Jose",
+      lastName: "Manalo"
     },
     earning: 10000,
   },
@@ -165,6 +243,12 @@ export const earnings = [
       address: 'Entire home in Silang, Philippines',
       imageKey: '5.jpg',
     },
+    status:"Completed",
+    user: {
+      id: 6,
+      firstName: "ArJhay",
+      lastName: "Andal"
+    },
     earning: 5000,
   },
   {
@@ -177,6 +261,12 @@ export const earnings = [
       address: 'Entire villa in Lobo, Philippines',
       imageKey: '3.jpg',
     },
+    status:"Completed",
+    user: {
+      id: 9,
+      firstName: "Jose",
+      lastName: "Manalo"
+    },
     earning: 5000,
   },
   {
@@ -188,6 +278,12 @@ export const earnings = [
       title: 'Overlooking Penthouse Manila Bay Suite w Pool 1 BR',
       address: 'Entire serviced apartment in Pasay, Philippines',
       imageKey: '2.jpg',
+    },
+    status:"Cancelled",
+    user: {
+      id: 6,
+      firstName: "ArJhay",
+      lastName: "Andal"
     },
     earning: 5000,
   },

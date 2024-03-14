@@ -9,6 +9,8 @@ import { getThisMonthBookings } from './services/thisMonthBooking'
 import { getPaidBookings } from './services/paidBooking'
 import { getUpcomingBookings } from './services/upcomingBooking'
 import { getMonthYearBookings } from './services/monthYearBooking'
+import { getPaymentHistoryGraph } from './services/paymentHistoryGraph'
+import { getPaymentHistoryTable } from './services/paymentHistoryTable'
 
 const router = express.Router()
 
@@ -27,4 +29,7 @@ router.get('/earnings/paid/bookings', getPaidBookings)
 router.get('/earnings/:monthYear', getMonthYearEarnings)
 router.get('/earnings/:monthYear/bookings', getMonthYearBookings)
 
+//payment history
+router.get('/payment-history/:date', getPaymentHistoryGraph)
+router.get('/payment-history/:date/bookings', getPaymentHistoryTable)
 export default router
