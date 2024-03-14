@@ -17,7 +17,7 @@ import useGetMonthYearEarningsWithBookings from "../Host/hooks/useGetMonthYearEa
 const LandingPage = () => {
   const userId = useSessionStore((state) => state).id
   const { data, isPending } = useGetAllBookings()
-  const {data:earnings} = useGetMonthYearEarningsWithBookings("march-2024")
+  const { data: earnings } = useGetMonthYearEarningsWithBookings("march-2024")
   return (
     <WidthWrapper className="my-24 lg:my-36">
       {isPending ? (

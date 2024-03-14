@@ -4,7 +4,9 @@ import { useQuery } from "@tanstack/react-query"
 
 export async function getThisMonthEarnings() {
   const apiService = new ApiService("mock")
-  return await apiService.get(`${API_URL_BOOKINGS}/earnings/this-month/bookings`)
+  return await apiService.get(
+    `${API_URL_BOOKINGS}/earnings/this-month/bookings`
+  )
 }
 
 function useGetThisMonthEarningsWithBookings() {
