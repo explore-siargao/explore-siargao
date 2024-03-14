@@ -75,23 +75,33 @@ export const getPaymentHistoryTable = async (req: Request, res: Response) => {
     return false // Return false if none of the conditions are met
   })
 
-    const getBookings = earnings.filter((item) => {
-        const dateYear = new Date(item.date).getFullYear();
-        const dateCompleted = new Date(item.date).toLocaleDateString("en-US", { month: "2-digit", day: "2-digit", year: "numeric" });
-        const month = new Date(item.date).toLocaleDateString("en-US", { month: "long" });
-        const year = new Date(item.date).toLocaleDateString("en-US", { year: "numeric" });
-        const monthYear = `${month}-${year}`;
-        if (dateType === "all") {
-            return item.status === "Completed" || item.status==="Cancelled";
-        } else if (dateType === String(dateYear)) {
-            return String(dateYear) === dateType;
-        } else if (completedDate === dateCompleted) {
-            return  completedDate === dateCompleted;
-        } else if (dateType?.toLocaleLowerCase() === monthYear.toLocaleLowerCase()) {
-            return (dateType.toLocaleLowerCase() === monthYear.toLocaleLowerCase());
-        }
-        return false
-    });
+  const getBookings = earnings.filter((item) => {
+    const dateYear = new Date(item.date).getFullYear()
+    const dateCompleted = new Date(item.date).toLocaleDateString('en-US', {
+      month: '2-digit',
+      day: '2-digit',
+      year: 'numeric',
+    })
+    const month = new Date(item.date).toLocaleDateString('en-US', {
+      month: 'long',
+    })
+    const year = new Date(item.date).toLocaleDateString('en-US', {
+      year: 'numeric',
+    })
+    const monthYear = `${month}-${year}`
+    if (dateType === 'all') {
+      return item.status === 'Completed' || item.status === 'Cancelled'
+    } else if (dateType === String(dateYear)) {
+      return String(dateYear) === dateType
+    } else if (completedDate === dateCompleted) {
+      return completedDate === dateCompleted
+    } else if (
+      dateType?.toLocaleLowerCase() === monthYear.toLocaleLowerCase()
+    ) {
+      return dateType.toLocaleLowerCase() === monthYear.toLocaleLowerCase()
+    }
+    return false
+  })
 
   // sums
   const sumOfCompleted = getCompletedStatus.reduce(
