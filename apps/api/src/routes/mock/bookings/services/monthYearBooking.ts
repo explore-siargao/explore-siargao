@@ -57,7 +57,7 @@ export const getMonthYearBookings = async (req: Request, res: Response) => {
     }
 
     earningsByDate[dateString]?.push(item.earning)
-    listing[dateString]?.push(item.Listing)
+    listing[dateString]?.push(item.listing)
     dateFrom[dateString]?.push(item.dateFrom)
     dateTo[dateString]?.push(item.dateTo)
   })
