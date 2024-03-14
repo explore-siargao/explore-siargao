@@ -148,11 +148,9 @@ const BookingsTable = () => {
     }),
   ]
   return (
-    <WidthWrapper className="mt-40 w-full">
-      <div className="px-12">
+      <div className="pt-8">
         <PaymentHistoryTable data={dummy} columns={columns} />
       </div>
-    </WidthWrapper>
   )
 }
 

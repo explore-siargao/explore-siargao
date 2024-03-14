@@ -10,7 +10,6 @@ import {
   ResponsiveContainer,
 } from "recharts"
 import formatCurrency from "@/common/helpers/formatCurrency"
-import { WidthWrapper } from "@/common/components/WidthWrapper"
 
 const dummyData = {
   completed: 2000,
@@ -25,13 +24,11 @@ const PaymentHistoryGraph = () => {
   ]
 
   return (
-    <WidthWrapper width="medium" className="mt-28 md:mt-36">
       <ResponsiveContainer width="100%" height={400}>
         <BarChart
           data={data}
           margin={{
             top: 40,
-            right: 90,
             left: 10,
           }}
         >
@@ -52,7 +49,6 @@ const PaymentHistoryGraph = () => {
           />
         </BarChart>
       </ResponsiveContainer>
-    </WidthWrapper>
   )
 }
 

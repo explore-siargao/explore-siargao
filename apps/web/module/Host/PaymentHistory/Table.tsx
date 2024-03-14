@@ -6,6 +6,7 @@ import Tabs from "@/common/components/Tabs"
 import formatCurrency from "@/common/helpers/formatCurrency"
 import { BarChart2, LucideTable } from "lucide-react"
 import OverAllSummary from "./components/OverAllSummary"
+import BookingsTable from "./BookingsTable"
 
 const tabs = [
   {
@@ -30,17 +31,15 @@ const summaryData = {
 const Table = () => {
   return (
     <WidthWrapper
-      width="medium"
-      className="grid grid-cols-1 lg:grid-cols-4 gap-12 lg:gap-16 mt-28 md:mt-36"
-    >
+    width="medium"
+    className="grid grid-cols-1 lg:grid-cols-4 gap-12 lg:gap-10 mt-28 md:mt-36"
+  >
       <div className="lg:col-span-3">
         <Typography variant="h1" fontWeight="semibold" className="mb-2">
           Payment History
         </Typography>
         <Tabs tabs={tabs} />
-        <div className="text-center justify-center pt-10 text-gray-400">
-          This is Table tab
-        </div>
+        <BookingsTable />
       </div>
       <div className="col-span-1 relative">
         <OverAllSummary overAllSummaryData={summaryData} />

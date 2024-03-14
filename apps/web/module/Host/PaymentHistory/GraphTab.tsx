@@ -5,12 +5,13 @@ import { WidthWrapper } from "@/common/components/WidthWrapper"
 import Tabs from "@/common/components/Tabs"
 import OverAllSummary from "./components/OverAllSummary"
 import formatCurrency from "@/common/helpers/formatCurrency"
-import { BarChart2, LucideTable } from "lucide-react"
+import { LucideBarChart, LucideTable } from "lucide-react"
+import Graph from "@/module/PaymentHistory/Graph"
 
 const tabs = [
   {
     name: "Graph",
-    icon: <BarChart2 size={20} />,
+    icon: <LucideBarChart size={20} />,
     link: "/hosting/payment-history/graph",
     isSelected: true,
   },
@@ -27,20 +28,18 @@ const summaryData = {
   ],
   total: formatCurrency(6000, "Philippines"),
 }
-const Graph = () => {
+const GraphTab = () => {
   return (
     <WidthWrapper
       width="medium"
-      className="grid grid-cols-1 lg:grid-cols-4 gap-12 lg:gap-16 mt-28 md:mt-36"
+      className="grid grid-cols-1 lg:grid-cols-4 gap-12 lg:gap-10 mt-28 md:mt-36"
     >
       <div className="lg:col-span-3">
         <Typography variant="h1" fontWeight="semibold" className="mb-2">
           Payment History
         </Typography>
         <Tabs tabs={tabs} />
-        <div className="text-center justify-center pt-10  text-gray-400">
-          This is Graph tab
-        </div>
+        <Graph/>
       </div>
       <div className="col-span-1 relative">
         <OverAllSummary overAllSummaryData={summaryData} />
@@ -49,4 +48,4 @@ const Graph = () => {
   )
 }
 
-export default Graph
+export default GraphTab

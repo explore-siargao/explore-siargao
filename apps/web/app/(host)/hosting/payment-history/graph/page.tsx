@@ -1,5 +1,5 @@
 import { PAYMENT_HISTORY } from "@/common/constants"
-import Graph from "@/module/Host/PaymentHistory/Graph"
+import GraphTab from "@/module/Host/PaymentHistory/GraphTab"
 import { APP_NAME } from "@repo/constants"
 import { Metadata } from "next"
 
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 }
 
 const GraphPage = () => {
-  return <Graph />
+  return <GraphTab />
 }
 
 export default GraphPage
