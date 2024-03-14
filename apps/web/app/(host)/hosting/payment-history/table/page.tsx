@@ -1,5 +1,5 @@
 import { PAYMENT_HISTORY } from "@/common/constants"
-import Table from "@/module/Host/PaymentHistory/Table"
+import TableTab from "@/module/Host/PaymentHistory/TableTab"
 import { APP_NAME } from "@repo/constants"
 import { Metadata } from "next"
 
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 }
 
 const TablePage = () => {
-  return <Table />
+  return <TableTab />
 }
 
 export default TablePage

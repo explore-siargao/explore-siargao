@@ -4,23 +4,10 @@ import { Typography } from "@/common/components/ui/Typography"
 import { WidthWrapper } from "@/common/components/WidthWrapper"
 import Tabs from "@/common/components/Tabs"
 import formatCurrency from "@/common/helpers/formatCurrency"
-import { BarChart2, LucideTable } from "lucide-react"
 import OverAllSummary from "./components/OverAllSummary"
 import BookingsTable from "./BookingsTable"
+import tabs from "./constants/tabs"
 
-const tabs = [
-  {
-    name: "Graph",
-    icon: <BarChart2 size={20} />,
-    link: "/hosting/payment-history/graph",
-  },
-  {
-    name: "Table",
-    icon: <LucideTable size={20} />,
-    link: "/hosting/payment-history/table",
-    isSelected: true,
-  },
-]
 const summaryData = {
   labels: ["Completed", "Cancelled"],
   values: [
@@ -28,7 +15,7 @@ const summaryData = {
   ],
   total: formatCurrency(6000, "Philippines"),
 }
-const Table = () => {
+const TableTab = () => {
   return (
     <WidthWrapper
       width="medium"
@@ -48,4 +35,4 @@ const Table = () => {
   )
 }
 
-export default Table
+export default TableTab

@@ -17,7 +17,7 @@ const dummyData = {
   total: 4000,
 }
 
-const PaymentHistoryGraph = () => {
+const Graph = () => {
   const data = [
     { name: "Cancelled", value: dummyData.cancelled },
     { name: "Completed", value: dummyData.completed },
@@ -52,4 +52,4 @@ const PaymentHistoryGraph = () => {
   )
 }
 
-export default PaymentHistoryGraph
+export default Graph

@@ -5,22 +5,9 @@ import { WidthWrapper } from "@/common/components/WidthWrapper"
 import Tabs from "@/common/components/Tabs"
 import OverAllSummary from "./components/OverAllSummary"
 import formatCurrency from "@/common/helpers/formatCurrency"
-import { LucideBarChart, LucideTable } from "lucide-react"
-import Graph from "@/module/PaymentHistory/Graph"
+import Graph from "@/module/Host/PaymentHistory/Graph"
+import tabs from "./constants/tabs"
 
-const tabs = [
-  {
-    name: "Graph",
-    icon: <LucideBarChart size={20} />,
-    link: "/hosting/payment-history/graph",
-    isSelected: true,
-  },
-  {
-    name: "Table",
-    icon: <LucideTable size={20} />,
-    link: "/hosting/payment-history/table",
-  },
-]
 const summaryData = {
   labels: ["Completed", "Cancelled"],
   values: [
