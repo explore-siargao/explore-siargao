@@ -28,14 +28,14 @@ const Paid = () => {
 
   return (
     <div className="mt-8">
-      {data?.item && data.item.amount.length > 0 ? (
+      {data?.item && data.item.months.length > 0 ? (
         <Chart
           width="100%"
           height={400}
           isPending={isPending}
-          data={data.item.amount}
+          data={data.item.months}
           type={ChartType.paid}
-          totalAmount={data.item.total}
+          totalAmount={data.item.summary.totalEarnings}
         />
       ) : (
         <div className="p-4">

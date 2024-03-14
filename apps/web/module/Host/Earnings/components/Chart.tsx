@@ -56,16 +56,31 @@ const Chart = ({
   type,
 }: ChartProps) => {
   let title = ""
-
+let options = {}
   switch (type) {
     case ChartType.upcoming:
       title = "Your upcoming earnings"
+      options ={
+        year: "numeric",
+        month: "long",
+        day:"2-digit"
+      }
       break
     case ChartType.paid:
       title = "Your paid earnings"
+      options={
+        year: "numeric",
+        month: "2-digit",
+        day:"2-digit"
+      }
       break
     case ChartType["this-month"]:
       title = "You've made"
+      options={
+        year: "numeric",
+        month: "long",
+        day:"2-digit"
+      }
       break
     default:
       title = "Earnings"
@@ -98,10 +113,7 @@ const Chart = ({
           <XAxis
             dataKey="date"
             tickFormatter={(value: string) =>
-              new Date(value).toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "long",
-              })
+              new Date(value).toLocaleDateString("en-US", options)
             }
           />
           <YAxis

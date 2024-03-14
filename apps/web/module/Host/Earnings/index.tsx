@@ -8,27 +8,28 @@ import { Typography } from "@/common/components/ui/Typography"
 import { format } from "date-fns"
 import formatCurrency from "@/common/helpers/formatCurrency"
 import { WidthWrapper } from "@/common/components/WidthWrapper"
+import useGetPaidEarnings from "../hooks/useGetPaidEarnings"
 
 const Earnings = () => {
-  const { data: thisMonth } = useGetThisMonthEarnings()
+  const { data: thisMonth } = useGetPaidEarnings()
   const currentDate = new Date()
   const summaryData = [
     ["Gross earnings", "Adjustments", "Service fee", "Taxes withheld"],
     [
       formatCurrency(
-        thisMonth?.item?.yearToDateSummary?.gross ?? "",
+        thisMonth?.item?.summary?.gross ?? "",
         "Philippines"
       ),
       formatCurrency(
-        thisMonth?.item?.yearToDateSummary?.adjustment ?? "",
+        thisMonth?.item?.summary?.adjustments ?? "",
         "Philippines"
       ),
       formatCurrency(
-        thisMonth?.item?.yearToDateSummary?.serviceFee ?? "",
+        thisMonth?.item?.summary?.service ?? "",
         "Philippines"
       ),
       formatCurrency(
-        thisMonth?.item?.yearToDateSummary?.tax ?? "",
+        thisMonth?.item?.summary?.tax ?? "",
         "Philippines"
       ),
     ],
@@ -82,7 +83,7 @@ const Earnings = () => {
               variant="p"
               fontWeight="semibold"
             >
-              {formatCurrency(thisMonth?.item?.total, "Philippines")}
+              {formatCurrency(thisMonth?.item?.summary.totalEarnings as number, "Philippines")}
             </Typography>
           </div>
         </div>

@@ -8,10 +8,10 @@ const EarningsThisMonth = () => {
     useGetThisMonthEarnings()
   return (
     <div className="mt-4">
-      {thisMonth?.item && thisMonth.item.amount.length > 0 ? (
+      {thisMonth?.item && thisMonth.item.days.length > 0 ? (
         <Chart
-          data={thisMonth.item.amount}
-          totalAmount={thisMonth.item.total}
+          data={thisMonth.item.days}
+          totalAmount={thisMonth.item.summary.totalEarnings}
           isPending={thisMonthIsPending}
           width="100%"
           height={400}

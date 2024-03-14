@@ -33,10 +33,10 @@ const EarningUpcoming = () => {
   ]
   return (
     <div className="mt-8">
-      {upcoming?.item && upcoming.item.amount.length > 0 ? (
+      {upcoming?.item && upcoming.item.months.length > 0 ? (
         <Chart
-          data={upcoming.item.amount}
-          totalAmount={upcoming.item.total}
+          data={upcoming.item.months}
+          totalAmount={upcoming.item.summary.totalEarnings}
           isPending={upcomingIsPending}
           width="100%"
           height={400}
