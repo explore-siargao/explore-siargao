@@ -1,4 +1,4 @@
-import { MapContainer, TileLayer, Marker, FeatureGroup } from "react-leaflet"
+import { MapContainer, TileLayer, Marker } from "react-leaflet"
 import "leaflet/dist/leaflet.css"
 import { useEffect, useRef, useState } from "react"
 import MapCustomPopup from "@/common/components/MapCustomPopup"
@@ -6,15 +6,24 @@ import { Icon } from "leaflet"
 import useSessionStore from "@/common/store/useSessionStore"
 import { useParams } from "next/navigation"
 import useGetWishGroupByUserAndTitle from "../hooks/useGetWishGroupByUserAndTitle"
+import useMarkerHoverStore from "@/common/store/useMarkerHoverStore"
 
 const navIcon = new Icon({
-  iconUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png",
+  iconUrl: "/primary-marker.svg",
+  iconAnchor: [12, 0],
+})
+
+const navIconHover = new Icon({
+  iconUrl: "/secondary-marker.svg",
   iconAnchor: [12, 0],
 })
 
 const WorldMap = () => {
   const mapRef = useRef(null)
   const [markerRefs, setMarkerRefs] = useState([])
+
+  const isHover = useMarkerHoverStore((state) => state.isHover)
+  const selectedHoverMarker = useMarkerHoverStore((state) => state.selectedItem)
 
   const session = useSessionStore((state) => state)
   const params = useParams()
@@ -60,6 +69,7 @@ const WorldMap = () => {
         item.listing.latitude,
         item.listing.longitude,
       ])
+
       // @ts-ignore
       map.target.fitBounds([bounds])
     }
@@ -90,7 +100,11 @@ const WorldMap = () => {
             <Marker
               key={index}
               position={[item.listing.latitude, item.listing.longitude]}
-              icon={navIcon}
+              icon={
+                selectedHoverMarker === item.id && isHover
+                  ? navIconHover
+                  : navIcon
+              }
               // @ts-ignore
               ref={(el) => (markerRefs[index] = el)}
             >
