@@ -14,7 +14,7 @@ export const getThisMonthEarnings = async (req: Request, res: Response) => {
   // Iterate over each day of the current month
   for (let day = 1; day <= now.getDate(); day++) {
     const currentDate = new Date(currentYear, currentMonth, day)
-    currentDate.setDate(currentDate.getDate()+1)
+    currentDate.setDate(currentDate.getDate() + 1)
     const dateString = currentDate.toISOString().split('T')[0]
     // Initialize earnings for the current date as 0
     earningsByDate[dateString as string] = 0
@@ -28,7 +28,7 @@ export const getThisMonthEarnings = async (req: Request, res: Response) => {
     if (
       earningDate.getFullYear() === currentYear &&
       earningDate.getMonth() === currentMonth &&
-      dateString as string in earningsByDate
+      (dateString as string) in earningsByDate
     ) {
       earningsByDate[dateString as string] += Number(earning.earning)
     }

@@ -75,7 +75,9 @@ const Earnings = () => {
               fontWeight="semibold"
             >
               {formatCurrency(
-                thisMonth?.item?.summary?.totalEarnings?  thisMonth?.item?.summary?.totalEarnings : 0,
+                thisMonth?.item?.summary?.totalEarnings
+                  ? thisMonth?.item?.summary?.totalEarnings
+                  : 0,
                 "Philippines"
               )}
             </Typography>

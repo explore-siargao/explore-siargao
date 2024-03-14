@@ -43,7 +43,7 @@ const EarningsPaid = () => {
             Payouts are sent after guests check in.{" "}
             <button className="underline">Learn how payouts work</button>
           </Typography>
-          </>
+        </>
       )}
     </div>
   )
