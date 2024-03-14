@@ -85,7 +85,12 @@ function Header({
                     </div>
                   )}
                   <div>
-                    {isHost ? (
+                    {!path.includes("/hosting") && !isHost && (
+                      <Button variant="primary" size="sm" onClick={openModal}>
+                        Apply to Host
+                      </Button>
+                    )}
+                    {isHost && !path.includes("/hosting") && (
                       <Button
                         variant="ghost"
                         className="underline font-semibold"
@@ -93,10 +98,6 @@ function Header({
                         onClick={() => router.push("/hosting")}
                       >
                         Manage Listing
-                      </Button>
-                    ) : (
-                      <Button variant="primary" size="sm" onClick={openModal}>
-                        Apply to Host
                       </Button>
                     )}
                   </div>
