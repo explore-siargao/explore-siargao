@@ -52,7 +52,6 @@ export const getPaymentHistoryTable = async(req: Request, res: Response) => {
         const month = new Date(item.date).toLocaleDateString("en-US", { month: "long" });
         const year = new Date(item.date).toLocaleDateString("en-US", { year: "numeric" });
         const monthYear = `${month}-${year}`;
-
         if (dateType === "all") {
             return item.status === "Completed" || item.status==="Cancelled";
         } else if (dateType === String(dateYear)) {
