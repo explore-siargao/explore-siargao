@@ -4,6 +4,7 @@ import { MedalIcon } from "lucide-react"
 import { Typography } from "@/common/components/ui/Typography"
 import { ASSET_ROOT } from "@/common/constants/index"
 import { ProfileCardProps } from "../types/ProfileCard"
+import { APP_NAME } from "@repo/constants"
 
 const ProfileCard = ({
   name,
@@ -38,10 +39,10 @@ const ProfileCard = ({
             variant="h5"
             className="flex justify-center items-center font-semibold"
           >
-            {hostStatus}
+            {hostStatus === "Host" ? "Host" : "Guest"}
           </Typography>
         </div>
-        <div className="col-span-2">
+        <div className="col-span-2 flex flex-col justify-center">
           <Typography variant="h2" fontWeight="semibold">
             {reviewsCount}
           </Typography>
@@ -49,21 +50,25 @@ const ProfileCard = ({
             Reviews
           </Typography>
           <hr className="mt-3 mb-2" />
-          <div className="flex items-center gap-1">
-            <Typography variant="h2" fontWeight="semibold">
-              {rating}
-            </Typography>
-            <StarIcon className="h-4 w-4" />
-          </div>
-          <Typography variant="h6" fontWeight="semibold">
-            Rating
-          </Typography>
-          <hr className="mt-3 mb-2" />
+          {hostStatus === "Host" && (
+            <>
+              <div className="flex items-center gap-1">
+                <Typography variant="h2" fontWeight="semibold">
+                  {rating}
+                </Typography>
+                <StarIcon className="h-4 w-4" />
+              </div>
+              <Typography variant="h6" fontWeight="semibold">
+                Rating
+              </Typography>
+              <hr className="mt-3 mb-2" />
+            </>
+          )}
           <Typography variant="h2" fontWeight="semibold">
             {hostingMonthAge ? hostingMonthAge : 0}
           </Typography>
           <Typography variant="h6" fontWeight="semibold">
-            Months hosting
+            {hostStatus === "Host" ? "Months hosting" : "Years on " + APP_NAME}
           </Typography>
         </div>
       </div>
