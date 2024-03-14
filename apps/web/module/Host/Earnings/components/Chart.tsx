@@ -56,6 +56,36 @@ const Chart = ({
   type,
   earningType,
 }: ChartProps) => {
+  let title = ""
+  let options = {}
+  switch (type) {
+    case ChartType.upcoming:
+      title = "Your upcoming earnings"
+      options = {
+        year: "numeric",
+        month: "long",
+        day: "2-digit",
+      }
+      break
+    case ChartType.paid:
+      title = "Your paid earnings"
+      options = {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+      }
+      break
+    case ChartType["this-month"]:
+      title = "You've made"
+      options = {
+        year: "numeric",
+        month: "long",
+        day: "2-digit",
+      }
+      break
+    default:
+      title = "Earnings"
+  }
   const router = useRouter()
 
   return (
@@ -131,7 +161,9 @@ const Chart = ({
             const selectedDay = format(new Date(value.date), "d")
             const selectedYear = format(new Date(value.date), "yyyy")
 
-            router.push(`/host/earnings/${selectedMonth}-${selectedYear}/graph`)
+            router.push(
+              `/hosting/earnings/${selectedMonth}-${selectedYear}/graph`
+            )
           }}
         />
       </BarChart>

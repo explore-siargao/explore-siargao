@@ -9,7 +9,7 @@ const EarningsThisMonth = () => {
     useGetThisMonthEarnings()
   return (
     <div className="mt-4">
-      {thisMonth?.item && thisMonth.item.amount.length > 0 ? (
+      {thisMonth?.item && thisMonth.item.days.length > 0 ? (
         <>
           <div>
             <Typography variant="h1" className="text-[30px]">
@@ -17,13 +17,16 @@ const EarningsThisMonth = () => {
               <span className="text-gray-400">
                 {thisMonthIsPending
                   ? formatCurrency(0.0, "Philippines")
-                  : formatCurrency(thisMonth.item.total, "Philippines")}
+                  : formatCurrency(
+                      thisMonth.item.summary.totalEarnings,
+                      "Philippines"
+                    )}
               </span>{" "}
               this month
             </Typography>
           </div>
           <Chart
-            data={thisMonth.item.amount}
+            data={thisMonth.item.days}
             isPending={thisMonthIsPending}
             width="100%"
             height={400}

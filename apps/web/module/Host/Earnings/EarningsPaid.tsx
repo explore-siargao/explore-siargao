@@ -6,27 +6,11 @@ import useGetPaidEarnings from "../hooks/useGetPaidEarnings"
 import Chart, { ChartType } from "./components/Chart"
 
 const EarningsPaid = () => {
-  const currentDate = new Date()
   const { data, isPending } = useGetPaidEarnings()
-  const summaryData = [
-    ["Gross earnings", "Adjustments", "Service fee", "Taxes withheld"],
-    [
-      formatCurrency(data?.item?.yearToDateSummary?.gross ?? "", "Philippines"),
-      formatCurrency(
-        data?.item?.yearToDateSummary?.adjustment ?? "",
-        "Philippines"
-      ),
-      formatCurrency(
-        data?.item?.yearToDateSummary?.serviceFee ?? "",
-        "Philippines"
-      ),
-      formatCurrency(data?.item?.yearToDateSummary?.tax ?? "", "Philippines"),
-    ],
-  ]
 
   return (
     <div className="mt-8">
-      {data?.item && data.item.amount.length > 0 ? (
+      {data?.item && data.item.months.length > 0 ? (
         <>
           <div>
             <Typography variant="h1" className="text-[30px]">
@@ -34,7 +18,10 @@ const EarningsPaid = () => {
               <span className="text-gray-400">
                 {isPending
                   ? formatCurrency(0.0, "Philippines")
-                  : formatCurrency(data.item.total, "Philippines")}
+                  : formatCurrency(
+                      data.item.summary.totalEarnings,
+                      "Philippines"
+                    )}
               </span>
             </Typography>
           </div>
@@ -42,7 +29,7 @@ const EarningsPaid = () => {
             width="100%"
             height={400}
             isPending={isPending}
-            data={data.item.amount}
+            data={data.item.months}
             type={ChartType["this-month"]}
             earningType="monthly"
           />

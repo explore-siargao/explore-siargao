@@ -7,7 +7,6 @@ import useGetThisMonthEarnings from "../hooks/useGetThisMonthEarnings"
 import Chart, { ChartType } from "./components/Chart"
 import Tabs from "@/common/components/Tabs"
 import { BarChart2, Table } from "lucide-react"
-import { useState } from "react"
 
 const months = {
   january: 0,
@@ -25,13 +24,15 @@ const months = {
 }
 
 const EarningDetails = () => {
-  const { type, date } = useParams()
+  const { type, date } = useParams<{ type: string; date: string }>()
   const [monthName, year] = date.toLowerCase().split("-")
 
-  let dateObject
+  let dateObject = ""
 
+  // @ts-expect-error
   const month = months[monthName]
   if (month !== undefined) {
+    // @ts-expect-error
     dateObject = new Date(year, month)
   }
 
@@ -39,13 +40,13 @@ const EarningDetails = () => {
     {
       name: "Graph",
       icon: <BarChart2 className="h-4 w-4" />,
-      link: `/host/earnings/${monthName}-${year}/graph`,
+      link: `/hosting/earnings/${monthName}-${year}/graph`,
       isSelected: type === "graph",
     },
     {
       name: "Table",
       icon: <Table className="h-4 w-4" />,
-      link: `/host/earnings/${monthName}-${year}/table`,
+      link: `/hosting/earnings/${monthName}-${year}/table`,
       isSelected: type === "table",
     },
   ]
@@ -80,14 +81,14 @@ const EarningDetails = () => {
         <Typography variant="h1" fontWeight="semibold">
           Earnings for {format(new Date(dateObject), "MMMM yyyy")}
         </Typography>
-        {thisMonth?.item && thisMonth.item.amount.length > 0 ? (
+        {thisMonth?.item && thisMonth.item.days.length > 0 ? (
           <>
             <div className="mt-3 lg:pr-[89px]">
               <Tabs tabs={tabs}></Tabs>
             </div>
             {type === "graph" ? (
               <Chart
-                data={thisMonth.item.amount}
+                data={thisMonth.item.days}
                 isPending={thisMonthIsPending}
                 width="100%"
                 height={400}
@@ -116,6 +117,7 @@ const EarningDetails = () => {
           <Typography variant="p" className="text-gray-400 pb-4">
             {format(new Date(dateObject), "MMMM d")} -{" "}
             {format(
+              // @ts-expect-error
               new Date(dateObject.getFullYear(), dateObject.getMonth() + 1, 0),
               "MMMM d, yyyy"
             )}
