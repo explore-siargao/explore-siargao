@@ -7,8 +7,6 @@ import { WidthWrapper } from "@/common/components/WidthWrapper"
 import tabs from "./constants/tabs"
 
 const RoomTypeTab = () => {
- 
-
   return (
     <WidthWrapper
       width="medium"
