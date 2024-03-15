@@ -6,8 +6,13 @@ import {
 import Pagination from "./Pagination"
 
 export interface PaymentHistoryBookingsData {
-  bookings: {
-    listing: string
+  date:string
+    listing:{
+      id: number,
+      title: string
+      address: string
+      imageKey: string
+    }
     user: {
       id: number
       firstName: string
@@ -15,10 +20,10 @@ export interface PaymentHistoryBookingsData {
     }
     dateFrom: string
     dateTo: string
-    earnings: number
+    earning: number
     status: string
   }
-}
+
 
 interface TableProps {
   data: PaymentHistoryBookingsData[]
