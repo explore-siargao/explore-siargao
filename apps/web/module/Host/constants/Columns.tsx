@@ -1,4 +1,3 @@
-
 import { Typography } from "@/common/components/ui/Typography"
 import formatCurrency from "@/common/helpers/formatCurrency"
 import { createColumnHelper } from "@tanstack/react-table"
@@ -15,7 +14,7 @@ const statusEnum = {
 const columnHelper = createColumnHelper<PaymentHistoryBookingsData>()
   export const ColumnsTab = [
     columnHelper.accessor("listing", {
-      header: "listing",
+      header: "Listing",
       cell: (listing) => (
         <Link href="/profile">
           <div className="flex items-center gap-5">

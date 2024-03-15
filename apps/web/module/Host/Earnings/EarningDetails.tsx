@@ -3,7 +3,6 @@ import { Typography } from "@/common/components/ui/Typography"
 import { format } from "date-fns"
 import formatCurrency from "@/common/helpers/formatCurrency"
 import { WidthWrapper } from "@/common/components/WidthWrapper"
-import useGetThisMonthEarnings from "../hooks/useGetThisMonthEarnings"
 import Chart, { ChartType } from "./components/Chart"
 import Tabs from "@/common/components/Tabs"
 import { BarChart2, Table } from "lucide-react"
@@ -28,7 +27,6 @@ const months = {
 const EarningDetails = () => {
   const { type, date } = useParams<{ type: string; date: string }>()
   const [monthName, year] = date.toLowerCase().split("-")
-  
 
   let dateObject = ""
 
@@ -89,21 +87,20 @@ const EarningDetails = () => {
             <div className="mt-3 lg:pr-[89px]">
               <Tabs tabs={tabs}></Tabs>
             </div>
-            {type === "graph" ? (
-              <Chart
-                data={thisMonth.item.days}
-                isPending={thisMonthIsPending}
-                width="100%"
-                height={400}
-                type={ChartType["this-month"]}
-                earningType="daily"
-              />
-            ) : (
-              <Typography fontWeight="semibold" variant="p" className="mt-8">
-                This is table view of earnings.
+            <div className=" lg:pr-[89px]">
+              {type === "graph" ? (
+                <Chart
+                  data={thisMonth.item.days}
+                  isPending={thisMonthIsPending}
+                  width="100%"
+                  height={400}
+                  type={ChartType["this-month"]}
+                  earningType="daily"
+                />
+              ) : (
                 <MonthlyEarningTable date={date} />
-              </Typography>
-            )}
+              )}
+            </div>
           </>
         ) : (
           <>
@@ -113,6 +110,7 @@ const EarningDetails = () => {
           </>
         )}
       </div>
+
       <div className="col-span-1 relative">
         <div className="bg-white rounded-lg shadow-lg p-8 sticky top-36">
           <Typography variant="h2" fontWeight="semibold">
