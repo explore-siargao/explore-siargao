@@ -12,12 +12,11 @@ import {
 import formatCurrency from "@/common/helpers/formatCurrency"
 import useGetPaymentHistoryGraph from "./hooks/useGetPaymentHistoryGraph"
 
-
 const Graph = () => {
-  const {data:graphData, isPending} = useGetPaymentHistoryGraph("all")
+  const { data: graphData, isPending } = useGetPaymentHistoryGraph("all")
   const data = [
     { name: "Cancelled", value: !isPending && graphData?.item?.cancelled },
-    { name: "Completed", value: !isPending && graphData?.item?.completed},
+    { name: "Completed", value: !isPending && graphData?.item?.completed },
   ]
 
   return (

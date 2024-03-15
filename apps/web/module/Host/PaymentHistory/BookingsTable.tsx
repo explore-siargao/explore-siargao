@@ -16,7 +16,7 @@ const statusEnum = {
 }
 
 const BookingsTable = () => {
-  const {data:bookings, isPending} = useGetPaymentHistoryTable("all")
+  const { data: bookings, isPending } = useGetPaymentHistoryTable("all")
   const columnHelper = createColumnHelper<PaymentHistoryBookingsData>()
   const columns = [
     columnHelper.accessor("listing", {
@@ -40,17 +40,16 @@ const BookingsTable = () => {
       header: "User",
       cell: (user) => (
         <Typography variant="p">
-          {user.getValue()} {" "} {user.row.original.user.lastName} 
+          {user.getValue()} {user.row.original.user.lastName}
         </Typography>
       ),
     }),
     columnHelper.accessor("dateFrom", {
       header: "Date Range",
       cell: (dateRange) => {
-        const dateFrom = new Date(dateRange.getValue() as string).toLocaleDateString(
-          "en-US",
-          { month: "long", day: "2-digit" }
-        )
+        const dateFrom = new Date(
+          dateRange.getValue() as string
+        ).toLocaleDateString("en-US", { month: "long", day: "2-digit" })
         const dateTo = new Date(
           dateRange.row.original.dateTo as string
         ).toLocaleDateString("en-US", {
@@ -92,7 +91,14 @@ const BookingsTable = () => {
   ]
   return (
     <div className="pt-8">
-      <PaymentHistoryTable data={!isPending? bookings?.item?.bookings as PaymentHistoryBookingsData[] : []} columns={columns} />
+      <PaymentHistoryTable
+        data={
+          !isPending
+            ? (bookings?.item?.bookings as PaymentHistoryBookingsData[])
+            : []
+        }
+        columns={columns}
+      />
     </div>
   )
 }

@@ -2,11 +2,10 @@ import React from "react"
 import { Typography } from "@/common/components/ui/Typography"
 
 interface SummaryData {
-  labels: string[];
-  values: (string | null)[][];
-  total: string | null;
+  labels: string[]
+  values: (string | null)[][]
+  total: string | null
 }
-
 
 interface OverAllSummaryProps {
   overAllSummaryData: SummaryData
