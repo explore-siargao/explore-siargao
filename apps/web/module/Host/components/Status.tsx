@@ -21,26 +21,22 @@ export interface StatusDotProps
   children?: React.ReactNode
 }
 
-const StatusDot = React.forwardRef<
-  HTMLElement,
-  StatusDotProps
->(({ variant, className, children }, ref) => {
-  const StatusDotClass = StatusDotVariants({
-    variant,
-    className,
-  })
-  return (
-    <span
-      ref={ref}
-      className={cn(
-        "rounded-full w-2 h-2 inline-block mr-2",
-        StatusDotClass
-      )}
-    >
-      {children}
-    </span>
-  )
-})
+const StatusDot = React.forwardRef<HTMLElement, StatusDotProps>(
+  ({ variant, className, children }, ref) => {
+    const StatusDotClass = StatusDotVariants({
+      variant,
+      className,
+    })
+    return (
+      <span
+        ref={ref}
+        className={cn("rounded-full w-2 h-2 inline-block mr-2", StatusDotClass)}
+      >
+        {children}
+      </span>
+    )
+  }
+)
 StatusDot.displayName = "Status"
 
 export { StatusDot, StatusDotVariants }

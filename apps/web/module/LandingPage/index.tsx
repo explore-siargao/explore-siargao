@@ -36,8 +36,8 @@ const LandingPage = () => {
               />
             ))}
           </ul>
-          <HostListing/>
-          <BookingsTable/>
+          <HostListing />
+          <BookingsTable />
         </>
       )}
     </WidthWrapper>

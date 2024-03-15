@@ -111,26 +111,26 @@ const HostListing = () => {
   ]
   return (
     <WidthWrapper className="mt-40 w-full">
-        <div className="px-12">
-          <div className="mb-12">
-            <Typography
-              variant="h1"
-              fontWeight="semibold"
-              className="flex justify-between items-center pl-4"
-            >
-              Your listings
-              <div className="flex gap-5">
-                <span className="bg-white rounded-full p-2 cursor-pointer shadow-lg">
-                  <LucideTable />
-                </span>
-                <span className="bg-white rounded-full p-2 cursor-pointer shadow-lg">
-                  <LucidePlus />
-                </span>
-              </div>
-            </Typography>
-          </div>
-          <Table data={dummy} columns={columns} />
+      <div className="px-12">
+        <div className="mb-12">
+          <Typography
+            variant="h1"
+            fontWeight="semibold"
+            className="flex justify-between items-center pl-4"
+          >
+            Your listings
+            <div className="flex gap-5">
+              <span className="bg-white rounded-full p-2 cursor-pointer shadow-lg">
+                <LucideTable />
+              </span>
+              <span className="bg-white rounded-full p-2 cursor-pointer shadow-lg">
+                <LucidePlus />
+              </span>
+            </div>
+          </Typography>
         </div>
+        <Table data={dummy} columns={columns} />
+      </div>
     </WidthWrapper>
   )
 }
