@@ -41,6 +41,7 @@ export const getMonthYearBookings = async (req: Request, res: Response) => {
   const earningsByDate: { [date: string]: number[] } = {}
   const dateFrom: { [date: string]: string[] } = {}
   const dateTo: { [date: string]: string[] } = {}
+  const user: {[date:string]:object[]} ={}
 
   earnings.forEach((item) => {
     const itemDate = new Date(item.date)
@@ -52,12 +53,14 @@ export const getMonthYearBookings = async (req: Request, res: Response) => {
     if (!earningsByDate[dateString]) {
       earningsByDate[dateString] = []
       listing[dateString] = []
+      user[dateString] = []
       dateFrom[dateString] = []
       dateTo[dateString] = []
     }
 
     earningsByDate[dateString]?.push(item.earning)
     listing[dateString]?.push(item.listing)
+    user[dateString]?.push(item.user)
     dateFrom[dateString]?.push(item.dateFrom)
     dateTo[dateString]?.push(item.dateTo)
   })
@@ -67,6 +70,7 @@ export const getMonthYearBookings = async (req: Request, res: Response) => {
     const dateString = `${year}-${(month as number).toString().padStart(2, '0')}-${date.toString().padStart(2, '0')}`
     const earningsForDate = earningsByDate[dateString] || []
     const listingsForDate = listing[dateString] || []
+    const userForDate = user[dateString] || []
     const dateFromForDate = dateFrom[dateString] || []
     const dateToForDate = dateTo[dateString] || []
 
@@ -74,7 +78,8 @@ export const getMonthYearBookings = async (req: Request, res: Response) => {
       date: dateString + ' 00:00:00',
       dateFrom: dateFromForDate[index] || null,
       dateTo: dateToForDate[index] || null,
-      Listing: listingsForDate[index] || null,
+      listing: listingsForDate[index] || null,
+      user: userForDate[index] || null,
       earning: earning,
     }))
 
@@ -83,7 +88,8 @@ export const getMonthYearBookings = async (req: Request, res: Response) => {
         date: dateString + ' 00:00:00',
         dateFrom: null,
         dateTo: null,
-        Listing: null,
+        listing: null,
+        user:null,
         earning: 0,
       })
     } else {
