@@ -79,12 +79,12 @@ const EarningDetails = () => {
       className="grid grid-cols-1 lg:grid-cols-4 gap-12 lg:gap-0 mt-28 md:mt-36"
     >
       <div className="lg:col-span-3">
-          <Link href="/hosting/earnings">
-            <LucideChevronLeft size={20} className="mb-4"/>
-          </Link>
-          <Typography variant="h1" fontWeight="semibold">
-            Earnings for {format(new Date(dateObject), "MMMM yyyy")}
-          </Typography>
+        <Link href="/hosting/earnings">
+          <LucideChevronLeft size={20} className="mb-4" />
+        </Link>
+        <Typography variant="h1" fontWeight="semibold">
+          Earnings for {format(new Date(dateObject), "MMMM yyyy")}
+        </Typography>
 
         {thisMonth?.item && thisMonth.item.days.length > 0 ? (
           <>
