@@ -1,46 +1,47 @@
+"use client"
 import React from "react"
 import { Typography } from "@/common/components/ui/Typography"
-import Chart, { ChartType } from "./components/Chart"
-import useGetThisMonthEarnings from "../hooks/useGetThisMonthEarnings"
 import formatCurrency from "@/common/helpers/formatCurrency"
+import useGetPaidEarnings from "../hooks/useGetPaidEarnings"
+import Chart, { ChartType } from "./components/Chart"
 
-const EarningsThisMonth = () => {
-  const { data: thisMonth, isPending: thisMonthIsPending } =
-    useGetThisMonthEarnings()
+const EarningsPaid = () => {
+  const { data, isPending } = useGetPaidEarnings()
+
   return (
-    <div className="mt-4">
-      {thisMonth?.item && thisMonth.item.days.length > 0 ? (
+    <div className="mt-8">
+      {data?.item && data.item.months.length > 0 ? (
         <>
           <div>
             <Typography variant="h1" className="text-[30px]">
-              You&apos;ve made{" "}
+              Your paid earnings{" "}
               <span className="text-gray-400">
-                {thisMonthIsPending
+                {isPending
                   ? formatCurrency(0.0, "Philippines")
                   : formatCurrency(
-                      thisMonth.item.summary.totalEarnings,
+                      data.item.summary.totalEarnings,
                       "Philippines"
                     )}
-              </span>{" "}
-              this month
+              </span>
             </Typography>
           </div>
           <Chart
-            data={thisMonth.item.days}
-            isPending={thisMonthIsPending}
             width="100%"
             height={400}
+            isPending={isPending}
+            data={data.item.months}
             type={ChartType["this-month"]}
-            earningType="daily"
+            earningType="monthly"
           />
         </>
       ) : (
         <>
           <Typography fontWeight="semibold" variant="h2" className="pb-4">
-            This Month
+            Paid
           </Typography>
           <Typography fontWeight="semibold" variant="p">
-            No this month earnings at the moment.
+            Payouts are sent after guests check in.{" "}
+            <button className="underline">Learn how payouts work</button>
           </Typography>
         </>
       )}
@@ -48,4 +49,4 @@ const EarningsThisMonth = () => {
   )
 }
 
-export default EarningsThisMonth
+export default EarningsPaid

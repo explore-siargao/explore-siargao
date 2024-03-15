@@ -1,7 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
 import { Typography } from "@/common/components/ui/Typography"
-import { WidthWrapper } from "@/common/components/WidthWrapper"
 import formatCurrency from "@/common/helpers/formatCurrency"
 import { createColumnHelper } from "@tanstack/react-table"
 import { PaymentHistoryBookingsData } from "@/common/components/Table/Type"
@@ -147,11 +146,9 @@ const BookingsTable = () => {
     }),
   ]
   return (
-    <WidthWrapper className="mt-40 w-full">
-      <div className="px-12">
-        <Table data={dummy} columns={columns} />
-      </div>
-    </WidthWrapper>
+    <div className="pt-8">
+      <PaymentHistoryTable data={dummy} columns={columns} />
+    </div>
   )
 }
 

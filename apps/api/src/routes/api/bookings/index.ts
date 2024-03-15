@@ -9,11 +9,6 @@ import {
   deleteBooking,
   getBookingByHost,
 } from './services/default'
-import {
-  getPaidEarnings,
-  getThisMonthEarnings,
-  getUpcomingEarnings,
-} from './services/earnings'
 
 const router = express.Router()
 
@@ -40,9 +35,5 @@ router.delete(
   isUserLoggedIn,
   deleteBooking
 )
-
-router.get('/earnings/this-month', getThisMonthEarnings)
-router.get('/earnings/upcoming', getUpcomingEarnings)
-router.get('/earnings/paid', getPaidEarnings)
 
 export default router

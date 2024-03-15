@@ -1,36 +1,28 @@
 "use client"
 import React from "react"
 import EarningsThisMonth from "./EarningsThisMonth"
-import EarningUpcoming from "./EarningUpcoming"
-import Paid from "./Paid"
+import EarningsUpcoming from "./EarningsUpcoming"
+import Paid from "./EarningsPaid"
 import useGetThisMonthEarnings from "../hooks/useGetThisMonthEarnings"
 import { Typography } from "@/common/components/ui/Typography"
 import { format } from "date-fns"
 import formatCurrency from "@/common/helpers/formatCurrency"
 import { WidthWrapper } from "@/common/components/WidthWrapper"
+import useGetPaidEarnings from "../hooks/useGetPaidEarnings"
 
 const Earnings = () => {
-  const { data: thisMonth } = useGetThisMonthEarnings()
+  const { data: thisMonth } = useGetPaidEarnings()
   const currentDate = new Date()
   const summaryData = [
     ["Gross earnings", "Adjustments", "Service fee", "Taxes withheld"],
     [
+      formatCurrency(thisMonth?.item?.summary?.gross ?? "", "Philippines"),
       formatCurrency(
-        thisMonth?.item?.yearToDateSummary?.gross ?? "",
+        thisMonth?.item?.summary?.adjustments ?? "",
         "Philippines"
       ),
-      formatCurrency(
-        thisMonth?.item?.yearToDateSummary?.adjustment ?? "",
-        "Philippines"
-      ),
-      formatCurrency(
-        thisMonth?.item?.yearToDateSummary?.serviceFee ?? "",
-        "Philippines"
-      ),
-      formatCurrency(
-        thisMonth?.item?.yearToDateSummary?.tax ?? "",
-        "Philippines"
-      ),
+      formatCurrency(thisMonth?.item?.summary?.service ?? "", "Philippines"),
+      formatCurrency(thisMonth?.item?.summary?.tax ?? "", "Philippines"),
     ],
   ]
   return (
@@ -44,7 +36,7 @@ const Earnings = () => {
         </Typography>
 
         <EarningsThisMonth />
-        <EarningUpcoming />
+        <EarningsUpcoming />
         <Paid />
       </div>
       <div className="col-span-1 relative">
@@ -82,7 +74,12 @@ const Earnings = () => {
               variant="p"
               fontWeight="semibold"
             >
-              {formatCurrency(thisMonth?.item?.total, "Philippines")}
+              {formatCurrency(
+                thisMonth?.item?.summary?.totalEarnings
+                  ? thisMonth?.item?.summary?.totalEarnings
+                  : 0,
+                "Philippines"
+              )}
             </Typography>
           </div>
         </div>

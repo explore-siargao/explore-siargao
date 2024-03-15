@@ -39,7 +39,7 @@ const OverAllSummary: React.FC<OverAllSummaryProps> = ({
           </div>
         ))}
       </div>
-      <div className="bottom-0 border-t flex gap-4 justify-between">
+      <div className="bottom-0 border-t flex gap-4 mt-4 justify-between">
         <Typography className="pt-4" variant="p" fontWeight="semibold">
           Total
         </Typography>
