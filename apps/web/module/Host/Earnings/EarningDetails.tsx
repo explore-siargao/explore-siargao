@@ -6,7 +6,8 @@ import { WidthWrapper } from "@/common/components/WidthWrapper"
 import useGetThisMonthEarnings from "../hooks/useGetThisMonthEarnings"
 import Chart, { ChartType } from "./components/Chart"
 import Tabs from "@/common/components/Tabs"
-import { BarChart2, Table } from "lucide-react"
+import { BarChart2, LucideChevronLeft, Table } from "lucide-react"
+import Link from "next/link"
 
 const months = {
   january: 0,
@@ -78,9 +79,13 @@ const EarningDetails = () => {
       className="grid grid-cols-1 lg:grid-cols-4 gap-12 lg:gap-0 mt-28 md:mt-36"
     >
       <div className="lg:col-span-3">
-        <Typography variant="h1" fontWeight="semibold">
-          Earnings for {format(new Date(dateObject), "MMMM yyyy")}
-        </Typography>
+          <Link href="/hosting/earnings">
+            <LucideChevronLeft size={20} className="mb-4"/>
+          </Link>
+          <Typography variant="h1" fontWeight="semibold">
+            Earnings for {format(new Date(dateObject), "MMMM yyyy")}
+          </Typography>
+
         {thisMonth?.item && thisMonth.item.days.length > 0 ? (
           <>
             <div className="mt-3 lg:pr-[89px]">
