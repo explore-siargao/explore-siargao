@@ -1,13 +1,12 @@
-import PaymentHistoryTable, {
-  PaymentHistoryBookingsData,
-} from "@/common/components/Table/PaymnetHistoryTable"
-import { createColumnHelper } from "@tanstack/react-table"
 import Link from "next/link"
 import Image from "next/image"
 import { Typography } from "@/common/components/ui/Typography"
 import { WidthWrapper } from "@/common/components/WidthWrapper"
 import formatCurrency from "@/common/helpers/formatCurrency"
-import { PaymentHistoryStatus } from "./components/Status"
+import { createColumnHelper } from "@tanstack/react-table"
+import { PaymentHistoryBookingsData } from "@/common/components/Table/Type"
+import Table from "@/common/components/Table/Index"
+import { StatusDot } from "../components/Status"
 
 const dummy = [
   {
@@ -135,10 +134,10 @@ const BookingsTable = () => {
           <div className="flex items-center">
             <span>
               {status.getValue() === statusEnum.CANCELLED && (
-                <PaymentHistoryStatus variant="Danger" />
+                <StatusDot variant="Danger" />
               )}
               {status.getValue() === statusEnum.COMPLETED && (
-                <PaymentHistoryStatus variant="Success" />
+                <StatusDot variant="Success" />
               )}
             </span>
             <Typography variant="p">{status.getValue()}</Typography>
@@ -150,7 +149,7 @@ const BookingsTable = () => {
   return (
     <WidthWrapper className="mt-40 w-full">
       <div className="px-12">
-        <PaymentHistoryTable data={dummy} columns={columns} />
+        <Table data={dummy} columns={columns} />
       </div>
     </WidthWrapper>
   )

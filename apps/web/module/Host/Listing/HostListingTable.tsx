@@ -5,12 +5,9 @@ import { Typography } from "@/common/components/ui/Typography"
 import { LucidePlus, LucideTable } from "lucide-react"
 import { createColumnHelper } from "@tanstack/react-table"
 import Link from "next/link"
-import { Spinner } from "@/common/components/ui/Spinner"
-import useGetListingsByHost from "../hooks/useGetListingsByHost"
-import { Status } from "./components/Status"
-import HostListingTable, {
-  ListingsData,
-} from "@/common/components/Table/HostTable"
+import { IListingsData } from "@/common/components/Table/Type"
+import Table from "@/common/components/Table/Index"
+import { StatusDot } from "../components/Status"
 
 const statusEnum = {
   PENDING: "Pending",
@@ -19,9 +16,19 @@ const statusEnum = {
 }
 
 const HostListing = () => {
-  const { data, isPending } = useGetListingsByHost()
 
-  const columnHelper = createColumnHelper<ListingsData>()
+  const dummy = [
+    {
+      id: 1,
+      hostId: 1,
+      title: "Villa",
+      address: "Longos",
+      imageKey: "1.jpg",
+      status: "Pending",
+    },
+  ]
+
+  const columnHelper = createColumnHelper<IListingsData>()
   const columns = [
     columnHelper.accessor("imageKey", {
       header: "Listing",
@@ -56,13 +63,13 @@ const HostListing = () => {
           <div className="flex items-center">
             <span>
               {status.getValue() === statusEnum.DECLINED && (
-                <Status variant="Declined" />
+                <StatusDot variant="Danger" />
               )}
               {status.getValue() === statusEnum.PENDING && (
-                <Status variant="Pending" />
+                <StatusDot variant="Warning" />
               )}
               {status.getValue() === statusEnum.LIVE && (
-                <Status variant="Live" />
+                <StatusDot variant="Success" />
               )}
             </span>
             <Typography variant="p">{status.getValue()}</Typography>
@@ -71,12 +78,8 @@ const HostListing = () => {
       ),
     }),
   ]
-
   return (
     <WidthWrapper className="mt-40 w-full">
-      {isPending ? (
-        <Spinner size="md">Loading...</Spinner>
-      ) : (
         <div className="px-12">
           <div className="mb-12">
             <Typography
@@ -95,12 +98,8 @@ const HostListing = () => {
               </div>
             </Typography>
           </div>
-          <HostListingTable
-            data={data?.items as ListingsData[]}
-            columns={columns}
-          />
+          <Table data={dummy} columns={columns} />
         </div>
-      )}
     </WidthWrapper>
   )
 }

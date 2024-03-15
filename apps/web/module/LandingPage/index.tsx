@@ -5,6 +5,8 @@ import useGetAllBookings from "../LandingPage/hooks/useGetAllBookings"
 import { Spinner } from "@/common/components/ui/Spinner"
 import useSessionStore from "@/common/store/useSessionStore"
 import Listing from "../Listing"
+import HostListing from "../Host/Listing/HostListingTable"
+import BookingsTable from "../Host/PaymentHistory/BookingsTable"
 
 const LandingPage = () => {
   const userId = useSessionStore((state) => state).id
@@ -34,6 +36,8 @@ const LandingPage = () => {
               />
             ))}
           </ul>
+          <HostListing/>
+          <BookingsTable/>
         </>
       )}
     </WidthWrapper>
