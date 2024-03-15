@@ -1,4 +1,3 @@
-import Earnings from "@/module/Host/Earnings"
 import AuthGuard from "@/common/components/AuthGuard"
 import React from "react"
 import { APP_NAME } from "@repo/constants"
