@@ -31,10 +31,10 @@ export interface IListingsData {
 // This is the shape and type of paymentHistoryBookingsData
 export interface PaymentHistoryBookingsData {
   listing: {
-    imageKey: string,
-    id: number,
-    title: string,
-    address: string,
+    imageKey: string
+    id: number
+    title: string
+    address: string
   }
   user: {
     id: number
