@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 const EarningsGraphTabPage = () => {
   return (
     <AuthGuard>
-      <EarningGraphTab/>
+      <EarningGraphTab />
     </AuthGuard>
   )
 }

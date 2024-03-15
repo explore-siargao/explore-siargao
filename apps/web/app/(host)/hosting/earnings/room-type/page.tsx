@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 const RoomTypePage = () => {
   return (
     <AuthGuard>
-      <RoomTypeTab/>
+      <RoomTypeTab />
     </AuthGuard>
   )
 }

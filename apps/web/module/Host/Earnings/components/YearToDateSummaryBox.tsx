@@ -15,8 +15,8 @@ interface OverAllSummaryProps {
 const YearToDateSummary: React.FC<OverAllSummaryProps> = ({
   yearToDateSummaryData,
 }) => {
-    const currentDate = new Date();
-    
+  const currentDate = new Date()
+
   return (
     <div className="bg-white rounded-lg shadow-lg p-8 sticky top-36">
       <Typography variant="h2" fontWeight="semibold" className="mb-2">

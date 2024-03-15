@@ -13,28 +13,28 @@ import useGetPaymentHistoryGraph from "../PaymentHistory/hooks/useGetPaymentHist
 
 const Earnings = () => {
   const { isPending, data: overAllSummaryDataGraph } =
-  useGetPaymentHistoryGraph("all")
+    useGetPaymentHistoryGraph("all")
 
-const summaryData = {
-  labels: ["Completed", "Cancelled"],
-  values: [
-    [
-      formatCurrency(
-        !isPending && overAllSummaryDataGraph?.item?.completed,
-        "Philippines"
-      ) || null,
-      formatCurrency(
-        !isPending && overAllSummaryDataGraph?.item?.cancelled,
-        "Philippines"
-      ) || null,
+  const summaryData = {
+    labels: ["Completed", "Cancelled"],
+    values: [
+      [
+        formatCurrency(
+          !isPending && overAllSummaryDataGraph?.item?.completed,
+          "Philippines"
+        ) || null,
+        formatCurrency(
+          !isPending && overAllSummaryDataGraph?.item?.cancelled,
+          "Philippines"
+        ) || null,
+      ],
     ],
-  ],
-  total:
-    formatCurrency(
-      !isPending && overAllSummaryDataGraph?.item?.total,
-      "Philippines"
-    ) || null,
-}
+    total:
+      formatCurrency(
+        !isPending && overAllSummaryDataGraph?.item?.total,
+        "Philippines"
+      ) || null,
+  }
 
   return (
     <WidthWrapper
@@ -46,8 +46,7 @@ const summaryData = {
           Earnings
         </Typography>
         <div className="mt-4 mb-6">
-          <Tabs tabs={tabs}>
-          </Tabs>
+          <Tabs tabs={tabs}></Tabs>
         </div>
         <EarningsThisMonth />
         <EarningsUpcoming />

@@ -1,4 +1,4 @@
-import { LucideBarChart, LucideDoorOpen} from "lucide-react"
+import { LucideBarChart, LucideDoorOpen } from "lucide-react"
 
 const tabs = [
   {
