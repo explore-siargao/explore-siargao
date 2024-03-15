@@ -15,14 +15,14 @@ const statusEnum = {
   LIVE: "Live",
 }
 
-const listingsData: ListingsData[] = [
+const dummy = [
   {
     id: 1,
     hostId: 101,
     title: "Cozy Apartment in Downtown",
     address: "123 Main St, City",
     imageKey: "1.jpg",
-    status: "Active",
+    status: "Live",
   },
   {
     id: 2,
@@ -30,7 +30,7 @@ const listingsData: ListingsData[] = [
     title: "Beachfront Villa",
     address: "456 Beach Ave, Beach City",
     imageKey: "2.jpg",
-    status: "Active",
+    status: "Live",
   },
   {
     id: 3,
@@ -38,7 +38,7 @@ const listingsData: ListingsData[] = [
     title: "Mountain Cabin Retreat",
     address: "789 Mountain Rd, Mountain Town",
     imageKey: "3.jpg",
-    status: "Inactive",
+    status: "Live",
   },
   {
     id: 4,
@@ -46,7 +46,7 @@ const listingsData: ListingsData[] = [
     title: "Luxury Penthouse Suite",
     address: "101 Skyline Dr, City",
     imageKey: "4.jpg",
-    status: "Active",
+    status: "Declined",
   },
   {
     id: 5,
@@ -54,23 +54,11 @@ const listingsData: ListingsData[] = [
     title: "Rustic Farmhouse",
     address: "202 Farm Rd, Countryside",
     imageKey: "5.jpg",
-    status: "Active",
+    status: "Pending",
   },
 ]
 
 const HostListing = () => {
-
-  const dummy = [
-    {
-      id: 1,
-      hostId: 1,
-      title: "Villa",
-      address: "Longos",
-      imageKey: "1.jpg",
-      status: "Pending",
-    },
-  ]
-
   const columnHelper = createColumnHelper<IListingsData>()
   const columns = [
     columnHelper.accessor("imageKey", {
