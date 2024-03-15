@@ -7,6 +7,8 @@ import useGetThisMonthEarnings from "../hooks/useGetThisMonthEarnings"
 import Chart, { ChartType } from "./components/Chart"
 import Tabs from "@/common/components/Tabs"
 import { BarChart2, Table } from "lucide-react"
+import useGetMonthYearEarnings from "../hooks/useGetMonthYearEarnings"
+import MonthlyEarningTable from "./MonthlyEarningTable"
 
 const months = {
   january: 0,
@@ -26,6 +28,7 @@ const months = {
 const EarningDetails = () => {
   const { type, date } = useParams<{ type: string; date: string }>()
   const [monthName, year] = date.toLowerCase().split("-")
+  
 
   let dateObject = ""
 
@@ -52,7 +55,7 @@ const EarningDetails = () => {
   ]
 
   const { data: thisMonth, isPending: thisMonthIsPending } =
-    useGetThisMonthEarnings()
+    useGetMonthYearEarnings(date)
   const summaryData = [
     ["Gross earnings", "Adjustments", "Service fee", "Taxes withheld"],
     [
@@ -98,6 +101,7 @@ const EarningDetails = () => {
             ) : (
               <Typography fontWeight="semibold" variant="p" className="mt-8">
                 This is table view of earnings.
+                <MonthlyEarningTable date={date} />
               </Typography>
             )}
           </>

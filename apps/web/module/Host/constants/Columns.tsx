@@ -4,8 +4,7 @@ import formatCurrency from "@/common/helpers/formatCurrency"
 import { createColumnHelper } from "@tanstack/react-table"
 import { PaymentHistoryBookingsData } from "@/common/components/Table/Type"
 import { StatusDot } from "../components/Status"
-import Table from "@/common/components/Table"
-import useGetPaymentHistoryTable from "../PaymentHistory/hooks/useGetPaymentHistoryTable"
+import Image from "next/image"
 import Link from "next/link"
 
 const statusEnum = {
@@ -14,7 +13,7 @@ const statusEnum = {
 }
 
 const columnHelper = createColumnHelper<PaymentHistoryBookingsData>()
-  export const columns = [
+  export const ColumnsTab = [
     columnHelper.accessor("listing", {
       header: "listing",
       cell: (listing) => (

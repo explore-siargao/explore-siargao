@@ -1,23 +1,11 @@
-import Link from "next/link"
-import Image from "next/image"
-import { Typography } from "@/common/components/ui/Typography"
-import formatCurrency from "@/common/helpers/formatCurrency"
 import useGetPaymentHistoryTable from "./hooks/useGetPaymentHistoryTable"
-import { createColumnHelper } from "@tanstack/react-table"
 import { PaymentHistoryBookingsData } from "@/common/components/Table/Type"
-import { StatusDot } from "../components/Status"
 import Table from "@/common/components/Table"
 import { ColumnsTab } from "../constants/Columns"
 
-const statusEnum = {
-  CANCELLED: "Cancelled",
-  COMPLETED: "Completed",
-}
 
 const BookingsTable = () => {
   const { data: bookings, isPending } = useGetPaymentHistoryTable("all")
-  const columnHelper = createColumnHelper<PaymentHistoryBookingsData>()
-
   const columns = ColumnsTab 
   // const columns = [
   //   columnHelper.accessor("listing", {
