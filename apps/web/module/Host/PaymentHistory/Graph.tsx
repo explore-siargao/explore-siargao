@@ -10,17 +10,13 @@ import {
   ResponsiveContainer,
 } from "recharts"
 import formatCurrency from "@/common/helpers/formatCurrency"
-
-const dummyData = {
-  completed: 2000,
-  cancelled: 2000,
-  total: 4000,
-}
+import useGetPaymentHistoryGraph from "./hooks/useGetPaymentHistoryGraph"
 
 const Graph = () => {
+  const { data: graphData, isPending } = useGetPaymentHistoryGraph("all")
   const data = [
-    { name: "Cancelled", value: dummyData.cancelled },
-    { name: "Completed", value: dummyData.completed },
+    { name: "Cancelled", value: !isPending && graphData?.item?.cancelled },
+    { name: "Completed", value: !isPending && graphData?.item?.completed },
   ]
 
   return (

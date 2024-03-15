@@ -3,8 +3,8 @@ import { Typography } from "@/common/components/ui/Typography"
 
 interface SummaryData {
   labels: string[]
-  values: string[][]
-  total: string
+  values: (string | null)[][]
+  total: string | null
 }
 
 interface OverAllSummaryProps {

@@ -6,7 +6,7 @@ import { LucidePlus, LucideTable } from "lucide-react"
 import { createColumnHelper } from "@tanstack/react-table"
 import Link from "next/link"
 import { IListingsData } from "@/common/components/Table/Type"
-import Table from "@/common/components/Table/Index"
+import Table from "@/common/components/Table"
 import { StatusDot } from "../components/Status"
 
 const statusEnum = {

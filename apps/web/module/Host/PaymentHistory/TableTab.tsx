@@ -7,15 +7,33 @@ import formatCurrency from "@/common/helpers/formatCurrency"
 import OverAllSummary from "./components/OverAllSummary"
 import BookingsTable from "./BookingsTable"
 import tabs from "./constants/tabs"
+import useGetPaymentHistoryTable from "./hooks/useGetPaymentHistoryTable"
 
-const summaryData = {
-  labels: ["Completed", "Cancelled"],
-  values: [
-    [formatCurrency(2000, "Philippines"), formatCurrency(4000, "Philippines")],
-  ],
-  total: formatCurrency(6000, "Philippines"),
-}
 const TableTab = () => {
+  const { isPending, data: overAllSummaryDataTable } =
+    useGetPaymentHistoryTable("all")
+
+  const summaryData = {
+    labels: ["Completed", "Cancelled"],
+    values: [
+      [
+        formatCurrency(
+          !isPending && overAllSummaryDataTable?.item?.summary.completed,
+          "Philippines"
+        ) || null,
+        formatCurrency(
+          !isPending && overAllSummaryDataTable?.item?.summary.cancelled,
+          "Philippines"
+        ) || null,
+      ],
+    ],
+    total:
+      formatCurrency(
+        !isPending && overAllSummaryDataTable?.item?.summary.total,
+        "Philippines"
+      ) || null,
+  }
+
   return (
     <WidthWrapper
       width="medium"
