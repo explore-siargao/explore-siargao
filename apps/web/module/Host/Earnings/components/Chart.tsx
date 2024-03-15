@@ -94,7 +94,6 @@ const Chart = ({
         data={isPending ? undefined : data}
         margin={{
           top: 40,
-          right: 90,
           left: 10,
         }}
       >
