@@ -1,32 +1,36 @@
 import { ResponseService } from '@/common/service/response'
 import { Request, Response } from 'express'
 import { earnings } from './jsons/earnings'
-import { date } from 'zod'
 
 const response = new ResponseService()
+
 export const getThisMonthEarnings = async (req: Request, res: Response) => {
   const now = new Date()
-  const utcNow = new Date(now.toISOString().split('T')[0] as string)
+  const currentYear = now.getFullYear()
+  const currentMonth = now.getMonth()
 
   const earningsByDate: { [key: string]: number } = {}
 
+  // Iterate over each day of the current month
+  for (let day = 1; day <= now.getDate(); day++) {
+    const currentDate = new Date(currentYear, currentMonth, day)
+    currentDate.setDate(currentDate.getDate() + 1)
+    const dateString = currentDate.toISOString().split('T')[0]
+    // Initialize earnings for the current date as 0
+    earningsByDate[dateString as string] = 0
+  }
+
+  // Populate earnings from the JSON data
   earnings.forEach((earning) => {
     const earningDate = new Date(earning.date)
     earningDate.setDate(earningDate.getDate() + 1)
-    const utcEarningDate = new Date(
-      earningDate.toISOString().split('T')[0] as string
-    )
+    const dateString = earningDate.toISOString().split('T')[0]
     if (
-      utcEarningDate.getUTCFullYear() === utcNow.getUTCFullYear() &&
-      utcEarningDate.getUTCMonth() === utcNow.getUTCMonth() &&
-      utcEarningDate.getUTCDate() <= utcNow.getUTCDate()
+      earningDate.getFullYear() === currentYear &&
+      earningDate.getMonth() === currentMonth &&
+      (dateString as string) in earningsByDate
     ) {
-      const dateString = utcEarningDate.toISOString().split('T')[0]
-      if ((dateString as string) in earningsByDate) {
-        earningsByDate[dateString as string] += Number(earning.earning)
-      } else {
-        earningsByDate[dateString as string] = Number(earning.earning)
-      }
+      earningsByDate[dateString as string] += Number(earning.earning)
     }
   })
 

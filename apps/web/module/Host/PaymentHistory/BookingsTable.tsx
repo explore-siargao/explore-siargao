@@ -1,14 +1,12 @@
-import PaymentHistoryTable, {
-  PaymentHistoryBookingsData,
-} from "@/common/components/Table/PaymnetHistoryTable"
-import { createColumnHelper } from "@tanstack/react-table"
 import Link from "next/link"
 import Image from "next/image"
 import { Typography } from "@/common/components/ui/Typography"
-import { WidthWrapper } from "@/common/components/WidthWrapper"
 import formatCurrency from "@/common/helpers/formatCurrency"
-import { PaymentHistoryStatus } from "./components/Status"
 import useGetPaymentHistoryTable from "./hooks/useGetPaymentHistoryTable"
+import { createColumnHelper } from "@tanstack/react-table"
+import { PaymentHistoryBookingsData } from "@/common/components/Table/Type"
+import Table from "@/common/components/Table"
+import { StatusDot } from "../components/Status"
 
 const statusEnum = {
   CANCELLED: "Cancelled",
@@ -77,10 +75,10 @@ const BookingsTable = () => {
           <div className="flex items-center">
             <span>
               {status.getValue() === statusEnum.CANCELLED && (
-                <PaymentHistoryStatus variant="Danger" />
+                <StatusDot variant="Danger" />
               )}
               {status.getValue() === statusEnum.COMPLETED && (
-                <PaymentHistoryStatus variant="Success" />
+                <StatusDot variant="Success" />
               )}
             </span>
             <Typography variant="p">{status.getValue() as string}</Typography>
@@ -91,7 +89,7 @@ const BookingsTable = () => {
   ]
   return (
     <div className="pt-8">
-      <PaymentHistoryTable
+      <Table
         data={
           !isPending
             ? (bookings?.item?.bookings as PaymentHistoryBookingsData[])

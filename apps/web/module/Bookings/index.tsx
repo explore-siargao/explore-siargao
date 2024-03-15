@@ -1,6 +1,6 @@
 "use client"
 import { WidthWrapper } from "@/common/components/WidthWrapper"
-import Table, { BookingsData } from "../../common/components/Table/Index"
+import Table, { BookingsData } from "../../common/components/Table"
 import Image from "next/image"
 import { Typography } from "@/common/components/ui/Typography"
 import { LucidePlus, LucideTable } from "lucide-react"

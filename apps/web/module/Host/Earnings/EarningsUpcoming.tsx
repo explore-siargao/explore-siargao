@@ -6,7 +6,7 @@ import formatCurrency from "@/common/helpers/formatCurrency"
 import Chart, { ChartType } from "./components/Chart"
 import { format } from "date-fns"
 
-const EarningUpcoming = () => {
+const EarningsUpcoming = () => {
   const { data: upcoming, isPending: upcomingIsPending } =
     useGetUpcomingEarnings()
   const currentDate = new Date()
@@ -33,15 +33,30 @@ const EarningUpcoming = () => {
   ]
   return (
     <div className="mt-8">
-      {upcoming?.item && upcoming.item.amount.length > 0 ? (
-        <Chart
-          data={upcoming.item.amount}
-          totalAmount={upcoming.item.total}
-          isPending={upcomingIsPending}
-          width="100%"
-          height={400}
-          type={ChartType.upcoming}
-        />
+      {upcoming?.item && upcoming.item.months.length > 0 ? (
+        <>
+          <div>
+            <Typography variant="h1" className="text-[30px]">
+              Your upcoming earnings{" "}
+              <span className="text-gray-400">
+                {upcomingIsPending
+                  ? formatCurrency(0.0, "Philippines")
+                  : formatCurrency(
+                      upcoming.item.summary.totalEarnings,
+                      "Philippines"
+                    )}
+              </span>
+            </Typography>
+          </div>
+          <Chart
+            data={upcoming.item.months}
+            isPending={upcomingIsPending}
+            width="100%"
+            height={400}
+            type={ChartType.upcoming}
+            earningType="monthly"
+          />
+        </>
       ) : (
         <>
           <Typography fontWeight="semibold" variant="h2" className="pb-4">
@@ -56,4 +71,4 @@ const EarningUpcoming = () => {
   )
 }
 
-export default EarningUpcoming
+export default EarningsUpcoming
