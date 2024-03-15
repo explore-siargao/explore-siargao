@@ -7,15 +7,24 @@ import OverAllSummary from "./components/OverAllSummary"
 import formatCurrency from "@/common/helpers/formatCurrency"
 import Graph from "@/module/Host/PaymentHistory/Graph"
 import tabs from "./constants/tabs"
+import useGetPaymentHistoryGraph from "./hooks/useGetPaymentHistoryGraph"
 
-const summaryData = {
-  labels: ["Completed", "Cancelled"],
-  values: [
-    [formatCurrency(2000, "Philippines"), formatCurrency(4000, "Philippines")],
-  ],
-  total: formatCurrency(6000, "Philippines"),
-}
+
 const GraphTab = () => {
+
+  const {isPending, data: overAllSummaryDataGraph} = useGetPaymentHistoryGraph("all");
+
+  const summaryData = {
+    labels: ["Completed", "Cancelled"],
+    values: [
+      [
+        formatCurrency(!isPending && overAllSummaryDataGraph?.item?.completed, "Philippines") || null,
+        formatCurrency(!isPending && overAllSummaryDataGraph?.item?.cancelled, "Philippines") || null,
+      ],
+    ],
+    total: formatCurrency(!isPending && overAllSummaryDataGraph?.item?.total, "Philippines") || null,
+  }
+
   return (
     <WidthWrapper
       width="medium"
