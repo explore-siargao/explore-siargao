@@ -5,12 +5,9 @@ import { Typography } from "@/common/components/ui/Typography"
 import { LucidePlus, LucideTable } from "lucide-react"
 import { createColumnHelper } from "@tanstack/react-table"
 import Link from "next/link"
-import { Spinner } from "@/common/components/ui/Spinner"
-import useGetListingsByHost from "../hooks/useGetListingsByHost"
-import { Status } from "./components/Status"
-import HostListingTable, {
-  ListingsData,
-} from "@/common/components/Table/HostTable"
+import { IListingsData } from "@/common/components/Table/Type"
+import Table from "@/common/components/Table/Index"
+import { StatusDot } from "../components/Status"
 
 const statusEnum = {
   PENDING: "Pending",
@@ -18,14 +15,14 @@ const statusEnum = {
   LIVE: "Live",
 }
 
-const listingsData: ListingsData[] = [
+const dummy = [
   {
     id: 1,
     hostId: 101,
     title: "Cozy Apartment in Downtown",
     address: "123 Main St, City",
     imageKey: "1.jpg",
-    status: "Active",
+    status: "Live",
   },
   {
     id: 2,
@@ -33,7 +30,7 @@ const listingsData: ListingsData[] = [
     title: "Beachfront Villa",
     address: "456 Beach Ave, Beach City",
     imageKey: "2.jpg",
-    status: "Active",
+    status: "Live",
   },
   {
     id: 3,
@@ -41,7 +38,7 @@ const listingsData: ListingsData[] = [
     title: "Mountain Cabin Retreat",
     address: "789 Mountain Rd, Mountain Town",
     imageKey: "3.jpg",
-    status: "Inactive",
+    status: "Live",
   },
   {
     id: 4,
@@ -49,7 +46,7 @@ const listingsData: ListingsData[] = [
     title: "Luxury Penthouse Suite",
     address: "101 Skyline Dr, City",
     imageKey: "4.jpg",
-    status: "Active",
+    status: "Declined",
   },
   {
     id: 5,
@@ -57,14 +54,12 @@ const listingsData: ListingsData[] = [
     title: "Rustic Farmhouse",
     address: "202 Farm Rd, Countryside",
     imageKey: "5.jpg",
-    status: "Active",
+    status: "Pending",
   },
 ]
 
 const HostListing = () => {
-  const { data, isPending } = useGetListingsByHost()
-
-  const columnHelper = createColumnHelper<ListingsData>()
+  const columnHelper = createColumnHelper<IListingsData>()
   const columns = [
     columnHelper.accessor("imageKey", {
       header: "Listing",
@@ -99,13 +94,13 @@ const HostListing = () => {
           <div className="flex items-center">
             <span>
               {status.getValue() === statusEnum.DECLINED && (
-                <Status variant="Declined" />
+                <StatusDot variant="Danger" />
               )}
               {status.getValue() === statusEnum.PENDING && (
-                <Status variant="Pending" />
+                <StatusDot variant="Warning" />
               )}
               {status.getValue() === statusEnum.LIVE && (
-                <Status variant="Live" />
+                <StatusDot variant="Success" />
               )}
             </span>
             <Typography variant="p">{status.getValue()}</Typography>
@@ -114,33 +109,28 @@ const HostListing = () => {
       ),
     }),
   ]
-
   return (
     <WidthWrapper className="mt-40 w-full">
-      {isPending ? (
-        <Spinner size="md">Loading...</Spinner>
-      ) : (
-        <div className="px-12">
-          <div className="mb-12">
-            <Typography
-              variant="h1"
-              fontWeight="semibold"
-              className="flex justify-between items-center pl-4"
-            >
-              Your listings
-              <div className="flex gap-5">
-                <span className="bg-white rounded-full p-2 cursor-pointer shadow-lg">
-                  <LucideTable />
-                </span>
-                <span className="bg-white rounded-full p-2 cursor-pointer shadow-lg">
-                  <LucidePlus />
-                </span>
-              </div>
-            </Typography>
-          </div>
-          <HostListingTable data={listingsData} columns={columns} />
+      <div className="px-12">
+        <div className="mb-12">
+          <Typography
+            variant="h1"
+            fontWeight="semibold"
+            className="flex justify-between items-center pl-4"
+          >
+            Your listings
+            <div className="flex gap-5">
+              <span className="bg-white rounded-full p-2 cursor-pointer shadow-lg">
+                <LucideTable />
+              </span>
+              <span className="bg-white rounded-full p-2 cursor-pointer shadow-lg">
+                <LucidePlus />
+              </span>
+            </div>
+          </Typography>
         </div>
-      )}
+        <Table data={dummy} columns={columns} />
+      </div>
     </WidthWrapper>
   )
 }

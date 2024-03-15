@@ -1,35 +1,16 @@
-import React, { useMemo } from "react"
+import React from "react"
 import {
   useReactTable,
   getCoreRowModel,
   flexRender,
 } from "@tanstack/react-table"
-import Pagination from "./Pagination"
 
-export interface BookingsData {
-  id: number
-  listingId: number
-  Listing: {
-    title: string
-    imageKey: string
-    address: string
-  }
-  fromDate: string
-  toDate: string
-  guestCount: number
-  totalFee: number
-  transactionId: number
-  Transaction: {
-    status: string
-  }
-  createdAt: string
-}
-interface TableProps {
-  data: BookingsData[]
+interface TableProps<T> {
+  data: T[]
   columns: any[]
 }
 
-const Table = ({ data, columns }: TableProps) => {
+const Table = <T,>({ data, columns }: TableProps<T>) => {
   const table = useReactTable({
     data,
     columns,
@@ -89,21 +70,6 @@ const Table = ({ data, columns }: TableProps) => {
           })}
         </tbody>
       </table>
-      <div className="flex items-end justify-end mt-5">
-        <Pagination
-          pageIndex={table.getState().pagination.pageIndex}
-          pageCount={table.getPageCount()}
-          canPreviousPage={table.getCanPreviousPage()}
-          canNextPage={table.getCanNextPage()}
-          onPageChange={table.setPageIndex}
-          onFirstPage={table.firstPage}
-          onLastPage={table.lastPage}
-          onPreviousPage={table.previousPage}
-          onNextPage={table.nextPage}
-          pageSize={table.getState().pagination.pageSize}
-          onPageSizeChange={table.setPageSize}
-        />
-      </div>
     </div>
   )
 }
