@@ -1,8 +1,6 @@
 "use client"
 import React from "react"
 import Tabs from "@/common/components/Tabs"
-import formatCurrency from "@/common/helpers/formatCurrency"
-import useGetPaymentHistoryGraph from "../PaymentHistory/hooks/useGetPaymentHistoryGraph"
 import { WidthWrapper } from "@/common/components/WidthWrapper"
 import tabs from "./constants/tabs"
 
