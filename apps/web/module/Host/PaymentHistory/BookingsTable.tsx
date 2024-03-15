@@ -3,10 +3,9 @@ import { PaymentHistoryBookingsData } from "@/common/components/Table/Type"
 import Table from "@/common/components/Table"
 import { ColumnsTab } from "../constants/columns"
 
-
 const BookingsTable = () => {
   const { data: bookings, isPending } = useGetPaymentHistoryTable("all")
-  const columns = ColumnsTab 
+  const columns = ColumnsTab
   // const columns = [
   //   columnHelper.accessor("listing", {
   //     header: "listing",

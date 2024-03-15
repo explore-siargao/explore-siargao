@@ -4,8 +4,11 @@ import { ColumnsTab } from "../constants/columns"
 import useGetMonthYearEarningsWithBookings from "../hooks/useGetMonthYearEarningsWithBookings"
 
 const MonthlyEarningTable = ({ date }: { date: string }) => {
-  const { data: bookings, isPending } = useGetMonthYearEarningsWithBookings(date)
-  const filteredBookings = bookings && bookings?.item?.bookings?.filter((booking: PaymentHistoryBookingsData) => {
+  const { data: bookings, isPending } =
+    useGetMonthYearEarningsWithBookings(date)
+  const filteredBookings =
+    bookings &&
+    bookings?.item?.bookings?.filter((booking: PaymentHistoryBookingsData) => {
       return booking.dateFrom !== null
     })
   const columns = ColumnsTab

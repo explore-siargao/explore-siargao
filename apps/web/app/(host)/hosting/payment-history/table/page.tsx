@@ -11,7 +11,6 @@ export const metadata: Metadata = {
 
 const TablePage = () => {
   return <TableTab />
-
 }
 
 export default TablePage

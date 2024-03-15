@@ -40,7 +40,7 @@ export const getMonthYearBookings = async (req: Request, res: Response) => {
   const earningsByDate: { [date: string]: number[] } = {}
   const dateFrom: { [date: string]: string[] } = {}
   const dateTo: { [date: string]: string[] } = {}
-  const user: {[date:string]:object[]} ={}
+  const user: { [date: string]: object[] } = {}
   const status: { [date: string]: string[] } = {}
   earnings.forEach((item) => {
     const itemDate = new Date(item.date)
@@ -82,7 +82,7 @@ export const getMonthYearBookings = async (req: Request, res: Response) => {
       dateTo: dateToForDate[index] || null,
       listing: listingsForDate[index] || null,
       user: userForDate[index] || null,
-      status:statusForDate[index] || null,
+      status: statusForDate[index] || null,
       earning: earning,
     }))
 
@@ -92,8 +92,8 @@ export const getMonthYearBookings = async (req: Request, res: Response) => {
         dateFrom: null,
         dateTo: null,
         listing: null,
-        user:null,
-        status:null,
+        user: null,
+        status: null,
         earning: 0,
       })
     } else {
