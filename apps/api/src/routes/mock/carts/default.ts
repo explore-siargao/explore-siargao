@@ -124,5 +124,8 @@ export const deleteCart = async (req: Request, res: Response) => {
     )
   }
   //@ts-ignore
-  return res.json({ message: 'Carts deleted successfully', items:deletedCarts })
+  return res.json({
+    message: 'Carts deleted successfully',
+    items: deletedCarts,
+  })
 }

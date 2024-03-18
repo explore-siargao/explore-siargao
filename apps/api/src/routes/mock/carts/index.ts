@@ -1,6 +1,12 @@
 import express from 'express'
-import { addCart, deleteCart, getCartsByHost, getCartsByListing, getCartsByUser, updateCart } from './default'
-
+import {
+  addCart,
+  deleteCart,
+  getCartsByHost,
+  getCartsByListing,
+  getCartsByUser,
+  updateCart,
+} from './default'
 
 const router = express.Router()
 
