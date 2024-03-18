@@ -512,7 +512,7 @@ model Cart {
   guestCounts String    @db.LongText()
   dateFrom    DateTime
   dateTo      DateTime
-  totalPrice  Float
+  totalFee    Float
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   deletedAt   DateTime?
