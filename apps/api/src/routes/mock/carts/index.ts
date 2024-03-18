@@ -10,6 +10,6 @@ router.get('/host/:hostId', getCartsByHost)
 router.get('/listing/:listingId', getCartsByListing)
 router.post('/:userId', addCart)
 router.patch('/:cartId', updateCart)
-router.delete('/:cartId', deleteCart)
+router.delete('/', deleteCart)
 
 export default router
