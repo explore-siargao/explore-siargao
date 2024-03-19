@@ -20,7 +20,6 @@ interface ICartProps {
 const CartList: React.FC<ICartProps> = ({ items }) => {
   const [selectAll, setSelectAll] = useState(false)
   const [selectedItems, setSelectedItems] = useState<number[]>([])
-  const [checkedIds, setCheckedIds] = useState<number[]>([])
 
   const toggleAllCheckboxes = () => {
     const newSelectAll = !selectAll
@@ -28,12 +27,10 @@ const CartList: React.FC<ICartProps> = ({ items }) => {
     if (newSelectAll) {
       const allIds = items.map((item) => item.id)
       setSelectedItems(allIds)
-      setCheckedIds(allIds)
       console.log("Checked IDs:", allIds)
     } else {
       setSelectedItems([])
-      setCheckedIds([])
-      console.log("Checked IDs cleared", setCheckedIds([]))
+      console.log("Checked IDs cleared")
     }
   }
 
@@ -67,60 +64,58 @@ const CartList: React.FC<ICartProps> = ({ items }) => {
         <Button variant="outline">Remove selected activity</Button>
       </div>
       {items.map((cartItem) => (
-        <>
-          <div key={cartItem.id} className=" bg-white pt-2">
-            <div className="flex flex-col gap-8 sm:flex-row pt-4">
-              <div className="lg:flex-none w-full sm:w-6 align-center">
-                <InputCheckbox
-                  id={cartItem.id}
-                  colorVariant="secondary"
-                  checked={selectedItems.includes(cartItem.id)}
-                  onChange={() => toggleCheckbox(cartItem.id)}
-                />
-              </div>
-              <div className="lg:flex-none pt-2 sm:w-full lg:w-1/6">
-                <img
-                  src={`/assets/${cartItem.imageKey}`}
-                  width={100}
-                  alt={"image"}
-                  className="rounded-md object-cover w-full sm:w-auto"
-                />
-              </div>
-
-              <div className="flex-1 w-60 sm:w-auto align-center">
-                <Typography variant="h3" fontWeight="semibold">
-                  {cartItem.title}
-                </Typography>
-                <Typography variant="p">{cartItem.address}</Typography>
-                <Typography variant="p">
-                  {cartItem.dateFrom} - {cartItem.dateTo}
-                </Typography>
-              </div>
+        <div key={cartItem.id} className=" bg-white pt-2">
+          <div className="flex flex-col gap-8 sm:flex-row pt-4">
+            <div className="lg:flex-none w-full sm:w-6 align-center">
+              <InputCheckbox
+                id={cartItem.id}
+                colorVariant="secondary"
+                checked={selectedItems.includes(cartItem.id)}
+                onChange={() => toggleCheckbox(cartItem.id)}
+              />
             </div>
-            <div className="flex justify-between items-center mt-6 pr-4 lg:pl-14">
-              <div className="flex gap-4">
-                <Typography
-                  variant="p"
-                  fontWeight="semibold"
-                  className="underline underline-offset-4 mr-4 hover:cursor-pointer"
-                >
-                  Manage
-                </Typography>
-                <Typography
-                  variant="p"
-                  fontWeight="semibold"
-                  className="underline underline-offset-4 hover:cursor-pointer"
-                >
-                  Remove
-                </Typography>
-              </div>
-              <Typography variant="p" fontWeight="semibold">
-                {formatCurrency(2550, "Philippines")}
+            <div className="lg:flex-none pt-2 sm:w-full lg:w-1/6">
+              <img
+                src={`/assets/${cartItem.imageKey}`}
+                width={100}
+                alt={"image"}
+                className="rounded-md object-cover w-full sm:w-auto"
+              />
+            </div>
+
+            <div className="flex-1 w-60 sm:w-auto align-center">
+              <Typography variant="h3" fontWeight="semibold">
+                {cartItem.title}
+              </Typography>
+              <Typography variant="p">{cartItem.address}</Typography>
+              <Typography variant="p">
+                {cartItem.dateFrom} - {cartItem.dateTo}
               </Typography>
             </div>
-            <div className="border-b mt-8"></div>
           </div>
-        </>
+          <div className="flex justify-between items-center mt-6 pr-4 lg:pl-14">
+            <div className="flex gap-4">
+              <Typography
+                variant="p"
+                fontWeight="semibold"
+                className="underline underline-offset-4 mr-4 hover:cursor-pointer"
+              >
+                Manage
+              </Typography>
+              <Typography
+                variant="p"
+                fontWeight="semibold"
+                className="underline underline-offset-4 hover:cursor-pointer"
+              >
+                Remove
+              </Typography>
+            </div>
+            <Typography variant="p" fontWeight="semibold">
+              {formatCurrency(2550, "Philippines")}
+            </Typography>
+          </div>
+          <div className="border-b mt-8"></div>
+        </div>
       ))}
     </>
   )
