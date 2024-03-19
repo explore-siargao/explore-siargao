@@ -29,9 +29,7 @@ export const getAllUsers = async (req: Request, res: Response) => {
       ...user,
       personalInfo: {
         ...user.guest,
-        confirm: user.guest?.confirm
-          ? JSON.parse(user.guest?.confirm)
-          : null,
+        confirm: user.guest?.confirm ? JSON.parse(user.guest?.confirm) : null,
         governmentId: user.guest?.governmentId
           ? JSON.parse(user.guest.governmentId)
           : null,
@@ -225,8 +223,7 @@ export const getUserProfile = async (req: Request, res: Response) => {
   let rating = totalRatings / listingReviewRating.length
   const newData = {
     profilePicture: getUser.profilePicture,
-    userName:
-      getUser.guest?.firstName + ' ' + getUser.guest?.lastName,
+    userName: getUser.guest?.firstName + ' ' + getUser.guest?.lastName,
     role: getUser.role,
     countReviews: countReviews,
     ratings: Number.isNaN(rating) ? 0 : rating.toFixed(2),

@@ -41,8 +41,7 @@ export const getHostDetailsInListing = async (req: Request, res: Response) => {
     }
     const totalReviews = getListing.review.length
     const returnData = {
-      hostName:
-        getHost.guest?.firstName + ' ' + getHost.guest?.lastName,
+      hostName: getHost.guest?.firstName + ' ' + getHost.guest?.lastName,
       hostProfilePic: getHost.profilePicture,
       joinedIn: getHost.createdAt,
       countReviews: totalReviews !== 0 ? totalReviews : 'No reviews yet',
