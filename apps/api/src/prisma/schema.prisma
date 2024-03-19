@@ -506,7 +506,7 @@ model Notification {
 model Photo {
   id                 Int              @id @default(autoincrement())
   bookableUnitTypeId Int
-    propertyId         Int
+  propertyId         Int
   url                String           @db.LongText()
   thumbUrl           String           @db.LongText()
   caption            String
@@ -514,9 +514,9 @@ model Photo {
   updatedAt          DateTime         @updatedAt
   deletedAt          DateTime?
   BookableUnitType   BookableUnitType @relation(fields: [bookableUnitTypeId], references: [id])
-  Property           Property        @relation(fields: [propertyId], references: [id])
+  Property           Property         @relation(fields: [propertyId], references: [id])
 
-@@index([propertyId])
+  @@index([propertyId])
   @@index([bookableUnitTypeId])
 }
 
@@ -559,7 +559,7 @@ model BookableUnitType {
   Photos                                Photo[]
   Features                              Feature[]
   BedConfigs                            BookableUnitBedConfig[]
-  BookableUnit BookableUnit[]
+  BookableUnit                          BookableUnit[]
   numBedrooms                           Int
   numBathrooms                          Int
   minNightlyRate                        Decimal                 @db.Decimal(10, 2)
@@ -572,25 +572,28 @@ model BookableUnitType {
 }
 
 model Guests {
-  id                     Int       @id @default(autoincrement())
-  firstName              String    @db.VarChar(255)
-  lastName               String    @db.VarChar(255)
+  id                     Int           @id @default(autoincrement())
+  firstName              String        @db.VarChar(255)
+  lastName               String        @db.VarChar(255)
   gender                 Gender
-  email                  String    @unique @db.VarChar(255)
-  phone                  String    @db.VarChar(20)
-  cellPhone              String    @db.VarChar(20)
-  country                String    @db.VarChar(100)
+  email                  String        @unique @db.VarChar(255)
+  phone                  String        @db.VarChar(20)
+  cellPhone              String        @db.VarChar(20)
+  country                String        @db.VarChar(100)
   addressesId            Int
-  Address                Addresses @relation(fields: [addressesId], references: [id])
+  Address                Addresses     @relation(fields: [addressesId], references: [id])
   birthDate              DateTime?
-  documentType           String    @db.VarChar(20)
-  documentNumber         String    @db.VarChar(20)
+  documentType           String        @db.VarChar(20)
+  documentNumber         String        @db.VarChar(20)
   documentIssueDate      DateTime
-  documentIssuingCountry String    @db.VarChar(20)
+  documentIssuingCountry String        @db.VarChar(20)
   documentExpirationDate DateTime
   taxId                  Int
   companyTaxId           Int
-  companyName            String    @db.VarChar(255)
+  companyName            String        @db.VarChar(255)
+  mainReservationId Int
+  MainReservation  Reservation[]
+  GuestList        GuestReservation[]
 
   @@index([addressesId])
 }
@@ -617,7 +620,9 @@ model Property {
   taxId2                      Int
   companyLegalName            String              @db.VarChar(255)
   propertyType                PropertyType
-  BookableUnit BookableUnit[]
+  BookableUnit                BookableUnit[]
+  Reservation Reservation[]
+
   @@index([propertyAddressesId])
 }
 
@@ -631,14 +636,53 @@ model PropertyAmenities {
 }
 
 model BookableUnit {
-  id Int @id @default(autoincrement())
-  propertyId  Int @unique
-  Property Property @relation(fields: [propertyId], references: [id])
+  id                 Int              @id @default(autoincrement())
+  propertyId         Int              @unique
+  Property           Property         @relation(fields: [propertyId], references: [id])
   bookableUnitTypeId Int
-  BookableUnitType BookableUnitType @relation(fields: [bookableUnitTypeId], references: [id])
+  BookableUnitType   BookableUnitType @relation(fields: [bookableUnitTypeId], references: [id])
+  reservationId      Int
+  Reservation        Reservation @relation(fields: [reservationId], references: [id])
 
   @@index([propertyId])
   @@index([bookableUnitTypeId])
+  @@index([reservationId])
+}
+
+model Reservation {
+  id          Int            @id @default(autoincrement())
+  propertyId  Int
+  Property    Property  @relation(fields: [propertyId], references: [id])
+  status      Status
+  stardDate   DateTime
+  endDate     DateTime
+  bookedUnits BookableUnit[]
+  mainGuestId Int
+  MainGuest   Guests @relation(fields: [mainGuestId], references: [id])
+  GuestList   GuestReservation[]
+
+  @@index([propertyId])
+  @@index([mainGuestId])
+}
+
+model GuestReservation {
+  id          Int            @id @default(autoincrement())
+  guestListId Int
+  reservationId Int
+  GuestList    Guests @relation(fields: [guestListId], references: [id])
+  Reservation  Reservation @relation(fields: [reservationId], references: [id])
+
+  @@index([reservationId])
+  @@index([guestListId])
+}
+
+enum Status {
+  confirmed
+  not_confirmed
+  cancelled
+  checked_in
+  checked_out
+  no_show
 }
 
 enum PropertyType {
