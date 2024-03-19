@@ -623,9 +623,10 @@ model Property {
   companyLegalName            String              @db.VarChar(255)
   propertyType                PropertyType
   BookableUnit                BookableUnit[]
-    createdAt              DateTime           @default(now())
+  createdAt              DateTime           @default(now())
   updatedAt              DateTime           @updatedAt
   deletedAt              DateTime?      
+  Reservation Reservation[]
 
   @@index([propertyAddressesId])
 }
@@ -651,8 +652,48 @@ model BookableUnit {
   createdAt              DateTime           @default(now())
   updatedAt              DateTime           @updatedAt
   deletedAt              DateTime?      
+  reservationId      Int
+  Reservation        Reservation @relation(fields: [reservationId], references: [id])
+
   @@index([propertyId])
   @@index([bookableUnitTypeId])
+  @@index([reservationId])
+}
+
+model Reservation {
+  id          Int            @id @default(autoincrement())
+  propertyId  Int
+  Property    Property  @relation(fields: [propertyId], references: [id])
+  status      Status
+  stardDate   DateTime
+  endDate     DateTime
+  bookedUnits BookableUnit[]
+  mainGuestId Int
+  MainGuest   Guests @relation(fields: [mainGuestId], references: [id])
+  GuestList   GuestReservation[]
+
+  @@index([propertyId])
+  @@index([mainGuestId])
+}
+
+model GuestReservation {
+  id          Int            @id @default(autoincrement())
+  guestListId Int
+  reservationId Int
+  GuestList    Guests @relation(fields: [guestListId], references: [id])
+  Reservation  Reservation @relation(fields: [reservationId], references: [id])
+
+  @@index([reservationId])
+  @@index([guestListId])
+}
+
+enum Status {
+  confirmed
+  not_confirmed
+  cancelled
+  checked_in
+  checked_out
+  no_show
 }
 
 enum PropertyType {
