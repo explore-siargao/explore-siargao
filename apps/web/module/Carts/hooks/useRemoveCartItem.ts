@@ -2,14 +2,18 @@ import { ApiService } from "@/common/service/api"
 import { API_URL_CARTS } from "@/common/constants"
 import { useMutation } from "@tanstack/react-query"
 
-export async function removeCartItem(id: number) {
-  const apiService = new ApiService("mock")
-  return await apiService.delete(`${API_URL_CARTS}/${id}`)
+interface CartIds {
+  cartIds: number[]
 }
 
-function useRemoveCartItem(id: number) {
+export async function removeCartItem(props: CartIds) {
+  const apiService = new ApiService("mock")
+  return await apiService.delete(`${API_URL_CARTS}/`, props)
+}
+
+function useRemoveCartItem() {
   const query = useMutation({
-    mutationFn: () => removeCartItem(id),
+    mutationFn: (props: CartIds) => removeCartItem(props),
   })
   return query
 }
