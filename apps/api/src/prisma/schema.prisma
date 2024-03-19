@@ -516,7 +516,8 @@ model BookableUnitBedConfig {
   createdAt          DateTime         @default(now())
   updatedAt          DateTime         @updatedAt
   deletedAt          DateTime?
-  BookableUnitType   BookableUnitType @relation(fields: [bookableUnitTypeId], references: [id])  
+  BookableUnitType   BookableUnitType @relation(fields: [bookableUnitTypeId], references: [id])
+
   @@index([bookableUnitTypeId])
 }
 
@@ -595,9 +596,11 @@ model Guests {
   companyName            String?             @db.VarChar(255)
   confirm                String?             @db.VarChar(250)
   profile                String?             @db.LongText()
-  createdAt              DateTime           @default(now())
-  updatedAt              DateTime           @updatedAt
-  deletedAt              DateTime?           
+  createdAt              DateTime            @default(now())
+  updatedAt              DateTime            @updatedAt
+  deletedAt              DateTime?
+  Reservation            Reservation[]
+  GuestReservation       GuestReservation[]
 }
 
 model Property {
@@ -623,10 +626,10 @@ model Property {
   companyLegalName            String              @db.VarChar(255)
   propertyType                PropertyType
   BookableUnit                BookableUnit[]
-  createdAt              DateTime           @default(now())
-  updatedAt              DateTime           @updatedAt
-  deletedAt              DateTime?      
-  Reservation Reservation[]
+  createdAt                   DateTime            @default(now())
+  updatedAt                   DateTime            @updatedAt
+  deletedAt                   DateTime?
+  Reservation                 Reservation[]
 
   @@index([propertyAddressesId])
 }
@@ -636,9 +639,9 @@ model PropertyAmenities {
   amenity    String    @db.VarChar(255)
   Property   Property? @relation(fields: [propertyId], references: [id])
   propertyId Int?
-    createdAt              DateTime           @default(now())
-  updatedAt              DateTime           @updatedAt
-  deletedAt              DateTime?      
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  deletedAt  DateTime?
 
   @@index([propertyId])
 }
@@ -649,11 +652,11 @@ model BookableUnit {
   Property           Property         @relation(fields: [propertyId], references: [id])
   bookableUnitTypeId Int
   BookableUnitType   BookableUnitType @relation(fields: [bookableUnitTypeId], references: [id])
-  createdAt              DateTime           @default(now())
-  updatedAt              DateTime           @updatedAt
-  deletedAt              DateTime?      
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+  deletedAt          DateTime?
   reservationId      Int
-  Reservation        Reservation @relation(fields: [reservationId], references: [id])
+  Reservation        Reservation      @relation(fields: [reservationId], references: [id])
 
   @@index([propertyId])
   @@index([bookableUnitTypeId])
@@ -661,15 +664,15 @@ model BookableUnit {
 }
 
 model Reservation {
-  id          Int            @id @default(autoincrement())
+  id          Int                @id @default(autoincrement())
   propertyId  Int
-  Property    Property  @relation(fields: [propertyId], references: [id])
+  Property    Property           @relation(fields: [propertyId], references: [id])
   status      Status
   stardDate   DateTime
   endDate     DateTime
   bookedUnits BookableUnit[]
   mainGuestId Int
-  MainGuest   Guests @relation(fields: [mainGuestId], references: [id])
+  MainGuest   Guests             @relation(fields: [mainGuestId], references: [id])
   GuestList   GuestReservation[]
 
   @@index([propertyId])
@@ -677,11 +680,11 @@ model Reservation {
 }
 
 model GuestReservation {
-  id          Int            @id @default(autoincrement())
-  guestListId Int
+  id            Int         @id @default(autoincrement())
+  guestListId   Int
   reservationId Int
-  GuestList    Guests @relation(fields: [guestListId], references: [id])
-  Reservation  Reservation @relation(fields: [reservationId], references: [id])
+  GuestList     Guests      @relation(fields: [guestListId], references: [id])
+  Reservation   Reservation @relation(fields: [reservationId], references: [id])
 
   @@index([reservationId])
   @@index([guestListId])
