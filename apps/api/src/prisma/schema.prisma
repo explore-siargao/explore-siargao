@@ -506,6 +506,7 @@ model Notification {
 model Photo {
   id                 Int              @id @default(autoincrement())
   bookableUnitTypeId Int
+    propertyId         Int
   url                String           @db.LongText()
   thumbUrl           String           @db.LongText()
   caption            String
@@ -513,9 +514,9 @@ model Photo {
   updatedAt          DateTime         @updatedAt
   deletedAt          DateTime?
   BookableUnitType   BookableUnitType @relation(fields: [bookableUnitTypeId], references: [id])
-  Property           Property?        @relation(fields: [propertyId], references: [id])
-  propertyId         Int?
+  Property           Property        @relation(fields: [propertyId], references: [id])
 
+@@index([propertyId])
   @@index([bookableUnitTypeId])
 }
 
@@ -558,6 +559,7 @@ model BookableUnitType {
   Photos                                Photo[]
   Features                              Feature[]
   BedConfigs                            BookableUnitBedConfig[]
+  BookableUnit BookableUnit[]
   numBedrooms                           Int
   numBathrooms                          Int
   minNightlyRate                        Decimal                 @db.Decimal(10, 2)
@@ -615,7 +617,7 @@ model Property {
   taxId2                      Int
   companyLegalName            String              @db.VarChar(255)
   propertyType                PropertyType
-
+  BookableUnit BookableUnit[]
   @@index([propertyAddressesId])
 }
 
@@ -626,6 +628,17 @@ model PropertyAmenities {
   propertyId Int?
 
   @@index([propertyId])
+}
+
+model BookableUnit {
+  id Int @id @default(autoincrement())
+  propertyId  Int @unique
+  Property Property @relation(fields: [propertyId], references: [id])
+  bookableUnitTypeId Int
+  BookableUnitType BookableUnitType @relation(fields: [bookableUnitTypeId], references: [id])
+
+  @@index([propertyId])
+  @@index([bookableUnitTypeId])
 }
 
 enum PropertyType {
