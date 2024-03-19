@@ -33,7 +33,7 @@ export const verifySignIn = async (req: Request, res: Response) => {
           email: email as string,
         },
         include: {
-          personalInfo: true,
+          guest: true,
         },
       })
       const capitalizeType = capitalize(type as string)
@@ -114,6 +114,7 @@ export const register = async (req: Request, res: Response) => {
       firstName,
       lastName,
       birthDate,
+      gender,
       registrationType,
       country,
       canReceiveEmail,
@@ -128,7 +129,7 @@ export const register = async (req: Request, res: Response) => {
           email: email as string,
         },
         include: {
-          personalInfo: true,
+          guest: true,
         },
       })
       if (!user) {
@@ -142,16 +143,20 @@ export const register = async (req: Request, res: Response) => {
           },
         })
 
-        const newPersonalInfo = await prisma.personalInfo.create({
+        const newPersonalInfo = await prisma.guests.create({
           data: {
             userId: newUser.id,
             firstName: firstName,
             middleName: '',
             lastName: lastName,
             birthDate: dayjs(birthDate).format(),
-            phoneNumber: '',
+            phone:'',
+            cellPhone: '',
             country: country,
             language: 'English',
+            companyName:'',
+            companyTaxId:null,
+            gender:gender,
             currency: selectedCurrency,
             confirm: JSON.stringify({
               identity: false,
@@ -189,7 +194,7 @@ export const manual = async (req: Request, res: Response) => {
           registrationType: RegistrationType.Manual,
         },
         include: {
-          personalInfo: true,
+          guest: true,
         },
       })
       if (!user) {
@@ -232,14 +237,14 @@ export const info = async (req: Request, res: Response) => {
             email: email,
           },
           include: {
-            personalInfo: true,
+            guest: true,
           },
         })
         if (user) {
           res.json(
             response.success({
               item: {
-                name: `${user.personalInfo?.firstName} ${user.personalInfo?.lastName}`,
+                name: `${user.guest?.firstName} ${user.guest?.lastName}`,
                 email: user.email,
               },
             })
@@ -362,7 +367,7 @@ export const forgotVerify = async (req: Request, res: Response) => {
             email: email,
           },
           include: {
-            personalInfo: true,
+            guest: true,
           },
           data: {
             password: String(encryptPassword),
@@ -506,7 +511,7 @@ export const updateUserEmail = async (req: Request, res: Response) => {
         deletedAt: null,
       },
       include: {
-        personalInfo: true,
+        guest: true,
       },
     })
     if (getUser) {
@@ -563,9 +568,9 @@ export const userDetails = async (req: Request, res: Response) => {
           deletedAt: null,
         },
         include: {
-          personalInfo: {
+          guest: {
             include: {
-              address: true,
+              Address: true,
               emergencyContacts: true,
             },
           },
@@ -579,7 +584,7 @@ export const userDetails = async (req: Request, res: Response) => {
             canReceivedEmail: user?.canReceiveEmail,
             registrationType: user?.registrationType,
             profilePicture: user?.profilePicture,
-            personalInfo: user?.personalInfo,
+            personalInfo: user?.guest,
           },
         })
       )

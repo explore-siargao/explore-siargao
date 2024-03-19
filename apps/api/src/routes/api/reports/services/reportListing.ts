@@ -23,7 +23,7 @@ export const getAllReports = async (req: Request, res: Response) => {
           select: {
             email: true,
             profilePicture: true,
-            personalInfo: {
+            guest: {
               select: {
                 firstName: true,
                 lastName: true,
@@ -51,9 +51,9 @@ export const getAllReports = async (req: Request, res: Response) => {
       reportedBy: {
         email: reportListing.user.email,
         name:
-          reportListing.user.personalInfo?.firstName +
+          reportListing.user.guest?.firstName +
           ' ' +
-          reportListing.user.personalInfo?.lastName,
+          reportListing.user.guest?.lastName,
         profilePicture: reportListing.user.profilePicture,
       },
       createdAt: reportListing.createdAt,
@@ -105,7 +105,7 @@ export const getAllReportListingByReportedBy = async (
           select: {
             email: true,
             profilePicture: true,
-            personalInfo: {
+            guest: {
               select: {
                 firstName: true,
                 lastName: true,
@@ -128,9 +128,9 @@ export const getAllReportListingByReportedBy = async (
       reportedBy: {
         email: reportListing.user.email,
         name:
-          reportListing.user.personalInfo?.firstName +
+          reportListing.user.guest?.firstName +
           ' ' +
-          reportListing.user.personalInfo?.lastName,
+          reportListing.user.guest?.lastName,
         profilePicture: reportListing.user.profilePicture,
       },
       createdAt: reportListing.createdAt,
@@ -167,7 +167,7 @@ export const getReportsByListing = async (req: Request, res: Response) => {
           select: {
             email: true,
             profilePicture: true,
-            personalInfo: {
+            guest: {
               select: {
                 firstName: true,
                 lastName: true,
@@ -195,9 +195,9 @@ export const getReportsByListing = async (req: Request, res: Response) => {
       reportedBy: {
         email: reportListing.user.email,
         name:
-          reportListing.user.personalInfo?.firstName +
+          reportListing.user.guest?.firstName +
           ' ' +
-          reportListing.user.personalInfo?.lastName,
+          reportListing.user.guest?.lastName,
         profilePicture: reportListing.user.profilePicture,
       },
       createdAt: reportListing.createdAt,
@@ -237,7 +237,7 @@ export const getReport = async (req: Request, res: Response) => {
           select: {
             email: true,
             profilePicture: true,
-            personalInfo: {
+            guest: {
               select: {
                 firstName: true,
                 lastName: true,
@@ -277,9 +277,9 @@ export const getReport = async (req: Request, res: Response) => {
       reportedBy: {
         email: modifyResult.user.email,
         name:
-          modifyResult.user.personalInfo?.firstName +
+          modifyResult.user.guest?.firstName +
           ' ' +
-          modifyResult.user.personalInfo?.lastName,
+          modifyResult.user.guest?.lastName,
         profilePicture: modifyResult.user.profilePicture,
       },
       createdAt: modifyResult.createdAt,

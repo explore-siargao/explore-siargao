@@ -24,12 +24,12 @@ export const getReviewByListing = async (req: Request, res: Response) => {
         include: {
           user: {
             select: {
-              personalInfo: {
+              guest: {
                 select: {
                   firstName: true,
                   middleName: true,
                   lastName: true,
-                  address: true,
+                  Address: true,
                 },
               },
             },
@@ -64,7 +64,7 @@ export const getReviewByListing = async (req: Request, res: Response) => {
         locationAverage = totalLocation / reviews.length
         valueAverage = totalValue / reviews.length
         return {
-          name: `${review?.user?.personalInfo?.firstName} ${review?.user?.personalInfo?.lastName}`,
+          name: `${review?.user?.guest?.firstName} ${review?.user?.guest?.lastName}`,
           rating: Number(
             (
               (review.cleanLinessRates +
@@ -78,7 +78,7 @@ export const getReviewByListing = async (req: Request, res: Response) => {
           ),
           description: review.comment,
           reviewDate: review.createdAt,
-          country: review.user.personalInfo?.address?.country,
+          country: review.user.guest?.Address?.country,
         }
       })
       if (reviews.length !== 0) {

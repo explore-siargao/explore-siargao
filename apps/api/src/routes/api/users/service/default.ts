@@ -17,10 +17,10 @@ export const getAllUsers = async (req: Request, res: Response) => {
     const prisma = new PrismaClient()
     const users = await prisma.user.findMany({
       include: {
-        personalInfo: {
+        guest: {
           include: {
             emergencyContacts: true,
-            address: true,
+            Address: true,
           },
         },
       },
@@ -28,12 +28,12 @@ export const getAllUsers = async (req: Request, res: Response) => {
     const modifyUsers = users.map((user) => ({
       ...user,
       personalInfo: {
-        ...user.personalInfo,
-        confirm: user.personalInfo?.confirm
-          ? JSON.parse(user.personalInfo?.confirm)
+        ...user.guest,
+        confirm: user.guest?.confirm
+          ? JSON.parse(user.guest?.confirm)
           : null,
-        governmentId: user.personalInfo?.governmentId
-          ? JSON.parse(user.personalInfo.governmentId)
+        governmentId: user.guest?.governmentId
+          ? JSON.parse(user.guest.governmentId)
           : null,
       },
     }))
@@ -171,7 +171,7 @@ export const getUserProfile = async (req: Request, res: Response) => {
             include: {
               user: {
                 select: {
-                  personalInfo: {
+                  guest: {
                     select: {
                       firstName: true,
                       lastName: true,
@@ -183,12 +183,12 @@ export const getUserProfile = async (req: Request, res: Response) => {
           },
         },
       },
-      personalInfo: {
+      guest: {
         select: {
           firstName: true,
           lastName: true,
           confirm: true,
-          address: {
+          Address: {
             select: {
               city: true,
               country: true,
@@ -226,7 +226,7 @@ export const getUserProfile = async (req: Request, res: Response) => {
   const newData = {
     profilePicture: getUser.profilePicture,
     userName:
-      getUser.personalInfo?.firstName + ' ' + getUser.personalInfo?.lastName,
+      getUser.guest?.firstName + ' ' + getUser.guest?.lastName,
     role: getUser.role,
     countReviews: countReviews,
     ratings: Number.isNaN(rating) ? 0 : rating.toFixed(2),
@@ -240,7 +240,7 @@ export const getUserProfile = async (req: Request, res: Response) => {
     hostedSince: getUser.hostInfo?.hostedSince
       ? getUser.hostInfo.hostedSince
       : null,
-    confirmInfo: JSON.parse(String(getUser.personalInfo?.confirm)),
+    confirmInfo: JSON.parse(String(getUser.guest?.confirm)),
   }
   const mockData = {
     school: 'LSPU',
