@@ -21,7 +21,7 @@ export const getUsedCoupons = async (req: Request, res: Response) => {
         include: {
           user: {
             include: {
-              personalInfo: true,
+              guest: true,
             },
           },
         },
@@ -31,12 +31,12 @@ export const getUsedCoupons = async (req: Request, res: Response) => {
         user: {
           ...coupon.user,
           personalInfo: {
-            ...coupon.user?.personalInfo,
-            confirm: coupon.user?.personalInfo?.confirm
-              ? JSON.parse(coupon.user?.personalInfo?.confirm)
+            ...coupon.user?.guest,
+            confirm: coupon.user?.guest?.confirm
+              ? JSON.parse(coupon.user?.guest?.confirm)
               : null,
-            governmentId: coupon.user?.personalInfo?.governmentId
-              ? JSON.parse(coupon.user.personalInfo.governmentId)
+            governmentId: coupon.user?.guest?.governmentId
+              ? JSON.parse(coupon.user.guest.governmentId)
               : null,
           },
         },

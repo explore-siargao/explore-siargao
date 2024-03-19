@@ -14,12 +14,12 @@ const fileService = new FileService()
 
 export const getPersonalInfo = async (req: Request, res: Response) => {
   try {
-    const getPersonalInfo = await prisma.personalInfo.findFirst({
+    const getPersonalInfo = await prisma.guests.findFirst({
       where: { userId: Number(req?.params?.userId) },
       include: {
-        user: true,
+        User: true,
         emergencyContacts: true,
-        address: true,
+        Address: true,
       },
     })
     const modifyPersonInfo = {
@@ -61,7 +61,7 @@ export const updatePersonalInfo = async (req: Request, res: Response) => {
       confirm,
     } = req.body
     const userId = Number(req.params.userId)
-    const editPersonalInfo = await prisma.personalInfo.update({
+    const editPersonalInfo = await prisma.guests.update({
       where: {
         userId: userId,
       },
@@ -71,7 +71,7 @@ export const updatePersonalInfo = async (req: Request, res: Response) => {
         middleName: middleName,
         birthDate: birthDate,
         governmentId: governmentId,
-        phoneNumber: phoneNumber,
+        cellPhone: phoneNumber,
         confirm: JSON.stringify(confirm),
       },
     })
@@ -95,7 +95,7 @@ export const addEmergencyContact = async (req: Request, res: Response) => {
     const { email, phoneNumber, name, relationship } = req.body
     const personalInfoId = Number(req.params.personalInfoId)
     if (name && relationship && (email || phoneNumber)) {
-      const getPersonalInfo = await prisma.personalInfo.findFirst({
+      const getPersonalInfo = await prisma.guests.findFirst({
         where: {
           id: personalInfoId,
           deletedAt: null,
@@ -140,7 +140,7 @@ export const removeEmergencyContact = async (req: Request, res: Response) => {
   const personId = Number(req.params.peronalInfoId)
   const emergencyContactId = Number(req.params.emergencyContactId)
   try {
-    const personalInfo = await prisma.personalInfo.findFirst({
+    const personalInfo = await prisma.guests.findFirst({
       where: {
         id: personId,
       },
@@ -190,19 +190,19 @@ export const addAddress = async (req: Request, res: Response) => {
       req.body
     const personalInfoId = Number(req.params.personalInfoId)
     if ((streetAddress && city && stateProvince) || (aptSuite && zipCode)) {
-      const getPersonalInfo = await prisma.personalInfo.findFirst({
+      const getPersonalInfo = await prisma.guests.findFirst({
         where: {
           id: personalInfoId,
           deletedAt: null,
         },
         include: {
-          address: true,
+          Address: true,
         },
       })
 
       if (getPersonalInfo) {
         let returnAddress = null
-        if (getPersonalInfo.address === null) {
+        if (getPersonalInfo.Address === null) {
           const newAddress = await prisma.addresses.create({
             data: {
               peronalInfoId: personalInfoId,
@@ -219,7 +219,7 @@ export const addAddress = async (req: Request, res: Response) => {
           const updateAddress = await prisma.addresses.update({
             where: {
               peronalInfoId: getPersonalInfo.id,
-              id: getPersonalInfo.address?.id,
+              id: getPersonalInfo.Address?.id | 0,
             },
             data: {
               streetAddress: streetAddress,
@@ -264,19 +264,19 @@ export const editAddress = async (req: Request, res: Response) => {
       (streetAddress && city && stateProvince) ||
       (aptSuite && zipCode && country)
     ) {
-      const personalInfo = await prisma.personalInfo.findUnique({
+      const personalInfo = await prisma.guests.findUnique({
         where: {
           userId: userId,
         },
         include: {
-          address: true,
+          Address: true,
         },
       })
       if (personalInfo) {
         const updateAddress = await prisma.addresses.update({
           where: {
             peronalInfoId: personalInfo.id,
-            id: personalInfo.address?.id,
+            id: personalInfo.Address?.id,
           },
           data: {
             streetAddress: streetAddress,
@@ -314,7 +314,7 @@ export const getAllGovernmentIdByPersonInfoId = async (
 ) => {
   const personId = Number(req.params.peronalInfoId)
   try {
-    const getPersonInfoId = await prisma.personalInfo.findUnique({
+    const getPersonInfoId = await prisma.guests.findUnique({
       where: {
         id: personId,
       },
@@ -350,7 +350,7 @@ export const addGovernmentId = async (req: Request, res: Response) => {
   if (isValidInput.success && files) {
     const { type } = req.body
     try {
-      const getPersonIfo = await prisma.personalInfo.findUnique({
+      const getPersonIfo = await prisma.guests.findUnique({
         where: {
           id: peronalInfoId,
         },
@@ -358,7 +358,7 @@ export const addGovernmentId = async (req: Request, res: Response) => {
       if (getPersonIfo) {
         if (getPersonIfo.governmentId === null) {
           const upload = await fileService.upload({ files })
-          const addNewGovernmentId = await prisma.personalInfo.update({
+          const addNewGovernmentId = await prisma.guests.update({
             where: {
               id: peronalInfoId,
             },
@@ -394,7 +394,7 @@ export const addGovernmentId = async (req: Request, res: Response) => {
                 type: type,
                 createdAt: new Date(),
               })
-              const updateGovId = await prisma.personalInfo.update({
+              const updateGovId = await prisma.guests.update({
                 where: {
                   id: peronalInfoId,
                 },
@@ -458,7 +458,7 @@ export const updateLanguage = async (req: Request, res: Response) => {
     if (!language) {
       return res.json(response.error({ message: REQUIRED_VALUE_EMPTY }))
     }
-    const getPersonalInfo = await prisma.personalInfo.findFirst({
+    const getPersonalInfo = await prisma.guests.findFirst({
       where: {
         id: personalInfoId,
       },
@@ -466,7 +466,7 @@ export const updateLanguage = async (req: Request, res: Response) => {
     if (!getPersonalInfo) {
       return res.json(response.error({ message: 'Personal info not found' }))
     }
-    const updateUserLanguage = await prisma.personalInfo.update({
+    const updateUserLanguage = await prisma.guests.update({
       where: {
         id: personalInfoId,
       },
@@ -494,7 +494,7 @@ export const updateCurrency = async (req: Request, res: Response) => {
     if (!currency) {
       return res.json(response.error({ message: REQUIRED_VALUE_EMPTY }))
     }
-    const getPersonalInfo = await prisma.personalInfo.findFirst({
+    const getPersonalInfo = await prisma.guests.findFirst({
       where: {
         id: personalInfoId,
       },
@@ -502,7 +502,7 @@ export const updateCurrency = async (req: Request, res: Response) => {
     if (!getPersonalInfo) {
       return res.json(response.error({ message: 'Personal info not found' }))
     }
-    const updateUserCurrency = await prisma.personalInfo.update({
+    const updateUserCurrency = await prisma.guests.update({
       where: {
         id: personalInfoId,
       },

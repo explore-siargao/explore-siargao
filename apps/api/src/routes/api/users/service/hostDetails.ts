@@ -15,7 +15,7 @@ export const getHostDetailsInListing = async (req: Request, res: Response) => {
         deletedAt: null,
       },
       include: {
-        personalInfo: true,
+        guest: true,
       },
     })
     const getListing = await prisma.listing.findFirst({
@@ -41,8 +41,7 @@ export const getHostDetailsInListing = async (req: Request, res: Response) => {
     }
     const totalReviews = getListing.review.length
     const returnData = {
-      hostName:
-        getHost.personalInfo?.firstName + ' ' + getHost.personalInfo?.lastName,
+      hostName: getHost.guest?.firstName + ' ' + getHost.guest?.lastName,
       hostProfilePic: getHost.profilePicture,
       joinedIn: getHost.createdAt,
       countReviews: totalReviews !== 0 ? totalReviews : 'No reviews yet',

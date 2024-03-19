@@ -45,9 +45,9 @@ const isUserLoggedIn = async (
           deletedAt: null,
         },
         include: {
-          personalInfo: {
+          guest: {
             include: {
-              address: true,
+              Address: true,
               emergencyContacts: true,
             },
           },
@@ -68,9 +68,9 @@ const isUserLoggedIn = async (
         changePasswordAt: String(user?.changePasswordAt),
         // TODO: FIX THE ANY FOR THIS VALUE
         personalInfo: {
-          ...user?.personalInfo,
-          governmentId: user?.personalInfo?.governmentId
-            ? JSON.parse(user?.personalInfo?.governmentId)
+          ...user?.guest,
+          governmentId: user?.guest?.governmentId
+            ? JSON.parse(user?.guest?.governmentId)
             : null,
         } as any,
       }
