@@ -502,6 +502,69 @@ model Notification {
   @@index([userId])
 }
 
+model Photo {
+  id                 Int              @id @default(autoincrement())
+  bookableUnitTypeId Int
+  url                String           @db.LongText()
+  thumbUrl           String           @db.LongText()
+  caption            String
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+  deletedAt          DateTime?
+  BookableUnitType   BookableUnitType @relation(fields: [bookableUnitTypeId], references: [id])
+
+  @@index([bookableUnitTypeId])
+}
+
+model Feature {
+  id                 Int              @id @default(autoincrement())
+  bookableUnitTypeId Int
+  feature            String
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+  deletedAt          DateTime?
+  BookableUnitType   BookableUnitType @relation(fields: [bookableUnitTypeId], references: [id])
+
+  @@index([bookableUnitTypeId])
+}
+
+model BookableUnitBedConfig {
+  id                 Int              @id @default(autoincrement())
+  bookableUnitTypeId Int
+  roomName           String           @db.VarChar(255)
+  bedType            String
+  bedQuantity        String
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+  deletedAt          DateTime?
+  BookableUnitType   BookableUnitType @relation(fields: [bookableUnitTypeId], references: [id])
+
+  @@index([bookableUnitTypeId])
+}
+
+model BookableUnitType {
+  id                                    Int                     @id @default(autoincrement())
+  category                              String                  @db.VarChar(255)
+  name                                  String                  @db.LongText()
+  description                           String                  @db.LongText()
+  isPrivate                             Boolean                 @default(false)
+  maxGuest                              Int
+  adultsIncluded                        Int
+  childrenIncluded                      Int
+  isMultiRoomUnit                       Boolean                 @default(false)
+  Photos                                Photo[]
+  Features                              Feature[]
+  BedConfigs                            BookableUnitBedConfig[]
+  numBedrooms                           Int
+  numBathrooms                          Int
+  minNightlyRate                        Decimal                 @db.Decimal(10, 2)
+  totalSizeSqm                          Decimal                 @db.Decimal(10, 2)
+  additionalPricePerPerson              Decimal                 @db.Decimal(10, 2)
+  thresholdOccupancyForAdditionalCharge Int
+  createdAt                             DateTime                @default(now())
+  updatedAt                             DateTime                @updatedAt
+  deletedAt                             DateTime?
+
 model Guests {
   id                     Int       @id @default(autoincrement())
   firstName              String    @db.VarChar(255)
