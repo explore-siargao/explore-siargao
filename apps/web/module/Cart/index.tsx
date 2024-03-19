@@ -1,6 +1,5 @@
 "use client"
 import { WidthWrapper } from "@/common/components/WidthWrapper"
-import React, { useState } from "react"
 import CartList from "./components/CartList"
 import SubTotalBox from "./components/SubTotalBox"
 
