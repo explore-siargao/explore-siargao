@@ -17,8 +17,8 @@ model User {
   createdAt        DateTime          @default(now())
   updatedAt        DateTime          @updatedAt
   deletedAt        DateTime?
-  role             UserRole             @default(User)
-  isHost           Boolean              @default(false)
+  role             UserRole          @default(User)
+  isHost           Boolean           @default(false)
   registrationType RegistrationType?
   deactivated      Boolean           @default(false)
   profilePicture   String?           @db.LongText
@@ -60,8 +60,9 @@ model PersonalInfo {
   user              User                @relation(fields: [userId], references: [id])
   address           Addresses?
   emergencyContacts EmergencyContacts[]
-  confirm           String?              @db.VarChar(250)
-  profile           String?              @db.LongText()
+  confirm           String?             @db.VarChar(250)
+  profile           String?             @db.LongText()
+
   @@index([userId])
 }
 
@@ -239,7 +240,6 @@ model ReportUser {
   updatedAt      DateTime  @updatedAt
   deletedAt      DateTime?
 
-
   @@index([reportedBy])
   @@index([reportedUserId])
 }
@@ -261,15 +261,15 @@ model Coupon {
 }
 
 model ListingPrice {
-  id          Int       @id @unique @default(autoincrement())
-  fee         Int
-  serviceFee  Int
-  cleaningFee Int
+  id              Int       @id @unique @default(autoincrement())
+  fee             Int
+  serviceFee      Int
+  cleaningFee     Int
   guestLimitCount Int
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  deletedAt   DateTime?
-  listing     Listing?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  deletedAt       DateTime?
+  listing         Listing?
 }
 
 model HighLights {
@@ -455,7 +455,7 @@ model Booking {
   cardInfo                 String?        @db.LongText
   cardType                 String?        @db.VarChar(255)
   lastFour                 String?        @db.VarChar(255)
-  totalFee                Int?
+  totalFee                 Int?
   PaymentMethod            PaymentMethod? @relation(fields: [paymentMethodId], references: [id])
   paymentMethodId          Int?
   xenditPaymentMethodId    String?        @unique @db.VarChar(255)
@@ -499,6 +499,70 @@ model Notification {
 
   @@index([listingId])
   @@index([userId])
+}
+
+model Photo {
+  id                 Int              @id @default(autoincrement())
+  bookableUnitTypeId Int
+  url                String           @db.LongText()
+  thumbUrl           String           @db.LongText()
+  caption            String
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+  deletedAt          DateTime?
+  BookableUnitType   BookableUnitType @relation(fields: [bookableUnitTypeId], references: [id])
+
+  @@index([bookableUnitTypeId])
+}
+
+model Feature {
+  id                 Int              @id @default(autoincrement())
+  bookableUnitTypeId Int
+  feature            String
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+  deletedAt          DateTime?
+  BookableUnitType   BookableUnitType @relation(fields: [bookableUnitTypeId], references: [id])
+
+  @@index([bookableUnitTypeId])
+}
+
+model BookableUnitBedConfig {
+  id                 Int              @id @default(autoincrement())
+  bookableUnitTypeId Int
+  roomName           String           @db.VarChar(255)
+  bedType            String
+  bedQuantity        String
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+  deletedAt          DateTime?
+  BookableUnitType   BookableUnitType @relation(fields: [bookableUnitTypeId], references: [id])
+
+  @@index([bookableUnitTypeId])
+}
+
+model BookableUnitType {
+  id                                    Int                     @id @default(autoincrement())
+  category                              String                  @db.VarChar(255)
+  name                                  String                  @db.LongText()
+  description                           String                  @db.LongText()
+  isPrivate                             Boolean                 @default(false)
+  maxGuest                              Int
+  adultsIncluded                        Int
+  childrenIncluded                      Int
+  isMultiRoomUnit                       Boolean                 @default(false)
+  Photos                                Photo[]
+  Features                              Feature[]
+  BedConfigs                            BookableUnitBedConfig[]
+  numBedrooms                           Int
+  numBathrooms                          Int
+  minNightlyRate                        Decimal                 @db.Decimal(10, 2)
+  totalSizeSqm                          Decimal                 @db.Decimal(10, 2)
+  additionalPricePerPerson              Decimal                 @db.Decimal(10, 2)
+  thresholdOccupancyForAdditionalCharge Int
+  createdAt                             DateTime                @default(now())
+  updatedAt                             DateTime                @updatedAt
+  deletedAt                             DateTime?
 }
 
 enum NotificationType {
