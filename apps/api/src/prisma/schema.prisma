@@ -105,6 +105,7 @@ model Addresses {
   country       String?      @db.VarChar(255)
   personalInfo  PersonalInfo @relation(fields: [peronalInfoId], references: [id])
   Guests        Guests[]
+  Property      Property[]
 
   @@index([peronalInfoId])
 }
@@ -512,6 +513,8 @@ model Photo {
   updatedAt          DateTime         @updatedAt
   deletedAt          DateTime?
   BookableUnitType   BookableUnitType @relation(fields: [bookableUnitTypeId], references: [id])
+  Property           Property?        @relation(fields: [propertyId], references: [id])
+  propertyId         Int?
 
   @@index([bookableUnitTypeId])
 }
@@ -564,6 +567,7 @@ model BookableUnitType {
   createdAt                             DateTime                @default(now())
   updatedAt                             DateTime                @updatedAt
   deletedAt                             DateTime?
+}
 
 model Guests {
   id                     Int       @id @default(autoincrement())
@@ -587,6 +591,50 @@ model Guests {
   companyName            String    @db.VarChar(255)
 
   @@index([addressesId])
+}
+
+model Property {
+  id                          Int                 @id @default(autoincrement())
+  propertyName                String              @db.VarChar(255)
+  propertyDescription         String              @db.LongText()
+  propertyCurrency            String              @db.VarChar(10)
+  propertyPrimaryLanguage     String              @db.VarChar(50)
+  propertyPhotos              Photo[]
+  propertyPhone               String              @db.VarChar(20)
+  propertyEmail               String              @unique @db.VarChar(255)
+  propertyAddressesId         Int
+  PropertyAddress             Addresses           @relation(fields: [propertyAddressesId], references: [id])
+  propertyCheckInTime         DateTime
+  propertyCheckOutTime        DateTime
+  propertyLateCheckOutAllowed Boolean
+  propertyLateCheckOutType    String              @db.VarChar(255)
+  propertyLateCheckoutValue   Float
+  propertyTermsAndConditions  String              @db.LongText()
+  PropertyAmenities           PropertyAmenities[]
+  taxId                       Int
+  taxId2                      Int
+  companyLegalName            String              @db.VarChar(255)
+  propertyType                PropertyType
+
+  @@index([propertyAddressesId])
+}
+
+model PropertyAmenities {
+  id         Int       @id @default(autoincrement())
+  amenity    String    @db.VarChar(255)
+  Property   Property? @relation(fields: [propertyId], references: [id])
+  propertyId Int?
+
+  @@index([propertyId])
+}
+
+enum PropertyType {
+  Hostel
+  Homestay
+  Hotel
+  Apartment
+  Resort
+  Villa
 }
 
 enum Gender {
