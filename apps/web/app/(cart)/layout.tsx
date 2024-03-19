@@ -28,7 +28,7 @@ export default async function CartLayout({
 }) {
   const session = await getServerSession(authOptions)
   return (
-    <html lang="en">
+    <html lang="en" id="cart-layout">
       <link rel="icon" type="image/x-icon" href={LOGO_SINGLE_IMAGE} />
       <body className={nunito.className}>
         <Toaster />
