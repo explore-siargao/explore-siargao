@@ -104,6 +104,7 @@ model Addresses {
   zipCode       Int?
   country       String?      @db.VarChar(255)
   personalInfo  PersonalInfo @relation(fields: [peronalInfoId], references: [id])
+  Guests        Guests[]
 
   @@index([peronalInfoId])
 }
@@ -563,6 +564,35 @@ model BookableUnitType {
   createdAt                             DateTime                @default(now())
   updatedAt                             DateTime                @updatedAt
   deletedAt                             DateTime?
+
+model Guests {
+  id                     Int       @id @default(autoincrement())
+  firstName              String    @db.VarChar(255)
+  lastName               String    @db.VarChar(255)
+  gender                 Gender
+  email                  String    @unique @db.VarChar(255)
+  phone                  String    @db.VarChar(20)
+  cellPhone              String    @db.VarChar(20)
+  country                String    @db.VarChar(100)
+  addressesId            Int
+  Address                Addresses @relation(fields: [addressesId], references: [id])
+  birthDate              DateTime?
+  documentType           String    @db.VarChar(20)
+  documentNumber         String    @db.VarChar(20)
+  documentIssueDate      DateTime
+  documentIssuingCountry String    @db.VarChar(20)
+  documentExpirationDate DateTime
+  taxId                  Int
+  companyTaxId           Int
+  companyName            String    @db.VarChar(255)
+
+  @@index([addressesId])
+}
+
+enum Gender {
+  M
+  F
+  NA
 }
 
 enum NotificationType {
