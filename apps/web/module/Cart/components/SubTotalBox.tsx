@@ -27,7 +27,7 @@ const SubTotalBox = ({ subTotal }: CheckoutProcessProps) => {
         <Typography variant="p" fontWeight="semibold">
           Subtotal (2)
         </Typography>
-        <LucideChevronDown/>
+        <LucideChevronDown />
       </div>
       <span className="text-xl font-semibold mb-4 mt-2">
         {formatCurrency(subTotal.titlePrice, "Philippines")}{" "}
@@ -36,9 +36,7 @@ const SubTotalBox = ({ subTotal }: CheckoutProcessProps) => {
       <div className="font-semibold grid grid-cols-1 gap-3 w-full"></div>
       <Button
         variant="primary"
-        onClick={() =>
-          router.push(`/accommodation/1/checkout`)
-        }
+        onClick={() => router.push(`/accommodation/1/checkout`)}
       >
         Book Now
       </Button>
@@ -46,9 +44,7 @@ const SubTotalBox = ({ subTotal }: CheckoutProcessProps) => {
         <div className="border-b mt-5 mb-5"></div>
         <div className="flex justify-between font-semibold">
           <div>Total before taxes</div>
-          <div>
-            {formatCurrency(subTotal.totalBeforeTaxes, "Philippines")}
-          </div>
+          <div>{formatCurrency(subTotal.totalBeforeTaxes, "Philippines")}</div>
         </div>
       </div>
     </div>
