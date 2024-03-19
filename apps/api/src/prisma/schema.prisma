@@ -17,8 +17,8 @@ model User {
   createdAt        DateTime          @default(now())
   updatedAt        DateTime          @updatedAt
   deletedAt        DateTime?
-  role             UserRole             @default(User)
-  isHost           Boolean              @default(false)
+  role             UserRole          @default(User)
+  isHost           Boolean           @default(false)
   registrationType RegistrationType?
   deactivated      Boolean           @default(false)
   profilePicture   String?           @db.LongText
@@ -60,8 +60,9 @@ model PersonalInfo {
   user              User                @relation(fields: [userId], references: [id])
   address           Addresses?
   emergencyContacts EmergencyContacts[]
-  confirm           String?              @db.VarChar(250)
-  profile           String?              @db.LongText()
+  confirm           String?             @db.VarChar(250)
+  profile           String?             @db.LongText()
+
   @@index([userId])
 }
 
@@ -103,6 +104,7 @@ model Addresses {
   zipCode       Int?
   country       String?      @db.VarChar(255)
   personalInfo  PersonalInfo @relation(fields: [peronalInfoId], references: [id])
+  Guests        Guests[]
 
   @@index([peronalInfoId])
 }
@@ -239,7 +241,6 @@ model ReportUser {
   updatedAt      DateTime  @updatedAt
   deletedAt      DateTime?
 
-
   @@index([reportedBy])
   @@index([reportedUserId])
 }
@@ -261,15 +262,15 @@ model Coupon {
 }
 
 model ListingPrice {
-  id          Int       @id @unique @default(autoincrement())
-  fee         Int
-  serviceFee  Int
-  cleaningFee Int
+  id              Int       @id @unique @default(autoincrement())
+  fee             Int
+  serviceFee      Int
+  cleaningFee     Int
   guestLimitCount Int
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  deletedAt   DateTime?
-  listing     Listing?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  deletedAt       DateTime?
+  listing         Listing?
 }
 
 model HighLights {
@@ -455,7 +456,7 @@ model Booking {
   cardInfo                 String?        @db.LongText
   cardType                 String?        @db.VarChar(255)
   lastFour                 String?        @db.VarChar(255)
-  totalFee                Int?
+  totalFee                 Int?
   PaymentMethod            PaymentMethod? @relation(fields: [paymentMethodId], references: [id])
   paymentMethodId          Int?
   xenditPaymentMethodId    String?        @unique @db.VarChar(255)
@@ -499,6 +500,36 @@ model Notification {
 
   @@index([listingId])
   @@index([userId])
+}
+
+model Guests {
+  id                     Int       @id @default(autoincrement())
+  firstName              String    @db.VarChar(255)
+  lastName               String    @db.VarChar(255)
+  gender                 Gender
+  email                  String    @unique @db.VarChar(255)
+  phone                  String    @db.VarChar(20)
+  cellPhone              String    @db.VarChar(20)
+  country                String    @db.VarChar(100)
+  addressesId            Int
+  Address                Addresses @relation(fields: [addressesId], references: [id])
+  birthDate              DateTime?
+  documentType           String    @db.VarChar(20)
+  documentNumber         String    @db.VarChar(20)
+  documentIssueDate      DateTime
+  documentIssuingCountry String    @db.VarChar(20)
+  documentExpirationDate DateTime
+  taxId                  Int
+  companyTaxId           Int
+  companyName            String    @db.VarChar(255)
+
+  @@index([addressesId])
+}
+
+enum Gender {
+  M
+  F
+  NA
 }
 
 enum NotificationType {
