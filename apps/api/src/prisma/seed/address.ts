@@ -1,7 +1,7 @@
 import { prisma } from '@/common/helpers/prismaClient'
 
 export const address = async () => {
-  const getPersonalInfos = await prisma.personalInfo.findMany({
+  const getPersonalInfos = await prisma.guests.findMany({
     where: {
       deletedAt: null,
     },
