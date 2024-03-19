@@ -29,7 +29,7 @@ model User {
   paymentMethod    PaymentMethod[]
   wishes           WishGroup[]
   review           Review[]
-  personalInfo     PersonalInfo?
+  guest            Guests?
   MultiFactorAuth  MultiFactorAuth[]
   Coupons          Coupon[]
   taxId            Int?
@@ -40,30 +40,6 @@ model User {
   Notification     Notification[]
   ReportedUser     ReportUser[]      @relation("reportedUsers")
   reportedByuser   ReportUser[]      @relation("reportedByUsers")
-}
-
-model PersonalInfo {
-  id                Int                 @id @default(autoincrement())
-  userId            Int                 @unique
-  firstName         String              @db.VarChar(255)
-  middleName        String?             @db.VarChar(255)
-  lastName          String              @db.VarChar(255)
-  birthDate         DateTime?
-  governmentId      String?             @db.LongText
-  phoneNumber       String              @db.VarChar(20)
-  country           String              @db.VarChar(100)
-  language          String              @db.VarChar(50)
-  currency          String              @db.VarChar(10)
-  createdAt         DateTime            @default(now())
-  updatedAt         DateTime            @updatedAt
-  deletedAt         DateTime?
-  user              User                @relation(fields: [userId], references: [id])
-  address           Addresses?
-  emergencyContacts EmergencyContacts[]
-  confirm           String?             @db.VarChar(250)
-  profile           String?             @db.LongText()
-
-  @@index([userId])
 }
 
 model HostInfo {
@@ -77,34 +53,33 @@ model HostInfo {
 }
 
 model EmergencyContacts {
-  id            Int          @id @default(autoincrement())
+  id            Int       @id @default(autoincrement())
   peronalInfoId Int
-  name          String       @db.LongText
-  relationship  String       @db.VarChar(100)
-  email         String?      @db.VarChar(50)
-  phoneNumber   String?      @db.VarChar(20)
-  createdAt     DateTime     @default(now())
-  updatedAt     DateTime     @updatedAt
+  name          String    @db.LongText
+  relationship  String    @db.VarChar(100)
+  email         String?   @db.VarChar(50)
+  phoneNumber   String?   @db.VarChar(20)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
   deletedAt     DateTime?
-  personalInfo  PersonalInfo @relation(fields: [peronalInfoId], references: [id])
+  guest         Guests    @relation(fields: [peronalInfoId], references: [id])
 
   @@index([peronalInfoId])
 }
 
 model Addresses {
-  id            Int          @id @default(autoincrement())
-  peronalInfoId Int          @unique
-  createdAt     DateTime     @default(now())
-  updatedAt     DateTime     @updatedAt
+  id            Int        @id @default(autoincrement())
+  peronalInfoId Int        @unique
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
   deletedAt     DateTime?
-  city          String?      @db.LongText
-  stateProvince String?      @db.LongText
-  streetAddress String?      @db.LongText
-  aptSuite      String?      @db.LongText
+  city          String?    @db.LongText
+  stateProvince String?    @db.LongText
+  streetAddress String?    @db.LongText
+  aptSuite      String?    @db.LongText
   zipCode       Int?
-  country       String?      @db.VarChar(255)
-  personalInfo  PersonalInfo @relation(fields: [peronalInfoId], references: [id])
-  Guests        Guests[]
+  country       String?    @db.VarChar(255)
+  guest         Guests     @relation(fields: [peronalInfoId], references: [id])
   Property      Property[]
 
   @@index([peronalInfoId])
@@ -541,8 +516,7 @@ model BookableUnitBedConfig {
   createdAt          DateTime         @default(now())
   updatedAt          DateTime         @updatedAt
   deletedAt          DateTime?
-  BookableUnitType   BookableUnitType @relation(fields: [bookableUnitTypeId], references: [id])
-
+  BookableUnitType   BookableUnitType @relation(fields: [bookableUnitTypeId], references: [id])  
   @@index([bookableUnitTypeId])
 }
 
@@ -571,31 +545,59 @@ model BookableUnitType {
   deletedAt                             DateTime?
 }
 
-model Guests {
-  id                     Int           @id @default(autoincrement())
-  firstName              String        @db.VarChar(255)
-  lastName               String        @db.VarChar(255)
-  gender                 Gender
-  email                  String        @unique @db.VarChar(255)
-  phone                  String        @db.VarChar(20)
-  cellPhone              String        @db.VarChar(20)
-  country                String        @db.VarChar(100)
-  addressesId            Int
-  Address                Addresses     @relation(fields: [addressesId], references: [id])
-  birthDate              DateTime?
-  documentType           String        @db.VarChar(20)
-  documentNumber         String        @db.VarChar(20)
-  documentIssueDate      DateTime
-  documentIssuingCountry String        @db.VarChar(20)
-  documentExpirationDate DateTime
-  taxId                  Int
-  companyTaxId           Int
-  companyName            String        @db.VarChar(255)
-  mainReservationId Int
-  MainReservation  Reservation[]
-  GuestList        GuestReservation[]
+// model PersonalInfo {
+//   id                Int                 @id @default(autoincrement())
+//   userId            Int                 @unique
+//   firstName         String              @db.VarChar(255)
+//   middleName        String?             @db.VarChar(255)
+//   lastName          String              @db.VarChar(255)
+//   birthDate         DateTime?
+//   governmentId      String?             @db.LongText
+//   phoneNumber       String              @db.VarChar(20)
+//   country           String              @db.VarChar(100)
+//   language          String              @db.VarChar(50)
+//   currency          String              @db.VarChar(10)
+//   createdAt         DateTime            @default(now())
+//   updatedAt         DateTime            @updatedAt
+//   deletedAt         DateTime?
+//   user              User                @relation(fields: [userId], references: [id])
+//   address           Addresses?
+//   emergencyContacts EmergencyContacts[]
+//   confirm           String?             @db.VarChar(250)
+//   profile           String?             @db.LongText()
 
-  @@index([addressesId])
+//   @@index([userId])
+// }
+
+model Guests {
+  id                     Int                 @id @default(autoincrement())
+  userId                 Int                 @unique
+  User                   User                @relation(fields: [userId], references: [id])
+  firstName              String              @db.VarChar(255)
+  middleName             String?             @db.VarChar(255)
+  lastName               String              @db.VarChar(255)
+  language               String              @db.VarChar(50)
+  currency               String              @db.VarChar(10)
+  gender                 Gender
+  phone                  String              @db.VarChar(20)
+  cellPhone              String              @db.VarChar(20)
+  governmentId           String?             @db.LongText
+  country                String              @db.VarChar(100)
+  Address                Addresses?
+  emergencyContacts      EmergencyContacts[]
+  birthDate              DateTime?
+  documentType           String?             @db.VarChar(20)
+  documentNumber         String?             @db.VarChar(20)
+  documentIssueDate      DateTime?
+  documentIssuingCountry String?             @db.VarChar(20)
+  documentExpirationDate DateTime?
+  companyTaxId           Int?
+  companyName            String?             @db.VarChar(255)
+  confirm                String?             @db.VarChar(250)
+  profile                String?             @db.LongText()
+  createdAt              DateTime           @default(now())
+  updatedAt              DateTime           @updatedAt
+  deletedAt              DateTime?           
 }
 
 model Property {
@@ -621,6 +623,9 @@ model Property {
   companyLegalName            String              @db.VarChar(255)
   propertyType                PropertyType
   BookableUnit                BookableUnit[]
+  createdAt              DateTime           @default(now())
+  updatedAt              DateTime           @updatedAt
+  deletedAt              DateTime?      
   Reservation Reservation[]
 
   @@index([propertyAddressesId])
@@ -631,6 +636,9 @@ model PropertyAmenities {
   amenity    String    @db.VarChar(255)
   Property   Property? @relation(fields: [propertyId], references: [id])
   propertyId Int?
+    createdAt              DateTime           @default(now())
+  updatedAt              DateTime           @updatedAt
+  deletedAt              DateTime?      
 
   @@index([propertyId])
 }
@@ -641,6 +649,9 @@ model BookableUnit {
   Property           Property         @relation(fields: [propertyId], references: [id])
   bookableUnitTypeId Int
   BookableUnitType   BookableUnitType @relation(fields: [bookableUnitTypeId], references: [id])
+  createdAt              DateTime           @default(now())
+  updatedAt              DateTime           @updatedAt
+  deletedAt              DateTime?      
   reservationId      Int
   Reservation        Reservation @relation(fields: [reservationId], references: [id])
 
