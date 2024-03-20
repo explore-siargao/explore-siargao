@@ -7,7 +7,7 @@ require("dotenv").config({
 module.exports = {
   reactStrictMode: true,
   images: {
-    domains: ["dev.exploresiargao.com"],
+    domains: ["dev-api.exploresiargao.com", "dev.exploresiargao.com", "exploresiargao.com"],
   },
   async rewrites() {
     return [
