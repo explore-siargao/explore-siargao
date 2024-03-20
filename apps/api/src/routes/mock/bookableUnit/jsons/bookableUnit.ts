@@ -75,7 +75,7 @@ export const bookableUnit = [
       propertyLateCheckOutType: 'percent',
       propertyLateCheckOutValue: 0.5,
       propertyTermsAndConditions:
-        'Guests must adhere to a no-smoking policy within the property premises and agree to vacate the premises by the specified check-out time.',
+        "Check-in time is from 3:00 PM onwards, and check-out time is until 11:00 AM. Early check-in and late check-out are subject to availability and may incur additional charges. Guests are required to present a valid ID and credit card upon check-in. Any damage to the property or its facilities will be charged to the guest's credit card.",
       taxID: '123-456-789-000',
       taxID2: '123-456-789-111',
       companyLegalName: 'Amazing Places Group of Hostels',
@@ -301,7 +301,7 @@ export const bookableUnit = [
       propertyLateCheckOutType: 'percent',
       propertyLateCheckOutValue: 0.5,
       propertyTermsAndConditions:
-        'Guests are required to present a valid ID upon check-in and provide a security deposit for incidentals.',
+        "Smoking is strictly prohibited inside the property. Any violation will result in a cleaning fee charged to the guest's credit card. Pets are not allowed on the premises. Guests found with pets will be asked to leave immediately, and additional cleaning fees will apply. Quiet hours are from 10:00 PM to 8:00 AM.",
       taxID: '555-123-987-000',
       taxID2: '555-123-987-111',
       companyLegalName: 'Royal Hospitality Group',
@@ -419,7 +419,8 @@ export const bookableUnit = [
       propertyLateCheckOutAllowed: true,
       propertyLateCheckOutType: 'fixed',
       propertyLateCheckOutValue: 200.0,
-      propertyTermsAndConditions: 'No smoking allowed. Pets are not permitted.',
+      propertyTermsAndConditions:
+        "The property is not liable for any loss, theft, or damage to guests' personal belongings during their stay. Guests are advised to use the in-room safe for valuable items. All visitors must register at the front desk and provide valid identification. Unregistered visitors are not allowed in guest rooms after 10:00 PM.",
       taxID: '987-654-321-123',
       taxID2: '987-654-321-456',
       companyLegalName: 'Oceanfront Escapes Inc.',
@@ -536,7 +537,7 @@ export const bookableUnit = [
       propertyLateCheckOutType: 'fixed',
       propertyLateCheckOutValue: 150.0,
       propertyTermsAndConditions:
-        'No pets allowed. Smoking is allowed only in designated areas.',
+        'Guests are responsible for adhering to local laws and regulations while staying at the property. Any illegal activities will result in immediate eviction without refund. Parties or gatherings involving non-registered guests are not permitted without prior approval from management. Management reserves the right to refuse service to anyone.',
       taxID: '987-654-321-222',
       taxID2: '987-654-321-333',
       companyLegalName: 'Tropical Retreats LLC',
@@ -652,7 +653,8 @@ export const bookableUnit = [
       propertyLateCheckOutAllowed: true,
       propertyLateCheckOutType: 'fixed',
       propertyLateCheckOutValue: 200.0,
-      propertyTermsAndConditions: 'No pets allowed. Smoking is prohibited.',
+      propertyTermsAndConditions:
+        "Cancellation policy: Reservations canceled within 48 hours of the arrival date will incur a penalty charge equivalent to one night's stay. No-shows will be charged the full amount of the reservation. For group bookings, different cancellation policies may apply. Please contact the property directly for more information.",
       taxID: '987-654-321-444',
       taxID2: '987-654-321-555',
       companyLegalName: 'Coastal Getaways Inc.',
@@ -769,7 +771,8 @@ export const bookableUnit = [
       propertyLateCheckOutType: 'percent',
       propertyLateCheckOutValue: 0.5,
       propertyTermsAndConditions:
-        'No smoking allowed. Pets must be approved in advance.',
+        'Guests are required to keep noise levels to a minimum, especially during quiet hours. Excessive noise or disruptive behavior will result in a warning, followed by eviction without refund if the behavior persists. The property is not responsible for any inconvenience caused by neighboring noise or construction.',
+
       taxID: '987-654-321-777',
       taxID2: '987-654-321-888',
       companyLegalName: 'Mountain Escapes LLC',
@@ -886,7 +889,7 @@ export const bookableUnit = [
       propertyLateCheckOutType: 'fixed',
       propertyLateCheckOutValue: 150.0,
       propertyTermsAndConditions:
-        'No smoking allowed. Pets must be approved in advance.',
+        'Guests are encouraged to respect the environment and conserve energy and water whenever possible. Please turn off lights, air conditioning, and other appliances when not in use. Towels and linens will be changed upon request to reduce water consumption. Thank you for helping us protect the planet.',
       taxID: '987-654-321-999',
       taxID2: '987-654-321-000',
       companyLegalName: 'Lakeside Escapes Inc.',
@@ -1003,7 +1006,8 @@ export const bookableUnit = [
       propertyLateCheckOutAllowed: true,
       propertyLateCheckOutType: 'fixed',
       propertyLateCheckOutValue: 100.0,
-      propertyTermsAndConditions: 'No smoking allowed. Pets are not permitted.',
+      propertyTermsAndConditions:
+        'By booking a stay at our property, guests agree to abide by all rules and regulations outlined in these terms and conditions, as well as any additional policies provided by the property management. Failure to comply with these rules may result in eviction without refund. Thank you for choosing our property for your accommodation needs.',
       taxID: '987-654-321-999',
       taxID2: '987-654-321-000',
       companyLegalName: 'Alpine Getaways Ltd.',
