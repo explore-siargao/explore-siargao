@@ -1,5 +1,12 @@
 import express from 'express'
-import {addReservation, deleteReservation, getReservationsByGuest, getReservationsByHost, getReservationsById, updateReservation} from "./service/default"
+import {
+  addReservation,
+  deleteReservation,
+  getReservationsByGuest,
+  getReservationsByHost,
+  getReservationsById,
+  updateReservation,
+} from './service/default'
 
 const router = express.Router()
 
