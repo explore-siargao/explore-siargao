@@ -7,7 +7,7 @@ import { listing } from './listing'
 import { listingDescription } from './listingDescription'
 import { listingPrice } from './listingPrice'
 import { paymentMethod } from './paymentMethod'
-import { personalInfo } from './personalInfo'
+import { guest } from './guest'
 import { placeOffer } from './placeOffer'
 import { tax } from './tax'
 import { users } from './user'
@@ -26,7 +26,7 @@ import { multiAuth } from './multiAuth'
 import { reportUser } from './reportUser'
 const main = async () => {
   await users()
-  await personalInfo()
+  await guest()
   await address()
   await tax()
   await emergencyContact()
