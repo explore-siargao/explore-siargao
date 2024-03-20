@@ -1,7 +1,7 @@
 export const bookableUnit = [
   {
     id: 1,
-    bookabeUnitTypeId: 1,
+    bookableUnitTypeId: 1,
     propertyId: 1,
     BookableUnitType: {
       id: 1,
@@ -55,6 +55,7 @@ export const bookableUnit = [
     },
     Property: {
       id: 1,
+      hostId: 1,
       propertyName: 'Paradise View',
       propertyDescription: 'Clean and affordable',
       propertyCurrency: 'PHP',
@@ -115,7 +116,7 @@ export const bookableUnit = [
 
   {
     id: 2,
-    bookabeUnitTypeId: 2,
+    bookableUnitTypeId: 2,
     propertyId: 2,
     BookableUnitType: {
       id: 2,
@@ -168,6 +169,7 @@ export const bookableUnit = [
     },
     Property: {
       id: 2,
+      hostId: 2,
       propertyName: 'Sunset Retreat',
       propertyDescription: 'Tranquil and scenic',
       propertyCurrency: 'PHP',
@@ -228,7 +230,7 @@ export const bookableUnit = [
 
   {
     id: 3,
-    bookabeUnitTypeId: 1,
+    bookableUnitTypeId: 1,
     propertyId: 3,
     BookableUnitType: {
       id: 3,
@@ -281,6 +283,7 @@ export const bookableUnit = [
     },
     Property: {
       id: 3,
+      hostId: 3,
       propertyName: 'Royal Palace',
       propertyDescription: 'Opulent and grand',
       propertyCurrency: 'PHP',
@@ -341,7 +344,7 @@ export const bookableUnit = [
 
   {
     id: 4,
-    bookabeUnitTypeId: 4,
+    bookableUnitTypeId: 4,
     propertyId: 4,
     BookableUnitType: {
       id: 4,
@@ -400,6 +403,7 @@ export const bookableUnit = [
     },
     Property: {
       id: 4,
+      hostId: 4,
       propertyName: 'Oceanfront Oasis',
       propertyDescription: 'Spectacular villa perched on the edge of the ocean',
       propertyCurrency: 'USD',
@@ -458,7 +462,7 @@ export const bookableUnit = [
 
   {
     id: 5,
-    bookabeUnitTypeId: 5,
+    bookableUnitTypeId: 5,
     propertyId: 5,
     BookableUnitType: {
       id: 5,
@@ -517,6 +521,7 @@ export const bookableUnit = [
     },
     Property: {
       id: 6,
+      hostId: 5,
       propertyName: 'Tropical Haven',
       propertyDescription: 'An exclusive sanctuary in a tropical setting',
       propertyCurrency: 'USD',
@@ -575,7 +580,7 @@ export const bookableUnit = [
 
   {
     id: 6,
-    bookabeUnitTypeId: 6,
+    bookableUnitTypeId: 6,
     propertyId: 6,
     BookableUnitType: {
       id: 6,
@@ -634,6 +639,7 @@ export const bookableUnit = [
     },
     Property: {
       id: 6,
+      hostId: 6,
       propertyName: 'Coastal Escape',
       propertyDescription: 'Tranquil villa overlooking the coast',
       propertyCurrency: 'USD',
@@ -692,7 +698,7 @@ export const bookableUnit = [
 
   {
     id: 7,
-    bookabeUnitTypeId: 7,
+    bookableUnitTypeId: 7,
     propertyId: 7,
     BookableUnitType: {
       id: 7,
@@ -751,6 +757,7 @@ export const bookableUnit = [
     },
     Property: {
       id: 7,
+      hostId: 7,
       propertyName: 'Mountain Vista',
       propertyDescription: 'Tranquil villa with stunning mountain vistas',
       propertyCurrency: 'USD',
@@ -810,7 +817,7 @@ export const bookableUnit = [
 
   {
     id: 8,
-    bookabeUnitTypeId: 8,
+    bookableUnitTypeId: 8,
     propertyId: 8,
     BookableUnitType: {
       id: 8,
@@ -869,6 +876,7 @@ export const bookableUnit = [
     },
     Property: {
       id: 8,
+      hostId: 8,
       propertyName: 'Lakeside Retreat',
       propertyDescription: 'Tranquil villa overlooking a peaceful lake',
       propertyCurrency: 'USD',
@@ -927,7 +935,7 @@ export const bookableUnit = [
 
   {
     id: 9,
-    bookabeUnitTypeId: 9,
+    bookableUnitTypeId: 9,
     propertyId: 9,
     BookableUnitType: {
       id: 9,
@@ -986,6 +994,7 @@ export const bookableUnit = [
     },
     Property: {
       id: 9,
+      hostId: 9,
       propertyName: 'Alpine Retreat',
       propertyDescription:
         'Idyllic chalet nestled in a picturesque Alpine village',
@@ -1045,7 +1054,7 @@ export const bookableUnit = [
 
   {
     id: 10,
-    bookabeUnitTypeId: 10,
+    bookableUnitTypeId: 10,
     propertyId: 10,
     BookableUnitType: {
       id: 10,
@@ -1104,6 +1113,7 @@ export const bookableUnit = [
     },
     Property: {
       id: 9,
+      hostId: 10,
       propertyName: 'Wilderness Haven',
       propertyDescription: 'Secluded cabin retreat in the heart of nature',
       propertyCurrency: 'USD',
