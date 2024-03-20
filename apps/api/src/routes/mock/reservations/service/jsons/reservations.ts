@@ -2,6 +2,42 @@ export const reservations = [
     {
         id: 1,
         propertyId: 1,
+        property: {
+            propertyName: "Property 1",
+            propertyDescription: "Property description 1",
+            propertyPhotos: [
+                {
+                    id: 1,
+                    key: "1.jpg",
+                    thumbKey: "1.jpg",
+                    caption: "Amazing"
+                },
+                {
+                    id: 2,
+                    key: "2.jpg",
+                    thumbKey: "2.jpg",
+                    caption: "Beautiful"
+                },
+                {
+                    id: 3,
+                    key: "3.jpg",
+                    thumbKey: "3.jpg",
+                    caption: "Refreshing"
+                },
+                {
+                    id: 4,
+                    key: "4.jpg",
+                    thumbKey: "4.jpg",
+                    caption: "Nature"
+                },
+                {
+                    id: 5,
+                    key: "5.jpg",
+                    thumbKey: "5.jpg",
+                    caption: "Glamorous"
+                },
+            ],
+        },
         mainGuestId: 1,
         status: "not_confirmed",
         startDate: "2024-03-19 03:09:52.697",
@@ -32,6 +68,42 @@ export const reservations = [
     {
         id: 2,
         propertyId: 2,
+        property: {
+            propertyName: "Property 2",
+            propertyDescription: "Property description 2",
+            propertyPhotos: [
+                {
+                    id: 1,
+                    key: "1.jpg",
+                    thumbKey: "1.jpg",
+                    caption: "Amazing"
+                },
+                {
+                    id: 2,
+                    key: "2.jpg",
+                    thumbKey: "2.jpg",
+                    caption: "Beautiful"
+                },
+                {
+                    id: 3,
+                    key: "3.jpg",
+                    thumbKey: "3.jpg",
+                    caption: "Refreshing"
+                },
+                {
+                    id: 4,
+                    key: "4.jpg",
+                    thumbKey: "4.jpg",
+                    caption: "Nature"
+                },
+                {
+                    id: 5,
+                    key: "5.jpg",
+                    thumbKey: "5.jpg",
+                    caption: "Glamorous"
+                },
+            ],
+        },
         mainGuestId: 4,
         status: "confirmed",
         startDate: "2024-03-19 03:09:52.697",
@@ -62,6 +134,42 @@ export const reservations = [
     {
         id: 3,
         propertyId: 3,
+        property: {
+            propertyName: "Property 3",
+            propertyDescription: "Property description 3",
+            propertyPhotos: [
+                {
+                    id: 1,
+                    key: "1.jpg",
+                    thumbKey: "1.jpg",
+                    caption: "Amazing"
+                },
+                {
+                    id: 2,
+                    key: "2.jpg",
+                    thumbKey: "2.jpg",
+                    caption: "Beautiful"
+                },
+                {
+                    id: 3,
+                    key: "3.jpg",
+                    thumbKey: "3.jpg",
+                    caption: "Refreshing"
+                },
+                {
+                    id: 4,
+                    key: "4.jpg",
+                    thumbKey: "4.jpg",
+                    caption: "Nature"
+                },
+                {
+                    id: 5,
+                    key: "5.jpg",
+                    thumbKey: "5.jpg",
+                    caption: "Glamorous"
+                },
+            ],
+        },
         mainGuestId: 7,
         status: "canceled",
         startDate: "2024-03-19 03:09:52.697",
