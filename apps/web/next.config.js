@@ -6,32 +6,6 @@ require("dotenv").config({
 
 module.exports = {
   reactStrictMode: true,
-  images: {
-    remotePatterns: [
-      {
-        protocol: "http",
-        hostname: "localhost",
-        port: "3000",
-        pathname: "/*",
-      },
-      {
-        protocol: "http",
-        hostname: "localhost",
-        port: "3000",
-        pathname: "/assets/**",
-      },
-      {
-        protocol: "https",
-        hostname: "dev.exploresiargao.com",
-        pathname: "/*",
-      },
-      {
-        protocol: "https",
-        hostname: "dev.exploresiargao.com",
-        pathname: "/assets/**",
-      },
-    ],
-  },
   async rewrites() {
     return [
       {
