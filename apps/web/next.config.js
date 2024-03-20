@@ -6,9 +6,6 @@ require("dotenv").config({
 
 module.exports = {
   reactStrictMode: true,
-  images: {
-    unoptimized: true,
-  },
   async rewrites() {
     return [
       {

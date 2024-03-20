@@ -32,8 +32,9 @@ const isUserLoggedIn = async (
   next: NextFunction
 ) => {
   const token = req.cookies['next-auth.session-token']
+  const secureToken = req.cookies['__Secure-next-auth.session-token']
   const decoded = await decode({
-    token: token,
+    token: token ? token : secureToken,
     secret: nextAuthSecret,
   })
   if (token && decoded?.email) {

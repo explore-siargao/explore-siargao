@@ -24,12 +24,13 @@ const authOptions: NextAuthOptions = {
       },
       async authorize(credentials, req) {
         const csrfToken = getCookie("next-auth.csrf-token", req.headers?.cookie)
+        const secureCsrfToken = getCookie("__Host-next-auth.csrf-token", req.headers?.cookie)
         const res = await fetch(`${process.env.API_URL}/api/users/auth/info`, {
           method: "POST",
           body: JSON.stringify({ email: credentials?.username }),
           headers: {
             "Content-Type": "application/json",
-            "X-CSRF-Token": csrfToken as string,
+            "X-CSRF-Token": csrfToken ? csrfToken as string : secureCsrfToken as string,
           },
         })
         const user = await res.json()
