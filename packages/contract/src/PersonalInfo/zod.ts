@@ -11,7 +11,7 @@ export const Z_PersonalInfo = z.object({
   lastName: z.string(),
   birthDate: z.string(),
   governmentId: z.array(Z_GovernmentId),
-  address: Z_Address,
+  Address: Z_Address,
   currency: z.string(),
   language: z.string(),
   emergencyContacts: z.array(Z_EmergencyContact),
