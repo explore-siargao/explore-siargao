@@ -125,7 +125,7 @@ export const updateReservation = async (req: Request, res: Response) => {
 
   if (findReservation === -1) {
     return res.json(
-      response.error({ message: 'No cart found or already deleted' })
+      response.error({ message: 'No reservation found or already deleted' })
     )
   }
 
