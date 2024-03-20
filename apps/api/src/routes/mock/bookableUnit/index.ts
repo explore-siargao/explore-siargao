@@ -1,6 +1,10 @@
 import express from 'express'
 import {
-  addBookableUnit, getBookableUnitByHost, getBookableUnitById, getBookableUnitByType, updateBookableUnit
+  addBookableUnit,
+  getBookableUnitByHost,
+  getBookableUnitById,
+  getBookableUnitByType,
+  updateBookableUnit,
 } from './service/default'
 
 const router = express.Router()
