@@ -8,10 +8,7 @@ export async function addPropertyOfHost(
   props: T_Property
 ) {
   const apiService = new ApiService("mock")
-  return await apiService.post(
-    `${API_URL_PROPERTIES}/${hostId}`,
-    props
-  )
+  return await apiService.post(`${API_URL_PROPERTIES}/${hostId}`, props)
 }
 
 function useAddPropertyOfHost(hostId: number) {
