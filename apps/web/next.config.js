@@ -20,6 +20,16 @@ module.exports = {
         port: "3000",
         pathname: "/assets/**",
       },
+      {
+        protocol: "https",
+        hostname: "dev.exploresiargao.com",
+        pathname: "/*",
+      },
+      {
+        protocol: "https",
+        hostname: "dev.exploresiargao.com",
+        pathname: "/assets/**",
+      },
     ],
   },
   async rewrites() {
