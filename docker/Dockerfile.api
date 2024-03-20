@@ -1,0 +1,29 @@
+FROM --platform=linux/amd64 node:20.10.0-slim
+ 
+WORKDIR /usr/src/app
+ 
+# Copy root folders files
+COPY package.json ./
+COPY package-lock.json ./
+COPY .npmrc ./
+COPY tsconfig.json ./
+COPY turbo.json ./
+ 
+# Copy sub folders files
+COPY apps/api ./apps/api
+COPY packages/contract ./packages/contract
+COPY packages/constants ./packages/constants
+COPY packages/services ./packages/services
+COPY packages/eslint-config ./packages/eslint-config
+COPY packages/typescript-config ./packages/typescript-config
+
+# Install global packages
+RUN npm install -g typescript
+
+# Run setup
+RUN npm install
+RUN npm run build
+ 
+EXPOSE 9000
+ 
+CMD [ "npm", "run", "start" ]
