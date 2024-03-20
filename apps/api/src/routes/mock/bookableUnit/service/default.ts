@@ -1,30 +1,66 @@
 import { Request, Response } from 'express'
 import { bookableUnit } from './jsons/bookableUnit'
 import { ResponseService } from '@/common/service/response'
-import { REQUIRED_VALUE_EMPTY } from '@/common/constants'
+import { REQUIRED_VALUE_EMPTY, USER_NOT_AUTHORIZED } from '@/common/constants'
+import { Z_BookableUnit } from '@repo/contract'
 
 const response = new ResponseService()
 
-// export const getReservationsByGuest = async (req: Request, res: Response) => {
-//   const guestId = Number(req.params.guestId)
+export const getBookableUnitByHost = async (req: Request, res: Response) => {
+  const hostId = Number(req.params.id)
 
-//   const filterReservations = bookableUnit.filter((item) => {
-//     return guestId === item.mainGuestId
-//   })
+  const filterBookableUnits = bookableUnit.filter((item) => {
+    return hostId === item.Property.hostId
+  })
 
-//   res.json(
-//     response.success({
-//       items: filterReservations,
-//       allItemCount: filterReservations.length,
-//     })
-//   )
-// }
+  res.json(
+    response.success({
+      items: filterBookableUnits,
+      allItemCount: filterBookableUnits.length,
+    })
+  )
+}
+
+export const getBookableUnitByType = async (req: Request, res: Response) => {
+  const bookableUnitTypeId = Number(req.params.bookableUnitTypeId)
+
+  const filterBookableUnits = bookableUnit.filter((item) => {
+    return bookableUnitTypeId === item.bookableUnitTypeId
+  })
+
+  res.json(
+    response.success({
+      items: filterBookableUnits,
+      allItemCount: filterBookableUnits.length,
+    })
+  )
+}
+
+export const getBookableUnitById = async (req: Request, res: Response) => {
+  const bookableUnitId = Number(req.params.id)
+
+  const filterBookableUnits = bookableUnit.filter((item) => {
+    return bookableUnitId === item.id
+  })
+
+  res.json(
+    response.success({
+      items: filterBookableUnits,
+      allItemCount: filterBookableUnits.length,
+    })
+  )
+}
 
 export const addBookableUnit = async (req: Request, res: Response) => {
     const hostId = Number(req.params.hostId)
+
+    if(!hostId) {
+      return res.json(response.error({message: USER_NOT_AUTHORIZED}))
+    }
   
     const { propertyId, bookableUnitTypeId } = req.body
-  
+    const isValidInput = Z_BookableUnit.safeParse(req.body)
+
     if (!propertyId || !bookableUnitTypeId) {
       return res.json(response.error({ message: REQUIRED_VALUE_EMPTY }))
     }
@@ -90,6 +126,7 @@ export const addBookableUnit = async (req: Request, res: Response) => {
       },
       Property: {
         id: 7,
+        hostId: 11,
         propertyName: 'Mountain Vista',
         propertyDescription: 'Tranquil villa with stunning mountain vistas',
         propertyCurrency: 'USD',
@@ -145,7 +182,11 @@ export const addBookableUnit = async (req: Request, res: Response) => {
         ],
       },
     }
-    
+
+    if(!isValidInput.success) {
+      return res.json(response.error({message: REQUIRED_VALUE_EMPTY}))
+    }
+
     const newBookableUnit = bookableUnit.push(bookableUnitData)
     res.json(
     response.success({
