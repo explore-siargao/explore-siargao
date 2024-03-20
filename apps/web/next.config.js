@@ -7,7 +7,16 @@ require("dotenv").config({
 module.exports = {
   reactStrictMode: true,
   images: {
-    domains: ["dev-api.exploresiargao.com", "dev.exploresiargao.com", "exploresiargao.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**",
+      },
+      {
+        protocol: "http",
+        hostname: "**",
+      },
+    ],
   },
   async rewrites() {
     return [
