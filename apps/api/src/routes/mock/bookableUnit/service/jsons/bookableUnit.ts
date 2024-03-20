@@ -1,7 +1,7 @@
 export const bookableUnit = [
   {
     id: 1,
-    bookabeUnitTypeId: 1,
+    bookableUnitTypeId: 1,
     propertyId: 1,
     BookableUnitType: {
       id: 1,
@@ -115,7 +115,7 @@ export const bookableUnit = [
 
   {
     id: 2,
-    bookabeUnitTypeId: 2,
+    bookableUnitTypeId: 2,
     propertyId: 2,
     BookableUnitType: {
       id: 2,
@@ -228,7 +228,7 @@ export const bookableUnit = [
 
   {
     id: 3,
-    bookabeUnitTypeId: 1,
+    bookableUnitTypeId: 1,
     propertyId: 3,
     BookableUnitType: {
       id: 3,
@@ -341,7 +341,7 @@ export const bookableUnit = [
 
   {
     id: 4,
-    bookabeUnitTypeId: 4,
+    bookableUnitTypeId: 4,
     propertyId: 4,
     BookableUnitType: {
       id: 4,
@@ -458,7 +458,7 @@ export const bookableUnit = [
 
   {
     id: 5,
-    bookabeUnitTypeId: 5,
+    bookableUnitTypeId: 5,
     propertyId: 5,
     BookableUnitType: {
       id: 5,
@@ -575,7 +575,7 @@ export const bookableUnit = [
 
   {
     id: 6,
-    bookabeUnitTypeId: 6,
+    bookableUnitTypeId: 6,
     propertyId: 6,
     BookableUnitType: {
       id: 6,
@@ -692,7 +692,7 @@ export const bookableUnit = [
 
   {
     id: 7,
-    bookabeUnitTypeId: 7,
+    bookableUnitTypeId: 7,
     propertyId: 7,
     BookableUnitType: {
       id: 7,
@@ -810,7 +810,7 @@ export const bookableUnit = [
 
   {
     id: 8,
-    bookabeUnitTypeId: 8,
+    bookableUnitTypeId: 8,
     propertyId: 8,
     BookableUnitType: {
       id: 8,
@@ -927,7 +927,7 @@ export const bookableUnit = [
 
   {
     id: 9,
-    bookabeUnitTypeId: 9,
+    bookableUnitTypeId: 9,
     propertyId: 9,
     BookableUnitType: {
       id: 9,
@@ -1045,7 +1045,7 @@ export const bookableUnit = [
 
   {
     id: 10,
-    bookabeUnitTypeId: 10,
+    bookableUnitTypeId: 10,
     propertyId: 10,
     BookableUnitType: {
       id: 10,
