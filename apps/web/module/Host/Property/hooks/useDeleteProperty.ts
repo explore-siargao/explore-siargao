@@ -3,7 +3,7 @@ import { API_URL_PROPERTIES } from "@/common/constants"
 import { useMutation } from "@tanstack/react-query"
 
 export async function deleteProperty(hostId: number | undefined) {
-  const apiService = new ApiService()
+  const apiService = new ApiService("mock")
   return await apiService.patch(`${API_URL_PROPERTIES}/${hostId}`)
 }
 function useDeleteProperty() {
