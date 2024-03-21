@@ -12,7 +12,7 @@ es.use(express.json())
 es.use(fileupload())
 es.use(
   cors({
-    origin: '*',
+    origin: origins,
     credentials: true,
   })
 )
