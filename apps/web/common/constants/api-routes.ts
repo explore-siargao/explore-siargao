@@ -6,3 +6,4 @@ export const API_URL_TAX = `/taxes`
 export const API_URL_TRANSACTIONS = `/transactions`
 export const API_URL_REPORTS = `/reports`
 export const API_URL_PROPERTIES = `/properties`
+export const API_URL_BOOKABLE_UNIT = `/bookable-unit`
