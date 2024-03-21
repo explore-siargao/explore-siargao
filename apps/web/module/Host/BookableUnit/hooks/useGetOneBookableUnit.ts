@@ -4,7 +4,9 @@ import { useQuery } from "@tanstack/react-query"
 
 export async function getOneBookableUnit(id: number | undefined) {
   const apiService = new ApiService("mock")
-  return await apiService.get(`${API_URL_BOOKABLE_UNIT}/bookable-unit-type/${id}`)
+  return await apiService.get(
+    `${API_URL_BOOKABLE_UNIT}/bookable-unit-type/${id}`
+  )
 }
 
 function useGetOneBookableUnit(id: number | undefined) {
