@@ -40,6 +40,7 @@ model User {
   Notification     Notification[]
   ReportedUser     ReportUser[]      @relation("reportedUsers")
   reportedByuser   ReportUser[]      @relation("reportedByUsers")
+  Property         Property[]
 }
 
 model PersonalInfo {
@@ -105,7 +106,6 @@ model Addresses {
   country       String?      @db.VarChar(255)
   personalInfo  PersonalInfo @relation(fields: [peronalInfoId], references: [id])
   Guests        Guests[]
-  Property      Property[]
 
   @@index([peronalInfoId])
 }
@@ -506,17 +506,17 @@ model Notification {
 model Photo {
   id                 Int              @id @default(autoincrement())
   bookableUnitTypeId Int
-    propertyId         Int
-  url                String           @db.LongText()
-  thumbUrl           String           @db.LongText()
+  propertyId         Int
+  key                String           @db.LongText()
+  thumbKey           String           @db.LongText()
   caption            String
   createdAt          DateTime         @default(now())
   updatedAt          DateTime         @updatedAt
   deletedAt          DateTime?
   BookableUnitType   BookableUnitType @relation(fields: [bookableUnitTypeId], references: [id])
-  Property           Property        @relation(fields: [propertyId], references: [id])
+  Property           Property         @relation(fields: [propertyId], references: [id])
 
-@@index([propertyId])
+  @@index([propertyId])
   @@index([bookableUnitTypeId])
 }
 
@@ -559,7 +559,7 @@ model BookableUnitType {
   Photos                                Photo[]
   Features                              Feature[]
   BedConfigs                            BookableUnitBedConfig[]
-  BookableUnit BookableUnit[]
+  BookableUnit                          BookableUnit[]
   numBedrooms                           Int
   numBathrooms                          Int
   minNightlyRate                        Decimal                 @db.Decimal(10, 2)
@@ -597,6 +597,8 @@ model Guests {
 
 model Property {
   id                          Int                 @id @default(autoincrement())
+  hostId                      Int
+  offerBy                     User                @relation(fields: [hostId], references: [id])
   propertyName                String              @db.VarChar(255)
   propertyDescription         String              @db.LongText()
   propertyCurrency            String              @db.VarChar(10)
@@ -604,8 +606,7 @@ model Property {
   propertyPhotos              Photo[]
   propertyPhone               String              @db.VarChar(20)
   propertyEmail               String              @unique @db.VarChar(255)
-  propertyAddressesId         Int
-  PropertyAddress             Addresses           @relation(fields: [propertyAddressesId], references: [id])
+  propertyAddress             String
   propertyCheckInTime         DateTime
   propertyCheckOutTime        DateTime
   propertyLateCheckOutAllowed Boolean
@@ -617,8 +618,12 @@ model Property {
   taxId2                      Int
   companyLegalName            String              @db.VarChar(255)
   propertyType                PropertyType
-  BookableUnit BookableUnit[]
-  @@index([propertyAddressesId])
+  BookableUnit                BookableUnit[]
+  createdAt                   DateTime            @default(now())
+  updatedAt                   DateTime            @updatedAt
+  deletedAt                   DateTime?
+
+  @@index([hostId])
 }
 
 model PropertyAmenities {
@@ -631,11 +636,11 @@ model PropertyAmenities {
 }
 
 model BookableUnit {
-  id Int @id @default(autoincrement())
-  propertyId  Int @unique
-  Property Property @relation(fields: [propertyId], references: [id])
+  id                 Int              @id @default(autoincrement())
+  propertyId         Int              @unique
+  Property           Property         @relation(fields: [propertyId], references: [id])
   bookableUnitTypeId Int
-  BookableUnitType BookableUnitType @relation(fields: [bookableUnitTypeId], references: [id])
+  BookableUnitType   BookableUnitType @relation(fields: [bookableUnitTypeId], references: [id])
 
   @@index([propertyId])
   @@index([bookableUnitTypeId])
