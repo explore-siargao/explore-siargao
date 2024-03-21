@@ -7,4 +7,3 @@ export const Z_Feature = z.object({
   updatedAt: z.date().nullable().optional(),
   deletedAt: z.date().nullable().optional(),
 })
-

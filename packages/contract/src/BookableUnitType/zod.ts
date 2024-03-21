@@ -34,4 +34,4 @@ export const Z_BookableUnitTypes = z.object({
   createdAt: z.date().optional(),
   updatedAt: z.date().nullable().optional(),
   deletedAt: z.date().nullable().optional(),
-  })
+})

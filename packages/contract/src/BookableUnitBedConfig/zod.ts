@@ -9,4 +9,3 @@ export const Z_BookableUnitBedConfig = z.object({
   updatedAt: z.date().nullable().optional(),
   deletedAt: z.date().nullable().optional(),
 })
-
