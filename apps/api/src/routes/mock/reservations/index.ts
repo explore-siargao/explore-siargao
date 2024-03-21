@@ -16,6 +16,6 @@ router.get('/host/:hostId', getReservationsByHost)
 router.get('/:id', getReservationsById)
 router.post('/:userId', addReservation)
 router.patch('/:reservationId', updateReservation)
-router.delete('/', deleteReservation)
+router.delete('/:reservationId', deleteReservation)
 
 export default router
