@@ -8,3 +8,5 @@ export const API_URL_REPORTS = `/reports`
 export const API_URL_PROPERTIES = `/properties`
 export const API_URL_BOOKABLE_UNIT = `/bookable-unit`
 export const API_URL_RESERVATION = `/reservations`
+export const API_URL_BOOKABLE_UNIT_TYPE = `/bookable-unit-type`
+
