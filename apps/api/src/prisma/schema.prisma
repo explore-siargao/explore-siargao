@@ -41,30 +41,6 @@ model User {
   ReportedUser     ReportUser[]      @relation("reportedUsers")
   reportedByuser   ReportUser[]      @relation("reportedByUsers")
   Property         Property[]
-}
-
-model PersonalInfo {
-  id                Int                 @id @default(autoincrement())
-  userId            Int                 @unique
-  firstName         String              @db.VarChar(255)
-  middleName        String?             @db.VarChar(255)
-  lastName          String              @db.VarChar(255)
-  birthDate         DateTime?
-  governmentId      String?             @db.LongText
-  phoneNumber       String              @db.VarChar(20)
-  country           String              @db.VarChar(100)
-  language          String              @db.VarChar(50)
-  currency          String              @db.VarChar(10)
-  createdAt         DateTime            @default(now())
-  updatedAt         DateTime            @updatedAt
-  deletedAt         DateTime?
-  user              User                @relation(fields: [userId], references: [id])
-  address           Addresses?
-  emergencyContacts EmergencyContacts[]
-  confirm           String?             @db.VarChar(250)
-  profile           String?             @db.LongText()
-
-  @@index([userId])
   BookableUnitType BookableUnitType[]
   BookableUnit     BookableUnit[]
 }
@@ -106,9 +82,6 @@ model Addresses {
   aptSuite      String?    @db.LongText
   zipCode       Int?
   country       String?      @db.VarChar(255)
-  personalInfo  PersonalInfo @relation(fields: [peronalInfoId], references: [id])
-  Guests        Guests[]
-  country       String?    @db.VarChar(255)
   guest         Guests     @relation(fields: [peronalInfoId], references: [id])
   
   @@index([peronalInfoId])
