@@ -53,9 +53,9 @@ export const getReservationsById = async (req: Request, res: Response) => {
 export const addReservation = async (req: Request, res: Response) => {
   const userId = Number(req.params.userId)
 
-  const { propertyId, startDate, endDate, guestList, bookedUnits } = req.body
+  const { propertyId, startDate, endDate } = req.body
 
-  if (!propertyId || !startDate || !endDate || !guestList || !bookedUnits) {
+  if (!propertyId || !startDate || !endDate) {
     return res.json(response.error({ message: REQUIRED_VALUE_EMPTY }))
   }
 
@@ -102,8 +102,28 @@ export const addReservation = async (req: Request, res: Response) => {
     status: 'no_show',
     startDate: startDate,
     endDate: endDate,
-    guestList: guestList,
-    bookedUnits: bookedUnits,
+    guestList: [
+      {
+        id: 5,
+        firstName: 'Jayce',
+        lastName: 'Talis',
+      },
+      {
+        id: 6,
+        firstName: 'Ella',
+        lastName: 'Purnell',
+      },
+    ],
+    bookedUnits: [
+      {
+        id: 1,
+        hostId: 3,
+      },
+      {
+        id: 2,
+        hostId: 4,
+      },
+    ],
   }
 
   const newReservation = reservations.push(reservationData)
@@ -148,7 +168,7 @@ export const updateReservation = async (req: Request, res: Response) => {
 }
 
 export const deleteReservation = async (req: Request, res: Response) => {
-  const reservationId = req.body.reservationId
+  const reservationId = Number(req.params.reservationId)
 
   if (!reservationId) {
     return res.json(response.error({ message: 'No reservation id provided' }))
