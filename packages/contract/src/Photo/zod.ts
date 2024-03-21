@@ -11,3 +11,4 @@ export const Z_Photo = z.object({
   updatedAt: z.date().nullable().optional(),
   deletedAt: z.date().nullable().optional(),
 })
+

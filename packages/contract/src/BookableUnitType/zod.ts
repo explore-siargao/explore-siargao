@@ -1,6 +1,3 @@
-import { Z_Photo } from "../Photo"
-import { Z_Feature } from "../Feature"
-import { Z_BookableUnitBedConfig } from "../BookableUnitBedConfig"
 import { z } from "zod"
 import { Z_BookableUnit } from "../BookableUnit"
 export const Z_BookableUnitTypes = z.object({
@@ -34,4 +31,3 @@ export const Z_BookableUnitTypes = z.object({
   createdAt: z.date().optional(),
   updatedAt: z.date().nullable().optional(),
   deletedAt: z.date().nullable().optional(),
-})

@@ -11,10 +11,12 @@ import XenditRoute from '@/routes/api/xendit'
 import BookingsRoute from '@/routes/api/bookings'
 import TransactionsRoute from '@/routes/api/transactions'
 import ReportsRoute from '@/routes/api/reports'
+
 // mock
 import MockUsersRoute from '@/routes/mock/users'
 import MockBookingsRoute from '@/routes/mock/bookings'
 import MockListingsRoute from '@/routes/mock/listings'
+import MockPropertiesRoute from '@/routes/mock/properties'
 import MockBookableUnitTypeRoute from '@/routes/mock/bookableUnitType'
 import MockReservationsRoute from '@/routes/mock/reservations'
 import MockBookableUnit from '@/routes/mock/bookableUnit'
@@ -30,10 +32,12 @@ export default function (app: Application) {
   app.use(`${API_ROOT}/bookings`, BookingsRoute)
   app.use(`${API_ROOT}/transactions`, TransactionsRoute)
   app.use(`${API_ROOT}/reports`, ReportsRoute)
+
   // MOCK
   app.use(`${MOCK_ROOT}/users`, MockUsersRoute)
   app.use(`${MOCK_ROOT}/bookings`, MockBookingsRoute)
   app.use(`${MOCK_ROOT}/listings`, MockListingsRoute)
+  app.use(`${MOCK_ROOT}/properties`, MockPropertiesRoute)
   app.use(`${MOCK_ROOT}/bookable-unit-type`, MockBookableUnitTypeRoute)
   app.use(`${MOCK_ROOT}/reservations`, MockReservationsRoute)
   app.use(`${MOCK_ROOT}/bookable-unit`, MockBookableUnit)

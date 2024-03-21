@@ -40,6 +40,31 @@ model User {
   Notification     Notification[]
   ReportedUser     ReportUser[]      @relation("reportedUsers")
   reportedByuser   ReportUser[]      @relation("reportedByUsers")
+  Property         Property[]
+}
+
+model PersonalInfo {
+  id                Int                 @id @default(autoincrement())
+  userId            Int                 @unique
+  firstName         String              @db.VarChar(255)
+  middleName        String?             @db.VarChar(255)
+  lastName          String              @db.VarChar(255)
+  birthDate         DateTime?
+  governmentId      String?             @db.LongText
+  phoneNumber       String              @db.VarChar(20)
+  country           String              @db.VarChar(100)
+  language          String              @db.VarChar(50)
+  currency          String              @db.VarChar(10)
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+  deletedAt         DateTime?
+  user              User                @relation(fields: [userId], references: [id])
+  address           Addresses?
+  emergencyContacts EmergencyContacts[]
+  confirm           String?             @db.VarChar(250)
+  profile           String?             @db.LongText()
+
+  @@index([userId])
   BookableUnitType BookableUnitType[]
   BookableUnit     BookableUnit[]
 }
@@ -80,10 +105,12 @@ model Addresses {
   streetAddress String?    @db.LongText
   aptSuite      String?    @db.LongText
   zipCode       Int?
+  country       String?      @db.VarChar(255)
+  personalInfo  PersonalInfo @relation(fields: [peronalInfoId], references: [id])
+  Guests        Guests[]
   country       String?    @db.VarChar(255)
   guest         Guests     @relation(fields: [peronalInfoId], references: [id])
-  Property      Property[]
-
+  
   @@index([peronalInfoId])
 }
 
@@ -486,8 +513,8 @@ model Photo {
   id                 Int              @id @default(autoincrement())
   bookableUnitTypeId Int
   propertyId         Int
-  url                String           @db.LongText()
-  thumbUrl           String           @db.LongText()
+  key                String           @db.LongText()
+  thumbKey           String           @db.LongText()
   caption            String
   createdAt          DateTime         @default(now())
   updatedAt          DateTime         @updatedAt
@@ -613,6 +640,8 @@ model Guests {
 
 model Property {
   id                          Int                 @id @default(autoincrement())
+  hostId                      Int
+  offerBy                     User                @relation(fields: [hostId], references: [id])
   propertyName                String              @db.VarChar(255)
   propertyDescription         String              @db.LongText()
   propertyCurrency            String              @db.VarChar(10)
@@ -620,8 +649,7 @@ model Property {
   propertyPhotos              Photo[]
   propertyPhone               String              @db.VarChar(20)
   propertyEmail               String              @unique @db.VarChar(255)
-  propertyAddressesId         Int
-  PropertyAddress             Addresses           @relation(fields: [propertyAddressesId], references: [id])
+  propertyAddress             String
   propertyCheckInTime         DateTime
   propertyCheckOutTime        DateTime
   propertyLateCheckOutAllowed Boolean
@@ -634,12 +662,12 @@ model Property {
   companyLegalName            String              @db.VarChar(255)
   propertyType                PropertyType
   BookableUnit                BookableUnit[]
+  Reservation                 Reservation[]
   createdAt                   DateTime            @default(now())
   updatedAt                   DateTime            @updatedAt
   deletedAt                   DateTime?
-  Reservation                 Reservation[]
-
-  @@index([propertyAddressesId])
+ 
+   @@index([hostId])
 }
 
 model PropertyAmenities {
@@ -667,7 +695,7 @@ model BookableUnit {
   Reservation        Reservation      @relation(fields: [reservationId], references: [id])
   hostId             Int
   Host               User             @relation(fields: [hostId], references: [id])
-
+  
   @@index([propertyId])
   @@index([bookableUnitTypeId])
   @@index([reservationId])
