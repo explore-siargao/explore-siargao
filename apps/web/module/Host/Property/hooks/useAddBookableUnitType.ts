@@ -8,12 +8,16 @@ export async function addBookableUnitType(
   props: T_BookableUnitType
 ) {
   const apiService = new ApiService("mock")
-  return await apiService.post(`${API_URL_BOOKABLE_UNIT_TYPE}/host/${hostId}`, props)
+  return await apiService.post(
+    `${API_URL_BOOKABLE_UNIT_TYPE}/host/${hostId}`,
+    props
+  )
 }
 
 function useAddBookableUnitType(hostId: number) {
   const query = useMutation({
-    mutationFn: (props: T_BookableUnitType) => addBookableUnitType(hostId, props),
+    mutationFn: (props: T_BookableUnitType) =>
+      addBookableUnitType(hostId, props),
   })
   return query
 }

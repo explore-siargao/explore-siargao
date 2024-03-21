@@ -3,7 +3,10 @@ import { API_URL_BOOKABLE_UNIT } from "@/common/constants"
 import { useMutation } from "@tanstack/react-query"
 import { T_BookableUnit } from "@repo/contract"
 
-export async function updateBookableUnit(id: number | undefined, props: T_BookableUnit) {
+export async function updateBookableUnit(
+  id: number | undefined,
+  props: T_BookableUnit
+) {
   const apiService = new ApiService("mock")
   return await apiService.patch(`${API_URL_BOOKABLE_UNIT}/${id}`, props)
 }
