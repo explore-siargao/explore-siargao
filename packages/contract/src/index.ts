@@ -34,4 +34,3 @@ export * from "./Amenity"
 export * from "./Feature"
 export * from "./Photo"
 export * from "./Reservation"
-

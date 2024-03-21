@@ -9,6 +9,7 @@ import Listing from "../Listing"
 const LandingPage = () => {
   const userId = useSessionStore((state) => state).id
   const { data, isPending } = useGetAllBookings()
+
   return (
     <WidthWrapper className="my-24 lg:my-36">
       {isPending ? (

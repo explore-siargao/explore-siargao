@@ -8,7 +8,7 @@ export async function deleteProperty(
   id: number | undefined
 ) {
   const apiService = new ApiService("mock")
-  return await apiService.patch(`${API_URL_PROPERTIES}/${hostId}/${id}`)
+  return await apiService.delete(`${API_URL_PROPERTIES}/${hostId}/${id}`)
 }
 function useDeleteProperty(hostId: number) {
   const query = useMutation({
