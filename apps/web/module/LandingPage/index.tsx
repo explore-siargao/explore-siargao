@@ -5,10 +5,15 @@ import useGetAllBookings from "../LandingPage/hooks/useGetAllBookings"
 import { Spinner } from "@/common/components/ui/Spinner"
 import useSessionStore from "@/common/store/useSessionStore"
 import Listing from "../Listing"
+import useDeleteProperty from "../Host/Property/hooks/useDeleteProperty"
+import { Button } from "@/common/components/ui/Button"
 
 const LandingPage = () => {
   const userId = useSessionStore((state) => state).id
   const { data, isPending } = useGetAllBookings()
+
+  const {mutate} = useDeleteProperty(4)
+
   return (
     <WidthWrapper className="my-24 lg:my-36">
       {isPending ? (
@@ -36,6 +41,26 @@ const LandingPage = () => {
           </ul>
         </>
       )}
+      <Button variant="primary" onClick={()=> mutate({
+        id: 1,
+        propertyPrimaryLanguage: "Tagalog",
+        companyLegalName: "Mountain View Place",
+        propertyEmail: "mountainview123@gmail.com",
+        propertyPhone: "587-6723",
+        propertyName: "Plain View",
+        propertyDescription: "Clean and green",
+        propertyCurrency: "PHP",
+        PropertyAddress: "Muntinlupa City",
+        propertyCheckInTime: "2024-03-20 01:05:43.736",
+        propertyCheckOutTime: "2024-03-25 01:05:43.736",
+        propertyLateCheckOutAllowed: true,
+        propertyLateCheckOutType: "percent",
+        propertyLateCheckoutValue: 0.50,
+        propertyTermsAndConditions: "no pets allowed",
+        taxId: 123465,
+        taxId2: 987564,
+        propertyType: "Resort",
+      })}>Add Button</Button>
     </WidthWrapper>
   )
 }

@@ -9,7 +9,7 @@ export async function updateProperty(
   props: T_Property
 ) {
   const apiService = new ApiService("mock")
-  return await apiService.patch(`${API_URL_PROPERTIES}/${hostId}`, props)
+  return await apiService.patch(`${API_URL_PROPERTIES}/${hostId}/${id}`, props)
 }
 
 function useUpdateProperty(hostId: number | undefined) {

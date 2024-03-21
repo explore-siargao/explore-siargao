@@ -1,7 +1,7 @@
-import { ApiService } from "@/common/service/api"
-import { API_URL_PROPERTIES } from "@/common/constants"
 import { useMutation } from "@tanstack/react-query"
 import { T_Property } from "@repo/contract"
+import { API_URL_PROPERTIES } from "@/common/constants"
+import { ApiService } from "@/common/service/api"
 
 export async function addPropertyOfHost(
   hostId: number | undefined,
