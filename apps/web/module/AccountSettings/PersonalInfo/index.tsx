@@ -40,14 +40,14 @@ const PersonalInfo = () => {
           />
           <GovernmentId governmentId={personalInfo?.governmentId} />
           <Address
-            country={personalInfo?.address?.country as string}
-            city={personalInfo?.address?.city as string}
-            stateProvince={personalInfo?.address?.stateProvince as string}
-            streetAddress={personalInfo?.address?.streetAddress as string}
-            zipCode={personalInfo?.address?.zipCode as number}
+            country={personalInfo?.Address?.country as string}
+            city={personalInfo?.Address?.city as string}
+            stateProvince={personalInfo?.Address?.stateProvince as string}
+            streetAddress={personalInfo?.Address?.streetAddress as string}
+            zipCode={personalInfo?.Address?.zipCode as number}
             peronalInfoId={personalInfo?.id as number}
-            aptSuite={personalInfo?.address?.aptSuite}
-            id={personalInfo?.address.id as number}
+            aptSuite={personalInfo?.Address?.aptSuite}
+            id={personalInfo?.Address?.id as number}
           />
           <EmergencyContact
             emergencyContact={

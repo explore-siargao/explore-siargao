@@ -78,7 +78,7 @@ export const getPaymentMethods = async (req: Request, res: Response) => {
         include: {
           user: {
             include: {
-              personalInfo: true,
+              guest: true,
             },
           },
         },
@@ -88,12 +88,12 @@ export const getPaymentMethods = async (req: Request, res: Response) => {
         user: {
           ...paymentMethod.user,
           personalInfo: {
-            ...paymentMethod.user.personalInfo,
-            confirm: paymentMethod.user.personalInfo?.confirm
-              ? JSON.parse(paymentMethod.user.personalInfo?.confirm)
+            ...paymentMethod.user.guest,
+            confirm: paymentMethod.user.guest?.confirm
+              ? JSON.parse(paymentMethod.user.guest?.confirm)
               : null,
-            governmentId: paymentMethod.user.personalInfo?.governmentId
-              ? JSON.parse(paymentMethod.user.personalInfo.governmentId)
+            governmentId: paymentMethod.user.guest?.governmentId
+              ? JSON.parse(paymentMethod.user.guest.governmentId)
               : null,
           },
         },
