@@ -5,6 +5,6 @@ services:
     container_name: es-api-dev
     restart: unless-stopped
     env_file:
-      - ../.env.development
+      - ../../.env.development
     ports:
       - 9000:9000

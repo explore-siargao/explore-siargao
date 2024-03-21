@@ -37,7 +37,7 @@ const isUserLoggedIn = async (
     token: token ? token : secureToken,
     secret: nextAuthSecret,
   })
-  if (token && decoded?.email) {
+  if ((token || secureToken) && decoded?.email) {
     const prisma = new PrismaClient()
     try {
       const user = await prisma.user.findFirst({

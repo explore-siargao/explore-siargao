@@ -5,6 +5,6 @@ services:
     container_name: es-api-dev-arm
     restart: unless-stopped
     env_file:
-      - ../.env.arm
+      - ../../.env
     ports:
       - 9000:9000

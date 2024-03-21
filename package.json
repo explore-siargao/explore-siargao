@@ -12,7 +12,15 @@
     "start": "turbo start",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "seed": "npx prisma db push --force-reset && npm run seed --workspace=api"
+    "seed": "npx prisma db push --force-reset && npm run seed --workspace=api",
+    "dr:api": "sudo docker container stop es-api-dev ; sudo docker container rm es-api-dev ; sudo docker container rm es-api-dev ; sudo docker image rm jpmadrigal/es-api-dev:latest ; sudo docker pull jpmadrigal/es-api-dev:latest && sudo docker compose -f ./docker/api/compose.yml up -d",
+    "dr:web": "sudo docker container stop es-web-dev ; sudo docker container rm es-web-dev ; sudo docker container rm es-web-dev ; sudo docker image rm jpmadrigal/es-web-dev:latest ; sudo docker pull jpmadrigal/es-web-dev:latest && sudo docker compose -f ./docker/web/compose.yml up -d",
+    "dbp:web": "docker image rm jpmadrigal/es-web-dev:latest ; docker compose -f ./docker/web/compose-build.yml --env-file .env.development build && docker push jpmadrigal/es-web-dev:latest",
+    "db:web-arm": "docker image rm jpmadrigal/es-web-dev-arm:latest ; docker compose -f ./docker/web/compose-build-arm.yml --env-file .env build",
+    "dc:web-arm": "docker compose -f ./docker/web/compose-arm.yml up -d",
+    "dbp:api": "docker image rm jpmadrigal/es-api-dev:latest ; docker build -f ./docker/api/Dockerfile -t jpmadrigal/es-api-dev . && docker push jpmadrigal/es-api-dev:latest",
+    "db:api-arm": "docker image rm jpmadrigal/es-api-dev-arm:latest ; docker build -f ./docker/api/Dockerfile.arm -t jpmadrigal/es-api-dev-arm .",
+    "dc:api-arm": "docker compose -f ./docker/api/compose-arm.yml up -d"
   },
   "devDependencies": {
     "@repo/eslint-config": "*",
