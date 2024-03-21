@@ -39,3 +39,4 @@ export const Z_Properties = z.object({
   updatedAt: z.date().nullable().optional(),
   deletedAt: z.date().nullable().optional(),
 })
+
