@@ -16,7 +16,7 @@ export const getAllReportUsers = async (req: Request, res: Response) => {
           select: {
             email: true,
             profilePicture: true,
-            personalInfo: {
+            guest: {
               select: {
                 firstName: true,
                 lastName: true,
@@ -28,7 +28,7 @@ export const getAllReportUsers = async (req: Request, res: Response) => {
           select: {
             email: true,
             profilePicture: true,
-            personalInfo: {
+            guest: {
               select: {
                 firstName: true,
                 lastName: true,
@@ -43,17 +43,17 @@ export const getAllReportUsers = async (req: Request, res: Response) => {
       report: JSON.parse(reportUser.report),
       reportedBy: {
         name:
-          reportUser.reportedByUser.personalInfo?.firstName +
+          reportUser.reportedByUser.guest?.firstName +
           ' ' +
-          reportUser.reportedByUser.personalInfo?.lastName,
+          reportUser.reportedByUser.guest?.lastName,
         profilePicture: reportUser.reportedByUser.profilePicture,
         email: reportUser.reportedByUser.email,
       },
       reportedUser: {
         name:
-          reportUser.reportedUser.personalInfo?.firstName +
+          reportUser.reportedUser.guest?.firstName +
           ' ' +
-          reportUser.reportedUser.personalInfo?.lastName,
+          reportUser.reportedUser.guest?.lastName,
         profilePicture: reportUser.reportedByUser.profilePicture,
         email: reportUser.reportedUser.email,
       },
@@ -111,7 +111,7 @@ export const getReportsByReportedUserId = async (
           select: {
             email: true,
             profilePicture: true,
-            personalInfo: {
+            guest: {
               select: {
                 firstName: true,
                 lastName: true,
@@ -123,7 +123,7 @@ export const getReportsByReportedUserId = async (
           select: {
             email: true,
             profilePicture: true,
-            personalInfo: {
+            guest: {
               select: {
                 firstName: true,
                 lastName: true,
@@ -142,17 +142,17 @@ export const getReportsByReportedUserId = async (
           email: reportUser.reportedUser.email,
           profilePicture: reportUser.reportedByUser.profilePicture,
           name:
-            reportUser.reportedUser.personalInfo?.firstName +
+            reportUser.reportedUser.guest?.firstName +
             ' ' +
-            reportUser.reportedUser.personalInfo?.lastName,
+            reportUser.reportedUser.guest?.lastName,
         },
         reportedBy: {
           email: reportUser.reportedByUser.email,
           profilePicture: reportUser.reportedByUser.profilePicture,
           name:
-            reportUser.reportedByUser.personalInfo?.firstName +
+            reportUser.reportedByUser.guest?.firstName +
             ' ' +
-            reportUser.reportedByUser.personalInfo?.lastName,
+            reportUser.reportedByUser.guest?.lastName,
         },
         createdAt: reportUser.createdAt,
       })
@@ -206,7 +206,7 @@ export const getReportsByResportedByUserId = async (
           select: {
             email: true,
             profilePicture: true,
-            personalInfo: {
+            guest: {
               select: {
                 firstName: true,
                 lastName: true,
@@ -218,7 +218,7 @@ export const getReportsByResportedByUserId = async (
           select: {
             email: true,
             profilePicture: true,
-            personalInfo: {
+            guest: {
               select: {
                 firstName: true,
                 lastName: true,
@@ -235,17 +235,17 @@ export const getReportsByResportedByUserId = async (
         report: JSON.parse(reportUser.report),
         reportedUser: {
           name:
-            reportUser.reportedUser.personalInfo?.firstName +
+            reportUser.reportedUser.guest?.firstName +
             ' ' +
-            reportUser.reportedUser.personalInfo?.lastName,
+            reportUser.reportedUser.guest?.lastName,
           profilePicture: reportUser.reportedByUser.profilePicture,
           email: reportUser.reportedUser.email,
         },
         reportedBy: {
           name:
-            reportUser.reportedByUser.personalInfo?.firstName +
+            reportUser.reportedByUser.guest?.firstName +
             ' ' +
-            reportUser.reportedByUser.personalInfo?.lastName,
+            reportUser.reportedByUser.guest?.lastName,
           profilePicture: reportUser.reportedByUser.profilePicture,
           email: reportUser.reportedByUser.email,
         },
@@ -288,7 +288,7 @@ export const getReportUserById = async (req: Request, res: Response) => {
           select: {
             email: true,
             profilePicture: true,
-            personalInfo: {
+            guest: {
               select: {
                 firstName: true,
                 lastName: true,
@@ -300,7 +300,7 @@ export const getReportUserById = async (req: Request, res: Response) => {
           select: {
             email: true,
             profilePicture: true,
-            personalInfo: {
+            guest: {
               select: {
                 firstName: true,
                 lastName: true,
@@ -318,17 +318,17 @@ export const getReportUserById = async (req: Request, res: Response) => {
       report: JSON.parse(getReportById.report),
       reportedUser: {
         name:
-          getReportById.reportedUser.personalInfo?.firstName +
+          getReportById.reportedUser.guest?.firstName +
           ' ' +
-          getReportById.reportedUser.personalInfo?.lastName,
+          getReportById.reportedUser.guest?.lastName,
         profilePicture: getReportById.reportedUser.profilePicture,
         email: getReportById.reportedUser.email,
       },
       reportedBy: {
         name:
-          getReportById.reportedByUser.personalInfo?.firstName +
+          getReportById.reportedByUser.guest?.firstName +
           ' ' +
-          getReportById.reportedByUser.personalInfo?.lastName,
+          getReportById.reportedByUser.guest?.lastName,
         profilePicture: getReportById.reportedByUser.profilePicture,
         email: getReportById.reportedByUser.email,
       },

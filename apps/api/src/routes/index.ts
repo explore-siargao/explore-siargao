@@ -16,6 +16,8 @@ import MockUsersRoute from '@/routes/mock/users'
 import MockBookingsRoute from '@/routes/mock/bookings'
 import MockListingsRoute from '@/routes/mock/listings'
 import MockBookableUnitTypeRoute from '@/routes/mock/bookableUnitType'
+import MockReservationsRoute from '@/routes/mock/reservations'
+import MockBookableUnit from '@/routes/mock/bookableUnit'
 
 export default function (app: Application) {
   app.use(`/assets`, AssetsRoute)
@@ -33,4 +35,6 @@ export default function (app: Application) {
   app.use(`${MOCK_ROOT}/bookings`, MockBookingsRoute)
   app.use(`${MOCK_ROOT}/listings`, MockListingsRoute)
   app.use(`${MOCK_ROOT}/bookable-unit-type`, MockBookableUnitTypeRoute)
+  app.use(`${MOCK_ROOT}/reservations`, MockReservationsRoute)
+  app.use(`${MOCK_ROOT}/bookable-unit`, MockBookableUnit)
 }
