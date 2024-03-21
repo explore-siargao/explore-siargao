@@ -1,6 +1,12 @@
-const bookableUnitTypes = [
+export const bookableUnitTypes = [
   {
     id: 1,
+    hostId: 1,
+    Host: {
+      id: 1,
+      firstName: 'Jose',
+      lastName: 'Rizal',
+    },
     category: 'Bed in room',
     name: 'Amazing room',
     description: 'Clean and big room',
@@ -8,7 +14,7 @@ const bookableUnitTypes = [
     maxGuests: 4,
     adultsIncluded: 2,
     childrenIncluded: 2,
-    isMultiroomUnit: false,
+    isMultiRoomUnit: false,
     photos: [
       {
         id: 1,
@@ -49,6 +55,12 @@ const bookableUnitTypes = [
   },
   {
     id: 2,
+    hostId: 1,
+    Host: {
+      id: 1,
+      firstName: 'Jose',
+      lastName: 'Rizal',
+    },
     category: 'Bed in room',
     name: 'Cozy Cottage',
     description: 'A charming cottage for a peaceful stay',
@@ -56,7 +68,7 @@ const bookableUnitTypes = [
     maxGuests: 2,
     adultsIncluded: 2,
     childrenIncluded: 0,
-    isMultiroomUnit: false,
+    isMultiRoomUnit: false,
     photos: [
       {
         id: 3,
@@ -91,6 +103,12 @@ const bookableUnitTypes = [
   },
   {
     id: 3,
+    hostId: 2,
+    Host: {
+      id: 2,
+      firstName: 'Kitty',
+      lastName: 'Rivera',
+    },
     category: 'Bed in room',
     name: 'Luxury Suite',
     description: 'Elegant suite with breathtaking views',
@@ -98,7 +116,7 @@ const bookableUnitTypes = [
     maxGuests: 3,
     adultsIncluded: 2,
     childrenIncluded: 1,
-    isMultiroomUnit: false,
+    isMultiRoomUnit: false,
     photos: [
       {
         id: 4,
@@ -133,6 +151,12 @@ const bookableUnitTypes = [
   },
   {
     id: 4,
+    hostId: 2,
+    Host: {
+      id: 2,
+      firstName: 'Kitty',
+      lastName: 'Rivera',
+    },
     category: 'Bed in room',
     name: 'Family Room',
     description: 'Spacious room perfect for families',
@@ -140,7 +164,7 @@ const bookableUnitTypes = [
     maxGuests: 6,
     adultsIncluded: 4,
     childrenIncluded: 2,
-    isMultiroomUnit: false,
+    isMultiRoomUnit: false,
     photos: [
       {
         id: 5,
@@ -175,6 +199,12 @@ const bookableUnitTypes = [
   },
   {
     id: 5,
+    hostId: 2,
+    Host: {
+      id: 2,
+      firstName: 'Kitty',
+      lastName: 'Rivera',
+    },
     category: 'Bed in room',
     name: 'Executive Suite',
     description: 'Luxurious suite for business travelers',
@@ -182,7 +212,7 @@ const bookableUnitTypes = [
     maxGuests: 2,
     adultsIncluded: 2,
     childrenIncluded: 0,
-    isMultiroomUnit: false,
+    isMultiRoomUnit: false,
     photos: [
       {
         id: 1,
@@ -217,6 +247,12 @@ const bookableUnitTypes = [
   },
   {
     id: 6,
+    hostId: 3,
+    Host: {
+      id: 3,
+      firstName: 'Paola',
+      lastName: 'Ramirez',
+    },
     category: 'Bed in room',
     name: 'Standard Room',
     description: 'Comfortable room for a relaxing stay',
@@ -224,7 +260,7 @@ const bookableUnitTypes = [
     maxGuests: 2,
     adultsIncluded: 2,
     childrenIncluded: 0,
-    isMultiroomUnit: false,
+    isMultiRoomUnit: false,
     photos: [
       {
         id: 2,
@@ -259,6 +295,12 @@ const bookableUnitTypes = [
   },
   {
     id: 7,
+    hostId: 3,
+    Host: {
+      id: 3,
+      firstName: 'Paola',
+      lastName: 'Ramirez',
+    },
     category: 'Bed in room',
     name: 'Deluxe Double Room',
     description: 'Modern room with stylish decor',
@@ -266,7 +308,7 @@ const bookableUnitTypes = [
     maxGuests: 2,
     adultsIncluded: 2,
     childrenIncluded: 0,
-    isMultiroomUnit: false,
+    isMultiRoomUnit: false,
     photos: [
       {
         id: 3,
@@ -301,6 +343,12 @@ const bookableUnitTypes = [
   },
   {
     id: 8,
+    hostId: 3,
+    Host: {
+      id: 3,
+      firstName: 'Paola',
+      lastName: 'Ramirez',
+    },
     category: 'Bed in room',
     name: 'Budget Room',
     description: 'Affordable option for budget travelers',
@@ -308,7 +356,7 @@ const bookableUnitTypes = [
     maxGuests: 1,
     adultsIncluded: 1,
     childrenIncluded: 0,
-    isMultiroomUnit: false,
+    isMultiRoomUnit: false,
     photos: [
       {
         id: 4,
@@ -343,6 +391,12 @@ const bookableUnitTypes = [
   },
   {
     id: 9,
+    hostId: 3,
+    Host: {
+      id: 3,
+      firstName: 'Paola',
+      lastName: 'Ramirez',
+    },
     category: 'Bed in room',
     name: 'Vintage Loft',
     description: 'Quirky loft with retro vibes',
@@ -350,7 +404,7 @@ const bookableUnitTypes = [
     maxGuests: 2,
     adultsIncluded: 2,
     childrenIncluded: 0,
-    isMultiroomUnit: false,
+    isMultiRoomUnit: false,
     photos: [
       {
         id: 5,
@@ -385,6 +439,12 @@ const bookableUnitTypes = [
   },
   {
     id: 10,
+    hostId: 1,
+    Host: {
+      id: 1,
+      firstName: 'Jose',
+      lastName: 'Rizal',
+    },
     category: 'Bed in room',
     name: 'Safari Tent',
     description: 'Adventure awaits in our safari tent',
@@ -392,7 +452,7 @@ const bookableUnitTypes = [
     maxGuests: 4,
     adultsIncluded: 2,
     childrenIncluded: 2,
-    isMultiroomUnit: false,
+    isMultiRoomUnit: false,
     photos: [
       {
         id: 1,
