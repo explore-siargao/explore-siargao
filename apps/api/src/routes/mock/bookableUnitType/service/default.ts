@@ -3,7 +3,6 @@ import { Request, Response } from 'express'
 import { bookableUnitTypes } from './jsons/bookableUnitType'
 import { REQUIRED_VALUE_EMPTY, USER_NOT_AUTHORIZED } from '@/common/constants'
 import { Z_BookableUnitTypes } from '@repo/contract'
-import { yearsToQuarters } from 'date-fns'
 const response = new ResponseService()
 
 export const getBookableUnitTypeById = async (req: Request, res: Response) => {
