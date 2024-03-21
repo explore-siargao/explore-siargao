@@ -40,6 +40,7 @@ model User {
   Notification     Notification[]
   ReportedUser     ReportUser[]      @relation("reportedUsers")
   reportedByuser   ReportUser[]      @relation("reportedByUsers")
+  BookableUnitType BookableUnitType[]
 }
 
 model HostInfo {
@@ -523,6 +524,8 @@ model BookableUnitBedConfig {
 
 model BookableUnitType {
   id                                    Int                     @id @default(autoincrement())
+  hostId                                Int
+  Host                                  User                    @relation(fields: [hostId], references: [id])
   category                              String                  @db.VarChar(255)
   name                                  String                  @db.LongText()
   description                           String                  @db.LongText()
@@ -544,6 +547,7 @@ model BookableUnitType {
   createdAt                             DateTime                @default(now())
   updatedAt                             DateTime                @updatedAt
   deletedAt                             DateTime?
+  @@index([hostId])
 }
 
 // model PersonalInfo {
