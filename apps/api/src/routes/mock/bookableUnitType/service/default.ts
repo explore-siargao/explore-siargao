@@ -130,10 +130,13 @@ export const addBookableUnitType = async (req: Request, res: Response) => {
   )
 }
 
-export const updateBookableUnitTypeById = async (req: Request,res: Response) => {
-const hostId = Number(req.params.hostId)
-const id = Number(req.params.id)
-const {
+export const updateBookableUnitTypeById = async (
+  req: Request,
+  res: Response
+) => {
+  const hostId = Number(req.params.hostId)
+  const id = Number(req.params.id)
+  const {
     category,
     name,
     description,
@@ -148,10 +151,11 @@ const {
     additionalPricePerPerson,
     thresholdOccupancyForAdditionalCharge,
   } = req.body
-if(!hostId){
-    return res.json(response.error({message:USER_NOT_AUTHORIZED}))
-}
-if( !category &&
+  if (!hostId) {
+    return res.json(response.error({ message: USER_NOT_AUTHORIZED }))
+  }
+  if (
+    !category &&
     !name &&
     !description &&
     !maxGuests &&
@@ -164,31 +168,43 @@ if( !category &&
     !totalSizeSqm &&
     !additionalPricePerPerson &&
     !thresholdOccupancyForAdditionalCharge
-    ){
-        return res.json(response.error({message:REQUIRED_VALUE_EMPTY}))
-    }
-const findBookableUnitType = bookableUnitTypes.findIndex((item)=>item.id===id)
-if(findBookableUnitType === -1){
-    return res.json(response.error({message:"Bookable Unit Type not exist or its already deleted"}))
-}
-const bookableUnitTypeDataUpdate = {
+  ) {
+    return res.json(response.error({ message: REQUIRED_VALUE_EMPTY }))
+  }
+  const findBookableUnitType = bookableUnitTypes.findIndex(
+    (item) => item.id === id
+  )
+  if (findBookableUnitType === -1) {
+    return res.json(
+      response.error({
+        message: 'Bookable Unit Type not exist or its already deleted',
+      })
+    )
+  }
+  const bookableUnitTypeDataUpdate = {
     ...bookableUnitTypes[findBookableUnitType],
-    category:category,
-    name:name,
-    description:description,
-    maxGuests:maxGuests,
-    isPrivate:isPrivate,
-    adultsIncluded:adultsIncluded,
-    childrenIncluded:childrenIncluded,
-    isMultiroomUnit:isMultiroomUnit,
-    numBedrooms:numBedrooms,
-    minNightlyRate:minNightlyRate,
-    totalSizeSqm:totalSizeSqm,
-    additionalPricePerPerson:additionalPricePerPerson,
-    thresholdOccupancyForAdditionalCharge:thresholdOccupancyForAdditionalCharge
-}
-//@ts-ignore
-bookableUnitTypes[findBookableUnitType] = bookableUnitTypeDataUpdate
+    category: category,
+    name: name,
+    description: description,
+    maxGuests: maxGuests,
+    isPrivate: isPrivate,
+    adultsIncluded: adultsIncluded,
+    childrenIncluded: childrenIncluded,
+    isMultiroomUnit: isMultiroomUnit,
+    numBedrooms: numBedrooms,
+    minNightlyRate: minNightlyRate,
+    totalSizeSqm: totalSizeSqm,
+    additionalPricePerPerson: additionalPricePerPerson,
+    thresholdOccupancyForAdditionalCharge:
+      thresholdOccupancyForAdditionalCharge,
+  }
+  //@ts-ignore
+  bookableUnitTypes[findBookableUnitType] = bookableUnitTypeDataUpdate
 
-res.json(response.success({item:bookableUnitTypes[findBookableUnitType], message:"Bookable Unit Type successfully updated"}))
+  res.json(
+    response.success({
+      item: bookableUnitTypes[findBookableUnitType],
+      message: 'Bookable Unit Type successfully updated',
+    })
+  )
 }

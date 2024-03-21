@@ -1,11 +1,11 @@
 export const bookableUnitTypes = [
   {
     id: 1,
-    hostId:1,
-    Host:{
-        id:1,
-        firstName:"Jose",
-        lastName:"Rizal"
+    hostId: 1,
+    Host: {
+      id: 1,
+      firstName: 'Jose',
+      lastName: 'Rizal',
     },
     category: 'Bed in room',
     name: 'Amazing room',
@@ -55,11 +55,11 @@ export const bookableUnitTypes = [
   },
   {
     id: 2,
-    hostId:1,
-    Host:{
-        id:1,
-        firstName:"Jose",
-        lastName:"Rizal"
+    hostId: 1,
+    Host: {
+      id: 1,
+      firstName: 'Jose',
+      lastName: 'Rizal',
     },
     category: 'Bed in room',
     name: 'Cozy Cottage',
@@ -103,11 +103,11 @@ export const bookableUnitTypes = [
   },
   {
     id: 3,
-    hostId:2,
-    Host:{
-        id:2,
-        firstName:"Kitty",
-        lastName:"Rivera"
+    hostId: 2,
+    Host: {
+      id: 2,
+      firstName: 'Kitty',
+      lastName: 'Rivera',
     },
     category: 'Bed in room',
     name: 'Luxury Suite',
@@ -151,11 +151,11 @@ export const bookableUnitTypes = [
   },
   {
     id: 4,
-    hostId:2,
-    Host:{
-        id:2,
-        firstName:"Kitty",
-        lastName:"Rivera"
+    hostId: 2,
+    Host: {
+      id: 2,
+      firstName: 'Kitty',
+      lastName: 'Rivera',
     },
     category: 'Bed in room',
     name: 'Family Room',
@@ -199,11 +199,11 @@ export const bookableUnitTypes = [
   },
   {
     id: 5,
-    hostId:2,
-    Host:{
-        id:2,
-        firstName:"Kitty",
-        lastName:"Rivera"
+    hostId: 2,
+    Host: {
+      id: 2,
+      firstName: 'Kitty',
+      lastName: 'Rivera',
     },
     category: 'Bed in room',
     name: 'Executive Suite',
@@ -247,11 +247,11 @@ export const bookableUnitTypes = [
   },
   {
     id: 6,
-    hostId:3,
-    Host:{
-        id:3,
-        firstName:"Paola",
-        lastName:"Ramirez"
+    hostId: 3,
+    Host: {
+      id: 3,
+      firstName: 'Paola',
+      lastName: 'Ramirez',
     },
     category: 'Bed in room',
     name: 'Standard Room',
@@ -295,11 +295,11 @@ export const bookableUnitTypes = [
   },
   {
     id: 7,
-    hostId:3,
-    Host:{
-        id:3,
-        firstName:"Paola",
-        lastName:"Ramirez"
+    hostId: 3,
+    Host: {
+      id: 3,
+      firstName: 'Paola',
+      lastName: 'Ramirez',
     },
     category: 'Bed in room',
     name: 'Deluxe Double Room',
@@ -343,11 +343,11 @@ export const bookableUnitTypes = [
   },
   {
     id: 8,
-    hostId:3,
-    Host:{
-        id:3,
-        firstName:"Paola",
-        lastName:"Ramirez"
+    hostId: 3,
+    Host: {
+      id: 3,
+      firstName: 'Paola',
+      lastName: 'Ramirez',
     },
     category: 'Bed in room',
     name: 'Budget Room',
@@ -391,11 +391,11 @@ export const bookableUnitTypes = [
   },
   {
     id: 9,
-    hostId:3,
-    Host:{
-        id:3,
-        firstName:"Paola",
-        lastName:"Ramirez"
+    hostId: 3,
+    Host: {
+      id: 3,
+      firstName: 'Paola',
+      lastName: 'Ramirez',
     },
     category: 'Bed in room',
     name: 'Vintage Loft',
@@ -439,11 +439,11 @@ export const bookableUnitTypes = [
   },
   {
     id: 10,
-    hostId:1,
-    Host:{
-        id:1,
-        firstName:"Jose",
-        lastName:"Rizal"
+    hostId: 1,
+    Host: {
+      id: 1,
+      firstName: 'Jose',
+      lastName: 'Rizal',
     },
     category: 'Bed in room',
     name: 'Safari Tent',
