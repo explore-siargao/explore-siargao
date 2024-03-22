@@ -6,7 +6,8 @@ import { WidthWrapper } from "@/common/components/WidthWrapper"
 import useGetThisMonthEarnings from "../hooks/useGetThisMonthEarnings"
 import Chart, { ChartType } from "./components/Chart"
 import Tabs from "@/common/components/Tabs"
-import { BarChart2, Table } from "lucide-react"
+import { BarChart2, LucideChevronLeft, Table } from "lucide-react"
+import Link from "next/link"
 
 const months = {
   january: 0,
@@ -73,84 +74,93 @@ const EarningDetails = () => {
   ]
 
   return (
-    <WidthWrapper
-      width="medium"
-      className="grid grid-cols-1 lg:grid-cols-4 gap-12 lg:gap-0 mt-28 md:mt-36"
-    >
-      <div className="lg:col-span-3">
-        <Typography variant="h1" fontWeight="semibold">
-          Earnings for {format(new Date(dateObject), "MMMM yyyy")}
-        </Typography>
-        {thisMonth?.item && thisMonth.item.days.length > 0 ? (
-          <>
-            <div className="mt-3 lg:pr-[89px]">
-              <Tabs tabs={tabs}></Tabs>
-            </div>
-            {type === "graph" ? (
-              <Chart
-                data={thisMonth.item.days}
-                isPending={thisMonthIsPending}
-                width="100%"
-                height={400}
-                type={ChartType["this-month"]}
-                earningType="daily"
-              />
-            ) : (
-              <Typography fontWeight="semibold" variant="p" className="mt-8">
-                This is table view of earnings.
-              </Typography>
-            )}
-          </>
-        ) : (
-          <>
-            <Typography fontWeight="semibold" variant="p" className="mt-2">
-              No earnings at the moment.
-            </Typography>
-          </>
-        )}
+    <WidthWrapper width="medium" className="mt-28 md:mt-36">
+      <div className="flex">
+        <Link href="/hosting/earnings">
+          <LucideChevronLeft className="text-text-300 hover:text-text-500 transition" />
+        </Link>
       </div>
-      <div className="col-span-1 relative">
-        <div className="bg-white rounded-lg shadow-lg p-8 sticky top-36">
-          <Typography variant="h2" fontWeight="semibold">
-            Summary
-          </Typography>
-          <Typography variant="p" className="text-gray-400 pb-4">
-            {format(new Date(dateObject), "MMMM d")} -{" "}
-            {format(
-              // @ts-expect-error
-              new Date(dateObject.getFullYear(), dateObject.getMonth() + 1, 0),
-              "MMMM d, yyyy"
-            )}
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-12 lg:gap-0 mt-8">
+        <div className="lg:col-span-3">
+          <Typography variant="h1" fontWeight="semibold">
+            Earnings for {format(new Date(dateObject), "MMMM yyyy")}
           </Typography>
 
-          <div className="flex gap-4 justify-between pb-4">
-            {summaryData.map((column) => (
-              <div key={`column-${column}`} className="flex flex-col">
-                {column.map((item) => (
-                  <Typography
-                    variant="p"
-                    fontWeight="semibold"
-                    key={`column-${column}-item-${item}`}
-                    className="pt-2 text-sm"
-                  >
-                    {item}
-                  </Typography>
-                ))}
+          {thisMonth?.item && thisMonth.item.days.length > 0 ? (
+            <>
+              <div className="mt-3 lg:pr-[89px]">
+                <Tabs tabs={tabs}></Tabs>
               </div>
-            ))}
-          </div>
+              {type === "graph" ? (
+                <Chart
+                  data={thisMonth.item.days}
+                  isPending={thisMonthIsPending}
+                  width="100%"
+                  height={400}
+                  type={ChartType["this-month"]}
+                  earningType="daily"
+                />
+              ) : (
+                <Typography fontWeight="semibold" variant="p" className="mt-8">
+                  This is table view of earnings.
+                </Typography>
+              )}
+            </>
+          ) : (
+            <>
+              <Typography fontWeight="semibold" variant="p" className="mt-2">
+                No earnings at the moment.
+              </Typography>
+            </>
+          )}
+        </div>
+        <div className="col-span-1 relative">
+          <div className="bg-white rounded-lg shadow-lg p-8 sticky top-36">
+            <Typography variant="h2" fontWeight="semibold">
+              Summary
+            </Typography>
+            <Typography variant="p" className="text-gray-400 pb-4">
+              {format(new Date(dateObject), "MMMM d")} -{" "}
+              {format(
+                // @ts-expect-error
+                new Date(
+                  dateObject.getFullYear(),
+                  dateObject.getMonth() + 1,
+                  0
+                ),
+                "MMMM d, yyyy"
+              )}
+            </Typography>
 
-          <div className="bottom-0 border-t flex gap-4 justify-between">
-            <Typography className="pt-4" variant="p" fontWeight="semibold">
-              Total
-            </Typography>
-            <Typography
-              className="pt-4 text-sm"
-              variant="p"
-              fontWeight="semibold"
-            >
-              {formatCurrency(97800, "Philippines")}
-            </Typography>
+            <div className="flex gap-4 justify-between pb-4">
+              {summaryData.map((column) => (
+                <div key={`column-${column}`} className="flex flex-col">
+                  {column.map((item) => (
+                    <Typography
+                      variant="p"
+                      fontWeight="semibold"
+                      key={`column-${column}-item-${item}`}
+                      className="pt-2 text-sm"
+                    >
+                      {item}
+                    </Typography>
+                  ))}
+                </div>
+              ))}
+            </div>
+
+            <div className="bottom-0 border-t flex gap-4 justify-between">
+              <Typography className="pt-4" variant="p" fontWeight="semibold">
+                Total
+              </Typography>
+              <Typography
+                className="pt-4 text-sm"
+                variant="p"
+                fontWeight="semibold"
+              >
+                {formatCurrency(97800, "Philippines")}
+              </Typography>
+            </div>
           </div>
         </div>
       </div>

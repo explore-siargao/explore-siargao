@@ -1,4 +1,4 @@
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { ChevronLeft, ChevronRight, LucideChevronLeft } from "lucide-react"
 import { useEffect, useState } from "react"
 import { useSwiper } from "swiper/react"
 
@@ -18,7 +18,7 @@ const SwiperCustomButton = () => {
         }}
         disabled={swiper.isBeginning}
       >
-        <ChevronLeft className="h-4 w-4" />
+        <LucideChevronLeft className="h-4 w-4" />
       </button>
       <button
         className="border border-gray-300 p-2 rounded-full disabled:opacity-40"
