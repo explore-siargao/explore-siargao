@@ -6,6 +6,7 @@ import {
   GetObjectCommandInput,
   GetObjectCommand,
 } from '@aws-sdk/client-s3'
+import { awsAccessKey, awsAccessSecret, awsRegion } from '@repo/env-vars'
 import { randomUUID } from 'crypto'
 
 export type T_UploadFileParams = {
@@ -27,9 +28,9 @@ export class FileService {
   private BUCKET_NAME: string
 
   constructor() {
-    this.AWS_REGION = process.env.AWS_REGION || ''
-    this.AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY || ''
-    this.AWS_SECRET_ACCESS_KEY = process.env.AWS_SECRET_ACCESS_KEY || ''
+    this.AWS_REGION = awsRegion
+    this.AWS_ACCESS_KEY = awsAccessKey
+    this.AWS_SECRET_ACCESS_KEY = awsAccessSecret
     this.BUCKET_NAME = 'exploresiargao-dev'
 
     this.config = {
