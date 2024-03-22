@@ -76,12 +76,15 @@ const EarningDetails = () => {
   return (
     <WidthWrapper
       width="medium"
-      className="grid grid-cols-1 lg:grid-cols-4 gap-12 lg:gap-0 mt-28 md:mt-36"
+      className="mt-28 md:mt-36"
     >
-      <div className="lg:col-span-3">
+      <div className="flex">
         <Link href="/hosting/earnings">
-          <LucideChevronLeft size={20} className="mb-4" />
+          <LucideChevronLeft className="text-text-300 hover:text-text-500 transition" />
         </Link>
+      </div>
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-12 lg:gap-0 mt-8">
+      <div className="lg:col-span-3">
         <Typography variant="h1" fontWeight="semibold">
           Earnings for {format(new Date(dateObject), "MMMM yyyy")}
         </Typography>
@@ -158,6 +161,7 @@ const EarningDetails = () => {
             </Typography>
           </div>
         </div>
+      </div>
       </div>
     </WidthWrapper>
   )
