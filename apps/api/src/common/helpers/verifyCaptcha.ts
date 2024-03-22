@@ -1,4 +1,4 @@
-import { captchaKeySecret } from '@repo/constants'
+import { captchaKeySecret } from '@repo/env-vars'
 
 const verifyCaptcha = async (token: string) => {
   const baseUrlPath = 'https://www.google.com/recaptcha/api/siteverify'

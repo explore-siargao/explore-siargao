@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express'
-import { webUrl } from '@repo/constants'
+import { webUrl } from '@repo/env-vars'
 import { ResponseService } from '@/common/service/response'
 import { USER_NOT_AUTHORIZED } from '@/common/constants'
 

@@ -9,6 +9,7 @@ import toast from "react-hot-toast"
 import ReCAPTCHA from "react-google-recaptcha"
 import useGlobalInputEmail from "../store/useGlobalInputEmail"
 import { Typography } from "@/common/components/ui/Typography"
+import { captchaKeySecret } from "@repo/env-vars"
 
 const ForgotPassword = () => {
   const recaptchaRef = useRef<ReCAPTCHA>(null)
@@ -71,7 +72,7 @@ const ForgotPassword = () => {
           </div>
           <ReCAPTCHA
             ref={recaptchaRef}
-            sitekey={process.env.RECAPTCHA_KEY || ""}
+            sitekey={captchaKeySecret}
             onChange={setCaptcha}
           />
           <Button

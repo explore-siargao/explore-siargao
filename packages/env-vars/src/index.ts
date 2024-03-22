@@ -16,6 +16,14 @@ export const mockUrl = process.env.API_MOCK_URL || ""
 export const captchaKeySecret = process.env.RECAPTCHA_KEY_SECRET || ""
 export const nodeEnv = process.env.NODE_ENV || ""
 export const nextAuthSecret = process.env.NEXTAUTH_SECRET || ""
+//new
+export const nextAuthUrl = process.env.NEXTAUTH_URL
+export const apiAuthUrl = process.env.API_AUTH_URL
+export const recaptchaKey = process.env.RECAPTCHA_KEY
+export const googleClientId = process.env.GOOGLE_CLIENT_ID
+export const googleSecretId = process.env.GOOGLE_SECRET_ID
+export const facebookClientId = process.env.FACEBOOK_CLIENT_ID
+export const facebookSecretId = process.env.FACEBOOK_SECRET_ID
 
 // AWS
 export const awsAccessKey = process.env.AWS_ACCESS_KEY || ""

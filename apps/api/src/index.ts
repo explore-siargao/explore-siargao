@@ -1,7 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import cookies from 'cookie-parser'
-import { port, origins } from '@repo/constants'
+import { port, origins } from '@repo/env-vars'
 import fileupload from 'express-fileupload'
 import routes from '@/routes'
 

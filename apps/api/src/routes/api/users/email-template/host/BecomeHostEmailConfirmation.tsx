@@ -21,6 +21,7 @@ import {
   paragraph,
   reportLink,
 } from '../styles'
+import { webUrl } from '@repo/env-vars'
 
 export const BecomeHostEmailConfirmation = () => {
   return (
@@ -30,7 +31,7 @@ export const BecomeHostEmailConfirmation = () => {
       <Body style={main}>
         <Container style={container}>
           <Img
-            src={`${process.env.WEB_URL}/logo-single.png`}
+            src={`${webUrl}/logo-single.png`}
             width="42"
             height="42"
             alt={APP_NAME}
@@ -42,7 +43,7 @@ export const BecomeHostEmailConfirmation = () => {
             confidence with us. You can now start adding your listing.
           </Text>
           <Hr style={hr} />
-          <Link href={process.env.WEB_URL} style={reportLink}>
+          <Link href={webUrl} style={reportLink}>
             {APP_NAME}
           </Link>
         </Container>

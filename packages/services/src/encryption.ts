@@ -1,5 +1,5 @@
 import CryptoJS from "crypto-js"
-import { passwordEncryptKey, cardEncryptKey } from "@repo/constants"
+import { passwordEncryptKey, cardEncryptKey } from "@repo/env-vars"
 
 export class EncryptionService {
   private KEY: string | undefined

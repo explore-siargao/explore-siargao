@@ -25,6 +25,7 @@ import {
   paragraph,
   reportLink,
 } from '../styles'
+import { webUrl } from '@repo/env-vars'
 
 interface ForgotPasswordEmailProps {
   magicLink: string
@@ -39,7 +40,7 @@ export const ForgotPasswordEmail = ({
     <Body style={main}>
       <Container style={container}>
         <Img
-          src={`${process.env.WEB_URL}/logo-single.png`}
+          src={`${webUrl}/logo-single.png`}
           width="42"
           height="42"
           alt={APP_NAME}
@@ -57,7 +58,7 @@ export const ForgotPasswordEmail = ({
           This link will only be valid for the next 30 minutes.
         </Text>
         <Hr style={hr} />
-        <Link href={process.env.WEB_URL} style={reportLink}>
+        <Link href={webUrl} style={reportLink}>
           {APP_NAME}
         </Link>
       </Container>

@@ -22,6 +22,7 @@ import {
   paragraph,
   reportLink,
 } from '../styles'
+import { webUrl } from '@repo/env-vars'
 
 interface MultiFactorAuthProps {
   validationCode: string
@@ -34,7 +35,7 @@ export const MultiFactorAuth = ({ validationCode }: MultiFactorAuthProps) => (
     <Body style={main}>
       <Container style={container}>
         <Img
-          src={`${process.env.WEB_URL}/logo-single.png`}
+          src={`${webUrl}/logo-single.png`}
           width="42"
           height="42"
           alt={APP_NAME}
@@ -48,7 +49,7 @@ export const MultiFactorAuth = ({ validationCode }: MultiFactorAuthProps) => (
         </Text>
         <code style={code}>{validationCode}</code>
         <Hr style={hr} />
-        <Link href={process.env.WEB_URL} style={reportLink}>
+        <Link href={webUrl} style={reportLink}>
           {APP_NAME}
         </Link>
       </Container>

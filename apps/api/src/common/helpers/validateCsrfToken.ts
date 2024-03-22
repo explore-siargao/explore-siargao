@@ -1,4 +1,4 @@
-import { nextAuthSecret } from '@repo/constants'
+import { nextAuthSecret } from '@repo/env-vars'
 import { createHash } from 'crypto'
 
 const validateCsrfToken = (csrfToken: string) => {

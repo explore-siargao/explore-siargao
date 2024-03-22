@@ -6,7 +6,7 @@ import {
   REQUIRED_VALUE_EMPTY,
   UNKNOWN_ERROR_OCCURRED,
 } from '@/common/constants'
-import { webUrl } from '@repo/constants'
+import { webUrl } from '@repo/env-vars'
 import { EncryptionService } from '@repo/services'
 import { T_CardInfo } from '@repo/contract'
 

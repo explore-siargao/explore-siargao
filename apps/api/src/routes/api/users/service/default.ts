@@ -9,7 +9,7 @@ import {
 import { ResponseService } from '@/common/service/response'
 import { currencyByCountry } from '@/common/helpers/currencyByCountry'
 import { prisma } from '@/common/helpers/prismaClient'
-import { passwordEncryptKey } from '@repo/constants'
+import { passwordEncryptKey } from '@repo/env-vars'
 
 const response = new ResponseService()
 export const getAllUsers = async (req: Request, res: Response) => {

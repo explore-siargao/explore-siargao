@@ -27,6 +27,7 @@ import {
   listingImage,
 } from './styles'
 import formatCurrency from '@/common/helpers/formatCurrency'
+import { webUrl } from '@repo/env-vars'
 
 export const PaymentEmailConfirmation = (
   amount: string,
@@ -45,7 +46,7 @@ export const PaymentEmailConfirmation = (
       <Body style={main}>
         <Container style={container}>
           <Img
-            src={`${process.env.WEB_URL}/logo-single.png`}
+            src={`${webUrl}/logo-single.png`}
             width="42"
             height="42"
             alt={APP_NAME}
@@ -56,7 +57,7 @@ export const PaymentEmailConfirmation = (
           </Heading>
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <img
-              src={`${process.env.WEB_URL}/assets/${imageKey}`}
+              src={`${webUrl}/assets/${imageKey}`}
               width="50"
               height="42"
               alt={title}
@@ -100,7 +101,7 @@ export const PaymentEmailConfirmation = (
             welcoming you back soon!"
           </Text>
           <Hr style={hr} />
-          <Link href={process.env.WEB_URL} style={reportLink}>
+          <Link href={webUrl} style={reportLink}>
             {APP_NAME}
           </Link>
         </Container>

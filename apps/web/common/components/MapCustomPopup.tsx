@@ -8,6 +8,7 @@ import "swiper/swiper-bundle.css"
 import "swiper/css/navigation"
 import "swiper/css/pagination"
 import Link from "next/link"
+import { webUrl } from "@repo/env-vars"
 
 type Prop = {
   itemId: number
@@ -45,7 +46,7 @@ const MapCustomPopup = ({
           <XMarkIcon className="h-4 w-4" />
         </button>
         <Link
-          href={process.env.WEB_URL + "/accommodation/" + itemId}
+          href={webUrl + "/accommodation/" + itemId}
           target="_blank"
         >
           <div className="absolute bg-gray-200 top-0 left-0 right-0 h-[70%] rounded-t-md w-full">

@@ -1,5 +1,5 @@
 import { T_BackendResponse } from '@repo/contract'
-import { apiUrl, mockUrl, xenditSecret, xenditUrl } from '@repo/constants'
+import { apiUrl, mockUrl, xenditSecret, xenditUrl } from '@repo/env-vars'
 
 export class ApiService {
   private BASE_URL: string | undefined

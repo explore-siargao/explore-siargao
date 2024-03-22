@@ -3,16 +3,16 @@ import GoogleProvider from "next-auth/providers/google"
 import Credentials from "next-auth/providers/credentials"
 import { NextAuthOptions } from "next-auth"
 import getCookie from "./getCookie"
-
+import { apiUrl, facebookClientId, facebookSecretId, googleClientId, googleSecretId, nextAuthSecret } from "@repo/env-vars"
 const authOptions: NextAuthOptions = {
   providers: [
     FacebookProvider({
-      clientId: process.env.FACEBOOK_CLIENT_ID as string,
-      clientSecret: process.env.FACEBOOK_SECRET_ID as string,
+      clientId: facebookClientId as string,
+      clientSecret: facebookSecretId as string,
     }),
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID as string,
-      clientSecret: process.env.GOOGLE_SECRET_ID as string,
+      clientId: googleClientId as string,
+      clientSecret: googleSecretId as string,
       authorization: {
         params: { prompt: "select_account" },
       },
@@ -24,7 +24,7 @@ const authOptions: NextAuthOptions = {
       },
       async authorize(credentials, req) {
         const csrfToken = getCookie("next-auth.csrf-token", req.headers?.cookie)
-        const res = await fetch(`${process.env.API_URL}/api/users/auth/info`, {
+        const res = await fetch(`${apiUrl}/api/users/auth/info`, {
           method: "POST",
           body: JSON.stringify({ email: credentials?.username }),
           headers: {
@@ -40,7 +40,7 @@ const authOptions: NextAuthOptions = {
       },
     }),
   ],
-  secret: process.env.NEXTAUTH_SECRET as string,
+  secret: nextAuthSecret as string,
   session: {
     maxAge: 604800, // 1 week of idle, session will be destroyed
   },
