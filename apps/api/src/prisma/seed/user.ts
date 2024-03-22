@@ -1,5 +1,5 @@
+import { PASSWORD_ENCRYPT_KEY } from '@/common/constants/ev'
 import { prisma } from '@/common/helpers/prismaClient'
-import { passwordEncryptKey } from '@repo/constants'
 import CryptoJS from 'crypto-js'
 
 export const users = async () => {
@@ -7,7 +7,7 @@ export const users = async () => {
     data: [
       {
         email: 'diana@ramos.com',
-        password: String(CryptoJS.AES.encrypt('test', passwordEncryptKey)),
+        password: String(CryptoJS.AES.encrypt('test', PASSWORD_ENCRYPT_KEY)),
         registrationType: 'Manual',
         role: 'User',
         isHost: true,

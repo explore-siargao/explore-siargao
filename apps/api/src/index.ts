@@ -1,9 +1,9 @@
 import express from 'express'
 import cors from 'cors'
 import cookies from 'cookie-parser'
-import { port, origins } from '@repo/constants'
 import fileupload from 'express-fileupload'
 import routes from '@/routes'
+import { ALLOWED_CLIENTS, API_PORT } from '@/common/constants/ev'
 
 const es = express()
 es.disable('x-powered-by')
@@ -12,11 +12,11 @@ es.use(express.json())
 es.use(fileupload())
 es.use(
   cors({
-    origin: origins,
+    origin: ALLOWED_CLIENTS,
     credentials: true,
   })
 )
 routes(es)
-es.listen(port, () => {
-  console.log(`API server is running at http://localhost:${port}`)
+es.listen(API_PORT, () => {
+  console.log(`API server is running at http://localhost:${API_PORT}`)
 })

@@ -6,7 +6,7 @@ import {
   USER_NOT_AUTHORIZED,
   USER_NOT_EXIST,
 } from '@/common/constants'
-import { APP_NAME, nextAuthSecret, webUrl } from '@repo/constants'
+import { APP_NAME } from '@repo/constants'
 import dayjs from 'dayjs'
 import { AuthEmail } from './authEmail'
 import verifyCaptcha from '@/common/helpers/verifyCaptcha'
@@ -20,6 +20,7 @@ import { currencyByCountry } from '@/common/helpers/currencyByCountry'
 const prisma = new PrismaClient()
 const response = new ResponseService()
 import { EncryptionService } from '@repo/services'
+import { NEXTAUTH_SECRET, WEB_URL } from '@/common/constants/ev'
 
 const decryptionService = new EncryptionService('password')
 const encryptionService = new EncryptionService('password')
@@ -294,7 +295,7 @@ export const forgot = async (req: Request, res: Response) => {
 
       const code = Math.floor(100000 + randomNumber() * 900000)
       const successMessage = `Email was sent to ${email}, please check before it expires.`
-      const webVerifyUrl = `${webUrl}/new-password?email=${email}&code=${code}`
+      const webVerifyUrl = `${WEB_URL}/new-password?email=${email}&code=${code}`
       const sendEmailParams = { to: email, magicLink: webVerifyUrl }
       const authEmail = new AuthEmail()
       if (!forgotPassword) {
@@ -551,7 +552,7 @@ export const userDetails = async (req: Request, res: Response) => {
   const sessionToken = req.cookies['next-auth.session-token']
   const decoded = await decode({
     token: sessionToken,
-    secret: nextAuthSecret,
+    secret: NEXTAUTH_SECRET,
   })
   if (sessionToken && decoded?.email) {
     const prisma = new PrismaClient()
