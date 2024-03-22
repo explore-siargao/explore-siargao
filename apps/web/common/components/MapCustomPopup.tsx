@@ -45,10 +45,7 @@ const MapCustomPopup = ({
         >
           <XMarkIcon className="h-4 w-4" />
         </button>
-        <Link
-          href={webUrl + "/accommodation/" + itemId}
-          target="_blank"
-        >
+        <Link href={webUrl + "/accommodation/" + itemId} target="_blank">
           <div className="absolute bg-gray-200 top-0 left-0 right-0 h-[70%] rounded-t-md w-full">
             <Swiper
               navigation

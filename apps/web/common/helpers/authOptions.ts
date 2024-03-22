@@ -3,7 +3,14 @@ import GoogleProvider from "next-auth/providers/google"
 import Credentials from "next-auth/providers/credentials"
 import { NextAuthOptions } from "next-auth"
 import getCookie from "./getCookie"
-import { apiUrl, facebookClientId, facebookSecretId, googleClientId, googleSecretId, nextAuthSecret } from "@repo/env-vars"
+import {
+  apiUrl,
+  facebookClientId,
+  facebookSecretId,
+  googleClientId,
+  googleSecretId,
+  nextAuthSecret,
+} from "@repo/env-vars"
 const authOptions: NextAuthOptions = {
   providers: [
     FacebookProvider({

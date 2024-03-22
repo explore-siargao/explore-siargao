@@ -7,7 +7,7 @@ import {
   USER_NOT_EXIST,
 } from '@/common/constants'
 import { APP_NAME } from '@repo/constants'
-import {nextAuthSecret, webUrl } from '@repo/env-vars'
+import { nextAuthSecret, webUrl } from '@repo/env-vars'
 import dayjs from 'dayjs'
 import { AuthEmail } from './authEmail'
 import verifyCaptcha from '@/common/helpers/verifyCaptcha'
