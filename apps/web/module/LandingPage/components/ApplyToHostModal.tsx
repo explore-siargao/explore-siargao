@@ -7,6 +7,8 @@ import { useQueryClient } from "@tanstack/react-query"
 import toast from "react-hot-toast"
 import { useRouter } from "next/navigation"
 import useSessionStore from "@/common/store/useSessionStore"
+import { LINK_LOGIN } from "@/common/constants/links"
+import { useSession } from "next-auth/react"
 
 interface ISetUpProfileAboutYouModalProps {
   isModalOpen: boolean
@@ -17,6 +19,7 @@ const ApplyToHostModal = ({
   isModalOpen,
   onClose,
 }: ISetUpProfileAboutYouModalProps) => {
+  const { data: session } = useSession()
   const queryClient = useQueryClient()
   const router = useRouter()
   const callBackReq = {
@@ -40,6 +43,14 @@ const ApplyToHostModal = ({
       toast.error(String(err))
     },
   }
+  const proceedApplyToHost = () => {
+    if (!session) {
+      onClose()
+      router.push(LINK_LOGIN)
+    } else {
+      mutate(undefined, callBackReq)
+    }
+  }
   const { mutate, isPending } = useChangeToHost()
   return (
     <ModalContainer
@@ -61,7 +72,7 @@ const ApplyToHostModal = ({
             <Button
               variant="primary"
               className="ml-auto"
-              onClick={() => mutate(undefined, callBackReq)}
+              onClick={proceedApplyToHost}
             >
               {isPending ? <Spinner size="sm">Loading...</Spinner> : "Proceed"}
             </Button>
