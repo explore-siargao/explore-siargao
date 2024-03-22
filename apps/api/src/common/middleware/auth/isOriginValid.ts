@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express'
-import { webUrl } from '@repo/constants'
 import { ResponseService } from '@/common/service/response'
 import { USER_NOT_AUTHORIZED } from '@/common/constants'
+import { WEB_URL } from '@/common/constants/ev'
 
 const response = new ResponseService()
 
@@ -15,8 +15,8 @@ const isOriginValid = async (
   const proxy = req.headers['x-forwarded-host']
   if ((origin && referer) || proxy) {
     const isValid =
-      (String(referer).startsWith(webUrl) && origin === webUrl) ||
-      webUrl.includes(proxy as string)
+      (String(referer).startsWith(WEB_URL) && origin === WEB_URL) ||
+      WEB_URL.includes(proxy as string)
     if (isValid) {
       next()
     } else {

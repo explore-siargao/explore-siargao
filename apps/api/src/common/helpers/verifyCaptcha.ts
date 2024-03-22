@@ -1,9 +1,9 @@
-import { captchaKeySecret } from '@repo/constants'
+import { RECAPTCHA_KEY_SECRET } from '../constants/ev'
 
 const verifyCaptcha = async (token: string) => {
   const baseUrlPath = 'https://www.google.com/recaptcha/api/siteverify'
   const verify = await fetch(
-    `${baseUrlPath}?secret=${captchaKeySecret}&response=${token}`,
+    `${baseUrlPath}?secret=${RECAPTCHA_KEY_SECRET}&response=${token}`,
     {
       method: 'POST',
       headers: {
