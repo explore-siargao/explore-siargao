@@ -5,7 +5,11 @@ import {
   SendEmailCommandInput,
 } from '@aws-sdk/client-ses'
 import { APP_NAME } from '@repo/constants'
-import { AWS_ACCESS_KEY, AWS_SECRET_ACCESS_KEY, AWS_REGION } from '../constants/ev'
+import {
+  AWS_ACCESS_KEY,
+  AWS_SECRET_ACCESS_KEY,
+  AWS_REGION,
+} from '../constants/ev'
 
 export type TSendEmailParams = {
   to: string[]

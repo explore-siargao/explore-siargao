@@ -1,4 +1,4 @@
-import { RECAPTCHA_KEY_SECRET } from "../constants/ev"
+import { RECAPTCHA_KEY_SECRET } from '../constants/ev'
 
 const verifyCaptcha = async (token: string) => {
   const baseUrlPath = 'https://www.google.com/recaptcha/api/siteverify'

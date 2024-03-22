@@ -1,5 +1,10 @@
 import { T_BackendResponse } from '@repo/contract'
-import { API_URL, API_MOCK_URL, XENDIT_SECRET, XENDIT_URL } from '../constants/ev'
+import {
+  API_URL,
+  API_MOCK_URL,
+  XENDIT_SECRET,
+  XENDIT_URL,
+} from '../constants/ev'
 
 export class ApiService {
   private BASE_URL: string | undefined
