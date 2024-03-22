@@ -18,8 +18,8 @@ const WishlistsItem = () => {
         <div className="flex-1">
           <WishlistsItemContainer />
         </div>
-        <div className="flex-1 hidden lg:block">
-          <div className="h-[calc(100vh-112px)] w-full">
+        <div className="flex-1 hidden lg:block z-0">
+          <div className="h-[calc(100vh-112px)] w-6/12 fixed">
             <WorldMap />
           </div>
         </div>
