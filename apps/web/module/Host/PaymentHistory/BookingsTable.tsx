@@ -5,8 +5,8 @@ import formatCurrency from "@/common/helpers/formatCurrency"
 import useGetPaymentHistoryTable from "./hooks/useGetPaymentHistoryTable"
 import { createColumnHelper } from "@tanstack/react-table"
 import { PaymentHistoryBookingsData } from "@/common/components/Table/Type"
-import Table from "@/common/components/Table"
 import { StatusDot } from "../components/Status"
+import Table from "@/common/components/Table"
 
 const statusEnum = {
   CANCELLED: "Cancelled",
