@@ -47,7 +47,7 @@ const RoomTypeTab = () => {
         <div>Room type content</div>
       </div>
       <div className="col-span-1 relative">
-        <YearToDateSummary yearToDateSummaryData={summaryData} />
+        <YearToDateSummary/>
       </div>
     </WidthWrapper>
   )
