@@ -154,10 +154,10 @@ router.patch(
 
 //user profile
 router.get(
-  '/user-profile',
-  isUserLoggedIn,
-  isCsrfTokenValid,
-  isOriginValid,
+  '/profile/:id',
+  // isUserLoggedIn,
+  // isCsrfTokenValid,
+  // isOriginValid,
   getUserProfile
 )
 router.get(

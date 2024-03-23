@@ -5,6 +5,11 @@ import {
   SendEmailCommandInput,
 } from '@aws-sdk/client-ses'
 import { APP_NAME } from '@repo/constants'
+import {
+  AWS_ACCESS_KEY,
+  AWS_SECRET_ACCESS_KEY,
+  AWS_REGION,
+} from '../constants/ev'
 
 export type TSendEmailParams = {
   to: string[]
@@ -22,9 +27,9 @@ export class EmailService {
   private DEFAULT_SENDER: string
 
   constructor() {
-    this.AWS_REGION = process.env.AWS_REGION || ''
-    this.AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY || ''
-    this.AWS_SECRET_ACCESS_KEY = process.env.AWS_SECRET_ACCESS_KEY || ''
+    this.AWS_REGION = AWS_REGION || ''
+    this.AWS_ACCESS_KEY = AWS_ACCESS_KEY || ''
+    this.AWS_SECRET_ACCESS_KEY = AWS_SECRET_ACCESS_KEY || ''
     this.DEFAULT_SENDER = `"${APP_NAME}" <no-reply@exploresiargao.com>`
 
     this.config = {
