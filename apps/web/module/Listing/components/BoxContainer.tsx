@@ -99,7 +99,7 @@ const BoxContainer = ({
             >
               <HeartIcon
                 className={` h-7 w-7 text-text-50 active:scale-90 ${
-                  isAdded || isHearted ? "fill-error-500" : "fill-text-500/50 "
+                  isAdded ? "fill-error-500" : "fill-text-500/50 "
                 }`}
               />
             </button>
