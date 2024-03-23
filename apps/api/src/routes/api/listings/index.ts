@@ -106,12 +106,7 @@ import { getNotificationsByHost } from './service/notification'
 const router = express.Router()
 
 // DEFAULT
-router.get(
-  '/',
-  isOriginValid,
-  isCsrfTokenValid,
-  getAllListing
-)
+router.get('/', isOriginValid, isCsrfTokenValid, getAllListing)
 router.get('/:id', getListing)
 router.post('/:hostId', addListing)
 router.patch('/:userId/listing/:id', updateListing)
