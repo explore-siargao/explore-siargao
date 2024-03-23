@@ -18,4 +18,3 @@ const EarningsDateGraphTabPage = () => {
 }
 
 export default EarningsDateGraphTabPage
-

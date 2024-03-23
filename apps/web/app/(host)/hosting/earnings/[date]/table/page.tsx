@@ -18,4 +18,3 @@ const EarningDateTableTabPage = () => {
 }
 
 export default EarningDateTableTabPage
-
