@@ -88,15 +88,16 @@ export const rule = async () => {
 
       {
         icon: '',
-        rule: 'No refund',
-        description: '',
+        rule: 'Partial refund',
+        description:
+          'Get back every night that remains 24 hours after you cancel. No refund of nights you spent or the service fee.',
         cancellationPolicyId: getCancellationPolicies[0]?.id,
       },
       {
         icon: '',
         rule: 'No refund',
         description: '',
-        cancellationPolicyId: getCancellationPolicies[1]?.id,
+        cancellationPolicyId: getCancellationPolicies[0]?.id,
       },
       {
         icon: '',

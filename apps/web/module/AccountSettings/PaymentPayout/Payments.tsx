@@ -1,5 +1,4 @@
 import { Button } from "@/common/components/ui/Button"
-import { Title } from "@/common/components/ui/Title"
 import { LINK_ACCOUNT_YOUR_PAYMENT, LINK_GIFT } from "@/common/constants/links"
 import { useRouter } from "next/navigation"
 import React, { Fragment, useState } from "react"
@@ -80,8 +79,10 @@ const Payments = () => {
       ) : (
         <div className="space-y-10 my-5">
           <div>
-            <Title size={"sub"}>Your payments</Title>
-            <Typography fontWeight={"light"} className="pb-4">
+            <Typography variant="h2" fontWeight="semibold">
+              Your payments
+            </Typography>
+            <Typography fontWeight="light" className="pb-4">
               Keep track of all your payments and refunds.
             </Typography>
             <Button onClick={() => router.push(LINK_ACCOUNT_YOUR_PAYMENT)}>
@@ -89,8 +90,10 @@ const Payments = () => {
             </Button>
           </div>
           <div>
-            <Title size={"sub"}>Payment methods</Title>
-            <Typography fontWeight={"light"} className="py-3">
+            <Typography variant="h2" fontWeight="semibold">
+              Payment methods
+            </Typography>
+            <Typography fontWeight="light" className="py-3">
               Add a payment method using our secure payment system, then start
               planning your next trip.
             </Typography>
@@ -198,17 +201,19 @@ const Payments = () => {
             </Button>
           </div>
           <div>
-            <Title size={"sub"} className="pb-4">
+            <Typography variant="h2" fontWeight="semibold" className="pb-4">
               {APP_NAME} gift credit
-            </Title>
+            </Typography>
             <Button onClick={() => router.push(LINK_GIFT)}>
               Add gift card
             </Button>
           </div>
           <div className="space-y-4">
-            <Title size={"sub"}>Coupons</Title>
+            <Typography variant="h2" fontWeight="semibold">
+              Coupons
+            </Typography>
             <div className="flex justify-between border-y border-y-text-100  py-4">
-              <Typography fontWeight={"light"}>Your coupons</Typography>
+              <Typography fontWeight="light">Your coupons</Typography>
               <Typography>0</Typography>
             </div>
             {showHide === false ? (

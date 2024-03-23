@@ -8,6 +8,7 @@ import useSessionStore from "@/common/store/useSessionStore"
 import usePaymentInfoStore from "./store/usePaymentInfoStore"
 import { E_PaymentType } from "@repo/contract"
 import { Spinner } from "@/common/components/ui/Spinner"
+import PaymentSavedForm from "./PaymentSavedForm"
 
 export default function PaymentOptions() {
   const updatePaymentInfo = usePaymentInfoStore(
@@ -23,7 +24,7 @@ export default function PaymentOptions() {
         type: E_PaymentType.SavedCreditDebit,
         name: `${paymentMethod.cardType} ending with ${paymentMethod.lastFour}`,
         description: "Pay using your saved card information.",
-        content: null,
+        content: <PaymentSavedForm />,
         selected: paymentMethod.isDefault,
         paymentMethodId: paymentMethod.id,
       }

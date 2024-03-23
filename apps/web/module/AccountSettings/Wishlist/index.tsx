@@ -1,6 +1,5 @@
 "use client"
 import React from "react"
-import { Title } from "@/common/components/ui/Title"
 import WishlistBoxContainer from "@/module/AccountSettings/Wishlist/WishlistBoxContainer"
 import { Breadcrumb } from "@/common/components/ui/Breadcrumb"
 import useWishGroupWithCount from "../hooks/useGetWishGroupWithCount"
@@ -18,7 +17,13 @@ const Wishlist = () => {
     <AccountSettingWrapper>
       <div>
         <Breadcrumb home={ACCOUNT} page={WISHLISTS} link={LINK_ACCOUNT} />
-        <Title>{WISHLISTS}</Title>
+        <Typography
+          variant="h1"
+          fontWeight="semibold"
+          className="text-4xl my-3.5"
+        >
+          {WISHLISTS}
+        </Typography>
       </div>
       <div className="mt-4">
         {isPending ? (
@@ -41,9 +46,7 @@ const Wishlist = () => {
               </div>
             ) : (
               <div className="mt-4">
-                <Typography variant={"h2"}>
-                  Create your first wishlist
-                </Typography>
+                <Typography variant="h2">Create your first wishlist</Typography>
                 <Typography className="mt-2">
                   As you search, click the heart icon to save your favorite
                   places and Experiences to a wishlist.

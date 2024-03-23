@@ -28,13 +28,13 @@ const ListingPriceDetailsBox = () => {
             </Typography>
             <div className="flex">
               <StarIcon height={15} />
-              <Typography variant={"h5"}>0 (0 review)</Typography>
+              <Typography variant="h5">0 (0 review)</Typography>
             </div>
           </div>
         </div>
         <hr className="my-6" />
         <div className="flex flex-col">
-          <Typography fontWeight="semibold" variant={"h2"}>
+          <Typography fontWeight="semibold" variant="h2">
             Price details
           </Typography>
           <div className="flex w-full justify-between items-center mt-4">
