@@ -18,7 +18,7 @@ const navIconHover = new Icon({
   iconAnchor: [12, 0],
 })
 
-const WorldMap = () => {
+const SiargaoMap = () => {
   const mapRef = useRef(null)
   const [markerRefs, setMarkerRefs] = useState([])
 
@@ -128,4 +128,4 @@ const WorldMap = () => {
   )
 }
 
-export default WorldMap
+export default SiargaoMap

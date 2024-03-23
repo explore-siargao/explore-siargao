@@ -4,8 +4,8 @@ import WishlistsItemContainer from "@/module/AccountSettings/Wishlist/WishlistsI
 import React from "react"
 import dynamic from "next/dynamic"
 
-const WorldMap = dynamic(
-  () => import("@/module/AccountSettings/Wishlist/WorldMap"),
+const SiargaoMap = dynamic(
+  () => import("@/module/AccountSettings/Wishlist/SiargaoMap"),
   {
     ssr: false,
   }
@@ -20,7 +20,7 @@ const WishlistsItem = () => {
         </div>
         <div className="flex-1 hidden lg:block z-0">
           <div className="h-[calc(100vh-112px)] w-6/12 fixed">
-            <WorldMap />
+            <SiargaoMap />
           </div>
         </div>
       </div>
