@@ -3,6 +3,7 @@ import GoogleProvider from "next-auth/providers/google"
 import Credentials from "next-auth/providers/credentials"
 import { NextAuthOptions } from "next-auth"
 import getCookie from "./getCookie"
+import { NEXTAUTH_SECRET } from "../constants/ev"
 
 const authOptions: NextAuthOptions = {
   providers: [
@@ -46,7 +47,7 @@ const authOptions: NextAuthOptions = {
       },
     }),
   ],
-  secret: process.env.NEXTAUTH_SECRET as string,
+  secret: NEXTAUTH_SECRET,
   session: {
     maxAge: 604800, // 1 week of idle, session will be destroyed
   },

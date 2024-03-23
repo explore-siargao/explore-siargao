@@ -20,11 +20,11 @@ const Category = ({
         <div className="flex justify-between items-center w-full py-4">
           <div className="flex space-x-3 items-center">
             {Icon}
-            <Typography variant={"h5"} fontWeight="semibold">
+            <Typography variant="h5" fontWeight="semibold">
               {title}
             </Typography>
           </div>
-          <Typography variant={"h5"} fontWeight="semibold">
+          <Typography variant="h5" fontWeight="semibold">
             {rating}
           </Typography>
         </div>
@@ -33,10 +33,10 @@ const Category = ({
   } else {
     return (
       <div className="flex flex-col lg:px-4 py-4">
-        <Typography variant={"h5"} fontWeight="semibold">
+        <Typography variant="h5" fontWeight="semibold">
           {title}
         </Typography>
-        <Typography variant={"h4"} fontWeight="semibold" className="mb-5">
+        <Typography variant="h4" fontWeight="semibold" className="mb-5">
           {rating}
         </Typography>
         {Icon}

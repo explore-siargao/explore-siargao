@@ -162,7 +162,7 @@ const WishlistsItemContainer = () => {
       ) : (
         <div className="w-full">
           {/* ... (other components remain unchanged) */}
-          <div className="sticky w-full top-0 bg-white z-50 flex border-b-gray-100 border-b py-4 px-6 items-center mt-1">
+          <div className="sticky w-full top-0 bg-white flex border-b-gray-100 border-b py-4 px-6 items-center mt-1">
             <Link href={LINK_ACCOUNT_WISHLIST}>
               <ArrowLeftIcon className="h-10 w-10 cursor-pointer rounded-full hover:bg-gray-50 p-2 -ml-3" />
             </Link>

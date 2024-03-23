@@ -55,7 +55,7 @@ const Review = ({
       <div className="flex items-center gap-2 mt-3">
         <div className="flex">{displayStars()}</div>
         <span>&middot;</span>
-        <Typography variant={"h5"} fontWeight="semibold">
+        <Typography variant="h5" fontWeight="semibold">
           {date}
         </Typography>
       </div>

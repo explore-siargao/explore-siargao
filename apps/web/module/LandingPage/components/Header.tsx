@@ -38,9 +38,14 @@ function Header({
   ]
   const [isModalOpen, setIsModalOpen] = useState(false)
   const renderHeader = () => {
-    const openModal = () => setIsModalOpen(true)
     const closeModal = () => setIsModalOpen(false)
-
+    const applyToHost = () => {
+      if (!session) {
+        router.push(LINK_LOGIN)
+      } else {
+        setIsModalOpen(true)
+      }
+    }
     if (!withoutHeader.includes(path as string)) {
       return (
         <>
@@ -85,12 +90,7 @@ function Header({
                     </div>
                   )}
                   <div>
-                    {!path.includes("/hosting") && !isHost && (
-                      <Button variant="primary" size="sm" onClick={openModal}>
-                        Apply to Host
-                      </Button>
-                    )}
-                    {isHost && !path.includes("/hosting") && (
+                    {isHost && !path.includes("/hosting") ? (
                       <Button
                         variant="ghost"
                         className="underline font-semibold"
@@ -98,6 +98,10 @@ function Header({
                         onClick={() => router.push("/hosting")}
                       >
                         Manage Listing
+                      </Button>
+                    ) : (
+                      <Button variant="primary" size="sm" onClick={applyToHost}>
+                        Apply to Host
                       </Button>
                     )}
                   </div>

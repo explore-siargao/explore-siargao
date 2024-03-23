@@ -1,11 +1,11 @@
 import { NextFunction, Request, Response } from 'express'
 import { UNKNOWN_ERROR_OCCURRED } from '../../constants'
-import { nextAuthSecret } from '@/common/config/'
 import { PrismaClient } from '@prisma/client'
 import { decode } from 'next-auth/jwt'
 import { ResponseService } from '@/common/service/response'
 import { E_RegistrationType, E_UserRole, T_Session } from '@repo/contract'
 import { USER_NOT_AUTHORIZED } from '@/common/constants'
+import { NEXTAUTH_SECRET } from '@/common/constants/ev'
 
 const response = new ResponseService()
 
@@ -35,7 +35,7 @@ const isUserLoggedIn = async (
   const secureToken = req.cookies['__Secure-next-auth.session-token']
   const decoded = await decode({
     token: token ? token : secureToken,
-    secret: nextAuthSecret,
+    secret: NEXTAUTH_SECRET,
   })
   if ((token || secureToken) && decoded?.email) {
     const prisma = new PrismaClient()

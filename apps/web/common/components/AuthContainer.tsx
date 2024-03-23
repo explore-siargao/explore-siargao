@@ -30,8 +30,8 @@ const AuthContainer = ({ children, title, onClose, onBack }: Props) => {
             </div>
             <div className="flex-1">
               <Typography
-                variant={"p"}
-                className={`w-full text-center place-self-center `}
+                variant="p"
+                className="w-full text-center place-self-center"
               >
                 <span className={`${onClose || onBack ? "-ml-4" : ""}`}>
                   {title}
