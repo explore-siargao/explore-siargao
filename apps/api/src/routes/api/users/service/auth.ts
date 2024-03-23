@@ -550,8 +550,9 @@ export const updateUserEmail = async (req: Request, res: Response) => {
 
 export const userDetails = async (req: Request, res: Response) => {
   const sessionToken = req.cookies['next-auth.session-token']
+  const secureSessionToken = req.cookies['__Secure-next-auth.session-token']
   const decoded = await decode({
-    token: sessionToken,
+    token: sessionToken ? sessionToken : secureSessionToken,
     secret: NEXTAUTH_SECRET,
   })
   if (sessionToken && decoded?.email) {

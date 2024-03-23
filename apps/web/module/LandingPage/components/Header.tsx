@@ -90,7 +90,7 @@ function Header({
                     </div>
                   )}
                   <div>
-                    {isHost ? (
+                    {isHost && !path.includes("/hosting") ? (
                       <Button
                         variant="ghost"
                         className="underline font-semibold"
