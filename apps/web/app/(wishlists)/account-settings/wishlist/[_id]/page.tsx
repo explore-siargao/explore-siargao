@@ -4,7 +4,7 @@ import React from "react"
 
 const WishListItemPage = () => {
   return (
-    <div className="h-screen overflow-hidden">
+    <div>
       <AuthGuard>
         <WishlistsItem />
       </AuthGuard>

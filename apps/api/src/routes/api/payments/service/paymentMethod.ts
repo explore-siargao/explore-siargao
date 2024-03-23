@@ -1,9 +1,15 @@
 import { PrismaClient } from '@prisma/client'
-import { REQUIRED_VALUE_EMPTY } from '@/common/constants'
+import {
+  REQUIRED_VALUE_EMPTY,
+  UNKNOWN_ERROR_OCCURRED,
+  USER_NOT_EXIST,
+} from '@/common/constants'
 import { Request, Response } from 'express'
+import { ResponseService } from '@/common/service/response'
 
+const response = new ResponseService()
+const prisma = new PrismaClient()
 export const addPaymentMethod = async (req: Request, res: Response) => {
-  const prisma = new PrismaClient()
   const { cardInfo, cardType, lastFour } = req.body
   const userId = Number(req.params.userId)
   try {
@@ -27,40 +33,28 @@ export const addPaymentMethod = async (req: Request, res: Response) => {
             user: true,
           },
         })
-        res.json({
-          error: false,
-          item: newPaymentMethod,
-          itemCount: 1,
-          message: 'Payment method successfully added',
-        })
+        res.json(
+          response.success({
+            item: newPaymentMethod,
+            message: 'Payment method successfully added',
+          })
+        )
       } else {
-        res.json({
-          error: true,
-          item: null,
-          itemCount: 0,
-          message: REQUIRED_VALUE_EMPTY,
-        })
+        res.json(response.error({ message: REQUIRED_VALUE_EMPTY }))
       }
     } else {
-      res.json({
-        error: true,
-        item: null,
-        itemCount: 0,
-        message: 'User is not exist from our system',
-      })
+      res.json(response.error({ message: USER_NOT_EXIST }))
     }
   } catch (err: any) {
-    res.json({
-      error: true,
-      item: null,
-      itemCount: 0,
-      message: err.message,
-    })
+    res.json(
+      response.error({
+        message: err.message ? err.message : UNKNOWN_ERROR_OCCURRED,
+      })
+    )
   }
 }
 
 export const getPaymentMethods = async (req: Request, res: Response) => {
-  const prisma = new PrismaClient()
   const userId = Number(req.params.userId)
   try {
     const isUserExist =
@@ -98,34 +92,27 @@ export const getPaymentMethods = async (req: Request, res: Response) => {
           },
         },
       }))
-      res.json({
-        error: false,
-        items: modifyResult,
-        itemCount: getPaymentsMethod.length,
-        message: '',
-      })
+      res.json(
+        response.success({
+          items: modifyResult,
+          allItemCount: getPaymentsMethod.length,
+        })
+      )
     } else {
-      res.json({
-        error: true,
-        items: null,
-        itemCount: 0,
-        message: 'user not exists to our system',
-      })
+      res.json(response.error({ message: USER_NOT_EXIST }))
     }
   } catch (err: any) {
-    res.json({
-      error: true,
-      items: null,
-      itemCount: 0,
-      message: err.message,
-    })
+    res.json(
+      response.error({
+        message: err.message ? err.message : UNKNOWN_ERROR_OCCURRED,
+      })
+    )
   }
 }
 
 export const removePaymentMethod = async (req: Request, res: Response) => {
   const userId = Number(req.params.userId)
   const paymentMethodId = Number(req.params.paymentMethodId)
-  const prisma = new PrismaClient()
   try {
     const isUserExist =
       (await prisma.user.findFirst({
@@ -150,35 +137,24 @@ export const removePaymentMethod = async (req: Request, res: Response) => {
             userId: userId,
           },
         })
-        res.json({
-          error: false,
-          items: deletePayementMethod,
-          itemCount: 0,
-          message: 'Payment method successfully removed',
-        })
+        res.json(
+          response.success({
+            item: deletePayementMethod,
+            message: 'Payment method successfully removed',
+          })
+        )
       } else {
-        res.json({
-          error: true,
-          items: null,
-          itemCount: 0,
-          message: 'Payment Method already deleted',
-        })
+        res.json(response.error({ message: 'Payment Method already deleted' }))
       }
     } else {
-      res.json({
-        error: true,
-        items: null,
-        itemCount: 0,
-        message: 'user not exists to our system',
-      })
+      res.json(response.error({ message: 'user not exists to our system' }))
     }
   } catch (err: any) {
-    res.json({
-      error: true,
-      items: null,
-      itemCount: 0,
-      message: err.message,
-    })
+    res.json(
+      response.error({
+        message: err.message ? err.message : UNKNOWN_ERROR_OCCURRED,
+      })
+    )
   }
 }
 
@@ -188,7 +164,6 @@ export const updatePaymentMethod = async (req: Request, res: Response) => {
   const userId = Number(req.params.userId)
   const paymentMethodId = Number(req.params.paymentMethodId)
   try {
-    const prisma = new PrismaClient()
     const getUser = await prisma.user.findFirst({
       where: {
         id: userId,
@@ -232,43 +207,28 @@ export const updatePaymentMethod = async (req: Request, res: Response) => {
               isDefault: isDefault,
             },
           })
-
-          res.json({
-            error: false,
-            items: [updatePaymentMethod, successDefault],
-            itemCount: 1,
-            message: 'Sucessfully updated',
-          })
+          res.json(
+            response.success({
+              item: [updatePaymentMethod, successDefault],
+              message: 'Sucessfully updated',
+            })
+          )
         } else {
-          res.json({
-            error: true,
-            items: null,
-            itemCount: 0,
-            message: REQUIRED_VALUE_EMPTY,
-          })
+          res.json(response.error({ message: REQUIRED_VALUE_EMPTY }))
         }
       } else {
-        res.json({
-          error: true,
-          items: null,
-          itemCount: 0,
-          message: 'Payment method not exist to our system',
-        })
+        res.json(
+          response.error({ message: 'Payment method not exist to our system' })
+        )
       }
     } else {
-      res.json({
-        error: true,
-        items: null,
-        itemCount: 0,
-        message: 'User not exist to our system',
-      })
+      res.json(response.error({ message: USER_NOT_EXIST }))
     }
   } catch (err: any) {
-    res.json({
-      error: true,
-      items: null,
-      itemCount: 0,
-      message: err.message,
-    })
+    res.json(
+      response.error({
+        message: err.message ? err.message : UNKNOWN_ERROR_OCCURRED,
+      })
+    )
   }
 }

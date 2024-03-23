@@ -1,7 +1,5 @@
 import ModalContainer from "@/common/components/ModalContainer"
-import { Title } from "@/common/components/ui/Title"
 import { Typography } from "@/common/components/ui/Typography"
-import { LucideIcon } from "lucide-react"
 import React from "react"
 import IconTitleDescription from "../IconTitleDescription"
 
@@ -30,20 +28,18 @@ const SafetyPropertyModal = ({
   return (
     <ModalContainer onClose={onClose} isOpen={isOpen} size="sm">
       <div className="py-4 px-8 flex flex-col divide-text-100 overflow-y-auto h-[600px]">
-        <Title size={"ContentTitle"} className="flex font-semibold mb-1">
+        <Typography variant="h2" fontWeight="semibold" className="flex mb-1">
           Safety & property
-        </Title>
-        <Typography className="mb-5" variant={"h5"}>
+        </Typography>
+        <Typography variant="h5" className="mb-5">
           Avoid surprises by looking over these important details about your
           Host's property
         </Typography>
-
         {groupSafetyProperty.map((gSafetyProperty) => (
           <div className="mt-5" key={gSafetyProperty.id}>
-            <Typography className="font-semibold mb-5" variant={"h4"}>
+            <Typography variant="h4" fontWeight="semibold" className="mb-5">
               {gSafetyProperty.title}
             </Typography>
-
             {gSafetyProperty.iconDesc.map((item) => (
               <div className="border-b" key={item.id}>
                 <IconTitleDescription

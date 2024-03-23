@@ -22,14 +22,21 @@ const Footer = ({
       <WidthWrapper width={contentWidth}>
         <div className="md:flex border-b pb-4 md:pb-11">
           <div className="md:flex-1 pb-4 md:pb-0 md:mr-4 border-b md:border-b-0">
-            <Typography className="mb-2 font-semibold text-sm">
+            <Typography
+              variant="p"
+              fontWeight="semibold"
+              className="mb-2 text-sm"
+            >
               Support
             </Typography>
             <ul>
               {SUPPORT.map((item, index) => (
                 <li key={`${item.name}-${index}`}>
                   <Link href={item.link}>
-                    <Typography className="mb-1 hover:underline inline-block hover:duration-300 cursor-pointer text-sm text-text-500">
+                    <Typography
+                      variant="p"
+                      className="mb-1 hover:underline inline-block hover:duration-300 cursor-pointer text-sm text-text-500"
+                    >
                       {item.name}
                     </Typography>
                   </Link>
@@ -38,7 +45,7 @@ const Footer = ({
             </ul>
           </div>
           <div className="md:flex-1 pb-4 pt-4 md:pt-0 md:pb-0 md:mr-4 border-b md:border-b-0">
-            <Typography className="font-semibold mb-2 text-sm">
+            <Typography fontWeight="semibold" className="mb-2 text-sm">
               {APP_NAME}
             </Typography>
             <ul>

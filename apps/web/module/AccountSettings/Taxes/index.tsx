@@ -2,7 +2,6 @@
 import AccountSettingWrapper from "@/module/AccountSettings/components/AccountSettingWrapper"
 import React, { useState } from "react"
 import { Breadcrumb } from "@/common/components/ui/Breadcrumb"
-import { Title } from "@/common/components/ui/Title"
 import { LINK_ACCOUNT } from "@/common/constants/links"
 import { cn } from "@/common/helpers/cn"
 import Taxpayers from "./Taxpayers"
@@ -11,6 +10,7 @@ import useSessionStore from "@/common/store/useSessionStore"
 import { useRouter } from "next/navigation"
 import { E_UserRole } from "@repo/contract"
 import { ACCOUNT } from "@/common/constants"
+import { Typography } from "@/common/components/ui/Typography"
 
 const Taxes = () => {
   const router = useRouter()
@@ -32,7 +32,13 @@ const Taxes = () => {
     <AccountSettingWrapper>
       <div>
         <Breadcrumb home={ACCOUNT} page={TITLE} link={LINK_ACCOUNT} />
-        <Title>{TITLE}</Title>
+        <Typography
+          variant="h1"
+          fontWeight="semibold"
+          className="text-4xl my-3.5"
+        >
+          {TITLE}
+        </Typography>
       </div>
       <div className="hidden sm:block">
         <div className="flex border-b border-b-text-50">
