@@ -1,6 +1,6 @@
 import ModalContainer from "@/common/components/ModalContainer"
-import { Title } from "@/common/components/ui/Title"
 import { T_BookingDescriptionModalProps } from "../../types/BookingDescription"
+import { Typography } from "@/common/components/ui/Typography"
 
 const ModalAboutTitleDescription = ({
   isOpen,
@@ -10,33 +10,45 @@ const ModalAboutTitleDescription = ({
   return (
     <ModalContainer onClose={onClose} isOpen={isOpen} size="md">
       <div className="py-4 px-8 flex flex-col divide-text-100 overflow-y-auto h-[600px]">
-        <Title className="flex text-xl font-semibold mb-5">
+        <Typography variant="h2" fontWeight="semibold" className="flex mb-5">
           About this place
-        </Title>
+        </Typography>
         <div>
-          <div>{listingDescription.generalDescription}</div>
+          <Typography>{listingDescription.generalDescription}</Typography>
           {listingDescription.aboutSpace && (
             <div>
-              <Title className="flex text-md font-semibold mb-5 my-4">
+              <Typography
+                variant="h4"
+                fontWeight="semibold"
+                className="flex mb-5 my-4"
+              >
                 About space
-              </Title>
-              <div>{listingDescription.aboutSpace}</div>
+              </Typography>
+              <Typography>{listingDescription.aboutSpace}</Typography>
             </div>
           )}
           {listingDescription.aboutGuestAccess && (
             <div>
-              <Title className="flex text-md font-semibold mb-5 my-4">
+              <Typography
+                variant="h4"
+                fontWeight="semibold"
+                className="flex mb-5 my-4"
+              >
                 About guest access
-              </Title>
-              <div>{listingDescription.aboutGuestAccess}</div>
+              </Typography>
+              <Typography>{listingDescription.aboutGuestAccess}</Typography>
             </div>
           )}
           {listingDescription.otherThingsNote && (
             <div>
-              <Title className="flex text-md font-semibold mb-5 my-4">
+              <Typography
+                variant="h4"
+                fontWeight="semibold"
+                className="flex mb-5 my-4"
+              >
                 Other things to note
-              </Title>
-              <div>{listingDescription.otherThingsNote}</div>
+              </Typography>
+              <Typography>{listingDescription.otherThingsNote}</Typography>
             </div>
           )}
         </div>

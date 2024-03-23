@@ -1,6 +1,5 @@
 "use client"
 import React, { useEffect, useState } from "react"
-import { Title } from "../../../common/components/ui/Title"
 import { HeartIcon } from "@heroicons/react/24/outline"
 import { StarIcon } from "@heroicons/react/20/solid"
 import { Typography } from "../../../common/components/ui/Typography"
@@ -108,23 +107,27 @@ const BoxContainer = ({
           </div>
           <div className="flex-1 -space-y-1 w-auto">
             <div className="flex justify-between">
-              <Title size={"ContentTitle"} className="text-text-500">
+              <Typography
+                variant="h3"
+                fontWeight="semibold"
+                className="text-text-500"
+              >
                 {location}
-              </Title>
+              </Typography>
               <div className="flex text-text-500 place-items-center gap-1">
                 <StarIcon className="h-4 w-auto" />
                 {ratings}
               </div>
             </div>
             <div className="text-text-300 text-sm">
-              <Typography variant={"p"}>{distance}</Typography>
-              <Typography variant={"p"}>{date}</Typography>
+              <Typography>{distance}</Typography>
+              <Typography>{date}</Typography>
             </div>
             <Typography
-              variant={"p"}
-              className="text-text-700 font-semibold underline"
+              fontWeight="semibold"
+              className="text-text-700 underline"
             >
-              {price} <span className="font-normal">{dayTime}asdasd</span>
+              {price} <span className="font-normal">{dayTime}</span>
             </Typography>
           </div>
         </Link>

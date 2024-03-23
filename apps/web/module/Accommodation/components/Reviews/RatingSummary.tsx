@@ -17,7 +17,7 @@ const HeadReview = ({ ratings, reviews, categories }: T_RatingSummaryProps) => {
     <>
       <div className="flex mb-4 space-x-2">
         <StarIcon className="h-6 w-6" />
-        <Typography variant={"h3"} fontWeight="semibold">
+        <Typography variant="h3" fontWeight="semibold">
           {ratings} &middot; {reviews} reviews
         </Typography>
       </div>

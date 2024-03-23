@@ -1,10 +1,10 @@
 "use client"
 import SpecificMap from "@/common/components/SpecificMap"
 import { Button } from "@/common/components/ui/Button"
-import { Title } from "@/common/components/ui/Title"
 import WhereYouWillBeModal from "./WhereYouWillBeModal"
 import { useState } from "react"
 import { MapProps } from "../types/Map"
+import { Typography } from "@/common/components/ui/Typography"
 
 const WhereYoullBeDescription = ({ location, coordinates, desc }: MapProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -15,7 +15,9 @@ const WhereYoullBeDescription = ({ location, coordinates, desc }: MapProps) => {
   return (
     <div className="flex flex-col w-full">
       <div className="flex-1 w-full">
-        <Title className="text-lg font-semibold">Where you'll be</Title>
+        <Typography variant="h2" fontWeight="semibold" className="mb-5">
+          Where you'll be
+        </Typography>
         <div className="w-12/12 h-[450px] bg-primary-200 mb-5">
           <SpecificMap
             coordinates={coordinates as [number, number]}
@@ -37,7 +39,7 @@ const WhereYoullBeDescription = ({ location, coordinates, desc }: MapProps) => {
         <Button
           onClick={() => setIsModalOpen(true)}
           className="text-sm font-semibold underline mx-0 px-0"
-          variant={"ghost"}
+          variant="ghost"
         >
           Show more &gt;
         </Button>

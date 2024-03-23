@@ -7,7 +7,7 @@ export class ApiService {
 
   constructor(source: "main" | "auth" | "mock" = "main") {
     if (source === "main") {
-      this.BASE_URL = process.env.API_URL
+      this.BASE_URL = process.env.WEB_URL
       this.ROOT_PATH = API_ROOT
     } else if (source === "auth") {
       this.BASE_URL = process.env.API_AUTH_URL
