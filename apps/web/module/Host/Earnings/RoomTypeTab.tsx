@@ -2,7 +2,7 @@
 import React from "react"
 import Tabs from "@/common/components/Tabs"
 import { WidthWrapper } from "@/common/components/WidthWrapper"
-import tabs from "./constants/tabs"
+import earningsTabs from "./helpers/earningsTabs"
 import { Typography } from "@/common/components/ui/Typography"
 import formatCurrency from "@/common/helpers/formatCurrency"
 import useGetPaymentHistoryGraph from "../PaymentHistory/hooks/useGetPaymentHistoryGraph"
@@ -41,11 +41,13 @@ const RoomTypeTab = () => {
         <Typography variant="h1" fontWeight="semibold">
           Earnings
         </Typography>
-        <Tabs tabs={tabs} />
+        <div className="mt-3">
+          <Tabs tabs={earningsTabs} />
+        </div>
         <div>Room type content</div>
       </div>
       <div className="col-span-1 relative">
-        <YearToDateSummary yearToDateSummaryData={summaryData} />
+        <YearToDateSummary />
       </div>
     </WidthWrapper>
   )

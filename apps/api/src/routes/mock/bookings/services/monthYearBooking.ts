@@ -1,7 +1,6 @@
 import { Request, Response } from 'express'
 import { earnings } from './jsons/earnings'
 import { ResponseService } from '@/common/service/response'
-import { string } from 'zod'
 
 const response = new ResponseService()
 
@@ -41,7 +40,8 @@ export const getMonthYearBookings = async (req: Request, res: Response) => {
   const earningsByDate: { [date: string]: number[] } = {}
   const dateFrom: { [date: string]: string[] } = {}
   const dateTo: { [date: string]: string[] } = {}
-
+  const user: { [date: string]: object[] } = {}
+  const status: { [date: string]: string[] } = {}
   earnings.forEach((item) => {
     const itemDate = new Date(item.date)
     const year = itemDate.getFullYear()
@@ -52,14 +52,18 @@ export const getMonthYearBookings = async (req: Request, res: Response) => {
     if (!earningsByDate[dateString]) {
       earningsByDate[dateString] = []
       listing[dateString] = []
+      user[dateString] = []
       dateFrom[dateString] = []
       dateTo[dateString] = []
+      status[dateString] = []
     }
 
     earningsByDate[dateString]?.push(item.earning)
     listing[dateString]?.push(item.listing)
+    user[dateString]?.push(item.user)
     dateFrom[dateString]?.push(item.dateFrom)
     dateTo[dateString]?.push(item.dateTo)
+    status[dateString]?.push(item.status)
   })
 
   let consolidatedEarnings: any[] = []
@@ -67,14 +71,18 @@ export const getMonthYearBookings = async (req: Request, res: Response) => {
     const dateString = `${year}-${(month as number).toString().padStart(2, '0')}-${date.toString().padStart(2, '0')}`
     const earningsForDate = earningsByDate[dateString] || []
     const listingsForDate = listing[dateString] || []
+    const userForDate = user[dateString] || []
     const dateFromForDate = dateFrom[dateString] || []
+    const statusForDate = status[dateString] || []
     const dateToForDate = dateTo[dateString] || []
 
     const entriesForDate = earningsForDate.map((earning, index) => ({
       date: dateString + ' 00:00:00',
       dateFrom: dateFromForDate[index] || null,
       dateTo: dateToForDate[index] || null,
-      Listing: listingsForDate[index] || null,
+      listing: listingsForDate[index] || null,
+      user: userForDate[index] || null,
+      status: statusForDate[index] || null,
       earning: earning,
     }))
 
@@ -83,7 +91,9 @@ export const getMonthYearBookings = async (req: Request, res: Response) => {
         date: dateString + ' 00:00:00',
         dateFrom: null,
         dateTo: null,
-        Listing: null,
+        listing: null,
+        user: null,
+        status: null,
         earning: 0,
       })
     } else {

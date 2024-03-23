@@ -2,40 +2,14 @@
 import React from "react"
 import EarningsThisMonth from "./EarningsThisMonth"
 import EarningsUpcoming from "./EarningsUpcoming"
-import Paid from "./EarningsPaid"
+import EarningsPaid from "./EarningsPaid"
 import { Typography } from "@/common/components/ui/Typography"
-import formatCurrency from "@/common/helpers/formatCurrency"
 import { WidthWrapper } from "@/common/components/WidthWrapper"
 import Tabs from "@/common/components/Tabs"
-import tabs from "./constants/tabs"
+import earningsTabs from "./helpers/earningsTabs"
 import YearToDateSummary from "./components/YearToDateSummaryBox"
-import useGetPaymentHistoryGraph from "../PaymentHistory/hooks/useGetPaymentHistoryGraph"
 
 const Earnings = () => {
-  const { isPending, data: overAllSummaryDataGraph } =
-    useGetPaymentHistoryGraph("all")
-
-  const summaryData = {
-    labels: ["Completed", "Cancelled"],
-    values: [
-      [
-        formatCurrency(
-          !isPending && overAllSummaryDataGraph?.item?.completed,
-          "Philippines"
-        ) || null,
-        formatCurrency(
-          !isPending && overAllSummaryDataGraph?.item?.cancelled,
-          "Philippines"
-        ) || null,
-      ],
-    ],
-    total:
-      formatCurrency(
-        !isPending && overAllSummaryDataGraph?.item?.total,
-        "Philippines"
-      ) || null,
-  }
-
   return (
     <WidthWrapper
       width="medium"
@@ -45,13 +19,15 @@ const Earnings = () => {
         <Typography variant="h1" fontWeight="semibold">
           Earnings
         </Typography>
-        <Tabs tabs={tabs}></Tabs>
+        <div className="mt-3">
+          <Tabs tabs={earningsTabs} />
+        </div>
         <EarningsThisMonth />
         <EarningsUpcoming />
-        <Paid />
+        <EarningsPaid />
       </div>
       <div className="col-span-1 relative">
-        <YearToDateSummary yearToDateSummaryData={summaryData} />
+        <YearToDateSummary />
       </div>
     </WidthWrapper>
   )

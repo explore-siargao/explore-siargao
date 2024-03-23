@@ -6,7 +6,7 @@ import Tabs from "@/common/components/Tabs"
 import OverAllSummary from "./components/OverAllSummary"
 import formatCurrency from "@/common/helpers/formatCurrency"
 import Graph from "@/module/Host/PaymentHistory/Graph"
-import tabs from "./constants/tabs"
+import paymentHistoryTabs from "./constants/paymentHistoryTabs"
 import useGetPaymentHistoryGraph from "./hooks/useGetPaymentHistoryGraph"
 
 const GraphTab = () => {
@@ -43,7 +43,9 @@ const GraphTab = () => {
         <Typography variant="h1" fontWeight="semibold" className="mb-2">
           Payment History
         </Typography>
-        <Tabs tabs={tabs} />
+        <div className="mt-3">
+          <Tabs tabs={paymentHistoryTabs} />
+        </div>
         <Graph />
       </div>
       <div className="col-span-1 relative">

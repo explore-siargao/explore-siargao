@@ -1,6 +1,6 @@
 import { LucideBarChart, LucideDoorOpen } from "lucide-react"
 
-const tabs = [
+const earningsTabs = [
   {
     name: "Graph",
     icon: <LucideBarChart />,
@@ -13,4 +13,4 @@ const tabs = [
   },
 ]
 
-export default tabs
+export default earningsTabs

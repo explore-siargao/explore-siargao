@@ -26,7 +26,7 @@ const Table = <T,>({ data, columns }: TableProps<T>) => {
               {headerGroup.headers.map((header) => {
                 return (
                   <th
-                    className="pl-4"
+                    className="pl-4 pb-4"
                     key={header.id}
                     colSpan={header.colSpan}
                     scope="col"
@@ -50,7 +50,7 @@ const Table = <T,>({ data, columns }: TableProps<T>) => {
         <tbody>
           {table.getRowModel().rows.map((row) => {
             return (
-              <tr className=" hover:bg-primary-500 cursor-pointer" key={row.id}>
+              <tr className=" hover:bg-primary-50 cursor-pointer" key={row.id}>
                 {row.getVisibleCells().map((cell, _id) => {
                   let className = "py-2 pl-4 items-center gap-5"
                   if (_id === 0) className += " rounded-l-xl"

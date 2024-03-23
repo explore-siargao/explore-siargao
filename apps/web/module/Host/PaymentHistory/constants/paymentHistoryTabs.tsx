@@ -1,6 +1,6 @@
 import { LucideBarChart, LucideTable } from "lucide-react"
 
-const tabs = [
+const paymentHistoryTabs = [
   {
     name: "Graph",
     icon: <LucideBarChart />,
@@ -13,4 +13,4 @@ const tabs = [
   },
 ]
 
-export default tabs
+export default paymentHistoryTabs

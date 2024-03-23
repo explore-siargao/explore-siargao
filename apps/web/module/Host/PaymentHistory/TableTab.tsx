@@ -6,7 +6,7 @@ import Tabs from "@/common/components/Tabs"
 import formatCurrency from "@/common/helpers/formatCurrency"
 import OverAllSummary from "./components/OverAllSummary"
 import BookingsTable from "./BookingsTable"
-import tabs from "./constants/tabs"
+import paymentHistoryTabs from "./constants/paymentHistoryTabs"
 import useGetPaymentHistoryTable from "./hooks/useGetPaymentHistoryTable"
 
 const TableTab = () => {
@@ -43,7 +43,9 @@ const TableTab = () => {
         <Typography variant="h1" fontWeight="semibold" className="mb-2">
           Payment History
         </Typography>
-        <Tabs tabs={tabs} />
+        <div className="mt-3">
+          <Tabs tabs={paymentHistoryTabs} />
+        </div>
         <BookingsTable />
       </div>
       <div className="col-span-1 relative">

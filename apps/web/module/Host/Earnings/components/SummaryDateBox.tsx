@@ -3,7 +3,7 @@ import { Typography } from "@/common/components/ui/Typography"
 import { format } from "date-fns"
 import formatCurrency from "@/common/helpers/formatCurrency"
 
-const YearToDateSummary: React.FC = () => {
+const SummaryDateBox: React.FC = () => {
   const currentDate = new Date()
   const summaryData = [
     ["Gross earnings", "Adjustments", "Service fee", "Taxes withheld"],
@@ -17,7 +17,7 @@ const YearToDateSummary: React.FC = () => {
   return (
     <div className="bg-white rounded-lg shadow-lg p-8 sticky top-36">
       <Typography variant="h2" fontWeight="semibold">
-        Year-to-date summary
+        Summary
       </Typography>
       <Typography variant="p" className="text-gray-400 pb-4">
         Jan 1 - {format(currentDate, "MMMM d yyyy")}
@@ -51,4 +51,4 @@ const YearToDateSummary: React.FC = () => {
   )
 }
 
-export default YearToDateSummary
+export default SummaryDateBox
