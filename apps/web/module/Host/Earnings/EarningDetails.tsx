@@ -123,7 +123,11 @@ const EarningDetails = () => {
               {format(new Date(dateObject), "MMMM d")} -{" "}
               {format(
                 // @ts-expect-error
-                new Date(dateObject.getFullYear(), dateObject.getMonth() + 1, 0),
+                new Date(
+                  dateObject.getFullYear(),
+                  dateObject.getMonth() + 1,
+                  0
+                ),
                 "MMMM d, yyyy"
               )}
             </Typography>
