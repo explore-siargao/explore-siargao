@@ -41,10 +41,8 @@ const RoomTypeTab = () => {
         <Typography variant="h1" fontWeight="semibold">
           Earnings
         </Typography>
-        <Tabs tabs={tabs}/>
-        <div>
-          Room type content
-        </div>
+        <Tabs tabs={tabs} />
+        <div>Room type content</div>
       </div>
       <div className="col-span-1 relative">
         <YearToDateSummary yearToDateSummaryData={summaryData} />
