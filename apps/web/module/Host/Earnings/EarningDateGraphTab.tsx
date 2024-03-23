@@ -56,7 +56,9 @@ const EarningDateGraphTab = () => {
             Earnings for {format(new Date(dateObject), "MMMM yyyy")}
           </Typography>
           <div className="mt-3">
-            <Tabs tabs={earningsDateTabs(monthName as string, year as string)}></Tabs>
+            <Tabs
+              tabs={earningsDateTabs(monthName as string, year as string)}
+            ></Tabs>
           </div>
           {thisMonth?.item && thisMonth.item.days.length > 0 ? (
             <Chart
@@ -76,7 +78,7 @@ const EarningDateGraphTab = () => {
           )}
         </div>
         <div className="col-span-1 relative">
-          <SummaryDateBox/>
+          <SummaryDateBox />
         </div>
       </div>
     </WidthWrapper>

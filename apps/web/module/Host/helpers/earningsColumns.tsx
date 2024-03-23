@@ -84,4 +84,4 @@ const earningsColumns = [
   }),
 ]
 
-export default earningsColumns;
+export default earningsColumns

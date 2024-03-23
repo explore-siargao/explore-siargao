@@ -10,7 +10,6 @@ import earningsTabs from "./helpers/earningsTabs"
 import YearToDateSummary from "./components/YearToDateSummaryBox"
 
 const Earnings = () => {
-
   return (
     <WidthWrapper
       width="medium"
