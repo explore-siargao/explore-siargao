@@ -1,7 +1,7 @@
 import useGetPaymentHistoryTable from "./hooks/useGetPaymentHistoryTable"
 import { PaymentHistoryBookingsData } from "@/common/components/Table/Type"
 import Table from "@/common/components/Table"
-import { ColumnsTab } from "../constants/columns"
+import { ColumnsTab } from "../constants/Columns"
 
 const BookingsTable = () => {
   const { data: bookings, isPending } = useGetPaymentHistoryTable("all")

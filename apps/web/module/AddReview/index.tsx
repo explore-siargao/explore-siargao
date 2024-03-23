@@ -100,8 +100,8 @@ const AddReview = () => {
 
   return (
     <WidthWrapper width={"small"} className="mt-24 md:mt-36 lg:mt-40">
-      <Link href={"/account-settings/booking-reviews"}>
-        <LucideChevronLeft strokeWidth={1} />
+      <Link href="/account-settings/booking-reviews">
+        <LucideChevronLeft className="text-text-300 hover:text-text-500 transition" />
       </Link>
       <Title className="pb-8 mt-8 mb-8 md:pb-0 justify-center">
         Review Booking

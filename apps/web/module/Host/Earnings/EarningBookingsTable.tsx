@@ -5,9 +5,7 @@ import { createColumnHelper } from "@tanstack/react-table"
 import { WidthWrapper } from "@/common/components/WidthWrapper"
 import { Spinner } from "@/common/components/ui/Spinner"
 import formatCurrency from "@/common/helpers/formatCurrency"
-import EarningsTable, {
-  EarningBookingsData,
-} from "@/common/components/Table/EarningsTable"
+import EarningsTable from "@/common/components/Table"
 
 const EarningBookingsTable = () => {
   const dummy = [
@@ -29,7 +27,7 @@ const EarningBookingsTable = () => {
     },
   ]
 
-  const columnHelper = createColumnHelper<EarningBookingsData>()
+  const columnHelper = createColumnHelper<any>()
   const columns = [
     columnHelper.accessor("bookings.listing", {
       header: "Listing",
