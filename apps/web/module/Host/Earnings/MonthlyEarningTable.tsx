@@ -1,7 +1,7 @@
 import { PaymentHistoryBookingsData } from "@/common/components/Table/Type"
 import Table from "@/common/components/Table"
 import useGetMonthYearEarningsWithBookings from "../hooks/useGetMonthYearEarningsWithBookings"
-import { ColumnsTab } from "../constants/columns"
+import earningsColumns from "../helpers/earningsColumns"
 
 const MonthlyEarningTable = ({ date }: { date: string }) => {
   const { data: bookings, isPending } =
@@ -11,15 +11,13 @@ const MonthlyEarningTable = ({ date }: { date: string }) => {
       return booking.dateFrom !== null
     }
   )
-
-  const columns = ColumnsTab
   return (
-    <div className="pt-8">
+    <div className="mt-7">
       <Table
         data={
           !isPending ? (filteredBookings as PaymentHistoryBookingsData[]) : []
         }
-        columns={columns}
+        columns={earningsColumns}
       />
     </div>
   )

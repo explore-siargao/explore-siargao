@@ -12,7 +12,7 @@ const statusEnum = {
 }
 
 const columnHelper = createColumnHelper<PaymentHistoryBookingsData>()
-export const ColumnsTab = [
+const earningsColumns = [
   columnHelper.accessor("listing", {
     header: "Listing",
     cell: (listing) => (
@@ -83,3 +83,5 @@ export const ColumnsTab = [
     ),
   }),
 ]
+
+export default earningsColumns;
