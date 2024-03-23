@@ -1,13 +1,13 @@
+import { PASSWORD_ENCRYPT_KEY } from '@/common/constants/ev'
 import { prisma } from '@/common/helpers/prismaClient'
-import { passwordEncryptKey } from '@/common/config'
 import CryptoJS from 'crypto-js'
 
 export const users = async () => {
   const createUsers = await prisma.user.createMany({
     data: [
       {
-        email: 'test@test.com',
-        password: String(CryptoJS.AES.encrypt('test', passwordEncryptKey)),
+        email: 'diana@ramos.com',
+        password: String(CryptoJS.AES.encrypt('test', PASSWORD_ENCRYPT_KEY)),
         registrationType: 'Manual',
         role: 'User',
         isHost: true,

@@ -1,6 +1,5 @@
 import OvalTab from "@/common/components/ui/OvalTab"
 import { Typography } from "@/common/components/ui/Typography"
-import { Title } from "@/common/components/ui/Title"
 import { Button } from "@/common/components/ui/Button"
 import { LucideBook } from "lucide-react"
 import { WidthWrapper } from "@/common/components/WidthWrapper"
@@ -54,9 +53,13 @@ const HostingPage: React.FC<HostingPageProps> = ({ hostName }) => {
       <div>
         <div className="">
           <div className="flex items-center justify-between pb-4">
-            <Title size="default" className="flex font-semibold">
+            <Typography
+              variant="h1"
+              fontWeight="semibold"
+              className="flex text-4xl my-3.5"
+            >
               Welcome, {hostName}
-            </Title>
+            </Typography>
             <Button variant="outline" className="flex items-end">
               Complete your listing
             </Button>
@@ -65,13 +68,14 @@ const HostingPage: React.FC<HostingPageProps> = ({ hostName }) => {
         <div className="">
           <div className="flex-grow" />
           <Typography
-            variant={"h1"}
-            className="flex justify-between font-semibold mb-5"
+            variant="h2"
+            fontWeight="semibold"
+            className="flex text-2xl justify-between mb-5"
           >
             Your reservations
             <Button
               variant={"ghost"}
-              className="flex items-end font-semibold text-[17px] underline"
+              className="flex items-end font-semibold text-xl underline"
             >
               All reservations (0)
             </Button>
@@ -86,9 +90,7 @@ const HostingPage: React.FC<HostingPageProps> = ({ hostName }) => {
                 {icon}
               </div>
               <div className="w-[200px]">
-                <Typography variant={"p"} className="font-semibold">
-                  {description}
-                </Typography>
+                <Typography fontWeight="semibold">{description}</Typography>
               </div>
             </div>
           </div>

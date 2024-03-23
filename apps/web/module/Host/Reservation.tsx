@@ -1,5 +1,4 @@
 import Link from "next/link"
-import { Title } from "@/common/components/ui/Title"
 import { ChevronDown, LucideChevronLeft, SlidersHorizontal } from "lucide-react"
 import { Button } from "@/common/components/ui/Button"
 import { Typography } from "@/common/components/ui/Typography"
@@ -54,7 +53,7 @@ const Reservation = ({ tabs }: ReservationPagesTabProps) => {
           </ul>
         </nav>
       </header>
-      <Title>Reservations</Title>
+      <Typography variant="h1">Reservations</Typography>
       <div>
         <div className="sm:hidden">
           <select
