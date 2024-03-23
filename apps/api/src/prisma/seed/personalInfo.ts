@@ -10,9 +10,9 @@ export const personalInfo = async () => {
   const createPersonalInfos = await prisma.personalInfo.createMany({
     data: [
       {
-        firstName: 'test',
-        lastName: 'account',
-        birthDate: '2014-02-19T12:34:56.789Z',
+        firstName: 'Diana',
+        lastName: 'Ramos',
+        birthDate: '2000-02-19T12:34:56.789Z',
         userId: getUsers[0]?.id ? getUsers[0].id : 0,
         phoneNumber: '09092558726',
         country: 'PH',

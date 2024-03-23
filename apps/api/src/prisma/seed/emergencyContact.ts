@@ -10,11 +10,11 @@ export const emergencyContact = async () => {
   const createEmergencyContact = await prisma.emergencyContacts.createMany({
     data: [
       {
-        name: 'Who ever',
+        name: 'Luz Fernandez',
         peronalInfoId: getPersonalInfos[0]?.id || 0,
-        relationship: 'Father',
-        email: 'whoiam@gmail.com',
-        phoneNumber: '09090909099',
+        relationship: 'Aunt',
+        email: 'luz.fernandez@yahoo.com',
+        phoneNumber: '09222222222',
       },
       {
         name: 'Julita Kaharian',
@@ -24,25 +24,25 @@ export const emergencyContact = async () => {
         phoneNumber: '09090909097',
       },
       {
-        name: 'Patrick',
+        name: 'Juan Dela Cruz',
         peronalInfoId: getPersonalInfos[2]?.id || 0,
         relationship: 'Father',
-        email: 'patrick@gmail.com',
-        phoneNumber: '09090909090',
+        email: ' juan.dc@gmail.com',
+        phoneNumber: '09123456789',
       },
       {
-        name: 'Chad',
+        name: 'Maria Santos',
         peronalInfoId: getPersonalInfos[3]?.id || 0,
-        relationship: 'Brother',
-        email: 'chad@gmail.com',
-        phoneNumber: '09090909094',
+        relationship: 'Sister',
+        email: 'maria.santos@example.com',
+        phoneNumber: '09876543210',
       },
       {
-        name: 'Jenny',
+        name: 'Pedro Reyes',
         peronalInfoId: getPersonalInfos[4]?.id || 0,
-        relationship: 'Sister',
-        email: 'jenn@gmail.com',
-        phoneNumber: '09090909095',
+        relationship: 'Brother',
+        email: 'pedro.reyes@gmail.com',
+        phoneNumber: '09567890123',
       },
     ],
   })

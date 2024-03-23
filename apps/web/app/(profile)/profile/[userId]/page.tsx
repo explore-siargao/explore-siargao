@@ -10,8 +10,8 @@ export const metadata: Metadata = {
 }
 
 const HostProfilePage = async () => {
-  const userProfile = await getRequest(`/users/1`)
-  return <Profile profile={userProfile.item} />
+  const userProfile = await getRequest(`/users/profile/1`)
+  return <Profile profile={userProfile?.item} />
 }
 
 export default HostProfilePage

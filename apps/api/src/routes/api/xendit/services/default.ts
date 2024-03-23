@@ -6,9 +6,9 @@ import {
   REQUIRED_VALUE_EMPTY,
   UNKNOWN_ERROR_OCCURRED,
 } from '@/common/constants'
-import { webUrl } from '@/common/config'
 import { EncryptionService } from '@repo/services'
 import { T_CardInfo } from '@repo/contract'
+import { WEB_URL } from '@/common/constants/ev'
 
 const response = new ResponseService()
 const apiXendit = new ApiService('xendit')
@@ -72,8 +72,8 @@ export const cardSingleUse = async (req: Request, res: Response) => {
         card: {
           currency: 'PHP',
           channel_properties: {
-            success_return_url: `${webUrl}/bookings/${bookingId}/success-payment`,
-            failure_return_url: `${webUrl}/bookings/${bookingId}/error-payment`,
+            success_return_url: `${WEB_URL}/bookings/${bookingId}/success-payment`,
+            failure_return_url: `${WEB_URL}/bookings/${bookingId}/error-payment`,
           },
           card_information: {
             card_number: cardNumber,
@@ -150,8 +150,8 @@ export const gcashCreatePayment = async (req: Request, res: Response) => {
           ewallet: {
             channel_code: 'GCASH',
             channel_properties: {
-              success_return_url: `${webUrl}/bookings/${bookingId}/success-payment`,
-              failure_return_url: `${webUrl}/bookings/${bookingId}/error-payment`,
+              success_return_url: `${WEB_URL}/bookings/${bookingId}/success-payment`,
+              failure_return_url: `${WEB_URL}/bookings/${bookingId}/error-payment`,
             },
           },
           reusability: 'ONE_TIME_USE',

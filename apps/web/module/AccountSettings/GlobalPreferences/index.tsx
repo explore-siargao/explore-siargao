@@ -2,11 +2,11 @@
 import AccountSettingWrapper from "@/module/AccountSettings/components/AccountSettingWrapper"
 import { LINK_ACCOUNT } from "@/common/constants/links"
 import React from "react"
-import { Title } from "@/common/components/ui/Title"
 import { Breadcrumb } from "@/common/components/ui/Breadcrumb"
 import PreferredLanguage from "./PreferredLanguage"
 import PreferredCurrency from "./PreferredCurrency"
 import { ACCOUNT, GLOBAL_PREFERENCES } from "@/common/constants"
+import { Typography } from "@/common/components/ui/Typography"
 
 const GlobalPreferences = () => {
   return (
@@ -17,7 +17,13 @@ const GlobalPreferences = () => {
           page={GLOBAL_PREFERENCES}
           link={LINK_ACCOUNT}
         />
-        <Title>{GLOBAL_PREFERENCES}</Title>
+        <Typography
+          variant="h1"
+          fontWeight="semibold"
+          className="text-4xl my-3.5"
+        >
+          {GLOBAL_PREFERENCES}
+        </Typography>
       </div>
       <div className="mt-4">
         <div className="divide-y">

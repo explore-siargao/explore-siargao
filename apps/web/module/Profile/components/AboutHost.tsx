@@ -1,7 +1,6 @@
 import { Typography } from "@/common/components/ui/Typography"
 import { AboutHostProps } from "../types/AboutHost"
 import {
-  LucideBaby,
   LucideBookOpen,
   LucideBriefcase,
   LucideCake,
@@ -14,7 +13,6 @@ import {
   LucideMusic,
   LucidePawPrint,
   LucidePencil,
-  LucidePlus,
 } from "lucide-react"
 import { cn } from "@/common/helpers/cn"
 
@@ -84,7 +82,11 @@ const ABOUT_MAP = [
 const AboutHost = (props: AboutHostProps) => {
   return (
     <div>
-      <Typography variant="h1" className="font-semibold hidden lg:block">
+      <Typography
+        variant="h2"
+        fontWeight="semibold"
+        className="text-2xl hidden lg:block"
+      >
         About {props.name}
       </Typography>
       {/* @ts-expect-error */}
@@ -99,7 +101,7 @@ const AboutHost = (props: AboutHostProps) => {
           // @ts-expect-error
           const value = props[item.name]
           return value ? (
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2" key={item.name}>
               {item.icon}
               <Typography variant="h4">
                 {item.title} {value}
@@ -108,7 +110,7 @@ const AboutHost = (props: AboutHostProps) => {
           ) : null
         })}
       </div>
-      <Typography variant="p">{props.desc}</Typography>
+      <Typography>{props.desc}</Typography>
     </div>
   )
 }

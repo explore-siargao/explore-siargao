@@ -35,19 +35,18 @@ const HostReviews = ({ name, reviewsCount, reviews }: HostReviewsProps) => {
         `}
         </style>
         <div className="flex justify-between items-center absolute top-0 w-full z-10">
-          <Typography variant="h1" fontWeight="semibold">
+          <Typography variant="h2" fontWeight="semibold" className="text-2xl">
             {name}'s reviews
           </Typography>
           <div className="hidden md:block space-x-2">
             <SwiperCustomButton />
           </div>
         </div>
-        {reviews.map((listing) => (
-          <>
-            {listing?.review?.slice(0, 5).map((review, index) => (
-              <SwiperSlide className="mt-14">
+        {reviews?.map((listing) => (
+          <div key={listing.id}>
+            {listing?.review?.slice(0, 5).map((review) => (
+              <SwiperSlide className="mt-14" key={review.id}>
                 <ReviewCard
-                  key={index}
                   reviewerName={
                     review?.user?.personalInfo?.firstName +
                     " " +
@@ -60,7 +59,7 @@ const HostReviews = ({ name, reviewsCount, reviews }: HostReviewsProps) => {
                 />
               </SwiperSlide>
             ))}
-          </>
+          </div>
         ))}
       </Swiper>
       <Button
