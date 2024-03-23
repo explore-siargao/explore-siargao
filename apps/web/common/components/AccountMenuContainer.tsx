@@ -30,7 +30,7 @@ const AccountMenuContainer = ({
     >
       {icon}
       <div className="hidden md:block">
-        <Typography variant={"p"} className="font-semibold">
+        <Typography variant="p" fontWeight="semibold">
           {title}
         </Typography>
         <span className="text-text-300 text-sm">{content}</span>

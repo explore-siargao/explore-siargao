@@ -13,7 +13,7 @@ const ContactHost = ({ hostName, listingName }: ContactHostProps) => {
     <div>
       <div className="flex pb-6 border-b justify-between">
         <div>
-          <Typography variant={"h2"}>Contact {hostName}</Typography>
+          <Typography variant="h1">Contact {hostName}</Typography>
           <Typography className="text-gray-400">{listingName}</Typography>
         </div>
         <div>
@@ -29,7 +29,7 @@ const ContactHost = ({ hostName, listingName }: ContactHostProps) => {
         </div>
       </div>
       <div className="py-6">
-        <Typography variant={"h2"}>Message the Host</Typography>
+        <Typography variant="h2">Message the Host</Typography>
         <Textarea className="h-40 my-6 focus:border-primary-700 focus:border-3 focus:ring-primary-700 " />
         <Button variant="outline">Send Message</Button>
       </div>
