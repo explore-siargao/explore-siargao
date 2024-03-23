@@ -1,6 +1,6 @@
 "use client"
 import { WidthWrapper } from "@/common/components/WidthWrapper"
-import Table, { BookingsData } from "../../common/components/Table"
+import Table from "../../common/components/Table"
 import Image from "next/image"
 import { Typography } from "@/common/components/ui/Typography"
 import { LucidePlus, LucideTable } from "lucide-react"
@@ -14,7 +14,7 @@ import { createColumnHelper } from "@tanstack/react-table"
 const Bookings = () => {
   const { data, isPending } = useGetBookings(2)
 
-  const columnHelper = createColumnHelper<BookingsData>()
+  const columnHelper = createColumnHelper<any>()
   const columns = [
     columnHelper.accessor("Listing.imageKey", {
       header: "Listing",
@@ -111,7 +111,7 @@ const Bookings = () => {
               </div>
             </Typography>
           </div>
-          <Table data={data?.items as BookingsData[]} columns={columns} />
+          <Table data={data?.items as any} columns={columns} />
         </div>
       ) : (
         <div className="px-12">

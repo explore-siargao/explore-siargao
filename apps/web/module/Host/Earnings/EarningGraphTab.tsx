@@ -45,9 +45,7 @@ const Earnings = () => {
         <Typography variant="h1" fontWeight="semibold">
           Earnings
         </Typography>
-        <div className="mt-4 mb-6">
-          <Tabs tabs={tabs}></Tabs>
-        </div>
+        <Tabs tabs={tabs}></Tabs>
         <EarningsThisMonth />
         <EarningsUpcoming />
         <Paid />
