@@ -4,7 +4,6 @@ import React, { useRef, useState } from "react"
 import Image from "next/image"
 import ModalContainerFooter from "@/common/components/ModalContainer/ModalContainerFooter"
 import { Typography } from "@/common/components/ui/Typography"
-import { Title } from "@/common/components/ui/Title"
 import { Button } from "@/common/components/ui/Button"
 import useAddWishGroup from "../../hooks/useAddWishGroup"
 import useSessionStore from "@/common/store/useSessionStore"
@@ -81,7 +80,7 @@ const AddWishlistModal = ({
           <Spinner
             variant="primary"
             size={"lg"}
-            className="mx-auto my-auto d-blockr"
+            className="mx-auto my-auto d-block"
           >
             Loading...
           </Spinner>
@@ -110,12 +109,13 @@ const AddWishlistModal = ({
                   />
                 </div>
                 <div className="flex-1 ml-1 -space-y-1 w-auto">
-                  <Title
-                    size={"ContentTitle"}
+                  <Typography
+                    variant="h3"
+                    fontWeight="semibold"
                     className="text-text-500 text-left"
                   >
                     {item.title}
-                  </Title>
+                  </Typography>
                   <Typography className="text-text-300 text-left">
                     {item._count + " saved"}
                   </Typography>
@@ -157,8 +157,8 @@ const AddWishlistModal = ({
             onChange={handleTextAreaChange}
           />
           <Typography
-            variant={"h6"}
-            fontWeight={"bold"}
+            variant="h6"
+            fontWeight="semibold"
             className={`${
               inputValue.replace(/\s/g, "").length > 50
                 ? "text-error-400 mt-2"

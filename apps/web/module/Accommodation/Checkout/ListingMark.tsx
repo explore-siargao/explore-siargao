@@ -17,7 +17,7 @@ const ListingMark: React.FC<ListingMarkProps> = ({
       <div className="mt-1">{iconSymbol}</div>
       <div>
         <h3 className="font-semibold">{title}</h3>
-        <Typography variant={"h5"} className="text-justify">
+        <Typography variant="h5" className="text-justify">
           {desc}
         </Typography>
       </div>

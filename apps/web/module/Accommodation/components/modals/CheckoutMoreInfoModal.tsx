@@ -55,10 +55,10 @@ const CheckoutMoreInfoModal = ({
                       />
                     </div>
                     <div className="flex-1">
-                      <p className="w-full place-self-center text-sm ml-2 mt-0.5">
+                      <Typography className="w-full place-self-center text-sm ml-2 mt-0.5">
                         This helps us run our platform and offer services like
                         24/7 support on your trip.
-                      </p>
+                      </Typography>
                     </div>
                   </div>
                 </div>

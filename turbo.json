@@ -13,7 +13,7 @@
         "API_PORT",
         "PASSWORD_ENCRYPT_KEY",
         "API_SIGN_KEY",
-        "API_ORIGINS",
+        "ALLOWED_CLIENTS",
         "API_AUTH_URL",
         "API_MOCK_URL",
         "NEXTAUTH_URL",

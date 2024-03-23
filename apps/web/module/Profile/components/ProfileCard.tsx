@@ -1,6 +1,5 @@
 import Image from "next/image"
 import { ShieldCheckIcon, StarIcon } from "@heroicons/react/20/solid"
-import { MedalIcon } from "lucide-react"
 import { Typography } from "@/common/components/ui/Typography"
 import { ASSET_ROOT } from "@/common/constants/index"
 import { ProfileCardProps } from "../types/ProfileCard"
@@ -31,7 +30,11 @@ const ProfileCard = ({
               <ShieldCheckIcon className="h-5 w-5 mx-auto text-white" />
             </div>
           </div>
-          <Typography variant="h1" className="mt-2 text-center font-semibold">
+          <Typography
+            variant="h2"
+            fontWeight="semibold"
+            className="text-2xl mt-2 text-center"
+          >
             {name}
           </Typography>
           <Typography

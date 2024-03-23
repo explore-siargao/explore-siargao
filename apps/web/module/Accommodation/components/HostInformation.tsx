@@ -43,7 +43,7 @@ const HostInformation = ({
         {rules.map((info) => (
           <div className="flex mt-6" key={info.id}>
             <TitleSection title={info.title}>
-              <Typography variant="p">{info.description}</Typography>
+              <Typography>{info.description}</Typography>
             </TitleSection>
           </div>
         ))}

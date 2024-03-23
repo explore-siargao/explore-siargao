@@ -13,7 +13,7 @@ export const cancellationPolicy = async () => {
         {
           listingId: getListings[3]?.id || 0,
           cancelationDueDate: '2000-10-31T01:30:00.000-05:00',
-          title: 'March 18',
+          title: 'March 14',
         },
         {
           listingId: getListings[1]?.id || 0,

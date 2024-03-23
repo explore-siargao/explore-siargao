@@ -3,6 +3,7 @@ import { XMarkIcon } from "@heroicons/react/20/solid"
 import React, { useRef, Fragment } from "react"
 import { Dialog, Transition } from "@headlessui/react"
 import { cn } from "@/common/helpers/cn"
+import { Typography } from "../ui/Typography"
 
 type Props = {
   children: React.ReactNode
@@ -74,11 +75,12 @@ const ModalContainer = ({
                       </div>
                     )}
                     <div className="flex-1">
-                      <h1
-                        className={`w-full text-center place-self-center font-semibold`}
+                      <Typography
+                        fontWeight="semibold"
+                        className="w-full text-center place-self-center"
                       >
                         {title}
-                      </h1>
+                      </Typography>
                     </div>
                   </div>
                   {children}
