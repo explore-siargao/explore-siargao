@@ -4,7 +4,6 @@ import React, { useState } from "react"
 import toast from "react-hot-toast"
 import { useForm } from "react-hook-form"
 import { Typography } from "@/common/components/ui/Typography"
-import { Title } from "@/common/components/ui/Title"
 import { T_BackendResponse } from "@repo/contract"
 import useSessionStore from "@/common/store/useSessionStore"
 import useUpdateAccountPassword, {
@@ -60,12 +59,14 @@ const UpdatePassword = () => {
 
   return (
     <>
-      <Title size="sub">Update password</Title>
+      <Typography variant="h2" fontWeight="semibold">
+        Update password
+      </Typography>
       <div className="text-sm mt-2 border-b border-text-100">
         {!contentState.isButtonClicked ? (
           <div className="flex justify-between py-5">
             <div>
-              <Typography variant="p">Password</Typography>
+              <Typography>Password</Typography>
               <Typography fontWeight="light">{passwordDescription}</Typography>
             </div>
             <button
@@ -84,7 +85,7 @@ const UpdatePassword = () => {
         ) : (
           <div className="grid py-5">
             <div className="flex justify-between">
-              <Typography variant="p">Password</Typography>
+              <Typography>Password</Typography>
               <button
                 className="underline self-start select-none "
                 onClick={() =>

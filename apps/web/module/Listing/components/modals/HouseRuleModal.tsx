@@ -2,6 +2,7 @@ import ModalContainer from "@/common/components/ModalContainer"
 import React from "react"
 import { TitleSection } from "../../../Accommodation/components/TitleSection"
 import IconDescription from "../../../Accommodation/components/IconDescription"
+import { Typography } from "@/common/components/ui/Typography"
 
 interface IconDescription {
   id: number
@@ -28,7 +29,7 @@ const HouseRuleModal = ({
     <ModalContainer onClose={onClose} isOpen={isOpen}>
       <div className="px-5 pt-4  md:h-[500px] md:overflow-y-auto">
         <div className="font-semibold text-2xl pt-7">
-          <h1>House Rules</h1>
+          <Typography>House Rules</Typography>
         </div>
         <div className="text-lg font-normal py-4">
           <h2>

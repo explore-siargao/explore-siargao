@@ -1,16 +1,21 @@
 import { T_BackendResponse } from '@repo/contract'
-import { apiUrl, mockUrl, xenditSecret, xenditUrl } from '../config'
+import {
+  API_URL,
+  API_MOCK_URL,
+  XENDIT_SECRET,
+  XENDIT_URL,
+} from '../constants/ev'
 
 export class ApiService {
   private BASE_URL: string | undefined
 
   constructor(source: 'main' | 'xendit' | 'mock' = 'main') {
     if (source === 'main') {
-      this.BASE_URL = apiUrl
+      this.BASE_URL = API_URL
     } else if (source === 'xendit') {
-      this.BASE_URL = xenditUrl
+      this.BASE_URL = XENDIT_URL
     } else {
-      this.BASE_URL = mockUrl
+      this.BASE_URL = API_MOCK_URL
     }
   }
 
@@ -18,7 +23,7 @@ export class ApiService {
     includeXenditAuth = false,
     removeContentType = false
   ) {
-    const username = xenditSecret
+    const username = XENDIT_SECRET
     const password = ''
     const headers = {
       ...(!removeContentType && {

@@ -1,32 +1,23 @@
 /** @type {import("next").NextConfig} */
-const { existsSync } = require("fs")
 require("dotenv").config({
-  path: existsSync("../../.env") ? "../../.env" : "../../../.env",
+  path: "../../.env",
 })
 
 module.exports = {
   reactStrictMode: true,
-  images: {
-    remotePatterns: [
-      {
-        protocol: "http",
-        hostname: "localhost",
-        port: "3000",
-        pathname: "/*",
-      },
-      {
-        protocol: "http",
-        hostname: "localhost",
-        port: "3000",
-        pathname: "/assets/**",
-      },
-    ],
-  },
   async rewrites() {
     return [
       {
         source: "/assets/:path*",
         destination: `${process.env.API_URL}/assets/:path*`,
+      },
+      {
+        source: "/api/v1/:path*",
+        destination: `${process.env.API_URL}/api/v1/:path*`,
+      },
+      {
+        source: "/mock/v1/:path*",
+        destination: `${process.env.API_URL}/mock/v1/:path*`,
       },
     ]
   },

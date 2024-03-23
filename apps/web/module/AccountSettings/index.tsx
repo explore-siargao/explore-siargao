@@ -12,7 +12,6 @@ import {
   LINK_ACCOUNT_GLOBAL_PREFERENCES,
   LINK_ACCOUNT_NOTIFICATIONS,
 } from "@/common/constants/links"
-import { Title } from "@/common/components/ui/Title"
 import { Typography } from "@/common/components/ui/Typography"
 import { capitalizeFirstLetter } from "@/common/helpers/capitalizeFirstLetter"
 import { ChevronRightIcon } from "@heroicons/react/20/solid"
@@ -121,7 +120,13 @@ const AccountSettings = () => {
 
   return (
     <AccountSettingWrapper>
-      <Title className="pb-5 md:pb-0">Account</Title>
+      <Typography
+        variant="h1"
+        fontWeight="semibold"
+        className="text-4xl my-3.5 pb-5 md:pb-0"
+      >
+        Account
+      </Typography>
       <div className="space-y-5">
         <div className="pb-5 border-b md:border-none">
           <div className="hidden md:block">
@@ -142,20 +147,15 @@ const AccountSettings = () => {
             <div className="flex space-x-4">
               <div className="flex h-12 w-12 bg-primary-500 rounded-full items-center text-center">
                 <Typography
-                  variant={"p"}
                   className="w-full h-auto text-white"
-                  fontWeight={"bold"}
+                  fontWeight="semibold"
                 >
                   {firstCharOnly}
                 </Typography>
               </div>
               <div className="flex flex-col">
-                <Typography variant={"h4"}>{uppercaseFirstChar} </Typography>
-                <Typography
-                  variant={"p"}
-                  fontWeight={"light"}
-                  className="mt-0 text-sm"
-                >
+                <Typography variant="h4">{uppercaseFirstChar} </Typography>
+                <Typography fontWeight="light" className="mt-0 text-sm">
                   Show profile
                 </Typography>
               </div>

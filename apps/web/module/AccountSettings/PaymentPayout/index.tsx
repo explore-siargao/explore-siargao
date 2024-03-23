@@ -1,7 +1,6 @@
 "use client"
 import React, { useState } from "react"
 import AccountSettingWrapper from "@/module/AccountSettings/components/AccountSettingWrapper"
-import { Title } from "@/common/components/ui/Title"
 import { LINK_ACCOUNT } from "@/common/constants/links"
 import { cn } from "@/common/helpers/cn"
 import Payments from "./Payments"
@@ -9,6 +8,7 @@ import Payouts from "./Payouts"
 import GuestContribution from "./GuestContribution"
 import { Breadcrumb } from "@/common/components/ui/Breadcrumb"
 import { ACCOUNT, PAYMENTS_PAYOUTS } from "@/common/constants"
+import { Typography } from "@/common/components/ui/Typography"
 
 const renderPayments = () => {
   return <Payments />
@@ -39,7 +39,13 @@ const PaymentPayout = () => {
           page={PAYMENTS_PAYOUTS}
           link={LINK_ACCOUNT}
         />
-        <Title>{PAYMENTS_PAYOUTS}</Title>
+        <Typography
+          variant="h1"
+          fontWeight="semibold"
+          className="text-4xl my-3.5"
+        >
+          {PAYMENTS_PAYOUTS}
+        </Typography>
       </div>
       <div className="hidden sm:block">
         <div className="flex border-b border-b-text-50">

@@ -1,5 +1,4 @@
 "use client"
-import { Title } from "@/common/components/ui/Title"
 import { Typography } from "@/common/components/ui/Typography"
 import { cn } from "@/common/helpers/cn"
 import { Switch } from "@headlessui/react"
@@ -11,8 +10,10 @@ const GuestContribution = () => {
   const [enabled, setEnabled] = useState(false)
   return (
     <div className="my-5">
-      <Title size={"sub"}>Guest contributions</Title>
-      <Typography fontWeight={"light"} className="pb-4">
+      <Typography variant="h2" fontWeight="semibold">
+        Guest contributions
+      </Typography>
+      <Typography fontWeight="light" className="pb-4">
         To show their appreciation for great hospitality, guests can send an
         optional financial contribution to a host after completing a stay or an
         {APP_NAME} Experience. You can choose to automatically allow or decline
@@ -41,7 +42,7 @@ const GuestContribution = () => {
           />
         </Switch>
       </div>
-      <Typography fontWeight={"light"} className="mt-10">
+      <Typography fontWeight="light" className="mt-10">
         100% of all contributions will be deposited into your payout account,
         unless you have an account balance. Your payout is subject to the{" "}
         <Link href="/" className="font-semibold">

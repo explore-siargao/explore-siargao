@@ -35,11 +35,12 @@ const PriceBreakdownModal = ({ buttonTitle, price }: PriceBreakdownProps) => {
             <div className="bg-white shadow rounded-2xl ">
               <div className="flex border-b-gray-200 border-b p-4">
                 <div className="flex-1">
-                  <h1
-                    className={`w-full text-center place-self-center font-semibold`}
+                  <Typography
+                    fontWeight="semibold"
+                    className="w-full text-center place-self-center"
                   >
                     Price breakdown
-                  </h1>
+                  </Typography>
                 </div>
               </div>
               <div className="grid grid-flow-row p-6 gap-5">
