@@ -10,7 +10,6 @@ import { ResponseService } from '@/common/service/response'
 import { prisma } from '@/common/helpers/prismaClient'
 import { PASSWORD_ENCRYPT_KEY } from '@/common/constants/ev'
 
-
 const response = new ResponseService()
 export const getAllUsers = async (req: Request, res: Response) => {
   try {

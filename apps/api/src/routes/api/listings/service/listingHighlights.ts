@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client'
 import { REQUIRED_VALUE_EMPTY, USER_NOT_EXIST } from '@/common/constants'
 import { Z_ListingHighlight } from '@repo/contract'
 import { Request, Response } from 'express'
-import { prisma } from '@/common/helpers/prismaClient' 
+import { prisma } from '@/common/helpers/prismaClient'
 
 const response = new ResponseService()
 
