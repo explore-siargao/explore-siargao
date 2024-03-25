@@ -14,9 +14,9 @@ const ImageGalleryModal = ({
         <div className="flex justify-center my-4">
           <ShareSave />
         </div>
-        {images.map((data) => {
+        {images.map((data, index) => {
           return (
-            <div className="relative h-60 w-10/12 md:w-1/2 lg:w-1/3 mx-auto bg-gray-200">
+            <div key={index} className="relative h-60 w-10/12 md:w-1/2 lg:w-1/3 mx-auto bg-gray-200">
               <Image
                 src={`/assets/${data.fileKey}`}
                 fill
