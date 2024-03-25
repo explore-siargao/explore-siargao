@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express'
 import { UNKNOWN_ERROR_OCCURRED } from '../../constants'
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '@/common/helpers/prismaClient'
 import { decode } from 'next-auth/jwt'
 import { ResponseService } from '@/common/service/response'
 import { E_RegistrationType, E_UserRole, T_Session } from '@repo/contract'
@@ -38,7 +38,6 @@ const isUserLoggedIn = async (
     secret: NEXTAUTH_SECRET,
   })
   if ((token || secureToken) && decoded?.email) {
-    const prisma = new PrismaClient()
     try {
       const user = await prisma.user.findFirst({
         where: {

@@ -10,10 +10,10 @@ import { ResponseService } from '@/common/service/response'
 import { prisma } from '@/common/helpers/prismaClient'
 import { PASSWORD_ENCRYPT_KEY } from '@/common/constants/ev'
 
+
 const response = new ResponseService()
 export const getAllUsers = async (req: Request, res: Response) => {
   try {
-    const prisma = new PrismaClient()
     const users = await prisma.user.findMany({
       include: {
         personalInfo: {
@@ -57,7 +57,6 @@ export const getAllUsers = async (req: Request, res: Response) => {
 }
 
 export const deactivateAccount = async (req: Request, res: Response) => {
-  const prisma = new PrismaClient()
   const userId = Number(req.params.userId)
   try {
     const getUser = await prisma.user.findUnique({
@@ -90,7 +89,6 @@ export const deactivateAccount = async (req: Request, res: Response) => {
 }
 
 export const updatePassword = async (req: Request, res: Response) => {
-  const prisma = new PrismaClient()
   const userId = Number(req.params.userId)
   const { currentPassword, newPassword, confirmNewPassword } = req.body
   try {

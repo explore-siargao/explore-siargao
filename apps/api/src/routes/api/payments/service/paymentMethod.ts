@@ -6,9 +6,10 @@ import {
 } from '@/common/constants'
 import { Request, Response } from 'express'
 import { ResponseService } from '@/common/service/response'
+import { prisma } from '@/common/helpers/prismaClient'
 
 const response = new ResponseService()
-const prisma = new PrismaClient()
+
 export const addPaymentMethod = async (req: Request, res: Response) => {
   const { cardInfo, cardType, lastFour } = req.body
   const userId = Number(req.params.userId)
