@@ -3,7 +3,7 @@ import { API_URL_BOOKINGS } from "@/common/constants"
 import { useQuery } from "@tanstack/react-query"
 
 export async function getUpcomingEarnings() {
-  const apiService = new ApiService()
+  const apiService = new ApiService("mock")
   return await apiService.get(`${API_URL_BOOKINGS}/earnings/upcoming`)
 }
 

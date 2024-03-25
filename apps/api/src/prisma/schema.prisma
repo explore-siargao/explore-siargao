@@ -19,6 +19,8 @@ model User {
   deletedAt        DateTime?
   role             UserRole          @default(User)
   isHost           Boolean           @default(false)
+  role             UserRole          @default(User)
+  isHost           Boolean           @default(false)
   registrationType RegistrationType?
   deactivated      Boolean           @default(false)
   profilePicture   String?           @db.LongText
@@ -43,6 +45,31 @@ model User {
   Property         Property[]
   BookableUnitType BookableUnitType[]
   BookableUnit     BookableUnit[]
+  Cart             Cart[]
+}
+
+model PersonalInfo {
+  id                Int                 @id @default(autoincrement())
+  userId            Int                 @unique
+  firstName         String              @db.VarChar(255)
+  middleName        String?             @db.VarChar(255)
+  lastName          String              @db.VarChar(255)
+  birthDate         DateTime?
+  governmentId      String?             @db.LongText
+  phoneNumber       String              @db.VarChar(20)
+  country           String              @db.VarChar(100)
+  language          String              @db.VarChar(50)
+  currency          String              @db.VarChar(10)
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+  deletedAt         DateTime?
+  user              User                @relation(fields: [userId], references: [id])
+  address           Addresses?
+  emergencyContacts EmergencyContacts[]
+  confirm           String?             @db.VarChar(250)
+  profile           String?             @db.LongText()
+
+  @@index([userId])
 }
 
 model HostInfo {
@@ -143,6 +170,7 @@ model Listing {
   wishes               WishGroup[]
   Booking              Booking[]
   Notification         Notification[]
+  Cart                 Cart[]
 
   @@index([basicAboutPlaceId])
   @@index([listingPriceId])
@@ -245,7 +273,15 @@ model ListingPrice {
   fee             Int
   serviceFee      Int
   cleaningFee     Int
+  id              Int       @id @unique @default(autoincrement())
+  fee             Int
+  serviceFee      Int
+  cleaningFee     Int
   guestLimitCount Int
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  deletedAt       DateTime?
+  listing         Listing?
   createdAt       DateTime  @default(now())
   updatedAt       DateTime  @updatedAt
   deletedAt       DateTime?
@@ -435,6 +471,7 @@ model Booking {
   cardInfo                 String?        @db.LongText
   cardType                 String?        @db.VarChar(255)
   lastFour                 String?        @db.VarChar(255)
+  totalFee                 Int?
   totalFee                 Int?
   PaymentMethod            PaymentMethod? @relation(fields: [paymentMethodId], references: [id])
   paymentMethodId          Int?
@@ -736,6 +773,24 @@ enum Gender {
   M
   F
   NA
+}
+
+model Cart {
+  id          Int       @id @default(autoincrement())
+  userId      Int
+  user        User      @relation(fields: [userId], references: [id])
+  listingId   Int
+  Listing     Listing   @relation(fields: [listingId], references: [id])
+  guestCounts String    @db.LongText()
+  dateFrom    DateTime
+  dateTo      DateTime
+  totalFee    Float
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  deletedAt   DateTime?
+
+  @@index([userId])
+  @@index([listingId])
 }
 
 enum NotificationType {

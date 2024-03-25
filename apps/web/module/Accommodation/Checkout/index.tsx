@@ -3,7 +3,7 @@ import { WidthWrapper } from "@/common/components/WidthWrapper"
 import { Button } from "@/common/components/ui/Button"
 import { Typography } from "@/common/components/ui/Typography"
 import valid from "card-validator"
-import { ChevronLeft } from "lucide-react"
+import { ChevronLeft, LucideChevronLeft } from "lucide-react"
 import Link from "next/link"
 import React, { useEffect, useState } from "react"
 import PaymentOptions from "./PaymentOptions"
@@ -103,7 +103,7 @@ const Checkout = () => {
     <WidthWrapper width="small" className="mt-4 md:mt-8 lg:mt-10">
       <div className="flex items-center gap-x-4">
         <Link href="/accommodation/1">
-          <ChevronLeft />
+          <LucideChevronLeft className="text-text-300 hover:text-text-500 transition" />
         </Link>
         <Typography variant="h1" fontWeight="semibold">
           Confirm and pay

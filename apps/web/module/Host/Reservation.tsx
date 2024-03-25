@@ -1,6 +1,5 @@
 import Link from "next/link"
-import { Title } from "@/common/components/ui/Title"
-import { ChevronDown, ChevronLeft, SlidersHorizontal } from "lucide-react"
+import { ChevronDown, LucideChevronLeft, SlidersHorizontal } from "lucide-react"
 import { Button } from "@/common/components/ui/Button"
 import { Typography } from "@/common/components/ui/Typography"
 import { usePathname } from "next/navigation"
@@ -22,7 +21,7 @@ const Reservation = ({ tabs }: ReservationPagesTabProps) => {
     <div className="flex flex-col min-h-screen">
       <header className="text-gray-600 py-4 flex justify-between items-center px-4">
         <Link href={""}>
-          <ChevronLeft />
+          <LucideChevronLeft className="text-text-300 hover:text-text-500 transition" />
         </Link>
         <nav>
           <ul className="flex space-x-2">
@@ -54,7 +53,7 @@ const Reservation = ({ tabs }: ReservationPagesTabProps) => {
           </ul>
         </nav>
       </header>
-      <Title>Reservations</Title>
+      <Typography variant="h1">Reservations</Typography>
       <div>
         <div className="sm:hidden">
           <select

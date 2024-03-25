@@ -7,9 +7,8 @@ import {
   USER_NOT_EXIST,
 } from '@/common/constants'
 import { ResponseService } from '@/common/service/response'
-import { passwordEncryptKey } from '@/common/config'
-import { currencyByCountry } from '@/common/helpers/currencyByCountry'
 import { prisma } from '@/common/helpers/prismaClient'
+import { PASSWORD_ENCRYPT_KEY } from '@/common/constants/ev'
 
 const response = new ResponseService()
 export const getAllUsers = async (req: Request, res: Response) => {
@@ -109,22 +108,22 @@ export const updatePassword = async (req: Request, res: Response) => {
     }
     const decryptPassword = CryptoJS.AES.decrypt(
       getUser.password as string,
-      passwordEncryptKey
+      PASSWORD_ENCRYPT_KEY
     )
     const encryptCurrentPassword = CryptoJS.AES.encrypt(
       currentPassword,
-      passwordEncryptKey
+      PASSWORD_ENCRYPT_KEY
     )
     const decryptCurrentPassword = CryptoJS.AES.decrypt(
       encryptCurrentPassword.toString(),
-      passwordEncryptKey
+      PASSWORD_ENCRYPT_KEY
     )
     if (decryptCurrentPassword.toString() !== decryptPassword.toString()) {
       return res.json(response.error({ message: 'Wrong old password' }))
     }
     const encryptNewPassword = CryptoJS.AES.encrypt(
       newPassword,
-      passwordEncryptKey
+      PASSWORD_ENCRYPT_KEY
     )
     const updateUserPassword = await prisma.user.update({
       where: {
@@ -149,7 +148,7 @@ export const updatePassword = async (req: Request, res: Response) => {
 }
 
 export const getUserProfile = async (req: Request, res: Response) => {
-  const id = Number(res.locals.user.id)
+  const id = Number(req.params.id)
   const getUser = await prisma.user.findFirst({
     where: {
       id: id,

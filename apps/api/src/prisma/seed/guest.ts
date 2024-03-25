@@ -10,9 +10,9 @@ export const guest = async () => {
   const createPersonalInfos = await prisma.guests.createMany({
     data: [
       {
-        firstName: 'test',
-        lastName: 'account',
-        birthDate: '2014-02-19T12:34:56.789Z',
+        firstName: 'Diana',
+        lastName: 'Ramos',
+        birthDate: '2000-02-19T12:34:56.789Z',
         userId: getUsers[0]?.id ? getUsers[0].id : 0,
         phone: '555-7777',
         cellPhone: '09092558726',

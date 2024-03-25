@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react"
-import { Title } from "./ui/Title"
 import { Typography } from "./ui/Typography"
 
 interface RightRadioListProps {
@@ -34,17 +33,19 @@ const RightRadioList: React.FC<RightRadioListProps> = ({
 
   return (
     <div className="flex flex-col w-full">
-      <Title size="sub" className="w-full py-3 border-b">
+      <Typography variant="h2" className="w-full py-3 border-b">
         {title}
-      </Title>
+      </Typography>
       {lists.map((choice) => (
         <div key={choice.id} className="flex w-full py-3 border-b">
           <label className="flex items-center w-full">
             <div>
-              <Typography className="text-gray-600">{choice.option}</Typography>
+              <Typography variant="p" className="text-gray-600">
+                {choice.option}
+              </Typography>
               <div className="items-start">
                 {choice.description && (
-                  <Typography className="text-gray-400">
+                  <Typography variant="p" className="text-gray-400">
                     {choice.description}
                   </Typography>
                 )}

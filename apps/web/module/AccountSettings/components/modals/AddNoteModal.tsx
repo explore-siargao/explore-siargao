@@ -1,6 +1,5 @@
 import ModalContainer from "@/common/components/ModalContainer"
 import ModalContainerFooter from "@/common/components/ModalContainer/ModalContainerFooter"
-import { Title } from "@/common/components/ui/Title"
 import { Typography } from "@/common/components/ui/Typography"
 import { ExclamationCircleIcon, StarIcon } from "@heroicons/react/20/solid"
 import Image from "next/image"
@@ -85,23 +84,22 @@ const AddNoteModal = ({
           <div className="flex flex-col justify-between h-full">
             <div className="flex-1 -space-y-1 w-auto">
               <div className="flex justify-between">
-                <Title size={"ContentTitle"} className="text-text-500">
+                <Typography variant="h3" className="text-text-500">
                   {title}
-                </Title>
+                </Typography>
                 <div className="flex text-text-500 place-items-center gap-1">
                   <StarIcon className="h-4 w-auto" />
                   5.0 <span className="text-text-400">(123)</span>
                 </div>
               </div>
-              <Typography variant={"h5"} className="text-text-300">
+              <Typography variant="h5" className="text-text-300">
                 {address}
               </Typography>
-              <Typography variant={"h5"} className="text-text-300">
+              <Typography variant="h5" className="text-text-300">
                 {description}
               </Typography>
               <Typography
-                variant={"p"}
-                fontWeight={"semibold"}
+                fontWeight="semibold"
                 className="text-text-700 flex items-start"
               >
                 ₱{price.fee}{" "}
@@ -134,8 +132,8 @@ const AddNoteModal = ({
             />
             <div className="flex justify-between">
               <Typography
-                variant={"h6"}
-                fontWeight={"bold"}
+                variant="h6"
+                fontWeight="bold"
                 className={`${
                   inputValue.replace(/\s/g, "").length > 250
                     ? "text-error-400 mt-2"
@@ -146,8 +144,8 @@ const AddNoteModal = ({
               </Typography>
               {inputValue.replace(/\s/g, "").length > 250 && (
                 <Typography
-                  variant={"h6"}
-                  fontWeight={"bold"}
+                  variant="h6"
+                  fontWeight="bold"
                   className={`flex items-center ${
                     inputValue.replace(/\s/g, "").length > 250
                       ? "text-error-400 mt-2"
