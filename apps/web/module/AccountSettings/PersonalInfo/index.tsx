@@ -53,7 +53,7 @@ const PersonalInfo = () => {
             zipCode={personalInfo?.Address?.zipCode as number}
             peronalInfoId={personalInfo?.id as number}
             aptSuite={personalInfo?.Address?.aptSuite}
-            id={personalInfo?.Address??.id as number}
+            id={personalInfo?.Address?.id as number}
           />
           <EmergencyContact
             emergencyContact={
