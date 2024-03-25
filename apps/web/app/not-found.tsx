@@ -2,6 +2,9 @@ import React from "react"
 import { Typography } from "@/common/components/ui/Typography"
 import Link from "next/link"
 import { Button } from "@/common/components/ui/Button"
+import Image from "next/image"
+import Logo from "@/common/assets/logo.png"
+import { APP_NAME } from "@repo/constants"
 
 const NotFound = () => {
   return (
@@ -14,7 +17,17 @@ const NotFound = () => {
         overflow: "hidden",
       }}
     >
-      <div style={{ textAlign: "center", overflow: "hidden" }}>
+      <div
+        className="mt-10"
+        style={{ textAlign: "center", overflow: "hidden" }}
+      >
+        <Image
+          className="h-12 w-auto mx-auto mb-5"
+          src={Logo}
+          width={500}
+          height={700}
+          alt={APP_NAME}
+        />
         <Typography variant="h1" fontWeight="semibold">
           404 - Page Not Found
         </Typography>
@@ -22,7 +35,7 @@ const NotFound = () => {
           Sorry, the page you're looking for does not exist.
         </Typography>
         <Link href="/">
-          <Button variant="default" className="mt-2">
+          <Button variant="primary" className="mt-10">
             Go back
           </Button>
         </Link>
