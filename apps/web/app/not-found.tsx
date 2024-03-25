@@ -4,12 +4,14 @@ import Link from "next/link"
 
 const NotFound = () => {
   return (
-        <div className="w-full h-screen mx-auto text-center">
-        <Typography variant="h1">404 | not found</Typography>
-          <Link href="/">Go back</Link>
+    <div style={{display:"flex", justifyContent:"center", alignItems:"center", height:"95vh", overflow:"hidden"  }}>
+        <div  style={{ textAlign:"center", overflow:"hidden"}}>
+          <Typography variant="h1">404 - Page Not Found</Typography>
+          <Typography>Sorry, the page you're looking for does not exist.</Typography>
         </div>
+        </div>
+      );
 
-  )
 }
 
 export default NotFound
