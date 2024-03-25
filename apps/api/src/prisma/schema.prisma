@@ -43,7 +43,32 @@ model User {
   Property         Property[]
   BookableUnitType BookableUnitType[]
   BookableUnit     BookableUnit[]
+  Cart             Cart[]
 }
+
+// model PersonalInfo {
+//   id                Int                 @id @default(autoincrement())
+//   userId            Int                 @unique
+//   firstName         String              @db.VarChar(255)
+//   middleName        String?             @db.VarChar(255)
+//   lastName          String              @db.VarChar(255)
+//   birthDate         DateTime?
+//   governmentId      String?             @db.LongText
+//   phoneNumber       String              @db.VarChar(20)
+//   country           String              @db.VarChar(100)
+//   language          String              @db.VarChar(50)
+//   currency          String              @db.VarChar(10)
+//   createdAt         DateTime            @default(now())
+//   updatedAt         DateTime            @updatedAt
+//   deletedAt         DateTime?
+//   user              User                @relation(fields: [userId], references: [id])
+//   address           Addresses?
+//   emergencyContacts EmergencyContacts[]
+//   confirm           String?             @db.VarChar(250)
+//   profile           String?             @db.LongText()
+
+//   @@index([userId])
+// }
 
 model HostInfo {
   id          Int      @id @default(autoincrement())
@@ -143,6 +168,7 @@ model Listing {
   wishes               WishGroup[]
   Booking              Booking[]
   Notification         Notification[]
+  Cart                 Cart[]
 
   @@index([basicAboutPlaceId])
   @@index([listingPriceId])
@@ -736,6 +762,24 @@ enum Gender {
   M
   F
   NA
+}
+
+model Cart {
+  id          Int       @id @default(autoincrement())
+  userId      Int
+  user        User      @relation(fields: [userId], references: [id])
+  listingId   Int
+  Listing     Listing   @relation(fields: [listingId], references: [id])
+  guestCounts String    @db.LongText()
+  dateFrom    DateTime
+  dateTo      DateTime
+  totalFee    Float
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  deletedAt   DateTime?
+
+  @@index([userId])
+  @@index([listingId])
 }
 
 enum NotificationType {
