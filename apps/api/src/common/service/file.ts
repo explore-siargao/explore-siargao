@@ -52,7 +52,7 @@ export class FileService {
       throw new Error('No file provided');
     }
     if (file.size > this.MAX_FILE_SIZE_MB) {
-      throw new Error('File size exceeds the limit');
+      throw new Error('File size exceeds. The max size needs to be 10mb per file.');
     }
     const fileContent = Buffer.from(
       multiple ? files?.files?.data : files?.file?.data,
