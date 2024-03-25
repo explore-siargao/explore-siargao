@@ -2,8 +2,8 @@ import { ResponseService } from '@/common/service/response'
 import { PrismaClient } from '@prisma/client'
 import { REQUIRED_VALUE_EMPTY, USER_NOT_EXIST } from '@/common/constants'
 import { Request, Response } from 'express'
+import { prisma } from '@/common/helpers/prismaClient'
 
-const prisma = new PrismaClient()
 const response = new ResponseService()
 
 export const getAllCancellationPolicies = async (

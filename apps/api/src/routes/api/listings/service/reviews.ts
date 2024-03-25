@@ -4,8 +4,8 @@ import { REQUIRED_VALUE_EMPTY, USER_NOT_EXIST } from '@/common/constants'
 import { Z_Review } from '@repo/contract'
 import { Request, Response } from 'express'
 import { reviews } from './jsons/reviews'
+import { prisma } from '@/common/helpers/prismaClient'
 
-const prisma = new PrismaClient()
 const response = new ResponseService()
 
 export const getReviewByListing = async (req: Request, res: Response) => {

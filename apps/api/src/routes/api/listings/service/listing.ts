@@ -3,8 +3,8 @@ import { PrismaClient } from '@prisma/client'
 import { REQUIRED_VALUE_EMPTY, USER_NOT_EXIST } from '@/common/constants'
 import { ResponseService } from '@/common/service/response'
 import { Z_Listing } from '@repo/contract'
+import { prisma } from '@/common/helpers/prismaClient'
 
-const prisma = new PrismaClient()
 const response = new ResponseService()
 export const getAllListing = async (req: Request, res: Response) => {
   try {

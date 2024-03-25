@@ -17,7 +17,7 @@ import { Z_UserRegister } from '@repo/contract'
 import { ResponseService } from '@/common/service/response'
 import randomNumber from '@/common/helpers/randomNumber'
 import { currencyByCountry } from '@/common/helpers/currencyByCountry'
-const prisma = new PrismaClient()
+import { prisma } from '@/common/helpers/prismaClient'
 const response = new ResponseService()
 import { EncryptionService } from '@repo/services'
 import { NEXTAUTH_SECRET, WEB_URL } from '@/common/constants/ev'
@@ -499,7 +499,6 @@ export const updateUserEmail = async (req: Request, res: Response) => {
   const { email } = req.body
   const userId = Number(req.params.userId)
   try {
-    const prisma = new PrismaClient()
     const getUser = await prisma.user.findFirst({
       where: {
         id: userId,
@@ -556,7 +555,6 @@ export const userDetails = async (req: Request, res: Response) => {
     secret: NEXTAUTH_SECRET,
   })
   if (sessionToken && decoded?.email) {
-    const prisma = new PrismaClient()
     try {
       const user = await prisma.user.findFirst({
         where: {
@@ -597,7 +595,6 @@ export const userDetails = async (req: Request, res: Response) => {
 }
 
 export const setCanReceiveEmail = async (req: Request, res: Response) => {
-  const prisma = new PrismaClient()
   const userId = Number(req.params.userId)
   const canReceive = req.body.canReceive
   if (typeof canReceive === 'boolean') {
