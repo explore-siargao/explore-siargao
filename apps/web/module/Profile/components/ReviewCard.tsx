@@ -13,7 +13,9 @@ const ReviewCard = ({
 
   return (
     <div
-      className={`${forModal ? "flex flex-col-reverse py-5" : "border rounded-md p-5"}`}
+      className={`${
+        forModal ? "flex flex-col-reverse py-5" : "border rounded-md p-5"
+      }`}
     >
       {forModal ? (
         <p>{reviewMessage}</p>
@@ -24,9 +26,8 @@ const ReviewCard = ({
         <div className="relative h-14 w-14 bg-gray-200 rounded-full">
           <Image
             src={`${ASSET_ROOT}/${reviewerImage}`}
-            layout="fill"
-            objectFit="cover"
-            className="rounded-full"
+            fill
+            className="rounded-full object-cover"
             alt="Reviewer's profile"
           />
         </div>

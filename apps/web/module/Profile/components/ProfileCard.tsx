@@ -19,11 +19,10 @@ const ProfileCard = ({
           <div className="relative h-24 w-24 rounded-full bg-gray-200">
             {profileImage && (
               <Image
-                src={`${ASSET_ROOT}/1.jpg`}
-                layout="fill"
-                objectFit="cover"
+                src={`${ASSET_ROOT}/${profileImage}`}
+                fill
                 alt="Profile"
-                className="rounded-full"
+                className="rounded-full object-cover"
               />
             )}
             <div className="bg-primary-600 h-8 w-8 rounded-full absolute bottom-1 right-[-5px] flex items-center">

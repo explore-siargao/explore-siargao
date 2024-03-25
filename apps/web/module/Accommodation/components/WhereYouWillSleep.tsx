@@ -51,10 +51,9 @@ const WhereYouWillSleep = ({ isIcon, items }: Props) => {
                   <div className="relative h-56 bg-gray-200 rounded-md mb-3">
                     <Image
                       src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Imperial_Hotel_Osaka_regular_floor_standard_twin_room_20120630-001.jpg/1200px-Imperial_Hotel_Osaka_regular_floor_standard_twin_room_20120630-001.jpg"
-                      layout="fill"
-                      objectFit="cover"
+                      fill
                       alt=""
-                      className="rounded-md"
+                      className="rounded-md object-cover"
                     />
                   </div>
                   <Typography variant="h4" fontWeight="bold" className="mb-1">

@@ -70,8 +70,8 @@ const HostListing = () => {
               <Image
                 src={`/assets/${Listing.getValue()}`}
                 alt="Image"
-                layout="fill"
-                objectFit="cover"
+                fill
+                className="object-cover"
               />
             </div>
             <span>

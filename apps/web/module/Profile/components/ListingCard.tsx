@@ -15,9 +15,8 @@ const ListingCard = ({
       <div className="relative h-60 w-full bg-gray-200 rounded-md">
         <Image
           src={`${ASSET_ROOT}/${image}`}
-          layout="fill"
-          objectFit="cover"
-          className="rounded-md"
+          fill
+          className="rounded-md object-cover"
           alt="image"
         />
       </div>
