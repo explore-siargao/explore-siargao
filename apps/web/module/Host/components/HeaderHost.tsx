@@ -1,9 +1,9 @@
-import React, { Fragment, useState } from "react"
+"use client"
+import React, { Fragment} from "react"
 import Image from "next/image"
 import Logo from "@/common/assets/es-logo.png"
 import { APP_NAME } from "@repo/constants"
 import { useSession } from "next-auth/react"
-import { usePathname, useRouter } from "next/navigation"
 import {
   LINK_ACCOUNT,
   LINK_CREATE_ACCOUNT,
@@ -55,15 +55,13 @@ const items = [
 function HeaderHost({
   contentWidth = "wide",
   isFixed = true,
-  headerType = "Guest Account"
+  headerType = "Hosting Account"
 }: {
   readonly contentWidth?: "medium" | "small" | "wide" | "full"
   isFixed?: boolean
-  headerType: "Hosting Account" | "Guest Account"
+  readonly headerType: "Hosting Account" | "Guest Account"
 }) {
   const { data: session } = useSession()
-  const path = usePathname()
-  const router = useRouter()
   const ASSET_ROOT = "/assets"
 
 
@@ -82,7 +80,7 @@ function HeaderHost({
   )
 
     return (
-      <>
+      
         <header
           className={cn(
             `w-full inset-x-0 top-0 z-50 bg-white border-y-gray-200/50 border flex flex-col`,
@@ -185,7 +183,7 @@ function HeaderHost({
             </nav>
           </WidthWrapper>
         </header>
-      </>
+    
     )
   }
  
