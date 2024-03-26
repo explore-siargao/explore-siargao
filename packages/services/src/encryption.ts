@@ -1,15 +1,18 @@
 import CryptoJS from "crypto-js"
-import { CARD_ENCRYPT_KEY, PASSWORD_ENCRYPT_KEY } from "./config"
+import { CARD_ENCRYPT_KEY, CSRF_SIGN_KEY, PASSWORD_ENCRYPT_KEY } from "./config"
 
 export class EncryptionService {
   private KEY: string | undefined
-  constructor(source: "password" | "card") {
+  constructor(source: "password" | "card" | "csrf") {
     if (source === "password") {
       this.KEY = PASSWORD_ENCRYPT_KEY
+    } else if (source === "csrf") {
+      this.KEY = CSRF_SIGN_KEY
     } else if (source === "card") {
       this.KEY = CARD_ENCRYPT_KEY
     }
   }
+
   encrypt(val: object | any[] | string) {
     let encryptValue = ""
     if (typeof val === "object" || Array.isArray(val)) {
@@ -50,4 +53,5 @@ export class EncryptionService {
 
     return decryptedValue
   }
+
 }

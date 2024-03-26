@@ -1,4 +1,3 @@
-import AuthGuard from "@/common/components/AuthGuard"
 import React from "react"
 import { APP_NAME } from "@repo/constants"
 import { Metadata } from "next"
@@ -14,9 +13,7 @@ export const metadata: Metadata = {
 const AccommodationPage = async () => {
   // const booking = await getRequest(`/bookings/1`)
   return (
-    <AuthGuard>
-      <Accommodation />
-    </AuthGuard>
+    <Accommodation />
   )
 }
 

@@ -7,7 +7,7 @@ import toast from "react-hot-toast"
 import { IUser } from "@/common/types/global"
 import { useForm } from "react-hook-form"
 import { APP_NAME } from "@repo/constants"
-import useLogin from "@/module/Authentication/hooks/useLogin"
+import useLogin from "@/module/Authentication/hooks/useLogin2"
 import { useRouter, useSearchParams } from "next/navigation"
 import { Button } from "@/common/components/ui/Button"
 import Link from "next/link"
@@ -15,11 +15,11 @@ import { LINK_CREATE_ACCOUNT } from "@/common/constants/links"
 import { CONTINUE } from "@/common/constants"
 import Image from "next/image"
 import { Input } from "@/common/components/ui/Input"
-import { signIn } from "next-auth/react"
 import { LINK_FORGOT_PASSWORD } from "../constants/links"
 import useGlobalInputEmail from "../store/useGlobalInputEmail"
 import { Typography } from "@/common/components/ui/Typography"
 import { EncryptionService } from "@repo/services/"
+import useGoogleLogin from "../hooks/useGoogleLogin"
 
 enum Position {
   "end",
@@ -32,23 +32,16 @@ const LoginForm = () => {
   const searchParams = useSearchParams()
   const redirectTo = searchParams.get("redirect_to")
   const updateEmail = useGlobalInputEmail((state) => state.update)
+  const { mutate, isPending } = useGoogleLogin()
   const { mutate: loginUser, isPending: isLoginPending } = useLogin()
   const { register, handleSubmit, getValues } = useForm<IUser>()
   const onSubmit = (formData: IUser) => {
     const callBackReq = {
       onSuccess: (data: any) => {
         if (!data.error && !isLoginPending) {
-          signIn("credentials", {
-            username: formData.email,
-            password: formData.password,
-            redirect: false,
-          }).then((response) => {
-            if (!response?.ok) {
-              toast.error("Something went wrong while signing in")
-            } else {
-              router.push("/")
-            }
-          })
+          if (data.action && data.action.link) {
+            router.push(data.action.link)
+          }
         } else {
           toast.error(String(data.message))
         }
@@ -64,6 +57,22 @@ const LoginForm = () => {
       },
       callBackReq
     )
+  }
+
+  const googleLogin = () => {
+    const callBackReq = {
+      onSuccess: (data: any) => {
+        if (!data.error && !isPending) {
+          window.location.href = data.action.link
+        } else {
+          toast.error(String(data.message))
+        }
+      },
+      onError: (err: any) => {
+        toast.error(String(err))
+      },
+    }
+    mutate(redirectTo ? redirectTo : undefined, callBackReq)
   }
 
   return (
@@ -155,11 +164,7 @@ const LoginForm = () => {
                   />
                 }
                 onClick={() =>
-                  signIn("facebook", {
-                    callbackUrl: `/session/facebook${
-                      redirectTo ? `?redirect_to=${redirectTo}` : ""
-                    }`,
-                  })
+                  googleLogin()
                 }
               >
                 <span className="text-sm font-medium leading-6 text-center w-full">
@@ -181,11 +186,7 @@ const LoginForm = () => {
                   />
                 }
                 onClick={() =>
-                  signIn("google", {
-                    callbackUrl: `/session/google${
-                      redirectTo ? `?redirect_to=${redirectTo}` : ""
-                    }`,
-                  })
+                  googleLogin()
                 }
               >
                 <span className="text-sm font-medium leading-6 text-center w-full">

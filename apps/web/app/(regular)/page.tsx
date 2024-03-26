@@ -1,4 +1,3 @@
-import AuthGuard from "@/common/components/AuthGuard"
 import LandingPage from "@/module/LandingPage"
 import { APP_NAME } from "@repo/constants"
 import { Metadata } from "next"
@@ -11,9 +10,7 @@ export const metadata: Metadata = {
 
 const HomePage = () => {
   return (
-    <AuthGuard>
-      <LandingPage />
-    </AuthGuard>
+    <LandingPage />
   )
 }
 

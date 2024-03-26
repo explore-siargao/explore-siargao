@@ -1,5 +1,4 @@
 "use client"
-import useRegister from "@/module/Authentication/hooks/useRegister"
 import React from "react"
 import { useForm } from "react-hook-form"
 import toast from "react-hot-toast"
@@ -9,7 +8,6 @@ import { CONTINUE } from "@/common/constants"
 import { Input } from "@/common/components/ui/Input"
 import { capitalizeFirstLetter } from "@/common/helpers/capitalizeFirstLetter"
 import { useParams, useRouter } from "next/navigation"
-import { signIn, useSession } from "next-auth/react"
 import { APP_NAME, COUNTRIES } from "@repo/constants"
 import dayjs from "dayjs"
 import { Option, Select } from "@/common/components/ui/Select"
@@ -21,7 +19,6 @@ import {
 } from "../constants"
 import useGlobalInputEmail from "../store/useGlobalInputEmail"
 import { Typography } from "@/common/components/ui/Typography"
-import useOptMessageStore from "@/common/store/useOptMessageStore"
 import { EncryptionService } from "@repo/services/"
 import {
   E_RegistrationType,
@@ -29,23 +26,25 @@ import {
   T_UserRegister,
 } from "@repo/contract"
 import { useQueryClient } from "@tanstack/react-query"
+import useRegister2 from "../hooks/useRegister2"
+import { addMinutes } from "date-fns"
 type Props = {
   isSocial?: boolean
 }
 const encryptionService = new EncryptionService("password")
 const SignUpForm = ({ isSocial = false }: Props) => {
   const router = useRouter()
-  const { data: session } = useSession()
-  const { mutate: addUser, isPending: addUserIsPending } = useRegister()
+  const { mutate: addUser, isPending: addUserIsPending } = useRegister2()
   const createAccountEmail = useGlobalInputEmail((state) => state.email)
   const queryClient = useQueryClient()
+  const data: any = queryClient.getQueryData(["google-redirect"]);
   const { register, handleSubmit } = useForm<
     T_UserRegister & { month: string; year: string; day: string }
   >({
     values: {
-      email: (session?.user?.email as string) || createAccountEmail || "",
-      firstName: "",
-      lastName: "",
+      email: (data?.item?.email as string) || createAccountEmail || "",
+      firstName: (data?.item?.given_name as string) || "",
+      lastName: (data?.item?.family_name as string) || "",
       birthDate: "",
       password: null,
       month: "",
@@ -68,18 +67,10 @@ const SignUpForm = ({ isSocial = false }: Props) => {
     const callBackReq = {
       onSuccess: async (data: T_BackendResponse) => {
         if (!data.error && !addUserIsPending) {
-          if (signUpType === "Manual") {
-            await signIn("credentials", {
-              callbackUrl: "/",
-              username: formData.email,
-              password: formData.password,
-              redirect: false,
-            })
-            queryClient.invalidateQueries({
-              queryKey: ["session"],
-            })
+          if (data.action && data.action.link) {
+            localStorage.setItem("welcome", "newUser");
+            router.push(data.action.link)
           }
-          setIsOpen()
           router.push("/")
         } else {
           toast.error(String(data.message))
@@ -116,7 +107,6 @@ const SignUpForm = ({ isSocial = false }: Props) => {
       callBackReq
     )
   }
-  const setIsOpen = useOptMessageStore((state) => state.setIsOpen)
 
   return (
     <div className="p-6">

@@ -20,7 +20,8 @@ export const users = async () => {
       },
       {
         email: 'jp.madrigal07@gmail.com',
-        registrationType: 'Google',
+        password: String(CryptoJS.AES.encrypt('@Patrick22', PASSWORD_ENCRYPT_KEY)),
+        registrationType: 'Manual',
         role: 'User',
         isHost: true,
       },

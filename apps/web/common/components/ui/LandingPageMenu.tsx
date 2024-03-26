@@ -8,8 +8,8 @@ import {
 import { Bars3Icon, UserCircleIcon } from "@heroicons/react/20/solid"
 import React, { Fragment } from "react"
 import { Popover, Transition } from "@headlessui/react"
-import { useSession } from "next-auth/react"
 import { ACCOUNT } from "@/common/constants"
+import useSessionStore from "@/common/store/useSessionStore"
 
 const unAuthMenus = [
   {
@@ -34,7 +34,7 @@ const authMenus = [
 ]
 
 const LandingPageMenu = () => {
-  const { data: session } = useSession()
+  const session = useSessionStore((state) => state);
   return (
     <Popover className="relative">
       <Popover.Button className="flex gap-1 rounded-full border-text-50 border items-center focus:ring-gray-400 focus:border-gray-400 px-2 py-1">
@@ -52,7 +52,7 @@ const LandingPageMenu = () => {
       >
         <Popover.Panel className="absolute right-0 top-9 z-10 mt-5 flex w-screen max-w-max">
           <div className="w-screen max-w-[200px] flex-auto bg-white text-sm leading-6 border border-gray-200 shadow-sm ring-transparent rounded-md">
-            {[...(session ? authMenus : unAuthMenus)].map((item) => (
+            {[...(session.id ? authMenus : unAuthMenus)].map((item) => (
               <div
                 key={item.name}
                 className="relative rounded hover:bg-gray-50 px-5 py-2"

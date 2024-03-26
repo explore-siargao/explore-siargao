@@ -1,9 +1,9 @@
 import ModalContainer from "@/common/components/ModalContainer"
-import React, { useRef } from "react"
+import React from "react"
 import toast from "react-hot-toast"
 import ModalContainerFooter from "@/common/components/ModalContainer/ModalContainerFooter"
 import useDeactivateAccount from "../../hooks/useDeactivateAccount"
-import { signOut } from "next-auth/react"
+import useLogout from "@/module/Authentication/hooks/useLogout"
 
 interface DeactivateUserModalProps {
   userId: number
@@ -16,13 +16,30 @@ const DeactivateUserModal = ({
   isOpen: openModal,
   onClose: closeModal,
 }: DeactivateUserModalProps) => {
+  const { mutate: logout } = useLogout()
   const { mutate, isPending } = useDeactivateAccount()
   const callBackReq = {
     onSuccess: (data: any) => {
       if (!data.error) {
         toast.success(data.message)
         closeModal()
-        signOut({ callbackUrl: "/" })
+        const callBackReq = {
+          onSuccess: (data: any) => {
+            if (!data.error) {
+              if (data.action && data.action.link) {
+                window.location.replace(data.action.link)
+              } else {
+                toast.success(data.message)
+              }
+            } else {
+              toast.error(String(data.message))
+            }
+          },
+          onError: (err: any) => {
+            toast.error(String(err))
+          },
+        }
+        logout(undefined, callBackReq)
       } else {
         toast.error(String(data.message))
       }
@@ -31,6 +48,8 @@ const DeactivateUserModal = ({
       toast.error(String(err))
     },
   }
+
+
 
   return (
     <ModalContainer

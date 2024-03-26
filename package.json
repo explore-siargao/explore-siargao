@@ -13,6 +13,7 @@
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "seed": "npx prisma db push --force-reset && npm run seed --workspace=api",
+    "pdb:push": "npx prisma db push",
     "dr:api": "sudo docker container stop es-api-dev ; sudo docker container rm es-api-dev ; sudo docker container rm es-api-dev ; sudo docker image rm jpmadrigal/es-api-dev:latest ; sudo docker pull jpmadrigal/es-api-dev:latest && sudo docker compose -f ./docker/api/compose.yml up -d && sudo docker ps",
     "dr:web": "sudo docker container stop es-web-dev ; sudo docker container rm es-web-dev ; sudo docker container rm es-web-dev ; sudo docker image rm jpmadrigal/es-web-dev:latest ; sudo docker pull jpmadrigal/es-web-dev:latest && sudo docker compose -f ./docker/web/compose.yml up -d && sudo docker ps",
     "dbp:web": "docker image rm jpmadrigal/es-web-dev:latest ; docker compose -f ./docker/web/compose-build.yml --env-file .env.development build && docker push jpmadrigal/es-web-dev:latest",
