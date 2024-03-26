@@ -11,9 +11,51 @@ import { LOGO_SINGLE_IMAGE } from "@/common/constants/index"
 import authOptions from "@/common/helpers/authOptions"
 import { APP_NAME } from "@repo/constants"
 import BottomNavBar from "@/module/Authentication/components/BottomNavBar"
-import Header from "@/module/LandingPage/components/Header"
-import Footer from "@/common/components/Footer"
+import HeaderHost from "@/module/Host/components/HeaderHost"
+import HostSideBar from "@/common/components/HostSidebar"
+import { LucideBarChart, LucideCreditCard, LucideFilePen, LucideStar } from "lucide-react"
 
+const topLinks = [
+  {
+    title: "Listing",
+    icon: <LucideFilePen />,
+    link: "/earnings",
+    isSelected: true,
+  },
+  {
+    title: "Earnings",
+    icon: <LucideBarChart />,
+    link: "/earnings",
+    isSelected: false,
+  },
+  {
+    title: "Payment History",
+    icon: <LucideCreditCard />,
+    link: "/earnings",
+    isSelected: false,
+  },
+  {
+    title: "Reviews",
+    icon: <LucideStar />,
+    link: "/earnings",
+    isSelected: false,
+  },
+]
+
+const bottomLinks = [
+  {
+    title: "Documentation",
+    link: "/documentation",
+  },
+  {
+    title: "Share feedback",
+    link: "/feedback",
+  },
+  {
+    title: "Join our discord",
+    link: "/discord",
+  },
+]
 const nunito = Nunito({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
@@ -35,9 +77,10 @@ export default async function HostLayout({
         <SessionProvider session={session}>
           <QueryClientWrapper>
             <GlobalModalWrapper>
-              <Header />
+              <HeaderHost headerType={"Hosting Account"} />
+              <HostSideBar topLinks={topLinks} bottomLinks={bottomLinks}>
               <div className="min-h-screen">{children}</div>
-              <Footer contentWidth="medium" />
+              </HostSideBar>
             </GlobalModalWrapper>
             <BottomNavBar />
           </QueryClientWrapper>

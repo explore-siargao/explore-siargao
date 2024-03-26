@@ -50,7 +50,7 @@ const EarningDateGraphTab = () => {
           <LucideChevronLeft className="text-text-300 hover:text-text-500 transition" />
         </Link>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-12 lg:gap-16 mt-4">
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-12 lg:gap-10 mt-4">
         <div className="lg:col-span-3">
           <Typography variant="h1" fontWeight="semibold">
             Earnings for {format(new Date(dateObject), "MMMM yyyy")}
