@@ -35,7 +35,6 @@
     "google-auth-library": "^9.7.0",
     "jsonwebtoken": "^9.0.2",
     "lodash": "^4.17.21",
-    "next-auth": "^4.24.5",
     "react-email": "^1.10.0",
     "redis": "^4.6.13",
     "xendit-node": "^4.2.0",

@@ -11,7 +11,6 @@ import dayjs from 'dayjs'
 import { AuthEmail } from './authEmail'
 import verifyCaptcha from '@/common/helpers/verifyCaptcha'
 import validateCsrfToken from '@/common/helpers/validateCsrfToken'
-import { decode } from 'next-auth/jwt'
 import { capitalize } from 'lodash'
 import { Z_UserRegister } from '@repo/contract'
 import { ResponseService } from '@/common/service/response'
@@ -549,18 +548,13 @@ export const updateUserEmail = async (req: Request, res: Response) => {
 }
 
 export const userDetails = async (req: Request, res: Response) => {
-  const sessionToken = req.cookies['next-auth.session-token']
-  const secureSessionToken = req.cookies['__Secure-next-auth.session-token']
-  const decoded = await decode({
-    token: sessionToken ? sessionToken : secureSessionToken,
-    secret: NEXTAUTH_SECRET,
-  })
-  if (sessionToken && decoded?.email) {
+  const email = res.locals.user.email;
+  if (email) {
     const prisma = new PrismaClient()
     try {
       const user = await prisma.user.findFirst({
         where: {
-          email: decoded?.email,
+          email: email,
           deletedAt: null,
         },
         include: {
