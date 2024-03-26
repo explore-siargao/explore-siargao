@@ -548,7 +548,7 @@ export const updateUserEmail = async (req: Request, res: Response) => {
 }
 
 export const userDetails = async (req: Request, res: Response) => {
-  const email = res.locals.user.email;
+  const email = res.locals.user.email
   if (email) {
     const prisma = new PrismaClient()
     try {
