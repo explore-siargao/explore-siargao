@@ -11,7 +11,11 @@ import { CSRF, SESSION } from '@repo/constants'
 import { getGoogleUserData } from '../helpers/googleApiRequest'
 import generateSession from '../helpers/generateSession'
 import { T_User, Z_UserRegister } from '@repo/contract'
-import { googleAuthPrompt, googleAuthScope, googleOAuth2Client } from '../helpers/googleAuth'
+import {
+  googleAuthPrompt,
+  googleAuthScope,
+  googleOAuth2Client,
+} from '../helpers/googleAuth'
 import dayjs from 'dayjs'
 import { currencyByCountry } from '@/common/helpers/currencyByCountry'
 import redisClient from '@/common/utils/redisClient'
@@ -31,7 +35,7 @@ export const manual2 = async (req: Request, res: Response) => {
         where: {
           email: email,
           registrationType: RegistrationType.Manual,
-        }
+        },
       })
       if (!user) {
         throw new Error('Email or password is invalid')
@@ -43,13 +47,15 @@ export const manual2 = async (req: Request, res: Response) => {
       const decryptInputPassword = passwordEncryption.decrypt(password)
       if (user && originalPassword === decryptInputPassword) {
         await generateSession(req, res, user as T_User)
-        res.json(response.success({
-          action: {
-            type: 'MANUAL_LOGIN_SUCCESS',
-            link: "/" // Home
-          },
-          message: 'User logged in!'
-        }))
+        res.json(
+          response.success({
+            action: {
+              type: 'MANUAL_LOGIN_SUCCESS',
+              link: '/', // Home
+            },
+            message: 'User logged in!',
+          })
+        )
       } else {
         res.json(response.error({ message: 'Email or password is invalid' }))
       }
@@ -70,23 +76,27 @@ export const manual2 = async (req: Request, res: Response) => {
 }
 
 export const logout2 = async (req: Request, res: Response) => {
-  const sessionCookie = req.cookies[SESSION];
-  const csrfCookie = req.cookies[CSRF];
+  const sessionCookie = req.cookies[SESSION]
+  const csrfCookie = req.cookies[CSRF]
   if (sessionCookie && csrfCookie) {
     try {
-      const session = await redisClient.hGetAll(`${sessionCookie}:${csrfCookie}`);
+      const session = await redisClient.hGetAll(
+        `${sessionCookie}:${csrfCookie}`
+      )
       if (session) {
         await redisClient.del(`${sessionCookie}:${csrfCookie}`)
       }
       res.clearCookie(SESSION)
       res.clearCookie(CSRF)
-      res.json(response.success({
-        action: {
-          type: 'LOGOUT_SUCCESS',
-          link: "/" // Home
-        },
-        message: 'User registered and logged out!'
-      }))
+      res.json(
+        response.success({
+          action: {
+            type: 'LOGOUT_SUCCESS',
+            link: '/', // Home
+          },
+          message: 'User registered and logged out!',
+        })
+      )
     } catch (err: any) {
       res.json(
         response.error({
@@ -100,41 +110,46 @@ export const logout2 = async (req: Request, res: Response) => {
 }
 
 export const googleRedirect = async (req: Request, res: Response) => {
-  const code = req.query.code;
-  const state = req.query.state;
-  const redirectTo = state && typeof state === 'string' ? state.replace("redirect_to=", "") : "";
+  const code = req.query.code
+  const state = req.query.state
+  const redirectTo =
+    state && typeof state === 'string' ? state.replace('redirect_to=', '') : ''
   if (code) {
     try {
-      const googleCredentials = await googleOAuth2Client.getToken(code as string);
-      googleOAuth2Client.setCredentials(googleCredentials.tokens);
-      const credentials = googleOAuth2Client.credentials;
-      const googleUserData = await getGoogleUserData(credentials.access_token as string);
+      const googleCredentials = await googleOAuth2Client.getToken(
+        code as string
+      )
+      googleOAuth2Client.setCredentials(googleCredentials.tokens)
+      const credentials = googleOAuth2Client.credentials
+      const googleUserData = await getGoogleUserData(
+        credentials.access_token as string
+      )
       const user = await prisma.user.findFirst({
         where: {
           email: googleUserData.item?.email,
         },
       })
-      if(user) {
-        await generateSession(req, res, user as T_User);
+      if (user) {
+        await generateSession(req, res, user as T_User)
         res.json(
           response.success({
             action: {
               type: 'SOCIAL_LOGIN_SUCCESS',
-              link: redirectTo ? redirectTo : "/"
+              link: redirectTo ? redirectTo : '/',
             },
-            message: 'User logged in!'
+            message: 'User logged in!',
           })
-        );
+        )
       } else {
         res.json(
           response.success({
             action: {
               type: 'SOCIAL_REGISTER',
-              link: "/create-account/google",
+              link: '/create-account/google',
             },
-            item: googleUserData.item
+            item: googleUserData.item,
           })
-        );
+        )
       }
     } catch (err: any) {
       res.json(
@@ -153,13 +168,13 @@ export const googleRedirect = async (req: Request, res: Response) => {
 }
 
 export const google = async (req: Request, res: Response) => {
-  const redirectTo = req.body.redirectTo;
+  const redirectTo = req.body.redirectTo
   try {
     const authorizeUrl = googleOAuth2Client.generateAuthUrl({
       scope: googleAuthScope,
       prompt: googleAuthPrompt,
-      state: redirectTo ? `redirect_to=${redirectTo}` : ""
-    });
+      state: redirectTo ? `redirect_to=${redirectTo}` : '',
+    })
     res.json(
       response.success({
         action: {
@@ -167,7 +182,7 @@ export const google = async (req: Request, res: Response) => {
           link: authorizeUrl,
         },
       })
-    );
+    )
   } catch (err: any) {
     res.json(
       response.error({
@@ -236,9 +251,9 @@ export const register2 = async (req: Request, res: Response) => {
           response.success({
             action: {
               type: 'REGISTER_LOGIN_SUCCESS',
-              link: "/" // Home
+              link: '/', // Home
             },
-            message: 'User registered and logged in!'
+            message: 'User registered and logged in!',
           })
         )
       } else {
@@ -298,9 +313,9 @@ export const forgotVerify2 = async (req: Request, res: Response) => {
           response.success({
             action: {
               type: 'CHANGE_PASSWORD_LOGIN_SUCCESS',
-              link: "/" // Home
+              link: '/', // Home
             },
-            message: 'User password changed and logged in!'
+            message: 'User password changed and logged in!',
           })
         )
       } else {
@@ -322,5 +337,3 @@ export const forgotVerify2 = async (req: Request, res: Response) => {
     res.json(response.error({ message: REQUIRED_VALUE_EMPTY }))
   }
 }
-
-

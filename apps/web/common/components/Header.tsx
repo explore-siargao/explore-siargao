@@ -51,10 +51,7 @@ function Header({
           className="flex items-center justify-between py-2 my-2 w-full"
           aria-label="Global"
         >
-          <Link
-            href="/"
-            className="-m-1.5 gap-2 flex lg:flex-1 items-center"
-          >
+          <Link href="/" className="-m-1.5 gap-2 flex lg:flex-1 items-center">
             <Image
               className="h-12 w-auto"
               src={Logo}
@@ -94,13 +91,10 @@ function Header({
             {session.id && <LandingPageMenu />}
           </div>
         </nav>
-        <ApplyToHostModal
-          isModalOpen={isModalOpen}
-          onClose={closeModal}
-        />
+        <ApplyToHostModal isModalOpen={isModalOpen} onClose={closeModal} />
       </WidthWrapper>
     </header>
-  );
+  )
 }
 
 export default Header

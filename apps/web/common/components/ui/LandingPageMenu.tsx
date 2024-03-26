@@ -34,7 +34,7 @@ const authMenus = [
 ]
 
 const LandingPageMenu = () => {
-  const session = useSessionStore((state) => state);
+  const session = useSessionStore((state) => state)
   return (
     <Popover className="relative">
       <Popover.Button className="flex gap-1 rounded-full border-text-50 border items-center focus:ring-gray-400 focus:border-gray-400 px-2 py-1">

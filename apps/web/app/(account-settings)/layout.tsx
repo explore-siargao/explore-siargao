@@ -28,15 +28,15 @@ export default async function AccountSettingsLayout({
       <link rel="icon" type="image/x-icon" href={LOGO_SINGLE_IMAGE} />
       <body className={nunito.className}>
         <Toaster />
-          <QueryClientWrapper>
-            <AuthStateProvider>
-              <GlobalModalWrapper>
-                <Header contentWidth="small" />
-                <div className="min-h-screen">{children}</div>
-                <Footer contentWidth="small" />
-              </GlobalModalWrapper>
-            </AuthStateProvider>
-          </QueryClientWrapper>
+        <QueryClientWrapper>
+          <AuthStateProvider>
+            <GlobalModalWrapper>
+              <Header contentWidth="small" />
+              <div className="min-h-screen">{children}</div>
+              <Footer contentWidth="small" />
+            </GlobalModalWrapper>
+          </AuthStateProvider>
+        </QueryClientWrapper>
       </body>
     </html>
   )

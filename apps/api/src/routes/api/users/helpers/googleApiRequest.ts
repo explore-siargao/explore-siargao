@@ -1,5 +1,5 @@
 import { ApiService } from '@/common/service/api'
-const apiGoogleApis = new ApiService('googleapis');
+const apiGoogleApis = new ApiService('googleapis')
 
 export interface GoogleProfile extends Record<string, any> {
   aud: string
@@ -21,15 +21,17 @@ export interface GoogleProfile extends Record<string, any> {
 
 export async function getGoogleUserData(access_token: string) {
   try {
-    const googleUserData = await apiGoogleApis.get<GoogleProfile>(`/oauth2/v3/userinfo?access_token=${access_token}`)
+    const googleUserData = await apiGoogleApis.get<GoogleProfile>(
+      `/oauth2/v3/userinfo?access_token=${access_token}`
+    )
     return {
       error: false,
-      item: googleUserData
-    };
+      item: googleUserData,
+    }
   } catch (error: any) {
     return {
       error: true,
-      message: error
-    };
+      message: error,
+    }
   }
 }

@@ -13,13 +13,21 @@ const isCsrfTokenValid2 = async (
   res: Response,
   next: NextFunction
 ) => {
-  const sessionCookie = req.cookies[SESSION];
-  const csrfCookie = req.cookies[CSRF];
+  const sessionCookie = req.cookies[SESSION]
+  const csrfCookie = req.cookies[CSRF]
   if (csrfCookie && sessionCookie) {
     try {
-      const session = await redisClient.hGetAll(`${sessionCookie}:${csrfCookie}`)
-      const decryptedCsrf = csrfEncryption.decrypt(csrfCookie) as { sessionKey: string, userId: number };
-      if(decryptedCsrf.sessionKey === sessionCookie && decryptedCsrf.userId === Number(session?.userId)) {
+      const session = await redisClient.hGetAll(
+        `${sessionCookie}:${csrfCookie}`
+      )
+      const decryptedCsrf = csrfEncryption.decrypt(csrfCookie) as {
+        sessionKey: string
+        userId: number
+      }
+      if (
+        decryptedCsrf.sessionKey === sessionCookie &&
+        decryptedCsrf.userId === Number(session?.userId)
+      ) {
         next()
       } else {
         res.json(

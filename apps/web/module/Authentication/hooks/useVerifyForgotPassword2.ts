@@ -10,7 +10,10 @@ export type TVerifyForgotPassword = {
 
 export async function verifyForgotPassword(props: TVerifyForgotPassword) {
   const apiService = new ApiService()
-  return await apiService.post(`${API_USERS_AUTH}/forgot-password/verify2`, props)
+  return await apiService.post(
+    `${API_USERS_AUTH}/forgot-password/verify2`,
+    props
+  )
 }
 
 function useVerifyForgotPassword2() {

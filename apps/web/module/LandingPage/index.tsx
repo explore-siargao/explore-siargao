@@ -13,9 +13,9 @@ const LandingPage = () => {
   const { data, isPending } = useGetAllBookings()
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const welcome = localStorage.getItem("welcome");
-      if(welcome) {
-        setIsOpen();
+      const welcome = localStorage.getItem("welcome")
+      if (welcome) {
+        setIsOpen()
         localStorage.removeItem("welcome")
       }
     }

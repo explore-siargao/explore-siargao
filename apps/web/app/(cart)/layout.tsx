@@ -28,15 +28,15 @@ export default async function CartLayout({
       <link rel="icon" type="image/x-icon" href={LOGO_SINGLE_IMAGE} />
       <body className={nunito.className}>
         <Toaster />
-          <QueryClientWrapper>
-            <AuthStateProvider>
-              <GlobalModalWrapper>
-                <Header />
-                <div className="min-h-screen">{children}</div>
-                <Footer contentWidth="medium" />
-              </GlobalModalWrapper>
-            </AuthStateProvider>
-          </QueryClientWrapper>
+        <QueryClientWrapper>
+          <AuthStateProvider>
+            <GlobalModalWrapper>
+              <Header />
+              <div className="min-h-screen">{children}</div>
+              <Footer contentWidth="medium" />
+            </GlobalModalWrapper>
+          </AuthStateProvider>
+        </QueryClientWrapper>
       </body>
     </html>
   )

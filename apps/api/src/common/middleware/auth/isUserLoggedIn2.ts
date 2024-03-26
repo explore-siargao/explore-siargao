@@ -13,11 +13,13 @@ const isUserLoggedIn2 = async (
   res: Response,
   next: NextFunction
 ) => {
-  const sessionCookie = req.cookies[SESSION];
-  const csrfCookie = req.cookies[CSRF];
+  const sessionCookie = req.cookies[SESSION]
+  const csrfCookie = req.cookies[CSRF]
   if (sessionCookie) {
     try {
-      const session = await redisClient.hGetAll(`${sessionCookie}:${csrfCookie}`)
+      const session = await redisClient.hGetAll(
+        `${sessionCookie}:${csrfCookie}`
+      )
       const user = await prisma.user.findFirst({
         where: {
           id: Number(session?.userId),

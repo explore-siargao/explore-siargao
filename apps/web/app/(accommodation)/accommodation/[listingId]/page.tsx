@@ -12,9 +12,7 @@ export const metadata: Metadata = {
 
 const AccommodationPage = async () => {
   // const booking = await getRequest(`/bookings/1`)
-  return (
-    <Accommodation />
-  )
+  return <Accommodation />
 }
 
 export default AccommodationPage

@@ -20,7 +20,9 @@ export const users = async () => {
       },
       {
         email: 'jp.madrigal07@gmail.com',
-        password: String(CryptoJS.AES.encrypt('@Patrick22', PASSWORD_ENCRYPT_KEY)),
+        password: String(
+          CryptoJS.AES.encrypt('@Patrick22', PASSWORD_ENCRYPT_KEY)
+        ),
         registrationType: 'Manual',
         role: 'User',
         isHost: true,

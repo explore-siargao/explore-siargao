@@ -5,7 +5,7 @@ import useLogout from "@/module/Authentication/hooks/useLogout"
 import toast from "react-hot-toast"
 
 const Logout = () => {
-  const { mutate } = useLogout();
+  const { mutate } = useLogout()
   useEffect(() => {
     setTimeout(function () {
       const callBackReq = {
