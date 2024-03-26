@@ -51,7 +51,6 @@ const items = [
   },
 ]
 
-
 function HeaderHost({
   contentWidth = "wide",
   isFixed = true,
@@ -63,7 +62,6 @@ function HeaderHost({
 }) {
   const { data: session } = useSession()
   const ASSET_ROOT = "/assets"
-
 
   const renderTransition = (children: React.ReactNode) => (
     <Transition
