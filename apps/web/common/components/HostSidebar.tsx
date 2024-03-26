@@ -12,7 +12,7 @@ interface HostSidebarProps {
 
 const HostSideBar = ({ navigation }: HostSidebarProps) => {
   return (
-    <div className="mt-14 w-2/12 h-screen p-5 bg-gray-200">
+    <div className="w-2/12 h-screen p-5">
       <nav className="flex flex-1 flex-col">
         <ul className="flex flex-1 flex-col gap-y-7">
           <li>
