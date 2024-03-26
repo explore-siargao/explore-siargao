@@ -12,11 +12,11 @@ interface HostSidebarProps {
 
 const HostSideBar = ({ navigation }: HostSidebarProps) => {
   return (
-    <div className="mt-14 w-2/12  p-5">
+    <div className="mt-14 w-2/12 h-screen p-5 bg-gray-200">
       <nav className="flex flex-1 flex-col">
-        <ul role="list" className="flex flex-1 flex-col gap-y-7">
+        <ul className="flex flex-1 flex-col gap-y-7">
           <li>
-            <ul role="list" className="-mx-2 space-y-1">
+            <ul className="-mx-2 space-y-1">
               {navigation.map((item) => (
                 <li key={item.title}>
                   <Link
