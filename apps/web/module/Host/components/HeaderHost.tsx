@@ -112,7 +112,7 @@ function HeaderHost({
                     <Popover.Panel className="absolute left-0 top-8 z-10 mt-4 flex w-screen max-w-max">
                       <div className="w-screen max-w-[200px] flex-auto bg-white text-sm leading-6 border border-gray-200 shadow-sm ring-transparent rounded-md">
                         {items.map((item) => (
-                          <div
+                          <button
                             key={item.name}
                             className="relative rounded hover:bg-gray-50 px-5 py-2"
                             onClick={() => {
@@ -136,7 +136,7 @@ function HeaderHost({
                                 <span className="absolute inset-0" />
                               </div>
                             </Popover.Button>
-                          </div>
+                          </button>
                         ))}
                       </div>
                     </Popover.Panel>
