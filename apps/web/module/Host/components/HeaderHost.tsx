@@ -15,6 +15,7 @@ import { WidthWrapper } from "@/common/components/WidthWrapper"
 import { cn } from "@/common/helpers/cn"
 import { Popover, Transition } from "@headlessui/react"
 import { ChevronDownIcon, LucideCheck } from "lucide-react"
+import { WorkSpaceEnum, setWorkspace } from "@/common/helpers/workspace" 
 
 const unAuthMenus = [
   {
@@ -41,20 +42,22 @@ const authMenus = [
 const items = [
   {
     name: "Hosting Account",
-    href: LINK_LOGIN,
+    href: "/",
     selected: false,
   },
   {
     name: "Guest Account",
-    href: LINK_CREATE_ACCOUNT,
+    href: "/",
     selected: false,
   },
 ]
 
+
 function HeaderHost({
   contentWidth = "wide",
   isFixed = true,
-  headerType = "Hosting Account",
+headerType = "Hosting Account"
+
 }: {
   readonly contentWidth?: "medium" | "small" | "wide" | "full"
   readonly isFixed?: boolean
@@ -62,6 +65,8 @@ function HeaderHost({
 }) {
   const { data: session } = useSession()
   const ASSET_ROOT = "/assets"
+
+  
 
   const renderTransition = (children: React.ReactNode) => (
     <Transition
@@ -114,6 +119,14 @@ function HeaderHost({
                           <div
                             key={item.name}
                             className="relative rounded hover:bg-gray-50 px-5 py-2"
+                            onClick={() => {
+                              if (item.name === "Hosting Account") {
+                                setWorkspace(WorkSpaceEnum.HOST);
+                              } 
+                              else if (item.name === "Guest Account") {
+                                setWorkspace(WorkSpaceEnum.GUEST);
+                              } 
+                            }}
                           >
                             <Popover.Button as="a" href={item.href}>
                               <div className="font-semibold text-gray-800">
