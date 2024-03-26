@@ -57,7 +57,7 @@ function HeaderHost({
   headerType = "Hosting Account",
 }: {
   readonly contentWidth?: "medium" | "small" | "wide" | "full"
-  isFixed?: boolean
+  readonly isFixed?: boolean
   readonly headerType: "Hosting Account" | "Guest Account"
 }) {
   const { data: session } = useSession()
