@@ -16,6 +16,7 @@ import MockUsersRoute from '@/routes/mock/users'
 import MockBookingsRoute from '@/routes/mock/bookings'
 import MockListingsRoute from '@/routes/mock/listings'
 import MockCartRoute from '@/routes/mock/carts'
+import MockConversationRoute from '@/routes/mock/conversations'
 
 export default function (app: Application) {
   app.use(`/assets`, AssetsRoute)
@@ -33,4 +34,5 @@ export default function (app: Application) {
   app.use(`${MOCK_ROOT}/bookings`, MockBookingsRoute)
   app.use(`${MOCK_ROOT}/listings`, MockListingsRoute)
   app.use(`${MOCK_ROOT}/carts`, MockCartRoute)
+  app.use(`${MOCK_ROOT}/conversations`, MockConversationRoute)
 }
