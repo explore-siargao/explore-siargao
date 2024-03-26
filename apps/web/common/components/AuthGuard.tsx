@@ -8,7 +8,7 @@ const AuthGuard = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname()
   const session = useSessionStore((state) => state)
 
-  if(!session.id) {
+  if (!session.id) {
     const redirect = pathname !== "/" ? `?redirect_to=${pathname}` : ``
     router.push(`/login${redirect}`)
   }

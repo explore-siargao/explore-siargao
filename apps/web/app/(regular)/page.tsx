@@ -9,9 +9,7 @@ export const metadata: Metadata = {
 }
 
 const HomePage = () => {
-  return (
-    <LandingPage />
-  )
+  return <LandingPage />
 }
 
 export default HomePage

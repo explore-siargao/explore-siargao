@@ -186,14 +186,38 @@ router.get('/:userId/group/wish', isOriginValid, wishGroupByTitle)
 //highlights
 router.get('/all/highlights', isOriginValid, getAllHighLights)
 router.get('/highlights/:id', isOriginValid, getHighLight)
-router.post('/:userId/highlights', isOriginValid, isCsrfTokenValid, addHighLight)
-router.patch('/:userId/highlights/:highLightId', isOriginValid, isCsrfTokenValid, updateHighLight)
-router.delete('/:userId/highlights/:highLightId', isOriginValid, isCsrfTokenValid, deleteHighLight)
+router.post(
+  '/:userId/highlights',
+  isOriginValid,
+  isCsrfTokenValid,
+  addHighLight
+)
+router.patch(
+  '/:userId/highlights/:highLightId',
+  isOriginValid,
+  isCsrfTokenValid,
+  updateHighLight
+)
+router.delete(
+  '/:userId/highlights/:highLightId',
+  isOriginValid,
+  isCsrfTokenValid,
+  deleteHighLight
+)
 
 //listing-highlights
 router.get('/all/listing-highlights', isOriginValid, getAllListingHighlights)
-router.get('/listing-highlights/:listingId', isOriginValid, getListingHighlightsByListing)
-router.post('/:userId/listing-highlights', isOriginValid, isCsrfTokenValid, addListingHighlight)
+router.get(
+  '/listing-highlights/:listingId',
+  isOriginValid,
+  getListingHighlightsByListing
+)
+router.post(
+  '/:userId/listing-highlights',
+  isOriginValid,
+  isCsrfTokenValid,
+  addListingHighlight
+)
 router.delete(
   '/:userId/listing-highlights/delete/:listingHighlightId',
   isOriginValid,
@@ -204,14 +228,38 @@ router.delete(
 //place to offers
 router.get('/all/place-offers', isOriginValid, getAllPlaceOffers)
 router.get('/place-offers/:id', isOriginValid, getPlaceOffersById)
-router.post('/:userId/place-offers', isOriginValid, isCsrfTokenValid, addPlaceOffer)
-router.patch('/:userId/place-offers/:placeOfferId', isOriginValid, isCsrfTokenValid, updatePlaceOffers)
-router.delete('/:userId/place-offers/delete/:placeOfferId', isOriginValid, isCsrfTokenValid, deletePlaceOffers)
+router.post(
+  '/:userId/place-offers',
+  isOriginValid,
+  isCsrfTokenValid,
+  addPlaceOffer
+)
+router.patch(
+  '/:userId/place-offers/:placeOfferId',
+  isOriginValid,
+  isCsrfTokenValid,
+  updatePlaceOffers
+)
+router.delete(
+  '/:userId/place-offers/delete/:placeOfferId',
+  isOriginValid,
+  isCsrfTokenValid,
+  deletePlaceOffers
+)
 
 //listing place offers
 router.get('/all/listing-place-offers', isOriginValid, getAllListingPlaceOffers)
-router.get('/listing-place-offers/:listingId', isOriginValid, getListingPlaceOffersByListing)
-router.post('/:userId/listing-place-offers', isOriginValid, isCsrfTokenValid, addListingPlaceOffer)
+router.get(
+  '/listing-place-offers/:listingId',
+  isOriginValid,
+  getListingPlaceOffersByListing
+)
+router.post(
+  '/:userId/listing-place-offers',
+  isOriginValid,
+  isCsrfTokenValid,
+  addListingPlaceOffer
+)
 router.delete(
   '/:userId/listing-place-offers/delete/:listingPlaceOfferId',
   isOriginValid,
@@ -247,60 +295,170 @@ router.post(
   // isUserLoggedIn,
   addReview
 )
-router.patch('/:userId/reviews/update/:reviewId', isOriginValid, isCsrfTokenValid, updateReview)
-router.delete('/:userId/reviews/delete/:reviewId', isOriginValid, isCsrfTokenValid, deleteReview)
+router.patch(
+  '/:userId/reviews/update/:reviewId',
+  isOriginValid,
+  isCsrfTokenValid,
+  updateReview
+)
+router.delete(
+  '/:userId/reviews/delete/:reviewId',
+  isOriginValid,
+  isCsrfTokenValid,
+  deleteReview
+)
 
 //Basic about place
 router.get('/basic-about-place/:id', isOriginValid, getBasicAboutPlaceById)
-router.patch('/:userId/basic-about-place/:id', isOriginValid, isCsrfTokenValid, updateBasicAboutPlace)
-router.delete('/:userId/basic-about-place/:id', isOriginValid, isCsrfTokenValid, deleteBasicAboutPlace)
+router.patch(
+  '/:userId/basic-about-place/:id',
+  isOriginValid,
+  isCsrfTokenValid,
+  updateBasicAboutPlace
+)
+router.delete(
+  '/:userId/basic-about-place/:id',
+  isOriginValid,
+  isCsrfTokenValid,
+  deleteBasicAboutPlace
+)
 
 //rules
 router.get('/all/rules', isOriginValid, getAllRules)
 router.get('/rules/house-rule/:houseRuleId', isOriginValid, getRulesByHouseRule)
-router.get('/rules/safety-property/:safetyPropertyId', isOriginValid, getRulesBySafetyProperty)
+router.get(
+  '/rules/safety-property/:safetyPropertyId',
+  isOriginValid,
+  getRulesBySafetyProperty
+)
 router.get(
   '/rules/cancellation-policy/:cancelPolicyId',
   isOriginValid,
   getRulesByCancellationPolicy
 )
-router.post('/:userId/rules/house-rule', isOriginValid, isCsrfTokenValid, addHouseRule)
-router.post('/:userId/rules/safety-property', isOriginValid, isCsrfTokenValid, addSafetypropertyRule)
-router.post('/:userId/rules/cancellation-policy', isOriginValid, isCsrfTokenValid, addCancellationPolicy)
-router.patch('/:userId/rules/:ruleId', isOriginValid, isCsrfTokenValid, updateRule)
-router.delete('/:userId/rules/:ruleId', isOriginValid, isCsrfTokenValid, deleteRule)
+router.post(
+  '/:userId/rules/house-rule',
+  isOriginValid,
+  isCsrfTokenValid,
+  addHouseRule
+)
+router.post(
+  '/:userId/rules/safety-property',
+  isOriginValid,
+  isCsrfTokenValid,
+  addSafetypropertyRule
+)
+router.post(
+  '/:userId/rules/cancellation-policy',
+  isOriginValid,
+  isCsrfTokenValid,
+  addCancellationPolicy
+)
+router.patch(
+  '/:userId/rules/:ruleId',
+  isOriginValid,
+  isCsrfTokenValid,
+  updateRule
+)
+router.delete(
+  '/:userId/rules/:ruleId',
+  isOriginValid,
+  isCsrfTokenValid,
+  deleteRule
+)
 
 //house rules
 router.get('/all/house-rules', isOriginValid, getAllHouseRules)
 router.get('/house-rules/:listingId', isOriginValid, getAllHouseRulesByListing)
 router.get('/house-rules/id/:id', isOriginValid, getHouseRule)
-router.patch('/:userId/house-rules/:id', isOriginValid, isCsrfTokenValid, updateHouseRule)
-router.delete('/:userId/house-rules/:id', isOriginValid, isCsrfTokenValid, deleteHouseRule)
+router.patch(
+  '/:userId/house-rules/:id',
+  isOriginValid,
+  isCsrfTokenValid,
+  updateHouseRule
+)
+router.delete(
+  '/:userId/house-rules/:id',
+  isOriginValid,
+  isCsrfTokenValid,
+  deleteHouseRule
+)
 
 //safety properties
 router.get('/all/safety-properties', isOriginValid, getAllSafetyProperties)
-router.get('/safety-properties/:listingId', isOriginValid, getAllSafetyPropertiesByListing)
+router.get(
+  '/safety-properties/:listingId',
+  isOriginValid,
+  getAllSafetyPropertiesByListing
+)
 router.get('/safety-properties/id/:id', isOriginValid, getSafetyProperty)
-router.patch('/:userId/safety-properties/:id', isOriginValid, isCsrfTokenValid, updateSafetyProperty)
-router.delete('/:userId/safety-properties/:id', isOriginValid, isCsrfTokenValid, deleteSafetyProperty)
+router.patch(
+  '/:userId/safety-properties/:id',
+  isOriginValid,
+  isCsrfTokenValid,
+  updateSafetyProperty
+)
+router.delete(
+  '/:userId/safety-properties/:id',
+  isOriginValid,
+  isCsrfTokenValid,
+  deleteSafetyProperty
+)
 
 //cancellation policies
-router.get('/all/cancellation-policies', isOriginValid, getAllCancellationPolicies)
+router.get(
+  '/all/cancellation-policies',
+  isOriginValid,
+  getAllCancellationPolicies
+)
 router.get(
   '/cancellation-policies/:listingId',
   isOriginValid,
   getCancellationPoliciesByListing
 )
-router.get('/cancellation-policies/id/:id', isOriginValid, getCancellationPolicy)
-router.patch('/:userId/cancellation-policies/:id', isOriginValid, isCsrfTokenValid, updateCancellationPolicy)
-router.delete('/:userId/cancellation-policies/:id', isOriginValid, isCsrfTokenValid, deleteCancellationPolicy)
+router.get(
+  '/cancellation-policies/id/:id',
+  isOriginValid,
+  getCancellationPolicy
+)
+router.patch(
+  '/:userId/cancellation-policies/:id',
+  isOriginValid,
+  isCsrfTokenValid,
+  updateCancellationPolicy
+)
+router.delete(
+  '/:userId/cancellation-policies/:id',
+  isOriginValid,
+  isCsrfTokenValid,
+  deleteCancellationPolicy
+)
 
 //listing description
 router.get('/listing-description/:id', isOriginValid, getDescription)
-router.get('/listing-description/listing/:listingId', isOriginValid, getDescriptionByListing)
-router.post('/:userId/listing-description/:listingId', isOriginValid, isCsrfTokenValid, addDescription)
-router.patch('/:userId/listing-description/:id', isOriginValid, isCsrfTokenValid, updateDescription)
-router.delete('/:userId/listing-description/:id', isOriginValid, isCsrfTokenValid, deleteDescription)
+router.get(
+  '/listing-description/listing/:listingId',
+  isOriginValid,
+  getDescriptionByListing
+)
+router.post(
+  '/:userId/listing-description/:listingId',
+  isOriginValid,
+  isCsrfTokenValid,
+  addDescription
+)
+router.patch(
+  '/:userId/listing-description/:id',
+  isOriginValid,
+  isCsrfTokenValid,
+  updateDescription
+)
+router.delete(
+  '/:userId/listing-description/:id',
+  isOriginValid,
+  isCsrfTokenValid,
+  deleteDescription
+)
 
 //notifications
 router.get('/notifications/:hostId', isOriginValid, getNotificationsByHost)

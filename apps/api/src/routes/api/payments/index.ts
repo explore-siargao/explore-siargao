@@ -41,12 +41,7 @@ router.delete(
 )
 
 //coupons
-router.get(
-  '/:userId/coupon',
-  isOriginValid,
-  isUserLoggedIn,
-  getUsedCoupons
-)
+router.get('/:userId/coupon', isOriginValid, isUserLoggedIn, getUsedCoupons)
 router.post(
   '/:userId/coupon',
   isCsrfTokenValid,

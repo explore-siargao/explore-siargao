@@ -53,5 +53,4 @@ export class EncryptionService {
 
     return decryptedValue
   }
-
 }

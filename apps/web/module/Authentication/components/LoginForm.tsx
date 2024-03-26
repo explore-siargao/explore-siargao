@@ -163,9 +163,7 @@ const LoginForm = () => {
                     alt=""
                   />
                 }
-                onClick={() =>
-                  googleLogin()
-                }
+                onClick={() => googleLogin()}
               >
                 <span className="text-sm font-medium leading-6 text-center w-full">
                   Continue with Facebook
@@ -185,9 +183,7 @@ const LoginForm = () => {
                     alt=""
                   />
                 }
-                onClick={() =>
-                  googleLogin()
-                }
+                onClick={() => googleLogin()}
               >
                 <span className="text-sm font-medium leading-6 text-center w-full">
                   Continue with Google

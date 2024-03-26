@@ -37,7 +37,7 @@ const SignUpForm = ({ isSocial = false }: Props) => {
   const { mutate: addUser, isPending: addUserIsPending } = useRegister2()
   const createAccountEmail = useGlobalInputEmail((state) => state.email)
   const queryClient = useQueryClient()
-  const data: any = queryClient.getQueryData(["google-redirect"]);
+  const data: any = queryClient.getQueryData(["google-redirect"])
   const { register, handleSubmit } = useForm<
     T_UserRegister & { month: string; year: string; day: string }
   >({
@@ -68,7 +68,7 @@ const SignUpForm = ({ isSocial = false }: Props) => {
       onSuccess: async (data: T_BackendResponse) => {
         if (!data.error && !addUserIsPending) {
           if (data.action && data.action.link) {
-            localStorage.setItem("welcome", "newUser");
+            localStorage.setItem("welcome", "newUser")
             router.push(data.action.link)
           }
           router.push("/")

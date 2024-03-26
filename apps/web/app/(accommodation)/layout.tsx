@@ -30,11 +30,11 @@ export default async function AccommodationLayout({
         <Toaster />
         <QueryClientWrapper>
           <AuthStateProvider>
-          <GlobalModalWrapper>
-            <Header contentWidth="small" isFixed={false} />
-            <div className="min-h-screen">{children}</div>
-            <Footer contentWidth="small" />
-          </GlobalModalWrapper>
+            <GlobalModalWrapper>
+              <Header contentWidth="small" isFixed={false} />
+              <div className="min-h-screen">{children}</div>
+              <Footer contentWidth="small" />
+            </GlobalModalWrapper>
           </AuthStateProvider>
         </QueryClientWrapper>
       </body>

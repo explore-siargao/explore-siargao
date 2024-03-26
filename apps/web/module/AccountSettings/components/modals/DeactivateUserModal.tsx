@@ -49,8 +49,6 @@ const DeactivateUserModal = ({
     },
   }
 
-
-
   return (
     <ModalContainer
       title="Deactivate your account"

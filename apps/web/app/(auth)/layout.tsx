@@ -26,13 +26,13 @@ export default async function AuthLayout({
       <link rel="icon" type="image/x-icon" href={LOGO_SINGLE_IMAGE} />
       <body className={nunito.className}>
         <Toaster />
-          <QueryClientWrapper>
+        <QueryClientWrapper>
           <AuthStateProvider>
             <GlobalModalWrapper>
               <div className="min-h-screen">{children}</div>
             </GlobalModalWrapper>
-            </AuthStateProvider>
-          </QueryClientWrapper>
+          </AuthStateProvider>
+        </QueryClientWrapper>
       </body>
     </html>
   )
