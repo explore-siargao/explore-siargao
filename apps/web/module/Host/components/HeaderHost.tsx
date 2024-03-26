@@ -51,11 +51,10 @@ const items = [
   },
 ]
 
-
 function HeaderHost({
   contentWidth = "wide",
   isFixed = true,
-  headerType = "Guest Account"
+  headerType = "Guest Account",
 }: {
   readonly contentWidth?: "medium" | "small" | "wide" | "full"
   isFixed?: boolean
@@ -65,7 +64,6 @@ function HeaderHost({
   const path = usePathname()
   const router = useRouter()
   const ASSET_ROOT = "/assets"
-
 
   const renderTransition = (children: React.ReactNode) => (
     <Transition
@@ -81,114 +79,112 @@ function HeaderHost({
     </Transition>
   )
 
-    return (
-      <>
-        <header
-          className={cn(
-            `w-full inset-x-0 top-0 z-50 bg-white border-y-gray-200/50 border flex flex-col`,
-            isFixed && "fixed"
-          )}
-        >
-          <WidthWrapper width={contentWidth}>
-            <nav
-              className="flex items-center py-2 my-2 w-full"
-              aria-label="Global"
-            >
-              <div className="grid grid-cols-3">
-                <Link href="/" className=" lg:flex-1">
-                  <Image
-                    className="h-12 w-auto"
-                    src={Logo}
-                    width={500}
-                    height={700}
-                    alt={APP_NAME}
-                  />
-                </Link>
-                <div className="col-span-2">
-                  {session && (
-                    <Popover className="relative items-center justify-start">
-                      <Popover.Button className="flex py-3 focus:outline-none">
-                        <div className="flex  gap-2">
-                          <p className="font-semibold">{headerType}</p>
-                          <span className="ml-auto">
-                            <ChevronDownIcon />
-                          </span>
-                        </div>
-                      </Popover.Button>
-                      {renderTransition(
-                        <Popover.Panel className="absolute left-0 top-8 z-10 mt-4 flex w-screen max-w-max">
-                          <div className="w-screen max-w-[200px] flex-auto bg-white text-sm leading-6 border border-gray-200 shadow-sm ring-transparent rounded-md">
-                            {items.map((item) => (
-                              <div
-                                key={item.name}
-                                className="relative rounded hover:bg-gray-50 px-5 py-2"
-                              >
-                                <Popover.Button as="a" href={item.href}>
-                                  <div className="font-semibold text-gray-800">
-                                    <div className="flex items-center">
-                                      {item.name}
-                                      {item.name === headerType && (
-                                        <span className="ml-auto">
-                                          <LucideCheck size={20} />
-                                        </span>
-                                      )}
-                                    </div>
-                                    <span className="absolute inset-0" />
-                                  </div>
-                                </Popover.Button>
-                              </div>
-                            ))}
-                          </div>
-                        </Popover.Panel>
-                      )}
-                    </Popover>
-                  )}
-                </div>
-              </div>
-              <div className="hidden lg:flex lg:flex-1 lg:justify-end space-x-3 items-center relative">
+  return (
+    <>
+      <header
+        className={cn(
+          `w-full inset-x-0 top-0 z-50 bg-white border-y-gray-200/50 border flex flex-col`,
+          isFixed && "fixed"
+        )}
+      >
+        <WidthWrapper width={contentWidth}>
+          <nav
+            className="flex items-center py-2 my-2 w-full"
+            aria-label="Global"
+          >
+            <div className="grid grid-cols-3">
+              <Link href="/" className=" lg:flex-1">
+                <Image
+                  className="h-12 w-auto"
+                  src={Logo}
+                  width={500}
+                  height={700}
+                  alt={APP_NAME}
+                />
+              </Link>
+              <div className="col-span-2">
                 {session && (
-                  <Popover className="relative">
-                    <Popover.Button className="flex items-center px-2 py-1 focus:outline-none">
-                      <div className="  w-6 h-8  overflow-hidden">
-                        <Image
-                          src={`${ASSET_ROOT}/1.jpg`}
-                          fill
-                          alt="Profile"
-                          className="rounded-full object-cover"
-                        />
+                  <Popover className="relative items-center justify-start">
+                    <Popover.Button className="flex py-3 focus:outline-none">
+                      <div className="flex  gap-2">
+                        <p className="font-semibold">{headerType}</p>
+                        <span className="ml-auto">
+                          <ChevronDownIcon />
+                        </span>
                       </div>
                     </Popover.Button>
                     {renderTransition(
-                      <Popover.Panel className="absolute right-0 top-9 z-10 mt-5 flex w-screen max-w-max">
+                      <Popover.Panel className="absolute left-0 top-8 z-10 mt-4 flex w-screen max-w-max">
                         <div className="w-screen max-w-[200px] flex-auto bg-white text-sm leading-6 border border-gray-200 shadow-sm ring-transparent rounded-md">
-                          {[...(session ? authMenus : unAuthMenus)].map(
-                            (item) => (
-                              <div
-                                key={item.name}
-                                className="relative rounded hover:bg-gray-50 px-5 py-2"
-                              >
-                                <Popover.Button as="a" href={item.href}>
-                                  <div className="font-semibold text-gray-800">
+                          {items.map((item) => (
+                            <div
+                              key={item.name}
+                              className="relative rounded hover:bg-gray-50 px-5 py-2"
+                            >
+                              <Popover.Button as="a" href={item.href}>
+                                <div className="font-semibold text-gray-800">
+                                  <div className="flex items-center">
                                     {item.name}
-                                    <span className="absolute inset-0" />
+                                    {item.name === headerType && (
+                                      <span className="ml-auto">
+                                        <LucideCheck size={20} />
+                                      </span>
+                                    )}
                                   </div>
-                                </Popover.Button>
-                              </div>
-                            )
-                          )}
+                                  <span className="absolute inset-0" />
+                                </div>
+                              </Popover.Button>
+                            </div>
+                          ))}
                         </div>
                       </Popover.Panel>
                     )}
                   </Popover>
                 )}
               </div>
-            </nav>
-          </WidthWrapper>
-        </header>
-      </>
-    )
-  }
- 
-
+            </div>
+            <div className="hidden lg:flex lg:flex-1 lg:justify-end space-x-3 items-center relative">
+              {session && (
+                <Popover className="relative">
+                  <Popover.Button className="flex items-center px-2 py-1 focus:outline-none">
+                    <div className="  w-6 h-8  overflow-hidden">
+                      <Image
+                        src={`${ASSET_ROOT}/1.jpg`}
+                        fill
+                        alt="Profile"
+                        className="rounded-full object-cover"
+                      />
+                    </div>
+                  </Popover.Button>
+                  {renderTransition(
+                    <Popover.Panel className="absolute right-0 top-9 z-10 mt-5 flex w-screen max-w-max">
+                      <div className="w-screen max-w-[200px] flex-auto bg-white text-sm leading-6 border border-gray-200 shadow-sm ring-transparent rounded-md">
+                        {[...(session ? authMenus : unAuthMenus)].map(
+                          (item) => (
+                            <div
+                              key={item.name}
+                              className="relative rounded hover:bg-gray-50 px-5 py-2"
+                            >
+                              <Popover.Button as="a" href={item.href}>
+                                <div className="font-semibold text-gray-800">
+                                  {item.name}
+                                  <span className="absolute inset-0" />
+                                </div>
+                              </Popover.Button>
+                            </div>
+                          )
+                        )}
+                      </div>
+                    </Popover.Panel>
+                  )}
+                </Popover>
+              )}
+            </div>
+          </nav>
+        </WidthWrapper>
+      </header>
+    </>
+  )
+}
 
 export default HeaderHost
