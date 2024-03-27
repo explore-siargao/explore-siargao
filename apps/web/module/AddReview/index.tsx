@@ -204,10 +204,9 @@ const AddReview = () => {
           <div className="w-full p-4 border bg-primary-50 rounded-md h-full relative">
             <Image
               src={`${ASSET_ROOT}/${toReviewData?.item?.listing?.imageKey}`}
-              layout="fill"
-              objectFit="cover"
+              fill
               alt="booking-image"
-              className="rounded-md"
+              className="rounded-md object-cover"
             />
           </div>
           <div>

@@ -22,8 +22,8 @@ const earningsColumns = [
             <Image
               src={`/assets/${listing.row.original.listing?.imageKey}`}
               alt="Image"
-              layout="fill"
-              objectFit="cover"
+              fill
+              className="object-cover"
             />
           </div>
         </div>

@@ -42,9 +42,8 @@ const BookingReviewItemPending = ({
         <div className="h-24 w-24 rounded-lg bg-primary-100 relative">
           <Image
             src={`${ASSET_ROOT}/${image}`}
-            layout="fill"
-            objectFit="cover"
-            className="rounded-lg"
+            fill
+            className="rounded-lg object-cover"
             alt="booking-image"
           />
         </div>

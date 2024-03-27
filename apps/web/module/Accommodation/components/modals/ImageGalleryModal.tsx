@@ -14,13 +14,16 @@ const ImageGalleryModal = ({
         <div className="flex justify-center my-4">
           <ShareSave />
         </div>
-        {images.map((data) => {
+        {images.map((data, items) => {
           return (
-            <div className="relative h-60 w-10/12 md:w-1/2 lg:w-1/3 mx-auto bg-gray-200">
+            <div
+              key={`${items}-${items}`}
+              className="relative h-60 w-10/12 md:w-1/2 lg:w-1/3 mx-auto bg-gray-200"
+            >
               <Image
                 src={`/assets/${data.fileKey}`}
-                layout="fill"
-                objectFit="cover"
+                fill
+                className="object-cover"
                 alt={`${data.alt}`}
               />
             </div>
