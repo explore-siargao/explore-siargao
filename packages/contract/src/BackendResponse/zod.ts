@@ -13,7 +13,7 @@ export const Z_BackendResponse = z.object({
   action: z
     .object({
       type: z.string(),
-      description: z.string(),
+      description: z.string().optional(),
       link: z.string().optional(),
     })
     .optional(),

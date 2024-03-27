@@ -6,9 +6,10 @@ import { useForm } from "react-hook-form"
 import fb from "@/common/assets/facebook-logo.png"
 import google from "@/common/assets/google-logo.png"
 import Image from "next/image"
-import { signIn } from "next-auth/react"
 import useGlobalInputEmail from "../store/useGlobalInputEmail"
 import { Typography } from "@/common/components/ui/Typography"
+import useGoogleLogin from "../hooks/useGoogleLogin"
+import toast from "react-hot-toast"
 
 enum Position {
   "end",
@@ -21,9 +22,26 @@ type TPreSignUp = {
 
 const PreSignUpForm = () => {
   const { register, handleSubmit } = useForm<TPreSignUp>()
+  const { mutate, isPending } = useGoogleLogin()
   const updateEmail = useGlobalInputEmail((state) => state.update)
   const onSubmit = (data: TPreSignUp) => {
     updateEmail(data.email)
+  }
+
+  const googleLogin = () => {
+    const callBackReq = {
+      onSuccess: (data: any) => {
+        if (!data.error && !isPending) {
+          window.location.href = data.action.link
+        } else {
+          toast.error(String(data.message))
+        }
+      },
+      onError: (err: any) => {
+        toast.error(String(err))
+      },
+    }
+    mutate(undefined, callBackReq)
   }
 
   return (
@@ -66,9 +84,7 @@ const PreSignUpForm = () => {
                 alt=""
               />
             }
-            onClick={() =>
-              signIn("facebook", { callbackUrl: "/session/facebook" })
-            }
+            onClick={() => googleLogin()}
           >
             <span className="text-sm font-medium leading-6 text-center w-full">
               Continue with Facebook
@@ -87,7 +103,7 @@ const PreSignUpForm = () => {
                 alt=""
               />
             }
-            onClick={() => signIn("google", { callbackUrl: "/session/google" })}
+            onClick={() => googleLogin()}
           >
             <span className="text-sm font-medium leading-6 text-center w-full">
               Continue with Google

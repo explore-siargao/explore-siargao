@@ -41,6 +41,8 @@ model User {
   ReportedUser     ReportUser[]      @relation("reportedUsers")
   reportedByuser   ReportUser[]      @relation("reportedByUsers")
   Cart             Cart[]
+  SendMessage      Message[]         @relation("sender")
+  ReceivedMessage  Message[]         @relation("receiver")
 }
 
 model PersonalInfo {
@@ -166,6 +168,7 @@ model Listing {
   Booking              Booking[]
   Notification         Notification[]
   Cart                 Cart[]
+  Conversation         Conversation[]
 
   @@index([basicAboutPlaceId])
   @@index([listingPriceId])
@@ -519,6 +522,34 @@ model Cart {
 
   @@index([userId])
   @@index([listingId])
+}
+
+model Message {
+  id           Int            @id @default(autoincrement())
+  Sender       User           @relation(fields: [senderId], references: [id], name: "sender")
+  senderId     Int
+  Receiver     User           @relation(fields: [receiverId], references: [id], name: "receiver")
+  receiverId   Int
+  message      String
+  Conversation Conversation[]
+  createdAt    DateTime       @default(now())
+
+  @@index([senderId])
+  @@index([receiverId])
+}
+
+model Conversation {
+  id          Int       @id @default(autoincrement())
+  listingId   Int
+  messageId   Int
+  userGuestId Int
+  Listing     Listing   @relation(fields: [listingId], references: [id])
+  Message     Message   @relation(fields: [messageId], references: [id])
+  createdAt   DateTime  @default(now())
+  deletedAt   DateTime?
+
+  @@index([listingId])
+  @@index([messageId])
 }
 
 enum NotificationType {
