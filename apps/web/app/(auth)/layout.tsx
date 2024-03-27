@@ -5,13 +5,9 @@ import QueryClientWrapper from "@/common/components/QueryClientWrapper"
 import GlobalModalWrapper from "@/common/components/GlobalModalWrapper"
 import { Toaster } from "react-hot-toast"
 import React from "react"
-import { getServerSession } from "next-auth/next"
-import { SessionProvider } from "@/common/components/SessionProvider"
 import { LOGO_SINGLE_IMAGE } from "@/common/constants/index"
-import authOptions from "@/common/helpers/authOptions"
 import { APP_NAME } from "@repo/constants"
-import BottomNavBar from "@/module/Authentication/components/BottomNavBar"
-import Header from "@/module/LandingPage/components/Header"
+import AuthStateProvider from "@/common/components/AuthStateProvider"
 
 const nunito = Nunito({ subsets: ["latin"] })
 
@@ -25,22 +21,18 @@ export default async function AuthLayout({
 }: {
   readonly children: React.ReactNode
 }) {
-  const session = await getServerSession(authOptions)
-
   return (
     <html lang="en" id="layout">
       <link rel="icon" type="image/x-icon" href={LOGO_SINGLE_IMAGE} />
       <body className={nunito.className}>
         <Toaster />
-        <SessionProvider session={session}>
-          <QueryClientWrapper>
+        <QueryClientWrapper>
+          <AuthStateProvider>
             <GlobalModalWrapper>
-              <Header />
               <div className="min-h-screen">{children}</div>
             </GlobalModalWrapper>
-            <BottomNavBar />
-          </QueryClientWrapper>
-        </SessionProvider>
+          </AuthStateProvider>
+        </QueryClientWrapper>
       </body>
     </html>
   )
