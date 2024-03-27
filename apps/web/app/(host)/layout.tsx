@@ -5,12 +5,8 @@ import QueryClientWrapper from "@/common/components/QueryClientWrapper"
 import GlobalModalWrapper from "@/common/components/GlobalModalWrapper"
 import { Toaster } from "react-hot-toast"
 import React from "react"
-import { getServerSession } from "next-auth/next"
-import { SessionProvider } from "@/common/components/SessionProvider"
 import { LOGO_SINGLE_IMAGE } from "@/common/constants/index"
-import authOptions from "@/common/helpers/authOptions"
 import { APP_NAME } from "@repo/constants"
-import BottomNavBar from "@/module/Authentication/components/BottomNavBar"
 import HeaderHost from "@/module/Host/components/HeaderHost"
 import HostSideBar from "@/common/components/HostSidebar"
 import {
@@ -19,6 +15,7 @@ import {
   LucideFilePen,
   LucideStar,
 } from "lucide-react"
+import AuthStateProvider from "@/common/components/AuthStateProvider"
 
 const topLinks = [
   {
@@ -73,23 +70,21 @@ export default async function HostLayout({
 }: {
   readonly children: React.ReactNode
 }) {
-  const session = await getServerSession(authOptions)
   return (
     <html lang="en">
       <link rel="icon" type="image/x-icon" href={LOGO_SINGLE_IMAGE} />
       <body className={nunito.className}>
         <Toaster />
-        <SessionProvider session={session}>
-          <QueryClientWrapper>
+        <QueryClientWrapper>
+          <AuthStateProvider>
             <GlobalModalWrapper>
               <HeaderHost headerType={"Hosting Account"} />
               <HostSideBar topLinks={topLinks} bottomLinks={bottomLinks}>
                 <div className="min-h-screen">{children}</div>
               </HostSideBar>
             </GlobalModalWrapper>
-            <BottomNavBar />
-          </QueryClientWrapper>
-        </SessionProvider>
+          </AuthStateProvider>
+        </QueryClientWrapper>
       </body>
     </html>
   )

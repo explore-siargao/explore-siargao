@@ -4,11 +4,9 @@ import React from "react"
 
 const WishListItemPage = () => {
   return (
-    <div>
-      <AuthGuard>
-        <WishlistsItem />
-      </AuthGuard>
-    </div>
+    <AuthGuard>
+      <WishlistsItem />
+    </AuthGuard>
   )
 }
 
