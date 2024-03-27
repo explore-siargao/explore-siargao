@@ -66,6 +66,7 @@ export const addMessage = async (req: Request, res: Response) => {
     id: 10,
     senderId: senderId,
     receiverId: receiverId,
+    conversationId: 3,
     message: message,
     Sender: {
       id: senderId,
@@ -116,4 +117,18 @@ export const addMessage = async (req: Request, res: Response) => {
       message: 'Message successfully sent',
     })
   )
+}
+
+export const getMessages = async (req: Request, res: Response) => {
+  const conversationId = Number(req.params.conversationId)
+  const convos = conversations.filter(
+    (item) => item.Message.conversationId === conversationId
+  )
+  const messages = convos.map((item) => ({
+    sender: item.Message.Sender.name,
+    receiver: item.Message.Receiver.name,
+    message: item.Message.message,
+    createdAt: item.Message.createdAt,
+  }))
+  res.json(response.success({ items: messages, allItemCount: messages.length }))
 }

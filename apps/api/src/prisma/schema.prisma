@@ -43,6 +43,7 @@ model User {
   Cart             Cart[]
   SendMessage      Message[]         @relation("sender")
   ReceivedMessage  Message[]         @relation("receiver")
+  Conversation    Conversation[]
 }
 
 model PersonalInfo {
@@ -531,6 +532,7 @@ model Message {
   Receiver     User           @relation(fields: [receiverId], references: [id], name: "receiver")
   receiverId   Int
   message      String
+  conversationId Int
   Conversation Conversation[]
   createdAt    DateTime       @default(now())
 
@@ -542,12 +544,14 @@ model Conversation {
   id          Int       @id @default(autoincrement())
   listingId   Int
   messageId   Int
-  userGuestId Int
+  guestId Int
+  Guest       User     @relation(fields: [guestId], references: [id])
   Listing     Listing   @relation(fields: [listingId], references: [id])
   Message     Message   @relation(fields: [messageId], references: [id])
   createdAt   DateTime  @default(now())
   deletedAt   DateTime?
 
+@@index([guestId])
   @@index([listingId])
   @@index([messageId])
 }
