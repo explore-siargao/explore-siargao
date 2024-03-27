@@ -5,8 +5,6 @@ import React, { useState } from "react"
 import { useForm } from "react-hook-form"
 import { useQueryClient } from "@tanstack/react-query"
 import toast from "react-hot-toast"
-import { signIn } from "next-auth/react"
-import Cookies from "js-cookie"
 import { Typography } from "@/common/components/ui/Typography"
 import useUpdateUserEmail from "../hooks/useUpdateUserEmail"
 
@@ -33,10 +31,10 @@ const EmailAddress = ({ email, id }: IUser) => {
     const callBackReq = {
       onSuccess: (data: any) => {
         if (!data.error) {
-          Cookies.set("accessToken", data?.items?.accessToken)
-          signIn("credentials", {
-            username: formData.email,
-          })
+          // Cookies.set("accessToken", data?.items?.accessToken)
+          // signIn("credentials", {
+          //   username: formData.email,
+          // })
           toast.success(data.message)
           queryClient.invalidateQueries({
             queryKey: ["session"],
