@@ -25,6 +25,7 @@ export class FileService {
   private AWS_ACCESS_KEY: string
   private AWS_SECRET_ACCESS_KEY: string
   private BUCKET_NAME: string
+  private MAX_FILE_SIZE_MB: number = 10 * 1024 * 1024
 
   constructor() {
     this.AWS_REGION = process.env.AWS_REGION || ''
@@ -46,6 +47,15 @@ export class FileService {
   async upload(uploadFileParams: T_UploadFileParams) {
     const { files, key, multiple = false } = uploadFileParams
     const randomId = randomUUID()
+    const file = multiple ? files?.files : files.file
+    if (!file) {
+      throw new Error('No file provided')
+    }
+    if (file.size > this.MAX_FILE_SIZE_MB) {
+      throw new Error(
+        'File size exceeds. The max size needs to be 10mb per file.'
+      )
+    }
     const fileContent = Buffer.from(
       multiple ? files?.files?.data : files?.file?.data,
       'binary'
