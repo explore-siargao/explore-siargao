@@ -19,6 +19,7 @@ export const Z_Conversation = z.object({
     senderId: z.number(),
     receiverId: z.number(),
     message: z.string(),
+    conversationId: z.number(),
     Sender: z.object({
       id: z.number(),
       name: z.string(),
