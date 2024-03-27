@@ -539,13 +539,14 @@ model Message {
 }
 
 model Conversation {
-  id          Int      @id @default(autoincrement())
+  id          Int       @id @default(autoincrement())
   listingId   Int
   messageId   Int
   userGuestId Int
-  Listing     Listing  @relation(fields: [listingId], references: [id])
-  Message     Message  @relation(fields: [messageId], references: [id])
-  createdAt   DateTime @default(now())
+  Listing     Listing   @relation(fields: [listingId], references: [id])
+  Message     Message   @relation(fields: [messageId], references: [id])
+  createdAt   DateTime  @default(now())
+  deletedAt   DateTime?
 
   @@index([listingId])
   @@index([messageId])
