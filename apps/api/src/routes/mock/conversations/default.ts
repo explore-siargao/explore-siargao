@@ -15,11 +15,10 @@ export const getConversations = async (req: Request, res: Response) => {
   const groupedConversations: { [key: number]: T_Conversation[] } = {}
   filterConvo.forEach((conversation) => {
     if (
-      conversation &&
       conversation?.Listing &&
       conversation?.Listing?.id !== undefined
     ) {
-      const listingId = conversation.Listing.id
+      const listingId = conversation?.Listing?.id
       if (!groupedConversations[listingId]) {
         groupedConversations[listingId] = []
       }
