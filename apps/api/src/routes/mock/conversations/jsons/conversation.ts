@@ -26,7 +26,7 @@ export const conversations = [
       id: 1,
       senderId: 2,
       receiverId: 1,
-      conversationId:1,
+      conversationId: 1,
       message: 'Good day',
       Sender: {
         id: 4,
@@ -66,7 +66,7 @@ export const conversations = [
       id: 1,
       senderId: 2,
       receiverId: 1,
-      conversationId:2,
+      conversationId: 2,
       message: 'Good day',
       Sender: {
         id: 2,
@@ -106,7 +106,7 @@ export const conversations = [
       id: 2,
       senderId: 1,
       receiverId: 2,
-      conversationId:2,
+      conversationId: 2,
       message: 'Hello, How we can help you?',
       Sender: {
         id: 1,
@@ -145,7 +145,7 @@ export const conversations = [
       id: 3,
       senderId: 3,
       receiverId: 1,
-      conversationId:3,
+      conversationId: 3,
       message: 'Are you available to chat?',
       Sender: {
         id: 3,
