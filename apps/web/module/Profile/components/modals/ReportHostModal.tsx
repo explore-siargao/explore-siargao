@@ -58,10 +58,6 @@ const ReportHostModal = ({ isOpen, onClose }: ReportHostModalProps) => {
   const currentContent = useReportHostStore((state) => state.currentContent)
   const output = useReportHostStore((state) => state.output)
 
-  useEffect(() => {
-    console.log(output)
-  }, [output])
-
   return (
     <ModalContainer isOpen={isOpen} onClose={onClose} size="sm">
       {reportListings

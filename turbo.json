@@ -12,7 +12,6 @@
         "API_URL",
         "API_PORT",
         "PASSWORD_ENCRYPT_KEY",
-        "API_SIGN_KEY",
         "ALLOWED_CLIENTS",
         "API_AUTH_URL",
         "API_MOCK_URL",
@@ -28,7 +27,11 @@
         "NODE_ENV",
         "XENDIT_URL",
         "XENDIT_SECRET",
-        "CARD_ENCRYPT_KEY"
+        "CARD_ENCRYPT_KEY",
+        "CSRF_SIGN_KEY",
+        "GOOGLE_APIS_URL",
+        "REDIS_URL",
+        "REDIS_PASSWORD"
       ]
     },
     "lint": {

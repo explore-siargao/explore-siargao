@@ -1,48 +1,30 @@
 import { NextFunction, Request, Response } from 'express'
-import { UNKNOWN_ERROR_OCCURRED } from '../../constants'
-import { prisma } from '@/common/helpers/prismaClient'
-import { decode } from 'next-auth/jwt'
 import { ResponseService } from '@/common/service/response'
 import { E_RegistrationType, E_UserRole, T_Session } from '@repo/contract'
-import { USER_NOT_AUTHORIZED } from '@/common/constants'
-import { NEXTAUTH_SECRET } from '@/common/constants/ev'
+import { UNKNOWN_ERROR_OCCURRED, USER_NOT_AUTHORIZED } from '@/common/constants'
+import { prisma } from '@/common/helpers/prismaClient'
+import { SESSION, CSRF } from '@repo/constants'
+import redisClient from '@/common/utils/redisClient'
 
 const response = new ResponseService()
 
-enum JWT_Error {
-  'jwt malformed' = 'jwt malformed',
-  'jwt expired' = 'jwt expired',
-}
-
-const checkErrorMessage = (res: Response, message: string | JWT_Error) => {
-  const error = {
-    'jwt malformed': 'Invalid authentication credentials',
-    'jwt expired': 'Authentication is expired, please login again',
-  }
-  res.json(
-    response.error({
-      message: typeof message === 'string' ? message : error[message],
-    })
-  )
-}
-
-const isUserLoggedIn = async (
+const isUserLoggedIn2 = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  const token = req.cookies['next-auth.session-token']
-  const secureToken = req.cookies['__Secure-next-auth.session-token']
-  const decoded = await decode({
-    token: token ? token : secureToken,
-    secret: NEXTAUTH_SECRET,
-  })
-  if ((token || secureToken) && decoded?.email) {
+  const sessionCookie = req.cookies[SESSION]
+  const csrfCookie = req.cookies[CSRF]
+  if (sessionCookie) {
     try {
+      const session = await redisClient.hGetAll(
+        `${sessionCookie}:${csrfCookie}`
+      )
       const user = await prisma.user.findFirst({
         where: {
-          email: decoded?.email,
+          id: Number(session?.userId),
           deletedAt: null,
+          deactivated: false,
         },
         include: {
           personalInfo: {
@@ -53,9 +35,6 @@ const isUserLoggedIn = async (
           },
         },
       })
-      if (user && (user.deletedAt || user.deactivated)) {
-        throw new Error('We cannot find your account in our system')
-      }
       const authUser: T_Session = {
         isHost: user?.isHost as boolean,
         id: user?.id as number,
@@ -78,7 +57,9 @@ const isUserLoggedIn = async (
       next()
     } catch (err: any) {
       const message = err.message ? err.message : UNKNOWN_ERROR_OCCURRED
-      checkErrorMessage(res, message)
+      response.error({
+        message: message,
+      })
     }
   } else {
     res.json(
@@ -89,4 +70,4 @@ const isUserLoggedIn = async (
   }
 }
 
-export default isUserLoggedIn
+export default isUserLoggedIn2
