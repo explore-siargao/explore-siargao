@@ -7,10 +7,57 @@ import { Toaster } from "react-hot-toast"
 import React from "react"
 import { LOGO_SINGLE_IMAGE } from "@/common/constants/index"
 import { APP_NAME } from "@repo/constants"
-import Header from "@/common/components/Header"
-import Footer from "@/common/components/Footer"
+import HeaderHost from "@/module/Host/components/HeaderHost"
+import HostSideBar from "@/common/components/HostSidebar"
+import {
+  LucideBarChart,
+  LucideCreditCard,
+  LucideFilePen,
+  LucideStar,
+} from "lucide-react"
 import AuthStateProvider from "@/common/components/AuthStateProvider"
 
+const topLinks = [
+  {
+    title: "Listing",
+    icon: <LucideFilePen />,
+    link: "/earnings",
+    isSelected: true,
+  },
+  {
+    title: "Earnings",
+    icon: <LucideBarChart />,
+    link: "/earnings",
+    isSelected: false,
+  },
+  {
+    title: "Payment History",
+    icon: <LucideCreditCard />,
+    link: "/earnings",
+    isSelected: false,
+  },
+  {
+    title: "Reviews",
+    icon: <LucideStar />,
+    link: "/earnings",
+    isSelected: false,
+  },
+]
+
+const bottomLinks = [
+  {
+    title: "Documentation",
+    link: "/documentation",
+  },
+  {
+    title: "Share feedback",
+    link: "/feedback",
+  },
+  {
+    title: "Join our discord",
+    link: "/discord",
+  },
+]
 const nunito = Nunito({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
@@ -31,9 +78,10 @@ export default async function HostLayout({
         <QueryClientWrapper>
           <AuthStateProvider>
             <GlobalModalWrapper>
-              <Header />
-              <div className="min-h-screen">{children}</div>
-              <Footer contentWidth="medium" />
+              <HeaderHost headerType={"Hosting Account"} />
+              <HostSideBar topLinks={topLinks} bottomLinks={bottomLinks}>
+                <div className="min-h-screen">{children}</div>
+              </HostSideBar>
             </GlobalModalWrapper>
           </AuthStateProvider>
         </QueryClientWrapper>
