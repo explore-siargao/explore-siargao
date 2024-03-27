@@ -8,8 +8,7 @@ import { useRouter, useSearchParams } from "next/navigation"
 import { useForm } from "react-hook-form"
 import useVerifyForgotPassword, {
   TVerifyForgotPassword,
-} from "../hooks/useVerifyForgotPassword"
-import { signIn } from "next-auth/react"
+} from "../hooks/useVerifyForgotPassword2"
 import toast from "react-hot-toast"
 import { EncryptionService } from "@repo/services/"
 
@@ -29,11 +28,9 @@ const NewPassword = () => {
     const callBackReq = {
       onSuccess: (data: any) => {
         if (!data.error && !isPendingNewPassword) {
-          signIn("credentials", {
-            callbackUrl: "/",
-            username: email,
-            password: newPassword,
-          })
+          if (data.action && data.action.link) {
+            router.push(data.action.link)
+          }
         } else {
           toast.error(String(data.message))
         }

@@ -1,33 +1,23 @@
 "use client"
 import React from "react"
-import { signOut, useSession } from "next-auth/react"
-import useVerifySignIn from "@/common/hooks/useVerifySignIn"
-import { useRouter, useParams, useSearchParams } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import toast from "react-hot-toast"
 import { Spinner } from "@/common/components/ui/Spinner"
+import useGoogleRedirect from "../hooks/useGoogleRedirect"
 
 const SessionVerifier = () => {
   const router = useRouter()
-  const params = useParams()
   const searchParams = useSearchParams()
-  const redirectTo = searchParams.get("redirect_to")
-  const { data: session } = useSession()
-  const { data } = useVerifySignIn()
-  if (!session || (session && data && data.item)) {
-    router.push(redirectTo ? redirectTo : "/")
-  } else if (session && data?.error) {
-    // Adding id 1 to prevent duplicate toast
-    toast.error(data.message as string, { id: "1", duration: 5000 })
-    signOut({ redirect: false })
-    router.push("/login")
-  } else if (
-    session &&
-    data &&
-    !data.error &&
-    data.action?.type === "SOCIAL_REGISTER" &&
-    data.action?.description === params.type
-  ) {
-    router.push(`/create-account/${params.type}`)
+  const googleError = searchParams.get("error")
+  const { data } = useGoogleRedirect()
+  if (!googleError && !data?.error && data?.action?.link) {
+    if (data.message) {
+      toast.success(data.message as string)
+    }
+    router.push(data?.action?.link)
+  }
+  if (googleError) {
+    router.push("/")
   }
   return <Spinner variant="primary" middle />
 }

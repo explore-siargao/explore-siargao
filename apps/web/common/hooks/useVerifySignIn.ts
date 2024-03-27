@@ -1,7 +1,6 @@
 import { API_URL_USERS } from "@/common/constants"
 import { useQuery } from "@tanstack/react-query"
 import { ApiService } from "@/common/service/api"
-import { useSession } from "next-auth/react"
 import { useParams } from "next/navigation"
 import { THREE_MINUTES } from "../constants"
 
@@ -14,15 +13,14 @@ export async function verifySignIn(props: T_VerifySignIn) {
 
 function useVerifySignIn() {
   const params = useParams()
-  const { data: session } = useSession()
   const query = useQuery({
     queryKey: ["sign-in"],
     queryFn: () =>
       verifySignIn({
         type: params.type as string,
-        email: session?.user?.email as string,
+        email: "jp.madrigal07@gmail.com",
       }),
-    enabled: !!session && !!params.type,
+    enabled: !!params.type,
     staleTime: THREE_MINUTES,
   })
   return query

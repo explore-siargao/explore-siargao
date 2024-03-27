@@ -8,7 +8,6 @@ import toast from "react-hot-toast"
 import { useRouter } from "next/navigation"
 import useSessionStore from "@/common/store/useSessionStore"
 import { LINK_LOGIN } from "@/common/constants/links"
-import { useSession } from "next-auth/react"
 
 interface ISetUpProfileAboutYouModalProps {
   isModalOpen: boolean
@@ -19,7 +18,7 @@ const ApplyToHostModal = ({
   isModalOpen,
   onClose,
 }: ISetUpProfileAboutYouModalProps) => {
-  const { data: session } = useSession()
+  const session = useSessionStore((state) => state)
   const queryClient = useQueryClient()
   const router = useRouter()
   const callBackReq = {
@@ -44,7 +43,7 @@ const ApplyToHostModal = ({
     },
   }
   const proceedApplyToHost = () => {
-    if (!session) {
+    if (!session.id) {
       onClose()
       router.push(LINK_LOGIN)
     } else {

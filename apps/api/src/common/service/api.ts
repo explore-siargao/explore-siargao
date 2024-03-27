@@ -4,16 +4,19 @@ import {
   API_MOCK_URL,
   XENDIT_SECRET,
   XENDIT_URL,
+  GOOGLE_APIS_URL,
 } from '../constants/ev'
 
 export class ApiService {
   private BASE_URL: string | undefined
 
-  constructor(source: 'main' | 'xendit' | 'mock' = 'main') {
+  constructor(source: 'main' | 'xendit' | 'googleapis' | 'mock' = 'main') {
     if (source === 'main') {
       this.BASE_URL = API_URL
     } else if (source === 'xendit') {
       this.BASE_URL = XENDIT_URL
+    } else if (source === 'googleapis') {
+      this.BASE_URL = GOOGLE_APIS_URL
     } else {
       this.BASE_URL = API_MOCK_URL
     }
