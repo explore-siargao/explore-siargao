@@ -13,7 +13,12 @@ import { APP_NAME } from "@repo/constants"
 import BottomNavBar from "@/module/Authentication/components/BottomNavBar"
 import HeaderHost from "@/module/Host/components/HeaderHost"
 import HostSideBar from "@/common/components/HostSidebar"
-import { LucideBarChart, LucideCreditCard, LucideFilePen, LucideStar } from "lucide-react"
+import {
+  LucideBarChart,
+  LucideCreditCard,
+  LucideFilePen,
+  LucideStar,
+} from "lucide-react"
 
 const topLinks = [
   {
@@ -79,7 +84,7 @@ export default async function HostLayout({
             <GlobalModalWrapper>
               <HeaderHost headerType={"Hosting Account"} />
               <HostSideBar topLinks={topLinks} bottomLinks={bottomLinks}>
-              <div className="min-h-screen">{children}</div>
+                <div className="min-h-screen">{children}</div>
               </HostSideBar>
             </GlobalModalWrapper>
             <BottomNavBar />
