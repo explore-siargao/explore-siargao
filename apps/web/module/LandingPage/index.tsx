@@ -5,38 +5,9 @@ import useGetAllBookings from "../LandingPage/hooks/useGetAllBookings"
 import { Spinner } from "@/common/components/ui/Spinner"
 import useSessionStore from "@/common/store/useSessionStore"
 import Listing from "../Listing"
-import MessageConversation from "../Host/Conversation/MessageConversation"
 
 
-const messages = [
-  {
-    id: 1,
-    user: "Jane Doe",
-    imageKey: "5.jpg",
-    message: " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam at lectus nec arcu accumsan vulputate. Mauris aliquet, enim a conguefringilla, felis lorem pharetra justo, eget vestibulum lacus odio",
-    isSender: true,
-    timeSent: "2024-03-27 10:00:00",
-    isSeen: true
-  },
-  {
-    id: 1,
-    user: "Jane Doe",
-    imageKey: "5.jpg",
-    message: " Lorem ipsum dolor ra Lorem ipsum dolor ra ",
-    isSender: true,
-    timeSent: "2024-03-27 10:00:00",
-    isSeen: true
-  },
-  {
-    id: 2,
-    user: "Manny Brills",
-    imageKey: "2.jpg",
-    message: "Lorem ipsum dolor sit  Lorem ipsum ",
-    timeSent: "2024-03-27 10:05:00",
-    isSender: false,
-    isSeen: false
-  },
-];
+
 
 
 const LandingPage = () => {
@@ -69,7 +40,6 @@ const LandingPage = () => {
           </ul>
         </>
       )}
-      <MessageConversation messages={messages}/>
     </WidthWrapper>
   )
 }

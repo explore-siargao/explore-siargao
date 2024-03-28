@@ -41,44 +41,45 @@ const MessageConversation = ({ messages }: MessageProps) => {
                   </Typography>
                 </div>
                 <Typography variant="h6" className="text-gray-400 pt-2 right-0">
-                      {format(new Date(item.timeSent), "hh:mm a")}
-                    </Typography>
+                  {format(new Date(item.timeSent), "hh:mm a")}
+                </Typography>
               </div>
             </div>
           )}
 
           {item.isSender === true && (
-            <>
-              <div className="flex justify-end gap-2 mb-4">
-                <div className="w-1/2 flex flex-row-reverse">
-                  <div className="flex flex-col">
-                    <Typography
-                      variant="p"
-                      className="bg-primary-600 md:rounded-xl text-white p-4 rounded-xl inline-block"
-                    >
-                      {item.message}
-                    </Typography>
-                    <Typography variant="h6" className="text-gray-400 pt-2 right-0 ml-auto">
-                      {format(new Date(item.timeSent), "hh:mm a")}
-                    </Typography>
-                  </div>
-                </div>
-
-                <div className="flex-none justify-end place-content-end ">
-                  <div className="relative">
-                    {item.isSeen === true && (
-                      <Image
-                        src={`/assets/${item.imageKey}`}
-                        width={50}
-                        height={50}
-                        alt="Profile image"
-                        className="w-5 h-5 object-cover rounded-full"
-                      />
-                    )}
-                  </div>
+            <div className="flex justify-end gap-2 mb-4">
+              <div className="w-1/2 flex flex-row-reverse">
+                <div className="flex flex-col">
+                  <Typography
+                    variant="p"
+                    className="bg-primary-600 md:rounded-xl text-white p-4 rounded-xl inline-block"
+                  >
+                    {item.message}
+                  </Typography>
+                  <Typography
+                    variant="h6"
+                    className="text-gray-400 pt-2 right-0 ml-auto"
+                  >
+                    {format(new Date(item.timeSent), "hh:mm a")}
+                  </Typography>
                 </div>
               </div>
-            </>
+
+              <div className="flex-none justify-end place-content-end ">
+                <div className="relative">
+                  {item.isSeen === true && (
+                    <Image
+                      src={`/assets/${item.imageKey}`}
+                      width={50}
+                      height={50}
+                      alt="Profile image"
+                      className="w-5 h-5 object-cover rounded-full"
+                    />
+                  )}
+                </div>
+              </div>
+            </div>
           )}
         </>
       ))}
