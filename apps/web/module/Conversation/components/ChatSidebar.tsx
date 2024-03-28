@@ -8,17 +8,22 @@ interface Chats {
 }
 
 export enum BadgeType {
-  AsGuest = "As Guest",
-  AsHost = "As Host",
+    AsGuest = "As Guest",
+    AsHost = "As Host",
+    INFO = "INFO",
+    URGENT = "URGENT",
+    NONE = "NONE"
 }
 
 interface ChatProps {
   chats: Chats[]
 }
 
-const ChatSidebar = ({ chats }: ChatProps) => {
+const ChatSidebar = ({ chats}: ChatProps) => {
   return (
-    <div className="mt-9 w-3/12 h-screen  pl-3 pr-3 pt-5 pb-5 overflow-y-auto fixed">
+    <>
+
+    <div className="w-full md:w-3/12 h-screen overflow-y-auto md:pl-2 pl-4 pr-4 pb-5 fixed">
       <nav className="flex flex-1 flex-col">
         <ul className="flex flex-1 flex-col gap-y-7">
           <li>
@@ -29,7 +34,7 @@ const ChatSidebar = ({ chats }: ChatProps) => {
                     href="/conversation"
                     passHref={true}
                     className="text-gray-600 hover:text-black hover:bg-primary-300 
-                  group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold justify-between"
+                  group flex gap-x-3 rounded-md pt-2 text-sm leading-6 font-semibold justify-between"
                   >
                     <div className="h-12 overflow-hidden mb-2 mt-2">
                       <Typography
@@ -67,7 +72,10 @@ const ChatSidebar = ({ chats }: ChatProps) => {
           </li>
         </ul>
       </nav>
+     
     </div>
+    </>
+
   )
 }
 

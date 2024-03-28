@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useRef } from "react"
 import Image from "next/image"
 import { format } from "date-fns"
 import { Typography } from "@/common/components/ui/Typography"
@@ -16,13 +16,25 @@ interface MessageProps {
 }
 
 const MessageConversation = ({ messages }: MessageProps) => {
+  const messageEndRef = useRef<HTMLDivElement>(null)
+
+  const scrollToBottom = () => {
+    if (messageEndRef.current) {
+      messageEndRef.current.scrollIntoView({ behavior: "smooth" })
+    }
+  }
+
+  useEffect(() => {
+    scrollToBottom()
+  }, [messages])
+
   return (
-    <div className="h-200 pt-6 pb-6">
+    <div className="bg-gray-50">
       {messages.map((item) => (
         <>
           {item.isSender === false && (
-            <div className="flex pr-2" key={item.timeSent}>
-              <div className="flex-none w-14 p-2">
+            <div className="flex" key={item.timeSent}>
+              <div className="flex-none w-14 pl-2">
                 <Image
                   src={`/assets/${item.imageKey}`}
                   width={50}
@@ -48,8 +60,8 @@ const MessageConversation = ({ messages }: MessageProps) => {
           )}
 
           {item.isSender === true && (
-            <div className="flex justify-end gap-2 mb-4">
-              <div className="w-1/2 flex flex-row-reverse">
+            <div className="flex justify-end mb-4">
+              <div className="w-1/2 flex flex-row-reverse pr-2">
                 <div className="flex flex-col">
                   <Typography
                     variant="p"
@@ -83,6 +95,7 @@ const MessageConversation = ({ messages }: MessageProps) => {
           )}
         </>
       ))}
+      <div ref={messageEndRef} />
     </div>
   )
 }
