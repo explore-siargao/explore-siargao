@@ -6,10 +6,6 @@ import { Spinner } from "@/common/components/ui/Spinner"
 import useSessionStore from "@/common/store/useSessionStore"
 import Listing from "../Listing"
 
-
-
-
-
 const LandingPage = () => {
   const userId = useSessionStore((state) => state).id
   const { data, isPending } = useGetAllBookings()
