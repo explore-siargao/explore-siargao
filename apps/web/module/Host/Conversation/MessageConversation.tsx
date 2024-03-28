@@ -1,4 +1,3 @@
-
 import React from "react"
 import Image from "next/image"
 import { format } from "date-fns"
@@ -17,8 +16,6 @@ interface MessageProps {
 }
 
 const MessageConversation = ({ messages }: MessageProps) => {
-  const timeSent = new Date()
-
   return (
     <div className="h-200 pt-6 pb-6">
       {messages.map((item) => (
@@ -28,57 +25,61 @@ const MessageConversation = ({ messages }: MessageProps) => {
               <div className="flex-none w-14 p-2">
                 <Image
                   src={`/assets/${item.imageKey}`}
-                  width={10}
-                  height={10}
+                  width={50}
+                  height={50}
                   alt="Profile image"
                   className="w-10 h-10 object-cover rounded-full"
                 />
               </div>
               <div className="flex-1">
-                <div className="sm:w-1/2">
+                <div className="w-1/2">
                   <Typography
                     variant="p"
-                    className="bg-secondary-700 md:rounded-full text-white p-4 rounded-lg inline-block"
+                    className="bg-secondary-600 md:rounded-xl text-white p-4 rounded-xl inline-block"
                   >
                     {item.message}
                   </Typography>
                 </div>
+                <Typography variant="h6" className="text-gray-400 pt-2 right-0">
+                      {format(new Date(item.timeSent), "hh:mm a")}
+                    </Typography>
               </div>
             </div>
           )}
 
           {item.isSender === true && (
-            <div className="flex flex-row-reverse gap-2 pl-6">
-              <div className="flex-none flex justify-end items-end">
-                <div className="relative">
-                  {item.isSeen === true && (
-                    <Image
-                      src={`/assets/${item.imageKey}`}
-                      width={50}
-                      height={50}
-                      alt="Profile image"
-                      className="w-5 h-5 object-cover rounded-full"
-                    />
-                  )}
+            <>
+              <div className="flex justify-end gap-2 mb-4">
+                <div className="w-1/2 flex flex-row-reverse">
+                  <div className="flex flex-col">
+                    <Typography
+                      variant="p"
+                      className="bg-primary-600 md:rounded-xl text-white p-4 rounded-xl inline-block"
+                    >
+                      {item.message}
+                    </Typography>
+                    <Typography variant="h6" className="text-gray-400 pt-2 right-0 ml-auto">
+                      {format(new Date(item.timeSent), "hh:mm a")}
+                    </Typography>
+                  </div>
+                </div>
 
+                <div className="flex-none justify-end place-content-end ">
+                  <div className="relative">
+                    {item.isSeen === true && (
+                      <Image
+                        src={`/assets/${item.imageKey}`}
+                        width={50}
+                        height={50}
+                        alt="Profile image"
+                        className="w-5 h-5 object-cover rounded-full"
+                      />
+                    )}
+                  </div>
                 </div>
               </div>
-              <div className="flex justify-end">
-                <div className="w-1/2 right-0 ">
-                  <Typography
-                    variant="p"
-                    className="flex-1 bg-primary-700 md:rounded-full text-white p-4 rounded-lg  w-full"
-                  >
-                    {item.message}
-                  </Typography>
-                </div>
-              </div>
-            </div>
+            </>
           )}
-
-          <div className="mt-4 text-gray-400 text-center mb-4">
-            {format(new Date(item.timeSent), "hh:mm a")}
-          </div>
         </>
       ))}
     </div>
